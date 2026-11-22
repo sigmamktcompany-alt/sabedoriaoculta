@@ -115,11 +115,56 @@
         </a>
 
         <!-- Badge de Nível (Básico / Master) -->
-        <button onclick="openModal('profileModal')" class="crown-badge cursor-pointer hover:border-gold-400 transition" id="userTierBadge">
-          <i data-lucide="crown" class="w-3.5 h-3.5 text-gold-400"></i>
-          <span id="userTierLabel">Membro Master</span>
-        </button>
+     const SUPABASE_URL = "https://wnfkbiqdyrxyuzgeekte.supabase.co";
+const SUPABASE_ANON_KEY = "SUA_CHAVE_ANON_PUBLICA";
 
+// Começa como "basico" até validar o e-mail no Supabase
+currentTier = localStorage.getItem("cupula33_verified_tier") || "basico";
+
+async function checkMemberEmail(email) {
+  const cleanEmail = String(email || "").toLowerCase().trim();
+  if (!cleanEmail) return;
+
+  const endpoint =
+    `${SUPABASE_URL}/rest/v1/members` +
+    `?email=eq.${encodeURIComponent(cleanEmail)}` +
+    `&active=eq.true` +
+    `&select=tier,active`;
+
+  const res = await fetch(endpoint, {
+    headers: {
+      apikey: SUPABASE_ANON_KEY,
+      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("Erro ao consultar o Supabase");
+  }
+
+  const rows = await res.json();
+  if (rows.length > 0 && rows[0].active) {
+    const verifiedTier = rows[0].tier === "master" ? "master" : "basico";
+    localStorage.setItem("cupula33_member_email", cleanEmail);
+    localStorage.setItem("cupula33_verified_tier", verifiedTier);
+    setUserTier(verifiedTier, false);
+    showToast(`Acesso ${verifiedTier.toUpperCase()} liberado para ${cleanEmail}!`);
+    closeModal("profileModal");
+  } else {
+    localStorage.removeItem("cupula33_verified_tier");
+    setUserTier("basico", false);
+    showToast("Nenhuma assinatura ativa encontrada para este e-mail.");
+  }
+}
+
+async function loginWithEmail() {
+  const input = document.getElementById("memberEmailInput");
+  try {
+    await checkMemberEmail(input ? input.value : "");
+  } catch (err) {
+    showToast("Não foi possível verificar o acesso agora.");
+  }
+}
         <!-- Botão Instalar PWA -->
         <button id="pwaInstallBtn" onclick="triggerPWAInstall()" class="hidden sm:flex items-center gap-1 px-3 py-1.5 rounded-xl bg-gold-500/10 hover:bg-gold-500/20 text-gold-400 border border-gold-500/30 text-xs font-bold transition">
           <i data-lucide="download" class="w-3.5 h-3.5"></i>
