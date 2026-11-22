@@ -1,3 +1,8 @@
+const SUPABASE_URL = "https://wnfkbiqdyrxyuzgeekte.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_X_uNrvnDnsaGW4ZLSBuF8g_24s3lm6m";
+
+// Começa como "basico" até validar o e-mail no Supabase
+let currentTier = localStorage.getItem("cupula33_verified_tier") || "basico";
 /**
  * CÚPULA 33 | PLATAFORMA DE MEMBROS & ACERVO HERMÉTICO PWA
  * Estrutura Canônica: 6 Módulos Oficiais (2.500 Obras no Master vs 500 no Básico)
@@ -1908,7 +1913,50 @@ function resetFilters() {
   if (input) input.value = "";
   filterCategory("todos");
 }
+async function checkMemberEmail(email) {
+  const cleanEmail = String(email || "").toLowerCase().trim();
+  if (!cleanEmail) return;
 
+  const endpoint =
+    `${SUPABASE_URL}/rest/v1/members` +
+    `?email=eq.${encodeURIComponent(cleanEmail)}` +
+    `&active=eq.true` +
+    `&select=tier,active`;
+
+  const res = await fetch(endpoint, {
+    headers: {
+      apikey: SUPABASE_ANON_KEY,
+      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("Erro ao consultar o Supabase");
+  }
+
+  const rows = await res.json();
+  if (rows.length > 0 && rows[0].active) {
+    const verifiedTier = rows[0].tier === "master" ? "master" : "basico";
+    localStorage.setItem("cupula33_member_email", cleanEmail);
+    localStorage.setItem("cupula33_verified_tier", verifiedTier);
+    setUserTier(verifiedTier, false);
+    showToast(`Acesso ${verifiedTier.toUpperCase()} liberado para ${cleanEmail}!`);
+    closeModal("profileModal");
+  } else {
+    localStorage.removeItem("cupula33_verified_tier");
+    setUserTier("basico", false);
+    showToast("Nenhuma assinatura ativa encontrada para este e-mail.");
+  }
+}
+
+async function loginWithEmail() {
+  const input = document.getElementById("memberEmailInput");
+  try {
+    await checkMemberEmail(input ? input.value : "");
+  } catch (err) {
+    showToast("Não foi possível verificar o acesso agora.");
+  }
+}
 // PWA INSTALL PROMPT
 let deferredPrompt = null;
 window.addEventListener('beforeinstallprompt', (e) => {
