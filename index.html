@@ -427,7 +427,7 @@
           <i data-lucide="check-circle" class="w-3.5 h-3.5"></i>
           <span>CHAVE ATIVA</span>
         </span>
-        <a href="#planos" onclick="scrollToPlanos(event)" class="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-crimson-900/70 to-gold-500/20 hover:from-crimson-800/80 hover:to-gold-500/30 border border-gold-500/40 text-gold-300 text-xs font-semibold uppercase tracking-wider transition-all">
+        <a href="#planos" class="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-crimson-900/70 to-gold-500/20 hover:from-crimson-800/80 hover:to-gold-500/30 border border-gold-500/40 text-gold-300 text-xs font-semibold uppercase tracking-wider transition-all">
           <i data-lucide="key" class="w-3.5 h-3.5"></i>
           <span>Acessar Acervo</span>
         </a>
@@ -454,9 +454,8 @@
           Mais de <strong class="text-gold-300 font-semibold">2.500 tratados raros, grimórios históricos, manuscritos herméticos e textos apócrifos</strong> de domínio público reunidos em uma plataforma moderna e intuitiva. Sem mensalidades.
         </p>
 
-        <!-- Hero CTA Button -->
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto mb-8">
-          <a href="#planos" onclick="scrollToPlanos(event)" class="cta-pulse w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-gold-500 via-amber-400 to-gold-500 text-black font-extrabold text-base sm:text-lg tracking-wide shadow-xl flex items-center justify-center gap-2.5 transition-transform hover:scale-105 active:scale-95">
+          <a href="#planos" class="cta-pulse w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-gold-500 via-amber-400 to-gold-500 text-black font-extrabold text-base sm:text-lg tracking-wide shadow-xl flex items-center justify-center gap-2.5 transition-transform hover:scale-105 active:scale-95">
             <i data-lucide="unlock" class="w-5 h-5 text-black stroke-[2.5]"></i>
             <span>DESBLOQUEAR ACESSO VITALÍCIO</span>
           </a>
@@ -532,7 +531,7 @@
             </div>
 
             <div class="flex flex-wrap items-center gap-3 pt-2">
-              <a href="#planos" onclick="scrollToPlanos(event)" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-gold-500 to-amber-400 hover:bg-white text-black font-extrabold text-xs uppercase tracking-wider shadow-lg transition-all">
+              <a href="#planos" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-gold-500 to-amber-400 hover:bg-white text-black font-extrabold text-xs uppercase tracking-wider shadow-lg transition-all">
                 Liberar Acesso Agora
               </a>
               <button onclick="openDemoModal()" class="px-5 py-3.5 rounded-xl bg-crimson-900/50 hover:bg-crimson-800/70 border border-gold-500/40 text-gold-300 font-bold text-xs uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer">
@@ -963,7 +962,7 @@
             <p class="text-xs text-gray-400 leading-relaxed">
               Entre na plataforma, acesse os livros, teste as frequências e leia as obras. Se por qualquer motivo você achar que não valeu 10x o que pagou, devolvemos 100% do seu dinheiro com um clique.
             </p>
-            <a href="#planos" onclick="scrollToPlanos(event)" class="block w-full py-3 bg-gold-500 hover:bg-white text-black font-bold text-xs rounded-xl transition-all uppercase tracking-wider">
+            <a href="#planos" class="block w-full py-3 bg-gold-500 hover:bg-white text-black font-bold text-xs rounded-xl transition-all uppercase tracking-wider">
               Garantir Minha Vaga Sem Risco
             </a>
           </div>
@@ -1119,11 +1118,11 @@
         </p>
 
         <div class="flex flex-wrap items-center justify-center gap-4 text-gray-400 text-xs font-medium">
-          <a href="#planos" onclick="scrollToPlanos(event)" class="hover:text-gold-400 transition-colors">Termos de Uso</a>
+          <a href="#planos" class="hover:text-gold-400 transition-colors">Termos de Uso</a>
           <span>•</span>
-          <a href="#planos" onclick="scrollToPlanos(event)" class="hover:text-gold-400 transition-colors">Política de Privacidade</a>
+          <a href="#planos" class="hover:text-gold-400 transition-colors">Política de Privacidade</a>
           <span>•</span>
-          <a href="#planos" onclick="scrollToPlanos(event)" class="hover:text-gold-400 transition-colors">Aviso Legal de Domínio Público</a>
+          <a href="#planos" class="hover:text-gold-400 transition-colors">Aviso Legal de Domínio Público</a>
           <span>•</span>
           <button onclick="resetQuiz()" class="hover:text-gold-400 transition-colors cursor-pointer">Refazer Triagem</button>
         </div>
@@ -1176,7 +1175,7 @@
 
       <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
         <span class="text-xs text-gray-400">+2.500 obras completas prontas para leitura e download PDF.</span>
-        <a href="#planos" onclick="closeDemoModal(); scrollToPlanos(event)" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-gold-500 to-amber-400 text-black font-extrabold text-xs uppercase tracking-wider text-center">
+        <a href="#planos" onclick="closeDemoModal()" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-gold-500 to-amber-400 text-black font-extrabold text-xs uppercase tracking-wider text-center">
           Desbloquear Acervo Completo
         </a>
       </div>
@@ -1734,40 +1733,18 @@
       } catch (e) {}
     }
 
-    // Rola direto para a seção #planos sem acionar o Back Redirect
-    function scrollToPlanos(e) {
-      if (e) e.preventDefault();
-      const planos = document.getElementById("planos");
-      if (planos) {
-        planos.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  </script>
-
-  <!-- Back Redirect Script -->
-  <script>
-    const link = 'https://sabedoriaoculta.com/back/';
-
-    function setBackRedirect(url) {
-      let urlBackRedirect = url;
-      urlBackRedirect =
-        urlBackRedirect.trim() +
-        (urlBackRedirect.indexOf('?') > 0 ? '&' : '?') +
-        document.location.search.replace('?', '').toString();
-
-      history.pushState({}, '', location.href);
-      history.pushState({}, '', location.href);
-      history.pushState({}, '', location.href);
-
-      window.addEventListener('popstate', () => {
-        console.log('onpopstate', urlBackRedirect);
-        setTimeout(() => {
-          location.href = urlBackRedirect;
-        }, 1);
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href');
+        if (targetId && targetId.length > 1) {
+          const targetEl = document.querySelector(targetId);
+          if (targetEl) {
+            e.preventDefault();
+            targetEl.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
       });
-    }
-
-    setBackRedirect(link);
+    });
   </script>
 
   <!-- Áudio ambiente (adicione seu arquivo em assets/audio/atmosfera.mp3) -->
