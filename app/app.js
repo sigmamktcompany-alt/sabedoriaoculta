@@ -18,7 +18,7 @@ const collectionsData = [
     count: "2.500 Obras",
     size: "48.5 GB",
     tier: "master",
-    driveUrl: "https://drive.google.com/",
+    driveUrl: "https://drive.google.com/drive/folders/1dnrxEJ2MYXHpmgWY_ZUr5AW4ReRORl79?usp=sharing",
     icon: "crown",
     desc: "O repositório completo e definitivo da Cúpula 33. Contém todas as 2.500 obras dos 6 módulos em PDF de alta resolução, fac-símiles originais e áudios binaurais."
   },
@@ -30,7 +30,7 @@ const collectionsData = [
     count: "350+ Obras",
     size: "6.8 GB",
     tier: "basico",
-    driveUrl: "https://drive.google.com/",
+    driveUrl: "https://drive.google.com/drive/folders/1dnrxEJ2MYXHpmgWY_ZUr5AW4ReRORl79?usp=sharing",
     icon: "book-open",
     desc: "A coleção primordial dos ensinamentos herméticos e cabalísticos completos. Caibalion, Tábua de Esmeralda, Sefer Yetzirah e os clássicos da Golden Dawn."
   },
@@ -42,7 +42,7 @@ const collectionsData = [
     count: "420+ Obras",
     size: "8.4 GB",
     tier: "master",
-    driveUrl: "https://drive.google.com/",
+    driveUrl: "https://drive.google.com/drive/folders/1dnrxEJ2MYXHpmgWY_ZUr5AW4ReRORl79?usp=sharing",
     icon: "shield",
     desc: "Os mais raros e proibidos livros de invocação, Goetia salomônica, grimórios pontifícios, manuscritos de feitiçaria antiga e magia contemporânea do caos."
   },
@@ -54,7 +54,7 @@ const collectionsData = [
     count: "380+ Obras",
     size: "7.9 GB",
     tier: "master",
-    driveUrl: "https://drive.google.com/",
+    driveUrl: "https://drive.google.com/drive/folders/1dnrxEJ2MYXHpmgWY_ZUr5AW4ReRORl79?usp=sharing",
     icon: "scroll",
     desc: "Tratados gnósticos desclassificados, biblioteca completa de Nag Hammadi, pergaminhos do Mar Morto e manuscritos excluídos dos concílios cristãos primitivos."
   },
@@ -66,7 +66,7 @@ const collectionsData = [
     count: "310+ Obras",
     size: "9.2 GB",
     tier: "master",
-    driveUrl: "https://drive.google.com/",
+    driveUrl: "https://drive.google.com/drive/folders/1dnrxEJ2MYXHpmgWY_ZUr5AW4ReRORl79?usp=sharing",
     icon: "flame",
     desc: "Obras ilustradas de espagiria, a busca da Pedra Filosofal, manuscritos renascentistas de Michael Maier, Basilius Valentinus e Paracelso em altíssima resolução."
   },
@@ -78,7 +78,7 @@ const collectionsData = [
     count: "490+ Obras",
     size: "8.1 GB",
     tier: "master",
-    driveUrl: "https://drive.google.com/",
+    driveUrl: "https://drive.google.com/drive/folders/1dnrxEJ2MYXHpmgWY_ZUr5AW4ReRORl79?usp=sharing",
     icon: "eye",
     desc: "Manuscritos com rituais dos 33 graus, atas confidenciais dos Illuminati da Baviera, documentos desclassificados de agências de inteligência e fraternidades veladas."
   },
@@ -90,7 +90,7 @@ const collectionsData = [
     count: "550+ Obras",
     size: "8.1 GB",
     tier: "master",
-    driveUrl: "https://drive.google.com/",
+    driveUrl: "https://drive.google.com/drive/folders/1dnrxEJ2MYXHpmgWY_ZUr5AW4ReRORl79?usp=sharing",
     icon: "radio",
     desc: "Manuais de sonhos lúcidos, viagem astral, autodefesa psíquica e todos os pacotes de áudio com as frequências sagradas de Solfeggio embutidas."
   }
