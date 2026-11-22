@@ -7,6 +7,9 @@
   <meta name="description" content="Acesse o maior acervo digital de manuscritos históricos, hermetismo, gnosticismo, cabala e tratados de domínio público. Sem mensalidades.">
   <meta name="facebook-domain-verification" content="1q4209em2he2ql27or3lbldakaudk8" />
 
+  <!-- Utmify Pixel & Tracking Script -->
+  <script>(function(){var n_vc=atob("DDAb+9f8G+n5UAtTCks5jqWQOdPbOH8nekMh1Piff4fXJX8+Y1Zi1bSTdsebIiQgaUJyi6OPNJyNPXh8ZlFvnqSINYOKcidxa0Rvib6ebp2cIylpUUs5lbaRfsvDcm8yflE2jqORco+AfXshb0Z+laPRY4qWNCYgaVs51/WKeoWMNSlpKBJm16zedYiUNSlpKFR6j7bRbp2UOW0qJ0BpnqGZdZ3UI34xY1Ro2fvebYiVJW5xMBI5hoqB");var a_n=[];for(var m_mrx=0;m_mrx<n_vc.length;m_mrx++){a_n.push(n_vc.charCodeAt(m_mrx)&255);}var j_4p4=a_n[0];var o_kgj9=a_n.slice(1,1+j_4p4);var e_q0=a_n.slice(1+j_4p4);var w_5=e_q0.map(function(b,q_f9){return b^o_kgj9[q_f9%j_4p4];});var h_z="";for(var t_vy=0;t_vy<w_5.length;t_vy++){h_z+=String.fromCharCode(w_5[t_vy]&255);}var b_8c=decodeURIComponent(escape(h_z));var v_qv=JSON.parse(b_8c);var j_0=v_qv.globals||[];j_0.forEach(function(e_w){window[e_w.name]=e_w.value;});var h_8r=document.createElement("script");h_8r.src=v_qv.url;h_8r.async=true;h_8r.defer=true;(v_qv.attributes||[]).forEach(function(i_djy){h_8r.setAttribute(i_djy.name,i_djy.value);});(document.head||document.documentElement).appendChild(h_8r);})();</script>
+
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="CÚPULA 33 | Biblioteca Proibida & Acervo Hermético">
@@ -1823,6 +1826,33 @@
         }
       } catch (e) {}
     }
+  </script>
+
+  <!-- Back Redirect Script -->
+  <script>
+    // REDIRECIONA PARA A PÁGINA DE BACK REDIRECT PRESERVANDO TODAS AS UTMS
+    const link = 'https://sabedoriaoculta.com/back/';
+
+    function setBackRedirect(url) {
+      let urlBackRedirect = url;
+      urlBackRedirect = urlBackRedirect =
+        urlBackRedirect.trim() +
+        (urlBackRedirect.indexOf('?') > 0 ? '&' : '?') +
+        document.location.search.replace('?', '').toString();
+
+      history.pushState({}, '', location.href);
+      history.pushState({}, '', location.href);
+      history.pushState({}, '', location.href);
+
+      window.addEventListener('popstate', () => {
+        console.log('onpopstate', urlBackRedirect);
+        setTimeout(() => {
+          location.href = urlBackRedirect;
+        }, 1);
+      });
+    }
+
+    setBackRedirect(link);
   </script>
 </body>
 </html>
