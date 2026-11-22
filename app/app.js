@@ -1,8 +1,4 @@
-const SUPABASE_URL = "https://wnfkbiqdyrxyuzgeekte.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_X_uNrvnDnsaGW4ZLSBuF8g_24s3lm6m";
 
-// Começa como "basico" até validar o e-mail no Supabase
-let currentTier = localStorage.getItem("cupula33_verified_tier") || "basico";
 /**
  * CÚPULA 33 | PLATAFORMA DE MEMBROS & ACERVO HERMÉTICO PWA
  * Estrutura Canônica: 6 Módulos Oficiais (2.500 Obras no Master vs 500 no Básico)
