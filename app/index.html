@@ -144,6 +144,8 @@
 
     <!-- ==================== ABA 1: BIBLIOTECA (LIVROS & MANUSCRITOS) ==================== -->
     <section id="tab-books" class="app-tab-section">
+      <div id="mainLibraryView">
+
       
       <!-- HERO: WIDGET DE LEITURA EM ANDAMENTO (CONTINUAR DE ONDE PAROU) -->
       <div id="resumeReadingSection" class="hidden mb-6">
@@ -226,7 +228,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4" id="modulesShowcaseGrid">
           
           <!-- MÓDULO I -->
-          <div onclick="filterModule('Hermetismo & Cabala')" class="module-card glass-panel glass-panel-hover p-4 sm:p-5 rounded-2xl cursor-pointer border border-gold-500/20 relative group transition-all" data-module="Hermetismo & Cabala">
+          <div onclick="openModuleDetail('Hermetismo & Cabala')" class="module-card glass-panel glass-panel-hover p-4 sm:p-5 rounded-2xl cursor-pointer border border-gold-500/20 relative group transition-all" data-module="Hermetismo & Cabala">
             <div class="flex items-start justify-between mb-2">
               <span class="text-xs font-mono font-bold text-gold-400 tracking-wider">ᚠ MÓDULO I</span>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gold-500/10 text-gold-300 border border-gold-500/30">350+ Obras</span>
@@ -240,7 +242,7 @@
           </div>
 
           <!-- MÓDULO II -->
-          <div onclick="filterModule('Grimórios & Alta Magia')" class="module-card glass-panel glass-panel-hover p-4 sm:p-5 rounded-2xl cursor-pointer border border-gold-500/20 relative group transition-all" data-module="Grimórios & Alta Magia">
+          <div onclick="openModuleDetail('Grimórios & Alta Magia')" class="module-card glass-panel glass-panel-hover p-4 sm:p-5 rounded-2xl cursor-pointer border border-gold-500/20 relative group transition-all" data-module="Grimórios & Alta Magia">
             <div class="flex items-start justify-between mb-2">
               <span class="text-xs font-mono font-bold text-gold-400 tracking-wider">ᚢ MÓDULO II</span>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gold-500/10 text-gold-300 border border-gold-500/30">420+ Obras</span>
@@ -254,7 +256,7 @@
           </div>
 
           <!-- MÓDULO III -->
-          <div onclick="filterModule('Gnosticismo & Apócrifos')" class="module-card glass-panel glass-panel-hover p-4 sm:p-5 rounded-2xl cursor-pointer border border-gold-500/20 relative group transition-all" data-module="Gnosticismo & Apócrifos">
+          <div onclick="openModuleDetail('Gnosticismo & Apócrifos')" class="module-card glass-panel glass-panel-hover p-4 sm:p-5 rounded-2xl cursor-pointer border border-gold-500/20 relative group transition-all" data-module="Gnosticismo & Apócrifos">
             <div class="flex items-start justify-between mb-2">
               <span class="text-xs font-mono font-bold text-gold-400 tracking-wider">ᚦ MÓDULO III</span>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gold-500/10 text-gold-300 border border-gold-500/30">380+ Obras</span>
@@ -268,7 +270,7 @@
           </div>
 
           <!-- MÓDULO IV -->
-          <div onclick="filterModule('Alquimia & Transmutação')" class="module-card glass-panel glass-panel-hover p-4 sm:p-5 rounded-2xl cursor-pointer border border-gold-500/20 relative group transition-all" data-module="Alquimia & Transmutação">
+          <div onclick="openModuleDetail('Alquimia & Transmutação')" class="module-card glass-panel glass-panel-hover p-4 sm:p-5 rounded-2xl cursor-pointer border border-gold-500/20 relative group transition-all" data-module="Alquimia & Transmutação">
             <div class="flex items-start justify-between mb-2">
               <span class="text-xs font-mono font-bold text-gold-400 tracking-wider">ᚨ MÓDULO IV</span>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gold-500/10 text-gold-300 border border-gold-500/30">310+ Obras</span>
@@ -282,7 +284,7 @@
           </div>
 
           <!-- MÓDULO V -->
-          <div onclick="filterModule('Sociedades Secretas')" class="module-card glass-panel glass-panel-hover p-4 sm:p-5 rounded-2xl cursor-pointer border border-gold-500/20 relative group transition-all" data-module="Sociedades Secretas">
+          <div onclick="openModuleDetail('Sociedades Secretas')" class="module-card glass-panel glass-panel-hover p-4 sm:p-5 rounded-2xl cursor-pointer border border-gold-500/20 relative group transition-all" data-module="Sociedades Secretas">
             <div class="flex items-start justify-between mb-2">
               <span class="text-xs font-mono font-bold text-gold-400 tracking-wider">ᚱ MÓDULO V</span>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gold-500/10 text-gold-300 border border-gold-500/30">490+ Obras</span>
@@ -296,7 +298,7 @@
           </div>
 
           <!-- MÓDULO VI -->
-          <div onclick="filterModule('Mente & Projeção Astral')" class="module-card glass-panel glass-panel-hover p-4 sm:p-5 rounded-2xl cursor-pointer border border-gold-500/20 relative group transition-all" data-module="Mente & Projeção Astral">
+          <div onclick="openModuleDetail('Mente & Projeção Astral')" class="module-card glass-panel glass-panel-hover p-4 sm:p-5 rounded-2xl cursor-pointer border border-gold-500/20 relative group transition-all" data-module="Mente & Projeção Astral">
             <div class="flex items-start justify-between mb-2">
               <span class="text-xs font-mono font-bold text-gold-400 tracking-wider">ᚲ MÓDULO VI</span>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gold-500/10 text-gold-300 border border-gold-500/30">550+ Obras</span>
@@ -379,7 +381,43 @@
           <!-- Injetado dinamicamente via app.js -->
         </div>
       </div>
-    </section>
+    
+      </div>
+
+      <!-- VIEW DEDICADA DO MÓDULO (ESTILO NETFLIX / BRAINSYNC) -->
+      <div id="moduleDetailView" class="hidden">
+        <div class="flex items-center justify-between mb-6 pb-4 border-b border-dark-700/80">
+          <button onclick="closeModuleDetail()" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-dark-900 border border-gold-500/30 text-gold-400 hover:text-white hover:border-gold-500 text-xs font-bold transition">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> Voltar à Biblioteca Completa
+          </button>
+          
+          <div class="text-right">
+            <span class="text-[10px] font-bold text-gold-500 uppercase tracking-widest block">MÓDULO DEDICADO</span>
+            <span id="moduleDetailCount" class="text-xs text-gray-400 font-mono">0 Obras</span>
+          </div>
+        </div>
+
+        <div class="glass-panel rounded-3xl p-6 sm:p-8 mb-8 border border-gold-500/30 relative overflow-hidden">
+          <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-gold-500/10 rounded-full blur-3xl pointer-events-none"></div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="crown-badge"><i data-lucide="layers" class="w-3.5 h-3.5 text-gold-400"></i> Acervo Oficial</span>
+            <span class="text-xs text-gold-400 font-bold">100% em Português</span>
+          </div>
+          <h2 id="moduleDetailTitle" class="font-cinzel font-bold text-2xl sm:text-3xl text-gray-100">Nome do Módulo</h2>
+          <p class="text-xs text-gray-400 mt-2 max-w-2xl leading-relaxed">
+            Todas as obras sagradas, tratados e manuscritos deste módulo com barra de progressão individual e leitura continuada.
+          </p>
+        </div>
+
+        <!-- Grid de Obras do Módulo com Progresso Individual -->
+        <div class="mb-12">
+          <div id="moduleDetailBooksGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 sm:gap-5">
+            <!-- Injetado dinamicamente via renderModuleDetailContent -->
+          </div>
+        </div>
+      </div>
+    
+</section>
 
     <!-- ==================== ABA 2: SANTUÁRIO DE FREQUÊNCIAS DE SOLFEGGIO (MÓDULO VI) ==================== -->
     <section id="tab-frequencies" class="app-tab-section hidden">
@@ -667,7 +705,7 @@
 
       <!-- Botão de Upgrade Oficial PerfectPay -->
       <a href="https://go.perfectpay.com.br/PPU38CQHUO7" target="_blank" class="block w-full py-3.5 rounded-xl bg-gradient-to-r from-gold-500 via-amber-400 to-gold-500 text-black font-black text-xs uppercase tracking-wider shadow-xl hover:scale-105 transition-transform mb-3">
-        Fazer Upgrade para Master por R$ 37
+        Fazer Upgrade para Master por R$ 29,90
       </a>
 
       <button onclick="closeModal('upgradeModal')" class="text-xs text-gray-500 hover:text-gray-300 transition-colors">
@@ -708,7 +746,7 @@
 
       <div class="pt-4 border-t border-dark-700/60 flex flex-col gap-2">
         <a href="https://go.perfectpay.com.br/PPU38CQHUO7" target="_blank" class="w-full py-2.5 rounded-xl bg-dark-800 text-gold-400 border border-gold-500/30 text-xs font-bold block hover:bg-dark-700 transition">
-          Fazer Upgrade Master (R$ 37)
+          Fazer Upgrade Master (R$ 29,90)
         </a>
         <button onclick="closeModal('profileModal')" class="w-full py-2.5 rounded-xl bg-dark-800 text-gray-400 text-xs font-semibold hover:text-white transition">
           Fechar
