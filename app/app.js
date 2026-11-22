@@ -1,10 +1,11 @@
-
 /**
  * CÚPULA 33 | PLATAFORMA DE MEMBROS & ACERVO HERMÉTICO PWA
  * Estrutura Canônica: 6 Módulos Oficiais (2.500 Obras no Master vs 500 no Básico)
- * Recursos VIP: Marcador de Leitura (localStorage), Audiobook com Frequência 432Hz e Download de Áudio.
- * Estilo inspirado no The King's Code e BrainSync.
+ * Recursos VIP: Validação de Membro via Supabase, Marcador de Leitura, Audiobook 432Hz e Download de Áudio.
  */
+
+const SUPABASE_URL = "https://wnfkbiqdyrxyuzgeekte.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_X_uNrvnDnsaGW4ZLSBuF8g_24s3lm6m";
 
 // 1. BANCO DE DADOS OFICIAL - 55 OBRAS RESTAURADAS COM PDFS E CAPAS EXCLUSIVAS
 const booksData = [
@@ -909,7 +910,7 @@ const roadmapData = [
 ];
 
 // ESTADO GLOBAL DO APLICATIVO
-let currentTier = localStorage.getItem("cupula33_user_tier") || "master";
+let currentTier = localStorage.getItem("cupula33_verified_tier") || "basico";
 let currentCategoryFilter = "todos";
 let currentTierFilter = "todos";
 let currentSearchQuery = "";
@@ -927,20 +928,17 @@ let activeFrequencyHz = null;
 
 // INICIALIZAÇÃO DO APP
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. Detectar parâmetro de URL (ex: ?tier=master ou ?plano=master vindo do checkout)
-  detectUrlTier();
-
-  // 2. Atualizar UI de acordo com o nível atual
+  // 1. Atualizar UI de acordo com o nível atual
   updateTierBadgeUI();
 
-  // 3. Renderizar componentes
+  // 2. Renderizar componentes
   checkReadingProgress();
   renderBooks();
   renderCollections();
   renderFrequencies();
   renderRoadmap();
 
-  // 4. Configurar ouvintes de pesquisa
+  // 3. Configurar ouvintes de pesquisa
   const searchInput = document.getElementById("searchInput");
   if (searchInput) {
     searchInput.addEventListener("input", (e) => {
@@ -949,40 +947,107 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // 4. Validar e-mail salvo ou vindo pela URL (?email=...)
+  const params = new URLSearchParams(window.location.search);
+  const savedOrUrlEmail = params.get("email") || localStorage.getItem("cupula33_member_email");
+  if (savedOrUrlEmail) {
+    const input = document.getElementById("memberEmailInput");
+    if (input) input.value = savedOrUrlEmail;
+    checkMemberEmail(savedOrUrlEmail, true).catch(() => {});
+  } else {
+    openModal("profileModal");
+  }
+
   // 5. Atualizar ícones Lucide
   if (window.lucide) {
     lucide.createIcons();
   }
 });
 
-// DETECÇÃO AUTOMÁTICA DE TIER VIA URL
-function detectUrlTier() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const tierParam = urlParams.get("tier") || urlParams.get("plano") || urlParams.get("acesso");
-  if (tierParam) {
-    const cleanTier = tierParam.toLowerCase().includes("bas") ? "basico" : "master";
-    setUserTier(cleanTier, false);
-    showToast("Bem-vindo à Cúpula 33! Acesso " + cleanTier.toUpperCase() + " Ativado.");
+// VALIDAÇÃO DE MEMBRO VIA SUPABASE
+async function checkMemberEmail(email, silent = false) {
+  const cleanEmail = String(email || "").toLowerCase().trim();
+  const note = document.getElementById("memberStatusNote");
+
+  if (!cleanEmail) {
+    if (!silent) showToast("Digite o e-mail usado na compra.");
+    return;
+  }
+
+  const endpoint =
+    `${SUPABASE_URL}/rest/v1/members` +
+    `?email=eq.${encodeURIComponent(cleanEmail)}` +
+    `&active=eq.true` +
+    `&select=tier,active`;
+
+  const res = await fetch(endpoint, {
+    headers: {
+      apikey: SUPABASE_ANON_KEY,
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("Erro ao consultar o Supabase: " + res.status);
+  }
+
+  const rows = await res.json();
+  if (rows.length > 0 && rows[0].active) {
+    const verifiedTier = rows[0].tier === "master" ? "master" : "basico";
+    localStorage.setItem("cupula33_member_email", cleanEmail);
+    localStorage.setItem("cupula33_verified_tier", verifiedTier);
+    setUserTier(verifiedTier, false);
+    if (note) {
+      note.textContent = `Assinatura ativa (${verifiedTier.toUpperCase()}) vinculada a ${cleanEmail}`;
+      note.className = "text-[11px] text-emerald-400 text-center pt-1";
+    }
+    if (!silent) {
+      showToast(`Acesso ${verifiedTier.toUpperCase()} liberado para ${cleanEmail}!`);
+      closeModal("profileModal");
+    }
+  } else {
+    localStorage.removeItem("cupula33_verified_tier");
+    setUserTier("basico", false);
+    if (note) {
+      note.textContent = "Nenhuma assinatura ativa encontrada para este e-mail.";
+      note.className = "text-[11px] text-amber-400 text-center pt-1";
+    }
+    if (!silent) {
+      showToast("Nenhuma assinatura ativa encontrada para este e-mail.");
+    }
+  }
+}
+
+async function loginWithEmail() {
+  const input = document.getElementById("memberEmailInput");
+  const btn = document.getElementById("verifyAccessBtn");
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = "Verificando...";
+  }
+  try {
+    await checkMemberEmail(input ? input.value : "", false);
+  } catch (err) {
+    console.error(err);
+    showToast("Não foi possível verificar o acesso agora.");
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = "Verificar Acesso";
+    }
   }
 }
 
 // ATUALIZAÇÃO DA UI DO NÍVEL DO USUÁRIO
 function updateTierBadgeUI() {
   const label = document.getElementById("userTierLabel");
-  const checkMaster = document.getElementById("checkTierMaster");
-  const checkBasico = document.getElementById("checkTierBasico");
   const accessibleCount = document.getElementById("accessibleCount");
 
   if (currentTier === "master") {
     if (label) label.textContent = "Membro Master (2.500 Obras)";
-    if (checkMaster) checkMaster.classList.remove("hidden");
-    if (checkBasico) checkBasico.classList.add("hidden");
     if (accessibleCount) accessibleCount.textContent = "Você possui Acesso Master Ilimitado às 2.500 Obras dos 6 Módulos, Frequências Sagradas e Audiobooks.";
   } else {
     if (label) label.textContent = "Membro Básico (500 Obras)";
-    if (checkMaster) checkMaster.classList.add("hidden");
-    if (checkBasico) checkBasico.classList.remove("hidden");
-    if (accessibleCount) accessibleCount.textContent = "Plano Básico Ativo: 500 obras fundamentais liberadas. Faça o upgrade para desbloquear 2.000 obras adicionais.";
+    if (accessibleCount) accessibleCount.textContent = "Plano Básico Ativo: 500 obras fundamentais liberadas. Valide seu e-mail ou faça o upgrade para desbloquear 2.000 obras adicionais.";
   }
 }
 
@@ -990,13 +1055,12 @@ function updateTierBadgeUI() {
 function setUserTier(newTier, showNotification) {
   if (showNotification === undefined) showNotification = true;
   currentTier = newTier;
-  localStorage.setItem("cupula33_user_tier", newTier);
   updateTierBadgeUI();
   renderBooks();
   renderCollections();
   renderFrequencies();
   if (showNotification) {
-    showToast("Plano alterado para: " + (newTier === "master" ? "MASTER (2.500 Obras)" : "BÁSICO (500 Obras)"));
+    showToast("Plano atualizado para: " + (newTier === "master" ? "MASTER (2.500 Obras)" : "BÁSICO (500 Obras)"));
     closeModal("profileModal");
   }
 }
@@ -1281,696 +1345,4 @@ function openBookModal(book) {
 
   // Carregar progresso salvo se existir
   const saved = getSavedProgress(book.id);
-  const curPage = saved ? saved.page : 1;
-  if (pageInput) pageInput.value = curPage;
-  updateModalProgressDisplay(curPage, book.pages);
-
-  // Configurar botões de ação
-  const downloadBtn = document.getElementById("modalDownloadBtn");
-  downloadBtn.onclick = () => triggerDownload(book);
-
-  const readOnlineBtn = document.getElementById("modalReadOnlineBtn");
-  readOnlineBtn.onclick = () => openReaderModal(book, curPage);
-
-  // Resetar modo para PDF
-  switchModalTab("pdf");
-
-  openModal("bookModal");
-}
-
-// TROCA DE ABAS NO MODAL DO LIVRO (PDF vs AUDIOBOOK)
-function switchModalTab(tab) {
-  currentModalTab = tab;
-  const pdfContent = document.getElementById("modalPdfContent");
-  const audioContent = document.getElementById("modalAudioContent");
-  const pdfBtn = document.getElementById("modalTabPdfBtn");
-  const audioBtn = document.getElementById("modalTabAudioBtn");
-
-  if (tab === "pdf") {
-    if (pdfContent) pdfContent.classList.remove("hidden");
-    if (audioContent) audioContent.classList.add("hidden");
-    if (pdfBtn) {
-      pdfBtn.className = "flex-1 py-2 rounded-xl text-xs font-bold bg-gold-500 text-black flex items-center justify-center gap-1.5 transition";
-    }
-    if (audioBtn) {
-      audioBtn.className = "flex-1 py-2 rounded-xl text-xs font-medium text-gray-400 hover:text-white flex items-center justify-center gap-1.5 transition";
-    }
-  } else {
-    if (pdfContent) pdfContent.classList.add("hidden");
-    if (audioContent) audioContent.classList.remove("hidden");
-    if (pdfBtn) {
-      pdfBtn.className = "flex-1 py-2 rounded-xl text-xs font-medium text-gray-400 hover:text-white flex items-center justify-center gap-1.5 transition";
-    }
-    if (audioBtn) {
-      audioBtn.className = "flex-1 py-2 rounded-xl text-xs font-bold bg-gold-500 text-black flex items-center justify-center gap-1.5 transition";
-    }
-  }
-  if (window.lucide) lucide.createIcons();
-}
-
-// AJUSTE DE PÁGINA NO MODAL
-function adjustModalPage(delta) {
-  if (!currentBookModalData) return;
-  const input = document.getElementById("modalPageInput");
-  if (!input) return;
-  let val = parseInt(input.value) || 1;
-  val = Math.max(1, Math.min(currentBookModalData.pages, val + delta));
-  input.value = val;
-  onPageInputChange(val);
-}
-
-function onPageInputChange(val) {
-  if (!currentBookModalData) return;
-  const page = parseInt(val) || 1;
-  saveReadingProgress(currentBookModalData.id, page, currentBookModalData.pages);
-  updateModalProgressDisplay(page, currentBookModalData.pages);
-}
-
-function updateModalProgressDisplay(page, total) {
-  const span = document.getElementById("modalCurrentProgressPct");
-  if (!span) return;
-  const pct = Math.round((page / total) * 100);
-  span.textContent = "Página " + page + " de " + total + " (" + pct + "%)";
-}
-
-// LEITOR EM TELA CHEIA
-function openReaderModal(book, startPage) {
-  if (startPage === undefined) startPage = 1;
-  closeModal("bookModal");
-  currentBookModalData = book;
-
-  document.getElementById("readerBookTitle").textContent = book.title;
-  document.getElementById("readerBookStatus").textContent = (book.module || 'Módulo') + " • Página " + startPage + " de " + book.pages;
-  
-  const iframe = document.getElementById("readerIframe");
-  if (iframe) {
-    iframe.src = book.pdfUrl;
-  }
-
-  saveReadingProgress(book.id, startPage, book.pages);
-  openModal("readerModal");
-}
-
-function closeReaderModal() {
-  const iframe = document.getElementById("readerIframe");
-  if (iframe) iframe.src = "";
-  closeModal("readerModal");
-}
-
-function bookmarkCurrentPage() {
-  if (!currentBookModalData) return;
-  const progress = getSavedProgress(currentBookModalData.id);
-  const curPage = progress ? progress.page : 1;
-  saveReadingProgress(currentBookModalData.id, curPage, currentBookModalData.pages);
-  showToast("Marcador salvo: " + currentBookModalData.title + " na pág. " + curPage);
-}
-
-// SISTEMA DE MARCACAO & PERSISTENCIA DE LEITURA (LOCALSTORAGE)
-function saveReadingProgress(bookId, page, totalPages) {
-  const book = booksData.find(b => b.id === bookId);
-  if (!book) return;
-
-  const pct = Math.round((page / totalPages) * 100);
-  const data = {
-    bookId: book.id,
-    title: book.title,
-    author: book.author,
-    cover: book.cover,
-    category: book.category,
-    module: book.module || "Módulo I",
-    page: page,
-    totalPages: totalPages,
-    percent: pct,
-    pdfUrl: book.pdfUrl,
-    timestamp: new Date().toISOString()
-  };
-
-  localStorage.setItem("cupula33_active_reading", JSON.stringify(data));
-
-  // Salvar no mapa histórico de todos os livros
-  const allHistory = JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
-  allHistory[book.id] = data;
-  localStorage.setItem("cupula33_books_progress", JSON.stringify(allHistory));
-
-  checkReadingProgress();
-}
-
-function getSavedProgress(bookId) {
-  const allHistory = JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
-  return allHistory[bookId] || null;
-}
-
-function checkReadingProgress() {
-  const section = document.getElementById("resumeReadingSection");
-  const stored = localStorage.getItem("cupula33_active_reading");
-  if (!section) return;
-
-  if (!stored) {
-    section.classList.add("hidden");
-    return;
-  }
-
-  try {
-    const data = JSON.parse(stored);
-    document.getElementById("resumeCover").src = data.cover;
-    document.getElementById("resumeTitle").textContent = data.title;
-    document.getElementById("resumeProgressText").textContent = "Página " + data.page + " de " + data.totalPages + " • " + data.percent + "% Concluído";
-    document.getElementById("resumeProgressBar").style.width = data.percent + "%";
-    section.classList.remove("hidden");
-    if (window.lucide) lucide.createIcons();
-  } catch (err) {
-    section.classList.add("hidden");
-  }
-}
-
-function resumeLastReading() {
-  const stored = localStorage.getItem("cupula33_active_reading");
-  if (!stored) return;
-  const data = JSON.parse(stored);
-  const book = booksData.find(b => b.id === data.bookId);
-  if (book) {
-    openReaderModal(book, data.page);
-  }
-}
-
-function clearReadingProgress() {
-  localStorage.removeItem("cupula33_active_reading");
-  checkReadingProgress();
-  showToast("Histórico de leitura reiniciado.");
-}
-
-// MOTOR DE AUDIOBOOK NARRADO (WEB SPEECH API + WEB AUDIO API 432HZ)
-function togglePlayAudiobook() {
-  if (isAudiobookPlaying) {
-    pauseAudiobook();
-  } else {
-    playAudiobook();
-  }
-}
-
-function playAudiobook() {
-  if (!currentBookModalData) return;
-  const book = currentBookModalData;
-
-  // Iniciar frequência de fundo 432Hz suave
-  startAudiobookAmbientDrone();
-
-  // Texto da narração
-  const narrationText = "Iniciação ao tratado sagrado: " + book.title + ". Autor: " + book.author + ". Pertencente ao acervo da Cúpula 33, " + (book.module || 'Módulo Oficial') + ". " + book.desc + " Este manuscrito guarda as chaves ancestrais da transmutação da mente. Ouça com atenção plena e permita que os ensinamentos façam morada em sua consciência.";
-
-  if ('speechSynthesis' in window) {
-    window.speechSynthesis.cancel();
-    audiobookUtterance = new SpeechSynthesisUtterance(narrationText);
-    audiobookUtterance.lang = 'pt-BR';
-    audiobookUtterance.rate = currentAudioSpeed;
-    audiobookUtterance.pitch = 0.95;
-
-    // Buscar voz em português se disponível
-    const voices = window.speechSynthesis.getVoices();
-    const ptVoice = voices.find(v => v.lang.includes('pt') || v.lang.includes('PT'));
-    if (ptVoice) audiobookUtterance.voice = ptVoice;
-
-    audiobookUtterance.onend = () => {
-      stopAudiobook();
-    };
-
-    audiobookUtterance.onerror = () => {
-      stopAudiobook();
-    };
-
-    window.speechSynthesis.speak(audiobookUtterance);
-    isAudiobookPlaying = true;
-    updateAudiobookControlsUI(true);
-  } else {
-    showToast("Síntese de voz não suportada neste navegador.");
-  }
-}
-
-function pauseAudiobook() {
-  if ('speechSynthesis' in window) {
-    window.speechSynthesis.pause();
-  }
-  stopAudiobookAmbientDrone();
-  isAudiobookPlaying = false;
-  updateAudiobookControlsUI(false);
-}
-
-function stopAudiobook() {
-  if ('speechSynthesis' in window) {
-    window.speechSynthesis.cancel();
-  }
-  stopAudiobookAmbientDrone();
-  isAudiobookPlaying = false;
-  updateAudiobookControlsUI(false);
-}
-
-function restartAudiobook() {
-  stopAudiobook();
-  setTimeout(() => playAudiobook(), 200);
-}
-
-function setAudioSpeed(speed) {
-  currentAudioSpeed = speed;
-  document.querySelectorAll(".audio-speed-btn").forEach(btn => {
-    if (parseFloat(btn.getAttribute("data-speed")) === speed) {
-      btn.className = "audio-speed-btn px-2.5 py-1 rounded-lg bg-gold-500/20 text-gold-400 border border-gold-500/40 font-bold";
-    } else {
-      btn.className = "audio-speed-btn px-2.5 py-1 rounded-lg bg-dark-800 text-gray-400 hover:text-white border border-dark-700";
-    }
-  });
-
-  if (isAudiobookPlaying) {
-    playAudiobook();
-  }
-}
-
-function updateAudiobookControlsUI(playing) {
-  const icon = document.getElementById("audiobookPlayIcon");
-  const status = document.getElementById("audiobookStatus");
-  if (icon) {
-    icon.setAttribute("data-lucide", playing ? "pause" : "play");
-    if (window.lucide) lucide.createIcons();
-  }
-  if (status) {
-    status.textContent = playing ? "Reproduzindo narração com frequência de fundo 432Hz..." : "Reprodução pausada.";
-  }
-}
-
-// FREQUÊNCIA DE FUNDO AMBIENTE PARA O AUDIOBOOK (432Hz)
-let audiobookOsc = null;
-let audiobookGain = null;
-
-function startAudiobookAmbientDrone() {
-  try {
-    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-    if (!AudioContextClass) return;
-    if (!audioCtx) audioCtx = new AudioContextClass();
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-
-    stopAudiobookAmbientDrone();
-
-    audiobookOsc = audioCtx.createOscillator();
-    audiobookGain = audioCtx.createGain();
-
-    audiobookOsc.type = 'sine';
-    audiobookOsc.frequency.setValueAtTime(432, audioCtx.currentTime);
-
-    audiobookGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
-    audiobookGain.gain.exponentialRampToValueAtTime(0.04, audioCtx.currentTime + 1.5);
-
-    audiobookOsc.connect(audiobookGain);
-    audiobookGain.connect(audioCtx.destination);
-    audiobookOsc.start();
-  } catch (err) {
-    console.log("Drone error:", err);
-  }
-}
-
-function stopAudiobookAmbientDrone() {
-  try {
-    if (audiobookGain && audioCtx) {
-      audiobookGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.5);
-      setTimeout(() => {
-        if (audiobookOsc) {
-          audiobookOsc.stop();
-          audiobookOsc.disconnect();
-          audiobookOsc = null;
-        }
-      }, 500);
-    }
-  } catch (err) {}
-}
-
-// BAIXAR ÁUDIO DO AUDIOBOOK PARA SMARTPHONE
-function downloadAudiobookTrack() {
-  if (!currentBookModalData) return;
-  const book = currentBookModalData;
-
-  showToast("Gerando arquivo de áudio para: " + book.title + "...");
-
-  // Gera um arquivo de áudio místico calibrado a 432Hz em formato WAV real sintetizado
-  const sampleRate = 44100;
-  const duration = 12; // 12 segundos do tom harmônico de apresentação da obra
-  const numSamples = sampleRate * duration;
-  const buffer = new Float32Array(numSamples);
-
-  // Sintetiza onda harmônica 432Hz + sobretons
-  for (let i = 0; i < numSamples; i++) {
-    const t = i / sampleRate;
-    const env = Math.sin((Math.PI * i) / numSamples); // Envelope suave
-    buffer[i] = (Math.sin(2 * Math.PI * 432 * t) * 0.6 + Math.sin(2 * Math.PI * 864 * t) * 0.2) * env;
-  }
-
-  // Monta arquivo WAV
-  const wavBytes = encodeWAV(buffer, sampleRate);
-  const blob = new Blob([wavBytes], { type: 'audio/wav' });
-  const url = URL.createObjectURL(blob);
-
-  const a = document.createElement('a');
-  const safeTitle = book.title.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 30);
-  a.href = url;
-  a.download = "Audiobook_432Hz_" + safeTitle + "_Cupula33.wav";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-
-  showToast("Download do Audiobook iniciado com sucesso!");
-}
-
-// ENCODER WAV
-function encodeWAV(samples, sampleRate) {
-  const buffer = new ArrayBuffer(44 + samples.length * 2);
-  const view = new DataView(buffer);
-
-  /* RIFF identifier */
-  writeString(view, 0, 'RIFF');
-  /* file length */
-  view.setUint32(4, 36 + samples.length * 2, true);
-  /* RIFF type */
-  writeString(view, 8, 'WAVE');
-  /* format chunk identifier */
-  writeString(view, 12, 'fmt ');
-  /* format chunk length */
-  view.setUint32(16, 16, true);
-  /* sample format (raw) */
-  view.setUint16(20, 1, true);
-  /* channel count */
-  view.setUint16(22, 1, true);
-  /* sample rate */
-  view.setUint32(24, sampleRate, true);
-  /* byte rate (sample rate * block align) */
-  view.setUint32(28, sampleRate * 2, true);
-  /* block align (channel count * bytes per sample) */
-  view.setUint16(32, 2, true);
-  /* bits per sample */
-  view.setUint16(34, 16, true);
-  /* data chunk identifier */
-  writeString(view, 36, 'data');
-  /* data chunk length */
-  view.setUint32(40, samples.length * 2, true);
-
-  // Escrever samples PCM 16-bit
-  let offset = 44;
-  for (let i = 0; i < samples.length; i++) {
-    const s = Math.max(-1, Math.min(1, samples[i]));
-    view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
-    offset += 2;
-  }
-
-  return buffer;
-}
-
-function writeString(view, offset, string) {
-  for (let i = 0; i < string.length; i++) {
-    view.setUint8(offset + i, string.charCodeAt(i));
-  }
-}
-
-// SISTEMA DE FREQUÊNCIAS DE SOLFEGGIO
-function renderFrequencies() {
-  const list = document.getElementById("frequenciesList");
-  if (!list) return;
-
-  list.innerHTML = frequenciesData.map(f => {
-    const isLocked = currentTier === "basico" && f.tier === "master";
-    const isPlaying = activeFrequencyHz === f.hz;
-
-    return `
-      <div class="glass-panel glass-panel-hover rounded-2xl p-5 border ${isPlaying ? 'border-gold-500 shadow-[0_0_20px_rgba(212,175,55,0.25)]' : 'border-gold-500/20'} flex flex-col justify-between transition-all">
-        
-        <div>
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-cinzel font-bold text-gold-400">${f.hz} HZ</span>
-            ${isLocked ? `
-              <span class="px-2 py-0.5 rounded-full bg-gold-500/15 border border-gold-500/40 text-gold-400 text-[10px] font-bold flex items-center gap-1">
-                <i data-lucide="crown" class="w-3 h-3"></i> Master
-              </span>
-            ` : `
-              <span class="text-[10px] font-bold text-gray-400">${f.chakra}</span>
-            `}
-          </div>
-
-          <h4 class="font-cinzel font-bold text-base text-gray-100 mb-1">${f.name}</h4>
-          <p class="text-xs text-gray-400 leading-relaxed mb-4">${f.benefit}</p>
-        </div>
-
-        <div class="pt-3 border-t border-dark-700/60 flex items-center justify-between">
-          <span class="text-[11px] text-gray-500">Onda Pura Senoidal</span>
-
-          <button onclick="handleFrequencyClick(${f.hz})" class="px-4 py-2 rounded-xl ${isPlaying ? 'bg-amber-400 text-black font-black' : isLocked ? 'bg-gold-500/20 text-gold-400 border border-gold-500/40' : 'bg-gold-500 text-black font-bold'} text-xs flex items-center gap-1.5 transition-all shadow-md">
-            <i data-lucide="${isLocked ? 'lock' : isPlaying ? 'pause' : 'play'}" class="w-3.5 h-3.5"></i>
-            <span>${isLocked ? 'Exclusivo Master' : isPlaying ? 'Pausar' : 'Sintonizar'}</span>
-          </button>
-        </div>
-
-      </div>
-    `;
-  }).join("");
-
-  if (window.lucide) lucide.createIcons();
-}
-
-function handleFrequencyClick(hz) {
-  const f = frequenciesData.find(item => item.hz === hz);
-  if (!f) return;
-
-  if (currentTier === "basico" && f.tier === "master") {
-    openUpgradeModal("Frequência Sagrada " + f.hz + " Hz");
-    return;
-  }
-
-  if (activeFrequencyHz === hz) {
-    stopFrequency(true);
-  } else {
-    playFrequency(hz);
-  }
-}
-
-function playFrequency(hz) {
-  stopFrequency(false);
-
-  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-  if (!AudioContextClass) {
-    showToast("Áudio não suportado no seu navegador.");
-    return;
-  }
-
-  if (!audioCtx) audioCtx = new AudioContextClass();
-  if (audioCtx.state === 'suspended') audioCtx.resume();
-
-  currentOscillator = audioCtx.createOscillator();
-  currentGain = audioCtx.createGain();
-
-  currentOscillator.type = 'sine';
-  currentOscillator.frequency.setValueAtTime(hz, audioCtx.currentTime);
-
-  currentGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
-  currentGain.gain.exponentialRampToValueAtTime(0.35, audioCtx.currentTime + 1.2);
-
-  currentOscillator.connect(currentGain);
-  currentGain.connect(audioCtx.destination);
-  currentOscillator.start();
-
-  activeFrequencyHz = hz;
-
-  const badge = document.getElementById("playerCurrentHz");
-  if (badge) badge.textContent = "Sintonizado em " + hz + " Hz";
-
-  renderFrequencies();
-  showToast("Sintonizado em " + hz + " Hz. Relaxe e respire fundo.");
-}
-
-function stopFrequency(showFeedback) {
-  if (showFeedback === undefined) showFeedback = true;
-  if (currentGain && audioCtx) {
-    try {
-      currentGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.5);
-      setTimeout(() => {
-        if (currentOscillator) {
-          currentOscillator.stop();
-          currentOscillator.disconnect();
-          currentOscillator = null;
-        }
-      }, 500);
-    } catch (e) {}
-  }
-
-  activeFrequencyHz = null;
-
-  const badge = document.getElementById("playerCurrentHz");
-  if (badge) badge.textContent = "Santuário em Silêncio";
-
-  renderFrequencies();
-  if (showFeedback) showToast("Frequência finalizada.");
-}
-
-// SISTEMA DO ROADMAP INICIÁTICO
-function renderRoadmap() {
-  const list = document.getElementById("roadmapList");
-  if (!list) return;
-
-  const completed = JSON.parse(localStorage.getItem("cupula33_roadmap_completed") || "[]");
-  const pct = Math.round((completed.length / roadmapData.length) * 100);
-
-  const progText = document.getElementById("roadmapProgressText");
-  const progBar = document.getElementById("roadmapProgressBar");
-  if (progText) progText.textContent = completed.length + " de 12 Graus (" + pct + "%)";
-  if (progBar) progBar.style.width = pct + "%";
-
-  list.innerHTML = roadmapData.map(r => {
-    const isDone = completed.includes(r.grade);
-
-    return `
-      <div onclick="toggleRoadmapGrade(${r.grade})" class="glass-panel glass-panel-hover rounded-2xl p-4 sm:p-5 border ${isDone ? 'border-gold-500/50 bg-gold-500/5' : 'border-gold-500/20'} flex items-start justify-between gap-4 cursor-pointer transition-all">
-        <div class="flex items-start gap-3.5">
-          <div class="w-8 h-8 rounded-xl ${isDone ? 'bg-gold-500 text-black' : 'bg-dark-800 text-gold-400 border border-gold-500/30'} flex items-center justify-center font-cinzel font-bold text-xs shrink-0 mt-0.5">
-            ${isDone ? '<i data-lucide="check" class="w-4 h-4 stroke-[3]"></i>' : r.grade}
-          </div>
-          <div>
-            <span class="text-[9px] font-bold text-gold-500 uppercase tracking-widest block">${r.module}</span>
-            <h4 class="font-cinzel font-bold text-sm text-gray-100 ${isDone ? 'line-through text-gray-400' : ''}">${r.title}</h4>
-            <p class="text-xs text-gray-400 mt-0.5">${r.desc}</p>
-          </div>
-        </div>
-
-        <span class="text-xs text-gray-500 font-bold shrink-0 mt-1">
-          ${isDone ? '<span class="text-gold-400">Concluído</span>' : 'Pendente'}
-        </span>
-      </div>
-    `;
-  }).join("");
-
-  if (window.lucide) lucide.createIcons();
-}
-
-function toggleRoadmapGrade(grade) {
-  let completed = JSON.parse(localStorage.getItem("cupula33_roadmap_completed") || "[]");
-  if (completed.includes(grade)) {
-    completed = completed.filter(g => g !== grade);
-  } else {
-    completed.push(grade);
-    showToast("Grau " + grade + " concluído com sucesso!");
-  }
-  localStorage.setItem("cupula33_roadmap_completed", JSON.stringify(completed));
-  renderRoadmap();
-}
-
-// SISTEMA DE DOWNLOADS
-function triggerDownload(book) {
-  showToast("Iniciando download seguro de: " + book.title + "...");
-  const a = document.createElement('a');
-  a.href = book.pdfUrl || 'livros_pdf/01_O_Caibalion_Tres_Iniciados.pdf';
-  a.download = '';
-  a.target = '_blank';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-}
-
-function triggerCollectionDownload(title, url) {
-  showToast("Conectando ao Drive Oficial: " + title + "...");
-  window.open(url, '_blank');
-}
-
-// MODAIS
-function openModal(modalId) {
-  const m = document.getElementById(modalId);
-  if (m) m.classList.remove("hidden");
-}
-
-function closeModal(modalId) {
-  const m = document.getElementById(modalId);
-  if (m) m.classList.add("hidden");
-}
-
-function openUpgradeModal(title) {
-  document.getElementById("upgradeModalTitle").textContent = "Desbloquear: " + title;
-  openModal("upgradeModal");
-}
-
-// TOAST
-function showToast(text) {
-  const toast = document.getElementById("appToast");
-  const span = document.getElementById("appToastText");
-  if (!toast || !span) return;
-  span.textContent = text;
-  toast.classList.remove("hidden");
-  setTimeout(() => {
-    toast.classList.add("hidden");
-  }, 3500);
-}
-
-function resetFilters() {
-  currentSearchQuery = "";
-  currentCategoryFilter = "todos";
-  currentTierFilter = "todos";
-  const input = document.getElementById("searchInput");
-  if (input) input.value = "";
-  filterCategory("todos");
-}
-async function checkMemberEmail(email) {
-  const cleanEmail = String(email || "").toLowerCase().trim();
-  if (!cleanEmail) return;
-
-  const endpoint =
-    `${SUPABASE_URL}/rest/v1/members` +
-    `?email=eq.${encodeURIComponent(cleanEmail)}` +
-    `&active=eq.true` +
-    `&select=tier,active`;
-
-  const res = await fetch(endpoint, {
-    headers: {
-      apikey: SUPABASE_ANON_KEY,
-      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-    },
-  });
-
-  if (!res.ok) {
-    throw new Error("Erro ao consultar o Supabase");
-  }
-
-  const rows = await res.json();
-  if (rows.length > 0 && rows[0].active) {
-    const verifiedTier = rows[0].tier === "master" ? "master" : "basico";
-    localStorage.setItem("cupula33_member_email", cleanEmail);
-    localStorage.setItem("cupula33_verified_tier", verifiedTier);
-    setUserTier(verifiedTier, false);
-    showToast(`Acesso ${verifiedTier.toUpperCase()} liberado para ${cleanEmail}!`);
-    closeModal("profileModal");
-  } else {
-    localStorage.removeItem("cupula33_verified_tier");
-    setUserTier("basico", false);
-    showToast("Nenhuma assinatura ativa encontrada para este e-mail.");
-  }
-}
-
-async function loginWithEmail() {
-  const input = document.getElementById("memberEmailInput");
-  try {
-    await checkMemberEmail(input ? input.value : "");
-  } catch (err) {
-    showToast("Não foi possível verificar o acesso agora.");
-  }
-}
-// PWA INSTALL PROMPT
-let deferredPrompt = null;
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  const btn = document.getElementById('pwaInstallBtn');
-  const banner = document.getElementById('pwaInstallBanner');
-  if (btn) btn.classList.remove('hidden');
-  if (banner) banner.classList.remove('hidden');
-});
-
-function triggerPWAInstall() {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(() => {
-      deferredPrompt = null;
-    });
-  } else {
-    showToast("Para instalar no celular: toque no botão Compartilhar do Safari/Chrome e em 'Adicionar à Tela de Início'.");
-  }
-}
+  const curPage = saved ? saved.page
