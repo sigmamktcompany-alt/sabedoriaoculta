@@ -4,6 +4,8 @@
 
 :root {
   --color-gold: #d4af37;
+  --color-gold-light: #f3e5ab;
+  --color-gold-dark: #aa8c2c;
   --color-gold-glow: rgba(212, 175, 55, 0.25);
   --bg-dark: #070709;
 }
@@ -32,42 +34,64 @@ body {
   background: #d4af37;
 }
 
-/* Glassmorphism Card */
+/* Glassmorphism Card (Estilo King's Code VIP) */
 .glass-panel {
-  background: rgba(13, 14, 18, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(212, 175, 55, 0.15);
+  background: rgba(13, 14, 18, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+}
+
+.glass-panel-gold {
+  background: linear-gradient(135deg, rgba(26, 21, 12, 0.9) 0%, rgba(13, 14, 18, 0.95) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7), 0 0 20px -5px rgba(212, 175, 55, 0.15);
 }
 
 .glass-panel-hover {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .glass-panel-hover:hover {
-  border-color: rgba(212, 175, 55, 0.45);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px -2px var(--color-gold-glow);
+  border-color: rgba(212, 175, 55, 0.55);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px -6px rgba(0, 0, 0, 0.6), 0 0 20px -3px var(--color-gold-glow);
 }
 
-/* Audio Visualizer Waves */
+/* King's Code Crown Badge */
+.crown-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  background: rgba(24, 21, 14, 0.9);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #e8c879;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Audio Visualizer Waves (Estilo BrainSync) */
 .wave-bar {
   display: inline-block;
   width: 3px;
   height: 12px;
   background-color: #d4af37;
-  margin: 0 1px;
+  margin: 0 1.5px;
   border-radius: 2px;
   animation: wave 1.2s infinite ease-in-out;
 }
 .wave-bar:nth-child(1) { animation-delay: 0.1s; }
 .wave-bar:nth-child(2) { animation-delay: 0.3s; }
 .wave-bar:nth-child(3) { animation-delay: 0.2s; }
-.wave-bar:nth-child(4) { animation-delay: 0.4s; }
+.wave-bar:nth-child(4) { animation-delay: 0.45s; }
 .wave-bar:nth-child(5) { animation-delay: 0.15s; }
 
 @keyframes wave {
   0%, 100% { height: 6px; opacity: 0.4; }
-  50% { height: 22px; opacity: 1; }
+  50% { height: 24px; opacity: 1; }
 }
 
 /* Gold Gradient Text */
@@ -100,6 +124,24 @@ body {
   animation: modalIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 @keyframes modalIn {
-  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  from { opacity: 0; transform: scale(0.96) translateY(12px); }
   to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Pulse animation */
+.pulse-gold {
+  animation: pulseGold 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@keyframes pulseGold {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* Tab active pills */
+.tab-active {
+  background: linear-gradient(135deg, #d4af37 0%, #aa8c2c 100%) !important;
+  color: #000000 !important;
+  font-weight: 800 !important;
+  border-color: #f3e5ab !important;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.35) !important;
 }

@@ -1,1007 +1,1050 @@
 /**
  * CÚPULA 33 | PLATAFORMA DE MEMBROS & ACERVO HERMÉTICO PWA
- * Sistema de Acesso: Básico (500 Obras) vs Master (2.500 Obras + Frequências Solfeggio)
- * Sem repetição de capas e títulos. Catálogo de obras autênticas.
+ * Estrutura Canônica: 6 Módulos Oficiais (2.500 Obras no Master vs 500 no Básico)
+ * Recursos VIP: Marcador de Leitura (localStorage), Audiobook com Frequência 432Hz e Download de Áudio.
+ * Estilo inspirado no The King's Code e BrainSync.
  */
 
-// 1. BANCO DE DADOS DOS MANUSCRITOS PRIMORDIAIS COM DOWNLOAD DIRETO (PDFs REAIS)
+// 1. BANCO DE DADOS OFICIAL - 55 OBRAS RESTAURADAS COM PDFS E CAPAS EXCLUSIVAS
 const booksData = [
-    {
-        "id": 1,
-        "title": "O Caibalion: Estudo da Filosofia Hermética",
-        "author": "Três Iniciados",
-        "category": "Hermetismo & Cabala",
-        "rarity": "Essencial",
-        "pages": 160,
-        "cover": "assets/books/o-caibalion.jpg",
-        "tier": "basico",
-        "desc": "O tratado definitivo dos sete princípios herméticos de Hermes Trismegisto: Mentalismo, Correspondência, Vibração, Polaridade, Ritmo, Causa e Efeito, e Gênero. A chave mestra de toda transmutação mental.",
-        "pdfUrl": "livros_pdf/01_O_Caibalion_Tres_Iniciados.pdf"
-    },
-    {
-        "id": 2,
-        "title": "A Tábua de Esmeralda",
-        "author": "Hermes Trismegisto",
-        "category": "Hermetismo & Cabala",
-        "rarity": "Manuscrito Sagrado",
-        "pages": 94,
-        "cover": "assets/books/tabua-de-esmeralda.jpg",
-        "tier": "basico",
-        "desc": "O texto críptico primordial da alquimia antiga: 'O que está em cima é como o que está embaixo'. Comentários esotéricos sobre a Grande Obra e a criação da Pedra Filosofal.",
-        "pdfUrl": "livros_pdf/10_A_Tabua_de_Esmeralda_Hermes_Trismegisto.pdf"
-    },
-    {
-        "id": 3,
-        "title": "Corpus Hermeticum",
-        "author": "Hermes Trismegisto",
-        "category": "Hermetismo & Cabala",
-        "rarity": "Manuscrito Sagrado",
-        "pages": 280,
-        "cover": "assets/books/corpus-hermeticum.jpg",
-        "tier": "basico",
-        "desc": "A coleção completa dos diálogos sagrados entre Hermes e seus discípulos Tat e Poimandres, desvendando a natureza da mente divina, o cosmos e a redenção da alma humana.",
-        "pdfUrl": "livros_pdf/07_Corpus_Hermeticum_Hermes_Trismegisto.pdf"
-    },
-    {
-        "id": 4,
-        "title": "O Zohar: Livro do Esplendor",
-        "author": "Simeon bar Yochai",
-        "category": "Hermetismo & Cabala",
-        "rarity": "Raríssimo",
-        "pages": 640,
-        "cover": "assets/books/o-zohar.jpg",
-        "tier": "master",
-        "desc": "A obra-prima da Cabala medieval judaica. Exegese mística e teosófica da Torá, revelando os mistérios do Ein Sof, das 10 Sefirot celestiais e da carruagem divina da Merkavah.",
-        "pdfUrl": "livros_pdf/17_O_Zohar_Traducao_Completa.pdf"
-    },
-    {
-        "id": 5,
-        "title": "Sefer Yetzirah: O Livro da Formação",
-        "author": "Atribuído ao Patriarca Abraão",
-        "category": "Hermetismo & Cabala",
-        "rarity": "Manuscrito Sagrado",
-        "pages": 110,
-        "cover": "assets/books/sefer-yetzirah.jpg",
-        "tier": "basico",
-        "desc": "O mais antigo texto cosmológico hebraico sobrevivente. Revela como o universo foi criado e estruturado através dos 32 Caminhos da Sabedoria e das 22 letras do alfabeto sagrado.",
-        "pdfUrl": "livros_pdf/18_Sefer_Yetzirah_Livro_da_Formacao.pdf"
-    },
-    {
-        "id": 6,
-        "title": "A Cabala Mística",
-        "author": "Dion Fortune",
-        "category": "Hermetismo & Cabala",
-        "rarity": "Essencial",
-        "pages": 310,
-        "cover": "assets/books/cabala-mistica.jpg",
-        "tier": "basico",
-        "desc": "A mais clara e brilhante introdução ocidental à Árvore da Vida cabalística. Conecta a sabedoria hebraica antiga à psicologia profunda, magia prática e ascensão espiritual.",
-        "pdfUrl": "livros_pdf/12_A_Cabala_Mistica_Dion_Fortune.pdf"
-    },
-    {
-        "id": 7,
-        "title": "O Livro de São Cipriano (Capa Preta)",
-        "author": "São Cipriano de Antioquia",
-        "category": "Grimórios & Alta Magia",
-        "rarity": "Proibido",
-        "pages": 380,
-        "cover": "assets/books/grimorio-sao-cipriano.jpg",
-        "tier": "master",
-        "desc": "O lendário tesouro do feiticeiro da Antióquia. Encantamentos, conjurações de espíritos, orações secretas, tesouros enterrados e práticas ancestrais de magia ibérica e cerimonial.",
-        "pdfUrl": "livros_pdf/06_Livro_de_Sao_Cipriano_Capa_Preta.pdf"
-    },
-    {
-        "id": 8,
-        "title": "Dogma e Ritual da Alta Magia",
-        "author": "Eliphas Levi",
-        "category": "Grimórios & Alta Magia",
-        "rarity": "Raríssimo",
-        "pages": 490,
-        "cover": "assets/books/dogma-e-ritual-alta-magia.jpg",
-        "tier": "master",
-        "desc": "O monumento do ocultismo do século XIX. Levi reconcilia ciência, religião e magia sob os princípios da Luz Astral, do Grande Agente Mágico e dos arcanos do Tarot.",
-        "pdfUrl": "livros_pdf/03_Dogma_e_Ritual_da_Alta_Magia_Eliphas_Levi.pdf"
-    },
-    {
-        "id": 9,
-        "title": "A Clavícula de Salomão & Lemegeton",
-        "author": "Rei Salomão (Atrib.)",
-        "category": "Grimórios & Alta Magia",
-        "rarity": "Proibido",
-        "pages": 240,
-        "cover": "assets/books/clavicula-de-salomao.jpg",
-        "tier": "master",
-        "desc": "O mais influente manual de teurgia e conjuração da história. Instruções detalhadas sobre círculos mágicos, pentáculos planetários, horas planetárias e proteção contra forças adversas.",
-        "pdfUrl": "livros_pdf/14_Lemegeton_Clavicula_de_Salomao_Goetia.pdf"
-    },
-    {
-        "id": 10,
-        "title": "Ars Goetia: As 72 Entidades Salomônicas",
-        "author": "S.L. MacGregor Mathers & Aleister Crowley",
-        "category": "Grimórios & Alta Magia",
-        "rarity": "Proibido",
-        "pages": 180,
-        "cover": "assets/books/ars-goetia.jpg",
-        "tier": "master",
-        "desc": "O catálogo completo dos 72 espíritos imperiais invocados por Salomão, com seus respectivos selos, governanças astrais, oferendas e métodos rigorosos de contenção mágica.",
-        "pdfUrl": "livros_pdf/14_Lemegeton_Clavicula_de_Salomao_Goetia.pdf"
-    },
-    {
-        "id": 11,
-        "title": "O Grande Grimório do Papa Honório",
-        "author": "Papa Honório III (Acervo Vaticano)",
-        "category": "Grimórios & Alta Magia",
-        "rarity": "Proibido",
-        "pages": 160,
-        "cover": "assets/books/grandegrimorio.jpg",
-        "tier": "master",
-        "desc": "Manuscrito atribuído à corte papal medieval que detalha conjurações sacerdotais, exorcismos rituais e o pacto hermético para controle das potestades do submundo.",
-        "pdfUrl": "livros_pdf/22_O_Grande_Grimorio_do_Papa_Honorio.pdf"
-    },
-    {
-        "id": 12,
-        "title": "Malleus Maleficarum (O Martelo das Feiticeiras)",
-        "author": "Heinrich Kramer & James Sprenger (1486)",
-        "category": "Grimórios & Alta Magia",
-        "rarity": "Raríssimo",
-        "pages": 420,
-        "cover": "assets/books/malleus.jpg",
-        "tier": "basico",
-        "desc": "O tratado oficial da Inquisição medieval sobre a identificação de praticantes de artes ocultas, pactos diabólicos e os procedimentos inquisitoriais do Santo Ofício.",
-        "pdfUrl": "livros_pdf/15_Malleus_Maleficarum_Martelo_das_Feiticeiras.pdf"
-    },
-    {
-        "id": 13,
-        "title": "Necronomicon (Al Azif)",
-        "author": "Abdul Alhazred (Damasco)",
-        "category": "Grimórios & Alta Magia",
-        "rarity": "Proibido",
-        "pages": 260,
-        "cover": "assets/books/necro.png",
-        "tier": "master",
-        "desc": "O lendário texto dos Antigos Deuses que habitam além das estrelas. Fórmulas para invocação dos Deuses Primordiais, astronomia pré-humana e geometria dimensional não-euclidiana.",
-        "pdfUrl": "livros_pdf/21_Necronomicon_Al_Azif_Abdul_Alhazred.pdf"
-    },
-    {
-        "id": 14,
-        "title": "As Nove Portas do Reino das Sombras",
-        "author": "Aristide Torchia (Veneza, 1666)",
-        "category": "Grimórios & Alta Magia",
-        "rarity": "Manuscrito Sagrado",
-        "pages": 190,
-        "cover": "assets/books/ninegates.png",
-        "tier": "master",
-        "desc": "O fac-símile dos 9 enigmas visuais gravados em madeira que abrem os 9 portais da sabedoria proibida. Análise das variantes atribuídas a Lúcifer e os selos iniciáticos.",
-        "pdfUrl": "livros_pdf/11_As_Nove_Portas_Do_Reino_Das_Sombras.pdf"
-    },
-    {
-        "id": 15,
-        "title": "Picatrix: Ghayat al-Hakim (O Cume do Sábio)",
-        "author": "Maslama al-Majriti (Tradição Árabe)",
-        "category": "Grimórios & Alta Magia",
-        "rarity": "Raríssimo",
-        "pages": 310,
-        "cover": "assets/books/picatrix.jpg",
-        "tier": "master",
-        "desc": "O maior compêndio de magia astrológica e talismânica do mundo árabe medieval. Como capturar as energias dos planetas e mansões lunares em anéis e pedras sagradas.",
-        "pdfUrl": "livros_pdf/35_Tratado_de_Magia_Oculta_Williams_Scott.pdf"
-    },
-    {
-        "id": 16,
-        "title": "Três Livros de Filosofia Oculta",
-        "author": "Heinrich Cornelius Agrippa",
-        "category": "Filosofia Oculta",
-        "rarity": "Manuscrito Sagrado",
-        "pages": 650,
-        "cover": "assets/books/de-occulta-philosophia.jpg",
-        "tier": "master",
-        "desc": "A enciclopédia renascentista da magia natural, celestial e cerimonial. Estudo completo dos quatro elementos, da magia matemática dos números e da invocação angelical.",
-        "pdfUrl": "livros_pdf/45_Curso_de_Filosofia_Oculta_Eliphas_Levi.pdf"
-    },
-    {
-        "id": 17,
-        "title": "O Livro de Enoque Completo",
-        "author": "Profeta Enoque (Cânone Etíope)",
-        "category": "Gnosticismo & Apócrifos",
-        "rarity": "Essencial",
-        "pages": 220,
-        "cover": "assets/books/livro-de-enoque.jpg",
-        "tier": "basico",
-        "desc": "O apócrifo fundamental excluído do cânone bíblico ocidental. A narrativa histórica dos 200 Sentinelas (Anjos Caídos), os gigantes Nefilim e os segredos astronômicos celestiais.",
-        "pdfUrl": "livros_pdf/04_O_Livro_de_Enoque_Completo.pdf"
-    },
-    {
-        "id": 18,
-        "title": "Pistis Sophia: O Evangelho Gnóstico da Sabedoria",
-        "author": "Biblioteca Gnóstica Cóptica",
-        "category": "Gnosticismo & Apócrifos",
-        "rarity": "Manuscrito Sagrado",
-        "pages": 440,
-        "cover": "assets/books/pistis-sophia.jpg",
-        "tier": "master",
-        "desc": "O evangelho secreto pós-ressurreição de Jesus Cristo ensinado aos seus discípulos e a Maria Madalena. A queda e redenção do Aeon Sophia através das 13 esferas celestiais.",
-        "pdfUrl": "livros_pdf/25_Codex_Nasaraeus_Texto_Gnostico.pdf"
-    },
-    {
-        "id": 19,
-        "title": "O Evangelho Secreto de Tomé",
-        "author": "Apóstolo Tomé (Nag Hammadi)",
-        "category": "Gnosticismo & Apócrifos",
-        "rarity": "Essencial",
-        "pages": 95,
-        "cover": "assets/books/evangelho-de-tome.jpg",
-        "tier": "basico",
-        "desc": "As 114 sentenças secretas que Jesus pronunciou em vida: 'Quem descobrir a interpretação destas palavras não experimentará a morte'. O ápice da mística cristã primitiva.",
-        "pdfUrl": "livros_pdf/25_Codex_Nasaraeus_Texto_Gnostico.pdf"
-    },
-    {
-        "id": 20,
-        "title": "Os Manuscritos de Nag Hammadi",
-        "author": "Comunidade Gnóstica do Egito",
-        "category": "Gnosticismo & Apócrifos",
-        "rarity": "Manuscrito Sagrado",
-        "pages": 520,
-        "cover": "assets/books/manuscritos-nag-hammadi.jpg",
-        "tier": "master",
-        "desc": "A coleção completa dos códices de papiro descobertos em 1945 nas cavernas de Chenoboskion. O Evangelho da Verdade, o Tratado Tripartite e o Apócrifo de João traduzidos.",
-        "pdfUrl": "livros_pdf/25_Codex_Nasaraeus_Texto_Gnostico.pdf"
-    },
-    {
-        "id": 21,
-        "title": "Codex Nasaraeus: O Livro Sagrado dos Mandenos",
-        "author": "Tradição de João Batista",
-        "category": "Gnosticismo & Apócrifos",
-        "rarity": "Raríssimo",
-        "pages": 280,
-        "cover": "assets/books/codexnasareus.png",
-        "tier": "master",
-        "desc": "O livro sagrado da única seita gnóstica sobrevivente da antiguidade. A cosmogonia dos Mundos de Luz, a oposição ao Demiurgo e a purificação das águas vivas.",
-        "pdfUrl": "livros_pdf/25_Codex_Nasaraeus_Texto_Gnostico.pdf"
-    },
-    {
-        "id": 22,
-        "title": "O Livro Egípcio dos Mortos: Papiro de Ani",
-        "author": "Escribas de Tebas (1250 a.C.)",
-        "category": "Hermetismo & Cabala",
-        "rarity": "Manuscrito Sagrado",
-        "pages": 310,
-        "cover": "assets/books/livro-egipcio-dos-mortos.jpg",
-        "tier": "basico",
-        "desc": "O manual fúnebre e iniciático mais venerado do Egito Antigo. A travessia do Duat, as 42 Confissões Negativas e a pesagem do coração diante da balança de Ma'at e Osíris.",
-        "pdfUrl": "livros_pdf/O_Livro_Egipcio_dos_Mortos_Papiro_Ani.pdf"
-    },
-    {
-        "id": 23,
-        "title": "O Livro das Estâncias de Dzyan",
-        "author": "Helena Petrovna Blavatsky",
-        "category": "Filosofia Oculta",
-        "rarity": "Manuscrito Sagrado",
-        "pages": 290,
-        "cover": "assets/books/dzyan.jpg",
-        "tier": "master",
-        "desc": "O texto arcaico preservado nos santuários subterrâneos do Tibete sobre o qual foi erguida 'A Doutrina Secreta'. A cosmogênese das Sete Rondas planetárias e as Raças-Raízes.",
-        "pdfUrl": "livros_pdf/02_O_Livro_de_Dzyan_Blavatsky.pdf"
-    },
-    {
-        "id": 24,
-        "title": "A Doutrina Secreta: Cosmogênese & Antropogênese",
-        "author": "Helena Petrovna Blavatsky",
-        "category": "Filosofia Oculta",
-        "rarity": "Manuscrito Sagrado",
-        "pages": 850,
-        "cover": "assets/books/a-doutrina-secreta.jpg",
-        "tier": "master",
-        "desc": "A sintese da ciência, religião e filosofia antiga. A história oculta do planeta Terra, a constituição setenária do homem e os registros akáshicos da evolução espiritual.",
-        "pdfUrl": "livros_pdf/02_O_Livro_de_Dzyan_Blavatsky.pdf"
-    },
-    {
-        "id": 25,
-        "title": "A Voz do Silêncio",
-        "author": "Helena P. Blavatsky",
-        "category": "Filosofia Oculta",
-        "rarity": "Essencial",
-        "pages": 115,
-        "cover": "assets/books/a-voz-do-silencio.jpg",
-        "tier": "basico",
-        "desc": "Preceitos iniciáticos extraídos do 'Livro dos Preceitos de Ouro'. As três salas da consciência e o caminho do Bodhisattva que renuncia ao Nirvana para servir à humanidade.",
-        "pdfUrl": "livros_pdf/44_O_Que_E_O_Espiritismo_Kardec.pdf"
-    },
-    {
-        "id": 26,
-        "title": "Alquimia: Significado e Imagem Cósmica",
-        "author": "Titus Burckhardt",
-        "category": "Hermetismo & Cabala",
-        "rarity": "Essencial",
-        "pages": 230,
-        "cover": "assets/books/AlquimiaTitus.jpg",
-        "tier": "basico",
-        "desc": "O estudo tradicional da transmutação dos metais como alegoria espiritual da iluminação interior. Explicação dos símbolos do Enxofre, Mercúrio e Sal e a união dos opostos.",
-        "pdfUrl": "livros_pdf/23_Alquimia_Significado_e_Imagem_Titus_Burckhardt.pdf"
-    },
-    {
-        "id": 27,
-        "title": "Atalanta Fugiens: Os 50 Emblemas da Alquimia",
-        "author": "Michael Maier (1617)",
-        "category": "Hermetismo & Cabala",
-        "rarity": "Raríssimo",
-        "pages": 310,
-        "cover": "assets/books/atalanta-fugiens.jpg",
-        "tier": "master",
-        "desc": "O mais belo tratado multimídia do Renascimento: contém 50 gravuras esotéricas em cobre, 50 fugas musicais e epigramas poéticos revelando o segredo da Pedra Filosofal.",
-        "pdfUrl": "livros_pdf/24_Atalanta_Fugiens_Michael_Maier.pdf"
-    },
-    {
-        "id": 28,
-        "title": "Splendor Solis: O Esplendor do Sol",
-        "author": "Salomon Trismosin (1582)",
-        "category": "Hermetismo & Cabala",
-        "rarity": "Manuscrito Sagrado",
-        "pages": 180,
-        "cover": "assets/books/splendor-solis.jpg",
-        "tier": "master",
-        "desc": "O mais célebre manuscrito iluminado de alquimia. As 22 gravuras clássicas que descrevem o nascimento do Rei Filosófico, o banho dos metais e o pássaro de Hermes.",
-        "pdfUrl": "livros_pdf/16_Splendor_Solis_Salomon_Trismosin.pdf"
-    },
-    {
-        "id": 29,
-        "title": "A Tradição Hermética",
-        "author": "Julius Evola",
-        "category": "Hermetismo & Cabala",
-        "rarity": "Raríssimo",
-        "pages": 260,
-        "cover": "assets/books/tradicao-hermetica.jpeg",
-        "tier": "master",
-        "desc": "A restauração da Alquimia como disciplina puramente espiritual e iniciática da nobreza espiritual. A superação do condicionamento humano e a conquista da Imortalidade Solar.",
-        "pdfUrl": "livros_pdf/27_A_Tradicao_Hermetica_Julius_Evola.pdf"
-    },
-    {
-        "id": 30,
-        "title": "Fama Fraternitatis & Os Manifestos Rosacruzes",
-        "author": "Fraternitas Rosae Crucis (Kassel, 1614)",
-        "category": "Ordens & Sociedades Secretas",
-        "rarity": "Essencial",
-        "pages": 140,
-        "cover": "assets/books/fama-fraternitatis.jpg",
-        "tier": "basico",
-        "desc": "Os manifestos que abalaram a Europa renascentista. A história da abertura do túmulo misterioso de Christian Rosenkreuz e o convite à Reforma Universal das ciências e da fé.",
-        "pdfUrl": "livros_pdf/47_O_Simbolismo_da_Cruz_Rene_Guenon.pdf"
-    },
-    {
-        "id": 31,
-        "title": "Moral e Dogma do Rito Escocês",
-        "author": "Albert Pike (Soberano Grande Comendador 33)",
-        "category": "Ordens & Sociedades Secretas",
-        "rarity": "Manuscrito Sagrado",
-        "pages": 860,
-        "cover": "assets/books/moral-e-dogma.jpg",
-        "tier": "master",
-        "desc": "O monumento do pensamento filosófico do Supremo Conselho 33 de Charleston. As leituras e instruções morais, kabalísticas e astrológicas do Grau 1 ao Grau 33.",
-        "pdfUrl": "livros_pdf/05_Moral_e_Dogma_Albert_Pike.pdf"
-    },
-    {
-        "id": 32,
-        "title": "A Ação Secreta e os Mistérios da Maçonaria",
-        "author": "Tradição Escocesa & Simbólica",
-        "category": "Ordens & Sociedades Secretas",
-        "rarity": "Essencial",
-        "pages": 190,
-        "cover": "assets/books/acao-secreta-maconaria.jpeg",
-        "tier": "basico",
-        "desc": "Estudo aprofundado dos símbolos do Templo de Salomão, a Lenda do Mestre Hiram Abiff, o esquadro, o compasso e as leis que regem as iniciações operativas e especulativas.",
-        "pdfUrl": "livros_pdf/32_A_Acao_Secreta_da_Maconaria.pdf"
-    },
-    {
-        "id": 33,
-        "title": "Os Escritos Originais dos Iluminados da Baviera",
-        "author": "Adam Weishaupt (Ingolstadt, 1776)",
-        "category": "Ordens & Sociedades Secretas",
-        "rarity": "Proibido",
-        "pages": 310,
-        "cover": "assets/books/iliuminati.png",
-        "tier": "master",
-        "desc": "Os documentos apreendidos pelo governo da Baviera revelando a estrutura interna, os codinomes clássicos e as diretrizes de infiltração social e política da Ordem dos Iluminados.",
-        "pdfUrl": "livros_pdf/19_Os_Iluminados_da_Baviera_Adam_Weishaupt.pdf"
-    },
-    {
-        "id": 34,
-        "title": "Sociedades Secretas e seu Poder no Século XX",
-        "author": "Jan van Helsing",
-        "category": "Ordens & Sociedades Secretas",
-        "rarity": "Proibido",
-        "pages": 370,
-        "cover": "assets/books/sociedades-secretas.webp",
-        "tier": "master",
-        "desc": "O livro banido em diversos países europeus. Investiga as ligações entre a finança internacional, a Sociedade Vril, a Thule Gesellschaft e os planos para a Nova Ordem Mundial.",
-        "pdfUrl": "livros_pdf/20_Sociedades_Secretas_Jan_van_Helsing.pdf"
-    },
-    {
-        "id": 35,
-        "title": "A Verdadeira História do Clube Bilderberg",
-        "author": "Daniel Estulin",
-        "category": "Ordens & Sociedades Secretas",
-        "rarity": "Essencial",
-        "pages": 320,
-        "cover": "assets/books/clube-bilderberg.jpeg",
-        "tier": "basico",
-        "desc": "Investigação jornalística definitiva sobre as reuniões anuais fechadas dos líderes financeiros, presidentes e magnatas da mídia que decidem o destino econômico do globo.",
-        "pdfUrl": "livros_pdf/28_A_Verdadeira_Historia_do_Clube_Bilderberg_Estulin.pdf"
-    },
-    {
-        "id": 36,
-        "title": "A Sociedade Thule e o Ocultismo",
-        "author": "Arquivos Secretos de Munique",
-        "category": "Ordens & Sociedades Secretas",
-        "rarity": "Proibido",
-        "pages": 240,
-        "cover": "assets/books/thulegesellschaft.jpg",
-        "tier": "master",
-        "desc": "A história das origens esotéricas do pangermanismo místico, a busca por Hiperbórea, as expedições secretas ao Tibete pela Ahnenerbe e os rituais de consagração de sangue.",
-        "pdfUrl": "livros_pdf/29_Sociedade_Thule_e_Ocultismo.pdf"
-    },
-    {
-        "id": 37,
-        "title": "Passaporte para Magonia",
-        "author": "Jacques Vallée (Astrofísico)",
-        "category": "Filosofia Oculta",
-        "rarity": "Raríssimo",
-        "pages": 360,
-        "cover": "assets/books/magonia.jpg",
-        "tier": "basico",
-        "desc": "A tese revolucionária que conecta os fenômenos aéreos modernos às antigas lendas de fadas, duendes, súcubos e demônios. O sistema de controle psíquico da consciência humana.",
-        "pdfUrl": "livros_pdf/30_Passaporte_para_Magonia_Jacques_Vallee.pdf"
-    },
-    {
-        "id": 38,
-        "title": "Sonhos Lúcidos & Desdobramento Astral",
-        "author": "Dr. Stephen LaBerge (Stanford University)",
-        "category": "Filosofia Oculta",
-        "rarity": "Essencial",
-        "pages": 280,
-        "cover": "assets/books/sonhos-lucidos.png",
-        "tier": "basico",
-        "desc": "A comprovação científica do despertar da consciência durante o sono REM. Protocolos rigorosos de indução mnemônica, verificação de realidade e estabilização do plano onírico.",
-        "pdfUrl": "livros_pdf/31_Sonhos_Lucidos_Stephen_LaBerge.pdf"
-    },
-    {
-        "id": 39,
-        "title": "A Projeção do Corpo Astral",
-        "author": "Sylvan Muldoon & Hereward Carrington",
-        "category": "Filosofia Oculta",
-        "rarity": "Essencial",
-        "pages": 310,
-        "cover": "assets/books/projecao-do-corpo-astral.jpg",
-        "tier": "basico",
-        "desc": "O clássico definitivo da experiência fora do corpo (OBE). Descrição anatômica do cordão de prata, dos sintomas de exteriorização e dos métodos de controle da energia sutil.",
-        "pdfUrl": "livros_pdf/31_Sonhos_Lucidos_Stephen_LaBerge.pdf"
-    },
-    {
-        "id": 40,
-        "title": "Os Ensinamentos Secretos de Todas as Épocas",
-        "author": "Manly Palmer Hall (Grau 33)",
-        "category": "Filosofia Oculta",
-        "rarity": "Manuscrito Sagrado",
-        "pages": 740,
-        "cover": "assets/books/33_Os_Ensinamentos_Secretos_Manly_Hall.pdf.png",
-        "tier": "master",
-        "desc": "A enciclopédia definitiva de simbolismo maçônico, cabalístico, órfico, pitagórico e rosacruz. A história esotérica da civilização humana ricamente ilustrada e documentada.",
-        "pdfUrl": "livros_pdf/33_Os_Ensinamentos_Secretos_Manly_Hall.pdf"
-    },
-    {
-        "id": 41,
-        "title": "O Livro de Thoth: O Tarot Egípcio e a Cabala",
-        "author": "Aleister Crowley (Mestre Therion)",
-        "category": "Grimórios & Alta Magia",
-        "rarity": "Raríssimo",
-        "pages": 350,
-        "cover": "assets/books/thoth.jpg",
-        "tier": "master",
-        "desc": "O tratado supremo sobre a Árvore da Vida e os 78 arcanos pintados por Lady Frieda Harris. A síntese cabalística, astrológica e telemática dos mistérios do Novo Aeon.",
-        "pdfUrl": "livros_pdf/13_O_Livro_de_Thoth_Tarot_Crowley.pdf"
-    },
-    {
-        "id": 42,
-        "title": "Liber AL vel Legis: O Livro da Lei",
-        "author": "Recebido por Aleister Crowley (Cairo, 1904)",
-        "category": "Grimórios & Alta Magia",
-        "rarity": "Proibido",
-        "pages": 130,
-        "cover": "assets/books/liber.png",
-        "tier": "master",
-        "desc": "O manuscrito ditado pelo mensageiro Aiwass que inaugurou o Aeon de Hórus: 'Faze o que tu queres há de ser tudo da Lei. Amor é a lei, amor sob vontade'.",
-        "pdfUrl": "livros_pdf/08_O_Livro_da_Lei_Liber_AL_vel_Legis_Crowley.pdf"
-    },
-    {
-        "id": 43,
-        "title": "Liber Null & Psiconauta: Magia do Caos",
-        "author": "Peter J. Carroll (IOT)",
-        "category": "Grimórios & Alta Magia",
-        "rarity": "Raríssimo",
-        "pages": 240,
-        "cover": "assets/books/livernull.jpg",
-        "tier": "master",
-        "desc": "A fundação do movimento de Chaos Magick contemporâneo. Desconstrução de dogmas dogmáticos, criação de servidores astrais, sigilização austiniana e controle da mente gnóstica.",
-        "pdfUrl": "livros_pdf/26_Liber_Null_e_Psiconauta_Peter_Carroll.pdf"
-    },
-    {
-        "id": 44,
-        "title": "Codex Gigas: A Bíblia do Diabo",
-        "author": "Herman o Recluso (Mosteiro de Podlažice, séc. XIII)",
-        "category": "Grimórios & Alta Magia",
-        "rarity": "Manuscrito Sagrado",
-        "pages": 624,
-        "cover": "assets/books/codex-gigas.jpg",
-        "tier": "master",
-        "desc": "O maior manuscrito medieval sobrevivente do mundo. Contém a Bíblia Vulgata completa, tratados médicos medievais, exorcismos litúrgicos e o célebre retrato de corpo inteiro de Lúcifer.",
-        "pdfUrl": "https://archive.org/download/CodexGigasDevilsBible_201804/Codex%20Gigas.pdf"
-    },
-    {
-        "id": 45,
-        "title": "O Despertar dos Mágicos: Realismo Fantástico",
-        "author": "Louis Pauwels & Jacques Bergier",
-        "category": "Filosofia Oculta",
-        "rarity": "Essencial",
-        "pages": 480,
-        "cover": "assets/books/a-doutrina-secreta.jpg",
-        "tier": "basico",
-        "desc": "A obra que sacudiu a intelectualidade mundial ao explorar os limites entre física atômica, sociedades secretas, nazismo esotérico e as civilizações desaparecidas do passado.",
-        "pdfUrl": "livros_pdf/34_O_Despertar_Dos_Magos_Pauwels_Bergier.pdf"
-    },
-    {
-        "id": 46,
-        "title": "Os Arquétipos e o Inconsciente Coletivo",
-        "author": "Carl Gustav Jung",
-        "category": "Filosofia Oculta",
-        "rarity": "Essencial",
-        "pages": 440,
-        "cover": "assets/books/sefer.jpg",
-        "tier": "basico",
-        "desc": "A exploração definitiva da Sombra, da Anima, do Animus e do Self. Como os mitos ancestrais e os símbolos herméticos emergem espontaneamente nos sonhos da humanidade.",
-        "pdfUrl": "livros_pdf/37_Os_Arquetipos_e_o_Inconsciente_Coletivo_Jung.pdf"
-    },
-    {
-        "id": 47,
-        "title": "O Simbolismo da Cruz & Tradição Primordial",
-        "author": "René Guénon",
-        "category": "Filosofia Oculta",
-        "rarity": "Essencial",
-        "pages": 210,
-        "cover": "assets/books/tradicao-hermetica.jpeg",
-        "tier": "basico",
-        "desc": "A interpretação metafísica definitiva do símbolo universal da Cruz segundo o Vedanta, o Sufismo e a Maçonaria Operativa. A hierarquia dos múltiplos estados do Ser.",
-        "pdfUrl": "livros_pdf/47_O_Simbolismo_da_Cruz_Rene_Guenon.pdf"
-    },
-    {
-        "id": 48,
-        "title": "O Livro dos Espíritos: Filosofia Espiritualista",
-        "author": "Allan Kardec",
-        "category": "Filosofia Oculta",
-        "rarity": "Essencial",
-        "pages": 380,
-        "cover": "assets/books/CAIBALION.jpg",
-        "tier": "basico",
-        "desc": "As 1019 perguntas e respostas fundamentais sobre a imortalidade da alma, a lei de causa e efeito, a pluralidade dos mundos habitados e a comunicabilidade dos espíritos.",
-        "pdfUrl": "livros_pdf/38_O_Livro_dos_Espiritos_Allan_Kardec.pdf"
-    },
-    {
-        "id": 49,
-        "title": "O Livro dos Médiuns: Guia Prático",
-        "author": "Allan Kardec",
-        "category": "Filosofia Oculta",
-        "rarity": "Essencial",
-        "pages": 410,
-        "cover": "assets/books/CAIBALION.jpg",
-        "tier": "basico",
-        "desc": "O tratado experimental sobre a mecânica das manifestações psíquicas, psicografia, desobsessão e a classificação metódica de todas as faculdades medianímicas.",
-        "pdfUrl": "livros_pdf/39_O_Livro_dos_Mediuns_Allan_Kardec.pdf"
-    },
-    {
-        "id": 50,
-        "title": "O Livro dos Jubileus: A Pequena Gênesis",
-        "author": "Cânone Etíope & Manuscritos de Qumran",
-        "category": "Gnosticismo & Apócrifos",
-        "rarity": "Raríssimo",
-        "pages": 190,
-        "cover": "assets/books/enoque.png",
-        "tier": "basico",
-        "desc": "A história da criação do mundo dividida em períodos exatos de 49 anos revelada pelo Anjo da Presença a Moisés no Monte Sinai. Revelações sobre os segredos do tempo cósmico.",
-        "pdfUrl": "livros_pdf/02_O_Livro_dos_Jubileus_Integral.pdf"
-    },
-    {
-        "id": 51,
-        "title": "O Livro dos Gigantes de Qumran",
-        "author": "Fragmentos do Mar Morto",
-        "category": "Gnosticismo & Apócrifos",
-        "rarity": "Proibido",
-        "pages": 140,
-        "cover": "assets/books/enoque.png",
-        "tier": "master",
-        "desc": "Os textos aramaicos descobertos nas cavernas de Qumran narrando os sonhos proféticos e o terror dos gigantes Nefilim antes do Dilúvio, complementando a tradição de Enoque.",
-        "pdfUrl": "livros_pdf/03_O_Livro_dos_Gigantes_Qumran.pdf"
-    },
-    {
-        "id": 52,
-        "title": "Kebra Nagast: A Glória dos Reis da Etiópia",
-        "author": "Tradição Real Etíope (Séc. XIV)",
-        "category": "Gnosticismo & Apócrifos",
-        "rarity": "Manuscrito Sagrado",
-        "pages": 260,
-        "cover": "assets/books/moraledogma.jpg",
-        "tier": "master",
-        "desc": "A narrativa sagrada sobre como a Arca da Aliança foi transportada do Templo de Salomão em Jerusalém para Axum, na Etiópia, pelo Rei Menelik I, filho da Rainha de Sabá.",
-        "pdfUrl": "livros_pdf/04_Kebra_Nagast_A_Gloria_dos_Reis.pdf"
-    },
-    {
-        "id": 53,
-        "title": "O Cânone Primitivo: Guia dos 88 Livros Sagrados",
-        "author": "Acervo Bíblico Antigo",
-        "category": "Gnosticismo & Apócrifos",
-        "rarity": "Manuscrito Sagrado",
-        "pages": 340,
-        "cover": "assets/books/enoque.png",
-        "tier": "basico",
-        "desc": "A reconstrução completa da biblioteca bíblica antes das supressões dos concílios de Nicéia e Trento, incluindo todos os textos históricos, sapienciais e apocalípticos primitivos.",
-        "pdfUrl": "livros_pdf/05_O_Canone_Primitivo_88_Livros_Guia_Completo.pdf"
-    },
-    {
-        "id": 54,
-        "title": "Mapa dos 200 Vigilantes e Linhagens dos Sentinelas",
-        "author": "Estudos Herméticos de Qumran",
-        "category": "Gnosticismo & Apócrifos",
-        "rarity": "Raríssimo",
-        "pages": 85,
-        "cover": "assets/books/enoque.png",
-        "tier": "master",
-        "desc": "Diagrama detalhado dos 20 decanos celestiais liderados por Semjaza e Azazel, seus nomes, as ciências proibidas que transmitiram à humanidade e o destino de sua descendência.",
-        "pdfUrl": "livros_pdf/06_BONUS_Mapa_dos_200_Vigilantes_e_Linhagens.pdf"
-    },
-    {
-        "id": 55,
-        "title": "Guia de Leitura Cruzada do Cânone Oculto",
-        "author": "Curadoria Cúpula 33",
-        "category": "Filosofia Oculta",
-        "rarity": "Essencial",
-        "pages": 90,
-        "cover": "assets/books/a-doutrina-secreta.jpg",
-        "tier": "basico",
-        "desc": "Mapeamento comparativo e referências cruzadas entre os textos do Mar Morto, os Evangelhos Gnósticos e o Novo Testamento tradicional, revelando citações diretas de Enoque.",
-        "pdfUrl": "livros_pdf/07_BONUS_Guia_de_Leitura_Cruzada_Novo_Testamento.pdf"
-    }
+  // ==================== MÓDULO I: HERMETISMO & CABALA (350+ OBRAS) ====================
+  {
+    id: 1,
+    title: "O Caibalion: Estudo da Filosofia Hermética",
+    author: "Três Iniciados",
+    category: "Hermetismo & Cabala",
+    module: "Módulo I",
+    rarity: "Essencial",
+    pages: 160,
+    cover: "assets/books/o-caibalion.jpg",
+    tier: "basico",
+    desc: "O tratado definitivo dos sete princípios herméticos de Hermes Trismegisto: Mentalismo, Correspondência, Vibração, Polaridade, Ritmo, Causa e Efeito, e Gênero. A chave mestra de toda transmutação mental.",
+    pdfUrl: "livros_pdf/01_O_Caibalion_Tres_Iniciados.pdf"
+  },
+  {
+    id: 2,
+    title: "A Tábua de Esmeralda",
+    author: "Hermes Trismegisto",
+    category: "Hermetismo & Cabala",
+    module: "Módulo I",
+    rarity: "Manuscrito Sagrado",
+    pages: 94,
+    cover: "assets/books/tabua-de-esmeralda.jpg",
+    tier: "basico",
+    desc: "O texto críptico primordial da alquimia antiga: 'O que está em cima é como o que está embaixo'. Comentários esotéricos sobre a Grande Obra e a criação da Pedra Filosofal.",
+    pdfUrl: "livros_pdf/10_A_Tabua_de_Esmeralda_Hermes_Trismegisto.pdf"
+  },
+  {
+    id: 3,
+    title: "Corpus Hermeticum",
+    author: "Hermes Trismegisto",
+    category: "Hermetismo & Cabala",
+    module: "Módulo I",
+    rarity: "Manuscrito Sagrado",
+    pages: 280,
+    cover: "assets/books/corpus-hermeticum.jpg",
+    tier: "basico",
+    desc: "A coleção dos diálogos de Hermes com seu discípulo Tat e com Poimandres (a Mente Suprema). A gênese sagrada e a iluminação da consciência no Egito helenístico.",
+    pdfUrl: "livros_pdf/07_Corpus_Hermeticum_Hermes_Trismegisto.pdf"
+  },
+  {
+    id: 4,
+    title: "O Zohar: Livro do Esplendor",
+    author: "Shimon bar Yochai",
+    category: "Hermetismo & Cabala",
+    module: "Módulo I",
+    rarity: "Raríssimo",
+    pages: 420,
+    cover: "assets/books/o-zohar.jpg",
+    tier: "master",
+    desc: "O coração da Cabala medieval aramaica. Revelações místicas sobre a emanação divina das Dez Sefirot, a estrutura da Criação, o mistério da alma e as leis ocultas do cosmos.",
+    pdfUrl: "livros_pdf/17_O_Zohar_Traducao_Completa.pdf"
+  },
+  {
+    id: 5,
+    title: "Sefer Yetzirah: O Livro da Formação",
+    author: "Patriarca Abraão",
+    category: "Hermetismo & Cabala",
+    module: "Módulo I",
+    rarity: "Antiguidade Extrema",
+    pages: 110,
+    cover: "assets/books/sefer-yetzirah.jpg",
+    tier: "basico",
+    desc: "O mais antigo tratado cabalístico conhecido. Desvenda os 32 Caminhos da Sabedoria: as 10 Sefirot do nada e as 22 letras hebraicas com as quais o Universo foi pronunciado.",
+    pdfUrl: "livros_pdf/18_Sefer_Yetzirah_Livro_da_Formacao.pdf"
+  },
+  {
+    id: 6,
+    title: "A Cabala Mística",
+    author: "Dion Fortune",
+    category: "Hermetismo & Cabala",
+    module: "Módulo I",
+    rarity: "Clássico Iniciático",
+    pages: 312,
+    cover: "assets/books/a-cabala-mistica.jpg",
+    tier: "basico",
+    desc: "A maior autoridade ocidental sobre a Árvore da Vida. Explicação prática de cada esfera, caminho astral e utilização da Cabala como mapa da psique humana e ascensão espiritual.",
+    pdfUrl: "livros_pdf/12_A_Cabala_Mistica_Dion_Fortune.pdf"
+  },
+  {
+    id: 7,
+    title: "O Livro de Thoth: O Tarot Sagrado",
+    author: "Aleister Crowley",
+    category: "Hermetismo & Cabala",
+    module: "Módulo I",
+    rarity: "Raríssimo",
+    pages: 340,
+    cover: "assets/books/o-livro-de-thoth.jpg",
+    tier: "master",
+    desc: "A síntese definitiva entre a Cabala, a astrologia e o Tarot hermético egípcio. Simbolismo das lâminas sagradas e correspondências esotéricas decodificadas.",
+    pdfUrl: "livros_pdf/13_O_Livro_de_Thoth_Tarot_Crowley.pdf"
+  },
+  {
+    id: 8,
+    title: "Tratado Elementar de Ciência Oculta",
+    author: "Papus (Gérard Encausse)",
+    category: "Hermetismo & Cabala",
+    module: "Módulo I",
+    rarity: "Clássico Martinista",
+    pages: 290,
+    cover: "assets/books/tratado-elementar-papus.jpg",
+    tier: "basico",
+    desc: "Fundamentos da Tradição Hermética, analogia universal, micro e macrocosmo, e o método de dedução cabalístico aplicado aos fenômenos da natureza.",
+    pdfUrl: "livros_pdf/42_Tratado_Elementar_de_Ciencia_Oculta_Papus.pdf"
+  },
+  {
+    id: 9,
+    title: "O Simbolismo da Cruz",
+    author: "René Guénon",
+    category: "Hermetismo & Cabala",
+    module: "Módulo I",
+    rarity: "Filosofia Tradicional",
+    pages: 215,
+    cover: "assets/books/o-simbolismo-da-cruz.jpg",
+    tier: "master",
+    desc: "A metafísica do símbolo da cruz nas tradições orientais e ocidentais. Estados múltiplos do Ser, o eixo vertical da consciência e a reintegração espiritual.",
+    pdfUrl: "livros_pdf/47_O_Simbolismo_da_Cruz_Rene_Guenon.pdf"
+  },
+  {
+    id: 10,
+    title: "O Livro Egípcio dos Mortos",
+    author: "Papiro de Ani (Trad. E. A. Wallis Budge)",
+    category: "Hermetismo & Cabala",
+    module: "Módulo I",
+    rarity: "Antiguidade Ancestral",
+    pages: 380,
+    cover: "assets/books/o-livro-egipcio-dos-mortos.jpg",
+    tier: "master",
+    desc: "As fórmulas rituais para a passagem no submundo Duat, a pesagem do coração contra a Pena de Maat e as palavras de poder para transcender os guardiões astrais.",
+    pdfUrl: "livros_pdf/O_Livro_Egipcio_dos_Mortos_Papiro_Ani.pdf"
+  },
+  {
+    id: 11,
+    title: "Os Ensinamentos Secretos de Todas as Épocas",
+    author: "Manly Palmer Hall",
+    category: "Hermetismo & Cabala",
+    module: "Módulo I",
+    rarity: "Enciclopédia Oculta",
+    pages: 720,
+    cover: "assets/books/ensinamentos-secretos-todas-as-epocas.jpg",
+    tier: "master",
+    desc: "A mais monumental enciclopédia esotérica do mundo ocidental. Mistérios órficos, pitagóricos, rosacrucianos, cabala e sociedades secretas decifradas.",
+    pdfUrl: "livros_pdf/Os_Ensinamentos_Secretos_de_Todas_as_Epocas_Manly_Hall.pdf"
+  },
+  {
+    id: 12,
+    title: "Curso de Filosofia Oculta",
+    author: "Éliphas Lévi",
+    category: "Hermetismo & Cabala",
+    module: "Módulo I",
+    rarity: "Doutrina Superior",
+    pages: 350,
+    cover: "assets/books/curso-filosofia-oculta.jpg",
+    tier: "basico",
+    desc: "A ciência dos magos, o mistério dos três mundos, a luz astral como agente magnético universal e as leis secretas da vontade pura.",
+    pdfUrl: "livros_pdf/45_Curso_de_Filosofia_Oculta_Eliphas_Levi.pdf"
+  },
+
+  // ==================== MÓDULO II: GRIMÓRIOS & ALTA MAGIA (420+ OBRAS) ====================
+  {
+    id: 13,
+    title: "A Clavícula de Salomão: Goetia / Lemegeton",
+    author: "Rei Salomão",
+    category: "Grimórios & Alta Magia",
+    module: "Módulo II",
+    rarity: "Grimório Proibido",
+    pages: 210,
+    cover: "assets/books/clavicula-de-salomao.jpg",
+    tier: "master",
+    desc: "A evocação cerimonial dos 72 espíritos, com selos, pentáculos de proteção, círculos consagrados e conjurações imperativas segundo a tradição salomônica.",
+    pdfUrl: "livros_pdf/14_Lemegeton_Clavicula_de_Salomao_Goetia.pdf"
+  },
+  {
+    id: 14,
+    title: "A Clavícula do Rei Salomão: Tratado Completo",
+    author: "Rei Salomão",
+    category: "Grimórios & Alta Magia",
+    module: "Módulo II",
+    rarity: "Manuscrito Raro",
+    pages: 185,
+    cover: "assets/books/clavicula-do-rei-salomao.jpg",
+    tier: "basico",
+    desc: "Os pentáculos sagrados dos sete planetas, consagração de instrumentos mágicos, vestimentas, horas planetárias e orações para controle das forças invisíveis.",
+    pdfUrl: "livros_pdf/A_Clavicula_do_Rei_Salomao_Tratado_Completo.pdf"
+  },
+  {
+    id: 15,
+    title: "Dogma e Ritual da Alta Magia",
+    author: "Éliphas Lévi",
+    category: "Grimórios & Alta Magia",
+    module: "Módulo II",
+    rarity: "Obra-Prima Teúrgica",
+    pages: 480,
+    cover: "assets/books/dogma-e-ritual.jpg",
+    tier: "basico",
+    desc: "O tratado canônico do ocultismo moderno. O enigma da Esfinge, a Luz Astral, o tetragrama sagrado, o poder do verbo e o ritual de transmutação psíquica.",
+    pdfUrl: "livros_pdf/03_Dogma_e_Ritual_da_Alta_Magia_Eliphas_Levi.pdf"
+  },
+  {
+    id: 16,
+    title: "O Grande Grimório do Papa Honório",
+    author: "Papa Honório III",
+    category: "Grimórios & Alta Magia",
+    module: "Módulo II",
+    rarity: "Grimório Secreto",
+    pages: 150,
+    cover: "assets/books/grimorio-papa-honorio.jpg",
+    tier: "master",
+    desc: "O polêmico grimório vaticano atribuído a Honório III. Conjurações e rituais que mesclam a liturgia católica romana com a magia evocativa medieval.",
+    pdfUrl: "livros_pdf/22_O_Grande_Grimorio_do_Papa_Honorio.pdf"
+  },
+  {
+    id: 17,
+    title: "O Livro de São Cipriano da Capa Preta",
+    author: "São Cipriano de Antioquia",
+    category: "Grimórios & Alta Magia",
+    module: "Módulo II",
+    rarity: "Folclore Oculto Raro",
+    pages: 310,
+    cover: "assets/books/sao-cipriano-capa-preta.jpg",
+    tier: "basico",
+    desc: "A mais famosa compilação de feitiçaria ibérica, esconjuros, tesouros enterrados, talismãs e os segredos do bruxo converso de Antioquia.",
+    pdfUrl: "livros_pdf/06_Livro_de_Sao_Cipriano_Capa_Preta.pdf"
+  },
+  {
+    id: 18,
+    title: "O Livro Negro de São Cipriano",
+    author: "N. A. Lopes",
+    category: "Grimórios & Alta Magia",
+    module: "Módulo II",
+    rarity: "Raríssimo",
+    pages: 240,
+    cover: "assets/books/livro-negro-sao-cipriano.jpg",
+    tier: "master",
+    desc: "Tratado de magia natural e simpática, preces cabalísticas, sortilégios e o oráculo das feiticeiras com ilustrações históricas.",
+    pdfUrl: "livros_pdf/36_O_Livro_Negro_de_Sao_Cipriano_Lopes.pdf"
+  },
+  {
+    id: 19,
+    title: "A Magia Sagrada de Abramelin, o Mago",
+    author: "Abraão de Worms",
+    category: "Grimórios & Alta Magia",
+    module: "Módulo II",
+    rarity: "Alta Teurgia",
+    pages: 360,
+    cover: "assets/books/magia-sagrada-abramelin.jpg",
+    tier: "master",
+    desc: "O sistema místico mais rigoroso do mundo ocidental para obtenção do Conhecimento e Conversação com o Sagrado Anjo Guardião e controle dos espíritos.",
+    pdfUrl: "livros_pdf/A_Magia_Sagrada_de_Abramelin_o_Mago.pdf"
+  },
+  {
+    id: 20,
+    title: "Liber Null & Psiconauta: Magia do Caos",
+    author: "Peter J. Carroll",
+    category: "Grimórios & Alta Magia",
+    module: "Módulo II",
+    rarity: "Caos Moderno",
+    pages: 230,
+    cover: "assets/books/liber-null-psiconauta.jpg",
+    tier: "master",
+    desc: "A bíblia fundadora da Magia do Caos: estado de gnose, sigilização de Austin Osman Spare, metamagia e o desmantelamento de dogmas arcaicos.",
+    pdfUrl: "livros_pdf/26_Liber_Null_e_Psiconauta_Peter_Carroll.pdf"
+  },
+  {
+    id: 21,
+    title: "Malleus Maleficarum: O Martelo das Feiticeiras",
+    author: "Heinrich Kramer & James Sprenger (1486)",
+    category: "Grimórios & Alta Magia",
+    module: "Módulo II",
+    rarity: "Documento Inquisitorial",
+    pages: 560,
+    cover: "assets/books/malleus-maleficarum.jpg",
+    tier: "basico",
+    desc: "O infame manual inquisitorial que ditou a perseguição e julgamento de práticas ocultas durante o Santo Ofício. Documento indispensável para historiadores.",
+    pdfUrl: "livros_pdf/15_Malleus_Maleficarum_Martelo_das_Feiticeiras.pdf"
+  },
+  {
+    id: 22,
+    title: "Necronomicon: Al Azif",
+    author: "Abdul Alhazred",
+    category: "Grimórios & Alta Magia",
+    module: "Módulo II",
+    rarity: "Tenebroso",
+    pages: 195,
+    cover: "assets/books/necronomicon.jpg",
+    tier: "master",
+    desc: "A mítica obra sobre os Antigos deuses estelares, os portais do abismo cósmico, rituais sumérios arcaicos e a invocação dos deuses exteriores.",
+    pdfUrl: "livros_pdf/21_Necronomicon_Al_Azif_Abdul_Alhazred.pdf"
+  },
+  {
+    id: 23,
+    title: "As Nove Portas do Reino das Sombras",
+    author: "Aristide Torchia (1666)",
+    category: "Grimórios & Alta Magia",
+    module: "Módulo II",
+    rarity: "Inestimável",
+    pages: 140,
+    cover: "assets/books/as-nove-portas.jpg",
+    tier: "master",
+    desc: "As nove gravuras esotéricas que guardam a chave para a abertura dos portais dimensionais. Fac-símile dos selos lendários queimados pela Inquisição.",
+    pdfUrl: "livros_pdf/11_As_Nove_Portas_Do_Reino_Das_Sombras.pdf"
+  },
+  {
+    id: 24,
+    title: "Tratado de Magia Oculta",
+    author: "Williams Scott",
+    category: "Grimórios & Alta Magia",
+    module: "Módulo II",
+    rarity: "Raro",
+    pages: 275,
+    cover: "assets/books/tratado-de-magia-oculta.jpg",
+    tier: "basico",
+    desc: "Instruções práticas para manipulação da energia etérica, defesas psíquicas, pantáculos de prosperidade e evocação de egrégoras benéficas.",
+    pdfUrl: "livros_pdf/35_Tratado_de_Magia_Oculta_Williams_Scott.pdf"
+  },
+  {
+    id: 25,
+    title: "História da Magia",
+    author: "Éliphas Lévi",
+    category: "Grimórios & Alta Magia",
+    module: "Módulo II",
+    rarity: "Clássico Ocultista",
+    pages: 410,
+    cover: "assets/books/historia-da-magia.jpg",
+    tier: "basico",
+    desc: "Panorama completo da magia desde os caldeus, persas e sacerdotes egípcios até a Idade Média, o Iluminismo e as fraternidades contemporâneas.",
+    pdfUrl: "livros_pdf/46_Historia_da_Magia_Eliphas_Levi.pdf"
+  },
+  {
+    id: 26,
+    title: "Liber AL vel Legis: O Livro da Lei",
+    author: "Aleister Crowley (Aiwass, 1904)",
+    category: "Grimórios & Alta Magia",
+    module: "Módulo II",
+    rarity: "Canônico Thelêmico",
+    pages: 120,
+    cover: "assets/books/livro-da-lei.jpg",
+    tier: "master",
+    desc: "O texto primordial da Thelema recebido no Cairo: 'Faze o que tu queres há de ser tudo da Lei'. A inauguração do Eon de Hórus e as novas diretrizes da vontade humana.",
+    pdfUrl: "livros_pdf/08_O_Livro_da_Lei_Liber_AL_vel_Legis_Crowley.pdf"
+  },
+
+  // ==================== MÓDULO III: GNOSTICISMO & APÓCRIFOS (380+ OBRAS) ====================
+  {
+    id: 27,
+    title: "O Livro de Enoque: Texto Etíope Completo",
+    author: "Henoch (Trad. R. H. Charles)",
+    category: "Gnosticismo & Apócrifos",
+    module: "Módulo III",
+    rarity: "Apócrifo Primordial",
+    pages: 245,
+    cover: "assets/books/livro-de-enoque.jpg",
+    tier: "basico",
+    desc: "A queda dos 200 anjos sentinelas (Vigilantes), a união com as filhas dos homens, o nascimento dos gigantes Nefilim e os segredos astronômicos do céu.",
+    pdfUrl: "livros_pdf/01_O_Livro_de_Enoque_Completo.pdf"
+  },
+  {
+    id: 28,
+    title: "O Livro dos Jubileus: Pequeno Gênesis",
+    author: "Tradição Essênia de Qumran",
+    category: "Gnosticismo & Apócrifos",
+    module: "Módulo III",
+    rarity: "Texto Banido",
+    pages: 290,
+    cover: "assets/books/livro-dos-jubileus.jpg",
+    tier: "master",
+    desc: "A história da Criação e dos patriarcas contada pelos Anjos da Presença a Moisés no Monte Sinai. Cronologia sagrada dos jubileus de 49 anos.",
+    pdfUrl: "livros_pdf/02_O_Livro_dos_Jubileus_Integral.pdf"
+  },
+  {
+    id: 29,
+    title: "O Livro dos Gigantes: Fragmentos de Qumran",
+    author: "Manuscritos do Mar Morto",
+    category: "Gnosticismo & Apócrifos",
+    module: "Módulo III",
+    rarity: "Achado Arqueológico",
+    pages: 140,
+    cover: "assets/books/livro-dos-gigantes.jpg",
+    tier: "master",
+    desc: "Os sonhos proféticos dos gigantes Ohya e Hahya antes do Dilúvio universal e o confronto com Enoque. Fragmentos aramaicos decifrados da caverna 4 de Qumran.",
+    pdfUrl: "livros_pdf/03_O_Livro_dos_Gigantes_Qumran.pdf"
+  },
+  {
+    id: 30,
+    title: "Kebra Nagast: A Glória dos Reis",
+    author: "Tradição Copta Etíope",
+    category: "Gnosticismo & Apócrifos",
+    module: "Módulo III",
+    rarity: "Épico Sagrado",
+    pages: 320,
+    cover: "assets/books/kebra-nagast.jpg",
+    tier: "master",
+    desc: "A crônica sagrada do encontro do Rei Salomão com a Rainha de Sabá, a linhagem de Menelik I e a transferência física da Arca da Aliança para a Etiópia.",
+    pdfUrl: "livros_pdf/04_Kebra_Nagast_A_Gloria_dos_Reis.pdf"
+  },
+  {
+    id: 31,
+    title: "O Cânone Primitivo: 88 Livros Banidos",
+    author: "Acervo dos Concílios Antigos",
+    category: "Gnosticismo & Apócrifos",
+    module: "Módulo III",
+    rarity: "Manuscrito Desclassificado",
+    pages: 410,
+    cover: "assets/books/canone-primitivo.jpg",
+    tier: "basico",
+    desc: "Guia completo das 88 obras excluídas do cânone bíblico ocidental pelos Concílios de Nicéia e Laodiceia, incluindo os Evangelhos da Infância e Atos de Paulo.",
+    pdfUrl: "livros_pdf/05_O_Canone_Primitivo_88_Livros_Guia_Completo.pdf"
+  },
+  {
+    id: 32,
+    title: "Manuscritos de Nag Hammadi: Biblioteca Gnóstica",
+    author: "Scribas Gnósticos do Egito Superior (350 d.C.)",
+    category: "Gnosticismo & Apócrifos",
+    module: "Módulo III",
+    rarity: "Inestimável",
+    pages: 580,
+    cover: "assets/books/manuscritos-nag-hammadi.jpg",
+    tier: "master",
+    desc: "O Evangelho de Tomé, o Evangelho de Filipe, o Livro Secreto de João e o Tratado Tripartido. A doutrina gnóstica do Demiurgo Yaldabaoth e a centelha divina Pneuma.",
+    pdfUrl: "https://archive.org/download/nag-hammadi-library-complete/nag_hammadi_library.pdf"
+  },
+  {
+    id: 33,
+    title: "Codex Gigas: A Bíblia do Diabo",
+    author: "Herman, o Recluso (Século XIII)",
+    category: "Gnosticismo & Apócrifos",
+    module: "Módulo III",
+    rarity: "Manuscrito Mais Misterioso do Mundo",
+    pages: 624,
+    cover: "assets/books/codex-gigas.jpg",
+    tier: "master",
+    desc: "O maior manuscrito medieval sobrevivente. Contém a Bíblia Vulgata completa, tratados médicos, encantos mágicos e o lendário retrato de página inteira de Lúcifer.",
+    pdfUrl: "https://archive.org/download/codex-gigas-facsimile/codex-gigas.pdf"
+  },
+  {
+    id: 34,
+    title: "Codex Nasaraeus: O Livro Secreto dos Mandeus",
+    author: "Tradição Mandeísta Gnóstica",
+    category: "Gnosticismo & Apócrifos",
+    module: "Módulo III",
+    rarity: "Raríssimo",
+    pages: 260,
+    cover: "assets/books/codex-nasaraeus.jpg",
+    tier: "master",
+    desc: "O texto sagrado dos discípulos diretos de João Batista na Mesopotâmia. Cosmogonia dualista da Luz contra as Trevas e as orações de purificação astral.",
+    pdfUrl: "livros_pdf/25_Codex_Nasaraeus_Texto_Gnostico.pdf"
+  },
+  {
+    id: 35,
+    title: "O Livro de Dzyan: Estâncias Ocultas",
+    author: "Helena P. Blavatsky",
+    category: "Gnosticismo & Apócrifos",
+    module: "Módulo III",
+    rarity: "Doutrina Secreta",
+    pages: 180,
+    cover: "assets/books/livro-de-dzyan.jpg",
+    tier: "basico",
+    desc: "O mais antigo manuscrito tibetano, gravado em folhas de palma. As estâncias cosmogônicas da Doutrina Secreta sobre as Sete Rondas e a evolução dos Mundos.",
+    pdfUrl: "livros_pdf/02_O_Livro_de_Dzyan_Blavatsky.pdf"
+  },
+  {
+    id: 36,
+    title: "Mapa dos 200 Anjos Vigilantes e Linhagens Nefilim",
+    author: "Acervo Genealógico Enoquiano",
+    category: "Gnosticismo & Apócrifos",
+    module: "Módulo III",
+    rarity: "Bônus Histórico",
+    pages: 45,
+    cover: "assets/books/mapa-vigilantes.jpg",
+    tier: "basico",
+    desc: "Tabela detalhada com os nomes aramaicos dos líderes celestes (Semjaza, Azazel, Baraqiel), seus conhecimentos proibidos transmitidos e árvore genealógica ancestral.",
+    pdfUrl: "livros_pdf/06_BONUS_Mapa_dos_200_Vigilantes_e_Linhagens.pdf"
+  },
+  {
+    id: 37,
+    title: "Guia de Leitura Cruzada do Novo Testamento",
+    author: "Escritório de Pesquisa Bíblica",
+    category: "Gnosticismo & Apócrifos",
+    module: "Módulo III",
+    rarity: "Bônus Hermenêutico",
+    pages: 60,
+    cover: "assets/books/guia-leitura-cruzada.jpg",
+    tier: "basico",
+    desc: "Comparações versículo a versículo entre os evangelhos canônicos e as revelações de Nag Hammadi e Qumran.",
+    pdfUrl: "livros_pdf/07_BONUS_Guia_de_Leitura_Cruzada_Novo_Testamento.pdf"
+  },
+
+  // ==================== MÓDULO IV: ALQUIMIA & TRANSMUTAÇÃO (310+ OBRAS) ====================
+  {
+    id: 38,
+    title: "Splendor Solis: O Esplendor do Sol",
+    author: "Salomon Trismosin (1582)",
+    category: "Alquimia & Transmutação",
+    module: "Módulo IV",
+    rarity: "Fac-símile Iluminado",
+    pages: 160,
+    cover: "assets/books/splendor-solis.jpg",
+    tier: "master",
+    desc: "O mais belo manuscrito alquímico da história com 22 iluminuras completas em alta resolução. As fases da Grande Obra: Nigredo, Albedo, Citrinitas e Rubedo.",
+    pdfUrl: "livros_pdf/16_Splendor_Solis_Salomon_Trismosin.pdf"
+  },
+  {
+    id: 39,
+    title: "Atalanta Fugiens: As 50 Emblemas Alquímicas",
+    author: "Michael Maier (1617)",
+    category: "Alquimia & Transmutação",
+    module: "Módulo IV",
+    rarity: "Clássico Hermético",
+    pages: 215,
+    cover: "assets/books/atalanta-fugiens.jpg",
+    tier: "master",
+    desc: "As cinquenta gravuras místicas com enigmas poéticos e comentários sobre a transmutação dos metais e a ressurreição do Rei Filosófico.",
+    pdfUrl: "livros_pdf/24_Atalanta_Fugiens_Michael_Maier.pdf"
+  },
+  {
+    id: 40,
+    title: "A Tradição Hermética: Alquimia Espiritual",
+    author: "Julius Evola",
+    category: "Alquimia & Transmutação",
+    module: "Módulo IV",
+    rarity: "Doutrina Esotérica",
+    pages: 290,
+    cover: "assets/books/a-tradicao-hermetica-evola.jpg",
+    tier: "basico",
+    desc: "A interpretação operativa da Alquimia não como química primitiva, mas como a Ciência Régia de transfiguração da consciência e conquista da imortalidade.",
+    pdfUrl: "livros_pdf/27_A_Tradicao_Hermetica_Julius_Evola.pdf"
+  },
+  {
+    id: 41,
+    title: "Alquimia: Significado e Imagem Sagrada",
+    author: "Titus Burckhardt",
+    category: "Alquimia & Transmutação",
+    module: "Módulo IV",
+    rarity: "Estudo Tradicional",
+    pages: 260,
+    cover: "assets/books/alquimia-significado-e-imagem.jpg",
+    tier: "basico",
+    desc: "A cosmologia do Enxofre, Mercúrio e Sal. O simbolismo da matéria prima e a reintegração do homem primordial à harmonia do cosmo.",
+    pdfUrl: "livros_pdf/23_Alquimia_Significado_e_Imagem_Titus_Burckhardt.pdf"
+  },
+  {
+    id: 42,
+    title: "O Despertar dos Mágicos: Realismo Fantástico",
+    author: "Louis Pauwels & Jacques Bergier",
+    category: "Alquimia & Transmutação",
+    module: "Módulo IV",
+    rarity: "Best-seller Ocultista",
+    pages: 520,
+    cover: "assets/books/o-despertar-dos-magicos.jpg",
+    tier: "basico",
+    desc: "A investigação pioneira sobre alquimistas atômicos, civilizações desaparecidas, a física de Fulcanelli e as sociedades secretas que moldaram o mundo contemporâneo.",
+    pdfUrl: "livros_pdf/34_O_Despertar_Dos_Magos_Pauwels_Bergier.pdf"
+  },
+
+  // ==================== MÓDULO V: SOCIEDADES SECRETAS (490+ OBRAS) ====================
+  {
+    id: 43,
+    title: "Moral e Dogma do Rito Escocês",
+    author: "Albert Pike (33°)",
+    category: "Sociedades Secretas",
+    module: "Módulo V",
+    rarity: "Texto Supremo Maçônico",
+    pages: 860,
+    cover: "assets/books/moral-e-dogma.jpg",
+    tier: "master",
+    desc: "A instrução filosófica oficial para os 33 Graus do Rito Escocês Antigo e Aceito. As conexões profundas da Maçonaria com a Cabala, Zoroastrismo e Hermetismo.",
+    pdfUrl: "livros_pdf/05_Moral_e_Dogma_Albert_Pike.pdf"
+  },
+  {
+    id: 44,
+    title: "Os Iluminados da Baviera: Estatutos Oficiais",
+    author: "Adam Weishaupt (1776)",
+    category: "Sociedades Secretas",
+    module: "Módulo V",
+    rarity: "Documento Desclassificado",
+    pages: 180,
+    cover: "assets/books/os-iluminados-da-baviera.jpg",
+    tier: "master",
+    desc: "Os regulamentos originais, graus do Areópago, códigos cifrados e estratégia de infiltração da Ordem dos Illuminati fundada em 1º de Maio de 1776.",
+    pdfUrl: "livros_pdf/19_Os_Iluminados_da_Baviera_Adam_Weishaupt.pdf"
+  },
+  {
+    id: 45,
+    title: "Arquivos da Sociedade Thule e o Ocultismo Vril",
+    author: "Arquivos Históricos Germânicos",
+    category: "Sociedades Secretas",
+    module: "Módulo V",
+    rarity: "Dossiê Desclassificado",
+    pages: 230,
+    cover: "assets/books/sociedade-thule.jpg",
+    tier: "master",
+    desc: "O misticismo da Sociedade Thule, as expedições secretas ao Tibete, a doutrina do Gelo e do Fogo de Hörbiger e a tecnologia do Sol Negro.",
+    pdfUrl: "livros_pdf/29_Sociedade_Thule_e_Ocultismo.pdf"
+  },
+  {
+    id: 46,
+    title: "A Ação Secreta da Maçonaria e Rituais Históricos",
+    author: "Grandes Orientes Internacionais",
+    category: "Sociedades Secretas",
+    module: "Módulo V",
+    rarity: "Rito Revelado",
+    pages: 270,
+    cover: "assets/books/acao-secreta-da-maconaria.jpg",
+    tier: "basico",
+    desc: "Os juramentos, toques, palavras de passe e a marcha do Aprendiz, Companheiro e Mestre decifrados em manuscritos históricos de lojas secretas.",
+    pdfUrl: "livros_pdf/32_A_Acao_Secreta_da_Maconaria.pdf"
+  },
+  {
+    id: 47,
+    title: "Sociedades Secretas e Seu Poder no Século XX",
+    author: "Jan van Helsing",
+    category: "Sociedades Secretas",
+    module: "Módulo V",
+    rarity: "Obra Banida em Diversos Países",
+    pages: 440,
+    cover: "assets/books/sociedades-secretas-van-helsing.jpg",
+    tier: "master",
+    desc: "A rede internacional entre banqueiros, sociedades herméticas, controle monetário e o planejamento para uma Nova Ordem Mundial.",
+    pdfUrl: "livros_pdf/20_Sociedades_Secretas_Jan_van_Helsing.pdf"
+  },
+  {
+    id: 48,
+    title: "A Verdadeira História do Clube Bilderberg",
+    author: "Daniel Estulin",
+    category: "Sociedades Secretas",
+    module: "Módulo V",
+    rarity: "Investigação Rara",
+    pages: 350,
+    cover: "assets/books/clube-bilderberg.jpg",
+    tier: "basico",
+    desc: "Os encontros anuais a portas fechadas dos 130 indivíduos mais poderosos do planeta. Atas vazadas e a manipulação dos mercados e governos globais.",
+    pdfUrl: "livros_pdf/28_A_Verdadeira_Historia_do_Clube_Bilderberg_Estulin.pdf"
+  },
+
+  // ==================== MÓDULO VI: MENTE & PROJEÇÃO ASTRAL (550+ OBRAS) ====================
+  {
+    id: 49,
+    title: "Sonhos Lúcidos: Controle da Consciência",
+    author: "Dr. Stephen LaBerge (Stanford)",
+    category: "Mente & Projeção Astral",
+    module: "Módulo VI",
+    rarity: "Ciência da Consciência",
+    pages: 320,
+    cover: "assets/books/sonhos-lucidos.jpg",
+    tier: "basico",
+    desc: "O método científico pioneiro do Instituto Lucidity para despertar dentro do sonho, técnicas de indução consciente (MILD e WILD) e transição para o plano astral.",
+    pdfUrl: "livros_pdf/31_Sonhos_Lucidos_Stephen_LaBerge.pdf"
+  },
+  {
+    id: 50,
+    title: "Os Arquétipos e o Inconsciente Coletivo",
+    author: "Carl Gustav Jung",
+    category: "Mente & Projeção Astral",
+    module: "Módulo VI",
+    rarity: "Psicologia Hermética",
+    pages: 510,
+    cover: "assets/books/arquetipos-inconsciente-coletivo.jpg",
+    tier: "basico",
+    desc: "A estrutura das imagens primordiais da alma humana: o Sombra, Anima e Animus, o Velho Sábio e o processo de individuação como Grande Obra interior.",
+    pdfUrl: "livros_pdf/37_Os_Arquetipos_e_o_Inconsciente_Coletivo_Jung.pdf"
+  },
+  {
+    id: 51,
+    title: "O Livro dos Espíritos: Teoria do Plano Astral",
+    author: "Allan Kardec",
+    category: "Mente & Projeção Astral",
+    module: "Módulo VI",
+    rarity: "Fundação da Doutrina",
+    pages: 460,
+    cover: "assets/books/livro-dos-espiritos.jpg",
+    tier: "basico",
+    desc: "As 1019 perguntas e respostas fundamentais sobre os mundos espirituais, desprendimento da alma no sono, reencarnação e as leis de afinidade psíquica.",
+    pdfUrl: "livros_pdf/38_O_Livro_dos_Espiritos_Allan_Kardec.pdf"
+  },
+  {
+    id: 52,
+    title: "O Livro dos Médiuns: Desdobramento e Fenômenos",
+    author: "Allan Kardec",
+    category: "Mente & Projeção Astral",
+    module: "Módulo VI",
+    rarity: "Guia Prático",
+    pages: 480,
+    cover: "assets/books/livro-dos-mediums.jpg",
+    tier: "basico",
+    desc: "Manual de autodefesa energética, identificação de obsessores, desenvolvimento de clarividência, telepatia e técnicas de incorporação segura.",
+    pdfUrl: "livros_pdf/39_O_Livro_dos_Mediuns_Allan_Kardec.pdf"
+  },
+  {
+    id: 53,
+    title: "O Céu e o Inferno: Planos Astrais e Consciência",
+    author: "Allan Kardec",
+    category: "Mente & Projeção Astral",
+    module: "Módulo VI",
+    rarity: "Filosofia Astral",
+    pages: 410,
+    cover: "assets/books/o-ceu-e-o-inferno.jpg",
+    tier: "basico",
+    desc: "A justiça divina examinada sob as leis naturais da afinidade vibratória. Relatos de almas em diferentes faixas de frequência após o desenlace físico.",
+    pdfUrl: "livros_pdf/40_O_Ceu_e_o_Inferno_Allan_Kardec.pdf"
+  },
+  {
+    id: 54,
+    title: "Passaporte para Magonia: A Conexão Secreta",
+    author: "Jacques Vallée",
+    category: "Mente & Projeção Astral",
+    module: "Módulo VI",
+    rarity: "Fenômenos Dimensionais",
+    pages: 360,
+    cover: "assets/books/passaporte-para-magonia.jpg",
+    tier: "master",
+    desc: "A análise científica e comparada entre os fenômenos de abdução contemporâneos, as fadas da Idade Média e as aparições místicas dos textos herméticos.",
+    pdfUrl: "livros_pdf/30_Passaporte_para_Magonia_Jacques_Vallee.pdf"
+  },
+  {
+    id: 55,
+    title: "O Evangelho Segundo o Espiritismo",
+    author: "Allan Kardec",
+    category: "Mente & Projeção Astral",
+    module: "Módulo VI",
+    rarity: "Código Moral Cósmico",
+    pages: 420,
+    cover: "assets/books/o-evangelho-kardec.jpg",
+    tier: "basico",
+    desc: "A moral crística explicada sob o ponto de vista da física quântica e do desdobramento da consciência espiritual no Universo.",
+    pdfUrl: "livros_pdf/43_O_Evangelho_Segundo_o_Espiritismo_Kardec.pdf"
+  }
 ];
 
-// 2. COLEÇÕES COMPLETAS DO CÂNONE BÁSICO (500 OBRAS) E MASTER (2.500 OBRAS)
+// 2. LOTES & COLEÇÕES COMPLETAS (DRIVE MASTER 2.500 OBRAS)
 const collectionsData = [
   {
-    id: "col-1",
-    title: "Coleção I: O Cânone Hermético & Alquimia Alexandrina",
-    totalBooks: 100,
-    tier: "basico",
-    category: "Hermetismo & Cabala",
-    cover: "assets/books/tabua-de-esmeralda.jpg",
-    desc: "100 tratados essenciais incluindo Poimandres, Asclépio, Geber, Paracelso, Turba Philosophorum, Heinrich Khunrath e os segredos da Pedra Filosofal.",
-    driveUrl: "https://drive.google.com/"
-  },
-  {
-    id: "col-2",
-    title: "Coleção II: A Biblioteca Gnóstica & Evangelhos de Nag Hammadi",
-    totalBooks: 100,
-    tier: "basico",
-    category: "Gnosticismo & Apócrifos",
-    cover: "assets/books/manuscritos-nag-hammadi.jpg",
-    desc: "100 textos sagrados primitivos incluindo o Evangelho de Filipe, Evangelho de Maria Madalena, Apócrifo de João, Tratado Tripartite e textos coptas.",
-    driveUrl: "https://drive.google.com/"
-  },
-  {
-    id: "col-3",
-    title: "Coleção III: O Cânone dos Sentinelas & Manuscritos do Mar Morto",
-    totalBooks: 100,
-    tier: "basico",
-    category: "Gnosticismo & Apócrifos",
-    cover: "assets/books/livro-de-enoque.jpg",
-    desc: "100 manuscritos das cavernas de Qumran sobre os 200 Sentinelas, a Regra da Comunidade, a Guerra dos Filhos da Luz e os Patriarcas Antediluvianos.",
-    driveUrl: "https://drive.google.com/"
-  },
-  {
-    id: "col-4",
-    title: "Coleção IV: Os Mistérios da Cabala Medieval & Hebraica",
-    totalBooks: 100,
-    tier: "basico",
-    category: "Hermetismo & Cabala",
-    cover: "assets/books/o-zohar.jpg",
-    desc: "100 tratados fundamentais da mística judaica: Sefer ha-Bahir (O Livro da Claridade), Portas da Luz de Gikatilla, Pardes Rimonim de Cordovero e o Zohar.",
-    driveUrl: "https://drive.google.com/"
-  },
-  {
-    id: "col-5",
-    title: "Coleção V: As Origens das Ordens Secretas & Rosa-Cruz",
-    totalBooks: 100,
-    tier: "basico",
-    category: "Ordens & Sociedades Secretas",
-    cover: "assets/books/fama-fraternitatis.jpg",
-    desc: "100 documentos históricos originais sobre os Cavaleiros Templários, os Manifestos Rosacruzes de Kassel, a Nova Atlântida de Bacon e a Franco-Maçonaria.",
-    driveUrl: "https://drive.google.com/"
-  },
-  {
-    id: "col-6",
-    title: "Coleção Master VI: Os Arquivos Secretos do Vaticano",
-    totalBooks: 600,
+    id: "lote-master-total",
+    title: "Acervo Master Supremo (2.500 Obras Completas)",
+    subtitle: "Todos os 6 Módulos Unificados • Pastas Oficiais",
+    module: "Todos os Módulos",
+    count: "2.500 Obras",
+    size: "48.5 GB",
     tier: "master",
-    category: "Grimórios & Alta Magia",
-    cover: "assets/books/grandegrimorio.jpg",
-    desc: "Lote supremo exclusivo contendo 600 manuscritos lacrados, bulas de Inquisição inéditas, exorcismos imperiais e grimórios ocultos sob sigilo papal.",
-    driveUrl: "https://drive.google.com/"
+    driveUrl: "https://drive.google.com/",
+    icon: "crown",
+    desc: "O repositório completo e definitivo da Cúpula 33. Contém todas as 2.500 obras dos 6 módulos em PDF de alta resolução, fac-símiles originais e áudios binaurais."
   },
   {
-    id: "col-7",
-    title: "Coleção Master VII: Códices Pré-Diluvianos & Tradição Sumeriana",
-    totalBooks: 400,
-    tier: "master",
-    category: "Gnosticismo & Apócrifos",
-    cover: "assets/books/ninegates.png",
-    desc: "400 textos arcaicos traduzidos de tabuletas cuneiformes sobre os Anunnaki, a Epopeia de Gilgamesh, a Lista de Reis Sumerianos e a astronomia védica.",
-    driveUrl: "https://drive.google.com/"
+    id: "lote-mod-1",
+    title: "Lote Módulo I: Hermetismo & Cabala",
+    subtitle: "350+ Tratados Herméticos, Zohar e Árvore da Vida",
+    module: "Módulo I",
+    count: "350+ Obras",
+    size: "6.8 GB",
+    tier: "basico",
+    driveUrl: "https://drive.google.com/",
+    icon: "book-open",
+    desc: "A coleção primordial dos ensinamentos herméticos e cabalísticos completos. Caibalion, Tábua de Esmeralda, Sefer Yetzirah e os clássicos da Golden Dawn."
   },
   {
-    id: "col-8",
-    title: "Coleção Master VIII: Alta Teurgia, Demonologia & Goetia Menor",
-    totalBooks: 500,
+    id: "lote-mod-2",
+    title: "Lote Módulo II: Grimórios & Alta Magia",
+    subtitle: "420+ Selos, Pentáculos e Teurgia Cerimonial",
+    module: "Módulo II",
+    count: "420+ Obras",
+    size: "8.4 GB",
     tier: "master",
-    category: "Grimórios & Alta Magia",
-    cover: "assets/books/ars-goetia.jpg",
-    desc: "500 manuais raros de invocação cerimonial, selos talismânicos planetários, tratados de Pedro de Abano, Abramelin e magia enochiana de John Dee.",
-    driveUrl: "https://drive.google.com/"
+    driveUrl: "https://drive.google.com/",
+    icon: "shield",
+    desc: "Os mais raros e proibidos livros de invocação, Goetia salomônica, grimórios pontifícios, manuscritos de feitiçaria antiga e magia contemporânea do caos."
   },
   {
-    id: "col-9",
-    title: "Coleção Master IX: Rituais Ocultos da Golden Dawn & O.T.O.",
-    totalBooks: 500,
+    id: "lote-mod-3",
+    title: "Lote Módulo III: Gnosticismo & Textos Banidos",
+    subtitle: "380+ Apócrifos, Qumran e Arquivos Secretos",
+    module: "Módulo III",
+    count: "380+ Obras",
+    size: "7.9 GB",
     tier: "master",
-    category: "Ordens & Sociedades Secretas",
-    cover: "assets/books/moral-e-dogma.jpg",
-    desc: "500 documentos confidenciais de iniciação mágica dos graus internos da Aurora Dourada, ritos Thelêmicos de Crowley e documentos do Supremo Conselho 33.",
-    driveUrl: "https://drive.google.com/"
+    driveUrl: "https://drive.google.com/",
+    icon: "scroll",
+    desc: "Tratados gnósticos desclassificados, biblioteca completa de Nag Hammadi, pergaminhos do Mar Morto e manuscritos excluídos dos concílios cristãos primitivos."
+  },
+  {
+    id: "lote-mod-4",
+    title: "Lote Módulo IV: Alquimia & Transmutação",
+    subtitle: "310+ Obras com Iluminuras Fac-símile em Cores",
+    module: "Módulo IV",
+    count: "310+ Obras",
+    size: "9.2 GB",
+    tier: "master",
+    driveUrl: "https://drive.google.com/",
+    icon: "flame",
+    desc: "Obras ilustradas de espagiria, a busca da Pedra Filosofal, manuscritos renascentistas de Michael Maier, Basilius Valentinus e Paracelso em altíssima resolução."
+  },
+  {
+    id: "lote-mod-5",
+    title: "Lote Módulo V: Sociedades Secretas & Desclassificados",
+    subtitle: "490+ Dossiês Maçônicos, Illuminati e Thule",
+    module: "Módulo V",
+    count: "490+ Obras",
+    size: "8.1 GB",
+    tier: "master",
+    driveUrl: "https://drive.google.com/",
+    icon: "eye",
+    desc: "Manuscritos com rituais dos 33 graus, atas confidenciais dos Illuminati da Baviera, documentos desclassificados de agências de inteligência e fraternidades veladas."
+  },
+  {
+    id: "lote-mod-6",
+    title: "Lote Módulo VI: Mente, Projeção & Audiobooks",
+    subtitle: "550+ Manuscritos de Desdobramento + Frequências",
+    module: "Módulo VI",
+    count: "550+ Obras",
+    size: "8.1 GB",
+    tier: "master",
+    driveUrl: "https://drive.google.com/",
+    icon: "radio",
+    desc: "Manuais de sonhos lúcidos, viagem astral, autodefesa psíquica e todos os pacotes de áudio com as frequências sagradas de Solfeggio embutidas."
   }
 ];
 
-// 3. FREQUÊNCIAS DE SOLFEGGIO
+// 3. SANTUÁRIO DE FREQUÊNCIAS DE SOLFEGGIO (MÓDULO VI BÔNUS)
 const frequenciesData = [
-  { hz: 432, name: "432 Hz — Afinação Cósmica & Cura Universal", purpose: "Harmonia universal, cura celular, ressonância com a Geometria Sagrada e redução profunda do estresse.", chakra: "Cardíaco / Todos", color: "#d4af37", binaural: 7.83 },
-  { hz: 528, name: "528 Hz — A Frequência do Milagre (DNA Repair)", purpose: "Conhecida como a 'Nota da Criação' e frequência dos milagres. Estimula a transmutação mental e reparação bioenergética.", chakra: "Plexo Solar", color: "#e6ca65", binaural: 8.0 },
-  { hz: 396, name: "396 Hz — Liberação de Medo, Culpa & Bloqueios", purpose: "Elimina memórias subconscientes de medo, culpa e padrões de escassez. Purificação espiritual profunda.", chakra: "Raiz (Básico)", color: "#c95b3c", binaural: 5.5 },
-  { hz: 417, name: "417 Hz — Transmutação & Dissolução de Traumas", purpose: "Desfaz situações estagnadas, dissocia bloqueios kármicos e facilita a mudança acelerada de realidade.", chakra: "Sacral", color: "#f59e0b", binaural: 6.0 },
-  { hz: 639, name: "639 Hz — Conexão Espiritual & Harmonia Relacional", purpose: "Facilita o magnetismo pessoal, compreensão de arquétipos herméticos e atração de aliados nobres.", chakra: "Cardíaco", color: "#10b981", binaural: 7.5 },
-  { hz: 741, name: "741 Hz — Despertar da Intuição & Clarividência", purpose: "Limpeza mental contra influências densas, despertar do olho da mente e resolução de enigmas complexos.", chakra: "Laríngeo", color: "#06b6d4", binaural: 9.0 },
-  { hz: 852, name: "852 Hz — Retorno à Ordem Cósmica & Visão Espiritual", purpose: "Restauração da mente superior, transcendência de ilusões da matéria e conexão com a Consciência Primordial.", chakra: "Terceiro Olho", color: "#8b5cf6", binaural: 10.5 },
-  { hz: 963, name: "963 Hz — Conexão Divina & Ativação da Pineal", purpose: "O despertar supremo da Coroa, alinhamento com a Cúpula dos Mestres e transcendência de tempo e espaço.", chakra: "Coronário", color: "#f3e5ab", binaural: 12.0 }
+  {
+    hz: 432,
+    name: "432 Hz • Ressonância Áurea Cósmica",
+    benefit: "Afinação natural do Universo (proporção áurea Phi), cura celular profunda e alinhamento do DNA.",
+    chakra: "Cardíaco & Coronário",
+    color: "#d4af37",
+    tier: "basico"
+  },
+  {
+    hz: 528,
+    name: "528 Hz • Frequência dos Milagres & Reparo do DNA",
+    benefit: "A frequência central de Solfeggio. Transforma a consciência, repara fitas genéticas e atrai milagres.",
+    chakra: "Plexo Solar (Manipura)",
+    color: "#10b981",
+    tier: "master"
+  },
+  {
+    hz: 396,
+    name: "396 Hz • Liberação de Culpa, Medo & Bloqueios",
+    benefit: "Dissolve nós emocionais antigos no chakra raiz e ancora a mente em estado de absoluta coragem.",
+    chakra: "Básico (Muladhara)",
+    color: "#ef4444",
+    tier: "basico"
+  },
+  {
+    hz: 417,
+    name: "417 Hz • Quebra de Padrões Negativos & Mudança",
+    benefit: "Limpa experiências traumáticas do passado e facilita novas decisões sem resistência inconsciente.",
+    chakra: "Sacral (Svadhisthana)",
+    color: "#f97316",
+    tier: "master"
+  },
+  {
+    hz: 639,
+    name: "639 Hz • Conexão & Harmonização dos Relacionamentos",
+    benefit: "Promove empatia, telepatia afetiva e conexão profunda com companheiros de caminho espiritual.",
+    chakra: "Cardíaco (Anahata)",
+    color: "#06b6d4",
+    tier: "master"
+  },
+  {
+    hz: 741,
+    name: "741 Hz • Despertar da Intuição & Limpeza Toxinas",
+    benefit: "Estimula a expressão autêntica, desintoxica células cerebrais e ativa a voz interior dos mestres.",
+    chakra: "Laríngeo (Vishuddha)",
+    color: "#3b82f6",
+    tier: "master"
+  },
+  {
+    hz: 852,
+    name: "852 Hz • Despertar do Terceiro Olho (Ajna)",
+    benefit: "Restaura a ordem espiritual, dissolve a névoa mental e desenvolve clarividência e visão astral.",
+    chakra: "Frontal (Ajna)",
+    color: "#8b5cf6",
+    tier: "master"
+  },
+  {
+    hz: 963,
+    name: "963 Hz • Conexão com a Centelha Divina Primordial",
+    benefit: "Ativação direta da glândula pineal, estado de Samadhi, reintegração com a Fonte Cósmica Suprema.",
+    chakra: "Coronário (Sahasrara)",
+    color: "#ec4899",
+    tier: "master"
+  }
 ];
 
-// 4. ROADMAP INICIÁTICO DOS 12 GRAUS
+// 4. ROADMAP INICIÁTICO - OS 12 GRAUS DA CÚPULA 33
 const roadmapData = [
-  { grade: 1, title: "O Despertar da Mente Hermética", bookRef: "O Caibalion", goal: "Compreender os 7 Princípios Universais e o Princípio do Mentalismo." },
-  { grade: 2, title: "A Grande Obra Alquímica", bookRef: "A Tábua de Esmeralda", goal: "Dominar o axioma 'O que está em cima é como o que está embaixo'." },
-  { grade: 3, title: "O Cosmos e o Verbo Divino", bookRef: "Corpus Hermeticum", goal: "Estudar o diálogo de Poimandres sobre a mente universal." },
-  { grade: 4, title: "A Árvore da Vida e as 10 Sefirot", bookRef: "A Cabala Mística", goal: "Mapear o fluxo de criação da energia cósmica na matéria." },
-  { grade: 5, title: "As 32 Trilhas da Sabedoria", bookRef: "Sefer Yetzirah", goal: "Desvendar as 22 letras hebraicas primordiais como forças da criação." },
-  { grade: 6, title: "A Tradição dos Sentinelas", bookRef: "O Livro de Enoque", goal: "Estudar a genealogia dos anjos caídos e o conhecimento proibido." },
-  { grade: 7, title: "O Esplendor Oculto", bookRef: "O Zohar", goal: "Leitura dos segredos mais profundos da Torá e o mistério de Ein Sof." },
-  { grade: 8, title: "Psicologia dos Arquétipos Ocultos", bookRef: "Arquetipos de Jung", goal: "Integrar a Sombra e os símbolos ocultos ao inconsciente desperto." },
-  { grade: 9, title: "A Filosofia dos Símbolos Maçônicos", bookRef: "Moral e Dogma", goal: "Análise dos graus simbólicos e a busca pela Palavra Perdida." },
-  { grade: 10, title: "O Desdobramento da Consciência", bookRef: "Sonhos Lúcidos", goal: "Prática de viagens astrais conscientes e navegação no plano sutil." },
-  { grade: 11, title: "A Teurgia e a Magia Cerimonial", bookRef: "Dogma e Ritual", goal: "Estudo da Vontade Direcionada e a proteção psíquica absoluta." },
-  { grade: 12, title: "O Mestre do Templo Interior", bookRef: "Splendor Solis", goal: "A transmutação final: união com a Centelha Divina e mestria na Cúpula 33." }
+  { grade: 1, title: "Grau I: O Despertar do Buscador", desc: "Leitura integral de O Caibalion. Assimilação prática dos 7 Princípios Herméticos na rotina diária.", module: "Módulo I" },
+  { grade: 2, title: "Grau II: O Selo de Hermes", desc: "Estudo das 13 sentenças da Tábua de Esmeralda e dos 3 mundos herméticos.", module: "Módulo I" },
+  { grade: 3, title: "Grau III: Os 32 Caminhos da Sabedoria", desc: "Decodificação das 10 Sefirot e 22 letras no Sefer Yetzirah.", module: "Módulo I" },
+  { grade: 4, title: "Grau IV: O Guardião dos Mistérios", desc: "Compreensão dos selos e círculos protetivos na Clavícula de Salomão.", module: "Módulo II" },
+  { grade: 5, title: "Grau V: A Luz Astral", desc: "Domínio da força de vontade como agente plástico universal segundo Éliphas Lévi.", module: "Módulo II" },
+  { grade: 6, title: "Grau VI: A Queda dos Vigilantes", desc: "Análise crítica do Livro de Enoque e das linhagens proibidas antediluvianas.", module: "Módulo III" },
+  { grade: 7, title: "Grau VII: A Centelha Gnóstica (Pneuma)", desc: "Meditação profunda com os ensinamentos secretos do Evangelho de Tomé em Nag Hammadi.", module: "Módulo III" },
+  { grade: 8, title: "Grau VIII: O Vaso Hermético & Nigredo", desc: "A fase do apodrecimento do ego e purificação espiritual em Splendor Solis.", module: "Módulo IV" },
+  { grade: 9, title: "Grau IX: A Pedra Filosofal", desc: "A transmutação da consciência de chumbo em ouro vivo segundo Julius Evola.", module: "Módulo IV" },
+  { grade: 10, title: "Grau X: A Geometria Sagrada dos Ritos", desc: "Estudo dos mistérios de Albert Pike e o templo interior do homem.", module: "Módulo V" },
+  { grade: 11, title: "Grau XI: A Consciência Desdobrada", desc: "Despertar consciente em sonhos lúcidos e proteção no plano astral com 432Hz.", module: "Módulo VI" },
+  { grade: 12, title: "Grau XII: Mestre da Cúpula 33 (Iluminação)", desc: "Consagração final como Iniciado Pleno da Cúpula 33. Acesso total ao Sanctum Sanctorum.", module: "Módulo VI" }
 ];
 
-// --- 5. GESTÃO DE TIERS & AUTENTICAÇÃO ---
-let userTier = 'master';
-let currentCategory = 'todos';
-let currentTierFilter = 'todos';
+// ESTADO GLOBAL DO APLICATIVO
+let currentTier = localStorage.getItem("cupula33_user_tier") || "master";
+let currentCategoryFilter = "todos";
+let currentTierFilter = "todos";
+let currentSearchQuery = "";
+let currentBookModalData = null;
+let currentModalTab = "pdf";
+let currentAudioSpeed = 1.0;
+let isAudiobookPlaying = false;
+let audiobookUtterance = null;
 
-function initUserTier() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const paramPlano = urlParams.get('plano') || urlParams.get('tier') || urlParams.get('acesso');
-  if (paramPlano) {
-    userTier = paramPlano.toLowerCase().includes('master') ? 'master' : 'basico';
-    localStorage.setItem('cupula33_user_tier', userTier);
-  } else {
-    const saved = localStorage.getItem('cupula33_user_tier');
-    if (saved) {
-      userTier = saved;
-    } else {
-      userTier = 'master';
-      localStorage.setItem('cupula33_user_tier', userTier);
-    }
-  }
-  updateTierUI();
-}
+// ÁUDIO E OSCILADORES (WEB AUDIO API)
+let audioCtx = null;
+let currentOscillator = null;
+let currentGain = null;
+let activeFrequencyHz = null;
 
-function updateTierUI() {
-  const badge = document.getElementById('userTierBadge');
-  const countDisplay = document.getElementById('accessibleCount');
-  if (badge) {
-    if (userTier === 'master') {
-      badge.innerHTML = '<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-gold-500/20 via-amber-400/20 to-gold-500/20 border border-gold-500/50 text-gold-400 shadow-[0_0_15px_rgba(212,175,55,0.2)]"><i data-lucide="crown" class="w-3.5 h-3.5 text-gold-400"></i> ACESSO MASTER SUPREMO (2.500 OBRAS)</span>';
-      if (countDisplay) countDisplay.textContent = "2.500+ Obras Liberadas & Frequências Ativas";
-    } else {
-      badge.innerHTML = '<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-dark-700 border border-gray-700 text-gray-300"><i data-lucide="shield" class="w-3.5 h-3.5 text-gray-400"></i> ACESSO BÁSICO (500 OBRAS)</span>';
-      if (countDisplay) countDisplay.textContent = "500 Obras Fundamentais Liberadas";
-    }
-    if (window.lucide) lucide.createIcons();
-  }
-}
+// INICIALIZAÇÃO DO APP
+document.addEventListener("DOMContentLoaded", () => {
+  // 1. Detectar parâmetro de URL (ex: ?tier=master ou ?plano=master vindo do checkout)
+  detectUrlTier();
 
-function setUserTier(tier) {
-  userTier = tier;
-  localStorage.setItem('cupula33_user_tier', tier);
-  updateTierUI();
+  // 2. Atualizar UI de acordo com o nível atual
+  updateTierBadgeUI();
+
+  // 3. Renderizar componentes
+  checkReadingProgress();
   renderBooks();
   renderCollections();
   renderFrequencies();
-  closeModal('profileModal');
-  showToast("Nível alterado para: " + tier.toUpperCase());
-}
+  renderRoadmap();
 
-function canUserAccess(tierRequired) {
-  if (userTier === 'master') return true;
-  return tierRequired === 'basico';
-}
-
-function openUpgradeModal(featureName) {
-  const titleElem = document.getElementById('upgradeModalTitle');
-  if (titleElem) {
-    titleElem.textContent = 'Acesso Master Necessário: ' + (featureName || 'Conteúdo Exclusivo');
+  // 4. Configurar ouvintes de pesquisa
+  const searchInput = document.getElementById("searchInput");
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      currentSearchQuery = e.target.value.toLowerCase().trim();
+      renderBooks();
+    });
   }
-  openModal('upgradeModal');
+
+  // 5. Atualizar ícones Lucide
+  if (window.lucide) {
+    lucide.createIcons();
+  }
+});
+
+// DETECÇÃO AUTOMÁTICA DE TIER VIA URL
+function detectUrlTier() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const tierParam = urlParams.get("tier") || urlParams.get("plano") || urlParams.get("acesso");
+  if (tierParam) {
+    const cleanTier = tierParam.toLowerCase().includes("bas") ? "basico" : "master";
+    setUserTier(cleanTier, false);
+    showToast("Bem-vindo à Cúpula 33! Acesso " + cleanTier.toUpperCase() + " Ativado.");
+  }
 }
 
-// --- 6. RENDERIZAÇÃO DOS LIVROS E COLEÇÕES ---
-function renderBooks() {
-  const container = document.getElementById('booksGrid');
-  if (!container) return;
+// ATUALIZAÇÃO DA UI DO NÍVEL DO USUÁRIO
+function updateTierBadgeUI() {
+  const label = document.getElementById("userTierLabel");
+  const checkMaster = document.getElementById("checkTierMaster");
+  const checkBasico = document.getElementById("checkTierBasico");
+  const accessibleCount = document.getElementById("accessibleCount");
 
-  const searchTerm = (document.getElementById('searchInput')?.value || '').toLowerCase().trim();
-  
-  let list = booksData.filter(b => {
-    const matchCat = (currentCategory === 'todos') || (b.category === currentCategory);
-    const matchSearch = !searchTerm || 
-      b.title.toLowerCase().includes(searchTerm) || 
-      b.author.toLowerCase().includes(searchTerm) ||
-      b.desc.toLowerCase().includes(searchTerm);
-    let matchTier = true;
-    if (currentTierFilter === 'meu_plano') {
-      matchTier = canUserAccess(b.tier);
-    } else if (currentTierFilter === 'exclusivo_master') {
-      matchTier = (b.tier === 'master');
+  if (currentTier === "master") {
+    if (label) label.textContent = "Membro Master (2.500 Obras)";
+    if (checkMaster) checkMaster.classList.remove("hidden");
+    if (checkBasico) checkBasico.classList.add("hidden");
+    if (accessibleCount) accessibleCount.textContent = "Você possui Acesso Master Ilimitado às 2.500 Obras dos 6 Módulos, Frequências Sagradas e Audiobooks.";
+  } else {
+    if (label) label.textContent = "Membro Básico (500 Obras)";
+    if (checkMaster) checkMaster.classList.add("hidden");
+    if (checkBasico) checkBasico.classList.remove("hidden");
+    if (accessibleCount) accessibleCount.textContent = "Plano Básico Ativo: 500 obras fundamentais liberadas. Faça o upgrade para desbloquear 2.000 obras adicionais.";
+  }
+}
+
+// TROCA DE NÍVEL DO USUÁRIO
+function setUserTier(newTier, showNotification) {
+  if (showNotification === undefined) showNotification = true;
+  currentTier = newTier;
+  localStorage.setItem("cupula33_user_tier", newTier);
+  updateTierBadgeUI();
+  renderBooks();
+  renderCollections();
+  renderFrequencies();
+  if (showNotification) {
+    showToast("Plano alterado para: " + (newTier === "master" ? "MASTER (2.500 Obras)" : "BÁSICO (500 Obras)"));
+    closeModal("profileModal");
+  }
+}
+
+// NAVEGAÇÃO DE ABAS DO APP
+function switchTab(tabName) {
+  const tabs = ["books", "frequencies", "roadmap"];
+  tabs.forEach(t => {
+    const sec = document.getElementById("tab-" + t);
+    const navBtn = document.getElementById("navBtn-" + t);
+    const tabBtn = document.getElementById("tabBtn-" + t);
+
+    if (t === tabName) {
+      if (sec) sec.classList.remove("hidden");
+      if (navBtn) navBtn.classList.add("nav-active");
+      if (tabBtn) {
+        tabBtn.classList.add("tab-active");
+        tabBtn.classList.remove("text-gray-400");
+      }
+    } else {
+      if (sec) sec.classList.add("hidden");
+      if (navBtn) navBtn.classList.remove("nav-active");
+      if (tabBtn) {
+        tabBtn.classList.remove("tab-active");
+        tabBtn.classList.add("text-gray-400");
+      }
     }
-    return matchCat && matchSearch && matchTier;
   });
 
-  const countBadge = document.getElementById('visibleBooksCount');
-  if (countBadge) {
-    countBadge.textContent = list.length + ' obras primordiais prontas para download';
-  }
-
-  container.innerHTML = list.map(book => {
-    const isUnlocked = canUserAccess(book.tier);
-    const isMasterOnly = (book.tier === 'master');
-    
-    return `
-      <div class="glass-panel glass-panel-hover rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden group ${!isUnlocked ? 'border-dashed border-gold-500/30' : ''}">
-        <div class="flex items-center justify-between gap-2 mb-3">
-          ${isMasterOnly 
-            ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider bg-gold-500/20 text-gold-400 border border-gold-500/40 flex items-center gap-1"><i data-lucide="crown" class="w-3 h-3"></i> MASTER</span>'
-            : '<span class="px-2 py-0.5 rounded-full text-[10px] font-medium tracking-wider bg-dark-700 text-gray-300 border border-gray-700">BÁSICO</span>'
-          }
-          <span class="text-[10px] text-gray-400 font-serif italic">${book.rarity}</span>
-        </div>
-
-        <div class="relative w-full aspect-[3/4] rounded-xl overflow-hidden mb-4 bg-dark-800 border border-dark-600 flex items-center justify-center cursor-pointer shadow-lg" onclick="handleBookClick(${book.id})">
-          <img src="${book.cover}" alt="${book.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='assets/books/CAIBALION.jpg'">
-          ${!isUnlocked ? `
-            <div class="absolute inset-0 bg-black/75 backdrop-blur-[2px] flex flex-col items-center justify-center p-4 text-center">
-              <div class="w-12 h-12 rounded-full bg-gold-500/20 border border-gold-500/60 flex items-center justify-center text-gold-400 mb-2 shadow-[0_0_15px_rgba(212,175,55,0.3)]">
-                <i data-lucide="lock" class="w-6 h-6"></i>
-              </div>
-              <span class="text-xs font-bold text-gold-300 uppercase tracking-wider">Acervo Master</span>
-              <span class="text-[10px] text-gray-400 mt-1">Toque para desbloquear</span>
-            </div>
-          ` : `
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
-              <span class="text-xs text-gold-300 font-medium flex items-center gap-1">
-                <i data-lucide="book-open" class="w-3.5 h-3.5"></i> Abrir Obra
-              </span>
-            </div>
-          `}
-        </div>
-
-        <div>
-          <span class="text-[10px] font-medium text-gold-500 uppercase tracking-wider block mb-1">${book.category}</span>
-          <h3 class="font-cinzel font-bold text-sm text-gray-100 leading-tight mb-1 group-hover:text-gold-400 transition-colors line-clamp-2">${book.title}</h3>
-          <p class="text-xs text-gray-400 mb-2">${book.author}</p>
-          <p class="text-[11px] text-gray-500 line-clamp-2 leading-relaxed mb-4">${book.desc}</p>
-        </div>
-
-        <div class="pt-2 border-t border-dark-700/60 flex items-center gap-2">
-          ${isUnlocked ? `
-            <button onclick="openBookModal(${book.id})" class="flex-1 py-2 px-3 rounded-xl bg-gold-500/10 hover:bg-gold-500/20 border border-gold-500/30 text-gold-400 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all">
-              <i data-lucide="eye" class="w-3.5 h-3.5"></i> Ler / Baixar
-            </button>
-            <a href="${book.pdfUrl}" download class="p-2 rounded-xl bg-dark-700 hover:bg-gray-700 text-gray-300 hover:text-white border border-gray-700 transition-colors" title="Download Direto">
-              <i data-lucide="download" class="w-4 h-4"></i>
-            </a>
-          ` : `
-            <button onclick="openUpgradeModal('${book.title}')" class="w-full py-2 px-3 rounded-xl bg-gradient-to-r from-gold-500 via-amber-400 to-gold-500 text-black text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md hover:scale-[1.02] transition-transform">
-              <i data-lucide="unlock" class="w-3.5 h-3.5"></i> Liberar no Master
-            </button>
-          `}
-        </div>
-      </div>
-    `;
-  }).join('');
-
+  window.scrollTo({ top: 0, behavior: "smooth" });
   if (window.lucide) lucide.createIcons();
 }
 
-function renderCollections() {
-  const container = document.getElementById('collectionsGrid');
-  if (!container) return;
-
-  container.innerHTML = collectionsData.map(col => {
-    const isUnlocked = canUserAccess(col.tier);
-    const isMaster = (col.tier === 'master');
-
-    return `
-      <div class="glass-panel glass-panel-hover rounded-2xl p-5 border border-gold-500/20 flex flex-col justify-between relative overflow-hidden group">
-        <div>
-          <div class="flex items-center justify-between gap-2 mb-3">
-            <span class="px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider ${isMaster ? 'bg-gold-500/20 text-gold-400 border border-gold-500/50' : 'bg-dark-700 text-gray-300 border border-gray-700'} flex items-center gap-1">
-              ${isMaster ? '<i data-lucide="crown" class="w-3 h-3"></i> LOTE MASTER SUPREMO' : '<i data-lucide="shield" class="w-3 h-3"></i> LOTE BÁSICO'}
-            </span>
-            <span class="text-xs font-bold text-gold-400 font-cinzel">${col.totalBooks} OBRAS</span>
-          </div>
-
-          <h3 class="font-cinzel font-bold text-base text-gray-100 group-hover:text-gold-400 transition-colors mb-2">${col.title}</h3>
-          <p class="text-xs text-gray-400 leading-relaxed mb-4">${col.desc}</p>
-        </div>
-
-        <div class="pt-3 border-t border-dark-700/60 flex items-center justify-between gap-3">
-          ${isUnlocked ? `
-            <button onclick="triggerCollectionDownload('${col.title}', '${col.driveUrl}')" class="w-full py-2.5 px-4 rounded-xl bg-gold-500/10 hover:bg-gold-500/20 border border-gold-500/40 text-gold-400 text-xs font-bold flex items-center justify-center gap-2 transition-all">
-              <i data-lucide="download-cloud" class="w-4 h-4"></i> Baixar Lote Completo (Drive)
-            </button>
-          ` : `
-            <button onclick="openUpgradeModal('${col.title}')" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-gold-500 via-amber-400 to-gold-500 text-black text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-md">
-              <i data-lucide="lock" class="w-4 h-4"></i> Desbloquear no Master
-            </button>
-          `}
-        </div>
-      </div>
-    `;
-  }).join('');
-
-  if (window.lucide) lucide.createIcons();
-}
-
-function triggerCollectionDownload(title, url) {
-  showToast("Abrindo pasta de alta velocidade de: " + title);
-  window.open(url, "_blank");
-}
-
-function handleBookClick(bookId) {
-  const book = booksData.find(b => b.id === bookId);
-  if (!book) return;
-  if (!canUserAccess(book.tier)) {
-    openUpgradeModal(book.title);
-  } else {
-    openBookModal(bookId);
+// FILTRAGEM POR MÓDULO E CATEGORIA
+function filterModule(moduleName) {
+  filterCategory(moduleName);
+  const element = document.getElementById("searchInput");
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 }
 
-function filterCategory(cat) {
-  currentCategory = cat;
-  document.querySelectorAll('.cat-pill').forEach(pill => {
-    if (pill.dataset.cat === cat) {
-      pill.className = "cat-pill px-4 py-2 rounded-full text-xs font-bold bg-gold-500 text-black border border-gold-400 shadow-md transition-all whitespace-nowrap";
+function filterCategory(category) {
+  currentCategoryFilter = category;
+  document.querySelectorAll(".cat-pill").forEach(btn => {
+    if (btn.getAttribute("data-cat") === category) {
+      btn.className = "cat-pill px-4 py-2 rounded-full text-xs font-bold bg-gold-500 text-black border border-gold-400 shadow-md transition-all whitespace-nowrap";
     } else {
-      pill.className = "cat-pill px-4 py-2 rounded-full text-xs font-medium bg-dark-800 text-gray-300 hover:text-white border border-gray-800 hover:border-gray-700 transition-all whitespace-nowrap";
+      btn.className = "cat-pill px-4 py-2 rounded-full text-xs font-medium bg-dark-800 text-gray-300 hover:text-white border border-gray-800 hover:border-gray-700 transition-all whitespace-nowrap";
     }
   });
   renderBooks();
@@ -1009,96 +1052,711 @@ function filterCategory(cat) {
 
 function filterTier(tierFilter) {
   currentTierFilter = tierFilter;
-  document.querySelectorAll('.tier-filter-btn').forEach(btn => {
-    if (btn.dataset.tier === tierFilter) {
-      btn.className = "tier-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-gold-500/20 text-gold-400 border border-gold-500/50";
+  document.querySelectorAll(".tier-filter-btn").forEach(btn => {
+    if (btn.getAttribute("data-tier") === tierFilter) {
+      btn.className = "tier-filter-btn flex-1 sm:flex-none px-3 py-1.5 rounded-lg text-xs font-bold bg-gold-500/20 text-gold-400 border border-gold-500/50 flex items-center justify-center gap-1";
     } else {
-      btn.className = "tier-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium text-gray-400 hover:text-white bg-dark-800 border border-transparent";
+      btn.className = "tier-filter-btn flex-1 sm:flex-none px-3 py-1.5 rounded-lg text-xs font-medium text-gray-400 hover:text-white bg-dark-800 border border-transparent flex items-center justify-center gap-1";
     }
   });
   renderBooks();
 }
 
-function openBookModal(bookId) {
-  const book = booksData.find(b => b.id === bookId);
-  if (!book) return;
+// RENDERIZAR OS LIVROS E MANUSCRITOS
+function renderBooks() {
+  const grid = document.getElementById("booksGrid");
+  const countSpan = document.getElementById("visibleBooksCount");
+  if (!grid) return;
 
-  document.getElementById('modalBookTitle').textContent = book.title;
-  document.getElementById('modalBookAuthor').textContent = book.author;
-  document.getElementById('modalBookCategory').textContent = book.category;
-  document.getElementById('modalBookPages').textContent = book.pages + ' páginas';
-  document.getElementById('modalBookRarity').textContent = book.rarity;
-  document.getElementById('modalBookDesc').textContent = book.desc;
-  
-  const coverImg = document.getElementById('modalBookCover');
-  if (coverImg) {
-    coverImg.src = book.cover;
-    coverImg.onerror = () => { coverImg.src = 'assets/books/CAIBALION.jpg'; };
+  const filtered = booksData.filter(book => {
+    // Busca por texto
+    const matchSearch = !currentSearchQuery || 
+      book.title.toLowerCase().includes(currentSearchQuery) ||
+      book.author.toLowerCase().includes(currentSearchQuery) ||
+      book.category.toLowerCase().includes(currentSearchQuery) ||
+      book.desc.toLowerCase().includes(currentSearchQuery);
+
+    // Filtro de categoria / módulo
+    const matchCat = currentCategoryFilter === "todos" || 
+      book.category.toLowerCase() === currentCategoryFilter.toLowerCase() ||
+      (book.module && book.module.toLowerCase().includes(currentCategoryFilter.toLowerCase()));
+
+    // Filtro de plano
+    let matchTier = true;
+    if (currentTierFilter === "meu_plano") {
+      if (currentTier === "basico") matchTier = book.tier === "basico";
+    } else if (currentTierFilter === "exclusivo_master") {
+      matchTier = book.tier === "master";
+    }
+
+    return matchSearch && matchCat && matchTier;
+  });
+
+  if (countSpan) {
+    countSpan.textContent = "Exibindo " + filtered.length + " de " + booksData.length + " obras fundamentais";
   }
 
-  const downloadBtn = document.getElementById('modalDownloadBtn');
-  if (downloadBtn) {
-    downloadBtn.onclick = () => triggerDownload(book);
-  }
-
-  const readOnlineBtn = document.getElementById('modalReadOnlineBtn');
-  if (readOnlineBtn) {
-    readOnlineBtn.onclick = () => openReader(book);
-  }
-
-  openModal('bookModal');
-}
-
-function triggerDownload(book) {
-  const link = document.createElement('a');
-  link.href = book.pdfUrl;
-  link.download = book.title + '.pdf';
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  showToast('Download de "' + book.title + '" iniciado com sucesso!');
-}
-
-function openReader(book) {
-  if (book.pdfUrl && book.pdfUrl.endsWith('.pdf')) {
-    window.open(book.pdfUrl, '_blank');
-  } else {
-    triggerDownload(book);
-  }
-}
-
-// --- 7. GERADOR DE FREQUÊNCIAS DE SOLFEGGIO ---
-let audioCtx = null;
-let currentOscillator = null;
-let currentGain = null;
-let activeFrequency = null;
-let isAudioPlaying = false;
-let ambientAudio = null;
-
-function initAudioContext() {
-  if (!audioCtx) {
-    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-    audioCtx = new AudioContextClass();
-  }
-  if (!ambientAudio) {
-    ambientAudio = new Audio('../assets/audio/atmosfera.mp3');
-    ambientAudio.loop = true;
-    ambientAudio.volume = 0.3;
-  }
-}
-
-function playFrequency(hz, binauralShift) {
-  if (userTier !== 'master') {
-    openUpgradeModal("as Frequências de Solfeggio & Ondas Binaurais");
+  if (filtered.length === 0) {
+    grid.innerHTML = `
+      <div class="col-span-full py-16 text-center text-gray-500 glass-panel rounded-2xl p-8">
+        <i data-lucide="book-x" class="w-10 h-10 mx-auto text-gray-600 mb-2"></i>
+        <p class="text-sm text-gray-300 font-cinzel">Nenhum manuscrito encontrado com estes termos.</p>
+        <p class="text-xs text-gray-500 mt-1">Tente ajustar a busca ou limpar os filtros de módulo.</p>
+        <button onclick="resetFilters()" class="mt-4 px-4 py-2 rounded-xl bg-gold-500/20 text-gold-400 text-xs font-bold border border-gold-500/40 hover:bg-gold-500/30 transition">
+          Ver Todo o Acervo
+        </button>
+      </div>
+    `;
+    if (window.lucide) lucide.createIcons();
     return;
   }
 
-  initAudioContext();
-  if (audioCtx.state === 'suspended') {
-    audioCtx.resume();
+  grid.innerHTML = filtered.map(book => {
+    const isLocked = currentTier === "basico" && book.tier === "master";
+
+    return `
+      <div onclick="handleBookClick(${book.id})" class="glass-panel glass-panel-hover rounded-2xl overflow-hidden border border-gold-500/20 flex flex-col justify-between cursor-pointer group relative transition-all">
+        
+        <!-- Capa do Livro -->
+        <div class="relative aspect-[3/4] bg-dark-900 overflow-hidden">
+          <img src="${book.cover}" alt="${book.title}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          
+          <!-- Badge do Módulo -->
+          <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-dark-950/85 backdrop-blur-md text-[9px] font-bold text-gold-400 border border-gold-500/30 tracking-wider uppercase">
+            ${book.module || 'Módulo'}
+          </span>
+
+          <!-- Selo Master / Bloqueio -->
+          ${isLocked ? `
+            <div class="absolute inset-0 bg-dark-950/85 backdrop-blur-[2px] flex flex-col items-center justify-center p-3 text-center border-2 border-gold-500/50">
+              <div class="w-10 h-10 rounded-full bg-gold-500/20 border border-gold-500/50 flex items-center justify-center text-gold-400 mb-2 shadow-lg">
+                <i data-lucide="lock" class="w-5 h-5"></i>
+              </div>
+              <span class="text-[10px] font-black text-gold-400 uppercase tracking-widest">Exclusivo Master</span>
+              <span class="text-[9px] text-gray-300 mt-1">Toque para Desbloquear</span>
+            </div>
+          ` : `
+            <div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-dark-950/80 backdrop-blur-md text-[9px] font-medium text-gray-300 border border-dark-700">
+              ${book.pages} pág
+            </div>
+          `}
+        </div>
+
+        <!-- Informações do Livro -->
+        <div class="p-3 flex-1 flex flex-col justify-between">
+          <div>
+            <span class="text-[9px] font-semibold text-gold-500/90 uppercase tracking-wider block mb-0.5 line-clamp-1">
+              ${book.category}
+            </span>
+            <h4 class="font-cinzel font-bold text-xs text-gray-100 group-hover:text-gold-300 transition-colors line-clamp-2 leading-snug">
+              ${book.title}
+            </h4>
+            <p class="text-[11px] text-gray-400 mt-0.5 line-clamp-1">${book.author}</p>
+          </div>
+
+          <!-- Rodapé do Card -->
+          <div class="mt-3 pt-2.5 border-t border-dark-700/60 flex items-center justify-between text-[10px]">
+            <span class="text-gold-400/90 font-serif italic">${book.rarity}</span>
+            <span class="font-bold ${isLocked ? 'text-amber-400' : 'text-gray-300 group-hover:text-gold-400'} flex items-center gap-1 transition-colors">
+              ${isLocked ? '<i data-lucide="crown" class="w-3 h-3 text-gold-400"></i> Upgrade' : '<i data-lucide="book-open" class="w-3 h-3"></i> Acessar'}
+            </span>
+          </div>
+        </div>
+
+      </div>
+    `;
+  }).join("");
+
+  if (window.lucide) lucide.createIcons();
+}
+
+// RENDERIZAR OS LOTES & COLEÇÕES COMPLETAS (DRIVE MASTER)
+function renderCollections() {
+  const grid = document.getElementById("collectionsGrid");
+  if (!grid) return;
+
+  grid.innerHTML = collectionsData.map(col => {
+    const isLocked = currentTier === "basico" && col.tier === "master";
+
+    return `
+      <div class="glass-panel glass-panel-hover rounded-2xl p-5 border ${isLocked ? 'border-gold-500/30' : 'border-gold-500/20'} flex flex-col justify-between relative overflow-hidden group">
+        ${col.id === 'lote-master-total' ? `
+          <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-gold-500/10 rounded-full blur-2xl pointer-events-none"></div>
+        ` : ''}
+
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <div class="w-9 h-9 rounded-xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400">
+                <i data-lucide="${col.icon}" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <span class="text-[9px] font-bold text-gold-400 uppercase tracking-wider block">${col.module}</span>
+                <span class="text-xs font-semibold text-gray-300">${col.count}</span>
+              </div>
+            </div>
+
+            ${isLocked ? `
+              <span class="px-2 py-0.5 rounded-full bg-gold-500/15 border border-gold-500/40 text-gold-400 text-[10px] font-bold flex items-center gap-1">
+                <i data-lucide="crown" class="w-3 h-3"></i> Master
+              </span>
+            ` : `
+              <span class="px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-emerald-400 text-[10px] font-bold">
+                Liberado
+              </span>
+            `}
+          </div>
+
+          <h4 class="font-cinzel font-bold text-sm text-gray-100 group-hover:text-gold-300 transition-colors mb-1">
+            ${col.title}
+          </h4>
+          <p class="text-xs text-gold-400/80 mb-2">${col.subtitle}</p>
+          <p class="text-xs text-gray-400 leading-relaxed mb-4">${col.desc}</p>
+        </div>
+
+        <div class="pt-3 border-t border-dark-700/60 flex items-center justify-between">
+          <span class="text-[11px] text-gray-500">Tamanho: ${col.size}</span>
+          
+          <button onclick="handleCollectionClick('${col.id}')" class="px-3.5 py-1.5 rounded-xl ${isLocked ? 'bg-gold-500/20 text-gold-400 hover:bg-gold-500/30 border border-gold-500/40 font-bold' : 'bg-gradient-to-r from-gold-500 to-amber-400 text-black font-black hover:scale-105 shadow-md'} text-xs flex items-center gap-1.5 transition-all">
+            <i data-lucide="${isLocked ? 'lock' : 'cloud-download'}" class="w-3.5 h-3.5"></i>
+            <span>${isLocked ? 'Desbloquear no Master' : 'Acessar Pasta'}</span>
+          </button>
+        </div>
+
+      </div>
+    `;
+  }).join("");
+
+  if (window.lucide) lucide.createIcons();
+}
+
+// CLICK EM UM LIVRO
+function handleBookClick(bookId) {
+  const book = booksData.find(b => b.id === bookId);
+  if (!book) return;
+
+  if (currentTier === "basico" && book.tier === "master") {
+    openUpgradeModal(book.title);
+    return;
   }
 
+  currentBookModalData = book;
+  openBookModal(book);
+}
+
+// CLICK EM UMA COLEÇÃO
+function handleCollectionClick(collectionId) {
+  const col = collectionsData.find(c => c.id === collectionId);
+  if (!col) return;
+
+  if (currentTier === "basico" && col.tier === "master") {
+    openUpgradeModal(col.title);
+    return;
+  }
+
+  triggerCollectionDownload(col.title, col.driveUrl);
+}
+
+// ABRIR MODAL DO LIVRO
+function openBookModal(book) {
+  document.getElementById("modalBookTitle").textContent = book.title;
+  document.getElementById("modalBookAuthor").textContent = "Por " + book.author;
+  document.getElementById("modalBookCategory").textContent = (book.module || 'Módulo') + " • " + book.category;
+  document.getElementById("modalBookPages").textContent = book.pages + " páginas";
+  document.getElementById("modalBookRarity").textContent = book.rarity;
+  document.getElementById("modalBookDesc").textContent = book.desc;
+  document.getElementById("modalBookCover").src = book.cover;
+  document.getElementById("modalBookTier").textContent = book.tier === "basico" ? "Liberado (Básico e Master)" : "Acervo Master";
+
+  // Audiobook info
+  document.getElementById("audiobookTitle").textContent = "Audiobook: " + book.title;
+  document.getElementById("audiobookStatus").textContent = "Narração em português com frequência áurea 432Hz";
+
+  // Configurar input de página e limites
+  const pageInput = document.getElementById("modalPageInput");
+  const maxPages = document.getElementById("modalMaxPages");
+  if (pageInput) pageInput.max = book.pages;
+  if (maxPages) maxPages.textContent = book.pages;
+
+  // Carregar progresso salvo se existir
+  const saved = getSavedProgress(book.id);
+  const curPage = saved ? saved.page : 1;
+  if (pageInput) pageInput.value = curPage;
+  updateModalProgressDisplay(curPage, book.pages);
+
+  // Configurar botões de ação
+  const downloadBtn = document.getElementById("modalDownloadBtn");
+  downloadBtn.onclick = () => triggerDownload(book);
+
+  const readOnlineBtn = document.getElementById("modalReadOnlineBtn");
+  readOnlineBtn.onclick = () => openReaderModal(book, curPage);
+
+  // Resetar modo para PDF
+  switchModalTab("pdf");
+
+  openModal("bookModal");
+}
+
+// TROCA DE ABAS NO MODAL DO LIVRO (PDF vs AUDIOBOOK)
+function switchModalTab(tab) {
+  currentModalTab = tab;
+  const pdfContent = document.getElementById("modalPdfContent");
+  const audioContent = document.getElementById("modalAudioContent");
+  const pdfBtn = document.getElementById("modalTabPdfBtn");
+  const audioBtn = document.getElementById("modalTabAudioBtn");
+
+  if (tab === "pdf") {
+    if (pdfContent) pdfContent.classList.remove("hidden");
+    if (audioContent) audioContent.classList.add("hidden");
+    if (pdfBtn) {
+      pdfBtn.className = "flex-1 py-2 rounded-xl text-xs font-bold bg-gold-500 text-black flex items-center justify-center gap-1.5 transition";
+    }
+    if (audioBtn) {
+      audioBtn.className = "flex-1 py-2 rounded-xl text-xs font-medium text-gray-400 hover:text-white flex items-center justify-center gap-1.5 transition";
+    }
+  } else {
+    if (pdfContent) pdfContent.classList.add("hidden");
+    if (audioContent) audioContent.classList.remove("hidden");
+    if (pdfBtn) {
+      pdfBtn.className = "flex-1 py-2 rounded-xl text-xs font-medium text-gray-400 hover:text-white flex items-center justify-center gap-1.5 transition";
+    }
+    if (audioBtn) {
+      audioBtn.className = "flex-1 py-2 rounded-xl text-xs font-bold bg-gold-500 text-black flex items-center justify-center gap-1.5 transition";
+    }
+  }
+  if (window.lucide) lucide.createIcons();
+}
+
+// AJUSTE DE PÁGINA NO MODAL
+function adjustModalPage(delta) {
+  if (!currentBookModalData) return;
+  const input = document.getElementById("modalPageInput");
+  if (!input) return;
+  let val = parseInt(input.value) || 1;
+  val = Math.max(1, Math.min(currentBookModalData.pages, val + delta));
+  input.value = val;
+  onPageInputChange(val);
+}
+
+function onPageInputChange(val) {
+  if (!currentBookModalData) return;
+  const page = parseInt(val) || 1;
+  saveReadingProgress(currentBookModalData.id, page, currentBookModalData.pages);
+  updateModalProgressDisplay(page, currentBookModalData.pages);
+}
+
+function updateModalProgressDisplay(page, total) {
+  const span = document.getElementById("modalCurrentProgressPct");
+  if (!span) return;
+  const pct = Math.round((page / total) * 100);
+  span.textContent = "Página " + page + " de " + total + " (" + pct + "%)";
+}
+
+// LEITOR EM TELA CHEIA
+function openReaderModal(book, startPage) {
+  if (startPage === undefined) startPage = 1;
+  closeModal("bookModal");
+  currentBookModalData = book;
+
+  document.getElementById("readerBookTitle").textContent = book.title;
+  document.getElementById("readerBookStatus").textContent = (book.module || 'Módulo') + " • Página " + startPage + " de " + book.pages;
+  
+  const iframe = document.getElementById("readerIframe");
+  if (iframe) {
+    iframe.src = book.pdfUrl;
+  }
+
+  saveReadingProgress(book.id, startPage, book.pages);
+  openModal("readerModal");
+}
+
+function closeReaderModal() {
+  const iframe = document.getElementById("readerIframe");
+  if (iframe) iframe.src = "";
+  closeModal("readerModal");
+}
+
+function bookmarkCurrentPage() {
+  if (!currentBookModalData) return;
+  const progress = getSavedProgress(currentBookModalData.id);
+  const curPage = progress ? progress.page : 1;
+  saveReadingProgress(currentBookModalData.id, curPage, currentBookModalData.pages);
+  showToast("Marcador salvo: " + currentBookModalData.title + " na pág. " + curPage);
+}
+
+// SISTEMA DE MARCACAO & PERSISTENCIA DE LEITURA (LOCALSTORAGE)
+function saveReadingProgress(bookId, page, totalPages) {
+  const book = booksData.find(b => b.id === bookId);
+  if (!book) return;
+
+  const pct = Math.round((page / totalPages) * 100);
+  const data = {
+    bookId: book.id,
+    title: book.title,
+    author: book.author,
+    cover: book.cover,
+    category: book.category,
+    module: book.module || "Módulo I",
+    page: page,
+    totalPages: totalPages,
+    percent: pct,
+    pdfUrl: book.pdfUrl,
+    timestamp: new Date().toISOString()
+  };
+
+  localStorage.setItem("cupula33_active_reading", JSON.stringify(data));
+
+  // Salvar no mapa histórico de todos os livros
+  const allHistory = JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
+  allHistory[book.id] = data;
+  localStorage.setItem("cupula33_books_progress", JSON.stringify(allHistory));
+
+  checkReadingProgress();
+}
+
+function getSavedProgress(bookId) {
+  const allHistory = JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
+  return allHistory[bookId] || null;
+}
+
+function checkReadingProgress() {
+  const section = document.getElementById("resumeReadingSection");
+  const stored = localStorage.getItem("cupula33_active_reading");
+  if (!section) return;
+
+  if (!stored) {
+    section.classList.add("hidden");
+    return;
+  }
+
+  try {
+    const data = JSON.parse(stored);
+    document.getElementById("resumeCover").src = data.cover;
+    document.getElementById("resumeTitle").textContent = data.title;
+    document.getElementById("resumeProgressText").textContent = "Página " + data.page + " de " + data.totalPages + " • " + data.percent + "% Concluído";
+    document.getElementById("resumeProgressBar").style.width = data.percent + "%";
+    section.classList.remove("hidden");
+    if (window.lucide) lucide.createIcons();
+  } catch (err) {
+    section.classList.add("hidden");
+  }
+}
+
+function resumeLastReading() {
+  const stored = localStorage.getItem("cupula33_active_reading");
+  if (!stored) return;
+  const data = JSON.parse(stored);
+  const book = booksData.find(b => b.id === data.bookId);
+  if (book) {
+    openReaderModal(book, data.page);
+  }
+}
+
+function clearReadingProgress() {
+  localStorage.removeItem("cupula33_active_reading");
+  checkReadingProgress();
+  showToast("Histórico de leitura reiniciado.");
+}
+
+// MOTOR DE AUDIOBOOK NARRADO (WEB SPEECH API + WEB AUDIO API 432HZ)
+function togglePlayAudiobook() {
+  if (isAudiobookPlaying) {
+    pauseAudiobook();
+  } else {
+    playAudiobook();
+  }
+}
+
+function playAudiobook() {
+  if (!currentBookModalData) return;
+  const book = currentBookModalData;
+
+  // Iniciar frequência de fundo 432Hz suave
+  startAudiobookAmbientDrone();
+
+  // Texto da narração
+  const narrationText = "Iniciação ao tratado sagrado: " + book.title + ". Autor: " + book.author + ". Pertencente ao acervo da Cúpula 33, " + (book.module || 'Módulo Oficial') + ". " + book.desc + " Este manuscrito guarda as chaves ancestrais da transmutação da mente. Ouça com atenção plena e permita que os ensinamentos façam morada em sua consciência.";
+
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    audiobookUtterance = new SpeechSynthesisUtterance(narrationText);
+    audiobookUtterance.lang = 'pt-BR';
+    audiobookUtterance.rate = currentAudioSpeed;
+    audiobookUtterance.pitch = 0.95;
+
+    // Buscar voz em português se disponível
+    const voices = window.speechSynthesis.getVoices();
+    const ptVoice = voices.find(v => v.lang.includes('pt') || v.lang.includes('PT'));
+    if (ptVoice) audiobookUtterance.voice = ptVoice;
+
+    audiobookUtterance.onend = () => {
+      stopAudiobook();
+    };
+
+    audiobookUtterance.onerror = () => {
+      stopAudiobook();
+    };
+
+    window.speechSynthesis.speak(audiobookUtterance);
+    isAudiobookPlaying = true;
+    updateAudiobookControlsUI(true);
+  } else {
+    showToast("Síntese de voz não suportada neste navegador.");
+  }
+}
+
+function pauseAudiobook() {
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.pause();
+  }
+  stopAudiobookAmbientDrone();
+  isAudiobookPlaying = false;
+  updateAudiobookControlsUI(false);
+}
+
+function stopAudiobook() {
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+  }
+  stopAudiobookAmbientDrone();
+  isAudiobookPlaying = false;
+  updateAudiobookControlsUI(false);
+}
+
+function restartAudiobook() {
+  stopAudiobook();
+  setTimeout(() => playAudiobook(), 200);
+}
+
+function setAudioSpeed(speed) {
+  currentAudioSpeed = speed;
+  document.querySelectorAll(".audio-speed-btn").forEach(btn => {
+    if (parseFloat(btn.getAttribute("data-speed")) === speed) {
+      btn.className = "audio-speed-btn px-2.5 py-1 rounded-lg bg-gold-500/20 text-gold-400 border border-gold-500/40 font-bold";
+    } else {
+      btn.className = "audio-speed-btn px-2.5 py-1 rounded-lg bg-dark-800 text-gray-400 hover:text-white border border-dark-700";
+    }
+  });
+
+  if (isAudiobookPlaying) {
+    playAudiobook();
+  }
+}
+
+function updateAudiobookControlsUI(playing) {
+  const icon = document.getElementById("audiobookPlayIcon");
+  const status = document.getElementById("audiobookStatus");
+  if (icon) {
+    icon.setAttribute("data-lucide", playing ? "pause" : "play");
+    if (window.lucide) lucide.createIcons();
+  }
+  if (status) {
+    status.textContent = playing ? "Reproduzindo narração com frequência de fundo 432Hz..." : "Reprodução pausada.";
+  }
+}
+
+// FREQUÊNCIA DE FUNDO AMBIENTE PARA O AUDIOBOOK (432Hz)
+let audiobookOsc = null;
+let audiobookGain = null;
+
+function startAudiobookAmbientDrone() {
+  try {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return;
+    if (!audioCtx) audioCtx = new AudioContextClass();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+
+    stopAudiobookAmbientDrone();
+
+    audiobookOsc = audioCtx.createOscillator();
+    audiobookGain = audioCtx.createGain();
+
+    audiobookOsc.type = 'sine';
+    audiobookOsc.frequency.setValueAtTime(432, audioCtx.currentTime);
+
+    audiobookGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+    audiobookGain.gain.exponentialRampToValueAtTime(0.04, audioCtx.currentTime + 1.5);
+
+    audiobookOsc.connect(audiobookGain);
+    audiobookGain.connect(audioCtx.destination);
+    audiobookOsc.start();
+  } catch (err) {
+    console.log("Drone error:", err);
+  }
+}
+
+function stopAudiobookAmbientDrone() {
+  try {
+    if (audiobookGain && audioCtx) {
+      audiobookGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.5);
+      setTimeout(() => {
+        if (audiobookOsc) {
+          audiobookOsc.stop();
+          audiobookOsc.disconnect();
+          audiobookOsc = null;
+        }
+      }, 500);
+    }
+  } catch (err) {}
+}
+
+// BAIXAR ÁUDIO DO AUDIOBOOK PARA SMARTPHONE
+function downloadAudiobookTrack() {
+  if (!currentBookModalData) return;
+  const book = currentBookModalData;
+
+  showToast("Gerando arquivo de áudio para: " + book.title + "...");
+
+  // Gera um arquivo de áudio místico calibrado a 432Hz em formato WAV real sintetizado
+  const sampleRate = 44100;
+  const duration = 12; // 12 segundos do tom harmônico de apresentação da obra
+  const numSamples = sampleRate * duration;
+  const buffer = new Float32Array(numSamples);
+
+  // Sintetiza onda harmônica 432Hz + sobretons
+  for (let i = 0; i < numSamples; i++) {
+    const t = i / sampleRate;
+    const env = Math.sin((Math.PI * i) / numSamples); // Envelope suave
+    buffer[i] = (Math.sin(2 * Math.PI * 432 * t) * 0.6 + Math.sin(2 * Math.PI * 864 * t) * 0.2) * env;
+  }
+
+  // Monta arquivo WAV
+  const wavBytes = encodeWAV(buffer, sampleRate);
+  const blob = new Blob([wavBytes], { type: 'audio/wav' });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement('a');
+  const safeTitle = book.title.replace(/[^a-zA-Z0-9]/g, '_').substring(0, 30);
+  a.href = url;
+  a.download = "Audiobook_432Hz_" + safeTitle + "_Cupula33.wav";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  showToast("Download do Audiobook iniciado com sucesso!");
+}
+
+// ENCODER WAV
+function encodeWAV(samples, sampleRate) {
+  const buffer = new ArrayBuffer(44 + samples.length * 2);
+  const view = new DataView(buffer);
+
+  /* RIFF identifier */
+  writeString(view, 0, 'RIFF');
+  /* file length */
+  view.setUint32(4, 36 + samples.length * 2, true);
+  /* RIFF type */
+  writeString(view, 8, 'WAVE');
+  /* format chunk identifier */
+  writeString(view, 12, 'fmt ');
+  /* format chunk length */
+  view.setUint32(16, 16, true);
+  /* sample format (raw) */
+  view.setUint16(20, 1, true);
+  /* channel count */
+  view.setUint16(22, 1, true);
+  /* sample rate */
+  view.setUint32(24, sampleRate, true);
+  /* byte rate (sample rate * block align) */
+  view.setUint32(28, sampleRate * 2, true);
+  /* block align (channel count * bytes per sample) */
+  view.setUint16(32, 2, true);
+  /* bits per sample */
+  view.setUint16(34, 16, true);
+  /* data chunk identifier */
+  writeString(view, 36, 'data');
+  /* data chunk length */
+  view.setUint32(40, samples.length * 2, true);
+
+  // Escrever samples PCM 16-bit
+  let offset = 44;
+  for (let i = 0; i < samples.length; i++) {
+    const s = Math.max(-1, Math.min(1, samples[i]));
+    view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+    offset += 2;
+  }
+
+  return buffer;
+}
+
+function writeString(view, offset, string) {
+  for (let i = 0; i < string.length; i++) {
+    view.setUint8(offset + i, string.charCodeAt(i));
+  }
+}
+
+// SISTEMA DE FREQUÊNCIAS DE SOLFEGGIO
+function renderFrequencies() {
+  const list = document.getElementById("frequenciesList");
+  if (!list) return;
+
+  list.innerHTML = frequenciesData.map(f => {
+    const isLocked = currentTier === "basico" && f.tier === "master";
+    const isPlaying = activeFrequencyHz === f.hz;
+
+    return `
+      <div class="glass-panel glass-panel-hover rounded-2xl p-5 border ${isPlaying ? 'border-gold-500 shadow-[0_0_20px_rgba(212,175,55,0.25)]' : 'border-gold-500/20'} flex flex-col justify-between transition-all">
+        
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-cinzel font-bold text-gold-400">${f.hz} HZ</span>
+            ${isLocked ? `
+              <span class="px-2 py-0.5 rounded-full bg-gold-500/15 border border-gold-500/40 text-gold-400 text-[10px] font-bold flex items-center gap-1">
+                <i data-lucide="crown" class="w-3 h-3"></i> Master
+              </span>
+            ` : `
+              <span class="text-[10px] font-bold text-gray-400">${f.chakra}</span>
+            `}
+          </div>
+
+          <h4 class="font-cinzel font-bold text-base text-gray-100 mb-1">${f.name}</h4>
+          <p class="text-xs text-gray-400 leading-relaxed mb-4">${f.benefit}</p>
+        </div>
+
+        <div class="pt-3 border-t border-dark-700/60 flex items-center justify-between">
+          <span class="text-[11px] text-gray-500">Onda Pura Senoidal</span>
+
+          <button onclick="handleFrequencyClick(${f.hz})" class="px-4 py-2 rounded-xl ${isPlaying ? 'bg-amber-400 text-black font-black' : isLocked ? 'bg-gold-500/20 text-gold-400 border border-gold-500/40' : 'bg-gold-500 text-black font-bold'} text-xs flex items-center gap-1.5 transition-all shadow-md">
+            <i data-lucide="${isLocked ? 'lock' : isPlaying ? 'pause' : 'play'}" class="w-3.5 h-3.5"></i>
+            <span>${isLocked ? 'Exclusivo Master' : isPlaying ? 'Pausar' : 'Sintonizar'}</span>
+          </button>
+        </div>
+
+      </div>
+    `;
+  }).join("");
+
+  if (window.lucide) lucide.createIcons();
+}
+
+function handleFrequencyClick(hz) {
+  const f = frequenciesData.find(item => item.hz === hz);
+  if (!f) return;
+
+  if (currentTier === "basico" && f.tier === "master") {
+    openUpgradeModal("Frequência Sagrada " + f.hz + " Hz");
+    return;
+  }
+
+  if (activeFrequencyHz === hz) {
+    stopFrequency(true);
+  } else {
+    playFrequency(hz);
+  }
+}
+
+function playFrequency(hz) {
   stopFrequency(false);
+
+  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContextClass) {
+    showToast("Áudio não suportado no seu navegador.");
+    return;
+  }
+
+  if (!audioCtx) audioCtx = new AudioContextClass();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
 
   currentOscillator = audioCtx.createOscillator();
   currentGain = audioCtx.createGain();
@@ -1107,253 +1765,168 @@ function playFrequency(hz, binauralShift) {
   currentOscillator.frequency.setValueAtTime(hz, audioCtx.currentTime);
 
   currentGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
-  currentGain.gain.exponentialRampToValueAtTime(0.35, audioCtx.currentTime + 1.5);
+  currentGain.gain.exponentialRampToValueAtTime(0.35, audioCtx.currentTime + 1.2);
 
   currentOscillator.connect(currentGain);
   currentGain.connect(audioCtx.destination);
-
   currentOscillator.start();
-  activeFrequency = hz;
-  isAudioPlaying = true;
 
-  const mixAmbient = document.getElementById('toggleAmbientAudio')?.checked;
-  if (mixAmbient && ambientAudio) {
-    ambientAudio.play().catch(() => {});
-  }
+  activeFrequencyHz = hz;
 
-  updatePlayerUI();
-  showToast('Sintonizando frequência harmônica de ' + hz + ' Hz...');
+  const badge = document.getElementById("playerCurrentHz");
+  if (badge) badge.textContent = "Sintonizado em " + hz + " Hz";
+
+  renderFrequencies();
+  showToast("Sintonizado em " + hz + " Hz. Relaxe e respire fundo.");
 }
 
-function stopFrequency(stopAmbient = true) {
+function stopFrequency(showFeedback) {
+  if (showFeedback === undefined) showFeedback = true;
   if (currentGain && audioCtx) {
     try {
-      currentGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.8);
+      currentGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.5);
       setTimeout(() => {
         if (currentOscillator) {
           currentOscillator.stop();
           currentOscillator.disconnect();
           currentOscillator = null;
         }
-      }, 900);
+      }, 500);
     } catch (e) {}
   }
-  if (stopAmbient && ambientAudio) {
-    ambientAudio.pause();
-  }
-  isAudioPlaying = false;
-  activeFrequency = null;
-  updatePlayerUI();
+
+  activeFrequencyHz = null;
+
+  const badge = document.getElementById("playerCurrentHz");
+  if (badge) badge.textContent = "Santuário em Silêncio";
+
+  renderFrequencies();
+  if (showFeedback) showToast("Frequência finalizada.");
 }
 
-function toggleFrequency(hz, binaural) {
-  if (activeFrequency === hz && isAudioPlaying) {
-    stopFrequency();
-  } else {
-    playFrequency(hz, binaural);
-  }
-}
-
-function updatePlayerUI() {
-  const currentHzElem = document.getElementById('playerCurrentHz');
-  if (currentHzElem) {
-    currentHzElem.textContent = activeFrequency ? activeFrequency + ' Hz Ativo' : 'Santuário em Silêncio';
-  }
-  
-  document.querySelectorAll('.freq-card').forEach(card => {
-    const cardHz = parseInt(card.dataset.hz, 10);
-    const waves = card.querySelector('.freq-waves');
-    const playIcon = card.querySelector('.freq-play-icon');
-    
-    if (activeFrequency === cardHz && isAudioPlaying) {
-      card.className = "freq-card glass-panel rounded-2xl p-4 border border-gold-500 shadow-[0_0_20px_rgba(212,175,55,0.2)] bg-dark-800 cursor-pointer transition-all";
-      if (waves) waves.classList.remove('hidden');
-      if (playIcon) playIcon.setAttribute('data-lucide', 'pause');
-    } else {
-      card.className = "freq-card glass-panel glass-panel-hover rounded-2xl p-4 cursor-pointer transition-all";
-      if (waves) waves.classList.add('hidden');
-      if (playIcon) playIcon.setAttribute('data-lucide', 'play');
-    }
-  });
-
-  if (window.lucide) lucide.createIcons();
-}
-
-function renderFrequencies() {
-  const container = document.getElementById('frequenciesList');
-  if (!container) return;
-
-  container.innerHTML = frequenciesData.map(f => {
-    const isMasterLocked = (userTier !== 'master');
-    
-    return `
-      <div class="freq-card glass-panel glass-panel-hover rounded-2xl p-5 cursor-pointer relative overflow-hidden group" data-hz="${f.hz}" onclick="toggleFrequency(${f.hz}, ${f.binaural})">
-        <div class="flex items-start justify-between gap-4">
-          <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-2xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400 group-hover:scale-110 transition-transform">
-              <span class="font-cinzel font-bold text-sm">${f.hz}</span>
-            </div>
-            <div>
-              <h4 class="font-cinzel font-bold text-sm text-gray-100 group-hover:text-gold-400 transition-colors">${f.name}</h4>
-              <span class="text-xs text-gold-500/80 font-medium">${f.chakra}</span>
-            </div>
-          </div>
-
-          <div class="flex items-center gap-2">
-            <div class="freq-waves hidden flex items-center gap-0.5">
-              <span class="wave-bar"></span>
-              <span class="wave-bar"></span>
-              <span class="wave-bar"></span>
-              <span class="wave-bar"></span>
-            </div>
-            <div class="w-9 h-9 rounded-full bg-dark-700 border border-gray-700 flex items-center justify-center text-gray-300 group-hover:border-gold-500/50 group-hover:text-gold-400 transition-colors">
-              ${isMasterLocked ? '<i data-lucide="lock" class="w-4 h-4 text-gold-500"></i>' : '<i data-lucide="play" class="freq-play-icon w-4 h-4"></i>'}
-            </div>
-          </div>
-        </div>
-
-        <p class="text-xs text-gray-400 mt-3 leading-relaxed">${f.purpose}</p>
-
-        ${isMasterLocked ? `
-          <div class="mt-3 pt-3 border-t border-dark-700/60 flex items-center justify-between text-[11px] text-gold-400/90 font-medium">
-            <span>🔒 Exclusivo Membros Master</span>
-            <span class="underline">Liberar Acesso</span>
-          </div>
-        ` : ''}
-      </div>
-    `;
-  }).join('');
-
-  if (window.lucide) lucide.createIcons();
-}
-
+// SISTEMA DO ROADMAP INICIÁTICO
 function renderRoadmap() {
-  const container = document.getElementById('roadmapList');
-  if (!container) return;
+  const list = document.getElementById("roadmapList");
+  if (!list) return;
 
-  const savedTasks = JSON.parse(localStorage.getItem('cupula33_tasks') || '{}');
-  const completedCount = Object.values(savedTasks).filter(Boolean).length;
-  const progressPercent = Math.round((completedCount / roadmapData.length) * 100);
+  const completed = JSON.parse(localStorage.getItem("cupula33_roadmap_completed") || "[]");
+  const pct = Math.round((completed.length / roadmapData.length) * 100);
 
-  const progressBar = document.getElementById('roadmapProgressBar');
-  const progressText = document.getElementById('roadmapProgressText');
-  if (progressBar) progressBar.style.width = progressPercent + '%';
-  if (progressText) progressText.textContent = completedCount + ' de ' + roadmapData.length + ' Graus Concluídos (' + progressPercent + '%)';
+  const progText = document.getElementById("roadmapProgressText");
+  const progBar = document.getElementById("roadmapProgressBar");
+  if (progText) progText.textContent = completed.length + " de 12 Graus (" + pct + "%)";
+  if (progBar) progBar.style.width = pct + "%";
 
-  container.innerHTML = roadmapData.map(item => {
-    const isDone = !!savedTasks[item.grade];
+  list.innerHTML = roadmapData.map(r => {
+    const isDone = completed.includes(r.grade);
+
     return `
-      <div class="glass-panel rounded-2xl p-4 flex items-center justify-between gap-4 transition-all ${isDone ? 'border-gold-500/40 bg-gold-500/5' : ''}">
-        <div class="flex items-center gap-3">
-          <button onclick="toggleRoadmapTask(${item.grade})" class="w-8 h-8 rounded-full border flex items-center justify-center transition-colors ${isDone ? 'bg-gold-500 border-gold-400 text-black' : 'border-gray-700 text-transparent hover:border-gold-500/50'}">
-            <i data-lucide="check" class="w-4 h-4"></i>
-          </button>
+      <div onclick="toggleRoadmapGrade(${r.grade})" class="glass-panel glass-panel-hover rounded-2xl p-4 sm:p-5 border ${isDone ? 'border-gold-500/50 bg-gold-500/5' : 'border-gold-500/20'} flex items-start justify-between gap-4 cursor-pointer transition-all">
+        <div class="flex items-start gap-3.5">
+          <div class="w-8 h-8 rounded-xl ${isDone ? 'bg-gold-500 text-black' : 'bg-dark-800 text-gold-400 border border-gold-500/30'} flex items-center justify-center font-cinzel font-bold text-xs shrink-0 mt-0.5">
+            ${isDone ? '<i data-lucide="check" class="w-4 h-4 stroke-[3]"></i>' : r.grade}
+          </div>
           <div>
-            <span class="text-[10px] text-gold-500 font-bold uppercase tracking-wider">Grau ${item.grade} • ${item.bookRef}</span>
-            <h4 class="font-cinzel font-bold text-sm ${isDone ? 'line-through text-gray-400' : 'text-gray-100'}">${item.title}</h4>
-            <p class="text-xs text-gray-500 mt-0.5">${item.goal}</p>
+            <span class="text-[9px] font-bold text-gold-500 uppercase tracking-widest block">${r.module}</span>
+            <h4 class="font-cinzel font-bold text-sm text-gray-100 ${isDone ? 'line-through text-gray-400' : ''}">${r.title}</h4>
+            <p class="text-xs text-gray-400 mt-0.5">${r.desc}</p>
           </div>
         </div>
+
+        <span class="text-xs text-gray-500 font-bold shrink-0 mt-1">
+          ${isDone ? '<span class="text-gold-400">Concluído</span>' : 'Pendente'}
+        </span>
       </div>
     `;
-  }).join('');
+  }).join("");
 
   if (window.lucide) lucide.createIcons();
 }
 
-function toggleRoadmapTask(grade) {
-  const saved = JSON.parse(localStorage.getItem('cupula33_tasks') || '{}');
-  saved[grade] = !saved[grade];
-  localStorage.setItem('cupula33_tasks', JSON.stringify(saved));
-  renderRoadmap();
-  showToast(saved[grade] ? 'Grau ' + grade + ' concluído!' : 'Grau ' + grade + ' reaberto.');
-}
-
-function switchTab(tabId) {
-  document.querySelectorAll('.app-tab-section').forEach(sec => sec.classList.add('hidden'));
-  document.querySelectorAll('.app-nav-btn').forEach(btn => btn.classList.remove('nav-active'));
-
-  const activeSection = document.getElementById('tab-' + tabId);
-  const activeBtn = document.getElementById('navBtn-' + tabId);
-  
-  if (activeSection) activeSection.classList.remove('hidden');
-  if (activeBtn) activeBtn.classList.add('nav-active');
-
-  if (tabId === 'books') {
-    renderBooks();
-    renderCollections();
+function toggleRoadmapGrade(grade) {
+  let completed = JSON.parse(localStorage.getItem("cupula33_roadmap_completed") || "[]");
+  if (completed.includes(grade)) {
+    completed = completed.filter(g => g !== grade);
+  } else {
+    completed.push(grade);
+    showToast("Grau " + grade + " concluído com sucesso!");
   }
-  if (tabId === 'frequencies') renderFrequencies();
-  if (tabId === 'roadmap') renderRoadmap();
-
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  localStorage.setItem("cupula33_roadmap_completed", JSON.stringify(completed));
+  renderRoadmap();
 }
 
+// SISTEMA DE DOWNLOADS
+function triggerDownload(book) {
+  showToast("Iniciando download seguro de: " + book.title + "...");
+  const a = document.createElement('a');
+  a.href = book.pdfUrl || 'livros_pdf/01_O_Caibalion_Tres_Iniciados.pdf';
+  a.download = '';
+  a.target = '_blank';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+function triggerCollectionDownload(title, url) {
+  showToast("Conectando ao Drive Oficial: " + title + "...");
+  window.open(url, '_blank');
+}
+
+// MODAIS
+function openModal(modalId) {
+  const m = document.getElementById(modalId);
+  if (m) m.classList.remove("hidden");
+}
+
+function closeModal(modalId) {
+  const m = document.getElementById(modalId);
+  if (m) m.classList.add("hidden");
+}
+
+function openUpgradeModal(title) {
+  document.getElementById("upgradeModalTitle").textContent = "Desbloquear: " + title;
+  openModal("upgradeModal");
+}
+
+// TOAST
+function showToast(text) {
+  const toast = document.getElementById("appToast");
+  const span = document.getElementById("appToastText");
+  if (!toast || !span) return;
+  span.textContent = text;
+  toast.classList.remove("hidden");
+  setTimeout(() => {
+    toast.classList.add("hidden");
+  }, 3500);
+}
+
+function resetFilters() {
+  currentSearchQuery = "";
+  currentCategoryFilter = "todos";
+  currentTierFilter = "todos";
+  const input = document.getElementById("searchInput");
+  if (input) input.value = "";
+  filterCategory("todos");
+}
+
+// PWA INSTALL PROMPT
 let deferredPrompt = null;
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
-  const pwaBtn = document.getElementById('pwaInstallBanner');
-  if (pwaBtn) pwaBtn.classList.remove('hidden');
+  const btn = document.getElementById('pwaInstallBtn');
+  const banner = document.getElementById('pwaInstallBanner');
+  if (btn) btn.classList.remove('hidden');
+  if (banner) banner.classList.remove('hidden');
 });
 
 function triggerPWAInstall() {
   if (deferredPrompt) {
     deferredPrompt.prompt();
-    deferredPrompt.userChoice.then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        showToast("Aplicativo adicionado à tela inicial!");
-      }
+    deferredPrompt.userChoice.then(() => {
       deferredPrompt = null;
-      const pwaBtn = document.getElementById('pwaInstallBanner');
-      if (pwaBtn) pwaBtn.classList.add('hidden');
     });
   } else {
-    openModal('pwaInstructionsModal');
+    showToast("Para instalar no celular: toque no botão Compartilhar do Safari/Chrome e em 'Adicionar à Tela de Início'.");
   }
 }
-
-function openModal(id) {
-  const m = document.getElementById(id);
-  if (m) {
-    m.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-  }
-}
-
-function closeModal(id) {
-  const m = document.getElementById(id);
-  if (m) {
-    m.classList.add('hidden');
-    document.body.style.overflow = '';
-  }
-}
-
-function showToast(msg) {
-  const toast = document.getElementById('appToast');
-  const toastText = document.getElementById('appToastText');
-  if (toast && toastText) {
-    toastText.textContent = msg;
-    toast.classList.remove('hidden');
-    setTimeout(() => {
-      toast.classList.add('hidden');
-    }, 3500);
-  }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  initUserTier();
-  renderBooks();
-  renderCollections();
-  renderFrequencies();
-  renderRoadmap();
-
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
-  }
-
-  const searchInput = document.getElementById('searchInput');
-  if (searchInput) {
-    searchInput.addEventListener('input', () => renderBooks());
-  }
-});
