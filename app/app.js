@@ -632,11 +632,22 @@ function openReaderModal(book, startPage) {
   currentBookModalData = book;
 
   document.getElementById("readerBookTitle").textContent = book.title;
-  document.getElementById("readerBookStatus").textContent = (book.module || 'Módulo') + " • Página " + startPage + " de " + book.pages;
+  document.getElementById("readerBookStatus").textContent = (book.module || 'Módulo') + " • Leitor Integrado";
   
+  let targetUrl = book.pdfUrl;
+  
+  // Se for link do Google Drive, converte automaticamente para o player/leitor embutido (/preview)
+  if (targetUrl.includes("drive.google.com")) {
+    if (targetUrl.includes("/view")) {
+      targetUrl = targetUrl.replace(/\/view(\?.*)?$/, "/preview");
+    } else if (!targetUrl.includes("/preview")) {
+      targetUrl = targetUrl.replace(/\?.*$/, "") + "/preview";
+    }
+  }
+
   const iframe = document.getElementById("readerIframe");
   if (iframe) {
-    iframe.src = book.pdfUrl;
+    iframe.src = targetUrl;
   }
 
   saveReadingProgress(book.id, startPage, book.pages);
