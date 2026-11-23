@@ -1010,10 +1010,6 @@ function renderFrequencies() {
 }
 
 // MOTOR DE FREQUÊNCIAS SAGRADAS (SOLFEGGIO ENGINE 2.0)
-let audioCtx = null;
-let currentOscillator = null;
-let currentGain = null;
-let activeFrequencyHz = null;
 
 function getAudioContext() {
   const AudioContextClass = window.AudioContext || window.webkitAudioContext;
