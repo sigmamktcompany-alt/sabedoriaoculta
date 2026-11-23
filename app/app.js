@@ -1230,7 +1230,7 @@ function triggerCollectionDownload(title, url) {
 
 // MODAIS
 function openModal(modalId) {
-  if (modalId === profileModal) {
+  if (modalId === "profileModal") {
     loadUserProfile();
   }
   const m = document.getElementById(modalId);
