@@ -1,0 +1,30 @@
+{
+  "members": {
+    "suportesabedoriaoculta@gmail.com": {
+      "tier": "master",
+      "added_at": 1795398920.323818,
+      "source": "admin"
+    },
+    "admin@cupula33.com": {
+      "tier": "master",
+      "added_at": 1795398920.323818,
+      "source": "admin"
+    },
+    "sigmamarketing@gmail.com": {
+      "tier": "master",
+      "added_at": 1795398920.323819,
+      "source": "admin"
+    },
+    "teste@cupula33.com": {
+      "tier": "master",
+      "added_at": 1795398920.323819,
+      "source": "admin"
+    },
+    "novo_membro_vip@gmail.com": {
+      "tier": "master",
+      "sale_code": "PPU_TESTE_33",
+      "status": "approved",
+      "time": 1795399703.687571
+    }
+  }
+}
