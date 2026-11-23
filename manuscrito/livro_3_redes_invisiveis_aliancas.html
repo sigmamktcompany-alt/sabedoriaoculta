@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>O GRIMÓRIO DAS REDES INVISÍVEIS</title>
+  <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=MedievalSharp&display=swap');
+
+:root {
+  --bg-parchment: #f5eedb;
+  --bg-parchment-dark: #ebd9b5;
+  --ink-primary: #1c140d;
+  --ink-secondary: #3d2b1f;
+  --gold-accent: #8b6b23;
+  --gold-bright: #b8860b;
+  --red-seal: #8a1414;
+  --border-outer: #4a3525;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #0d0a08;
+  color: var(--ink-primary);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 14pt;
+  line-height: 1.65;
+  padding: 40px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.book-container {
+  width: 100%;
+  max-width: 850px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.page {
+  width: 100%;
+  min-height: 1180px;
+  background: var(--bg-parchment);
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4) 0%, rgba(220, 195, 150, 0.2) 70%, rgba(160, 130, 85, 0.45) 100%),
+    repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(100, 70, 30, 0.015) 3px, rgba(100, 70, 30, 0.015) 6px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.8), inset 0 0 100px rgba(110, 75, 35, 0.25);
+  border: 1px solid #7c5a36;
+  padding: 60px 70px;
+  position: relative;
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.page-border-outer {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  border: 2px solid var(--border-outer);
+  pointer-events: none;
+}
+
+.page-border-inner {
+  position: absolute;
+  top: 26px;
+  left: 26px;
+  right: 26px;
+  bottom: 26px;
+  border: 1px solid var(--gold-accent);
+  pointer-events: none;
+}
+
+.corner-ornament {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  font-size: 20px;
+  color: var(--gold-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.corner-tl { top: 12px; left: 12px; }
+.corner-tr { top: 12px; right: 12px; }
+.corner-bl { bottom: 12px; left: 12px; }
+.corner-br { bottom: 12px; right: 12px; }
+
+.header-meta {
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  font-size: 10pt;
+  letter-spacing: 3px;
+  color: var(--gold-accent);
+  text-transform: uppercase;
+  border-bottom: 1px double rgba(139, 107, 35, 0.4);
+  padding-bottom: 8px;
+  margin-bottom: 25px;
+}
+
+.page-content {
+  position: relative;
+  z-index: 10;
+  flex-grow: 1;
+}
+
+.page-title {
+  font-family: 'Cinzel', serif;
+  font-size: 20pt;
+  font-weight: 700;
+  text-align: center;
+  color: var(--ink-primary);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.page-subtitle {
+  font-family: 'Cinzel', serif;
+  font-size: 11pt;
+  font-weight: 600;
+  text-align: center;
+  color: var(--red-seal);
+  margin-bottom: 24px;
+  letter-spacing: 2px;
+  font-style: italic;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin: 16px 0 24px 0;
+  color: var(--gold-accent);
+  font-size: 14pt;
+}
+.divider::before, .divider::after {
+  content: "";
+  height: 1px;
+  width: 80px;
+  background: linear-gradient(to right, transparent, var(--gold-accent), transparent);
+}
+
+p {
+  margin-bottom: 16px;
+  text-align: justify;
+  text-indent: 28px;
+}
+
+p.no-indent {
+  text-indent: 0;
+}
+
+.drop-cap {
+  float: left;
+  font-family: 'Cinzel', serif;
+  font-size: 52pt;
+  line-height: 44pt;
+  padding-top: 4px;
+  padding-right: 10px;
+  padding-bottom: 0px;
+  color: var(--red-seal);
+  font-weight: 900;
+  text-shadow: 1px 1px 0px rgba(0,0,0,0.2);
+}
+
+.quote-box {
+  margin: 22px 0;
+  padding: 16px 26px;
+  background: rgba(184, 134, 11, 0.08);
+  border-left: 3px solid var(--red-seal);
+  border-right: 1px solid rgba(139, 107, 35, 0.3);
+  font-style: italic;
+  font-size: 13pt;
+  text-align: justify;
+}
+
+.quote-box .author {
+  display: block;
+  text-align: right;
+  font-family: 'Cinzel', serif;
+  font-size: 9.5pt;
+  font-style: normal;
+  letter-spacing: 1px;
+  margin-top: 8px;
+  color: var(--gold-accent);
+}
+
+.axiom-list {
+  list-style: none;
+  margin: 18px 0;
+  padding-left: 10px;
+}
+
+.axiom-list li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 14px;
+  text-align: justify;
+}
+
+.axiom-list li::before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--red-seal);
+  font-size: 12pt;
+}
+
+.masonic-seal {
+  width: 90px;
+  height: 90px;
+  margin: 15px auto;
+  border-radius: 50%;
+  border: 2px dashed var(--gold-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38px;
+  color: var(--red-seal);
+  background: radial-gradient(circle, rgba(220,195,150,0.6) 0%, rgba(139,107,35,0.15) 100%);
+}
+
+.footer-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Cinzel', serif;
+  font-size: 9pt;
+  color: var(--gold-accent);
+  border-top: 1px double rgba(139, 107, 35, 0.4);
+  padding-top: 10px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Cover Styling */
+.page-cover {
+  background: #140d07;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(70, 45, 20, 0.8) 0%, rgba(20, 12, 6, 0.98) 80%),
+    repeating-linear-gradient(45deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 2px, transparent 2px, transparent 4px);
+  color: #dfcaa7;
+  border: 4px solid #8b6b23;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.95), inset 0 0 120px rgba(0,0,0,0.9);
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 70px 50px;
+}
+
+.cover-border {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  right: 25px;
+  bottom: 25px;
+  border: 2px solid #b8860b;
+  box-shadow: inset 0 0 25px rgba(184, 134, 11, 0.3);
+}
+
+.cover-title-main {
+  font-family: 'Cinzel', serif;
+  font-size: 32pt;
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: #f7e2a9;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(184,134,11,0.5);
+  line-height: 1.2;
+  margin-top: 20px;
+}
+
+.cover-subtitle {
+  font-family: 'Cinzel', serif;
+  font-size: 15pt;
+  letter-spacing: 5px;
+  color: #d14949;
+  text-transform: uppercase;
+  margin-top: 15px;
+  font-weight: 700;
+}
+
+.cover-emblem {
+  font-size: 70pt;
+  color: #b8860b;
+  margin: 30px 0;
+  filter: drop-shadow(0 0 15px rgba(184,134,11,0.6));
+}
+
+.cover-motto {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 16pt;
+  color: #e5cb9c;
+  max-width: 580px;
+  line-height: 1.4;
+  margin: 15px auto;
+}
+
+.cover-footer {
+  font-family: 'Cinzel', serif;
+  font-size: 10pt;
+  letter-spacing: 4px;
+  color: #8b6b23;
+  margin-top: 30px;
+}
+
+.print-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: #8a1414;
+  color: #f5eedb;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 12pt;
+  padding: 14px 24px;
+  border: 2px solid #b8860b;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+  z-index: 9999;
+  transition: all 0.3s ease;
+}
+.print-btn:hover {
+  background: #a61c1c;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(184,134,11,0.4);
+}
+
+@media print {
+  body {
+    background: transparent;
+    padding: 0;
+  }
+  .print-btn {
+    display: none;
+  }
+  .book-container {
+    max-width: 100%;
+    gap: 0;
+  }
+  .page {
+    box-shadow: none;
+    border: none;
+    margin: 0;
+    min-height: 100vh;
+    page-break-after: always;
+  }
+}
+
+/* ========================================================
+   ESTILOS DE CAPA: ENCADERNAÇÃO EM COURO ANTIGO & FOLHA DE OURO
+   ======================================================== */
+.page-cover {
+  position: relative;
+  background-color: #140904 !important;
+  background-image: 
+    radial-gradient(ellipse at 50% 35%, rgba(65, 34, 16, 0.95) 0%, rgba(32, 16, 7, 0.98) 60%, rgba(12, 6, 2, 1) 100%),
+    repeating-radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.18) 0px, rgba(0, 0, 0, 0.18) 1px, transparent 1px, transparent 3px),
+    repeating-linear-gradient(45deg, rgba(0,0,0,0.08) 0px, rgba(0,0,0,0.08) 2px, transparent 2px, transparent 4px) !important;
+  color: #e5cb9c !important;
+  border: 12px solid #231207 !important;
+  outline: 2px solid #6b4c1f !important;
+  outline-offset: -6px;
+  box-shadow: 
+    0 35px 90px rgba(0,0,0,0.98), 
+    inset 0 0 160px rgba(0,0,0,0.95), 
+    inset 0 0 40px rgba(184, 134, 11, 0.25) !important;
+  text-align: center;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 55px 45px 35px 70px !important; /* Espaço para vinco do lombo à esquerda */
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Vinco / Lombada de Livro Antigo na Borda Esquerda */
+.page-cover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 35px;
+  background: linear-gradient(to right, 
+    rgba(0,0,0,0.9) 0%, 
+    rgba(255,255,255,0.06) 18%, 
+    rgba(0,0,0,0.95) 45%, 
+    rgba(184,134,11,0.18) 72%, 
+    rgba(0,0,0,0.7) 100%
+  );
+  box-shadow: inset -2px 0 6px rgba(0,0,0,0.85);
+  border-right: 1px solid rgba(139, 107, 35, 0.35);
+  z-index: 15;
+  pointer-events: none;
+}
+
+/* Molduras em Ouro Prensado */
+.cover-outer-frame {
+  position: absolute;
+  top: 20px;
+  left: 45px;
+  right: 20px;
+  bottom: 20px;
+  border: 3px double #d4af37;
+  box-shadow: 
+    0 0 15px rgba(212, 175, 55, 0.25), 
+    inset 0 0 25px rgba(0, 0, 0, 0.85);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.cover-inner-frame {
+  position: absolute;
+  top: 30px;
+  left: 55px;
+  right: 30px;
+  bottom: 30px;
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  box-shadow: inset 0 0 35px rgba(10, 5, 2, 0.95);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Títulos Gravados em Folha de Ouro Real */
+.gold-foil-supertitle {
+  font-family: 'Cinzel', serif;
+  font-size: 10pt;
+  font-weight: 700;
+  letter-spacing: 6px;
+  color: #d4af37;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #dfb76c 0%, #fff2b2 30%, #c99738 60%, #fae896 85%, #9d6d1b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.9));
+  margin-top: 10px;
+  z-index: 10;
+}
+
+.gold-foil-title {
+  font-family: 'Cinzel', serif;
+  font-size: 28pt;
+  font-weight: 900;
+  letter-spacing: 3.5px;
+  line-height: 1.15;
+  background: linear-gradient(135deg, #ecd396 0%, #fff7d6 20%, #cfa043 45%, #fff2be 75%, #a6741d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.95)) drop-shadow(0 0 20px rgba(212,175,55,0.45));
+  text-transform: uppercase;
+  margin: 10px 0 6px 0;
+  z-index: 10;
+}
+
+.gold-foil-subtitle {
+  font-family: 'Cinzel', serif;
+  font-size: 10.5pt;
+  font-weight: 700;
+  letter-spacing: 3.5px;
+  color: #df5252;
+  text-transform: uppercase;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.95);
+  max-width: 620px;
+  line-height: 1.4;
+  margin: 0 auto;
+  z-index: 10;
+}
+
+/* Frontispício em Vetor Gravado */
+.master-frontispiece-svg {
+  width: 100%;
+  max-width: 630px;
+  height: auto;
+  margin: 6px auto;
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,0.95));
+  z-index: 10;
+}
+
+/* Cantoneiras Nobres em Bronze / Ouro */
+.antique-corner {
+  position: absolute;
+  width: 85px;
+  height: 85px;
+  z-index: 12;
+  pointer-events: none;
+}
+.antique-corner.tl { top: 12px; left: 34px; }
+.antique-corner.tr { top: 12px; right: 12px; transform: scaleX(-1); }
+.antique-corner.bl { bottom: 12px; left: 34px; transform: scaleY(-1); }
+.antique-corner.br { bottom: 12px; right: 12px; transform: scale(-1, -1); }
+
+/* Selo de Cera Carmesim com Fitas de Cetim */
+.wax-seal-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 6px 0 4px 0;
+  z-index: 20;
+}
+.wax-seal {
+  width: 66px;
+  height: 66px;
+  background: radial-gradient(circle at 35% 35%, #b51a1a 0%, #7a0c0c 55%, #3d0303 100%);
+  border-radius: 50%;
+  border: 3px solid #8e1010;
+  box-shadow: 
+    0 8px 18px rgba(0,0,0,0.85),
+    inset 0 3px 6px rgba(255,255,255,0.35),
+    inset 0 -4px 8px rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.wax-seal-inner {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(245, 238, 219, 0.45);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.9);
+}
+.wax-seal-symbol {
+  font-size: 20px;
+  color: #f7e2a9;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+  line-height: 1;
+}
+.wax-seal-text {
+  font-family: 'Cinzel', serif;
+  font-size: 5pt;
+  letter-spacing: 1.5px;
+  color: #dfcaa7;
+  margin-top: 2px;
+}
+.wax-ribbon {
+  position: absolute;
+  width: 14px;
+  height: 46px;
+  background: linear-gradient(to bottom, #7a0c0c, #420303);
+  top: 36px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.8);
+  z-index: -1;
+}
+.ribbon-left {
+  left: calc(50% - 15px);
+  transform: rotate(18deg);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 85%, 0 100%);
+}
+.ribbon-right {
+  right: calc(50% - 15px);
+  transform: rotate(-18deg);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 85%, 0 100%);
+}
+
+.cover-footer-antique {
+  font-family: 'Cinzel', serif;
+  font-size: 8.5pt;
+  letter-spacing: 3.5px;
+  color: #bfa061;
+  text-transform: uppercase;
+  margin-top: 6px;
+  z-index: 10;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+}
+
+  </style>
+</head>
+<body>
+
+  <button class="print-btn" onclick="window.print()">🖨 IMPRIMIR / SALVAR PDF</button>
+
+  <div class="book-container">
+    <!-- Capa Estilo Livro Antigo -->
+    <section class="page page-cover">
+      
+<svg class="antique-corner tl" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGradCorner" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#bf953f" />
+      <stop offset="25%" stop-color="#fcf6ba" />
+      <stop offset="50%" stop-color="#b38728" />
+      <stop offset="75%" stop-color="#fbf5b7" />
+      <stop offset="100%" stop-color="#aa771c" />
+    </linearGradient>
+    <filter id="cornerShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.9"/>
+    </filter>
+  </defs>
+  <g filter="url(#cornerShadow)" fill="none" stroke="url(#goldGradCorner)" stroke-width="1.8">
+    <!-- Cantoneira Barroca Antiga -->
+    <path d="M 6 6 L 110 6 C 85 10 50 25 35 45 C 25 60 10 85 6 110 Z" fill="rgba(20, 10, 5, 0.6)" stroke-width="2.5"/>
+    <path d="M 12 12 L 95 12 C 75 16 45 28 32 45 C 22 60 16 75 12 95 Z" stroke-dasharray="3,2" stroke-width="1.2"/>
+    <path d="M 6 6 L 50 50" stroke-width="2"/>
+    <circle cx="28" cy="28" r="8" fill="url(#goldGradCorner)" stroke="#5c4308" stroke-width="1"/>
+    <circle cx="28" cy="28" r="3" fill="#2a1408"/>
+    <!-- Arabescos e Volutas -->
+    <path d="M 45 15 C 60 15 75 22 80 32 C 85 42 75 50 65 48 C 55 46 52 35 60 30 C 65 27 70 32 68 36" />
+    <path d="M 15 45 C 15 60 22 75 32 80 C 42 85 50 75 48 65 C 46 55 35 52 30 60 C 27 65 32 70 36 68" />
+    <!-- Rebites / Florões de Canto -->
+    <circle cx="16" cy="16" r="3.5" fill="url(#goldGradCorner)" stroke="#3a2505"/>
+    <circle cx="95" cy="16" r="2.5" fill="url(#goldGradCorner)"/>
+    <circle cx="16" cy="95" r="2.5" fill="url(#goldGradCorner)"/>
+    <path d="M 22 6 L 6 22 M 35 6 L 6 35 M 48 6 L 6 48" stroke-width="0.8" opacity="0.7"/>
+  </g>
+</svg>
+
+      
+<svg class="antique-corner tr" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGradCorner" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#bf953f" />
+      <stop offset="25%" stop-color="#fcf6ba" />
+      <stop offset="50%" stop-color="#b38728" />
+      <stop offset="75%" stop-color="#fbf5b7" />
+      <stop offset="100%" stop-color="#aa771c" />
+    </linearGradient>
+    <filter id="cornerShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.9"/>
+    </filter>
+  </defs>
+  <g filter="url(#cornerShadow)" fill="none" stroke="url(#goldGradCorner)" stroke-width="1.8">
+    <!-- Cantoneira Barroca Antiga -->
+    <path d="M 6 6 L 110 6 C 85 10 50 25 35 45 C 25 60 10 85 6 110 Z" fill="rgba(20, 10, 5, 0.6)" stroke-width="2.5"/>
+    <path d="M 12 12 L 95 12 C 75 16 45 28 32 45 C 22 60 16 75 12 95 Z" stroke-dasharray="3,2" stroke-width="1.2"/>
+    <path d="M 6 6 L 50 50" stroke-width="2"/>
+    <circle cx="28" cy="28" r="8" fill="url(#goldGradCorner)" stroke="#5c4308" stroke-width="1"/>
+    <circle cx="28" cy="28" r="3" fill="#2a1408"/>
+    <!-- Arabescos e Volutas -->
+    <path d="M 45 15 C 60 15 75 22 80 32 C 85 42 75 50 65 48 C 55 46 52 35 60 30 C 65 27 70 32 68 36" />
+    <path d="M 15 45 C 15 60 22 75 32 80 C 42 85 50 75 48 65 C 46 55 35 52 30 60 C 27 65 32 70 36 68" />
+    <!-- Rebites / Florões de Canto -->
+    <circle cx="16" cy="16" r="3.5" fill="url(#goldGradCorner)" stroke="#3a2505"/>
+    <circle cx="95" cy="16" r="2.5" fill="url(#goldGradCorner)"/>
+    <circle cx="16" cy="95" r="2.5" fill="url(#goldGradCorner)"/>
+    <path d="M 22 6 L 6 22 M 35 6 L 6 35 M 48 6 L 6 48" stroke-width="0.8" opacity="0.7"/>
+  </g>
+</svg>
+
+      
+<svg class="antique-corner bl" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGradCorner" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#bf953f" />
+      <stop offset="25%" stop-color="#fcf6ba" />
+      <stop offset="50%" stop-color="#b38728" />
+      <stop offset="75%" stop-color="#fbf5b7" />
+      <stop offset="100%" stop-color="#aa771c" />
+    </linearGradient>
+    <filter id="cornerShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.9"/>
+    </filter>
+  </defs>
+  <g filter="url(#cornerShadow)" fill="none" stroke="url(#goldGradCorner)" stroke-width="1.8">
+    <!-- Cantoneira Barroca Antiga -->
+    <path d="M 6 6 L 110 6 C 85 10 50 25 35 45 C 25 60 10 85 6 110 Z" fill="rgba(20, 10, 5, 0.6)" stroke-width="2.5"/>
+    <path d="M 12 12 L 95 12 C 75 16 45 28 32 45 C 22 60 16 75 12 95 Z" stroke-dasharray="3,2" stroke-width="1.2"/>
+    <path d="M 6 6 L 50 50" stroke-width="2"/>
+    <circle cx="28" cy="28" r="8" fill="url(#goldGradCorner)" stroke="#5c4308" stroke-width="1"/>
+    <circle cx="28" cy="28" r="3" fill="#2a1408"/>
+    <!-- Arabescos e Volutas -->
+    <path d="M 45 15 C 60 15 75 22 80 32 C 85 42 75 50 65 48 C 55 46 52 35 60 30 C 65 27 70 32 68 36" />
+    <path d="M 15 45 C 15 60 22 75 32 80 C 42 85 50 75 48 65 C 46 55 35 52 30 60 C 27 65 32 70 36 68" />
+    <!-- Rebites / Florões de Canto -->
+    <circle cx="16" cy="16" r="3.5" fill="url(#goldGradCorner)" stroke="#3a2505"/>
+    <circle cx="95" cy="16" r="2.5" fill="url(#goldGradCorner)"/>
+    <circle cx="16" cy="95" r="2.5" fill="url(#goldGradCorner)"/>
+    <path d="M 22 6 L 6 22 M 35 6 L 6 35 M 48 6 L 6 48" stroke-width="0.8" opacity="0.7"/>
+  </g>
+</svg>
+
+      
+<svg class="antique-corner br" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGradCorner" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#bf953f" />
+      <stop offset="25%" stop-color="#fcf6ba" />
+      <stop offset="50%" stop-color="#b38728" />
+      <stop offset="75%" stop-color="#fbf5b7" />
+      <stop offset="100%" stop-color="#aa771c" />
+    </linearGradient>
+    <filter id="cornerShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.9"/>
+    </filter>
+  </defs>
+  <g filter="url(#cornerShadow)" fill="none" stroke="url(#goldGradCorner)" stroke-width="1.8">
+    <!-- Cantoneira Barroca Antiga -->
+    <path d="M 6 6 L 110 6 C 85 10 50 25 35 45 C 25 60 10 85 6 110 Z" fill="rgba(20, 10, 5, 0.6)" stroke-width="2.5"/>
+    <path d="M 12 12 L 95 12 C 75 16 45 28 32 45 C 22 60 16 75 12 95 Z" stroke-dasharray="3,2" stroke-width="1.2"/>
+    <path d="M 6 6 L 50 50" stroke-width="2"/>
+    <circle cx="28" cy="28" r="8" fill="url(#goldGradCorner)" stroke="#5c4308" stroke-width="1"/>
+    <circle cx="28" cy="28" r="3" fill="#2a1408"/>
+    <!-- Arabescos e Volutas -->
+    <path d="M 45 15 C 60 15 75 22 80 32 C 85 42 75 50 65 48 C 55 46 52 35 60 30 C 65 27 70 32 68 36" />
+    <path d="M 15 45 C 15 60 22 75 32 80 C 42 85 50 75 48 65 C 46 55 35 52 30 60 C 27 65 32 70 36 68" />
+    <!-- Rebites / Florões de Canto -->
+    <circle cx="16" cy="16" r="3.5" fill="url(#goldGradCorner)" stroke="#3a2505"/>
+    <circle cx="95" cy="16" r="2.5" fill="url(#goldGradCorner)"/>
+    <circle cx="16" cy="95" r="2.5" fill="url(#goldGradCorner)"/>
+    <path d="M 22 6 L 6 22 M 35 6 L 6 35 M 48 6 L 6 48" stroke-width="0.8" opacity="0.7"/>
+  </g>
+</svg>
+
+      <div class="cover-outer-frame"></div>
+      <div class="cover-inner-frame"></div>
+      
+      <div class="gold-foil-supertitle">
+        COLEÇÃO ARQUIVOS DA ORDEM • VOLUME COMPLEMENTAR
+      </div>
+
+      <div class="gold-foil-title" style="font-size: 24pt;">
+        O GRIMÓRIO DAS REDES INVISÍVEIS
+      </div>
+
+      <div class="gold-foil-subtitle" style="font-size: 10pt;">
+        A CIÊNCIA DA TROLHA E A CORDA DE 81 NÓS NO CAPITAL MODERNO
+      </div>
+
+      
+<svg class="master-frontispiece-svg" viewBox="0 0 700 450" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldLeaf3" x1="0%" y1="0%" x2="100%" y2="80%">
+      <stop offset="0%" stop-color="#dfb76c" />
+      <stop offset="25%" stop-color="#fff2b2" />
+      <stop offset="50%" stop-color="#c99738" />
+      <stop offset="75%" stop-color="#fae896" />
+      <stop offset="100%" stop-color="#9d6d1b" />
+    </linearGradient>
+    <filter id="goldShine3" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.95"/>
+    </filter>
+  </defs>
+
+  <!-- A Mística Corda de 81 Nós Circundando o Selo das Alianças -->
+  <g transform="translate(350, 195)" filter="url(#goldShine3)">
+    <!-- Corda Oval Entrelaçada com Nós Visíveis -->
+    <ellipse cx="0" cy="0" rx="220" ry="140" fill="none" stroke="url(#goldLeaf3)" stroke-width="4" stroke-dasharray="8,6"/>
+    <!-- Borlas Tradicionais de Ouro (Tassels) no Vértice Inferior Aberto -->
+    <g transform="translate(0, 140)">
+      <circle cx="-15" cy="0" r="6" fill="url(#goldLeaf3)"/>
+      <path d="M -18,6 L -25,25 L -7,25 Z" fill="url(#goldLeaf3)"/>
+      <circle cx="15" cy="0" r="6" fill="url(#goldLeaf3)"/>
+      <path d="M 12,6 L 7,25 L 23,25 Z" fill="url(#goldLeaf3)"/>
+    </g>
+
+    <!-- Nós de Amor / Laços de 8 (Nós Herméticos nas 4 Extremidades) -->
+    <circle cx="-220" cy="0" r="8" fill="#1b0e06" stroke="url(#goldLeaf3)" stroke-width="2"/>
+    <circle cx="220" cy="0" r="8" fill="#1b0e06" stroke="url(#goldLeaf3)" stroke-width="2"/>
+    <circle cx="0" cy="-140" r="8" fill="#1b0e06" stroke="url(#goldLeaf3)" stroke-width="2"/>
+
+    <!-- O Aperto de Mão Fraternal Mútuo (Dextrarum Iunctio) -->
+    <g transform="translate(0, -35)">
+      <!-- Círculo Radiante Central -->
+      <circle cx="0" cy="0" r="65" fill="#180e07" stroke="url(#goldLeaf3)" stroke-width="3"/>
+      <circle cx="0" cy="0" r="58" fill="none" stroke="url(#goldLeaf3)" stroke-width="1" stroke-dasharray="3,3"/>
+      
+      <!-- As Mãos Entrelaçadas da Aliança -->
+      <!-- Punho Esquerdo -->
+      <path d="M -45,-5 L -25,-10 L -15,0 L -25,10 Z" fill="url(#goldLeaf3)" stroke="#3a2205"/>
+      <!-- Dedos Entrelaçados -->
+      <path d="M -15,0 Q 0,-15 15,0 Q 0,15 -15,0 Z" fill="#2a1608" stroke="url(#goldLeaf3)" stroke-width="2"/>
+      <!-- Punho Direito -->
+      <path d="M 45,-5 L 25,-10 L 15,0 L 25,10 Z" fill="url(#goldLeaf3)" stroke="#3a2205"/>
+      <!-- O Selo do Delta sobre as mãos -->
+      <polygon points="0,-42 16,-18 -16,-18" fill="url(#goldLeaf3)" stroke="#3a2205"/>
+      <circle cx="0" cy="-26" r="3" fill="#150a04"/>
+    </g>
+
+    <!-- A Espátula / Trolha de Ouro Estendida (A Ferramenta que Espalha o Cimento da Lealdade) -->
+    <g transform="translate(0, 70)">
+      <polygon points="0,-25 28,15 -28,15" fill="url(#goldLeaf3)" stroke="#3a2205" stroke-width="2"/>
+      <path d="M 0,15 L 0,38 L 8,42" stroke="url(#goldLeaf3)" stroke-width="3" fill="none"/>
+      <rect x="6" y="38" width="18" height="7" rx="3" fill="url(#goldLeaf3)"/>
+      <text x="0" y="3" font-family="'Cinzel', serif" font-size="9" font-weight="700" fill="#140903" text-anchor="middle">SILENTIUM</text>
+    </g>
+  </g>
+
+  <!-- Lema Inferior em Banner -->
+  <g transform="translate(350, 400)" filter="url(#goldShine3)">
+    <path d="M -220,0 L 220,0 L 200,24 L -200,24 Z" fill="#180e07" stroke="url(#goldLeaf3)" stroke-width="1.8"/>
+    <text x="0" y="16" font-family="'Cinzel', serif" font-size="11" font-weight="700" letter-spacing="3" fill="url(#goldLeaf3)" text-anchor="middle">
+      FIDES • CONCORDIA • UNITAS
+    </text>
+  </g>
+</svg>
+
+
+      
+<div class="wax-seal-wrapper">
+  <div class="wax-ribbon ribbon-left"></div>
+  <div class="wax-ribbon ribbon-right"></div>
+  <div class="wax-seal">
+    <div class="wax-seal-inner">
+      <div class="wax-seal-symbol">⚖</div>
+      <div class="wax-seal-text">ORD•MET•6026</div>
+    </div>
+  </div>
+</div>
+
+
+      <div class="cover-footer-antique">
+        EDIÇÃO HISTÓRICA E OPERATIVA • ANNO LUCIS 6026<br>
+        <span style="font-size: 7.5pt; opacity: 0.85; letter-spacing: 2px;">DOCUMENTO DE USO INTERNO E TRANSMISSÃO FRATERNA</span>
+      </div>
+    </section>
+
+    <section class="page">
+      <div class="page-border-outer"></div>
+      <div class="page-border-inner"></div>
+      <div class="corner-ornament corner-tl">☩</div>
+      <div class="corner-ornament corner-tr">☩</div>
+      <div class="corner-ornament corner-bl">☩</div>
+      <div class="corner-ornament corner-br">☩</div>
+
+      <div class="header-meta">
+        <span>O GRIMÓRIO DAS REDES INVISÍVEIS • CAPÍTULO I</span>
+      </div>
+
+      <div class="page-content">
+        <h2 class="page-title">A Geometria Social das Altas Esferas</h2>
+        <div class="page-subtitle">Como se Posicionar em Círculos de Poder Sem Mendigar Atenção</div>
+        <div class="divider">✦ ∴ ✦</div>
+        
+        <p class="no-indent"><span class="drop-cap">O</span> homem profano acredita que fazer alianças estratégicas é comparecer a coquetéis barulhentos distribuindo cartões de visitas que terminarão na lixeira mais próxima na manhã seguinte. Essa abordagem rasteira exala o cheiro nauseante do desespero e afasta qualquer indivíduo verdadeiramente poderoso.</p>
+
+        <p>Os círculos herméticos de alta influência operam por um princípio diametralmente oposto: a <strong>Gravitação por Utilidade Singular</strong>.</p>
+
+        <ul class="axiom-list">
+          <li><strong>A Identificação do Gargalo Alheio:</strong> Homens de grande poder e riqueza não precisam de bajulação; seus corredores estão apinhados de parasitas bajuladores. Eles precisam de <em>homens competentes que resolvam problemas complexos em silêncio absoluto</em>. Encontra o ponto cego ou a dor não resolvida do indivíduo influente antes mesmo que ele perceba que precisa de ajuda.</li>
+          <li><strong>A Entrada Lateral e Discreta:</strong> Nunca abordes o monarca diretamente no trono; ganha a confiança do seu conselheiro mais leal ou do seu arquiteto de confiança prestando um serviço impecável e sem cobrar nada na primeira instância. A reputação de competência pura viaja mais rápido pelos corredores do que qualquer currículo brilhante.</li>
+          <li><strong>O Poder da Informação Antecipada:</strong> Quem detém o fato antes que ele se torne notícia pública domina qualquer negociação. Cultiva informantes técnicos nos escalões intermediários da sociedade. Um bom operador de alfândega, um secretário discreto ou um auditor meticuloso valem cem vezes mais do que um político discursando no palanque.</li>
+        </ul>
+        
+      </div>
+
+      <div class="footer-meta">
+        <span>BIBLIOTECA OCULTA DA ORDEM</span>
+        <span style="font-weight: 700; font-size: 11pt;">• PÁGINA 1 •</span>
+        <span>SAPIENTIA ET VIRTUS</span>
+      </div>
+    </section>
+
+    <section class="page">
+      <div class="page-border-outer"></div>
+      <div class="page-border-inner"></div>
+      <div class="corner-ornament corner-tl">☩</div>
+      <div class="corner-ornament corner-tr">☩</div>
+      <div class="corner-ornament corner-bl">☩</div>
+      <div class="corner-ornament corner-br">☩</div>
+
+      <div class="header-meta">
+        <span>O GRIMÓRIO DAS REDES INVISÍVEIS • CAPÍTULO II</span>
+      </div>
+
+      <div class="page-content">
+        <h2 class="page-title">A Moeda dos Favores Não Cobrados</h2>
+        <div class="page-subtitle">A Maior Arma de Influência Já Forjada pelas Irmandades</div>
+        <div class="divider">✦ ∴ ✦</div>
+        
+        <p class="no-indent"><span class="drop-cap">Q</span>uando prestas um serviço de valor incalculável a um homem influente e cometes o erro de cobrar-lhe imediatamente uma ninharia em dinheiro, tu nivelaste a relação ao patamar comercial ordinário. A transação morreu ali: pagou, acabou.</p>
+
+        <p>O Mestre Maçom das alianças invisíveis opera com a mais nobre e perigosa das moedas: o <strong>Favor Histórico Pendente</strong>.</p>
+
+        <div class="quote-box">
+          "Salva o filho do nobre e recusa o ouro da recompensa. Pede-lhe apenas que recorde da tua lealdade quando o dia sombrio chegar. Naquela hora, o nobre te entregará as chaves da sua própria fortaleza para quitar sua dívida de honra."
+          <span class="author">— Crônicas dos Cavaleiros Construtores de Chipre</span>
+        </div>
+
+        <p>Ao acumulares uma carteira de favores de alto calibre entre juízes, empresários, banqueiros e governantes, tornas-te praticamente intocável. Quando uma barreira burocrática levantar-se contra teus negócios, um simples sussurro no ouvido do homem certo destrancará a engrenagem sem que precises gastar um centavo em litígios exaustivos.</p>
+        
+      </div>
+
+      <div class="footer-meta">
+        <span>BIBLIOTECA OCULTA DA ORDEM</span>
+        <span style="font-weight: 700; font-size: 11pt;">• PÁGINA 2 •</span>
+        <span>SAPIENTIA ET VIRTUS</span>
+      </div>
+    </section>
+
+    <section class="page">
+      <div class="page-border-outer"></div>
+      <div class="page-border-inner"></div>
+      <div class="corner-ornament corner-tl">☩</div>
+      <div class="corner-ornament corner-tr">☩</div>
+      <div class="corner-ornament corner-bl">☩</div>
+      <div class="corner-ornament corner-br">☩</div>
+
+      <div class="header-meta">
+        <span>O GRIMÓRIO DAS REDES INVISÍVEIS • CAPÍTULO III</span>
+      </div>
+
+      <div class="page-content">
+        <h2 class="page-title">O Círculo Fechado e o Juramento dos Três</h2>
+        <div class="page-subtitle">A Estrutura Celular de Domínio e Sucessão</div>
+        <div class="divider">✦ ∴ ✦</div>
+        
+        <p class="no-indent"><span class="drop-cap">A</span> história demonstra que movimentos de massas barulhentos são facilmente infiltrados, manipulados e desmantelados pelas forças dominantes. As únicas ordens que resistiram incólumes a inquisições, revoluções sangrentas e colapsos imperiais foram aquelas organizadas em <strong>Células Triangulares Autônomas</strong>.</p>
+
+        <p>A estrutura de poder perfeita para teus empreendimentos materiais consiste no <em>Triângulo de Hiram</em>:</p>
+
+        <div class="masonic-seal">▲</div>
+
+        <ul class="axiom-list">
+          <li><strong>O Vértice do Arquiteto (Tu):</strong> Guarda a visão global, controla o destino dos fluxos financeiros e detém as senhas mestras de todas as estruturas.</li>
+          <li><strong>O Vértice do Executor Técnico:</strong> O mestre das ferramentas que implementa o produto ou serviço no mais alto nível de excelência, sem jamais desviar sua atenção da manufatura.</li>
+          <li><strong>O Vértice do Escudo e Relações:</strong> Aquele que lida com o mundo exterior, neutraliza as investidas de adversários e abre caminhos institucionais com carisma e astúcia legal.</li>
+        </ul>
+
+        <p>Quando esses três elementos operam em sintonia perfeita sob o cimento da Trolha — onde nenhum trai o outro e cada um é soberano em sua esfera —, ergue-se uma entidade comercial indestrutível. Este é o cume da Maçonaria Operativa Moderna: construir no meio do caos mundano um templo invisível de riqueza, liberdade e glória que nada no mundo pode derrubar.</p>
+        
+      </div>
+
+      <div class="footer-meta">
+        <span>BIBLIOTECA OCULTA DA ORDEM</span>
+        <span style="font-weight: 700; font-size: 11pt;">• PÁGINA 3 •</span>
+        <span>SAPIENTIA ET VIRTUS</span>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>

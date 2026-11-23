@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manuscrito Maçônico da Prosperidade Oculta - XV Lâminas</title>
+  <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=MedievalSharp&display=swap');
+
+:root {
+  --bg-parchment: #f5eedb;
+  --bg-parchment-dark: #ebd9b5;
+  --ink-primary: #1c140d;
+  --ink-secondary: #3d2b1f;
+  --gold-accent: #8b6b23;
+  --gold-bright: #b8860b;
+  --red-seal: #8a1414;
+  --border-outer: #4a3525;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #0d0a08;
+  color: var(--ink-primary);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 14pt;
+  line-height: 1.65;
+  padding: 40px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.book-container {
+  width: 100%;
+  max-width: 850px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.page {
+  width: 100%;
+  min-height: 1180px;
+  background: var(--bg-parchment);
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4) 0%, rgba(220, 195, 150, 0.2) 70%, rgba(160, 130, 85, 0.45) 100%),
+    repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(100, 70, 30, 0.015) 3px, rgba(100, 70, 30, 0.015) 6px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.8), inset 0 0 100px rgba(110, 75, 35, 0.25);
+  border: 1px solid #7c5a36;
+  padding: 60px 70px;
+  position: relative;
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.page-border-outer {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  border: 2px solid var(--border-outer);
+  pointer-events: none;
+}
+
+.page-border-inner {
+  position: absolute;
+  top: 26px;
+  left: 26px;
+  right: 26px;
+  bottom: 26px;
+  border: 1px solid var(--gold-accent);
+  pointer-events: none;
+}
+
+.corner-ornament {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  font-size: 20px;
+  color: var(--gold-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.corner-tl { top: 12px; left: 12px; }
+.corner-tr { top: 12px; right: 12px; }
+.corner-bl { bottom: 12px; left: 12px; }
+.corner-br { bottom: 12px; right: 12px; }
+
+.header-meta {
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  font-size: 10pt;
+  letter-spacing: 3px;
+  color: var(--gold-accent);
+  text-transform: uppercase;
+  border-bottom: 1px double rgba(139, 107, 35, 0.4);
+  padding-bottom: 8px;
+  margin-bottom: 25px;
+}
+
+.page-content {
+  position: relative;
+  z-index: 10;
+  flex-grow: 1;
+}
+
+.page-title {
+  font-family: 'Cinzel', serif;
+  font-size: 20pt;
+  font-weight: 700;
+  text-align: center;
+  color: var(--ink-primary);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.page-subtitle {
+  font-family: 'Cinzel', serif;
+  font-size: 11pt;
+  font-weight: 600;
+  text-align: center;
+  color: var(--red-seal);
+  margin-bottom: 24px;
+  letter-spacing: 2px;
+  font-style: italic;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin: 16px 0 24px 0;
+  color: var(--gold-accent);
+  font-size: 14pt;
+}
+.divider::before, .divider::after {
+  content: "";
+  height: 1px;
+  width: 80px;
+  background: linear-gradient(to right, transparent, var(--gold-accent), transparent);
+}
+
+p {
+  margin-bottom: 16px;
+  text-align: justify;
+  text-indent: 28px;
+}
+
+p.no-indent {
+  text-indent: 0;
+}
+
+.drop-cap {
+  float: left;
+  font-family: 'Cinzel', serif;
+  font-size: 52pt;
+  line-height: 44pt;
+  padding-top: 4px;
+  padding-right: 10px;
+  padding-bottom: 0px;
+  color: var(--red-seal);
+  font-weight: 900;
+  text-shadow: 1px 1px 0px rgba(0,0,0,0.2);
+}
+
+.quote-box {
+  margin: 22px 0;
+  padding: 16px 26px;
+  background: rgba(184, 134, 11, 0.08);
+  border-left: 3px solid var(--red-seal);
+  border-right: 1px solid rgba(139, 107, 35, 0.3);
+  font-style: italic;
+  font-size: 13pt;
+  text-align: justify;
+}
+
+.quote-box .author {
+  display: block;
+  text-align: right;
+  font-family: 'Cinzel', serif;
+  font-size: 9.5pt;
+  font-style: normal;
+  letter-spacing: 1px;
+  margin-top: 8px;
+  color: var(--gold-accent);
+}
+
+.axiom-list {
+  list-style: none;
+  margin: 18px 0;
+  padding-left: 10px;
+}
+
+.axiom-list li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 14px;
+  text-align: justify;
+}
+
+.axiom-list li::before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--red-seal);
+  font-size: 12pt;
+}
+
+.masonic-seal {
+  width: 90px;
+  height: 90px;
+  margin: 15px auto;
+  border-radius: 50%;
+  border: 2px dashed var(--gold-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38px;
+  color: var(--red-seal);
+  background: radial-gradient(circle, rgba(220,195,150,0.6) 0%, rgba(139,107,35,0.15) 100%);
+}
+
+.footer-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Cinzel', serif;
+  font-size: 9pt;
+  color: var(--gold-accent);
+  border-top: 1px double rgba(139, 107, 35, 0.4);
+  padding-top: 10px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Cover Styling */
+.page-cover {
+  background: #140d07;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(70, 45, 20, 0.8) 0%, rgba(20, 12, 6, 0.98) 80%),
+    repeating-linear-gradient(45deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 2px, transparent 2px, transparent 4px);
+  color: #dfcaa7;
+  border: 4px solid #8b6b23;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.95), inset 0 0 120px rgba(0,0,0,0.9);
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 70px 50px;
+}
+
+.cover-border {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  right: 25px;
+  bottom: 25px;
+  border: 2px solid #b8860b;
+  box-shadow: inset 0 0 25px rgba(184, 134, 11, 0.3);
+}
+
+.cover-title-main {
+  font-family: 'Cinzel', serif;
+  font-size: 32pt;
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: #f7e2a9;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(184,134,11,0.5);
+  line-height: 1.2;
+  margin-top: 20px;
+}
+
+.cover-subtitle {
+  font-family: 'Cinzel', serif;
+  font-size: 15pt;
+  letter-spacing: 5px;
+  color: #d14949;
+  text-transform: uppercase;
+  margin-top: 15px;
+  font-weight: 700;
+}
+
+.cover-emblem {
+  font-size: 70pt;
+  color: #b8860b;
+  margin: 30px 0;
+  filter: drop-shadow(0 0 15px rgba(184,134,11,0.6));
+}
+
+.cover-motto {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 16pt;
+  color: #e5cb9c;
+  max-width: 580px;
+  line-height: 1.4;
+  margin: 15px auto;
+}
+
+.cover-footer {
+  font-family: 'Cinzel', serif;
+  font-size: 10pt;
+  letter-spacing: 4px;
+  color: #8b6b23;
+  margin-top: 30px;
+}
+
+.print-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: #8a1414;
+  color: #f5eedb;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 12pt;
+  padding: 14px 24px;
+  border: 2px solid #b8860b;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+  z-index: 9999;
+  transition: all 0.3s ease;
+}
+.print-btn:hover {
+  background: #a61c1c;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(184,134,11,0.4);
+}
+
+@media print {
+  body {
+    background: transparent;
+    padding: 0;
+  }
+  .print-btn {
+    display: none;
+  }
+  .book-container {
+    max-width: 100%;
+    gap: 0;
+  }
+  .page {
+    box-shadow: none;
+    border: none;
+    margin: 0;
+    min-height: 100vh;
+    page-break-after: always;
+  }
+}
+
+/* ========================================================
+   ESTILOS DE CAPA: ENCADERNAÇÃO EM COURO ANTIGO & FOLHA DE OURO
+   ======================================================== */
+.page-cover {
+  position: relative;
+  background-color: #140904 !important;
+  background-image: 
+    radial-gradient(ellipse at 50% 35%, rgba(65, 34, 16, 0.95) 0%, rgba(32, 16, 7, 0.98) 60%, rgba(12, 6, 2, 1) 100%),
+    repeating-radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.18) 0px, rgba(0, 0, 0, 0.18) 1px, transparent 1px, transparent 3px),
+    repeating-linear-gradient(45deg, rgba(0,0,0,0.08) 0px, rgba(0,0,0,0.08) 2px, transparent 2px, transparent 4px) !important;
+  color: #e5cb9c !important;
+  border: 12px solid #231207 !important;
+  outline: 2px solid #6b4c1f !important;
+  outline-offset: -6px;
+  box-shadow: 
+    0 35px 90px rgba(0,0,0,0.98), 
+    inset 0 0 160px rgba(0,0,0,0.95), 
+    inset 0 0 40px rgba(184, 134, 11, 0.25) !important;
+  text-align: center;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 55px 45px 35px 70px !important; /* Espaço para vinco do lombo à esquerda */
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Vinco / Lombada de Livro Antigo na Borda Esquerda */
+.page-cover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 35px;
+  background: linear-gradient(to right, 
+    rgba(0,0,0,0.9) 0%, 
+    rgba(255,255,255,0.06) 18%, 
+    rgba(0,0,0,0.95) 45%, 
+    rgba(184,134,11,0.18) 72%, 
+    rgba(0,0,0,0.7) 100%
+  );
+  box-shadow: inset -2px 0 6px rgba(0,0,0,0.85);
+  border-right: 1px solid rgba(139, 107, 35, 0.35);
+  z-index: 15;
+  pointer-events: none;
+}
+
+/* Molduras em Ouro Prensado */
+.cover-outer-frame {
+  position: absolute;
+  top: 20px;
+  left: 45px;
+  right: 20px;
+  bottom: 20px;
+  border: 3px double #d4af37;
+  box-shadow: 
+    0 0 15px rgba(212, 175, 55, 0.25), 
+    inset 0 0 25px rgba(0, 0, 0, 0.85);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.cover-inner-frame {
+  position: absolute;
+  top: 30px;
+  left: 55px;
+  right: 30px;
+  bottom: 30px;
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  box-shadow: inset 0 0 35px rgba(10, 5, 2, 0.95);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Títulos Gravados em Folha de Ouro Real */
+.gold-foil-supertitle {
+  font-family: 'Cinzel', serif;
+  font-size: 10pt;
+  font-weight: 700;
+  letter-spacing: 6px;
+  color: #d4af37;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #dfb76c 0%, #fff2b2 30%, #c99738 60%, #fae896 85%, #9d6d1b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.9));
+  margin-top: 10px;
+  z-index: 10;
+}
+
+.gold-foil-title {
+  font-family: 'Cinzel', serif;
+  font-size: 28pt;
+  font-weight: 900;
+  letter-spacing: 3.5px;
+  line-height: 1.15;
+  background: linear-gradient(135deg, #ecd396 0%, #fff7d6 20%, #cfa043 45%, #fff2be 75%, #a6741d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.95)) drop-shadow(0 0 20px rgba(212,175,55,0.45));
+  text-transform: uppercase;
+  margin: 10px 0 6px 0;
+  z-index: 10;
+}
+
+.gold-foil-subtitle {
+  font-family: 'Cinzel', serif;
+  font-size: 10.5pt;
+  font-weight: 700;
+  letter-spacing: 3.5px;
+  color: #df5252;
+  text-transform: uppercase;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.95);
+  max-width: 620px;
+  line-height: 1.4;
+  margin: 0 auto;
+  z-index: 10;
+}
+
+/* Frontispício em Vetor Gravado */
+.master-frontispiece-svg {
+  width: 100%;
+  max-width: 630px;
+  height: auto;
+  margin: 6px auto;
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,0.95));
+  z-index: 10;
+}
+
+/* Cantoneiras Nobres em Bronze / Ouro */
+.antique-corner {
+  position: absolute;
+  width: 85px;
+  height: 85px;
+  z-index: 12;
+  pointer-events: none;
+}
+.antique-corner.tl { top: 12px; left: 34px; }
+.antique-corner.tr { top: 12px; right: 12px; transform: scaleX(-1); }
+.antique-corner.bl { bottom: 12px; left: 34px; transform: scaleY(-1); }
+.antique-corner.br { bottom: 12px; right: 12px; transform: scale(-1, -1); }
+
+/* Selo de Cera Carmesim com Fitas de Cetim */
+.wax-seal-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 6px 0 4px 0;
+  z-index: 20;
+}
+.wax-seal {
+  width: 66px;
+  height: 66px;
+  background: radial-gradient(circle at 35% 35%, #b51a1a 0%, #7a0c0c 55%, #3d0303 100%);
+  border-radius: 50%;
+  border: 3px solid #8e1010;
+  box-shadow: 
+    0 8px 18px rgba(0,0,0,0.85),
+    inset 0 3px 6px rgba(255,255,255,0.35),
+    inset 0 -4px 8px rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.wax-seal-inner {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(245, 238, 219, 0.45);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.9);
+}
+.wax-seal-symbol {
+  font-size: 20px;
+  color: #f7e2a9;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+  line-height: 1;
+}
+.wax-seal-text {
+  font-family: 'Cinzel', serif;
+  font-size: 5pt;
+  letter-spacing: 1.5px;
+  color: #dfcaa7;
+  margin-top: 2px;
+}
+.wax-ribbon {
+  position: absolute;
+  width: 14px;
+  height: 46px;
+  background: linear-gradient(to bottom, #7a0c0c, #420303);
+  top: 36px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.8);
+  z-index: -1;
+}
+.ribbon-left {
+  left: calc(50% - 15px);
+  transform: rotate(18deg);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 85%, 0 100%);
+}
+.ribbon-right {
+  right: calc(50% - 15px);
+  transform: rotate(-18deg);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 85%, 0 100%);
+}
+
+.cover-footer-antique {
+  font-family: 'Cinzel', serif;
+  font-size: 8.5pt;
+  letter-spacing: 3.5px;
+  color: #bfa061;
+  text-transform: uppercase;
+  margin-top: 6px;
+  z-index: 10;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+}
+
+  </style>
+</head>
+<body>
+
+  <button class="print-btn" onclick="window.print()">🖨 IMPRIMIR / SALVAR PDF (15 PÁGINAS)</button>
+
+  <div class="book-container">
+    
+        <section class="page page-cover">
+          
+<svg class="antique-corner tl" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGradCorner" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#bf953f" />
+      <stop offset="25%" stop-color="#fcf6ba" />
+      <stop offset="50%" stop-color="#b38728" />
+      <stop offset="75%" stop-color="#fbf5b7" />
+      <stop offset="100%" stop-color="#aa771c" />
+    </linearGradient>
+    <filter id="cornerShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.9"/>
+    </filter>
+  </defs>
+  <g filter="url(#cornerShadow)" fill="none" stroke="url(#goldGradCorner)" stroke-width="1.8">
+    <!-- Cantoneira Barroca Antiga -->
+    <path d="M 6 6 L 110 6 C 85 10 50 25 35 45 C 25 60 10 85 6 110 Z" fill="rgba(20, 10, 5, 0.6)" stroke-width="2.5"/>
+    <path d="M 12 12 L 95 12 C 75 16 45 28 32 45 C 22 60 16 75 12 95 Z" stroke-dasharray="3,2" stroke-width="1.2"/>
+    <path d="M 6 6 L 50 50" stroke-width="2"/>
+    <circle cx="28" cy="28" r="8" fill="url(#goldGradCorner)" stroke="#5c4308" stroke-width="1"/>
+    <circle cx="28" cy="28" r="3" fill="#2a1408"/>
+    <!-- Arabescos e Volutas -->
+    <path d="M 45 15 C 60 15 75 22 80 32 C 85 42 75 50 65 48 C 55 46 52 35 60 30 C 65 27 70 32 68 36" />
+    <path d="M 15 45 C 15 60 22 75 32 80 C 42 85 50 75 48 65 C 46 55 35 52 30 60 C 27 65 32 70 36 68" />
+    <!-- Rebites / Florões de Canto -->
+    <circle cx="16" cy="16" r="3.5" fill="url(#goldGradCorner)" stroke="#3a2505"/>
+    <circle cx="95" cy="16" r="2.5" fill="url(#goldGradCorner)"/>
+    <circle cx="16" cy="95" r="2.5" fill="url(#goldGradCorner)"/>
+    <path d="M 22 6 L 6 22 M 35 6 L 6 35 M 48 6 L 6 48" stroke-width="0.8" opacity="0.7"/>
+  </g>
+</svg>
+
+          
+<svg class="antique-corner tr" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGradCorner" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#bf953f" />
+      <stop offset="25%" stop-color="#fcf6ba" />
+      <stop offset="50%" stop-color="#b38728" />
+      <stop offset="75%" stop-color="#fbf5b7" />
+      <stop offset="100%" stop-color="#aa771c" />
+    </linearGradient>
+    <filter id="cornerShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.9"/>
+    </filter>
+  </defs>
+  <g filter="url(#cornerShadow)" fill="none" stroke="url(#goldGradCorner)" stroke-width="1.8">
+    <!-- Cantoneira Barroca Antiga -->
+    <path d="M 6 6 L 110 6 C 85 10 50 25 35 45 C 25 60 10 85 6 110 Z" fill="rgba(20, 10, 5, 0.6)" stroke-width="2.5"/>
+    <path d="M 12 12 L 95 12 C 75 16 45 28 32 45 C 22 60 16 75 12 95 Z" stroke-dasharray="3,2" stroke-width="1.2"/>
+    <path d="M 6 6 L 50 50" stroke-width="2"/>
+    <circle cx="28" cy="28" r="8" fill="url(#goldGradCorner)" stroke="#5c4308" stroke-width="1"/>
+    <circle cx="28" cy="28" r="3" fill="#2a1408"/>
+    <!-- Arabescos e Volutas -->
+    <path d="M 45 15 C 60 15 75 22 80 32 C 85 42 75 50 65 48 C 55 46 52 35 60 30 C 65 27 70 32 68 36" />
+    <path d="M 15 45 C 15 60 22 75 32 80 C 42 85 50 75 48 65 C 46 55 35 52 30 60 C 27 65 32 70 36 68" />
+    <!-- Rebites / Florões de Canto -->
+    <circle cx="16" cy="16" r="3.5" fill="url(#goldGradCorner)" stroke="#3a2505"/>
+    <circle cx="95" cy="16" r="2.5" fill="url(#goldGradCorner)"/>
+    <circle cx="16" cy="95" r="2.5" fill="url(#goldGradCorner)"/>
+    <path d="M 22 6 L 6 22 M 35 6 L 6 35 M 48 6 L 6 48" stroke-width="0.8" opacity="0.7"/>
+  </g>
+</svg>
+
+          
+<svg class="antique-corner bl" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGradCorner" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#bf953f" />
+      <stop offset="25%" stop-color="#fcf6ba" />
+      <stop offset="50%" stop-color="#b38728" />
+      <stop offset="75%" stop-color="#fbf5b7" />
+      <stop offset="100%" stop-color="#aa771c" />
+    </linearGradient>
+    <filter id="cornerShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.9"/>
+    </filter>
+  </defs>
+  <g filter="url(#cornerShadow)" fill="none" stroke="url(#goldGradCorner)" stroke-width="1.8">
+    <!-- Cantoneira Barroca Antiga -->
+    <path d="M 6 6 L 110 6 C 85 10 50 25 35 45 C 25 60 10 85 6 110 Z" fill="rgba(20, 10, 5, 0.6)" stroke-width="2.5"/>
+    <path d="M 12 12 L 95 12 C 75 16 45 28 32 45 C 22 60 16 75 12 95 Z" stroke-dasharray="3,2" stroke-width="1.2"/>
+    <path d="M 6 6 L 50 50" stroke-width="2"/>
+    <circle cx="28" cy="28" r="8" fill="url(#goldGradCorner)" stroke="#5c4308" stroke-width="1"/>
+    <circle cx="28" cy="28" r="3" fill="#2a1408"/>
+    <!-- Arabescos e Volutas -->
+    <path d="M 45 15 C 60 15 75 22 80 32 C 85 42 75 50 65 48 C 55 46 52 35 60 30 C 65 27 70 32 68 36" />
+    <path d="M 15 45 C 15 60 22 75 32 80 C 42 85 50 75 48 65 C 46 55 35 52 30 60 C 27 65 32 70 36 68" />
+    <!-- Rebites / Florões de Canto -->
+    <circle cx="16" cy="16" r="3.5" fill="url(#goldGradCorner)" stroke="#3a2505"/>
+    <circle cx="95" cy="16" r="2.5" fill="url(#goldGradCorner)"/>
+    <circle cx="16" cy="95" r="2.5" fill="url(#goldGradCorner)"/>
+    <path d="M 22 6 L 6 22 M 35 6 L 6 35 M 48 6 L 6 48" stroke-width="0.8" opacity="0.7"/>
+  </g>
+</svg>
+
+          
+<svg class="antique-corner br" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGradCorner" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#bf953f" />
+      <stop offset="25%" stop-color="#fcf6ba" />
+      <stop offset="50%" stop-color="#b38728" />
+      <stop offset="75%" stop-color="#fbf5b7" />
+      <stop offset="100%" stop-color="#aa771c" />
+    </linearGradient>
+    <filter id="cornerShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.9"/>
+    </filter>
+  </defs>
+  <g filter="url(#cornerShadow)" fill="none" stroke="url(#goldGradCorner)" stroke-width="1.8">
+    <!-- Cantoneira Barroca Antiga -->
+    <path d="M 6 6 L 110 6 C 85 10 50 25 35 45 C 25 60 10 85 6 110 Z" fill="rgba(20, 10, 5, 0.6)" stroke-width="2.5"/>
+    <path d="M 12 12 L 95 12 C 75 16 45 28 32 45 C 22 60 16 75 12 95 Z" stroke-dasharray="3,2" stroke-width="1.2"/>
+    <path d="M 6 6 L 50 50" stroke-width="2"/>
+    <circle cx="28" cy="28" r="8" fill="url(#goldGradCorner)" stroke="#5c4308" stroke-width="1"/>
+    <circle cx="28" cy="28" r="3" fill="#2a1408"/>
+    <!-- Arabescos e Volutas -->
+    <path d="M 45 15 C 60 15 75 22 80 32 C 85 42 75 50 65 48 C 55 46 52 35 60 30 C 65 27 70 32 68 36" />
+    <path d="M 15 45 C 15 60 22 75 32 80 C 42 85 50 75 48 65 C 46 55 35 52 30 60 C 27 65 32 70 36 68" />
+    <!-- Rebites / Florões de Canto -->
+    <circle cx="16" cy="16" r="3.5" fill="url(#goldGradCorner)" stroke="#3a2505"/>
+    <circle cx="95" cy="16" r="2.5" fill="url(#goldGradCorner)"/>
+    <circle cx="16" cy="95" r="2.5" fill="url(#goldGradCorner)"/>
+    <path d="M 22 6 L 6 22 M 35 6 L 6 35 M 48 6 L 6 48" stroke-width="0.8" opacity="0.7"/>
+  </g>
+</svg>
+
+          <div class="cover-outer-frame"></div>
+          <div class="cover-inner-frame"></div>
+          
+          <div class="gold-foil-supertitle">
+            ARCHIVUM SECRETUM • RITUS VETUS OPERATIVUS
+          </div>
+
+          <div class="gold-foil-title">
+            MANUSCRITO MAÇÔNICO<br>
+            <span style="font-size: 20pt; letter-spacing: 5px;">DA PROSPERIDADE OCULTA</span>
+          </div>
+
+          <div class="gold-foil-subtitle">
+            A CIÊNCIA SAGRADA DA CONSTRUÇÃO DO IMPÉRIO MATERIAL
+          </div>
+
+          
+<svg class="master-frontispiece-svg" viewBox="0 0 700 480" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradientes Metálicos em Ouro e Bronze -->
+    <linearGradient id="goldLeaf" x1="0%" y1="0%" x2="100%" y2="80%">
+      <stop offset="0%" stop-color="#dfb76c" />
+      <stop offset="20%" stop-color="#fff2b2" />
+      <stop offset="45%" stop-color="#c99738" />
+      <stop offset="70%" stop-color="#fae896" />
+      <stop offset="90%" stop-color="#9d6d1b" />
+      <stop offset="100%" stop-color="#e8c878" />
+    </linearGradient>
+    <linearGradient id="darkGold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#a67c1e" />
+      <stop offset="50%" stop-color="#644606" />
+      <stop offset="100%" stop-color="#382502" />
+    </linearGradient>
+    <radialGradient id="deltaGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff7d6" stop-opacity="1" />
+      <stop offset="35%" stop-color="#f5cf6d" stop-opacity="0.8" />
+      <stop offset="70%" stop-color="#b8860b" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#000" stop-opacity="0" />
+    </radialGradient>
+    <filter id="goldShine" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.95"/>
+    </filter>
+    <pattern id="checkerPavement" width="30" height="15" patternUnits="userSpaceOnUse" patternTransform="rotate(0)">
+      <polygon points="0,0 15,0 7.5,15 0,15" fill="#120c06" />
+      <polygon points="15,0 30,0 22.5,15 7.5,15" fill="#f0dec1" opacity="0.85" />
+      <polygon points="22.5,15 30,15 15,15 7.5,15" fill="#20150a" />
+    </pattern>
+  </defs>
+
+  <!-- Glória Radiante / Raios de Luz -->
+  <g opacity="0.65" stroke="url(#goldLeaf)" stroke-width="1.2">
+    <!-- 32 Raios Cósmicos -->
+    <line x1="350" y1="110" x2="190" y2="20" stroke-dasharray="4,3" />
+    <line x1="350" y1="110" x2="230" y2="15" />
+    <line x1="350" y1="110" x2="270" y2="10" stroke-dasharray="6,2" />
+    <line x1="350" y1="110" x2="310" y2="8" />
+    <line x1="350" y1="110" x2="350" y2="5" stroke-width="2"/>
+    <line x1="350" y1="110" x2="390" y2="8" />
+    <line x1="350" y1="110" x2="430" y2="10" stroke-dasharray="6,2" />
+    <line x1="350" y1="110" x2="470" y2="15" />
+    <line x1="350" y1="110" x2="510" y2="20" stroke-dasharray="4,3" />
+    <line x1="350" y1="110" x2="160" y2="55" />
+    <line x1="350" y1="110" x2="540" y2="55" />
+    <line x1="350" y1="110" x2="140" y2="90" stroke-dasharray="3,3" />
+    <line x1="350" y1="110" x2="560" y2="90" stroke-dasharray="3,3" />
+    <line x1="350" y1="110" x2="150" y2="135" />
+    <line x1="350" y1="110" x2="550" y2="135" />
+  </g>
+
+  <!-- Sol Hermético à Esquerda -->
+  <g transform="translate(180, 75)" filter="url(#goldShine)">
+    <circle cx="0" cy="0" r="16" fill="url(#goldLeaf)"/>
+    <path d="M-22,0 L22,0 M0,-22 L0,22 M-15,-15 L15,15 M-15,15 L15,-15" stroke="url(#goldLeaf)" stroke-width="2"/>
+    <circle cx="0" cy="0" r="7" fill="#201005"/>
+  </g>
+
+  <!-- Lua Crescente à Direita -->
+  <g transform="translate(520, 75)" filter="url(#goldShine)">
+    <path d="M -8 -16 A 16 16 0 1 0 12 16 A 12 12 0 1 1 -8 -16 Z" fill="url(#goldLeaf)"/>
+    <!-- Estrelas circundantes -->
+    <circle cx="16" cy="-10" r="1.5" fill="url(#goldLeaf)"/>
+    <circle cx="22" cy="5" r="1.5" fill="url(#goldLeaf)"/>
+    <circle cx="14" cy="18" r="1.5" fill="url(#goldLeaf)"/>
+  </g>
+
+  <!-- Pavimento Mosaico (Perspectiva no Piso) -->
+  <g filter="url(#goldShine)">
+    <!-- Base / Patamar com 3 Degraus Iniciáticos -->
+    <polygon points="120,440 580,440 620,470 80,470" fill="#180e07" stroke="url(#goldLeaf)" stroke-width="2"/>
+    <!-- Degrau 2 -->
+    <polygon points="140,425 560,425 580,440 120,440" fill="#22140b" stroke="url(#goldLeaf)" stroke-width="1.5"/>
+    <!-- Degrau 1 com quadriculado -->
+    <polygon points="170,410 530,410 560,425 140,425" fill="#2c1a0e" stroke="url(#goldLeaf)" stroke-width="1.5"/>
+    <!-- Xadrez Maçônico Central -->
+    <path d="M 210,410 L 490,410 L 520,440 L 180,440 Z" fill="url(#checkerPavement)" stroke="url(#goldLeaf)" stroke-width="1"/>
+  </g>
+
+  <!-- Coluna BOAZ (Esquerda - B) -->
+  <g transform="translate(160, 160)" filter="url(#goldShine)">
+    <!-- Globo Terrestre sobre o Capitel -->
+    <circle cx="25" cy="15" r="18" fill="url(#darkGold)" stroke="url(#goldLeaf)" stroke-width="2"/>
+    <ellipse cx="25" cy="15" rx="18" ry="7" fill="none" stroke="url(#goldLeaf)" stroke-width="1.2"/>
+    <line x1="25" y1="-3" x2="25" y2="33" stroke="url(#goldLeaf)" stroke-width="1.2"/>
+    <!-- Capitel Dórico / Romãs -->
+    <path d="M 5,35 L 45,35 L 40,55 L 10,55 Z" fill="url(#goldLeaf)"/>
+    <circle cx="15" cy="45" r="3" fill="#8a1414"/>
+    <circle cx="25" cy="45" r="3" fill="#8a1414"/>
+    <circle cx="35" cy="45" r="3" fill="#8a1414"/>
+    <!-- Fuste da Coluna Canelado -->
+    <rect x="12" y="55" width="26" height="195" fill="url(#darkGold)" stroke="url(#goldLeaf)" stroke-width="2"/>
+    <line x1="17" y1="55" x2="17" y2="250" stroke="url(#goldLeaf)" stroke-width="1"/>
+    <line x1="22" y1="55" x2="22" y2="250" stroke="url(#goldLeaf)" stroke-width="1.2"/>
+    <line x1="28" y1="55" x2="28" y2="250" stroke="url(#goldLeaf)" stroke-width="1.2"/>
+    <line x1="33" y1="55" x2="33" y2="250" stroke="url(#goldLeaf)" stroke-width="1"/>
+    <!-- Letra B Gravada no Fuste -->
+    <circle cx="25" cy="140" r="13" fill="#170c05" stroke="url(#goldLeaf)" stroke-width="1.5"/>
+    <text x="25" y="146" font-family="'Cinzel', serif" font-size="16" font-weight="900" fill="url(#goldLeaf)" text-anchor="middle">B</text>
+    <!-- Base e Plinto da Coluna -->
+    <path d="M 7,250 L 43,250 L 48,265 L 2,265 Z" fill="url(#goldLeaf)"/>
+    <rect x="0" y="265" width="50" height="15" fill="url(#darkGold)" stroke="url(#goldLeaf)" stroke-width="1.5"/>
+  </g>
+
+  <!-- Coluna JACHIN (Direita - J) -->
+  <g transform="translate(490, 160)" filter="url(#goldShine)">
+    <!-- Esfera Celeste com Constelações sobre o Capitel -->
+    <circle cx="25" cy="15" r="18" fill="url(#darkGold)" stroke="url(#goldLeaf)" stroke-width="2"/>
+    <ellipse cx="25" cy="15" rx="7" ry="18" fill="none" stroke="url(#goldLeaf)" stroke-width="1.2"/>
+    <line x1="7" y1="15" x2="43" y2="15" stroke="url(#goldLeaf)" stroke-width="1.2"/>
+    <circle cx="20" cy="10" r="1.5" fill="#fff"/>
+    <circle cx="30" cy="20" r="1.5" fill="#fff"/>
+    <!-- Capitel Coríntio / Volutas -->
+    <path d="M 5,35 L 45,35 L 40,55 L 10,55 Z" fill="url(#goldLeaf)"/>
+    <circle cx="15" cy="45" r="3" fill="#8a1414"/>
+    <circle cx="25" cy="45" r="3" fill="#8a1414"/>
+    <circle cx="35" cy="45" r="3" fill="#8a1414"/>
+    <!-- Fuste Canelado -->
+    <rect x="12" y="55" width="26" height="195" fill="url(#darkGold)" stroke="url(#goldLeaf)" stroke-width="2"/>
+    <line x1="17" y1="55" x2="17" y2="250" stroke="url(#goldLeaf)" stroke-width="1"/>
+    <line x1="22" y1="55" x2="22" y2="250" stroke="url(#goldLeaf)" stroke-width="1.2"/>
+    <line x1="28" y1="55" x2="28" y2="250" stroke="url(#goldLeaf)" stroke-width="1.2"/>
+    <line x1="33" y1="55" x2="33" y2="250" stroke="url(#goldLeaf)" stroke-width="1"/>
+    <!-- Letra J Gravada no Fuste -->
+    <circle cx="25" cy="140" r="13" fill="#170c05" stroke="url(#goldLeaf)" stroke-width="1.5"/>
+    <text x="25" y="146" font-family="'Cinzel', serif" font-size="16" font-weight="900" fill="url(#goldLeaf)" text-anchor="middle">J</text>
+    <!-- Base e Plinto da Coluna -->
+    <path d="M 7,250 L 43,250 L 48,265 L 2,265 Z" fill="url(#goldLeaf)"/>
+    <rect x="0" y="265" width="50" height="15" fill="url(#darkGold)" stroke="url(#goldLeaf)" stroke-width="1.5"/>
+  </g>
+
+  <!-- Delta Radiante Central (Olho Onividente no Triângulo) -->
+  <g transform="translate(350, 115)" filter="url(#goldShine)">
+    <!-- Halo Luminoso de Fundo -->
+    <circle cx="0" cy="5" r="65" fill="url(#deltaGlow)"/>
+    <!-- Triângulo Sagrado com Borda Dupla -->
+    <polygon points="0,-60 68,52 -68,52" fill="#201208" stroke="url(#goldLeaf)" stroke-width="5"/>
+    <polygon points="0,-48 54,42 -54,42" fill="none" stroke="url(#goldLeaf)" stroke-width="1.5" stroke-dasharray="3,2"/>
+    <!-- O Olho da Providência -->
+    <g transform="translate(0, 15)">
+      <!-- Amêndoa / Pálpebras -->
+      <path d="M -30,0 Q 0,-20 30,0 Q 0,20 -30,0 Z" fill="#fff7e6" stroke="url(#goldLeaf)" stroke-width="2.2"/>
+      <!-- Íris e Pupila -->
+      <circle cx="0" cy="0" r="11" fill="url(#darkGold)" stroke="url(#goldLeaf)" stroke-width="1.5"/>
+      <circle cx="0" cy="0" r="5" fill="#100802"/>
+      <circle cx="-3" cy="-3" r="2" fill="#ffffff"/>
+      <!-- Raios Menores sob a pálpebra -->
+      <path d="M -15,-20 L -10,-12 M 0,-22 L 0,-13 M 15,-20 L 10,-12" stroke="url(#goldLeaf)" stroke-width="1.5"/>
+    </g>
+  </g>
+
+  <!-- O Grande Emblema Central: Esquadro, Compasso e a Letra G -->
+  <g transform="translate(350, 280)" filter="url(#goldShine)">
+    <!-- Ramos de Acácia Ornamentais nas Laterais -->
+    <path d="M -90,50 Q -110,-10 -65,-55 Q -80,-30 -70,10 Q -65,35 -90,50 Z" fill="url(#goldLeaf)" opacity="0.85"/>
+    <path d="M 90,50 Q 110,-10 65,-55 Q 80,-30 70,10 Q 65,35 90,50 Z" fill="url(#goldLeaf)" opacity="0.85"/>
+
+    <!-- O Compasso (Aberto a 60 Graus sobre o Esquadro) -->
+    <g stroke="url(#goldLeaf)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Articulação Central Superior -->
+      <circle cx="0" cy="-70" r="11" fill="url(#darkGold)" stroke-width="3"/>
+      <circle cx="0" cy="-70" r="4" fill="url(#goldLeaf)"/>
+      <!-- Braço Esquerdo do Compasso -->
+      <path d="M -3,-65 L -52,50"/>
+      <!-- Braço Direito do Compasso -->
+      <path d="M 3,-65 L 52,50"/>
+      <!-- Pontas de Aço Cinzeladas -->
+      <polygon points="-52,50 -56,62 -48,58" fill="url(#goldLeaf)"/>
+      <polygon points="52,50 48,58 56,62" fill="url(#goldLeaf)"/>
+    </g>
+
+    <!-- O Esquadro (Ângulo Reto de 90 Graus) -->
+    <g fill="url(#goldLeaf)">
+      <polygon points="0,55 -75,-20 -60,-35 0,25 60,-35 75,-20" stroke="#4a3205" stroke-width="2"/>
+      <!-- Gravações métricas / Graduações no Esquadro -->
+      <line x1="-50" y1="-5" x2="-43" y2="-12" stroke="#2a1a05" stroke-width="1.8"/>
+      <line x1="-35" y1="10" x2="-28" y2="3" stroke="#2a1a05" stroke-width="1.8"/>
+      <line x1="-20" y1="25" x2="-13" y2="18" stroke="#2a1a05" stroke-width="1.8"/>
+      <line x1="50" y1="-5" x2="43" y2="-12" stroke="#2a1a05" stroke-width="1.8"/>
+      <line x1="35" y1="10" x2="28" y2="3" stroke="#2a1a05" stroke-width="1.8"/>
+      <line x1="20" y1="25" x2="13" y2="18" stroke="#2a1a05" stroke-width="1.8"/>
+    </g>
+
+    <!-- Letra G Mística Central (Geometria / G.A.D.U. / Geração da Riqueza) -->
+    <g transform="translate(0, -5)">
+      <circle cx="0" cy="0" r="26" fill="#140903" stroke="url(#goldLeaf)" stroke-width="2.5"/>
+      <circle cx="0" cy="0" r="22" fill="none" stroke="url(#goldLeaf)" stroke-width="1" stroke-dasharray="2,2"/>
+      <text x="0" y="11" font-family="'Cinzel', serif" font-size="32" font-weight="900" fill="url(#goldLeaf)" text-anchor="middle" filter="url(#goldShine)">G</text>
+    </g>
+
+    <!-- Ferramentas Operativas Cruzadas: Maço, Cinzel e Trolha -->
+    <g transform="translate(0, 85)" opacity="0.95">
+      <!-- Régua de 24 Polegadas -->
+      <rect x="-85" y="-4" width="170" height="8" fill="url(#darkGold)" stroke="url(#goldLeaf)" stroke-width="1.2"/>
+      <line x1="-50" y1="-4" x2="-50" y2="4" stroke="url(#goldLeaf)"/>
+      <line x1="0" y1="-4" x2="0" y2="4" stroke="url(#goldLeaf)"/>
+      <line x1="50" y1="-4" x2="50" y2="4" stroke="url(#goldLeaf)"/>
+      <!-- Trolha Sagrada no Centro -->
+      <polygon points="0,-18 14,8 -14,8" fill="url(#goldLeaf)" stroke="#3a2505" stroke-width="1"/>
+      <path d="M 0,8 L 0,22 L 6,24" stroke="url(#goldLeaf)" stroke-width="2" fill="none"/>
+    </g>
+  </g>
+
+  <!-- Faixa / Flâmula Clássica em Pergaminho com Lema em Latim -->
+  <g transform="translate(350, 435)" filter="url(#goldShine)">
+    <!-- Fita com Dobras -->
+    <path d="M -220,0 L -180,-12 L 180,-12 L 220,0 L 195,18 L -195,18 Z" fill="#1a0f08" stroke="url(#goldLeaf)" stroke-width="2"/>
+    <polygon points="-220,0 -240,-8 -235,12 -220,0" fill="url(#darkGold)" stroke="url(#goldLeaf)"/>
+    <polygon points="220,0 240,-8 235,12 220,0" fill="url(#darkGold)" stroke="url(#goldLeaf)"/>
+    <text x="0" y="5" font-family="'Cinzel', serif" font-size="12" font-weight="700" letter-spacing="4" fill="url(#goldLeaf)" text-anchor="middle">
+      SAPIENTIA • FORTITUDO • PULCHRITUDO
+    </text>
+  </g>
+</svg>
+
+
+          
+<div class="wax-seal-wrapper">
+  <div class="wax-ribbon ribbon-left"></div>
+  <div class="wax-ribbon ribbon-right"></div>
+  <div class="wax-seal">
+    <div class="wax-seal-inner">
+      <div class="wax-seal-symbol">⚖</div>
+      <div class="wax-seal-text">ORD•MET•6026</div>
+    </div>
+  </div>
+</div>
+
+
+          <div class="cover-footer-antique">
+            TRANSMISSÃO PRIVADA • RESTREITA AOS VERDADEIROS INICIADOS<br>
+            <span style="font-size: 7.5pt; opacity: 0.85; letter-spacing: 2px;">ANNO LUCIS 6026 • EDIÇÃO DEFINITIVA EM XV LÂMINAS</span>
+          </div>
+        </section>
+        
+
+    <section class="page" id="pagina-i">
+      <div class="page-border-outer"></div>
+      <div class="page-border-inner"></div>
+      <div class="corner-ornament corner-tl">☩</div>
+      <div class="corner-ornament corner-tr">☩</div>
+      <div class="corner-ornament corner-bl">☩</div>
+      <div class="corner-ornament corner-br">☩</div>
+
+      <div class="header-meta">
+        <span>LÂMINA I • O UMBRAL DA INICIAÇÃO</span>
+      </div>
+
+      <div class="page-content">
+        <h2 class="page-title">Frontispício & A Advertência ao Neófito</h2>
+        <div class="page-subtitle">Silentium, Prudentia et Fortitudo</div>
+        <div class="divider">✦ ∴ ✦</div>
+        
+        <p class="no-indent"><span class="drop-cap">A</span>os olhos dos homens profanos que erram cegos pelas praças públicas do mundo, o ouro é apenas um metal vil, e a moeda, um mero instrumento de transação passageira. Eles ignoram, por cegueira da mente e fraqueza do espírito, que toda riqueza material não passa da cristalização visível de uma potência espiritual invisível. O dinheiro, antes de repousar nas arcas dos tesouros terrenos, é gerado no Templo Interior pela exata aplicação das Leis Universais da Geometria, da Retidão e da Vontade Direcionada.</p>
+
+        <p>Este manuscrito que agora tocas não foi redigido para os curiosos, nem para os amantes da ganância mesquinha que buscam enriquecimento fácil sem transformação pessoal. A Maçonaria Operativa original jamais construiu catedrais a partir do pó do acaso: cada ogiva, cada contraforte e cada abóbada exigia cálculo inflexível, sacrifício do tempo e harmonia entre os operários.</p>
+
+        <div class="quote-box">
+          "Aquele que deseja comandar a matéria deve primeiro libertar-se da servidão de seus próprios caprichos. A riqueza que não é governada pela Sabedoria transforma-se no carrasco daquele que a acumula."
+          <span class="author">— Albert Pike, Morals and Dogma</span>
+        </div>
+
+        <p>Aqui revelamos o <em>Grande Segredo da Prosperidade Construtiva</em>. Exige-se de ti três virtudes preliminares antes de transpores as próximas páginas:</p>
+
+        <ul class="axiom-list">
+          <li><strong>Silentium (O Silêncio):</strong> Não divulgarás tuas fontes de rendimento, nem teus projetos antes de estarem solidamente edificados. A energia dissipada pela vanglória é a ruína de qualquer empreendimento.</li>
+          <li><strong>Prudentia (A Prudência):</strong> O homem sábio jamais arrisca a fundação do seu templo em apostas inconsequentes. Toda expansão de patrimônio deve ser antecedida pelo prumo da segurança e do esquadro do discernimento.</li>
+          <li><strong>Fortitudo (A Fortaleza):</strong> Os ciclos de escassez e fartura regem o mundo material. Apenas o iniciado que domina sua mente permanece inabalável diante das tempestades e constrói nos tempos sombrios as fortunas dos tempos de luz.</li>
+        </ul>
+        
+      </div>
+
+      <div class="footer-meta">
+        <span>MANUSCRITO MAÇÔNICO DA PROSPERIDADE OCULTA</span>
+        <span style="font-weight: 700; font-size: 11pt;">• I •</span>
+        <span>ORDEM & EQUIDADE</span>
+      </div>
+    </section>
+    
+    <section class="page" id="pagina-ii">
+      <div class="page-border-outer"></div>
+      <div class="page-border-inner"></div>
+      <div class="corner-ornament corner-tl">☩</div>
+      <div class="corner-ornament corner-tr">☩</div>
+      <div class="corner-ornament corner-bl">☩</div>
+      <div class="corner-ornament corner-br">☩</div>
+
+      <div class="header-meta">
+        <span>LÂMINA II • A HISTÓRIA OCULTA DO PODER</span>
+      </div>
+
+      <div class="page-content">
+        <h2 class="page-title">A Linhagem dos Construtores</h2>
+        <div class="page-subtitle">Da Maçonaria Operativa ao Domínio do Capital</div>
+        <div class="divider">✦ ∴ ✦</div>
+        
+        <p class="no-indent"><span class="drop-cap">D</span>urante a Idade Média, os Mestres de Obra das guildas operativas detinham privilégios jamais concedidos aos servos ou aos nobres comuns. Eram chamados de <em>Freestone Masons</em> (pedreiros livres) porque possuíam a liberdade de transitar através das fronteiras dos reinos, isentos de tributos feudais abusivos, guardando consigo a matemática euclidiana, a trigonometria e os segredos da proporção áurea.</p>
+
+        <p>Por trás do labor físico com a pedra de cantaria, esses homens operavam o mais sublime dos mistérios herméticos: a <strong>transmutação da força bruta em valor eterno</strong>. Enquanto os reis endividavam seus impérios com guerras fúteis e aristocratas consumiam suas heranças em banquetes efêmeros, os Mestres Construtores criavam patrimônios perpétuos que resistiam aos séculos.</p>
+
+        <div class="masonic-seal">⚙</div>
+
+        <p>No século XVII, quando Elias Ashmole e outros sábios foram aceitos nas corporações de ofício — marcando a transição da Maçonaria Operativa para a Especulativa —, os instrumentos de ferro foram convertidos em símbolos de governo mental e financeiro:</p>
+
+        <p>A catedral que hoje erguemos não é de pedra e cal, mas o império de soberania de um homem livre. O templo contemporâneo é a <strong>Independência Econômica Inabalável</strong>. Quem depende do favor de tiranos, do salário esmola ou do capricho do Estado jamais será um homem livre: continuará preso às cadeias da escravidão moderna.</p>
+
+        <div class="quote-box">
+          "O iniciado não pede prosperidade como quem implora esmola aos céus; ele a ergue como quem talha a pedra com método, milímetro a milímetro, até que o santuário esteja completo."
+          <span class="author">— Manly P. Hall, The Lost Keys of Freemasonry</span>
+        </div>
+        
+      </div>
+
+      <div class="footer-meta">
+        <span>MANUSCRITO MAÇÔNICO DA PROSPERIDADE OCULTA</span>
+        <span style="font-weight: 700; font-size: 11pt;">• II •</span>
+        <span>ORDEM & EQUIDADE</span>
+      </div>
+    </section>
+    
+    <section class="page" id="pagina-iii">
+      <div class="page-border-outer"></div>
+      <div class="page-border-inner"></div>
+      <div class="corner-ornament corner-tl">☩</div>
+      <div class="corner-ornament corner-tr">☩</div>
+      <div class="corner-ornament corner-bl">☩</div>
+      <div class="corner-ornament corner-br">☩</div>
+
+      <div class="header-meta">
+        <span>LÂMINA III • A ARQUITETURA POLAR DO OURO</span>
+      </div>
+
+      <div class="page-content">
+        <h2 class="page-title">As Duas Colunas da Abundância</h2>
+        <div class="page-subtitle">Boaz (Força Produtiva) e Jachin (Estabilidade do Capital)</div>
+        <div class="divider">✦ ∴ ✦</div>
+        
+        <p class="no-indent"><span class="drop-cap">A</span>o adentrares o vestíbulo do Templo de Salomão, deparar-te-ás com duas gigantescas colunas de bronze erguidas por Hiram Abiff. À esquerda ergue-se <strong>Boaz</strong>, que significa <em>"Na Força"</em>; à direita ergue-se <strong>Jachin</strong>, que proclama <em>"Ele Estabelecerá"</em> ou <em>"Estabilidade"</em>.</p>
+
+        <p>Nenhum teto pode repousar sobre apenas uma coluna. Da mesma forma, nenhum patrimônio prospera se apoiado em apenas uma virtude. A ruína dos profanos provém de ignorarem essa dialética sagrada:</p>
+
+        <ul class="axiom-list">
+          <li><strong>A Coluna Boaz (O Fogo Ativo da Criação):</strong> É a capacidade de gerar fluxo, de produzir receita ativa, de inovar, de conquistar clientes e fechar contratos com intrepidez. É a força motriz do trabalho focado, da audácia comercial e da agressividade lúcida nos negócios. Sem Boaz, há estagnação e impotência.</li>
+          <li><strong>A Coluna Jachin (A Água Estável da Preservação):</strong> É a ciência da retenção, da alocação de ativos, do reinvestimento composto e da reserva inatacável. É a prudência que impede o homem de gastar o que ganha e o faz transformar excedente em terra, ouro e patrimônio protegido. Sem Jachin, qualquer fortuna que entra é engolida pelo ralo do consumo desenfreado.</li>
+        </ul>
+
+        <div class="quote-box">
+          "Aquele que apenas possui Boaz produz torrentes de água que vazam por terras áridas. Aquele que apenas possui Jachin guarda uma cisterna que apodrece por falta de renovação. O Mestre caminha com firmeza entre as duas colunas."
+          <span class="author">— George Oliver, The Symbolism of Masonry</span>
+        </div>
+
+        <p>Para operares a prosperidade real, teu primeiro dever é equilibrar teus pesos: nunca permitas que tua capacidade de gastar cresça na mesma proporção da tua capacidade de faturar. Boaz constrói a muralha; Jachin garante que ela jamais desmorone.</p>
+        
+      </div>
+
+      <div class="footer-meta">
+        <span>MANUSCRITO MAÇÔNICO DA PROSPERIDADE OCULTA</span>
+        <span style="font-weight: 700; font-size: 11pt;">• III •</span>
+        <span>ORDEM & EQUIDADE</span>
+      </div>
+    </section>
+    
+    <section class="page" id="pagina-iv">
+      <div class="page-border-outer"></div>
+      <div class="page-border-inner"></div>
+      <div class="corner-ornament corner-tl">☩</div>
+      <div class="corner-ornament corner-tr">☩</div>
+      <div class="corner-ornament corner-bl">☩</div>
+      <div class="corner-ornament corner-br">☩</div>
+
+      <div class="header-meta">
+        <span>LÂMINA IV • O CHÃO DO DESTINO</span>
+      </div>
+
+      <div class="page-content">
+        <h2 class="page-title">O Pavimento Mosaico</h2>
+        <div class="page-subtitle">Dominando a Roda da Fortuna e as Polaridades Financeiras</div>
+        <div class="divider">✦ ∴ ✦</div>
+        
+        <p class="no-indent"><span class="drop-cap">O</span> piso sobre o qual caminha o Mestre é composto por quadrados alternados em preto e branco: o <strong>Pavimento Mosaico</strong>. Este quadriculado não é um ornamento decorativo, mas uma das mais severas lições da ordem cósmica.</p>
+
+        <p>O quadrado branco representa a abundância, os anos de vacas gordas, o pico dos ciclos de mercado, a liquidez e a vitória. O quadrado preto representa as crises sistêmicas, a recessão, o aperto de liquidez, os prejuízos inesperados e as traições de sócios profanos.</p>
+
+        <p>O homem comum enlouquece com o Pavimento Mosaico: no quadrado branco ele se torna arrogante, esbanja seus recursos, contrai dívidas suntuosas e acredita que o sol brilhará para sempre; no quadrado preto ele entra em pânico, vende seus bens a preço de banana e rende-se à miséria moral.</p>
+
+        <div class="masonic-seal">⚖</div>
+
+        <p>O Mestre Maçom da Prosperidade Oculta pisa ambos os pisos com a mesma dignidade e serenidade:</p>
+
+        <ul class="axiom-list">
+          <li><strong>No Piso Branco:</strong> Acumula trigo, prepara as arcas de reserva, liquida passivos e estuda os pontos fracos dos seus adversários sonolentos.</li>
+          <li><strong>No Piso Preto:</strong> É quando o verdadeiro iniciado compra os ativos depreciados daqueles que sucumbiram ao desespero. Todas as dinastias maçônicas construíram seus maiores saltos de poder exatamente durante as maiores crises que assolaram o mundo.</li>
+        </ul>
+
+        <p>Aprende, pois: a crise não destrói o dinheiro; o dinheiro simplesmente troca de mãos — sai das mãos dos tolos amedrontados e marcha direto para as mãos dos iniciados preparados.</p>
+        
+      </div>
+
+      <div class="footer-meta">
+        <span>MANUSCRITO MAÇÔNICO DA PROSPERIDADE OCULTA</span>
+        <span style="font-weight: 700; font-size: 11pt;">• IV •</span>
+        <span>ORDEM & EQUIDADE</span>
+      </div>
+    </section>
+    
+    <section class="page" id="pagina-v">
+      <div class="page-border-outer"></div>
+      <div class="page-border-inner"></div>
+      <div class="corner-ornament corner-tl">☩</div>
+      <div class="corner-ornament corner-tr">☩</div>
+      <div class="corner-ornament corner-bl">☩</div>
+      <div class="corner-ornament corner-br">☩</div>
+
+      <div class="header-meta">
+        <span>LÂMINA V • A MEDIDA DO TEMPO E DO VALOR</span>
+      </div>
+
+      <div class="page-content">
+        <h2 class="page-title">A Régua de 24 Polegadas</h2>
+        <div class="page-subtitle">A Economia Esotérica do Tempo Sagrado</div>
+        <div class="divider">✦ ∴ ✦</div>
+        
+        <p class="no-indent"><span class="drop-cap">A</span> primeira ferramenta entregue ao Aprendiz é a <strong>Régua de 24 Polegadas</strong>. Diferente de outros instrumentos mecânicos, a régua mede uma grandeza que nenhum rei ou imperador pode comprar de volta: as vinte e quatro horas do dia solar.</p>
+
+        <p>A instrução original do rito divide este instrumento com precisão cirúrgica em três partes iguais de oito polegadas:</p>
+
+        <ul class="axiom-list">
+          <li><strong>As Primeiras 8 Polegadas (O Labor Nobre da Construção):</strong> Dedicadas ao trabalho produtivo, à geração de riqueza e à execução implacável das tarefas operativas sem distração mundana.</li>
+          <li><strong>As Segundas 8 Polegadas (O Repouso e a Recomposição):</strong> Destinadas ao sono restaurador e à regeneração do templo biológico, pois um corpo esgotado toma decisões financeiras desastrosas.</li>
+          <li><strong>As Terceiras 8 Polegadas (A Elevação Intelectual e Espiritual):</strong> Dedicadas ao estudo das leis, à meditação no Grande Arquiteto do Universo, ao desenvolvimento de habilidades de alto valor e ao serviço fraterno.</li>
+        </ul>
+
+        <div class="quote-box">
+          "O profano que diz 'não tenho tempo' mente para sua própria alma. Ele entrega 8 horas ao seu algoz, 6 horas à vaidade das futilidades e as restantes ao sono da ignorância. Quem não governa suas 24 polegadas é um mendigo espiritual."
+          <span class="author">— William Preston, Illustrations of Masonry</span>
+        </div>
+
+        <p>O tempo é o ouro não refinado. Se desperdiças horas preciosas consumindo entretenimento estúpido concebido para sedar as massas, estás voluntariamente assinando teu termo de indigência. Cada polegada do teu dia deve ter destino deliberado e propósito construtivo.</p>
+        
+      </div>
+
+      <div class="footer-meta">
+        <span>MANUSCRITO MAÇÔNICO DA PROSPERIDADE OCULTA</span>
+        <span style="font-weight: 700; font-size: 11pt;">• V •</span>
+        <span>ORDEM & EQUIDADE</span>
+      </div>
+    </section>
+    
+    <section class="page" id="pagina-vi">
+      <div class="page-border-outer"></div>
+      <div class="page-border-inner"></div>
+      <div class="corner-ornament corner-tl">☩</div>
+      <div class="corner-ornament corner-tr">☩</div>
+      <div class="corner-ornament corner-bl">☩</div>
+      <div class="corner-ornament corner-br">☩</div>
+
+      <div class="header-meta">
+        <span>LÂMINA VI • A TRANSMUTAÇÃO DO CARÁTER</span>
+      </div>
+
+      <div class="page-content">
+        <h2 class="page-title">O Malhete e o Cinzel</h2>
+        <div class="page-subtitle">A Lapidação da Pedra Bruta da Escassez</div>
+        <div class="divider">✦ ∴ ✦</div>
+        
+        <p class="no-indent"><span class="drop-cap">T</span>odo homem nasce como uma <strong>Pedra Bruta</strong>: disforme, áspera, repleta de arestas pontiagudas, medos herdados dos antepassados e crenças rasteiras de miséria. A sociedade profana ensina que ser rico é pecado, que o dinheiro corrompe o homem justo e que a pobreza é virtude.</p>
+
+        <p>Essas mentiras foram forjadas por tiranos medievais para manter os súditos obedientes em seus casebres enquanto a corte acumulava arcas de ouro e terras incontáveis.</p>
+
+        <p>Para extirpar essa ferrugem mental, o iniciado maneja o <strong>Malhete</strong> (a força da vontade inflexível) e o <strong>Cinzel</strong> (a acuidade do intelecto refinado):</p>
+
+        <div class="masonic-seal">⚒</div>
+
+        <ul class="axiom-list">
+          <li><strong>O Golpe no Medo do Fracasso:</strong> O cinzel deve decepar a paralisia diante do risco calculado. O homem que teme perder jamais terá a têmpera para vencer.</li>
+          <li><strong>O Golpe na Culpa do Ganho:</strong> O dinheiro em mãos do homem vil torna-se instrumento de destruição; nas mãos do Justo e Perfeito Construtor, ele constrói escolas, protege famílias, financia a ciência e assegura a liberdade da Ordem.</li>
+          <li><strong>A Pedra Cúbica Polida:</strong> Quando todas as arestas de preguiça, vitimismo e indisciplina são arrancadas pela força do Malhete, a alma atinge a geometria do Cubo Perfeito. Um cubo assenta-se com solidez sobre qualquer uma de suas faces. Qualquer que seja o revés, o homem lapidado permanece de pé.</li>
+        </ul>
+        
+      </div>
+
+      <div class="footer-meta">
+        <span>MANUSCRITO MAÇÔNICO DA PROSPERIDADE OCULTA</span>
+        <span style="font-weight: 700; font-size: 11pt;">• VI •</span>
+        <span>ORDEM & EQUIDADE</span>
+      </div>
+    </section>
+    
+    <section class="page" id="pagina-vii">
+      <div class="page-border-outer"></div>
+      <div class="page-border-inner"></div>
+      <div class="corner-ornament corner-tl">☩</div>
+      <div class="corner-ornament corner-tr">☩</div>
+      <div class="corner-ornament corner-bl">☩</div>
+      <div class="corner-ornament corner-br">☩</div>
+
+      <div class="header-meta">
+        <span>LÂMINA VII • AS COORDENADAS DA JUSTIÇA</span>
+      </div>
+
+      <div class="page-content">
+        <h2 class="page-title">O Nível e o Prumo</h2>
+        <div class="page-subtitle">A Lei da Gravidade Moral e Equidade nas Transações</div>
+        <div class="divider">✦ ∴ ✦</div>
+        
+        <p class="no-indent"><span class="drop-cap">D</span>ois grandes instrumentos governam a ação do Segundo Vigilante e do Primeiro Vigilante em Loja: o <strong>Prumo</strong> e o <strong>Nível</strong>.</p>
+
+        <p>O <strong>Prumo</strong> é a linha vertical que pende do zênite ao centro da Terra pela força invariável da gravidade. Ele simboliza a retidão intransigente de conduta. No mundo dos negócios, o Prumo é a tua palavra empenhada. Os maiores impérios comerciais construídos por iniciados através dos séculos tinham como lema o aperto de mão inviolável. Se tua reputação for vertical, as oportunidades virão bater à tua porta sem que precises persegui-las.</p>
+
+        <p>O <strong>Nível</strong> é a linha horizontal da perfeita igualdade. Ele nos recorda que todos os homens vieram do mesmo pó e retornarão ao mesmo barro. Nas transações materiais, o Nível ensina a <em>Lei da Troca Justa</em>:</p>
+
+        <div class="quote-box">
+          "Jamais enriqueças através do roubo velado ou da lesão do teu próximo. O ganho desonesto carrega em si a semente da própria desintegração cósmica. A única prosperidade que perdura por gerações é aquela em que o valor que tu entregas supera em muito o dinheiro que recebes."
+          <span class="author">— Tradicional Catecismo do Grau de Companheiro</span>
+        </div>
+
+        <p>Se venderes um bem ou serviço por dez moedas de prata, certifica-te de que a utilidade real que o comprador recebeu vale cem moedas em sua vida. Quando operares nessa frequência de sobrevalor, a riqueza virá a ti como um rio caudaloso que busca o oceano.</p>
+        
+      </div>
+
+      <div class="footer-meta">
+        <span>MANUSCRITO MAÇÔNICO DA PROSPERIDADE OCULTA</span>
+        <span style="font-weight: 700; font-size: 11pt;">• VII •</span>
+        <span>ORDEM & EQUIDADE</span>
+      </div>
+    </section>
+    
+    <section class="page" id="pagina-viii">
+      <div class="page-border-outer"></div>
+      <div class="page-border-inner"></div>
+      <div class="corner-ornament corner-tl">☩</div>
+      <div class="corner-ornament corner-tr">☩</div>
+      <div class="corner-ornament corner-bl">☩</div>
+      <div class="corner-ornament corner-br">☩</div>
+
+      <div class="header-meta">
+        <span>LÂMINA VIII • A UNIÃO DOS MATERIAIS</span>
+      </div>
+
+      <div class="page-content">
+        <h2 class="page-title">A Trolha dos Mestres</h2>
+        <div class="page-subtitle">A Argamassa da Fidelidade e as Alianças Silenciosas</div>
+        <div class="divider">✦ ∴ ✦</div>
+        
+        <p class="no-indent"><span class="drop-cap">N</span>enhum bloco de granito, por mais perfeitamente esculpido que seja, consegue formar um castelo isoladamente. Pedras amontoadas sem cimento tombam ao menor sopro do vendaval. É por isso que o símbolo supremo do Grau de Mestre é a <strong>Trolha</strong>.</p>
+
+        <p>A trolha é o instrumento destinado a espalhar a argamassa do afeto fraterno, da lealdade inquebrável e da fidelidade mútua entre aqueles que comungam do mesmo propósito.</p>
+
+        <p>O maior erro dos profanos que tentam enriquecer é o isolamento solitário do lobo desconfiado. Eles não confiam em ninguém e ninguém neles confia. Não compreendem que todo grande capital é uma construção coletiva orquestrada em silêncio:</p>
+
+        <div class="masonic-seal">☩</div>
+
+        <ul class="axiom-list">
+          <li><strong>O Pacto de Silêncio nos Negócios:</strong> Os membros da cadeia de união trocam informações privilegiadas de mercado, protegem-se mutuamente contra armadilhas e direcionam oportunidades comerciais prioritárias aos seus irmãos de ofício.</li>
+          <li><strong>A Argamassa que Tapa as Rachaduras:</strong> Quando um parceiro leal enfrenta dificuldades temporárias de liquidez, o verdadeiro Mestre não o executa friamente; estende-lhe a régua e o ampara com a trolha, pois sabe que a força da muralha reside na união indivisível de suas partes.</li>
+        </ul>
+
+        <p>Aprende a selecionar três aliados de ferro que possuam habilidades complementares às tuas. Aplica entre vós a trolha da integridade. Um grupo de quatro homens unidos por propósito inflexível governa uma cidade inteira sem que o povo jamais saiba quem assina as diretrizes.</p>
+        
+      </div>
+
+      <div class="footer-meta">
+        <span>MANUSCRITO MAÇÔNICO DA PROSPERIDADE OCULTA</span>
+        <span style="font-weight: 700; font-size: 11pt;">• VIII •</span>
+        <span>ORDEM & EQUIDADE</span>
+      </div>
+    </section>
+    
+    <section class="page" id="pagina-ix">
+      <div class="page-border-outer"></div>
+      <div class="page-border-inner"></div>
+      <div class="corner-ornament corner-tl">☩</div>
+      <div class="corner-ornament corner-tr">☩</div>
+      <div class="corner-ornament corner-bl">☩</div>
+      <div class="corner-ornament corner-br">☩</div>
+
+      <div class="header-meta">
+        <span>LÂMINA IX • O CIRCUITO FECHADO DA FORÇA</span>
+      </div>
+
+      <div class="page-content">
+        <h2 class="page-title">A Corda de 81 Nós</h2>
+        <div class="page-subtitle">A Ciência Oculta das Redes de Influência e Capital Social</div>
+        <div class="divider">✦ ∴ ✦</div>
+        
+        <p class="no-indent"><span class="drop-cap">C</span>ontornando o alto das paredes do Templo Maçônico repousa a <strong>Corda de 81 Nós</strong> (ou Corda de Amor), cujas extremidades terminam em borlas pendentes nos cantos do Ocidente. Oitenta e um é o quadrado sagrado de nove (9 × 9), o número da plenitude do ciclo criativo.</p>
+
+        <p>Cada nó na corda representa um elo vivo, uma conexão deliberada, um ponto nodal de poder e influência. Esta é a mais pura representação ancestral do <em>Network de Alta Fidelidade</em>.</p>
+
+        <p>O homem comum coleciona contatos vazios como quem junta folhas secas no outono. O Mestre cria nós estratégicos:</p>
+
+        <div class="quote-box">
+          "Dize-me com quem te unes na câmara das deliberações e te direi até onde alcançará teu domínio. A força de um homem não reside nos músculos do seu braço, mas na extensão da cadeia invisível que atende ao seu chamado."
+          <span class="author">— Instrução Reservada dos Mestres Instalados</span>
+        </div>
+
+        <p>Para tecer tua própria Corda de Poder financeiro, deves mapear com clareza matemática os <strong>Nove Pilares da Sociedade</strong>:</p>
+
+        <ul class="axiom-list">
+          <li>1. O Guardião das Leis (advogados, juízes e juristas de confiança);</li>
+          <li>2. O Controlador dos Fluxos (contadores, auditores e banqueiros astutos);</li>
+          <li>3. O Forjador de Narrativas (comunicadores, estrategistas e oradores persuasivos);</li>
+          <li>4. Os Guardiões da Técnica (engenheiros, arquitetos e desenvolvedores de ponta).</li>
+        </ul>
+
+        <p>Nunca busques favores sem antes depositar valor no poço da aliança. Sê aquele que resolve os problemas dos nós superiores, e os nós superiores abrirão as portas de bronze das grandes riquezas para ti.</p>
+        
+      </div>
+
+      <div class="footer-meta">
+        <span>MANUSCRITO MAÇÔNICO DA PROSPERIDADE OCULTA</span>
+        <span style="font-weight: 700; font-size: 11pt;">• IX •</span>
+        <span>ORDEM & EQUIDADE</span>
+      </div>
+    </section>
+    
+    <section class="page" id="pagina-x">
+      <div class="page-border-outer"></div>
+      <div class="page-border-inner"></div>
+      <div class="corner-ornament corner-tl">☩</div>
+      <div class="corner-ornament corner-tr">☩</div>
+      <div class="corner-ornament corner-bl">☩</div>
+      <div class="corner-ornament corner-br">☩</div>
+
+      <div class="header-meta">
+        <span>LÂMINA X • A GEOMETRIA VIVA DA EXPANSÃO</span>
+      </div>
+
+      <div class="page-content">
+        <h2 class="page-title">A Estrela Flamígera e a Razão Áurea</h2>
+        <div class="page-subtitle">O Número Phi (Φ) Aplicado à Escala dos Negócios</div>
+        <div class="divider">✦ ∴ ✦</div>
+        
+        <p class="no-indent"><span class="drop-cap">S</span>uspensa no centro da abóbada do Templo brilha a <strong>Estrela Flamígera</strong> de cinco pontas, exibindo em seu coração a sagrada letra 'G'. No pentagrama reside o maior segredo geométrico dos pitagóricos e dos pedreiros operativos: a <strong>Proporção Áurea (Phi = 1,618...)</strong>.</p>
+
+        <p>A Razão Áurea é a matemática com que a natureza expande galáxias, desenha conchas marinhas, ramifica árvores e multiplica células vivas. Qualquer projeto humano que contrarie essa proporção divina está condenado a uma morte precoce por asfixia ou gigantismo insustentável.</p>
+
+        <p>No domínio do capital, a Estrela Flamígera dita as leis de crescimento escalável dos negócios:</p>
+
+        <div class="masonic-seal">✡</div>
+
+        <ul class="axiom-list">
+          <li><strong>O Princípio da Reinvestimento Áureo:</strong> De cada ciclo de lucro líquido apurado, jamais consumas mais que 38,2% para tua subsistência terrena. Os restantes 61,8% devem ser obrigatoriamente devolvidos ao sistema construtivo como semente de expansão e reforço das muralhas de ativos.</li>
+          <li><strong>A Harmonia da Escala:</strong> Um negócio não deve crescer por inchaço descontrolado de despesas operacionais. A expansão orgânica deve respeitar a espiral de Fibonacci: cada novo passo deve ser sustentado pela soma dos dois passos anteriores já consolidados e lucrativos.</li>
+        </ul>
+
+        <p>Quando teus negócios dançarem de acordo com a métrica da Estrela Flamígera, o crescimento deixará de ser um esforço titânico de desgaste e se tornará um fluxo natural e inevitável da harmonia universal.</p>
+        
+      </div>
+
+      <div class="footer-meta">
+        <span>MANUSCRITO MAÇÔNICO DA PROSPERIDADE OCULTA</span>
+        <span style="font-weight: 700; font-size: 11pt;">• X •</span>
+        <span>ORDEM & EQUIDADE</span>
+      </div>
+    </section>
+    
+    <section class="page" id="pagina-xi">
+      <div class="page-border-outer"></div>
+      <div class="page-border-inner"></div>
+      <div class="corner-ornament corner-tl">☩</div>
+      <div class="corner-ornament corner-tr">☩</div>
+      <div class="corner-ornament corner-bl">☩</div>
+      <div class="corner-ornament corner-br">☩</div>
+
+      <div class="header-meta">
+        <span>LÂMINA XI • A TRAGÉDIA DE HIRAM NO PLANO MATERIAL</span>
+      </div>
+
+      <div class="page-content">
+        <h2 class="page-title">Os Três Golpes da Ignorância</h2>
+        <div class="page-subtitle">Como os Homens Profanos Assassinam Sua Própria Fortuna</div>
+        <div class="divider">✦ ∴ ✦</div>
+        
+        <p class="no-indent"><span class="drop-cap">A</span> lenda central que todo Mestre Maçom vivencia no ápice de sua elevação é o martírio de <strong>Hiram Abiff</strong>. O Mestre Arquiteto foi abordado sucessivamente nas três portas do Templo por três companheiros renegados que exigiam a Palavra de Mestre sem terem trabalhado o tempo necessário para merecê-la.</p>
+
+        <p>Esses três algozes — <em>Jubela</em>, <em>Jubelo</em> e <em>Jubelum</em> — continuam vivos hoje no coração dos homens medíocres, desferindo os três golpes fatais que assassinam qualquer possibilidade de riqueza duradoura:</p>
+
+        <ul class="axiom-list">
+          <li><strong>O Primeiro Golpe (A Ignorância Financeira na Garganta):</strong> Desferido pela Régua de 24 Polegadas. É a incapacidade de ler um balanço, a cegueira sobre juros compostos, impostos e inflação. O homem ignorante asfixia sua renda viva pagando tributos idiotas e enriquecendo bancos parasitas com dívidas de consumo.</li>
+          <li><strong>O Segundo Golpe (A Cupidez e Impaciência no Coração):</strong> Desferido pelo Esquadro de Ferro. É a ganância dos tolos que querem pular etapas, caindo em esquemas fáceis, apostas modernas, pirâmides e promessas de retorno sem esforço real. O coração ambicioso sem sabedoria é esmagado na porta meridional.</li>
+          <li><strong>O Terceiro Golpe (A Arrogância e Teimosia na Fronte):</strong> Desferido pelo pesado Malhete de fundição. Quando o homem obtém os primeiros sucessos financeiros, sua vaidade cega-o. Crê que sabe tudo, ignora os conselhos dos veteranos, desafia as leis de mercado e recebe o golpe de misericórdia que o atira na vala da falência completa.</li>
+        </ul>
+
+        <p>Examina teus atos diariamente no silêncio da noite. Se permitires que algum desses três traidores habite teu peito, teu império ruirá antes mesmo de atingir o terceiro piso.</p>
+        
+      </div>
+
+      <div class="footer-meta">
+        <span>MANUSCRITO MAÇÔNICO DA PROSPERIDADE OCULTA</span>
+        <span style="font-weight: 700; font-size: 11pt;">• XI •</span>
+        <span>ORDEM & EQUIDADE</span>
+      </div>
+    </section>
+    
+    <section class="page" id="pagina-xii">
+      <div class="page-border-outer"></div>
+      <div class="page-border-inner"></div>
+      <div class="corner-ornament corner-tl">☩</div>
+      <div class="corner-ornament corner-tr">☩</div>
+      <div class="corner-ornament corner-bl">☩</div>
+      <div class="corner-ornament corner-br">☩</div>
+
+      <div class="header-meta">
+        <span>LÂMINA XII • A LEVANTADA PELOS CINCO PONTOS</span>
+      </div>
+
+      <div class="page-content">
+        <h2 class="page-title">A Ressurreição de Hiram</h2>
+        <div class="page-subtitle">A Doutrina do Renascimento Financeiro após a Queda</div>
+        <div class="divider">✦ ∴ ✦</div>
+        
+        <p class="no-indent"><span class="drop-cap">M</span>as a morte não tem a palavra final na tradição dos Construtores. O corpo de Hiram foi sepultado sob uma colina árida, marcado apenas por um ramo verde de <strong>Acácia</strong>. Quando os Mestres enviados pelo Rei Salomão encontraram o túmulo, a carne já se desprendia dos ossos e a desesperança pairava no ar.</p>
+
+        <p>Foi então que o Rei aplicou o <strong>Toque do Leão de Judá</strong>, ressuscitando o Mestre caído através dos <em>Cinco Pontos Perfeitos de Companheirismo</em>. Esta é a mais profunda chave esotérica para o homem que sofreu perdas catastróficas, quebrou empresas ou viu seu patrimônio evaporar nas mãos do destino:</p>
+
+        <div class="masonic-seal">☤</div>
+
+        <ul class="axiom-list">
+          <li><strong>1. Pé com Pé (Passos Firme na Nova Realidade):</strong> Aceitação implacável da derrota presente sem autopiedade. Os pés assentam-se no chão da verdade, encarando credores e realidades sem fugas mentais.</li>
+          <li><strong>2. Joelho com Joelho (Humildade e Reavaliação):</strong> Inclinar-se diante do Grande Arquiteto para reconhecer os erros de julgamento que provocaram a ruína anterior. Toda quebra é precedida por cegueira vaidosa.</li>
+          <li><strong>3. Peito com Peito (O Segredo Guardado):</strong> A determinação silenciosa que arde no peito. Não reveles ao mundo teu plano de contra-ataque até que ele esteja em marcha vitoriosa.</li>
+          <li><strong>4. Mão com Mão (A Restauração do Crédito Moral):</strong> Honrar cada centavo devido, cumprir cada palavra assumida, restabelecendo a confiança daqueles que detêm o capital.</li>
+          <li><strong>5. Face a Face (A Visão Compartilhada):</strong> Falar ao ouvido dos sábios, absorvendo as instruções dos Mestres que já atravessaram o vale da quebra e voltaram cem vezes mais poderosos.</li>
+        </ul>
+
+        <p>O ramo de Acácia simboliza a alma que jamais se rende à derrota temporária. Quem conhece este mistério pode perder todo o ouro que possui num dia, e em poucos giros do sol erguerá um império dez vezes maior sobre as cinzas do passado.</p>
+        
+      </div>
+
+      <div class="footer-meta">
+        <span>MANUSCRITO MAÇÔNICO DA PROSPERIDADE OCULTA</span>
+        <span style="font-weight: 700; font-size: 11pt;">• XII •</span>
+        <span>ORDEM & EQUIDADE</span>
+      </div>
+    </section>
+    
+    <section class="page" id="pagina-xiii">
+      <div class="page-border-outer"></div>
+      <div class="page-border-inner"></div>
+      <div class="corner-ornament corner-tl">☩</div>
+      <div class="corner-ornament corner-tr">☩</div>
+      <div class="corner-ornament corner-bl">☩</div>
+      <div class="corner-ornament corner-br">☩</div>
+
+      <div class="header-meta">
+        <span>LÂMINA XIII • O EPICENTRO DA LUZ</span>
+      </div>
+
+      <div class="page-content">
+        <h2 class="page-title">A Sagrada Letra 'G'</h2>
+        <div class="page-subtitle">Geometria, Geração e Gnose do Fluxo Monetário</div>
+        <div class="divider">✦ ∴ ✦</div>
+        
+        <p class="no-indent"><span class="drop-cap">N</span>enhum símbolo intriga mais os observadores do que a letra <strong>'G'</strong> cintilando no interior do Esquadro e do Compasso. Aos aprendizes diz-se que significa <em>Geometria</em>; aos companheiros ensina-se que significa <em>Gnose</em> (conhecimento interior) e <em>Geração</em> (o princípio reprodutivo universal).</p>
+
+        <p>No mistério operativo da riqueza, o 'G' encerra a fórmula viva de como o valor monetário se multiplica através dos canais de civilização:</p>
+
+        <div class="quote-box">
+          "A Geometria é a raiz de todas as ciências. Deus geometriza em cada flor e em cada galáxia. Aquele que domina as linhas e ângulos das trocas comerciais governa o destino dos povos sem usar espadas."
+          <span class="author">— Anderson's Constitutions of 1723</span>
+        </div>
+
+        <ul class="axiom-list">
+          <li><strong>Geometria do Mercado (Distribuição e Escala):</strong> O dinheiro não flui em círculos fechados e aleatórios; ele obedece a gradientes de pressão e utilidade. Flui sempre de quem gera menor valor agregado para quem domina os gargalos de distribuição e a síntese do conhecimento. Posiciona-te no nó central da teia geométrica de troca, e todo o fluxo passará pelas tuas mãos.</li>
+          <li><strong>Geração Contínua de Riqueza:</strong> Nunca vivas do capital principal. O capital imobilizado é matéria morta; o capital inteligente é um organismo vivo que gera descendentes. Cria fontes perpétuas de dividendos, royalties, aluguéis e lucros operacionais que se reproduzam dia e noite, independente do teu esforço muscular.</li>
+          <li><strong>Gnose Financeira (O Olhar Invisível):</strong> Aprende a enxergar as marés monetárias mundiais antes que o homem comum as perceba nas manchetes dos jornais sensacionalistas. Quando o fato sai na notícia profana, o Mestre já colheu os lucros e transferiu seus navios para outro porto seguro.</li>
+        </ul>
+        
+      </div>
+
+      <div class="footer-meta">
+        <span>MANUSCRITO MAÇÔNICO DA PROSPERIDADE OCULTA</span>
+        <span style="font-weight: 700; font-size: 11pt;">• XIII •</span>
+        <span>ORDEM & EQUIDADE</span>
+      </div>
+    </section>
+    
+    <section class="page" id="pagina-xiv">
+      <div class="page-border-outer"></div>
+      <div class="page-border-inner"></div>
+      <div class="corner-ornament corner-tl">☩</div>
+      <div class="corner-ornament corner-tr">☩</div>
+      <div class="corner-ornament corner-bl">☩</div>
+      <div class="corner-ornament corner-br">☩</div>
+
+      <div class="header-meta">
+        <span>LÂMINA XIV • A HERMÉTICA DO PATRIMÔNIO</span>
+      </div>
+
+      <div class="page-content">
+        <h2 class="page-title">O Selo de Salomão & Os Ativos Perpétuos</h2>
+        <div class="page-subtitle">A Blindagem do Templo contra a Pilhagem Mundana</div>
+        <div class="divider">✦ ∴ ✦</div>
+        
+        <p class="no-indent"><span class="drop-cap">O</span> <strong>Selo de Salomão</strong> — o hexagrama formado pelo entrelaçamento harmônico de dois triângulos equiláteros — encerra o axioma hermético primordial: <em>"O que está em cima é como o que está embaixo"</em>. O triângulo que aponta para o céu representa o Fogo e o Ar (visão, ambição e estratégia intelectual); o triângulo que aponta para a terra representa a Água e a Terra (bens tangíveis, propriedades físicas e alicerces legais).</p>
+
+        <p>Muitos constroem impérios impressionantes no ar, mas deixam de fincar as estacas na terra firme, sucumbindo à pilhagem de governos confiscadores, processos predatórios e divórcios litigiosos fabricados pela imprudência.</p>
+
+        <div class="masonic-seal">✡</div>
+
+        <p>A sabedoria salomônica da blindagem perpétua exige a aplicação rigorosa do <strong>Triângulo Terrestre de Defesa</strong>:</p>
+
+        <ul class="axiom-list">
+          <li><strong>A Dissociação entre Propriedade e Posse:</strong> O Mestre nada tem em seu nome individual perante os tribunais profanos, mas controla todas as entidades que custodiam os ativos. "Não possuas nada; controla tudo através da estrutura corporativa correta."</li>
+          <li><strong>A Diversificação Tripartite de Jurisdições:</strong> Mantém tuas operações de geração de riqueza onde a energia econômica for abundante; custodia tuas reservas de proteção em jurisdições de estrita segurança jurídica e confidencialidade; goza teus rendimentos onde a paz e a liberdade forem mais plenas.</li>
+          <li><strong>A Custódia de Bens Reais Inatacáveis:</strong> Ouro físico fora do circuito bancário central, terras férteis produtivas, propriedades imobiliárias com posse inquestionável e direitos intelectuais perpétuos. As moedas de papel passam e desabam em hiperinflações; os bens fundamentais atravessam séculos intactos.</li>
+        </ul>
+        
+      </div>
+
+      <div class="footer-meta">
+        <span>MANUSCRITO MAÇÔNICO DA PROSPERIDADE OCULTA</span>
+        <span style="font-weight: 700; font-size: 11pt;">• XIV •</span>
+        <span>ORDEM & EQUIDADE</span>
+      </div>
+    </section>
+    
+    <section class="page" id="pagina-xv">
+      <div class="page-border-outer"></div>
+      <div class="page-border-inner"></div>
+      <div class="corner-ornament corner-tl">☩</div>
+      <div class="corner-ornament corner-tr">☩</div>
+      <div class="corner-ornament corner-bl">☩</div>
+      <div class="corner-ornament corner-br">☩</div>
+
+      <div class="header-meta">
+        <span>LÂMINA XV • A TRANSMISSÃO DA CHAVE</span>
+      </div>
+
+      <div class="page-content">
+        <h2 class="page-title">O Juramento da Prosperidade</h2>
+        <div class="page-subtitle">O Testamento do Mestre Construtor</div>
+        <div class="divider">✦ ∴ ✦</div>
+        
+        <p class="no-indent"><span class="drop-cap">C</span>hegaste ao termo da décima quinta lâmina deste manuscrito venerável. Diante de ti repousam agora as ferramentas que ergueram as maiores riquezas e governaram as dinastias mais longevas da história humana. Mas atenta bem: o conhecimento sem a pedra cinzelada pela ação prática é veneno que incha o ego e esteriliza o espírito.</p>
+
+        <p>De pé e à ordem perante tua própria consciência e perante o Grande Arquiteto do Universo, assume este solene compromisso para a edificação da tua nova vida:</p>
+
+        <div class="quote-box" style="border: 2px solid #8b6b23; background: rgba(139,107,35,0.06); padding: 20px;">
+          "Eu juro, sob a abóbada estelar e perante as Colunas de Salomão, que não mais viverei na vileza da escravidão financeira, nem mendigarei a segurança aos pés dos tiranos profanos. Manejarei o Esquadro da Retidão em todos os meus acordos; empunharei a Régua de 24 Polegadas com disciplina férrea; e erguerei meu templo de soberania material e espiritual tijolo sobre tijolo, para que minha casa jamais desmorone e minha descendência prospere na Luz da Verdade."
+        </div>
+
+        <p>A partir deste instante, tu deixaste de ser um mero passageiro do destino dos homens fracos. Tu és um <strong>Construtor Soberano</strong>. Vai para o canteiro das obras terrenas, trabalha com método, guarda o silêncio devido aos profanos e colhe os frutos dourados que a Ordem reserva aos seus verdadeiros e fiéis operários.</p>
+
+        <div class="divider" style="margin-top: 35px;">✦ ∴ ✦</div>
+
+        <div style="text-align: center; font-family: 'Cinzel', serif; font-size: 13pt; letter-spacing: 4px; color: #8a1414; margin-top: 20px; font-weight: 700;">
+          SOLI DEO GLORIA • CONSUMMATUM EST<br>
+          <span style="font-size: 9pt; color: #8b6b23; letter-spacing: 2px;">ASSINADO NO RETRATO OCULTO DO TEMPLO • ∴</span>
+        </div>
+        
+      </div>
+
+      <div class="footer-meta">
+        <span>MANUSCRITO MAÇÔNICO DA PROSPERIDADE OCULTA</span>
+        <span style="font-weight: 700; font-size: 11pt;">• XV •</span>
+        <span>ORDEM & EQUIDADE</span>
+      </div>
+    </section>
+    
+  </div>
+</body>
+</html>
