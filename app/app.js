@@ -1478,7 +1478,7 @@ async function authenticateGateLogin() {
   } else {
     if (statusMsg) {
       statusMsg.className = "text-xs text-center min-h-[20px] font-bold text-rose-400";
-      statusMsg.innerHTML = `E-mail não localizado no banco de dados. <a href="https://go.perfectpay.com.br/PPU38CQHUO7" target="_blank" class="underline text-gold-400">Garanta seu acesso aqui</a>`;
+      statusMsg.innerHTML = `E-mail não localizado no banco de dados. <a href="https://pay.kirvano.com/1fdcf9d3-915e-432f-9046-cd2285db206e" target="_blank" class="underline text-gold-400">Garanta seu acesso aqui</a>`;
     }
   }
 
