@@ -61,7 +61,69 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="app.css?v=1795415601">
+  <link rel="stylesheet" href="app.css?v=1795415683">
+
+  <style>
+    /* CSS CRÍTICO DE CONTINGÊNCIA - GARANTE QUE A TELA NUNCA FIQUE PRETA OU VAZIA */
+    html, body {
+      background-color: #070709 !important;
+      color: #e5e7eb !important;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+    }
+    #vipLoginGate {
+      position: fixed !important;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(7, 7, 9, 0.98) !important;
+      z-index: 99999 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 16px;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    .gate-box {
+      width: 100%;
+      max-width: 420px;
+      background: #0f1118 !important;
+      border: 1px solid rgba(212, 175, 55, 0.4) !important;
+      border-radius: 24px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 0 50px rgba(0,0,0,0.8);
+      box-sizing: border-box;
+    }
+    .gate-input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: #070709;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: #fff;
+      font-size: 15px;
+      margin-top: 8px;
+      margin-bottom: 16px;
+    }
+    .gate-btn {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #d4af37, #f3e5ab, #d4af37);
+      color: #000;
+      font-weight: 900;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+
 </head>
 <body class="bg-dark-950 text-gray-200 font-sans antialiased min-h-screen flex flex-col pb-24 sm:pb-12 selection:bg-gold-500/20 selection:text-gold-400">
 
@@ -71,7 +133,7 @@
     <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gold-500/15 via-dark-950/80 to-dark-950"></div>
     <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:24px_24px]"></div>
 
-    <div class="relative w-full max-w-md rounded-3xl p-7 sm:p-9 border border-gold-500/40 bg-[#0b0c10]/95 shadow-[0_0_50px_rgba(212,175,55,0.15)] text-center">
+    <div class="gate-box relative w-full max-w-md rounded-3xl p-7 sm:p-9 border border-gold-500/40 bg-[#0b0c10]/95 shadow-[0_0_50px_rgba(212,175,55,0.15)] text-center">
       
       <!-- Brasão Oficial Cúpula 33 -->
       <div class="relative w-20 h-20 mx-auto mb-5">
@@ -98,7 +160,7 @@
             <i data-lucide="mail" class="w-4 h-4 text-gray-500 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
             <input
               type="email"
-              id="gateEmailInput"
+              id="gateEmailInput" class="gate-input w-full pl-10 pr-4 py-3 rounded-xl bg-dark-900 border border-gold-500/30 text-xs sm:text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400/50 transition shadow-inner"
               placeholder="seu.email@exemplo.com"
               autocomplete="email"
               onkeydown="if(event.key === 'Enter') authenticateGateLogin()"
@@ -108,7 +170,7 @@
         </div>
 
         <button
-          id="gateSubmitBtn"
+          id="gateSubmitBtn" class="gate-btn w-full py-3.5 rounded-xl bg-gradient-to-r from-gold-500 via-amber-400 to-gold-500 text-black font-black text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
           onclick="authenticateGateLogin()"
           class="w-full py-3.5 rounded-xl bg-gradient-to-r from-gold-500 via-amber-400 to-gold-500 text-black font-black text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
         >
@@ -132,7 +194,7 @@
   </div>
 
   <!-- Lucide Icon Renderer & App Script -->
-  <script src="app.js?v=1795415601"></script>
+  <script src="app.js?v=1795415683"></script>
   <script>
     // Forçar limpeza de caches locais em celulares iOS / Safari / Chrome Mobile
     if ('serviceWorker' in navigator) {
