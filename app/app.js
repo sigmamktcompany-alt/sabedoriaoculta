@@ -1248,7 +1248,9 @@ const MASTER_ALLOWLIST = [
   "suportesabedoriaoculta@gmail.com",
   "admin@cupula33.com",
   "sigmamarketing@gmail.com",
-  "teste@cupula33.com"
+  "teste@cupula33.com",
+  "testealuno@gmail.com",
+  "cliente@example.com"
 ];
 
 function checkVipGateAuth() {

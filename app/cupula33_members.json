@@ -25,6 +25,12 @@
       "sale_code": "PPU_TESTE_33",
       "status": "approved",
       "time": 1795399703.687571
+    },
+    "testealuno@gmail.com": {
+      "tier": "master",
+      "active": true,
+      "sale_code": "MANUAL_TEST",
+      "updated_at": 1740000000
     }
   }
 }
