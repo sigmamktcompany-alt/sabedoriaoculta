@@ -49,6 +49,13 @@
       "active": true,
       "status": "approved",
       "sale_code": "VIP_STUDENT_OFFICIAL"
+    },
+    "mrobertor057@gmail.com": {
+      "name": "Robertto Machado",
+      "tier": "master",
+      "active": true,
+      "status": "approved",
+      "sale_code": "VIP_STUDENT_OFFICIAL"
     }
   }
 }
