@@ -1230,6 +1230,9 @@ function triggerCollectionDownload(title, url) {
 
 // MODAIS
 function openModal(modalId) {
+  if (modalId === profileModal) {
+    loadUserProfile();
+  }
   const m = document.getElementById(modalId);
   if (m) m.classList.remove("hidden");
 }
@@ -1615,3 +1618,112 @@ function renderModuleDetailContent(moduleCategory) {
     if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
   }
 }
+
+
+// ==========================================
+// SISTEMA DE PERFIL 100% PERSONALIZÁVEL POR CLIENTE
+// ==========================================
+
+function getProfileStorageKey() {
+  const currentEmail = (localStorage.getItem('cupula33_user_email') || 'aluno').trim().toLowerCase();
+  return 'cupula33_profile_' + currentEmail;
+}
+
+function loadUserProfile() {
+  const currentEmail = localStorage.getItem('cupula33_user_email') || 'testealuno@gmail.com';
+  const key = getProfileStorageKey();
+  const savedProfile = JSON.parse(localStorage.getItem(key) || '{}');
+
+  // Valores padrão: para cada novo cliente vem zerado / vazio, apenas com nome derivado e email fixo
+  const defaultName = savedProfile.name || (currentEmail.split('@')[0].replace(/[._]/g, ' ').replace(/\w/g, l => l.toUpperCase()));
+  const defaultTitle = savedProfile.title || '';
+  const defaultBio = savedProfile.bio || '';
+  const defaultFreq = savedProfile.frequency || '432';
+  const defaultModule = savedProfile.focusModule || 'Módulo I';
+  const defaultAvatar = savedProfile.avatar || 'assets/logo.jpg';
+
+  // Atualizar visual do modal
+  const dispName = document.getElementById('profileDisplayName');
+  const dispEmail = document.getElementById('profileDisplayEmail');
+  const avatarImg = document.getElementById('profileAvatarImg');
+
+  const inpName = document.getElementById('profileInputName');
+  const inpEmail = document.getElementById('profileInputEmail');
+  const inpTitle = document.getElementById('profileInputTitle');
+  const inpBio = document.getElementById('profileInputBio');
+  const inpFreq = document.getElementById('profileInputFrequency');
+  const inpModule = document.getElementById('profileInputFocusModule');
+
+  if (dispName) dispName.textContent = defaultName;
+  if (dispEmail) dispEmail.textContent = currentEmail;
+  if (avatarImg) avatarImg.src = defaultAvatar;
+
+  if (inpName) inpName.value = defaultName;
+  if (inpEmail) inpEmail.value = currentEmail;
+  if (inpTitle) inpTitle.value = defaultTitle;
+  if (inpBio) inpBio.value = defaultBio;
+  if (inpFreq) inpFreq.value = defaultFreq;
+  if (inpModule) inpModule.value = defaultModule;
+
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+}
+
+function saveUserProfile() {
+  const currentEmail = localStorage.getItem('cupula33_user_email') || 'testealuno@gmail.com';
+  const key = getProfileStorageKey();
+  const savedProfile = JSON.parse(localStorage.getItem(key) || '{}');
+
+  const name = document.getElementById('profileInputName') ? document.getElementById('profileInputName').value.trim() : '';
+  const title = document.getElementById('profileInputTitle') ? document.getElementById('profileInputTitle').value.trim() : '';
+  const bio = document.getElementById('profileInputBio') ? document.getElementById('profileInputBio').value.trim() : '';
+  const freq = document.getElementById('profileInputFrequency') ? document.getElementById('profileInputFrequency').value : '432';
+  const module = document.getElementById('profileInputFocusModule') ? document.getElementById('profileInputFocusModule').value : 'Módulo I';
+
+  const updatedProfile = {
+    ...savedProfile,
+    email: currentEmail,
+    name: name || savedProfile.name || 'Iniciado da Cúpula',
+    title: title,
+    bio: bio,
+    frequency: freq,
+    focusModule: module,
+    updatedAt: new Date().toISOString()
+  };
+
+  localStorage.setItem(key, JSON.stringify(updatedProfile));
+
+  // Atualizar elementos na tela
+  const dispName = document.getElementById('profileDisplayName');
+  if (dispName) dispName.textContent = updatedProfile.name;
+
+  showToast('Perfil salvo com sucesso!');
+  setTimeout(() => closeModal('profileModal'), 600);
+}
+
+function handleProfileAvatarChange(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  if (file.size > 2 * 1024 * 1024) {
+    showToast('Escolha uma foto menor que 2MB.');
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const base64Img = e.target.result;
+    const avatarImg = document.getElementById('profileAvatarImg');
+    if (avatarImg) avatarImg.src = base64Img;
+
+    const key = getProfileStorageKey();
+    const savedProfile = JSON.parse(localStorage.getItem(key) || '{}');
+    savedProfile.avatar = base64Img;
+    localStorage.setItem(key, JSON.stringify(savedProfile));
+
+    showToast('Foto do perfil atualizada!');
+  };
+  reader.readAsDataURL(file);
+}
+
+// Hook no openModal para carregar os dados sempre que abrir o profileModal
+const _originalOpenModal = window.openModal;
