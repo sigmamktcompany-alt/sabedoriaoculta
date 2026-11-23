@@ -252,6 +252,10 @@ function updateTierBadgeUI() {
   const checkBasico = document.getElementById("checkTierBasico");
   const accessibleCount = document.getElementById("accessibleCount");
 
+  if (typeof updateSidebarUserInfo === "function") {
+    try { updateSidebarUserInfo(); } catch(e) {}
+  }
+
   if (currentTier === "master") {
     if (label) label.textContent = "Membro Master (2.500 Obras)";
     if (checkMaster) checkMaster.classList.remove("hidden");
@@ -287,26 +291,44 @@ function switchTab(tabName) {
     const sec = document.getElementById("tab-" + t);
     const navBtn = document.getElementById("navBtn-" + t);
     const tabBtn = document.getElementById("tabBtn-" + t);
+    const sideBtn = document.getElementById("sideNav-" + t);
 
     if (t === tabName) {
       if (sec) sec.classList.remove("hidden");
-      if (navBtn) navBtn.classList.add("nav-active");
+      if (navBtn) navBtn.className = "flex flex-col items-center gap-1 text-[#D2042D] text-[10px] font-bold py-1";
       if (tabBtn) {
         tabBtn.classList.add("tab-active");
         tabBtn.classList.remove("text-gray-400");
       }
+      if (sideBtn) {
+        sideBtn.className = "w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-bold text-white bg-white/5 border border-[#D2042D]/50 transition-all text-left";
+        const icon = sideBtn.querySelector("i, svg");
+        if (icon) icon.className = "w-4 h-4 text-[#D2042D]";
+      }
     } else {
       if (sec) sec.classList.add("hidden");
-      if (navBtn) navBtn.classList.remove("nav-active");
+      if (navBtn) navBtn.className = "flex flex-col items-center gap-1 text-gray-400 text-[10px] font-medium py-1";
       if (tabBtn) {
         tabBtn.classList.remove("tab-active");
         tabBtn.classList.add("text-gray-400");
       }
+      if (sideBtn) {
+        sideBtn.className = "w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left";
+        const icon = sideBtn.querySelector("i, svg");
+        if (icon) icon.className = "w-4 h-4 text-gray-400";
+      }
     }
   });
 
+  const sideCat = document.getElementById("sideNav-categories");
+  const sideList = document.getElementById("sideNav-mylist");
+  if (tabName !== "books") {
+    if (sideCat) sideCat.className = "w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left";
+    if (sideList) sideList.className = "w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left";
+  }
+
   window.scrollTo({ top: 0, behavior: "smooth" });
-  if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
 // FILTRAGEM POR MÓDULO E CATEGORIA
@@ -343,183 +365,509 @@ function filterTier(tierFilter) {
 }
 
 // RENDERIZAR OS LIVROS E MANUSCRITOS
-function renderBooks() {
-  const grid = document.getElementById("booksGrid");
-  const countSpan = document.getElementById("visibleBooksCount");
-  if (!grid) return;
 
-  const filtered = booksData.filter(book => {
-    // Busca por texto
-    const matchSearch = !currentSearchQuery || 
-      book.title.toLowerCase().includes(currentSearchQuery) ||
-      book.author.toLowerCase().includes(currentSearchQuery) ||
-      book.category.toLowerCase().includes(currentSearchQuery) ||
-      book.desc.toLowerCase().includes(currentSearchQuery);
+// ==========================================
+// ORDEM 137 ENGINE - BIBLIOTECA, STREAMING & MINHA LISTA
+// ==========================================
 
-    // Filtro de categoria / módulo
-    const matchCat = currentCategoryFilter === "todos" || 
-      book.category.toLowerCase() === currentCategoryFilter.toLowerCase() ||
-      (book.module && book.module.toLowerCase().includes(currentCategoryFilter.toLowerCase()));
-
-    // Filtro de plano
-    let matchTier = true;
-    if (currentTierFilter === "meu_plano") {
-      if (currentTier === "basico") matchTier = book.tier === "basico";
-    } else if (currentTierFilter === "exclusivo_master") {
-      matchTier = book.tier === "master";
-    }
-
-    return matchSearch && matchCat && matchTier;
-  });
-
-  if (countSpan) {
-    countSpan.textContent = "Exibindo " + filtered.length + " de " + booksData.length + " obras fundamentais";
+const CANONICAL_MODULES = [
+  {
+    name: "Hermetismo & Cabala",
+    code: "Módulo I",
+    desc: "O Caibalion, Tábua de Esmeralda, Zohar, Sefer Yetzirah e os mistérios dos arcanos primordiais.",
+    icon: "book-open"
+  },
+  {
+    name: "Grimórios & Alta Magia",
+    code: "Módulo II",
+    desc: "Clavícula de Salomão, Goetia, São Cipriano, rituais de evocação e teurgia cerimonial.",
+    icon: "shield"
+  },
+  {
+    name: "Gnosticismo & Apócrifos",
+    code: "Módulo III",
+    desc: "Nag Hammadi, Livro de Enoque, Evangelhos Apócrifos e os textos banidos dos concílios.",
+    icon: "scroll"
+  },
+  {
+    name: "Alquimia & Transmutação",
+    code: "Módulo IV",
+    desc: "Splendor Solis, Atalanta Fugiens, Paracelso e a busca pela Pedra Filosofal.",
+    icon: "flame"
+  },
+  {
+    name: "Sociedades Secretas",
+    code: "Módulo V",
+    desc: "Maçonaria, Rosacruz, Iluminados da Baviera, Cavaleiros Templários e documentos desclassificados.",
+    icon: "eye"
+  },
+  {
+    name: "Mente & Projeção Astral",
+    code: "Módulo VI",
+    desc: "Desdobramento astral, autodefesa psíquica, sonhos lúcidos e ondas cerebrais calibradas.",
+    icon: "radio"
   }
+];
 
-  if (filtered.length === 0) {
-    grid.innerHTML = `
-      <div class="col-span-full py-16 text-center text-gray-500 glass-panel rounded-2xl p-8">
-        <i data-lucide="book-x" class="w-10 h-10 mx-auto text-gray-600 mb-2"></i>
-        <p class="text-sm text-gray-300 font-cinzel">Nenhum manuscrito encontrado com estes termos.</p>
-        <p class="text-xs text-gray-500 mt-1">Tente ajustar a busca ou limpar os filtros de módulo.</p>
-        <button onclick="resetFilters()" class="mt-4 px-4 py-2 rounded-xl bg-gold-500/20 text-gold-400 text-xs font-bold border border-gold-500/40 hover:bg-gold-500/30 transition">
-          Ver Todo o Acervo
-        </button>
-      </div>
-    `;
-    if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
-    return;
+let libraryViewMode = 'streaming'; // 'streaming' | 'categories' | 'category_detail' | 'search' | 'my_list'
+let activeCategoryName = null;
+// currentBookModalData is declared at top
+
+// Gestão de Minha Lista (Bookmarks)
+function getMyList() {
+  try {
+    return JSON.parse(localStorage.getItem("cupula33_my_list") || "[]");
+  } catch(e) {
+    return [];
   }
+}
 
-  grid.innerHTML = filtered.map(book => {
-    const isLocked = currentTier === "basico" && book.tier === "master";
+function isBookInMyList(bookId) {
+  const list = getMyList();
+  return list.includes(Number(bookId));
+}
 
-    return `
-      <div onclick="handleBookClick(${book.id})" class="glass-panel glass-panel-hover rounded-2xl overflow-hidden border border-gold-500/20 flex flex-col justify-between cursor-pointer group relative transition-all">
+function toggleCurrentBookMyList() {
+  if (!currentBookModalData) return;
+  const id = Number(currentBookModalData.id);
+  let list = getMyList();
+  
+  if (list.includes(id)) {
+    list = list.filter(x => x !== id);
+    showToast("Removido da Minha Lista");
+  } else {
+    list.push(id);
+    showToast("Adicionado à Minha Lista");
+  }
+  
+  localStorage.setItem("cupula33_my_list", JSON.stringify(list));
+  updateModalBookmarkUI(id);
+  
+  if (libraryViewMode === "my_list") {
+    renderMyListGrid();
+  }
+}
+
+function updateModalBookmarkUI(bookId) {
+  const btn = document.getElementById("modalBtnBookmark");
+  const icon = document.getElementById("modalBookmarkIcon");
+  const text = document.getElementById("modalBookmarkText");
+  if (!btn) return;
+  
+  const saved = isBookInMyList(bookId);
+  if (saved) {
+    btn.className = "w-full sm:w-auto py-3 px-4 rounded-xl bg-[#D2042D]/20 border border-[#D2042D]/60 text-[#D2042D] text-xs font-bold flex items-center justify-center gap-2 transition cursor-pointer";
+    if (text) text.textContent = "Salvo na Lista";
+    if (icon) icon.className = "w-4 h-4 fill-[#D2042D]";
+  } else {
+    btn.className = "w-full sm:w-auto py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-[#D2042D] text-xs font-bold flex items-center justify-center gap-2 transition cursor-pointer";
+    if (text) text.textContent = "Salvar";
+    if (icon) icon.className = "w-4 h-4";
+  }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+}
+
+// Criação do Card de Livro Estilo Ordem 137
+function createBookCardHTML(book, isCarousel) {
+  const isLocked = currentTier === "basico" && book.tier === "master";
+  const savedProg = getSavedProgress(book.id);
+  const progPercent = savedProg && book.pages ? Math.min(100, Math.round((savedProg.page / book.pages) * 100)) : 0;
+  
+  const containerClass = isCarousel 
+    ? "flex-none w-[145px] sm:w-[165px] cursor-pointer group snap-start select-none"
+    : "cursor-pointer group select-none";
+
+  return `
+    <div onclick="handleBookClick(${book.id})" class="${containerClass}">
+      
+      <!-- Container da Capa com Aspect Ratio 2:3 -->
+      <div class="relative aspect-[2/3] rounded-xl overflow-hidden mb-2.5 border border-white/10 group-hover:border-[#D2042D] shadow-lg shadow-black/60 transition-all bg-[#0d0d0d]">
+        <img src="${book.cover}" alt="${book.title}" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${isLocked ? 'grayscale opacity-50' : ''}">
         
-        <!-- Capa do Livro -->
-        <div class="relative aspect-[3/4] bg-dark-900 overflow-hidden">
-          <img src="${book.cover}" alt="${book.title}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-          
-          <!-- Badge do Módulo -->
-          <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-dark-950/85 backdrop-blur-md text-[9px] font-bold text-gold-400 border border-gold-500/30 tracking-wider uppercase">
-            ${book.module || 'Módulo'}
-          </span>
-          ${(book.orderbump && !hasUserPurchasedOrderbump(book)) ? `
-            <div class="absolute inset-0 bg-dark-950/80 backdrop-blur-[2px] flex flex-col items-center justify-center p-3 text-center border-2 border-amber-500/40">
-              <div class="w-9 h-9 rounded-full bg-amber-500/20 border border-amber-500/50 flex items-center justify-center text-amber-400 mb-1.5 shadow-lg">
-                <i data-lucide="lock" class="w-4 h-4"></i>
-              </div>
-              <span class="text-[10px] font-black text-amber-300 uppercase tracking-wider">Orderbump Exclusivo</span>
-              <span class="text-[9px] text-gray-400 mt-0.5">Toque para desbloquear</span>
+        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+
+        <!-- Badges Superiores -->
+        <div class="absolute top-2 left-2 z-20 flex flex-col gap-1 items-start">
+          ${!isLocked && book.id <= 15 ? `
+            <div class="bg-[#D2042D] text-white text-[9px] font-black px-2 py-0.5 rounded shadow-lg uppercase tracking-wider">
+              NOVO
             </div>
           ` : ''}
 
-          <!-- Selo Master / Bloqueio -->
-          ${isLocked ? `
-            <div class="absolute inset-0 bg-dark-950/85 backdrop-blur-[2px] flex flex-col items-center justify-center p-3 text-center border-2 border-gold-500/50">
-              <div class="w-10 h-10 rounded-full bg-gold-500/20 border border-gold-500/50 flex items-center justify-center text-gold-400 mb-2 shadow-lg">
-                <i data-lucide="lock" class="w-5 h-5"></i>
-              </div>
-              <span class="text-[10px] font-black text-gold-400 uppercase tracking-widest">Exclusivo Master</span>
-              <span class="text-[9px] text-gray-300 mt-1">Toque para Desbloquear</span>
+          ${progPercent > 0 ? `
+            <div class="bg-black/80 backdrop-blur-md px-2 py-0.5 rounded-full border border-white/10 flex items-center shadow-lg">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#D2042D] mr-1.5 animate-pulse"></span>
+              <span class="text-[9px] font-bold text-white tracking-wider">${progPercent}%</span>
             </div>
-          ` : `
-            <div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-dark-950/80 backdrop-blur-md text-[9px] font-medium text-gray-300 border border-dark-700">
-              ${book.pages} pág
-            </div>
-          `}
+          ` : ''}
         </div>
 
-        <!-- Informações do Livro -->
-        <div class="p-3 flex-1 flex flex-col justify-between">
-          <div>
-            <span class="text-[9px] font-semibold text-gold-500/90 uppercase tracking-wider block mb-0.5 line-clamp-1">
-              ${book.category}
-            </span>
-            <h4 class="font-cinzel font-bold text-xs text-gray-100 group-hover:text-gold-300 transition-colors line-clamp-2 leading-snug">
-              ${book.title}
-            </h4>
-            <p class="text-[11px] text-gray-400 mt-0.5 line-clamp-1">${book.author}</p>
+        ${isLocked ? `
+          <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/60 p-2 text-center">
+            <i data-lucide="lock" class="text-white/80 w-7 h-7 mb-1"></i>
+            <span class="text-[9px] font-black text-amber-300 uppercase tracking-wider">Master</span>
           </div>
-
-          <!-- Rodapé do Card -->
-          <div class="mt-3 pt-2.5 border-t border-dark-700/60 flex items-center justify-between text-[10px]">
-            <span class="text-gold-400/90 font-serif italic">${book.rarity}</span>
-            <span class="font-bold ${isLocked ? 'text-amber-400' : 'text-gray-300 group-hover:text-gold-400'} flex items-center gap-1 transition-colors">
-              ${isLocked ? '<i data-lucide="crown" class="w-3 h-3 text-gold-400"></i> Upgrade' : '<i data-lucide="book-open" class="w-3 h-3"></i> Acessar'}
-            </span>
-          </div>
-        </div>
-
-      </div>
-    `;
-  }).join("");
-
-  if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
-}
-
-// RENDERIZAR OS LOTES & COLEÇÕES COMPLETAS (DRIVE MASTER)
-function renderCollections() {
-  const grid = document.getElementById("collectionsGrid");
-  if (!grid) return;
-
-  grid.innerHTML = collectionsData.map(col => {
-    const isLocked = currentTier === "basico" && col.tier === "master";
-
-    return `
-      <div class="glass-panel glass-panel-hover rounded-2xl p-5 border ${isLocked ? 'border-gold-500/30' : 'border-gold-500/20'} flex flex-col justify-between relative overflow-hidden group">
-        ${col.id === 'lote-master-total' ? `
-          <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-gold-500/10 rounded-full blur-2xl pointer-events-none"></div>
         ` : ''}
 
-        <div>
-          <div class="flex items-center justify-between mb-3">
-            <div class="flex items-center gap-2">
-              <div class="w-9 h-9 rounded-xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400">
-                <i data-lucide="${col.icon}" class="w-4 h-4"></i>
-              </div>
-              <div>
-                <span class="text-[9px] font-bold text-gold-400 uppercase tracking-wider block">${col.module}</span>
-                <span class="text-xs font-semibold text-gray-300">${col.count}</span>
-              </div>
-            </div>
+        <!-- Barra de Progresso no Rodapé da Capa -->
+        ${progPercent > 0 ? `
+          <div class="absolute bottom-0 left-0 w-full h-1 bg-gray-900/80">
+            <div class="h-full bg-[#D2042D] shadow-[0_0_8px_rgba(210,4,45,0.8)]" style="width: ${progPercent}%"></div>
+          </div>
+        ` : ''}
+      </div>
 
-            ${isLocked ? `
-              <span class="px-2 py-0.5 rounded-full bg-gold-500/15 border border-gold-500/40 text-gold-400 text-[10px] font-bold flex items-center gap-1">
-                <i data-lucide="crown" class="w-3 h-3"></i> Master
-              </span>
-            ` : `
-              <span class="px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-emerald-400 text-[10px] font-bold">
-                Liberado
-              </span>
-            `}
+      <!-- Título & Autor -->
+      <h3 class="text-xs sm:text-sm font-medium truncate text-white group-hover:text-[#D2042D] transition-colors leading-snug">
+        ${book.title}
+      </h3>
+      <p class="text-gray-500 text-[11px] truncate mt-0.5">
+        ${book.author}
+      </p>
+    </div>
+  `;
+}
+
+// Orquestrador de Renderização da Biblioteca
+function renderBooks() {
+  const streamingView = document.getElementById("libraryStreamingView");
+  const categoriesView = document.getElementById("libraryCategoriesView");
+  const categoryDetailView = document.getElementById("libraryCategoryDetailView");
+  const searchResultsView = document.getElementById("librarySearchResultsView");
+  const myListView = document.getElementById("libraryMyListView");
+  const backBtn = document.getElementById("libraryBackBtn");
+  const titleElem = document.getElementById("libraryMainTitle");
+
+  // Esconder todas as subviews primeiro
+  if (streamingView) streamingView.classList.add("hidden");
+  if (categoriesView) categoriesView.classList.add("hidden");
+  if (categoryDetailView) categoryDetailView.classList.add("hidden");
+  if (searchResultsView) searchResultsView.classList.add("hidden");
+  if (myListView) myListView.classList.add("hidden");
+
+  // Reset do botão voltar e título
+  if (backBtn) backBtn.classList.add("hidden");
+
+  if (libraryViewMode === "streaming") {
+    if (streamingView) streamingView.classList.remove("hidden");
+    if (titleElem) titleElem.textContent = "Biblioteca";
+    renderLibraryStreaming();
+  } else if (libraryViewMode === "categories") {
+    if (categoriesView) categoriesView.classList.remove("hidden");
+    if (backBtn) backBtn.classList.remove("hidden");
+    if (titleElem) titleElem.textContent = "Categorias";
+    renderCategoriesGrid();
+  } else if (libraryViewMode === "category_detail") {
+    if (categoryDetailView) categoryDetailView.classList.remove("hidden");
+    if (backBtn) backBtn.classList.remove("hidden");
+    if (titleElem) titleElem.textContent = activeCategoryName || "Módulo";
+    renderCategoryDetailGrid(activeCategoryName);
+  } else if (libraryViewMode === "search") {
+    if (searchResultsView) searchResultsView.classList.remove("hidden");
+    if (backBtn) backBtn.classList.remove("hidden");
+    if (titleElem) titleElem.textContent = "Busca no Acervo";
+  } else if (libraryViewMode === "my_list") {
+    if (myListView) myListView.classList.remove("hidden");
+    if (backBtn) backBtn.classList.remove("hidden");
+    if (titleElem) titleElem.textContent = "Minha Lista";
+    renderMyListGrid();
+  }
+
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+}
+
+// 1. Renderiza o Modo Streaming (Carrosséis Netflix / Ordem 137)
+function renderLibraryStreaming() {
+  // A. Continuar Lendo
+  const secContinue = document.getElementById("sectionContinueReading");
+  const carContinue = document.getElementById("continueReadingCarousel");
+  if (secContinue && carContinue) {
+    const readingBooks = booksData.filter(b => {
+      const p = getSavedProgress(b.id);
+      return p && p.page > 0;
+    });
+    if (readingBooks.length > 0) {
+      secContinue.classList.remove("hidden");
+      carContinue.innerHTML = readingBooks.map(b => createBookCardHTML(b, true)).join("");
+    } else {
+      secContinue.classList.add("hidden");
+    }
+  }
+
+  // B. Destaques
+  const carFeatured = document.getElementById("featuredBooksCarousel");
+  if (carFeatured) {
+    const featured = booksData.slice(0, 12);
+    carFeatured.innerHTML = featured.map(b => createBookCardHTML(b, true)).join("");
+  }
+
+  // C. As 6 Fileiras por Módulo
+  const rowsContainer = document.getElementById("moduleRowsContainer");
+  if (rowsContainer) {
+    rowsContainer.innerHTML = CANONICAL_MODULES.map(mod => {
+      const modBooks = booksData.filter(b => 
+        (b.module && b.module.toLowerCase() === mod.code.toLowerCase()) ||
+        (b.category && b.category.toLowerCase().includes(mod.name.toLowerCase()))
+      );
+
+      if (modBooks.length === 0) return '';
+
+      return `
+        <div>
+          <div class="flex items-center justify-between mb-3.5 group cursor-pointer" onclick="openCategoryDetail('${mod.name}')">
+            <h2 class="text-lg sm:text-xl font-serif text-white group-hover:text-[#D2042D] transition-colors flex items-center gap-2">
+              <span class="text-xs font-mono font-bold text-[#D2042D]">${mod.code}</span>
+              <span>${mod.name}</span>
+            </h2>
+            <span class="text-[11px] text-gray-500 uppercase tracking-widest group-hover:text-white transition-colors flex items-center gap-1">
+              Ver todos (${modBooks.length}) →
+            </span>
           </div>
 
-          <h4 class="font-cinzel font-bold text-sm text-gray-100 group-hover:text-gold-300 transition-colors mb-1">
-            ${col.title}
-          </h4>
-          <p class="text-xs text-gold-400/80 mb-2">${col.subtitle}</p>
-          <p class="text-xs text-gray-400 leading-relaxed mb-4">${col.desc}</p>
+          <div class="flex overflow-x-auto gap-4 pb-4 hide-scrollbar scroll-smooth snap-x">
+            ${modBooks.map(b => createBookCardHTML(b, true)).join("")}
+          </div>
         </div>
+      `;
+    }).join("");
+  }
 
-        <div class="pt-3 border-t border-dark-700/60 flex items-center justify-between">
-          <span class="text-[11px] text-gray-500">Tamanho: ${col.size}</span>
-          
-          <button onclick="handleCollectionClick('${col.id}')" class="px-3.5 py-1.5 rounded-xl ${isLocked ? 'bg-gold-500/20 text-gold-400 hover:bg-gold-500/30 border border-gold-500/40 font-bold' : 'bg-gradient-to-r from-gold-500 to-amber-400 text-black font-black hover:scale-105 shadow-md'} text-xs flex items-center gap-1.5 transition-all">
-            <i data-lucide="${isLocked ? 'lock' : 'cloud-download'}" class="w-3.5 h-3.5"></i>
-            <span>${isLocked ? 'Desbloquear no Master' : 'Acessar Pasta'}</span>
-          </button>
+  renderCollections();
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+}
+
+// 2. Renderiza a Grade de Vias de Estudo ("Selecione uma via")
+function renderCategoriesGrid() {
+  const grid = document.getElementById("categoriesGrid");
+  if (!grid) return;
+
+  grid.innerHTML = CANONICAL_MODULES.map(mod => {
+    const count = booksData.filter(b => 
+      (b.module && b.module.toLowerCase() === mod.code.toLowerCase()) ||
+      (b.category && b.category.toLowerCase().includes(mod.name.toLowerCase()))
+    ).length;
+
+    return `
+      <div onclick="openCategoryDetail('${mod.name}')" class="group relative h-36 overflow-hidden rounded-2xl border border-white/10 bg-[#141414] hover:border-[#D2042D]/50 transition-all text-left p-6 flex flex-col justify-end cursor-pointer shadow-lg">
+        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 group-hover:text-[#D2042D] transition-all">
+          <i data-lucide="${mod.icon}" class="w-14 h-14"></i>
         </div>
-
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+        <div class="relative z-10">
+          <span class="text-[10px] font-mono font-bold text-[#D2042D] tracking-widest block uppercase">${mod.code}</span>
+          <h3 class="text-lg font-serif font-bold text-white group-hover:text-[#D2042D] transition-colors mt-0.5">${mod.name}</h3>
+          <p class="text-xs text-gray-500 mt-1">${count} Tratados & Manuscritos</p>
+        </div>
       </div>
     `;
   }).join("");
 
-  if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
-// CLICK EM UM LIVRO
+// 3. Renderiza a Grade Completa da Categoria Selecionada
+function renderCategoryDetailGrid(categoryName) {
+  const grid = document.getElementById("categoryDetailBooksGrid");
+  if (!grid) return;
+
+  const filtered = booksData.filter(b => 
+    (b.category && b.category.toLowerCase().includes(categoryName.toLowerCase())) ||
+    (b.module && b.module.toLowerCase().includes(categoryName.toLowerCase()))
+  );
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div class="col-span-full py-16 text-center text-gray-500">Nenhuma obra localizada nesta via.</div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map(b => createBookCardHTML(b, false)).join("");
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+}
+
+// 4. Renderiza Resultados da Busca
+function handleSearchInput(query) {
+  const q = String(query || "").trim().toLowerCase();
+  const clearBtn = document.getElementById("clearSearchBtn");
+  const termSpan = document.getElementById("searchResultTerm");
+  const grid = document.getElementById("searchResultsGrid");
+
+  if (!q) {
+    if (clearBtn) clearBtn.classList.add("hidden");
+    if (libraryViewMode === "search") {
+      returnToDefaultLibrary();
+    }
+    return;
+  }
+
+  if (clearBtn) clearBtn.classList.remove("hidden");
+  libraryViewMode = "search";
+  renderBooks();
+
+  if (termSpan) termSpan.textContent = `"${q}"`;
+
+  const results = booksData.filter(b => 
+    b.title.toLowerCase().includes(q) ||
+    b.author.toLowerCase().includes(q) ||
+    b.category.toLowerCase().includes(q) ||
+    (b.desc && b.desc.toLowerCase().includes(q))
+  );
+
+  if (grid) {
+    if (results.length === 0) {
+      grid.innerHTML = `
+        <div class="col-span-full py-16 text-center text-gray-500">
+          <p class="text-sm">Nenhum manuscrito encontrado para "${q}".</p>
+          <button onclick="clearSearch()" class="mt-4 px-4 py-2 rounded-xl bg-white/5 text-[#D2042D] border border-[#D2042D]/40 text-xs font-bold hover:bg-[#D2042D] hover:text-white transition">
+            Limpar Busca
+          </button>
+        </div>
+      `;
+    } else {
+      grid.innerHTML = results.map(b => createBookCardHTML(b, false)).join("");
+    }
+  }
+
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+}
+
+function clearSearch() {
+  const inp = document.getElementById("searchInput");
+  if (inp) inp.value = "";
+  returnToDefaultLibrary();
+}
+
+// 5. Renderiza a Minha Lista
+function renderMyListGrid() {
+  const grid = document.getElementById("myListBooksGrid");
+  if (!grid) return;
+
+  const savedIds = getMyList();
+  const savedBooks = booksData.filter(b => savedIds.includes(Number(b.id)));
+
+  if (savedBooks.length === 0) {
+    grid.innerHTML = `
+      <div class="col-span-full py-16 text-center text-gray-500">
+        <i data-lucide="bookmark" class="w-10 h-10 mx-auto text-gray-600 mb-2"></i>
+        <p class="text-sm text-gray-300 font-serif">Sua lista de estudos está vazia.</p>
+        <p class="text-xs text-gray-500 mt-1">Toque em "Salvar" nos detalhes de qualquer obra para adicioná-la aqui.</p>
+        <button onclick="returnToDefaultLibrary()" class="mt-5 px-5 py-2.5 rounded-xl bg-[#D2042D]/20 text-[#D2042D] border border-[#D2042D]/40 text-xs font-bold hover:bg-[#D2042D] hover:text-white transition">
+          Explorar Acervo
+        </button>
+      </div>
+    `;
+    if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+    return;
+  }
+
+  grid.innerHTML = savedBooks.map(b => createBookCardHTML(b, false)).join("");
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+}
+
+// Ações de Navegação da Biblioteca
+function returnToDefaultLibrary() {
+  libraryViewMode = "streaming";
+  activeCategoryName = null;
+  const inp = document.getElementById("searchInput");
+  if (inp) inp.value = "";
+  const clearBtn = document.getElementById("clearSearchBtn");
+  if (clearBtn) clearBtn.classList.add("hidden");
+  renderBooks();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function toggleCategoriesView() {
+  if (libraryViewMode === "categories") {
+    returnToDefaultLibrary();
+  } else {
+    libraryViewMode = "categories";
+    renderBooks();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
+
+function openCategoriesFromNav() {
+  switchTab('books');
+  libraryViewMode = "categories";
+  renderBooks();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function openCategoryDetail(catName) {
+  libraryViewMode = "category_detail";
+  activeCategoryName = catName;
+  renderBooks();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function openMyList() {
+  switchTab('books');
+  libraryViewMode = "my_list";
+  renderBooks();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// Modal do Livro (Padrão Bk Ordem 137)
+function openBookModal(book) {
+  currentBookModalData = book;
+
+  const cover = document.getElementById("modalBookCover");
+  const cat = document.getElementById("modalBookCategory");
+  const pages = document.getElementById("modalBookPages");
+  const title = document.getElementById("modalBookTitle");
+  const author = document.getElementById("modalBookAuthor");
+  const desc = document.getElementById("modalBookDesc");
+  const pBar = document.getElementById("modalProgressBar");
+  const pText = document.getElementById("modalProgressPercent");
+
+  if (cover) cover.src = book.cover;
+  if (cat) cat.textContent = (book.module ? `${book.module}: ` : '') + book.category;
+  if (pages) pages.textContent = `${book.pages || 120} páginas`;
+  if (title) title.textContent = book.title;
+  if (author) author.textContent = "Por " + book.author;
+  if (desc) desc.textContent = book.desc || "Tratado autêntico preservado em língua portuguesa.";
+
+  // Progresso
+  const saved = getSavedProgress(book.id);
+  const percent = saved && book.pages ? Math.min(100, Math.round((saved.page / book.pages) * 100)) : 0;
+  if (pBar) pBar.style.width = percent + "%";
+  if (pText) pText.textContent = percent + "%";
+
+  updateModalBookmarkUI(book.id);
+  openModal("bookModal");
+}
+
+function triggerReadModalFromDetails() {
+  if (!currentBookModalData) return;
+  closeModal("bookModal");
+  const saved = getSavedProgress(currentBookModalData.id);
+  const page = saved ? saved.page : 1;
+  openReaderModal(currentBookModalData, page);
+}
+
+function triggerDownloadFromDetails() {
+  if (!currentBookModalData) return;
+  triggerDownload(currentBookModalData);
+}
+
+// Atualização de Informações do Membro no Sidebar e Telas
+function updateSidebarUserInfo() {
+  const currentEmail = (localStorage.getItem("cupula33_user_email") || "paulo-reis51@hotmail.com").trim().toLowerCase();
+  const name = (typeof KNOWN_STUDENT_NAMES !== "undefined" && KNOWN_STUDENT_NAMES[currentEmail]) || "Iniciado da Cúpula";
+  const tier = (localStorage.getItem("cupula33_user_tier") || "master") === "master" ? "Membro Master" : "Membro Básico";
+
+  const sName = document.getElementById("sidebarUserName");
+  const sTier = document.getElementById("sidebarTierLabel");
+  if (sName) sName.textContent = name;
+  if (sTier) sTier.textContent = tier;
+}
+
+// Integrar no carregamento inicial
+window.addEventListener("DOMContentLoaded", () => {
+  try {
+    updateSidebarUserInfo();
+  } catch(e) {}
+});
+
 function handleBookClick(bookId) {
   const book = booksData.find(b => b.id === bookId);
   if (!book) return;
@@ -538,49 +886,8 @@ function handleCollectionClick(collectionId) {
   triggerCollectionDownload(col.title, col.driveUrl);
 }
 
-// ABRIR MODAL DO LIVRO
-function openBookModal(book) {
-  document.getElementById("modalBookTitle").textContent = book.title;
-  document.getElementById("modalBookAuthor").textContent = "Por " + book.author;
-  document.getElementById("modalBookCategory").textContent = (book.module || 'Módulo') + " • " + book.category;
-  document.getElementById("modalBookPages").textContent = book.pages + " páginas";
-  document.getElementById("modalBookRarity").textContent = book.rarity;
-  document.getElementById("modalBookDesc").textContent = book.desc;
-  document.getElementById("modalBookCover").src = book.cover;
-  document.getElementById("modalBookTier").textContent = book.tier === "basico" ? "Liberado (Básico e Master)" : "Acervo Master";
+// Antigo modal substituído pelo padrão Ordem 137
 
-  // Audiobook info
-  document.getElementById("audiobookTitle").textContent = "Audiobook: " + book.title;
-  document.getElementById("audiobookStatus").textContent = "Narração em português com frequência áurea 432Hz";
-
-  // Configurar input de página e limites
-  const pageInput = document.getElementById("modalPageInput");
-  const maxPages = document.getElementById("modalMaxPages");
-  if (pageInput) pageInput.max = book.pages;
-  if (maxPages) maxPages.textContent = book.pages;
-
-  // Carregar progresso salvo se existir
-  const saved = getSavedProgress(book.id);
-  const curPage = saved ? saved.page : 1;
-  if (pageInput) pageInput.value = curPage;
-  updateModalProgressDisplay(curPage, book.pages);
-
-  // Configurar botões de ação
-  const downloadBtn = document.getElementById("modalDownloadBtn");
-  downloadBtn.onclick = () => triggerDownload(book);
-
-  const readOnlineBtn = document.getElementById("modalReadOnlineBtn");
-  readOnlineBtn.onclick = () => {
-    const pInput = document.getElementById("modalPageInput");
-    const p = pInput ? (parseInt(pInput.value) || 1) : curPage;
-    openReaderModal(book, p);
-  };
-
-  // Resetar modo para PDF
-  switchModalTab("pdf");
-
-  openModal("bookModal");
-}
 
 // TROCA DE ABAS NO MODAL DO LIVRO (PDF vs AUDIOBOOK)
 function switchModalTab(tab) {

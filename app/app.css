@@ -145,3 +145,47 @@ body {
   border-color: #f3e5ab !important;
   box-shadow: 0 0 15px rgba(212, 175, 55, 0.35) !important;
 }
+
+/* ORDEM 137 ESOTERIC THEME TOKENS */
+:root {
+  --color-esoteric-red: #D2042D;
+  --color-esoteric-red-glow: rgba(210, 4, 45, 0.45);
+  --color-esoteric-dark: #0a0a0a;
+  --color-esoteric-card: #141414;
+  --sidebar-width: 250px;
+}
+
+/* Hide scrollbar utility */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Red glow effects */
+.hover-border-red:hover {
+  border-color: #D2042D !important;
+  box-shadow: 0 0 15px rgba(210, 4, 45, 0.25);
+}
+
+.border-esoteric-red {
+  border-color: #D2042D;
+}
+
+.text-esoteric-red {
+  color: #D2042D;
+}
+
+.bg-esoteric-red {
+  background-color: #D2042D;
+}
+
+.bg-esoteric-card {
+  background-color: #141414;
+}
+
+.bg-esoteric-dark {
+  background-color: #0a0a0a;
+}
