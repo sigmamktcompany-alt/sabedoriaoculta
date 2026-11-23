@@ -1245,12 +1245,12 @@ const SUPABASE_CONFIG = {
 };
 
 const MASTER_ALLOWLIST = [
+  "testealuno@gmail.com",
+  "cliente@example.com",
   "suportesabedoriaoculta@gmail.com",
   "admin@cupula33.com",
   "sigmamarketing@gmail.com",
-  "teste@cupula33.com",
-  "testealuno@gmail.com",
-  "cliente@example.com"
+  "teste@cupula33.com"
 ];
 
 function checkVipGateAuth() {
@@ -1280,38 +1280,36 @@ function checkVipGateAuth() {
 }
 
 async function verifyMemberInSupabase(email) {
+  const cleanEmail = String(email || "").trim().toLowerCase();
+  
+  // 1. Checagem imediata na whitelist embutida
+  if (MASTER_ALLOWLIST.includes(cleanEmail) || cleanEmail.endsWith("@cupula33.com")) {
+    return { authorized: true, tier: "master" };
+  }
+
+  // 2. Checagem no banco de membros local do site (cupula33_members.json)
   try {
-    const encoded = encodeURIComponent(email);
-    const resp = await fetch(`${SUPABASE_CONFIG.url}/rest/v1/members?email=eq.${encoded}&select=*`, {
-      method: "GET",
-      headers: {
-        "apikey": SUPABASE_CONFIG.apiKey,
-        "Authorization": `Bearer ${SUPABASE_CONFIG.apiKey}`,
-        "Accept": "application/json"
-      }
-    });
-    if (resp.ok) {
-      const rows = await resp.json();
-      if (rows && rows.length > 0 && rows[0].active !== false) {
-        return { authorized: true, tier: rows[0].tier || "master" };
+    const localRes = await fetch("cupula33_members.json?t=" + Date.now());
+    if (localRes.ok) {
+      const db = await localRes.json();
+      if (db && db.members && db.members[cleanEmail] && db.members[cleanEmail].active !== false) {
+        return { authorized: true, tier: db.members[cleanEmail].tier || "master" };
       }
     }
   } catch (err) {
-    console.warn("Falha direta Supabase REST, tentando API local:", err);
+    console.warn("Falha ao checar cupula33_members.json:", err);
   }
 
-  // Fallback no webhook local se o cliente estiver em ambiente fechado
+  // 3. Fallback no webhook se estiver online
   try {
-    const respLocal = await fetch(`${SUPABASE_CONFIG.localVerifyApi}?email=${encodeURIComponent(email)}`);
+    const respLocal = await fetch(`${SUPABASE_CONFIG.localVerifyApi}?email=${encodeURIComponent(cleanEmail)}`);
     if (respLocal.ok) {
       const data = await respLocal.json();
       if (data && data.authorized) {
         return { authorized: true, tier: data.tier || "master" };
       }
     }
-  } catch (e) {
-    console.warn("Fallback local inacessível:", e);
-  }
+  } catch (e) {}
 
   return { authorized: false };
 }
@@ -1343,16 +1341,18 @@ async function authenticateGateLogin() {
     statusMsg.textContent = "Verificando liberação na nuvem...";
   }
 
-  let authorized = false;
+    let authorized = false;
   let userTier = "master";
 
-  // 1. Whitelist master
-  if (MASTER_ALLOWLIST.includes(email) || email.endsWith("@cupula33.com")) {
+  const cleanEmail = email.trim().toLowerCase();
+
+  // 1. Verificação instantânea na Whitelist
+  if (MASTER_ALLOWLIST.includes(cleanEmail) || cleanEmail.endsWith("@cupula33.com")) {
     authorized = true;
     userTier = "master";
   } else {
-    // 2. Consulta em tempo real na nuvem do Supabase
-    const result = await verifyMemberInSupabase(email);
+    // 2. Consulta na base de membros e na nuvem
+    const result = await verifyMemberInSupabase(cleanEmail);
     if (result.authorized) {
       authorized = true;
       userTier = result.tier;

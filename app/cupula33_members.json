@@ -2,23 +2,23 @@
   "members": {
     "suportesabedoriaoculta@gmail.com": {
       "tier": "master",
-      "added_at": 1795398920.323818,
-      "source": "admin"
+      "active": true,
+      "sale_code": "VIP_LIFETIME"
     },
     "admin@cupula33.com": {
       "tier": "master",
-      "added_at": 1795398920.323818,
-      "source": "admin"
+      "active": true,
+      "sale_code": "VIP_LIFETIME"
     },
     "sigmamarketing@gmail.com": {
       "tier": "master",
-      "added_at": 1795398920.323819,
-      "source": "admin"
+      "active": true,
+      "sale_code": "VIP_LIFETIME"
     },
     "teste@cupula33.com": {
       "tier": "master",
-      "added_at": 1795398920.323819,
-      "source": "admin"
+      "active": true,
+      "sale_code": "VIP_LIFETIME"
     },
     "novo_membro_vip@gmail.com": {
       "tier": "master",
@@ -29,8 +29,12 @@
     "testealuno@gmail.com": {
       "tier": "master",
       "active": true,
-      "sale_code": "MANUAL_TEST",
-      "updated_at": 1740000000
+      "sale_code": "VIP_LIFETIME"
+    },
+    "cliente@example.com": {
+      "tier": "master",
+      "active": true,
+      "sale_code": "VIP_LIFETIME"
     }
   }
 }
