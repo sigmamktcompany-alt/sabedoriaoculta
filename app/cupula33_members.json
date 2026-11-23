@@ -55,7 +55,19 @@
       "tier": "master",
       "active": true,
       "status": "approved",
-      "sale_code": "VIP_STUDENT_OFFICIAL"
+      "sale_code": "VIP_STUDENT_OFFICIAL",
+      "has_prosperidade_oculta": true,
+      "products": [
+        "cupula33_master",
+        "prosperidade_oculta"
+      ]
+    },
+    "paulo-reis51@hotmail.com": {
+      "name": "Paulo Reis",
+      "tier": "master",
+      "active": true,
+      "status": "approved",
+      "sale_code": "MANUAL_APPROVAL_OFFICIAL"
     }
   }
 }

@@ -1,4 +1,5 @@
 const KNOWN_STUDENT_NAMES = {
+  "paulo-reis51@hotmail.com": "Paulo Reis",
   "mrobertor057@gmail.com": "Robertto Machado",
   'edurosalopes@vivaldi.net': 'Carlos Eduardo Rosa Lopes',
   'crazyled.delavelle9@gmail.com': 'Emerson Ferreira'
@@ -1333,6 +1334,7 @@ const SUPABASE_CONFIG = {
 };
 
 const MASTER_ALLOWLIST = [
+  "paulo-reis51@hotmail.com",
   "mrobertor057@gmail.com",
   "crazyled.delavelle9@gmail.com",
   "edurosalopes@vivaldi.net",
