@@ -622,13 +622,18 @@
               </span>
               <span id="modalCurrentProgressPct" class="text-gold-400 font-bold">Página 1</span>
             </div>
-            <div class="flex items-center gap-2">
-              <button onclick="adjustModalPage(-5)" class="px-2.5 py-1 rounded-lg bg-dark-800 text-xs text-gray-300 hover:bg-dark-700 border border-dark-700">-5</button>
-              <button onclick="adjustModalPage(-1)" class="px-2.5 py-1 rounded-lg bg-dark-800 text-xs text-gray-300 hover:bg-dark-700 border border-dark-700">-1</button>
-              <input type="number" id="modalPageInput" min="1" max="500" value="1" onchange="onPageInputChange(this.value)" class="w-20 px-2 py-1 text-center rounded-lg bg-dark-950 border border-gold-500/30 text-xs text-gold-300 font-bold">
-              <span class="text-xs text-gray-500">de <span id="modalMaxPages">160</span></span>
-              <button onclick="adjustModalPage(1)" class="px-2.5 py-1 rounded-lg bg-dark-800 text-xs text-gray-300 hover:bg-dark-700 border border-dark-700">+1</button>
-              <button onclick="adjustModalPage(5)" class="px-2.5 py-1 rounded-lg bg-dark-800 text-xs text-gray-300 hover:bg-dark-700 border border-dark-700">+5</button>
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div class="flex items-center gap-1.5">
+                <button onclick="adjustModalPage(-5)" class="px-2.5 py-1 rounded-lg bg-dark-800 text-xs text-gray-300 hover:bg-dark-700 border border-dark-700">-5</button>
+                <button onclick="adjustModalPage(-1)" class="px-2.5 py-1 rounded-lg bg-dark-800 text-xs text-gray-300 hover:bg-dark-700 border border-dark-700">-1</button>
+                <input type="number" id="modalPageInput" min="1" max="500" value="1" oninput="onPageInputChange(this.value)" onchange="onPageInputChange(this.value)" class="w-16 px-2 py-1 text-center rounded-lg bg-dark-950 border border-gold-500/30 text-xs text-gold-300 font-bold focus:outline-none">
+                <span class="text-xs text-gray-500">de <span id="modalMaxPages">160</span></span>
+                <button onclick="adjustModalPage(1)" class="px-2.5 py-1 rounded-lg bg-dark-800 text-xs text-gray-300 hover:bg-dark-700 border border-dark-700">+1</button>
+                <button onclick="adjustModalPage(5)" class="px-2.5 py-1 rounded-lg bg-dark-800 text-xs text-gray-300 hover:bg-dark-700 border border-dark-700">+5</button>
+              </div>
+              <button onclick="bookmarkCurrentPage()" class="px-3 py-1 rounded-lg bg-gold-500/20 hover:bg-gold-500/30 text-gold-400 border border-gold-500/40 text-xs font-bold flex items-center gap-1 transition active:scale-95">
+                <i data-lucide="bookmark" class="w-3 h-3 text-gold-400"></i> Salvar Marcador
+              </button>
             </div>
           </div>
         </div>
@@ -710,9 +715,18 @@
           <span id="readerBookStatus" class="text-[10px] text-gold-400">Leitor Interativo Cúpula 33</span>
         </div>
       </div>
-      <div class="flex items-center gap-2">
-        <button onclick="bookmarkCurrentPage()" title="Salvar Marcador" class="px-3 py-1.5 rounded-xl bg-gold-500/20 text-gold-400 border border-gold-500/30 text-xs font-bold flex items-center gap-1.5 transition">
-          <i data-lucide="bookmark" class="w-3.5 h-3.5"></i> Salvar Posição
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Seletor Rápido de Página no Topo do Leitor -->
+        <div class="flex items-center bg-dark-900 border border-gold-500/30 rounded-xl px-2 py-1 gap-1 text-xs">
+          <span class="text-[11px] text-gray-400 hidden xs:inline">Pág:</span>
+          <button onclick="adjustReaderPage(-1)" class="w-5 h-5 flex items-center justify-center rounded bg-dark-800 text-gray-300 hover:text-white hover:bg-dark-700 text-[10px]">-</button>
+          <input type="number" id="readerCurrentPageInput" min="1" value="1" onchange="onReaderPageInputChange(this.value)" class="w-12 bg-transparent text-center font-bold text-gold-400 focus:outline-none text-xs">
+          <span class="text-[10px] text-gray-500">/<span id="readerTotalPages">1</span></span>
+          <button onclick="adjustReaderPage(1)" class="w-5 h-5 flex items-center justify-center rounded bg-dark-800 text-gray-300 hover:text-white hover:bg-dark-700 text-[10px]">+</button>
+        </div>
+
+        <button onclick="bookmarkCurrentPage()" title="Salvar Marcador" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-gold-500/30 to-amber-500/30 hover:from-gold-500/40 hover:to-amber-500/40 text-gold-300 border border-gold-500/40 text-xs font-bold flex items-center gap-1.5 transition active:scale-95">
+          <i data-lucide="bookmark" class="w-3.5 h-3.5 text-gold-400"></i> <span class="hidden sm:inline">Salvar</span> Posição
         </button>
         <button onclick="closeReaderModal()" class="p-2 rounded-xl bg-dark-800 text-gray-400 hover:text-white transition">
           <i data-lucide="x" class="w-4 h-4"></i>
@@ -759,7 +773,7 @@
   </div>
 
   <!-- Lucide Icon Renderer & App Script -->
-  <script src="app.js?v=1795417083"></script>
+  <script src="app.js?v=1795417392"></script>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {

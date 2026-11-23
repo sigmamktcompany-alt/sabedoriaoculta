@@ -557,7 +557,11 @@ function openBookModal(book) {
   downloadBtn.onclick = () => triggerDownload(book);
 
   const readOnlineBtn = document.getElementById("modalReadOnlineBtn");
-  readOnlineBtn.onclick = () => openReaderModal(book, curPage);
+  readOnlineBtn.onclick = () => {
+    const pInput = document.getElementById("modalPageInput");
+    const p = pInput ? (parseInt(pInput.value) || 1) : curPage;
+    openReaderModal(book, p);
+  };
 
   // Resetar modo para PDF
   switchModalTab("pdf");
@@ -620,18 +624,55 @@ function updateModalProgressDisplay(page, total) {
   span.textContent = "Página " + page + " de " + total + " (" + pct + "%)";
 }
 
+// AJUSTE DIRETO DE PÁGINA DENTRO DO LEITOR
+function adjustReaderPage(delta) {
+  if (!currentBookModalData) return;
+  const input = document.getElementById("readerCurrentPageInput");
+  if (!input) return;
+  let val = parseInt(input.value) || 1;
+  val = Math.max(1, Math.min(currentBookModalData.pages, val + delta));
+  input.value = val;
+  onReaderPageInputChange(val);
+}
+
+function onReaderPageInputChange(val) {
+  if (!currentBookModalData) return;
+  const page = Math.max(1, Math.min(currentBookModalData.pages, parseInt(val) || 1));
+  saveReadingProgress(currentBookModalData.id, page, currentBookModalData.pages);
+  
+  // Atualiza também os displays do bookModal
+  const modalInput = document.getElementById("modalPageInput");
+  if (modalInput) modalInput.value = page;
+  updateModalProgressDisplay(page, currentBookModalData.pages);
+}
+
 // LEITOR EM TELA CHEIA
 function openReaderModal(book, startPage) {
-  if (startPage === undefined) startPage = 1;
+  // Se startPage não foi especificado, busca se já tem progresso salvo deste livro
+  if (startPage === undefined) {
+    const saved = getSavedProgress(book.id);
+    startPage = saved ? saved.page : 1;
+  }
   closeModal("bookModal");
   currentBookModalData = book;
 
   document.getElementById("readerBookTitle").textContent = book.title;
   document.getElementById("readerBookStatus").textContent = (book.module || 'Módulo') + " • Leitor Integrado";
   
+  // Atualiza controles de página no header do leitor
+  const readerInput = document.getElementById("readerCurrentPageInput");
+  const readerTotal = document.getElementById("readerTotalPages");
+  if (readerInput) {
+    readerInput.max = book.pages;
+    readerInput.value = startPage;
+  }
+  if (readerTotal) {
+    readerTotal.textContent = book.pages;
+  }
+
   let targetUrl = book.pdfUrl;
   
-  // Se for link do Google Drive, converte automaticamente para o player/leitor embutido (/preview)
+  // Converte para /preview e adiciona o hash de página #page=X
   if (targetUrl.includes("drive.google.com")) {
     if (targetUrl.includes("/view")) {
       targetUrl = targetUrl.replace(/\/view(\?.*)?$/, "/preview");
@@ -640,9 +681,12 @@ function openReaderModal(book, startPage) {
     }
   }
 
+  // Anexa o hash de página para leitores nativos de PDF ou visualizadores com suporte
+  const finalUrl = startPage > 1 ? (targetUrl.split('#')[0] + "#page=" + startPage) : targetUrl;
+
   const iframe = document.getElementById("readerIframe");
   if (iframe) {
-    iframe.src = targetUrl;
+    iframe.src = finalUrl;
   }
 
   saveReadingProgress(book.id, startPage, book.pages);
@@ -657,10 +701,22 @@ function closeReaderModal() {
 
 function bookmarkCurrentPage() {
   if (!currentBookModalData) return;
-  const progress = getSavedProgress(currentBookModalData.id);
-  const curPage = progress ? progress.page : 1;
+  // Pega a página que está no input do leitor ou do modal
+  const readerInput = document.getElementById("readerCurrentPageInput");
+  const modalInput = document.getElementById("modalPageInput");
+  let curPage = 1;
+
+  if (readerInput && readerInput.value) {
+    curPage = parseInt(readerInput.value) || 1;
+  } else if (modalInput && modalInput.value) {
+    curPage = parseInt(modalInput.value) || 1;
+  } else {
+    const progress = getSavedProgress(currentBookModalData.id);
+    curPage = progress ? progress.page : 1;
+  }
+
   saveReadingProgress(currentBookModalData.id, curPage, currentBookModalData.pages);
-  showToast("Marcador salvo: " + currentBookModalData.title + " na pág. " + curPage);
+  showToast("Marcador gravado: pág. " + curPage + " de " + currentBookModalData.pages + "!");
 }
 
 // SISTEMA DE MARCACAO & PERSISTENCIA DE LEITURA (LOCALSTORAGE)
