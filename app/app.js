@@ -239,6 +239,7 @@ function detectUrlTier() {
 }
 
 // ATUALIZAÇÃO DA UI DO NÍVEL DO USUÁRIO
+function updateTierUI() { updateTierBadgeUI(); }
 function updateTierBadgeUI() {
   const label = document.getElementById("userTierLabel");
   const checkMaster = document.getElementById("checkTierMaster");
@@ -1260,15 +1261,16 @@ function checkVipGateAuth() {
 
   if (!gate) return;
 
-  if (savedEmail) {
+    if (savedEmail) {
     if (savedTier === "master") {
       currentTier = "master";
     }
-    updateTierUI();
+    try { updateTierBadgeUI(); } catch(e) {}
     gate.style.opacity = "0";
     setTimeout(() => {
       gate.classList.add("hidden");
-    }, 400);
+      gate.style.display = "none";
+    }, 200);
   } else {
     gate.classList.remove("hidden");
     gate.style.opacity = "1";
@@ -1359,26 +1361,28 @@ async function authenticateGateLogin() {
     }
   }
 
-  if (authorized) {
+    if (authorized) {
     localStorage.setItem("cupula33_user_email", email);
     localStorage.setItem("cupula33_user_tier", userTier);
     currentTier = userTier;
 
     if (statusMsg) {
       statusMsg.className = "text-xs text-center min-h-[20px] font-bold text-emerald-400";
-      statusMsg.textContent = "✓ Acesso Aprovado via Supabase! Bem-vindo(a) à Cúpula 33.";
+      statusMsg.textContent = "✓ Acesso Autorizado! Carregando Acervo Sagrado...";
     }
 
-    showToast("Acesso VIP autenticado com sucesso!");
-    updateTierUI();
+    try { updateTierBadgeUI(); } catch(e) {}
+    try { renderBooks(); } catch(e) {}
 
-    setTimeout(() => {
-      const gate = document.getElementById("vipLoginGate");
-      if (gate) {
-        gate.style.opacity = "0";
-        setTimeout(() => gate.classList.add("hidden"), 450);
-      }
-    }, 600);
+    // Fecha o portal de login imediatamente
+    const gate = document.getElementById("vipLoginGate");
+    if (gate) {
+      gate.style.opacity = "0";
+      setTimeout(() => {
+        gate.classList.add("hidden");
+        gate.style.display = "none";
+      }, 300);
+    }
   } else {
     if (statusMsg) {
       statusMsg.className = "text-xs text-center min-h-[20px] font-bold text-rose-400";
