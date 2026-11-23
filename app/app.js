@@ -223,7 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 5. Atualizar ícones Lucide
   if (window.lucide) {
-    lucide.createIcons();
+    try { if (window.lucide) lucide.createIcons(); } catch(e) {}
   }
 });
 
@@ -300,7 +300,7 @@ function switchTab(tabName) {
   });
 
   window.scrollTo({ top: 0, behavior: "smooth" });
-  if (window.lucide) lucide.createIcons();
+  if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
 }
 
 // FILTRAGEM POR MÓDULO E CATEGORIA
@@ -381,7 +381,7 @@ function renderBooks() {
         </button>
       </div>
     `;
-    if (window.lucide) lucide.createIcons();
+    if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
     return;
   }
 
@@ -441,7 +441,7 @@ function renderBooks() {
     `;
   }).join("");
 
-  if (window.lucide) lucide.createIcons();
+  if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
 }
 
 // RENDERIZAR OS LOTES & COLEÇÕES COMPLETAS (DRIVE MASTER)
@@ -501,7 +501,7 @@ function renderCollections() {
     `;
   }).join("");
 
-  if (window.lucide) lucide.createIcons();
+  if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
 }
 
 // CLICK EM UM LIVRO
@@ -592,7 +592,7 @@ function switchModalTab(tab) {
       audioBtn.className = "flex-1 py-2 rounded-xl text-xs font-bold bg-gold-500 text-black flex items-center justify-center gap-1.5 transition";
     }
   }
-  if (window.lucide) lucide.createIcons();
+  if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
 }
 
 // AJUSTE DE PÁGINA NO MODAL
@@ -715,7 +715,7 @@ function checkReadingProgress() {
     document.getElementById("resumeProgressText").textContent = "Página " + data.page + " de " + data.totalPages + " • " + data.percent + "% Concluído";
     document.getElementById("resumeProgressBar").style.width = data.percent + "%";
     section.classList.remove("hidden");
-    if (window.lucide) lucide.createIcons();
+    if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
   } catch (err) {
     section.classList.add("hidden");
   }
@@ -827,7 +827,7 @@ function updateAudiobookControlsUI(playing) {
   const status = document.getElementById("audiobookStatus");
   if (icon) {
     icon.setAttribute("data-lucide", playing ? "pause" : "play");
-    if (window.lucide) lucide.createIcons();
+    if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
   }
   if (status) {
     status.textContent = playing ? "Reproduzindo narração com frequência de fundo 432Hz..." : "Reprodução pausada.";
@@ -1006,7 +1006,7 @@ function renderFrequencies() {
     `;
   }).join("");
 
-  if (window.lucide) lucide.createIcons();
+  if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
 }
 
 // MOTOR DE FREQUÊNCIAS SAGRADAS (SOLFEGGIO ENGINE 2.0)
@@ -1140,7 +1140,7 @@ function renderRoadmap() {
     `;
   }).join("");
 
-  if (window.lucide) lucide.createIcons();
+  if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
 }
 
 function toggleRoadmapGrade(grade) {
@@ -1331,7 +1331,7 @@ async function authenticateGateLogin() {
   if (btn) {
     btn.disabled = true;
     btn.innerHTML = `<i data-lucide="loader" class="w-4 h-4 animate-spin"></i><span>Consultando no Supabase...</span>`;
-    if (window.lucide) lucide.createIcons();
+    if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
   }
 
   if (statusMsg) {
@@ -1389,7 +1389,7 @@ async function authenticateGateLogin() {
   if (btn) {
     btn.disabled = false;
     btn.innerHTML = `<i data-lucide="lock-open" class="w-4 h-4"></i><span>Entrar no Acervo Sagrado</span>`;
-    if (window.lucide) lucide.createIcons();
+    if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
   }
 }
 
@@ -1536,6 +1536,6 @@ function renderModuleDetailContent(moduleCategory) {
       `;
     }).join("");
     
-    if (window.lucide) lucide.createIcons();
+    if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
   }
 }

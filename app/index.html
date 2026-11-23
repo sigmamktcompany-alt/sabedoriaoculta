@@ -61,12 +61,12 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="app.css?v=1795413456">
+  <link rel="stylesheet" href="app.css?v=1795415601">
 </head>
 <body class="bg-dark-950 text-gray-200 font-sans antialiased min-h-screen flex flex-col pb-24 sm:pb-12 selection:bg-gold-500/20 selection:text-gold-400">
 
   <!-- ==================== TELA INICIAL DE LOGIN VIP (GATEWAY OBRIGATÓRIO) ==================== -->
-  <div id="vipLoginGate" class="fixed inset-0 z-[10000] bg-dark-950/98 backdrop-blur-2xl flex items-center justify-center p-4 transition-opacity duration-500">
+  <div id="vipLoginGate" style="opacity: 1 !important; display: flex !important;" class="fixed inset-0 z-[10000] bg-dark-950/98 backdrop-blur-2xl flex items-center justify-center p-4 transition-opacity duration-300">
     <!-- Efeito de fundo místico -->
     <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gold-500/15 via-dark-950/80 to-dark-950"></div>
     <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:24px_24px]"></div>
@@ -132,11 +132,17 @@
   </div>
 
   <!-- Lucide Icon Renderer & App Script -->
-  <script src="app.js?v=1795415352"></script>
+  <script src="app.js?v=1795415601"></script>
   <script>
+    // Forçar limpeza de caches locais em celulares iOS / Safari / Chrome Mobile
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js').catch(err => console.log('SW falhou', err));
+      navigator.serviceWorker.getRegistrations().then(registrations => {
+        for (let r of registrations) { r.unregister(); }
+      });
+    }
+    if ('caches' in window) {
+      caches.keys().then(names => {
+        for (let name of names) { caches.delete(name); }
       });
     }
   </script>

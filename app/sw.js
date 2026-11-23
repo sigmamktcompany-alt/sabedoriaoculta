@@ -1,21 +1,9 @@
-// CÚPULA 33 - SERVICE WORKER V2.0 (NETWORK FIRST COM BYPASS DE DADOS)
-const CACHE_NAME = 'cupula33-v2.0-' + Date.now();
-
-self.addEventListener('install', (event) => {
-  self.skipWaiting();
+// Service Worker auto-destrutor para desentupir qualquer celular com cache preso
+self.addEventListener('install', (e) => self.skipWaiting());
+self.addEventListener('activate', (e) => {
+  caches.keys().then(keys => Promise.all(keys.map(k => caches.delete(k))));
+  self.clients.claim();
 });
-
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys().then((keys) => {
-      return Promise.all(keys.map((key) => caches.delete(key)));
-    }).then(() => self.clients.claim())
-  );
-});
-
-self.addEventListener('fetch', (event) => {
-  // Sempre busca da rede direto para evitar qualquer cache antigo de 1919 ou arquivos velhos
-  event.respondWith(
-    fetch(event.request).catch(() => caches.match(event.request))
-  );
+self.addEventListener('fetch', (e) => {
+  e.respondWith(fetch(e.request));
 });
