@@ -1265,25 +1265,45 @@ function resetFilters() {
   filterCategory("todos");
 }
 
-// PWA INSTALL PROMPT
+// PWA INSTALL PROMPT & BAIXAR APP
 let deferredPrompt = null;
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
-  const btn = document.getElementById('pwaInstallBtn');
-  const banner = document.getElementById('pwaInstallBanner');
-  if (btn) btn.classList.remove('hidden');
-  if (banner) banner.classList.remove('hidden');
+  const nativeBtn = document.getElementById('nativeInstallDirectBtn');
+  if (nativeBtn) {
+    nativeBtn.textContent = "Instalar Agora (1 Clique)";
+  }
 });
 
 function triggerPWAInstall() {
   if (deferredPrompt) {
     deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(() => {
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        showToast("Instalação iniciada com sucesso!");
+      }
       deferredPrompt = null;
     });
   } else {
-    showToast("Para instalar no celular: toque no botão Compartilhar do Safari/Chrome e em 'Adicionar à Tela de Início'.");
+    // Abre modal com instruções completas para iOS e Android
+    openModal('installAppModal');
+  }
+}
+
+function executeNativeInstallPrompt() {
+  if (deferredPrompt) {
+    closeModal('installAppModal');
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        showToast("App Cúpula 33 instalado!");
+      }
+      deferredPrompt = null;
+    });
+  } else {
+    // Se não há prompt nativo (ex: Safari no iOS ou já instalado), orienta direto
+    showToast("Siga as instruções na tela para adicionar à Tela de Início!");
   }
 }
 
