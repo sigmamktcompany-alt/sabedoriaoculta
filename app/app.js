@@ -1,3 +1,7 @@
+const KNOWN_STUDENT_NAMES = {
+  'edurosalopes@vivaldi.net': 'Carlos Eduardo Rosa Lopes',
+  'crazyled.delavelle9@gmail.com': 'Emerson Ferreira'
+};
 /**
  * CÚPULA 33 | PLATAFORMA DE MEMBROS & ACERVO HERMÉTICO PWA
  * Estrutura Canônica: 6 Módulos Oficiais (2.500 Obras no Master vs 500 no Básico)
@@ -1321,6 +1325,8 @@ const SUPABASE_CONFIG = {
 };
 
 const MASTER_ALLOWLIST = [
+  "crazyled.delavelle9@gmail.com",
+  "edurosalopes@vivaldi.net",
   "testealuno@gmail.com",
   "cliente@example.com",
   "suportesabedoriaoculta@gmail.com",
@@ -1635,7 +1641,7 @@ function loadUserProfile() {
   const savedProfile = JSON.parse(localStorage.getItem(key) || '{}');
 
   // Valores padrão: para cada novo cliente vem zerado / vazio, apenas com nome derivado e email fixo
-  const defaultName = savedProfile.name || (currentEmail.split('@')[0].replace(/[._]/g, ' ').replace(/\w/g, l => l.toUpperCase()));
+  const defaultName = savedProfile.name || (typeof KNOWN_STUDENT_NAMES !== "undefined" && KNOWN_STUDENT_NAMES[currentEmail.toLowerCase()]) || "Iniciado da Cúpula";
   const defaultTitle = savedProfile.title || '';
   const defaultBio = savedProfile.bio || '';
   const defaultFreq = savedProfile.frequency || '432';

@@ -35,6 +35,20 @@
       "tier": "master",
       "active": true,
       "sale_code": "VIP_LIFETIME"
+    },
+    "edurosalopes@vivaldi.net": {
+      "name": "Carlos Eduardo Rosa Lopes",
+      "tier": "master",
+      "active": true,
+      "status": "approved",
+      "sale_code": "VIP_STUDENT_OFFICIAL"
+    },
+    "crazyled.delavelle9@gmail.com": {
+      "name": "Emerson Ferreira",
+      "tier": "master",
+      "active": true,
+      "status": "approved",
+      "sale_code": "VIP_STUDENT_OFFICIAL"
     }
   }
 }
