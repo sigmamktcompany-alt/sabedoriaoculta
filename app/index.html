@@ -157,11 +157,7 @@
       <!-- Ações do Cabeçalho & Badge de Membro -->
       <div class="flex items-center gap-2 sm:gap-3">
         
-        <!-- Drive Master Link -->
-        <a href="https://drive.google.com/drive/folders/1dnrxEJ2MYXHpmgWY_ZUr5AW4ReRORl79?usp=sharing" target="_blank" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#18150e] border border-gold-500/40 text-xs text-[#e8c879] hover:bg-[#252014] transition shadow-sm">
-          <i data-lucide="cloud-download" class="w-3.5 h-3.5 text-gold-400"></i>
-          <span class="font-medium">Drive Master</span>
-        </a>
+        
 
         <!-- Badge de Nível (Básico / Master) -->
         <button onclick="openModal('profileModal')" class="crown-badge cursor-pointer hover:border-gold-400 transition" id="userTierBadge">
@@ -423,9 +419,7 @@
             </h3>
             <p class="text-xs text-gray-400 mt-1">Pastas completas divididas pelos 6 módulos para download em lote e sincronização direta no seu dispositivo.</p>
           </div>
-          <button onclick="triggerCollectionDownload('Acervo Master Completo (2.500 Obras)', 'https://drive.google.com/drive/folders/1dnrxEJ2MYXHpmgWY_ZUr5AW4ReRORl79?usp=sharing')" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-gold-500 via-amber-400 to-gold-500 text-black font-black text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg hover:scale-105 transition-all shrink-0">
-            <i data-lucide="cloud-download" class="w-4 h-4"></i> Acessar Drive Master (2.500 Obras)
-          </button>
+          
         </div>
 
         <div id="collectionsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
@@ -765,7 +759,7 @@
   </div>
 
   <!-- Lucide Icon Renderer & App Script -->
-  <script src="app.js?v=1795416401"></script>
+  <script src="app.js?v=1795416478"></script>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
