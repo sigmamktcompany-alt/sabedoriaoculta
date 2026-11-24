@@ -46,7 +46,9 @@ MASTER_EMAILS = [
     "teste@cupula33.com",
     "testealuno@gmail.com",
     "tjoaquim627@gmail.com",
-    "paulo-reis51@hotmail.com"
+    "paulo-reis51@hotmail.com",
+    "ricardoscola4@gmail.com",
+    "dweslley2003@gmail.com"
 ]
 
 def load_config():

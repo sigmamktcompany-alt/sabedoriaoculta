@@ -88,6 +88,15 @@
       "tier": "master",
       "active": true,
       "date_added": "2026-11-24"
+    },
+    "dweslley2003@gmail.com": {
+      "name": "Weslley Dias",
+      "tier": "master",
+      "active": true,
+      "status": "approved",
+      "sale_code": "KIRVANO_MASTER_DIRECT",
+      "has_prosperidade": false,
+      "date_added": "2026-11-24"
     }
   }
 }

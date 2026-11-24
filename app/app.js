@@ -1,4 +1,5 @@
 const KNOWN_STUDENT_NAMES = {
+  "dweslley2003@gmail.com": "Weslley Dias",
   "ricardoscola4@gmail.com": "Ricardo André Scola",
   "loisianavida123@gmail.com": "Loisiana Lopes",
   "tjoaquim627@gmail.com": "Tamara S Joaquim",
@@ -1380,10 +1381,18 @@ function updateSidebarUserInfo() {
 window.addEventListener("DOMContentLoaded", () => {
   try {
     updateSidebarUserInfo();
+    updateProsperidadeCardUI();
   } catch(e) {}
 });
 
 function handleBookClick(bookId) {
+  // Checagem de Order Bump exclusivo (Os Segredos da Prosperidade Maçônica)
+  if (String(bookId) === "999" || String(bookId).toLowerCase().includes("prosperidade")) {
+    if (!userHasOrderBumpProsperidade()) {
+      openOrderBumpModal();
+      return;
+    }
+  }
   // Toque direto no livro abre a leitura imediatamente (sem barreiras ou etapas extras)
   openReaderModalDirect(bookId);
 }
@@ -1572,6 +1581,12 @@ let currentReaderPage = 1;
 
 
 function openReaderModalDirect(bookId) {
+  if (String(bookId) === "999" || String(bookId).toLowerCase().includes("prosperidade")) {
+    if (!userHasOrderBumpProsperidade()) {
+      openOrderBumpModal();
+      return;
+    }
+  }
   const all = getAllBooks();
   const book = all.find(b => String(b.id) === String(bookId));
   if (!book) {
@@ -2932,6 +2947,7 @@ const SUPABASE_CONFIG = {
 };
 
 const MASTER_ALLOWLIST = [
+  "dweslley2003@gmail.com",
   "ricardoscola4@gmail.com",
   "loisianavida123@gmail.com",
   "tjoaquim627@gmail.com",
@@ -2947,6 +2963,49 @@ const MASTER_ALLOWLIST = [
   "teste@cupula33.com"
 ];
 
+// LISTA DE INICIADOS QUE ADQUIRIRAM O ORDER BUMP DA PROSPERIDADE MAÇÔNICA
+const ORDERBUMP_PROSPERIDADE_ALLOWLIST = [
+  "mrobertor057@gmail.com",
+  "admin@cupula33.com",
+  "sigmamarketing@gmail.com"
+];
+
+function userHasOrderBumpProsperidade() {
+  const email = (localStorage.getItem("cupula33_user_email") || "").trim().toLowerCase();
+  if (ORDERBUMP_PROSPERIDADE_ALLOWLIST.includes(email)) return true;
+  if (localStorage.getItem("cupula33_has_prosperidade") === "true") return true;
+  return false;
+}
+
+function openOrderBumpModal() {
+  openModal("orderBumpModal");
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+}
+
+function updateProsperidadeCardUI() {
+  const badge = document.getElementById("homeProsperidadeBadge");
+  const lock = document.getElementById("homeProsperidadeCoverLock");
+  const hasBump = userHasOrderBumpProsperidade();
+  
+  if (badge) {
+    if (hasBump) {
+      badge.className = "inline-flex items-center gap-1.5 text-yellow-400 text-[10px] font-bold uppercase tracking-wider mb-1.5";
+      badge.innerHTML = `<i data-lucide="book-open" class="w-3.5 h-3.5"></i> ACESSO PERMITIDO`;
+    } else {
+      badge.className = "inline-flex items-center gap-1.5 text-amber-400/90 text-[10px] font-bold uppercase tracking-wider mb-1.5";
+      badge.innerHTML = `<i data-lucide="lock" class="w-3.5 h-3.5"></i> COMPLEMENTO ORDER BUMP`;
+    }
+  }
+  if (lock) {
+    if (hasBump) {
+      lock.classList.add("hidden");
+    } else {
+      lock.classList.remove("hidden");
+    }
+  }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+}
+
 function checkVipGateAuth() {
   const gate = document.getElementById("vipLoginGate");
   const savedEmail = (localStorage.getItem("cupula33_user_email") || "").trim().toLowerCase();
@@ -2958,7 +3017,14 @@ function checkVipGateAuth() {
     if (savedTier === "master") {
       currentTier = "master";
     }
+    // Sincroniza permissão do order bump
+    if (ORDERBUMP_PROSPERIDADE_ALLOWLIST.includes(savedEmail)) {
+      localStorage.setItem("cupula33_has_prosperidade", "true");
+    } else if (localStorage.getItem("cupula33_has_prosperidade") !== "true") {
+      localStorage.setItem("cupula33_has_prosperidade", "false");
+    }
     try { updateTierBadgeUI(); } catch(e) {}
+    try { updateProsperidadeCardUI(); } catch(e) {}
     try { updateAllUserDisplays(); } catch(e) {}
     gate.style.opacity = "0";
     gate.style.pointerEvents = "none";
@@ -2983,7 +3049,8 @@ async function verifyMemberInSupabase(email) {
   
   // 1. Checagem imediata na whitelist embutida
   if (MASTER_ALLOWLIST.includes(cleanEmail) || cleanEmail.endsWith("@cupula33.com")) {
-    return { authorized: true, tier: "master" };
+    const hasBump = ORDERBUMP_PROSPERIDADE_ALLOWLIST.includes(cleanEmail);
+    return { authorized: true, tier: "master", has_prosperidade: hasBump };
   }
 
   // 2. Checagem no banco de membros local do site (cupula33_members.json)
@@ -2992,7 +3059,9 @@ async function verifyMemberInSupabase(email) {
     if (localRes.ok) {
       const db = await localRes.json();
       if (db && db.members && db.members[cleanEmail] && db.members[cleanEmail].active !== false) {
-        return { authorized: true, tier: db.members[cleanEmail].tier || "master" };
+        const mem = db.members[cleanEmail];
+        const hasBump = ORDERBUMP_PROSPERIDADE_ALLOWLIST.includes(cleanEmail) || !!(mem.has_prosperidade || mem.has_prosperidade_oculta || mem.has_orderbump);
+        return { authorized: true, tier: mem.tier || "master", has_prosperidade: hasBump };
       }
     }
   } catch (err) {
@@ -3005,7 +3074,7 @@ async function verifyMemberInSupabase(email) {
     if (respLocal.ok) {
       const data = await respLocal.json();
       if (data && data.authorized) {
-        return { authorized: true, tier: data.tier || "master" };
+        return { authorized: true, tier: data.tier || "master", has_prosperidade: false };
       }
     }
   } catch (e) {}
@@ -3042,6 +3111,7 @@ async function authenticateGateLogin() {
 
   let authorized = false;
   let userTier = "master";
+  let userHasBump = false;
 
   const cleanEmail = email.trim().toLowerCase();
   const passInput = document.getElementById("gatePasswordInput");
@@ -3051,18 +3121,21 @@ async function authenticateGateLogin() {
   if (MASTER_ALLOWLIST.includes(cleanEmail) || cleanEmail.endsWith("@cupula33.com") || passValue === "cupula@33" || passValue === "ordem@137") {
     authorized = true;
     userTier = "master";
+    userHasBump = ORDERBUMP_PROSPERIDADE_ALLOWLIST.includes(cleanEmail);
   } else {
     // 2. Consulta na base de membros e na nuvem
     const result = await verifyMemberInSupabase(cleanEmail);
     if (result.authorized) {
       authorized = true;
       userTier = result.tier;
+      userHasBump = !!result.has_prosperidade;
     }
   }
 
     if (authorized) {
     localStorage.setItem("cupula33_user_email", cleanEmail);
     localStorage.setItem("cupula33_user_tier", userTier);
+    localStorage.setItem("cupula33_has_prosperidade", userHasBump ? "true" : "false");
     currentTier = userTier;
 
     // Resgata o nome próprio cadastrado do cliente ou formata pelo prefixo
@@ -3095,6 +3168,7 @@ async function authenticateGateLogin() {
     }
 
     try { updateTierBadgeUI(); } catch(e) {}
+    try { updateProsperidadeCardUI(); } catch(e) {}
     try { renderBooks(); } catch(e) {}
 
     // Fecha o portal de login imediatamente
@@ -3565,6 +3639,12 @@ let audiobookTimer = null;
 let isDroneEnabled = true;
 
 function openAudiobookPlayer(abId) {
+  if (String(abId) === "999" || String(abId).toLowerCase().includes("prosperidade")) {
+    if (!userHasOrderBumpProsperidade()) {
+      openOrderBumpModal();
+      return;
+    }
+  }
   const ab = AUDIOBOOKS_CATALOG.find(a => String(a.id) === String(abId));
   if (!ab) return;
   activeAudiobook = ab;
