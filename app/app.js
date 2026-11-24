@@ -3123,6 +3123,71 @@ function userHasOrderBumpProsperidade() {
   return false;
 }
 
+// LÓGICA DO MODAL DE ESTRUTURA DO CURSO (IDÊNTICO AOS PRINTS DA ORDEM 137)
+function openCourseStructureModal() {
+  const modal = document.getElementById("courseStructureModal");
+  if (modal) {
+    modal.classList.remove("hidden");
+    if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  }
+}
+
+function closeCourseStructureModal() {
+  const modal = document.getElementById("courseStructureModal");
+  if (modal) modal.classList.add("hidden");
+}
+
+function toggleCourseDesc() {
+  const s = document.getElementById("courseDescShort");
+  const f = document.getElementById("courseDescFull");
+  const btn = document.getElementById("btnToggleCourseDesc");
+  if (!s || !f) return;
+  const isExpanded = s.classList.contains("hidden");
+  if (isExpanded) {
+    s.classList.remove("hidden");
+    f.classList.add("hidden");
+    if (btn) btn.innerHTML = `<span>LER MAIS</span><i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>`;
+  } else {
+    s.classList.add("hidden");
+    f.classList.remove("hidden");
+    if (btn) btn.innerHTML = `<span>LER MENOS</span><i data-lucide="chevron-up" class="w-3.5 h-3.5"></i>`;
+  }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+}
+
+function toggleModalDesc() {
+  const s = document.getElementById("modalDescShort");
+  const f = document.getElementById("modalDescFull");
+  const btn = document.getElementById("btnToggleModalDesc");
+  if (!s || !f) return;
+  const isExpanded = s.classList.contains("hidden");
+  if (isExpanded) {
+    s.classList.remove("hidden");
+    f.classList.add("hidden");
+    if (btn) btn.innerHTML = `<span>LER MAIS</span><i data-lucide="chevron-down" class="w-3 h-3"></i>`;
+  } else {
+    s.classList.add("hidden");
+    f.classList.remove("hidden");
+    if (btn) btn.innerHTML = `<span>LER MENOS</span><i data-lucide="chevron-up" class="w-3 h-3"></i>`;
+  }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+}
+
+function toggleModuleAccordion() {
+  const list = document.getElementById("moduleLessonsList");
+  const icon = document.getElementById("moduleChevronIcon");
+  if (!list) return;
+  list.classList.toggle("hidden");
+  if (icon) {
+    if (list.classList.contains("hidden")) {
+      icon.setAttribute("data-lucide", "chevron-down");
+    } else {
+      icon.setAttribute("data-lucide", "chevron-up");
+    }
+    if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  }
+}
+
 // MODAL DE BLOQUEIO DE CURSOS (A CÂMARA INTERNA)
 function openCourseLockedNotice(courseTitle = "A Câmara Interna") {
   const modal = document.getElementById("courseLockedModal");

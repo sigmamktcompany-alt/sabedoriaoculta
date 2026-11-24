@@ -616,189 +616,82 @@
 
     <!-- ==================== ABA 4: AULAS & CURSOS (A CÂMARA INTERNA) ==================== -->
     <section id="tab-courses" class="app-tab-section hidden animate-fade-in">
-      <div class="px-6 sm:px-12 py-8 text-left">
+      <div class="px-4 sm:px-12 py-8 text-left max-w-4xl mx-auto">
         
         <!-- Header da Seção -->
-        <div class="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
-            <h1 class="text-2xl sm:text-3xl font-serif text-white font-bold border-l-4 border-yellow-500 pl-4 tracking-tight">
-              A Câmara Interna
+        <div class="mb-6">
+          <div class="flex items-center gap-2 mb-1">
+            <div class="w-1.5 h-6 bg-red-600 rounded-full"></div>
+            <h1 class="text-2xl sm:text-3xl font-serif text-white font-bold tracking-tight">
+              Aulas & Sabedoria
             </h1>
-            <p class="text-xs text-gray-400 mt-2 pl-4">
-              Ensinamentos secretos e tradições ocultas reveladas em vídeo.
+          </div>
+          <p class="text-xs text-gray-400 pl-3.5">
+            Aulas em vídeo para aprofundamento
+          </p>
+        </div>
+
+        <!-- Card de Destaque da Câmara Interna (Idêntico ao Print 1 e 2) -->
+        <div class="esoteric-card rounded-3xl p-6 sm:p-8 mb-10 border border-white/10 relative overflow-hidden bg-[#111111] text-center shadow-2xl">
+          <!-- Capa Grande Centralizada -->
+          <div class="w-48 sm:w-60 aspect-[3/4] mx-auto rounded-2xl overflow-hidden bg-black shadow-2xl border border-white/10 mb-6">
+            <img src="https://ajczjcjbsuvxrfdumwow.supabase.co/storage/v1/object/public/library-covers/course-covers/1773264811685_ywl2mf.png" onerror="this.src='assets/covers_extracted/cover_A_T_bua_Das_Esmeraldas_De_Thoth.jpg'" alt="A Câmara Interna" class="w-full h-full object-cover">
+          </div>
+
+          <!-- Tag Destaque Vermelha -->
+          <div class="inline-block px-3 py-1 rounded bg-[#dc2626] text-white text-[11px] font-extrabold uppercase tracking-wider mb-3">
+            DESTAQUE
+          </div>
+
+          <!-- Título -->
+          <h2 class="text-2xl sm:text-3xl font-serif font-black text-white mb-3">
+            A Câmara Interna
+          </h2>
+
+          <!-- Descrição com Ver Mais -->
+          <div class="max-w-xl mx-auto mb-6">
+            <p id="courseDescShort" class="text-xs text-gray-300 leading-relaxed">
+              Quebre as correntes da ignorância. Esta coletânea de vídeos revela os mecanismos ocultos da realidade e os mistérios do...
             </p>
+            <p id="courseDescFull" class="hidden text-xs text-gray-300 leading-relaxed">
+              Quebre as correntes da ignorância. Esta coletânea de vídeos revela os mecanismos ocultos da realidade e os mistérios do universo que foram escondidos de você por séculos. A verdade nua e crua.
+            </p>
+            <button onclick="toggleCourseDesc()" id="btnToggleCourseDesc" class="mt-2 text-[11px] font-bold text-gray-400 hover:text-white uppercase tracking-wider transition cursor-pointer flex items-center justify-center gap-1 mx-auto">
+              <span>LER MAIS</span>
+              <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+            </button>
           </div>
-          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-xs font-bold uppercase tracking-wider self-start sm:self-auto">
-            <i data-lucide="lock" class="w-3.5 h-3.5"></i> Acesso Restrito
-          </div>
+
+          <!-- Botão Acessar Estrutura (Branco com Cadeado, idêntico aos Prints 2 e 3) -->
+          <button onclick="openCourseStructureModal()" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white hover:bg-gray-100 text-black font-extrabold text-xs uppercase tracking-wider inline-flex items-center justify-center gap-2 shadow-xl active:scale-95 transition cursor-pointer">
+            <i data-lucide="lock" class="w-4 h-4 text-black"></i>
+            <span>Acessar Estrutura</span>
+          </button>
         </div>
 
-        <!-- Card de Destaque Oficial: A Câmara Interna -->
-        <div class="esoteric-card rounded-2xl p-6 sm:p-8 mb-10 max-w-5xl border border-white/10 relative overflow-hidden bg-gradient-to-br from-[#141414] to-[#0a0a0a]">
-          <div class="flex flex-col md:flex-row items-center gap-6 sm:gap-8">
-            <div class="w-full md:w-56 aspect-[3/4] rounded-xl overflow-hidden bg-black shrink-0 border border-yellow-500/30 shadow-2xl relative group">
-              <img src="https://ajczjcjbsuvxrfdumwow.supabase.co/storage/v1/object/public/library-covers/course-covers/1773264811685_ywl2mf.png" onerror="this.src='assets/covers_extracted/cover_A_T_bua_Das_Esmeraldas_De_Thoth.jpg'" alt="A Câmara Interna" class="w-full h-full object-cover">
-              <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-                <div class="w-12 h-12 rounded-full bg-yellow-500/20 border border-yellow-500/60 flex items-center justify-center text-yellow-400">
-                  <i data-lucide="lock" class="w-6 h-6"></i>
+        <!-- Seção Catálogo Completo (Idêntico ao Print 2 e 3) -->
+        <div class="mb-10">
+          <h2 class="text-xl font-serif font-bold text-white mb-5 tracking-tight">
+            Catálogo Completo
+          </h2>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6">
+            <!-- Card Catálogo da Câmara Interna -->
+            <div onclick="openCourseStructureModal()" class="group cursor-pointer text-left">
+              <div class="w-full aspect-[3/4] rounded-2xl overflow-hidden bg-black relative border border-white/10 shadow-lg mb-2.5">
+                <img src="https://ajczjcjbsuvxrfdumwow.supabase.co/storage/v1/object/public/library-covers/course-covers/1773264811685_ywl2mf.png" onerror="this.src='assets/covers_extracted/cover_A_T_bua_Das_Esmeraldas_De_Thoth.jpg'" alt="A Câmara Interna" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                
+                <!-- Ícone Cadeado Translúcido no Canto Superior Direito -->
+                <div class="absolute top-2.5 right-2.5 w-7 h-7 rounded-lg bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white/90">
+                  <i data-lucide="lock" class="w-3.5 h-3.5"></i>
                 </div>
               </div>
-            </div>
-
-            <div class="flex-1">
-              <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-yellow-500 text-black text-[10px] font-black uppercase tracking-wider mb-3">
-                <i data-lucide="sparkles" class="w-3 h-3"></i> NÍVEL 1 • COLETÂNEA EXCLUSIVA
-              </div>
-              <h2 class="text-2xl sm:text-3xl font-serif font-black text-white mb-3">
+              <h3 class="text-sm font-bold text-white group-hover:text-yellow-400 transition-colors">
                 A Câmara Interna
-              </h2>
-              <p class="text-xs sm:text-sm text-gray-300 leading-relaxed mb-6">
-                Quebre as correntes da ignorância. Esta coletânea de vídeos revela os mecanismos ocultos da realidade e os mistérios do universo que foram escondidos de você por séculos. A verdade nua e crua.
+              </h3>
+              <p class="text-xs text-gray-500 mt-0.5 font-medium">
+                1 Módulos
               </p>
-              
-              <div class="flex flex-wrap items-center gap-3">
-                <button onclick="openCourseLockedNotice('A Câmara Interna')" class="px-6 py-3 rounded-xl bg-gradient-to-r from-yellow-500 to-amber-400 hover:from-yellow-400 hover:to-amber-300 text-black font-extrabold text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg shadow-yellow-500/20 active:scale-95 transition cursor-pointer">
-                  <i data-lucide="lock" class="w-4 h-4"></i>
-                  <span>Desbloquear Aulas em Vídeo</span>
-                </button>
-                <div class="text-xs text-gray-400 font-medium flex items-center gap-1.5">
-                  <i data-lucide="film" class="w-4 h-4 text-yellow-500"></i>
-                  <span>5 Aulas Exclusivas (Bloqueadas)</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Grade com as 5 Aulas em Vídeo da Câmara Interna (Idêntico à Ordem 137) -->
-        <div class="max-w-5xl">
-          <div class="flex items-center justify-between mb-5">
-            <h2 class="text-lg font-serif font-bold text-white flex items-center gap-2">
-              <i data-lucide="video" class="w-5 h-5 text-yellow-400"></i>
-              <span>Grade de Aulas • Nível 1</span>
-            </h2>
-            <span class="text-xs text-gray-500 font-mono">5 VÍDEOS COMPLETOS</span>
-          </div>
-
-          <div class="space-y-4">
-            <!-- Aula 1 -->
-            <div onclick="openCourseLockedNotice('Por que Jesus não rezava como nos ensinaram?')" class="esoteric-card esoteric-card-hover rounded-2xl p-5 border border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer group">
-              <div class="flex items-start gap-4">
-                <div class="w-12 h-12 rounded-xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-yellow-400 shrink-0 group-hover:scale-105 transition-transform">
-                  <i data-lucide="lock" class="w-5 h-5"></i>
-                </div>
-                <div>
-                  <div class="flex items-center gap-2 mb-1">
-                    <span class="text-[10px] font-mono font-bold text-yellow-500 uppercase tracking-wider">AULA 01 • GNOSTICISMO & MÔNADA</span>
-                  </div>
-                  <h3 class="text-base font-bold text-white group-hover:text-yellow-400 transition-colors">
-                    Por que Jesus não "rezava" como nos ensinaram? (O Chamado da Mônada)
-                  </h3>
-                  <p class="text-xs text-gray-400 mt-1 line-clamp-2 leading-relaxed">
-                    A visão gnóstica de que Jesus não utilizava a oração como súplica de pedinte, mas como comando de autoridade interna direta à Fonte. A Armadilha da Súplica, Arcontes e o Estado de Operador da Realidade.
-                  </p>
-                </div>
-              </div>
-              <div class="shrink-0 flex items-center gap-2 text-xs font-bold text-yellow-400 border border-yellow-500/20 bg-yellow-500/5 px-3 py-1.5 rounded-lg self-start md:self-center">
-                <i data-lucide="lock" class="w-3.5 h-3.5"></i>
-                <span>BLOQUEADO</span>
-              </div>
-            </div>
-
-            <!-- Aula 2 -->
-            <div onclick="openCourseLockedNotice('As 7 Leis Herméticas Explicadas em Detalhes')" class="esoteric-card esoteric-card-hover rounded-2xl p-5 border border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer group">
-              <div class="flex items-start gap-4">
-                <div class="w-12 h-12 rounded-xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-yellow-400 shrink-0 group-hover:scale-105 transition-transform">
-                  <i data-lucide="lock" class="w-5 h-5"></i>
-                </div>
-                <div>
-                  <div class="flex items-center gap-2 mb-1">
-                    <span class="text-[10px] font-mono font-bold text-yellow-500 uppercase tracking-wider">AULA 02 • HERMETISMO PRÁTICO</span>
-                  </div>
-                  <h3 class="text-base font-bold text-white group-hover:text-yellow-400 transition-colors">
-                    AS 7 LEIS HERMÉTICAS EXPLICADAS EM DETALHES
-                  </h3>
-                  <p class="text-xs text-gray-400 mt-1 line-clamp-2 leading-relaxed">
-                    Mentalismo, Correspondência, Vibração, Polaridade, Ritmo, Causa e Efeito e Gênero. O manual prático para compreender a mente e a cocriação quântica da realidade alinhada à ciência moderna.
-                  </p>
-                </div>
-              </div>
-              <div class="shrink-0 flex items-center gap-2 text-xs font-bold text-yellow-400 border border-yellow-500/20 bg-yellow-500/5 px-3 py-1.5 rounded-lg self-start md:self-center">
-                <i data-lucide="lock" class="w-3.5 h-3.5"></i>
-                <span>BLOQUEADO</span>
-              </div>
-            </div>
-
-            <!-- Aula 3 -->
-            <div onclick="openCourseLockedNotice('O Verdadeiro Propósito da Criação da Humanidade')" class="esoteric-card esoteric-card-hover rounded-2xl p-5 border border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer group">
-              <div class="flex items-start gap-4">
-                <div class="w-12 h-12 rounded-xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-yellow-400 shrink-0 group-hover:scale-105 transition-transform">
-                  <i data-lucide="lock" class="w-5 h-5"></i>
-                </div>
-                <div>
-                  <div class="flex items-center gap-2 mb-1">
-                    <span class="text-[10px] font-mono font-bold text-yellow-500 uppercase tracking-wider">AULA 03 • COSMOGONIA OCULTA</span>
-                  </div>
-                  <h3 class="text-base font-bold text-white group-hover:text-yellow-400 transition-colors">
-                    O VERDADEIRO PROPÓSITO DA CRIAÇÃO DA HUMANIDADE
-                  </h3>
-                  <p class="text-xs text-gray-400 mt-1 line-clamp-2 leading-relaxed">
-                    A ruptura com narrativas tradicionais: a humanidade não como obra casual, mas como interface viva e portal biológico desenhado para colapsar possibilidades infinitas no plano físico.
-                  </p>
-                </div>
-              </div>
-              <div class="shrink-0 flex items-center gap-2 text-xs font-bold text-yellow-400 border border-yellow-500/20 bg-yellow-500/5 px-3 py-1.5 rounded-lg self-start md:self-center">
-                <i data-lucide="lock" class="w-3.5 h-3.5"></i>
-                <span>BLOQUEADO</span>
-              </div>
-            </div>
-
-            <!-- Aula 4 -->
-            <div onclick="openCourseLockedNotice('O Maior Segredo do Universo Revelado')" class="esoteric-card esoteric-card-hover rounded-2xl p-5 border border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer group">
-              <div class="flex items-start gap-4">
-                <div class="w-12 h-12 rounded-xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-yellow-400 shrink-0 group-hover:scale-105 transition-transform">
-                  <i data-lucide="lock" class="w-5 h-5"></i>
-                </div>
-                <div>
-                  <div class="flex items-center gap-2 mb-1">
-                    <span class="text-[10px] font-mono font-bold text-yellow-500 uppercase tracking-wider">AULA 04 • CONSCIÊNCIA & MORFOGÊNESE</span>
-                  </div>
-                  <h3 class="text-base font-bold text-white group-hover:text-yellow-400 transition-colors">
-                    O MAIOR SEGREDO DO UNIVERSO REVELADO: O QUE NUNCA TE CONTARAM
-                  </h3>
-                  <p class="text-xs text-gray-400 mt-1 line-clamp-2 leading-relaxed">
-                    O Espaço Platônico, campos bioelétricos e a função do ser humano como antena viva. Como padrões e arquétipos invisíveis moldam a biologia e a realidade antes mesmo da matéria existir.
-                  </p>
-                </div>
-              </div>
-              <div class="shrink-0 flex items-center gap-2 text-xs font-bold text-yellow-400 border border-yellow-500/20 bg-yellow-500/5 px-3 py-1.5 rounded-lg self-start md:self-center">
-                <i data-lucide="lock" class="w-3.5 h-3.5"></i>
-                <span>BLOQUEADO</span>
-              </div>
-            </div>
-
-            <!-- Aula 5 -->
-            <div onclick="openCourseLockedNotice('Manifestação Quântica: O que o 1% Sabe')" class="esoteric-card esoteric-card-hover rounded-2xl p-5 border border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer group">
-              <div class="flex items-start gap-4">
-                <div class="w-12 h-12 rounded-xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-yellow-400 shrink-0 group-hover:scale-105 transition-transform">
-                  <i data-lucide="lock" class="w-5 h-5"></i>
-                </div>
-                <div>
-                  <div class="flex items-center gap-2 mb-1">
-                    <span class="text-[10px] font-mono font-bold text-yellow-500 uppercase tracking-wider">AULA 05 • FÍSICA QUÂNTICA & MANIFESTAÇÃO</span>
-                  </div>
-                  <h3 class="text-base font-bold text-white group-hover:text-yellow-400 transition-colors">
-                    MANIFESTAÇÃO QUÂNTICA: O QUE O 1% SABE E NUNCA FOI ENSINADO A VOCÊ
-                  </h3>
-                  <p class="text-xs text-gray-400 mt-1 line-clamp-2 leading-relaxed">
-                    O colapso da função de onda pela ausência de resistência interna. Desconstrução do mito do esforço, reprogramação do campo vibracional e a equação definitiva para manifestação secular.
-                  </p>
-                </div>
-              </div>
-              <div class="shrink-0 flex items-center gap-2 text-xs font-bold text-yellow-400 border border-yellow-500/20 bg-yellow-500/5 px-3 py-1.5 rounded-lg self-start md:self-center">
-                <i data-lucide="lock" class="w-3.5 h-3.5"></i>
-                <span>BLOQUEADO</span>
-              </div>
             </div>
           </div>
         </div>
@@ -1182,6 +1075,166 @@
     </div>
   </div>
 
+  <!-- ==================== MODAL ESTRUTURA DO CURSO: A CÂMARA INTERNA (EXATAMENTE COMO PRINTS 4 E 5) ==================== -->
+  <div id="courseStructureModal" class="fixed inset-0 z-[120] flex items-center justify-center p-3 sm:p-4 bg-black/95 backdrop-blur-xl hidden animate-fade-in">
+    <div class="relative bg-[#121212] w-full max-w-lg rounded-3xl shadow-[0_25px_80px_rgba(0,0,0,0.95)] border border-white/10 overflow-hidden max-h-[92vh] flex flex-col z-10 text-left animate-slide-up">
+      
+      <!-- Botão Fechar X no Topo Direito (Idêntico ao Print 4) -->
+      <button onclick="closeCourseStructureModal()" class="absolute top-4 right-4 z-30 w-9 h-9 bg-black/70 hover:bg-white/10 border border-white/15 rounded-full flex items-center justify-center text-white/80 hover:text-white transition-all cursor-pointer">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <!-- Conteúdo com Scroll -->
+      <div class="overflow-y-auto px-6 py-6 hide-scrollbar flex-1">
+        
+        <!-- Topo do Curso: Capa à esquerda + Tags & Título à direita -->
+        <div class="flex items-start gap-4 mb-4 pr-8">
+          <div class="w-20 sm:w-24 aspect-[3/4] rounded-xl overflow-hidden bg-black shrink-0 border border-white/10 shadow-lg">
+            <img src="https://ajczjcjbsuvxrfdumwow.supabase.co/storage/v1/object/public/library-covers/course-covers/1773264811685_ywl2mf.png" onerror="this.src='assets/covers_extracted/cover_A_T_bua_Das_Esmeraldas_De_Thoth.jpg'" alt="A Câmara Interna" class="w-full h-full object-cover">
+          </div>
+          <div>
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="text-[10px] font-mono font-black text-red-500 uppercase tracking-widest">GERAL</span>
+              <span class="text-[10px] text-gray-500">•</span>
+              <span class="text-[10px] font-mono font-bold text-red-500 uppercase tracking-widest">1 MÓDULOS</span>
+            </div>
+            <h2 class="text-xl font-serif font-black text-white leading-tight">
+              A Câmara Interna
+            </h2>
+            <p class="text-[10px] font-mono font-bold text-gray-500 uppercase tracking-wider mt-1.5">
+              INSTRUTOR: CÚPULA 33
+            </p>
+          </div>
+        </div>
+
+        <!-- Sinopse com Expansão LER MAIS -->
+        <div class="mb-6">
+          <p id="modalDescShort" class="text-xs text-gray-300 leading-relaxed">
+            Quebre as correntes da ignorância. Esta coletânea de vídeos revela os mecanismos ocultos da realidade e os mistérios do...
+          </p>
+          <p id="modalDescFull" class="hidden text-xs text-gray-300 leading-relaxed">
+            Quebre as correntes da ignorância. Esta coletânea de vídeos revela os mecanismos ocultos da realidade e os mistérios do universo que foram escondidos de você por séculos. A verdade nua e crua.
+          </p>
+          <button onclick="toggleModalDesc()" id="btnToggleModalDesc" class="mt-1 text-[10px] font-bold text-gray-400 hover:text-white uppercase tracking-wider transition cursor-pointer flex items-center gap-1">
+            <span>LER MAIS</span>
+            <i data-lucide="chevron-down" class="w-3 h-3"></i>
+          </button>
+        </div>
+
+        <!-- Título Seção: Conteúdo do Curso -->
+        <h3 class="text-base font-bold text-white mb-3">
+          Conteúdo do Curso
+        </h3>
+
+        <!-- Acordeão Módulo: Nível 1 (Idêntico ao Print 4 e 5) -->
+        <div class="border border-white/10 rounded-2xl overflow-hidden bg-[#161616]">
+          <!-- Header do Módulo Nível 1 -->
+          <div class="p-4 flex items-center justify-between border-b border-white/5 cursor-pointer" onclick="toggleModuleAccordion()">
+            <span class="text-sm font-bold text-white">Nível 1</span>
+            <i id="moduleChevronIcon" data-lucide="chevron-up" class="w-4 h-4 text-gray-400"></i>
+          </div>
+
+          <!-- Lista de Aulas Bloqueadas (Exatamente como nos Prints 4 e 5) -->
+          <div id="moduleLessonsList" class="divide-y divide-white/5">
+            <!-- Aula 1 -->
+            <div onclick="openCourseLockedNotice('Por que Jesus não rezava como nos ensinaram?')" class="p-3.5 sm:p-4 flex items-center justify-between hover:bg-white/[0.03] transition cursor-pointer group">
+              <div class="flex items-center gap-3.5 pr-2 overflow-hidden">
+                <span class="text-xs font-mono font-bold text-gray-500 w-4 text-center shrink-0">1</span>
+                <div class="overflow-hidden">
+                  <h4 class="text-xs font-semibold text-white truncate group-hover:text-yellow-400 transition-colors">
+                    Por que Jesus não "rezava" como nos ...
+                  </h4>
+                  <div class="flex items-center gap-1 text-[10px] text-gray-500 font-mono mt-0.5">
+                    <i data-lucide="clock" class="w-3 h-3"></i>
+                    <span>0</span>
+                  </div>
+                </div>
+              </div>
+              <i data-lucide="lock" class="w-4 h-4 text-gray-500 group-hover:text-yellow-400 shrink-0"></i>
+            </div>
+
+            <!-- Aula 2 -->
+            <div onclick="openCourseLockedNotice('AS 7 LEIS HERMÉTICAS EXPLICADAS EM DETALHES')" class="p-3.5 sm:p-4 flex items-center justify-between hover:bg-white/[0.03] transition cursor-pointer group">
+              <div class="flex items-center gap-3.5 pr-2 overflow-hidden">
+                <span class="text-xs font-mono font-bold text-gray-500 w-4 text-center shrink-0">2</span>
+                <div class="overflow-hidden">
+                  <h4 class="text-xs font-semibold text-white truncate group-hover:text-yellow-400 transition-colors">
+                    AS 7 LEIS HERMÉTICAS EXPLICADAS E...
+                  </h4>
+                  <div class="flex items-center gap-1 text-[10px] text-gray-500 font-mono mt-0.5">
+                    <i data-lucide="clock" class="w-3 h-3"></i>
+                    <span>0</span>
+                  </div>
+                </div>
+              </div>
+              <i data-lucide="lock" class="w-4 h-4 text-gray-500 group-hover:text-yellow-400 shrink-0"></i>
+            </div>
+
+            <!-- Aula 3 -->
+            <div onclick="openCourseLockedNotice('O EMPATA CURADO')" class="p-3.5 sm:p-4 flex items-center justify-between hover:bg-white/[0.03] transition cursor-pointer group">
+              <div class="flex items-center gap-3.5 pr-2 overflow-hidden">
+                <span class="text-xs font-mono font-bold text-gray-500 w-4 text-center shrink-0">3</span>
+                <div class="overflow-hidden">
+                  <h4 class="text-xs font-semibold text-white truncate group-hover:text-yellow-400 transition-colors">
+                    O EMPATA CURADO
+                  </h4>
+                  <div class="flex items-center gap-1 text-[10px] text-gray-500 font-mono mt-0.5">
+                    <i data-lucide="clock" class="w-3 h-3"></i>
+                    <span>0</span>
+                  </div>
+                </div>
+              </div>
+              <i data-lucide="lock" class="w-4 h-4 text-gray-500 group-hover:text-yellow-400 shrink-0"></i>
+            </div>
+
+            <!-- Aula 4 -->
+            <div onclick="openCourseLockedNotice('A REALIDADE É UMA ILUSÃO: O CÉREBRO')" class="p-3.5 sm:p-4 flex items-center justify-between hover:bg-white/[0.03] transition cursor-pointer group">
+              <div class="flex items-center gap-3.5 pr-2 overflow-hidden">
+                <span class="text-xs font-mono font-bold text-gray-500 w-4 text-center shrink-0">4</span>
+                <div class="overflow-hidden">
+                  <h4 class="text-xs font-semibold text-white truncate group-hover:text-yellow-400 transition-colors">
+                    A REALIDADE É UMA ILUSÃO: O CÉRE...
+                  </h4>
+                  <div class="flex items-center gap-1 text-[10px] text-gray-500 font-mono mt-0.5">
+                    <i data-lucide="clock" class="w-3 h-3"></i>
+                    <span>0</span>
+                  </div>
+                </div>
+              </div>
+              <i data-lucide="lock" class="w-4 h-4 text-gray-500 group-hover:text-yellow-400 shrink-0"></i>
+            </div>
+
+            <!-- Aula 5 -->
+            <div onclick="openCourseLockedNotice('MANIFESTAÇÃO QUÂNTICA: O QUE O 1% SABE')" class="p-3.5 sm:p-4 flex items-center justify-between hover:bg-white/[0.03] transition cursor-pointer group">
+              <div class="flex items-center gap-3.5 pr-2 overflow-hidden">
+                <span class="text-xs font-mono font-bold text-gray-500 w-4 text-center shrink-0">5</span>
+                <div class="overflow-hidden">
+                  <h4 class="text-xs font-semibold text-white truncate group-hover:text-yellow-400 transition-colors">
+                    MANIFESTAÇÃO QUÂNTICA: O QUE O ...
+                  </h4>
+                  <div class="flex items-center gap-1 text-[10px] text-gray-500 font-mono mt-0.5">
+                    <i data-lucide="clock" class="w-3 h-3"></i>
+                    <span>0</span>
+                  </div>
+                </div>
+              </div>
+              <i data-lucide="lock" class="w-4 h-4 text-gray-500 group-hover:text-yellow-400 shrink-0"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botão para Desbloqueio no rodapé do Modal -->
+        <div class="mt-6">
+          <a href="https://pay.kirvano.com/85412bf1-7719-4b62-8703-94aa0d95f07d" target="_blank" class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-yellow-500 to-amber-400 hover:from-yellow-400 text-black font-extrabold text-xs uppercase tracking-wider text-center shadow-lg transition-all flex items-center justify-center gap-2">
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+            <span>Desbloquear Acesso à Câmara Interna</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
   <!-- MODAL DE BLOQUEIO DE CURSOS (A CÂMARA INTERNA) -->
   <div id="courseLockedModal" class="fixed inset-0 z-[115] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md hidden animate-fade-in">
     <div class="relative bg-[#101010] w-full max-w-lg rounded-3xl shadow-[0_25px_70px_rgba(0,0,0,0.9)] border border-yellow-500/30 overflow-hidden p-6 sm:p-8 z-10 text-left animate-slide-up">
@@ -1267,6 +1320,6 @@
 
   <!-- SCRIPTS -->
   <script src="books_data.js?v=1795566000"></script>
-  <script src="app.js?v=1795562429"></script>
+  <script src="app.js?v=1795562650"></script>
 </body>
 </html>
