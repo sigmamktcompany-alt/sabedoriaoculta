@@ -31,15 +31,17 @@
       theme: {
         extend: {
           colors: {
-            'esoteric-yellow': '#eab308',
-            'esoteric-yellow-hover': '#ca8a04',
-            'esoteric-dark': '#0a0a0a',
-            'esoteric-card': '#121212',
-            'esoteric-surface': '#181818',
+            'esoteric-yellow': '#D4AF37',
+            'esoteric-yellow-hover': '#AA7C11',
+            'esoteric-dark': '#060606',
+            'esoteric-card': '#101010',
+            'esoteric-surface': '#161616',
             gold: {
-              400: '#facc15',
-              500: '#eab308',
-              600: '#ca8a04',
+              300: '#F3E5AB',
+              400: '#E5C158',
+              500: '#D4AF37',
+              600: '#AA7C11',
+              700: '#805D0B',
             }
           },
           fontFamily: {
@@ -61,7 +63,7 @@
       pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
     }
   </script>
-  <link rel="stylesheet" href="app.css?v=1795484000">
+  <link rel="stylesheet" href="app.css?v=1795540999">
 </head>
 
 <body class="bg-black text-gray-200 font-sans antialiased overflow-x-hidden selection:bg-yellow-500/30 selection:text-yellow-300">
@@ -479,49 +481,42 @@
         </div>
 
         <!-- Player de Frequências Sagradas 100% Funcional e Audível -->
-        <div class="esoteric-card rounded-3xl p-6 sm:p-8 mb-8 border border-white/10 max-w-4xl text-left">
-          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+        <div class="esoteric-card rounded-3xl p-6 sm:p-8 mb-10 border border-white/10 max-w-4xl text-left relative overflow-hidden">
+          <div class="absolute -right-16 -top-16 w-56 h-56 rounded-full bg-[#D4AF37]/5 blur-3xl pointer-events-none"></div>
+
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 relative z-10">
             <div>
-              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400 text-[10px] font-bold uppercase tracking-wider mb-2 border border-yellow-500/30">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D4AF37]/10 text-[#D4AF37] text-[10px] font-bold uppercase tracking-wider mb-2 border border-[#D4AF37]/30 shadow-sm">
                 <i data-lucide="radio" class="w-3.5 h-3.5"></i> Ressonância de Solfeggio Ativa
               </span>
-              <h2 class="text-xl font-serif font-bold text-white">Frequências Sonoras & Ondas Sagradas</h2>
-              <p class="text-xs text-gray-400 mt-1 max-w-lg">Batimentos binaurais de ondas puras calibrados para foco, dissolução de bloqueios e expansão mental.</p>
+              <h2 class="text-xl sm:text-2xl font-serif font-bold text-white">Frequências Sonoras & Ondas Sagradas</h2>
+              <p class="text-xs text-gray-400 mt-1.5 max-w-lg leading-relaxed">Batimentos binaurais de ondas senoidais puras calibrados para concentração profunda, desbloqueio de chakras e expansão da consciência.</p>
             </div>
 
-            <div class="flex flex-col items-center sm:items-end gap-2.5">
-              <div class="px-4 py-2 rounded-2xl bg-black border border-white/10 flex items-center gap-2">
+            <div class="flex flex-col items-center sm:items-end gap-2.5 shrink-0">
+              <div id="soundWaveBox" class="px-4 py-2.5 rounded-2xl bg-black/90 border border-white/15 flex items-center gap-2.5 shadow-lg wave-paused">
                 <span class="wave-bar"></span>
                 <span class="wave-bar"></span>
                 <span class="wave-bar"></span>
                 <span class="wave-bar"></span>
                 <span class="wave-bar"></span>
-                <span id="playerCurrentHz" class="font-mono font-bold text-xs text-yellow-400">Santuário em Silêncio</span>
+                <span id="playerCurrentHz" class="font-mono font-bold text-xs text-[#D4AF37] tracking-wide">Santuário em Silêncio</span>
               </div>
-              <button onclick="stopFrequency(true)" class="text-xs text-gray-400 hover:text-white flex items-center gap-1 transition-colors cursor-pointer">
+              <button onclick="stopFrequency(true)" class="text-xs text-gray-400 hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer py-1 px-2.5 rounded-lg hover:bg-white/5">
                 <i data-lucide="square" class="w-3.5 h-3.5"></i> Parar Frequência
               </button>
             </div>
           </div>
 
-          <!-- Botões das Frequências com Ícones e Feedback em Tempo Real -->
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-white/10">
-            <button onclick="playFrequency(432, 'Ressonância Áurea')" data-freq-btn="432" class="p-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left hover:border-yellow-500/50 transition cursor-pointer">
-              <span class="text-yellow-400 font-bold text-sm block">432 Hz</span>
-              <span class="text-[10px] text-gray-400">Clareza & Harmonia</span>
-            </button>
-            <button onclick="playFrequency(528, 'Transformação & Milagre')" data-freq-btn="528" class="p-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left hover:border-yellow-500/50 transition cursor-pointer">
-              <span class="text-yellow-400 font-bold text-sm block">528 Hz</span>
-              <span class="text-[10px] text-gray-400">Reparo & Centelha</span>
-            </button>
-            <button onclick="playFrequency(396, 'Liberação')" data-freq-btn="396" class="p-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left hover:border-yellow-500/50 transition cursor-pointer">
-              <span class="text-yellow-400 font-bold text-sm block">396 Hz</span>
-              <span class="text-[10px] text-gray-400">Dissolução de Medo</span>
-            </button>
-            <button onclick="playFrequency(963, 'Conexão Cósmica')" data-freq-btn="963" class="p-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left hover:border-yellow-500/50 transition cursor-pointer">
-              <span class="text-yellow-400 font-bold text-sm block">963 Hz</span>
-              <span class="text-[10px] text-gray-400">Conexão Divina</span>
-            </button>
+          <!-- Grade Dinâmica Completa com as 8 Frequências Sagradas de Solfeggio -->
+          <div class="mt-8 pt-6 border-t border-white/10 relative z-10">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Sintonizar Matriz Sonora</span>
+              <span class="text-[10px] font-mono text-[#D4AF37]">Ondas Senoidais 432Hz - 963Hz</span>
+            </div>
+            <div id="frequenciesList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+              <!-- Injetado dinamicamente via renderFrequencies() -->
+            </div>
           </div>
         </div>
 
@@ -663,33 +658,39 @@
       <div class="px-6 sm:px-12 py-10 max-w-3xl text-left">
         
         <div class="flex flex-col items-center text-center mb-8">
-          <div class="relative mb-4">
-            <div class="w-24 h-24 rounded-full overflow-hidden bg-[#181818] border-2 border-white/20 flex items-center justify-center">
-              <img id="profileAvatarImg" src="assets/logo.jpg" alt="Avatar" class="w-full h-full object-cover">
+          <div class="relative mb-4 group cursor-pointer" onclick="promptEditUserName()">
+            <div class="w-28 h-28 rounded-full overflow-hidden bg-[#121212] border-2 border-[#D4AF37]/50 flex items-center justify-center shadow-[0_0_25px_rgba(212,175,55,0.25)] relative">
+              <img id="profileAvatarImg" src="assets/logo.jpg" alt="Avatar" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+              <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <i data-lucide="camera" class="w-5 h-5 text-[#D4AF37]"></i>
+              </div>
             </div>
-            <span id="profileLevelBadge" class="absolute -bottom-1 -right-1 px-2.5 py-0.5 rounded-full bg-yellow-500 text-black text-[10px] font-black uppercase tracking-wider shadow-lg">
+            <span id="profileLevelBadge" class="absolute -bottom-1 -right-1 px-3 py-0.5 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#E5C158] text-black text-[10px] font-black uppercase tracking-wider shadow-lg border border-black/50">
               LVL 1
             </span>
           </div>
 
           <div class="flex items-center gap-2">
-            <h1 id="profileDisplayName" class="text-2xl font-serif font-black text-white">
+            <h1 id="profileDisplayName" class="text-2xl sm:text-3xl font-serif font-black text-white tracking-tight">
               Carregando...
             </h1>
-            <button onclick="promptEditUserName()" class="text-gray-400 hover:text-white transition cursor-pointer" title="Editar Nome">
+            <button onclick="promptEditUserName()" class="p-1.5 rounded-lg text-gray-400 hover:text-[#D4AF37] hover:bg-white/5 transition cursor-pointer" title="Editar Nome">
               <i data-lucide="edit-3" class="w-4 h-4"></i>
             </button>
           </div>
-          <p class="text-xs text-gray-400 mt-1">Membro da Cúpula</p>
+          <div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/25 text-[#D4AF37] text-[10px] font-mono font-bold tracking-widest uppercase mt-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-pulse"></span>
+            <span>MEMBRO DA CÚPULA 33</span>
+          </div>
 
           <!-- Barra de XP (Screenshot 1) -->
-          <div class="w-full max-w-md esoteric-card rounded-2xl p-4 mt-6 border border-white/10">
+          <div class="w-full max-w-md esoteric-card rounded-2xl p-4.5 mt-6 border border-white/10 shadow-lg">
             <div class="flex items-center justify-between text-[11px] mb-2 font-mono font-bold">
               <span id="profileXpText" class="text-gray-400">XP: 0 / 300</span>
-              <span id="profileNextLvlText" class="text-yellow-400">RUMO AO NÍVEL 2</span>
+              <span id="profileNextLvlText" class="text-[#D4AF37] tracking-wider">RUMO AO NÍVEL 2</span>
             </div>
-            <div class="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
-              <div id="profileXpBar" class="h-full bg-yellow-500" style="width: 15%"></div>
+            <div class="w-full h-2 bg-black/80 rounded-full overflow-hidden border border-white/5">
+              <div id="profileXpBar" class="h-full bg-gradient-to-r from-[#AA7C11] via-[#D4AF37] to-[#F3E5AB] shadow-[0_0_10px_rgba(212,175,55,0.7)] transition-all duration-300" style="width: 15%"></div>
             </div>
           </div>
         </div>
@@ -767,58 +768,65 @@
   <div id="bookModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md hidden animate-fade-in">
     <div class="absolute inset-0" onclick="closeModal('bookModal')"></div>
     
-    <div class="relative bg-[#141414] w-full max-w-4xl rounded-2xl shadow-2xl border border-white/10 overflow-hidden flex flex-col md:flex-row max-h-[90vh] z-10 text-left">
+    <div class="relative bg-[#101010] w-full max-w-4xl rounded-3xl shadow-[0_25px_70px_rgba(0,0,0,0.9)] border border-white/15 overflow-hidden flex flex-col md:flex-row max-h-[92vh] z-10 text-left animate-slide-up">
       
-      <button onclick="closeModal('bookModal')" class="absolute top-4 right-4 z-20 p-2 bg-black/60 rounded-full text-white hover:bg-yellow-500 hover:text-black transition-colors cursor-pointer">
-        <i data-lucide="x" class="w-5 h-5"></i>
+      <button onclick="closeModal('bookModal')" class="absolute top-4 right-4 z-30 p-2.5 bg-black/70 backdrop-blur-md rounded-full text-white/80 hover:text-black hover:bg-[#D4AF37] border border-white/10 transition-all duration-200 cursor-pointer shadow-lg active:scale-90">
+        <i data-lucide="x" class="w-4 h-4 stroke-[2.5]"></i>
       </button>
 
-      <div class="w-full md:w-2/5 h-64 md:h-auto relative bg-black shrink-0 overflow-hidden">
-        <img id="modalBookCover" src="" alt="Capa" class="w-full h-full object-cover">
-        <div class="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-[#141414]"></div>
+      <div class="w-full md:w-5/12 h-64 md:h-auto relative bg-[#060606] shrink-0 overflow-hidden group">
+        <img id="modalBookCover" src="" alt="Capa" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+        <div class="absolute inset-0 bg-gradient-to-t from-[#101010] via-black/30 to-transparent md:bg-gradient-to-r md:from-transparent md:via-black/30 md:to-[#101010]"></div>
+        <div class="absolute top-4 left-4 z-20 flex flex-col gap-1.5">
+          <span class="px-2.5 py-1 rounded-md bg-black/80 backdrop-blur-md text-[#D4AF37] text-[10px] font-mono font-bold tracking-wider uppercase border border-[#D4AF37]/30 shadow-md">
+            TRATADO OFICIAL
+          </span>
+        </div>
       </div>
 
-      <div class="flex-1 p-6 md:p-8 flex flex-col justify-between overflow-y-auto">
+      <div class="flex-1 p-6 md:p-8 flex flex-col justify-between overflow-y-auto bg-[#101010]">
         <div>
-          <div class="flex items-center space-x-2 text-yellow-400 text-xs font-bold uppercase tracking-widest mb-2">
+          <div class="flex items-center space-x-2 text-[#D4AF37] text-xs font-bold uppercase tracking-widest mb-2.5">
             <span id="modalBookCategory">Módulo I: Hermetismo & Cabala</span>
-            <span>•</span>
-            <span id="modalBookPages">127 páginas</span>
+            <span class="text-white/20">•</span>
+            <span id="modalBookPages" class="font-mono">127 páginas</span>
           </div>
 
-          <h2 id="modalBookTitle" class="text-2xl md:text-3xl font-serif text-white font-bold mb-1 leading-snug">
+          <h2 id="modalBookTitle" class="text-2xl md:text-3xl font-serif text-white font-bold mb-1.5 leading-snug tracking-tight">
             Título da Obra
           </h2>
 
-          <p id="modalBookAuthor" class="text-gray-400 text-xs mb-4">Por Acervo Cúpula 33</p>
+          <p id="modalBookAuthor" class="text-gray-400 text-xs mb-5 font-medium">Por Acervo Cúpula 33</p>
 
-          <div id="modalProgressContainer" class="mb-5 bg-white/5 border border-white/10 p-3 rounded-xl">
-            <div class="flex justify-between items-center mb-1.5 text-xs">
-              <span class="text-gray-400 font-bold uppercase tracking-wider text-[10px]">Progresso da Leitura</span>
-              <span id="modalProgressPercent" class="text-yellow-400 font-mono font-bold text-xs">0%</span>
+          <div id="modalProgressContainer" class="mb-6 bg-white/[0.03] border border-white/10 p-3.5 rounded-2xl">
+            <div class="flex justify-between items-center mb-2 text-xs">
+              <span class="text-gray-400 font-bold uppercase tracking-wider text-[10px] flex items-center gap-1.5">
+                <i data-lucide="sparkles" class="w-3 h-3 text-[#D4AF37]"></i> Progresso Iniciático
+              </span>
+              <span id="modalProgressPercent" class="text-[#D4AF37] font-mono font-bold text-xs">0%</span>
             </div>
-            <div class="w-full h-1.5 bg-gray-800 rounded-full overflow-hidden">
-              <div id="modalProgressBar" class="h-full bg-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.8)] transition-all duration-300" style="width: 0%"></div>
+            <div class="w-full h-2 bg-black/80 rounded-full overflow-hidden border border-white/5">
+              <div id="modalProgressBar" class="h-full bg-gradient-to-r from-[#AA7C11] via-[#D4AF37] to-[#F3E5AB] shadow-[0_0_12px_rgba(212,175,55,0.8)] transition-all duration-300" style="width: 0%"></div>
             </div>
           </div>
 
-          <div class="text-xs text-gray-300 leading-relaxed space-y-2 mb-6">
-            <p id="modalBookDesc">Tratado autêntico preservado em língua portuguesa.</p>
+          <div class="text-xs sm:text-sm text-gray-300 leading-relaxed space-y-2.5 mb-6">
+            <p id="modalBookDesc">Tratado autêntico preservado em língua portuguesa com anotações e comentários herméticos da tradição.</p>
           </div>
         </div>
 
-        <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center gap-3">
-          <button id="modalBtnRead" onclick="triggerReadModalFromDetails()" class="w-full sm:flex-1 py-3 px-5 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-black font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-yellow-500/20 active:scale-95 transition-all cursor-pointer">
+        <div class="pt-5 border-t border-white/10 flex flex-col sm:flex-row items-center gap-3">
+          <button id="modalBtnRead" onclick="triggerReadModalFromDetails()" class="w-full sm:flex-1 py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#D4AF37] via-[#E5C158] to-[#D4AF37] hover:brightness-110 text-black font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(212,175,55,0.35)] active:scale-95 transition-all cursor-pointer">
             <i data-lucide="book-open" class="w-4 h-4 fill-black"></i>
-            <span>Ler Obra Completa</span>
+            <span>Ler Manuscrito</span>
           </button>
 
-          <button id="modalBtnDownload" onclick="triggerDownloadFromDetails()" class="w-full sm:w-auto py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-gray-200 text-xs font-bold flex items-center justify-center gap-2 transition cursor-pointer" title="Baixar PDF">
+          <button id="modalBtnDownload" onclick="triggerDownloadFromDetails()" class="w-full sm:w-auto py-3.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-gray-200 hover:text-white text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer" title="Baixar PDF">
             <i data-lucide="download" class="w-4 h-4"></i>
             <span>Baixar PDF</span>
           </button>
 
-          <button id="modalBtnBookmark" onclick="toggleCurrentBookMyList()" class="w-full sm:w-auto py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-yellow-400 text-xs font-bold flex items-center justify-center gap-2 transition cursor-pointer" title="Minha Lista">
+          <button id="modalBtnBookmark" onclick="toggleCurrentBookMyList()" class="w-full sm:w-auto py-3.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-gray-300 hover:text-[#D4AF37] hover:border-[#D4AF37]/50 text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer" title="Minha Lista">
             <i id="modalBookmarkIcon" data-lucide="bookmark" class="w-4 h-4"></i>
             <span id="modalBookmarkText">Salvar</span>
           </button>
@@ -870,7 +878,7 @@
       </div>
 
       <!-- Leitor Nativo PDF.js com Scroll Contínuo e IntersectionObserver -->
-      <div id="readerNativeContainer" class="w-full h-full overflow-y-auto px-2 sm:px-4 py-8 space-y-6 flex flex-col items-center hide-scrollbar scroll-smooth">
+      <div id="readerNativeContainer" class="w-full h-full overflow-y-auto px-2 sm:px-4 py-8 space-y-6 block hide-scrollbar scroll-smooth">
         <!-- Páginas renderizadas dinamicamente aqui -->
       </div>
 
@@ -882,6 +890,6 @@
   <!-- SCRIPTS -->
   <script src="books_2500.json" type="application/json" id="rawBooksData"></script>
   
-  <script src="app.js?v=1795539449"></script>
+  <script src="app.js?v=1795540999"></script>
 </body>
 </html>

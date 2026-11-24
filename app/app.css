@@ -3,38 +3,47 @@
 @tailwind utilities;
 
 :root {
-  --color-accent: #eab308;
-  --color-accent-hover: #ca8a04;
-  --color-accent-glow: rgba(234, 179, 8, 0.4);
-  --bg-dark: #000000;
+  --gold-primary: #D4AF37;
+  --gold-light: #F3E5AB;
+  --gold-dark: #AA7C11;
+  --gold-glow: rgba(212, 175, 55, 0.35);
+  --gold-subtle: rgba(212, 175, 55, 0.12);
+  --bg-black: #060606;
+  --card-bg: #101010;
+  --card-border: rgba(255, 255, 255, 0.08);
+  --card-border-gold: rgba(212, 175, 55, 0.35);
   --sidebar-width: 250px;
 }
 
 body {
-  background-color: #000000;
+  background-color: #060606;
   color: #e5e5e5;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
 
-/* Custom Scrollbar - Padrão Ordem com Amarelo */
+/* Custom Scrollbar Luxuosa - Ouro Metálico Refinado */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: #080808;
 }
 ::-webkit-scrollbar-thumb {
-  background: #262626;
-  border-radius: 3px;
+  background: #222222;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #eab308;
+  background: #D4AF37;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
-/* Hide scrollbar utility */
+/* Utilitário para ocultar scrollbars preservando rolagem suave */
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -43,60 +52,114 @@ body {
   scrollbar-width: none;
 }
 
-/* Painéis e cards escuros */
+/* Painéis e cards escuros de alta costura */
 .esoteric-card {
-  background-color: #121212;
+  background-color: #101010;
   border: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, border-color, box-shadow;
 }
 
 .esoteric-card-hover {
-  transition: all 0.25s ease;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .esoteric-card-hover:hover {
-  border-color: rgba(234, 179, 8, 0.5);
-  box-shadow: 0 0 20px rgba(234, 179, 8, 0.15);
+  transform: translateY(-2px);
+  border-color: rgba(212, 175, 55, 0.45);
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.8),
+              0 0 25px rgba(212, 175, 55, 0.16);
 }
 
-/* Animações suaves */
+/* Animações e Transições 60FPS */
 .animate-fade-in {
-  animation: fadeIn 0.25s ease-out forwards;
+  animation: cupulaFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes cupulaFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-slide-up {
-  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: cupulaSlideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes cupulaSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
-/* Ondas sonoras do player */
+/* Efeito Gradiente Dourado Nobre */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #AA7C11 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-gradient-bg {
+  background: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #AA7C11 100%);
+}
+
+.gold-border-glow {
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.25), inset 0 0 12px rgba(212, 175, 55, 0.08);
+}
+
+/* Ondas sonoras do player de áudio (60fps pura) */
 .wave-bar {
   display: inline-block;
   width: 3px;
-  height: 12px;
-  background-color: #eab308;
+  height: 14px;
+  background-color: #D4AF37;
   margin: 0 1.5px;
   border-radius: 2px;
-  animation: wave 1.2s infinite ease-in-out;
+  animation: soundWave 1.2s infinite ease-in-out;
+  transform-origin: bottom center;
 }
-.wave-bar:nth-child(1) { animation-delay: 0.1s; }
-.wave-bar:nth-child(2) { animation-delay: 0.3s; }
-.wave-bar:nth-child(3) { animation-delay: 0.2s; }
-.wave-bar:nth-child(4) { animation-delay: 0.45s; }
-.wave-bar:nth-child(5) { animation-delay: 0.15s; }
+.wave-bar:nth-child(1) { animation-delay: 0.08s; }
+.wave-bar:nth-child(2) { animation-delay: 0.28s; }
+.wave-bar:nth-child(3) { animation-delay: 0.18s; }
+.wave-bar:nth-child(4) { animation-delay: 0.42s; }
+.wave-bar:nth-child(5) { animation-delay: 0.12s; }
 
-@keyframes wave {
-  0%, 100% { height: 6px; opacity: 0.4; }
-  50% { height: 22px; opacity: 1; }
+@keyframes soundWave {
+  0%, 100% {
+    height: 6px;
+    opacity: 0.35;
+    background-color: rgba(212, 175, 55, 0.5);
+  }
+  50% {
+    height: 22px;
+    opacity: 1;
+    background-color: #F3E5AB;
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.7);
+  }
 }
 
+/* Estado inativo do player */
+.wave-paused .wave-bar {
+  animation: none !important;
+  height: 6px !important;
+  opacity: 0.3 !important;
+  background-color: #666666 !important;
+  box-shadow: none !important;
+}
 
-/* Garantia de exibição do Leitor e Modais */
+/* Toasts e Modais */
 .hidden {
   display: none !important;
 }
@@ -105,7 +168,7 @@ body {
   position: fixed !important;
   inset: 0 !important;
   z-index: 10000 !important;
-  background-color: #000000 !important;
+  background-color: #060606 !important;
 }
 
 #bookModal {
@@ -117,10 +180,27 @@ body {
 }
 
 /* Leitor PDF Nativo Estilo Livro Real */
+#readerNativeContainer {
+  display: block !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
 .pdf-page-wrapper {
+  display: block !important;
+  position: relative !important;
+  width: 100% !important;
+  max-width: 850px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
   background-color: #ffffff !important;
   color: #111111 !important;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6) !important;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.85) !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
 }
 
 .pdf-page-wrapper canvas {
@@ -128,4 +208,13 @@ body {
   width: 100% !important;
   height: auto !important;
   background-color: #ffffff !important;
+}
+
+/* Touch feedback mobile nativo */
+@media (hover: none) and (pointer: coarse) {
+  button:active, a:active, .cursor-pointer:active {
+    opacity: 0.75;
+    transform: scale(0.975);
+    transition: transform 0.1s ease, opacity 0.1s ease;
+  }
 }

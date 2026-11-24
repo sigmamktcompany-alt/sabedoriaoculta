@@ -405,7 +405,7 @@ function filterCommunityPosts(category) {
   document.querySelectorAll(".community-pill").forEach(btn => {
     const f = btn.getAttribute("data-filter");
     if (f === category) {
-      btn.className = "community-pill px-4 py-1.5 rounded-full bg-yellow-500 text-black text-xs font-bold whitespace-nowrap transition cursor-pointer";
+      btn.className = "community-pill px-4 py-1.5 rounded-full bg-[#D4AF37] text-black text-xs font-bold whitespace-nowrap transition shadow-md shadow-[#D4AF37]/20 cursor-pointer";
     } else {
       btn.className = "community-pill px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 text-xs font-medium whitespace-nowrap transition cursor-pointer";
     }
@@ -440,37 +440,37 @@ function renderCommunityFeed(filter = "Tudo") {
   }
 
   container.innerHTML = posts.map(p => `
-    <div class="esoteric-card rounded-2xl p-5 border border-white/10 animate-fade-in text-left">
-      <div class="flex items-center gap-3 mb-2.5">
-        <div class="w-8 h-8 rounded-full bg-yellow-500 text-black flex items-center justify-center font-bold text-xs shrink-0">
-          ${p.initial || (p.author ? p.author.charAt(0).toUpperCase() : '?')}
-        </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="text-xs font-bold text-white">${p.author}</span>
-            <span class="text-[9px] px-1.5 py-0.5 rounded bg-yellow-500/20 text-yellow-400 font-mono font-bold">NÍVEL ${p.level || 1}</span>
+    <div class="esoteric-card rounded-2xl p-5 border border-white/10 animate-fade-in text-left shadow-md hover:border-[#D4AF37]/30 transition-all duration-300">
+      <div class="flex items-center justify-between mb-3">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#AA7C11] text-black flex items-center justify-center font-bold text-xs shrink-0 shadow-md">
+            ${p.initial || (p.author ? p.author.charAt(0).toUpperCase() : '?')}
           </div>
-          <span class="text-[10px] text-gray-500 font-mono">${p.timeAgo || 'Recentemente'}</span>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-white tracking-wide">${p.author}</span>
+              <span class="text-[9px] px-2 py-0.5 rounded-full bg-[#D4AF37]/15 text-[#D4AF37] border border-[#D4AF37]/30 font-mono font-bold tracking-wider">NÍVEL ${p.level || 1}</span>
+            </div>
+            <span class="text-[10px] text-gray-500 font-mono">${p.timeAgo || 'Recentemente'}</span>
+          </div>
         </div>
+        ${p.category ? `
+          <span class="inline-flex items-center gap-1 text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-gray-300">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#D4AF37]"></span>
+            ${p.category}
+          </span>
+        ` : ''}
       </div>
 
-      ${p.category ? `
-        <div class="mb-2">
-          <span class="inline-flex items-center gap-1 text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-white/5 border border-white/10 text-gray-300">
-            <i data-lucide="message-circle" class="w-3 h-3 text-yellow-400"></i> ${p.category}
-          </span>
-        </div>
-      ` : ''}
+      <p class="text-xs sm:text-sm text-gray-200 mt-2 leading-relaxed whitespace-pre-line font-normal">${p.text}</p>
 
-      <p class="text-xs sm:text-sm text-gray-200 mt-2 leading-relaxed whitespace-pre-line">${p.text}</p>
-
-      <div class="flex items-center gap-5 mt-4 pt-3 border-t border-white/5 text-gray-500 text-xs">
-        <button onclick="likeCommunityPost('${p.id}')" class="flex items-center gap-1.5 transition cursor-pointer ${p.liked ? 'text-yellow-400 font-bold' : 'hover:text-yellow-400'}">
-          <i data-lucide="heart" class="w-3.5 h-3.5 ${p.liked ? 'fill-yellow-400 text-yellow-400' : ''}"></i>
+      <div class="flex items-center gap-5 mt-4 pt-3 border-t border-white/5 text-gray-400 text-xs">
+        <button onclick="likeCommunityPost('${p.id}')" class="flex items-center gap-1.5 transition-all duration-200 cursor-pointer active:scale-90 ${p.liked ? 'text-[#D4AF37] font-bold' : 'hover:text-[#D4AF37]'}">
+          <i data-lucide="heart" class="w-4 h-4 ${p.liked ? 'fill-[#D4AF37] text-[#D4AF37]' : ''}"></i>
           <span>${p.likes || 0}</span>
         </button>
         <button onclick="showToast('Comentários em breve na próxima atualização')" class="flex items-center gap-1.5 hover:text-white transition cursor-pointer">
-          <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
+          <i data-lucide="message-square" class="w-4 h-4"></i>
           <span>${p.comments || 0}</span>
         </button>
       </div>
@@ -672,61 +672,63 @@ function updateModalBookmarkUI(bookId) {
   if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
-// Criação do Card de Livro Estilo Cúpula 33
+// Criação do Card de Livro Estilo Cúpula 33 (Acabamento Dourado Nobre)
 function createBookCardHTML(book, isCarousel) {
   const isLocked = currentTier === "basico" && book.tier === "master";
   const savedProg = getSavedProgress(book.id);
   const progPercent = savedProg && book.pages ? Math.min(100, Math.round((savedProg.page / book.pages) * 100)) : 0;
   
   const containerClass = isCarousel 
-    ? "flex-none w-[145px] sm:w-[165px] cursor-pointer group snap-start select-none"
-    : "cursor-pointer group select-none";
+    ? "flex-none w-[145px] sm:w-[170px] cursor-pointer group snap-start select-none transition-transform duration-200 active:scale-95"
+    : "cursor-pointer group select-none transition-transform duration-200 active:scale-95";
 
   return `
     <div onclick="handleBookClick(${book.id})" class="${containerClass}">
       
       <!-- Container da Capa com Aspect Ratio 2:3 -->
-      <div class="relative aspect-[2/3] rounded-xl overflow-hidden mb-2.5 border border-white/10 group-hover:border-[#eab308] shadow-lg shadow-black/60 transition-all bg-[#0d0d0d]">
-        <img src="${book.cover}" alt="${book.title}" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${isLocked ? 'grayscale opacity-50' : ''}">
+      <div class="relative aspect-[2/3] rounded-2xl overflow-hidden mb-2.5 border border-white/10 group-hover:border-[#D4AF37] shadow-[0_8px_25px_rgba(0,0,0,0.7)] group-hover:shadow-[0_12px_30px_rgba(212,175,55,0.22)] transition-all duration-300 bg-[#0d0d0d]">
+        <img src="${book.cover}" alt="${book.title}" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 ${isLocked ? 'grayscale opacity-40' : ''}">
         
-        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
 
         <!-- Badges Superiores -->
-        <div class="absolute top-2 left-2 z-20 flex flex-col gap-1 items-start">
+        <div class="absolute top-2.5 left-2.5 z-20 flex flex-col gap-1 items-start">
           ${!isLocked && book.id <= 15 ? `
-            <div class="bg-[#eab308] text-white text-[9px] font-black px-2 py-0.5 rounded shadow-lg uppercase tracking-wider">
+            <div class="bg-gradient-to-r from-[#D4AF37] to-[#E5C158] text-black text-[9px] font-black px-2 py-0.5 rounded shadow-lg uppercase tracking-wider">
               NOVO
             </div>
           ` : ''}
 
           ${progPercent > 0 ? `
-            <div class="bg-black/80 backdrop-blur-md px-2 py-0.5 rounded-full border border-white/10 flex items-center shadow-lg">
-              <span class="w-1.5 h-1.5 rounded-full bg-[#eab308] mr-1.5 animate-pulse"></span>
-              <span class="text-[9px] font-bold text-white tracking-wider">${progPercent}%</span>
+            <div class="bg-black/85 backdrop-blur-md px-2 py-0.5 rounded-full border border-white/10 flex items-center shadow-lg">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#D4AF37] mr-1.5 animate-pulse"></span>
+              <span class="text-[9px] font-bold text-white tracking-wider font-mono">${progPercent}%</span>
             </div>
           ` : ''}
         </div>
 
         ${isLocked ? `
-          <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/60 p-2 text-center">
-            <i data-lucide="lock" class="text-white/80 w-7 h-7 mb-1"></i>
-            <span class="text-[9px] font-black text-amber-300 uppercase tracking-wider">Master</span>
+          <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/75 backdrop-blur-[2px] p-2 text-center">
+            <div class="w-9 h-9 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/40 flex items-center justify-center text-[#D4AF37] mb-1.5 shadow-lg">
+              <i data-lucide="lock" class="w-4 h-4"></i>
+            </div>
+            <span class="text-[9px] font-black text-[#D4AF37] uppercase tracking-widest">Exclusivo Master</span>
           </div>
         ` : ''}
 
         <!-- Barra de Progresso no Rodapé da Capa -->
         ${progPercent > 0 ? `
-          <div class="absolute bottom-0 left-0 w-full h-1 bg-gray-900/80">
-            <div class="h-full bg-[#eab308] shadow-[0_0_8px_rgba(210,4,45,0.8)]" style="width: ${progPercent}%"></div>
+          <div class="absolute bottom-0 left-0 w-full h-1 bg-black/80">
+            <div class="h-full bg-gradient-to-r from-[#AA7C11] via-[#D4AF37] to-[#F3E5AB] shadow-[0_0_8px_rgba(212,175,55,0.8)]" style="width: ${progPercent}%"></div>
           </div>
         ` : ''}
       </div>
 
       <!-- Título & Autor -->
-      <h3 class="text-xs sm:text-sm font-medium truncate text-white group-hover:text-[#eab308] transition-colors leading-snug">
+      <h3 class="text-xs sm:text-sm font-semibold truncate text-white group-hover:text-[#D4AF37] transition-colors leading-snug">
         ${book.title}
       </h3>
-      <p class="text-gray-500 text-[11px] truncate mt-0.5">
+      <p class="text-gray-400 text-[11px] truncate mt-0.5 font-medium">
         ${book.author}
       </p>
     </div>
@@ -736,26 +738,28 @@ function createBookCardHTML(book, isCarousel) {
 // Orquestrador de Renderização da Biblioteca
 
 function renderCollections() {
-  const container = document.getElementById("collectionsList") || document.getElementById("collectionsContainer");
+  const container = document.getElementById("collectionsGrid") || document.getElementById("collectionsList") || document.getElementById("collectionsContainer");
   if (!container || typeof collectionsData === "undefined") return;
 
   container.innerHTML = collectionsData.map(col => `
-    <div onclick="handleCollectionClick('${col.id}')" class="esoteric-card rounded-2xl p-5 border border-white/10 flex items-center justify-between cursor-pointer hover:border-yellow-500/50 transition-all group">
+    <div onclick="handleCollectionClick('${col.id}')" class="esoteric-card rounded-2xl p-5 border border-white/10 flex items-center justify-between cursor-pointer hover:border-[#D4AF37]/50 transition-all duration-300 group shadow-md hover:shadow-[0_10px_25px_rgba(212,175,55,0.15)]">
       <div class="flex items-center gap-4">
-        <div class="w-12 h-12 rounded-xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-yellow-400 shrink-0 group-hover:scale-105 transition-transform">
+        <div class="w-12 h-12 rounded-xl bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37] shrink-0 group-hover:scale-105 transition-transform duration-300">
           <i data-lucide="${col.icon || 'crown'}" class="w-6 h-6"></i>
         </div>
         <div class="text-left">
-          <h4 class="text-sm font-bold text-white group-hover:text-yellow-400 transition-colors">${col.title}</h4>
-          <p class="text-xs text-gray-400">${col.subtitle || col.desc || ''}</p>
-          <div class="flex items-center gap-2 mt-1 text-[10px] text-gray-500">
-            <span>${col.count}</span>
+          <h4 class="text-sm font-bold text-white group-hover:text-[#D4AF37] transition-colors leading-snug">${col.title}</h4>
+          <p class="text-xs text-gray-400 mt-0.5 line-clamp-1">${col.subtitle || col.desc || ''}</p>
+          <div class="flex items-center gap-2 mt-1.5 text-[10px] text-gray-500 font-mono">
+            <span class="text-[#D4AF37] font-bold">${col.count}</span>
             <span>•</span>
             <span>${col.size}</span>
           </div>
         </div>
       </div>
-      <i data-lucide="download" class="w-4 h-4 text-gray-500 group-hover:text-yellow-400 transition-colors"></i>
+      <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-gray-400 group-hover:text-[#D4AF37] group-hover:bg-[#D4AF37]/10 transition-colors shrink-0">
+        <i data-lucide="download" class="w-4 h-4"></i>
+      </div>
     </div>
   `).join("");
 
@@ -1073,9 +1077,9 @@ function triggerReadModalFromDetails() {
   if (!currentBookModalData) return;
   closeModal("bookModal");
   const saved = getSavedProgress(currentBookModalData.id);
-  // Se já leu antes, continua onde parou; se passou do total ou for inválido, inicia na página 1
   let page = 1;
-  if (saved && saved.page && saved.page >= 1 && saved.page <= (currentBookModalData.pages || 1000)) {
+  // Se o progresso salvo não for 56 (artefato do bug antigo) e for válido:
+  if (saved && saved.page && saved.page > 1 && saved.page !== 56 && saved.page !== 27 && saved.page <= (currentBookModalData.pages || 1000)) {
     page = saved.page;
   }
   openReaderModal(currentBookModalData, page);
@@ -1431,7 +1435,7 @@ async function openReaderModal(book, startPage) {
     }
     if (nativeContainer) {
       nativeContainer.classList.remove("hidden");
-      nativeContainer.style.display = "flex";
+      nativeContainer.style.display = "block";
     }
     
     await renderNativePDF(targetUrl, startPage);
@@ -1512,7 +1516,7 @@ async function renderNativePDF(pdfUrl, startPage = 1) {
       const pageDiv = document.createElement("div");
       pageDiv.id = `pdf-page-wrapper-${p}`;
       pageDiv.dataset.pageNumber = p;
-      pageDiv.className = "pdf-page-wrapper relative w-full max-w-[850px] mx-auto rounded-xl shadow-2xl bg-white overflow-hidden flex flex-col items-center justify-center my-6 transition-all duration-300";
+      pageDiv.className = "pdf-page-wrapper block relative w-full max-w-[850px] mx-auto rounded-xl shadow-2xl bg-white overflow-hidden my-6 transition-all duration-300";
       pageDiv.style.minHeight = Math.max(480, Math.round(window.innerHeight * 0.75)) + "px";
 
       pageDiv.innerHTML = `
@@ -1566,7 +1570,7 @@ async function renderNativePDF(pdfUrl, startPage = 1) {
         pageDiv.innerHTML = "";
         pageDiv.style.minHeight = "auto";
         pageDiv.style.aspectRatio = "auto";
-        pageDiv.className = "pdf-page-wrapper relative w-full max-w-[850px] mx-auto rounded-xl shadow-2xl bg-white overflow-hidden flex flex-col items-center my-6 transition-all duration-300";
+        pageDiv.className = "pdf-page-wrapper block relative w-full max-w-[850px] mx-auto rounded-xl shadow-2xl bg-white overflow-hidden my-6 transition-all duration-300";
         pageDiv.appendChild(canvas);
       } catch (err) {
         console.error("Erro ao renderizar página " + pageNum, err);
@@ -1741,8 +1745,19 @@ function saveReadingProgress(bookId, page, totalPages) {
 }
 
 function getSavedProgress(bookId) {
-  const allHistory = JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
-  return allHistory[bookId] || null;
+  try {
+    const allHistory = JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
+    const prog = allHistory[bookId] || null;
+    // Se o progresso salvo for a página 56 ou 27 do livro 36 (artefato do bug anterior), expurga e inicia limpo
+    if (prog && (bookId === 36 || (prog.title && prog.title.toLowerCase().includes("enoque"))) && (prog.page === 56 || prog.page === 27)) {
+      delete allHistory[bookId];
+      localStorage.setItem("cupula33_books_progress", JSON.stringify(allHistory));
+      return null;
+    }
+    return prog;
+  } catch(e) {
+    return null;
+  }
 }
 
 function checkReadingProgress() {
@@ -2108,20 +2123,20 @@ function renderFrequencies() {
     const isPlaying = activeFrequencyHz === f.hz;
 
     return `
-      <div class="glass-panel glass-panel-hover rounded-2xl p-5 border ${isPlaying ? 'border-yellow-500 shadow-[0_0_20px_rgba(234,179,8,0.25)]' : 'border-white/10'} flex flex-col justify-between transition-all">
+      <div onclick="handleFrequencyClick(${f.hz})" class="esoteric-card rounded-2xl p-4.5 border ${isPlaying ? 'border-[#D4AF37] shadow-[0_0_25px_rgba(212,175,55,0.3)] bg-[#D4AF37]/5' : 'border-white/10 hover:border-[#D4AF37]/40'} flex flex-col justify-between transition-all duration-300 cursor-pointer group">
         <div>
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-serif font-bold text-yellow-400">${f.hz} HZ</span>
-            <span class="text-[10px] font-bold text-gray-400">${f.chakra || ''}</span>
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono font-bold text-[#D4AF37] px-2 py-0.5 rounded bg-[#D4AF37]/10 border border-[#D4AF37]/20">${f.hz} HZ</span>
+            <span class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">${f.chakra || 'Solfeggio'}</span>
           </div>
-          <h4 class="font-serif font-bold text-base text-gray-100 mb-1">${f.name}</h4>
-          <p class="text-xs text-gray-400 leading-relaxed mb-4">${f.benefit}</p>
+          <h4 class="font-serif font-bold text-sm text-white group-hover:text-[#D4AF37] transition-colors mb-1 line-clamp-1">${f.name}</h4>
+          <p class="text-xs text-gray-400 leading-relaxed mb-3 line-clamp-2">${f.benefit}</p>
         </div>
-        <div class="pt-3 border-t border-white/10 flex items-center justify-between">
-          <span class="text-[11px] text-gray-500">Onda Pura Senoidal</span>
-          <button onclick="handleFrequencyClick(${f.hz})" class="px-4 py-2 rounded-xl ${isPlaying ? 'bg-yellow-400 text-black font-black' : 'bg-yellow-500 text-black font-bold'} text-xs flex items-center gap-1.5 transition-all shadow-md">
-            <i data-lucide="${isPlaying ? 'pause' : 'play'}" class="w-3.5 h-3.5"></i>
-            <span>${isPlaying ? 'Pausar' : 'Sintonizar'}</span>
+        <div class="pt-2.5 border-t border-white/5 flex items-center justify-between">
+          <span class="text-[10px] text-gray-500 font-mono">Onda Binaural</span>
+          <button class="px-3 py-1.5 rounded-xl ${isPlaying ? 'bg-[#D4AF37] text-black font-black' : 'bg-white/5 text-gray-300 group-hover:bg-[#D4AF37] group-hover:text-black font-bold'} text-[11px] flex items-center gap-1.5 transition-all duration-200 pointer-events-none">
+            <i data-lucide="${isPlaying ? 'pause' : 'play'}" class="w-3 h-3"></i>
+            <span>${isPlaying ? 'Tocando' : 'Ouvir'}</span>
           </button>
         </div>
       </div>
@@ -2189,6 +2204,8 @@ async function playFrequency(hz, name) {
 
     const badge = document.getElementById("playerCurrentHz");
     if (badge) badge.textContent = `Sintonizado em ${targetHz} Hz ${name ? '• ' + name : ''}`;
+    const waveBox = document.getElementById("soundWaveBox");
+    if (waveBox) waveBox.classList.remove("wave-paused");
 
     document.querySelectorAll("[data-freq-btn]").forEach(btn => {
       const bHz = parseInt(btn.getAttribute("data-freq-btn"));
@@ -2231,6 +2248,8 @@ function stopFrequency(showFeedback = true) {
 
   const badge = document.getElementById("playerCurrentHz");
   if (badge) badge.textContent = "Santuário em Silêncio";
+  const waveBox = document.getElementById("soundWaveBox");
+  if (waveBox) waveBox.classList.add("wave-paused");
 
   document.querySelectorAll("[data-freq-btn]").forEach(btn => {
     btn.classList.remove("border-yellow-500", "bg-yellow-500/10", "shadow-[0_0_20px_rgba(234,179,8,0.3)]");
