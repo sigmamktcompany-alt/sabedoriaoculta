@@ -3123,6 +3123,24 @@ function userHasOrderBumpProsperidade() {
   return false;
 }
 
+// MODAL DE BLOQUEIO DE CURSOS (A CÂMARA INTERNA)
+function openCourseLockedNotice(courseTitle = "A Câmara Interna") {
+  const modal = document.getElementById("courseLockedModal");
+  if (modal) {
+    const titleEl = document.getElementById("courseLockedModalTitle");
+    if (titleEl) titleEl.textContent = courseTitle;
+    modal.classList.remove("hidden");
+    if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  } else {
+    showToast("Conteúdo reservado aos alunos da Câmara Interna.");
+  }
+}
+
+function closeCourseLockedModal() {
+  const modal = document.getElementById("courseLockedModal");
+  if (modal) modal.classList.add("hidden");
+}
+
 function openOrderBumpModal() {
   openModal("orderBumpModal");
   if (window.lucide) try { lucide.createIcons(); } catch(e) {}
