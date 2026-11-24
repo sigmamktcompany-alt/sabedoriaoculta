@@ -767,6 +767,34 @@ function createBookCardHTML(book, isCarousel) {
 }
 
 // Orquestrador de Renderização da Biblioteca
+
+function renderCollections() {
+  const container = document.getElementById("collectionsList") || document.getElementById("collectionsContainer");
+  if (!container || typeof collectionsData === "undefined") return;
+
+  container.innerHTML = collectionsData.map(col => `
+    <div onclick="handleCollectionClick('${col.id}')" class="esoteric-card rounded-2xl p-5 border border-white/10 flex items-center justify-between cursor-pointer hover:border-yellow-500/50 transition-all group">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-yellow-400 shrink-0 group-hover:scale-105 transition-transform">
+          <i data-lucide="${col.icon || 'crown'}" class="w-6 h-6"></i>
+        </div>
+        <div class="text-left">
+          <h4 class="text-sm font-bold text-white group-hover:text-yellow-400 transition-colors">${col.title}</h4>
+          <p class="text-xs text-gray-400">${col.subtitle || col.desc || ''}</p>
+          <div class="flex items-center gap-2 mt-1 text-[10px] text-gray-500">
+            <span>${col.count}</span>
+            <span>•</span>
+            <span>${col.size}</span>
+          </div>
+        </div>
+      </div>
+      <i data-lucide="download" class="w-4 h-4 text-gray-500 group-hover:text-yellow-400 transition-colors"></i>
+    </div>
+  `).join("");
+
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+}
+
 function renderBooks() {
   const streamingView = document.getElementById("libraryStreamingView");
   const categoriesView = document.getElementById("libraryCategoriesView");
@@ -1374,7 +1402,18 @@ let currentScrollObserver = null;
 let saveProgressDebounceTimer = null;
 let currentReaderPage = 1;
 
+
+function openReaderModalDirect(bookId) {
+  const book = booksData.find(b => b.id == bookId);
+  if (!book) return;
+  openReaderModal(book);
+}
+
 async function openReaderModal(book, startPage) {
+  if (typeof book === "number" || typeof book === "string") {
+    book = booksData.find(b => b.id == book);
+  }
+  if (!book) return;
   if (startPage === undefined) {
     const saved = getSavedProgress(book.id);
     startPage = saved ? saved.page : 1;
@@ -1413,17 +1452,28 @@ async function openReaderModal(book, startPage) {
     // MODO NATIVO COM SCROLL CONTÍNUO (ESTILO ORDEM 137)
     if (iframe) {
       iframe.classList.add("hidden");
+      iframe.style.display = "none";
       iframe.src = "";
     }
-    if (nativeContainer) nativeContainer.classList.remove("hidden");
+    if (nativeContainer) {
+      nativeContainer.classList.remove("hidden");
+      nativeContainer.style.display = "flex";
+    }
     
     await renderNativePDF(targetUrl, startPage);
   } else {
     // FALLBACK DRIVE (IFRAME)
-    if (nativeContainer) nativeContainer.classList.add("hidden");
-    if (spinner) spinner.classList.add("hidden");
+    if (nativeContainer) {
+      nativeContainer.classList.add("hidden");
+      nativeContainer.style.display = "none";
+    }
+    if (spinner) {
+      spinner.classList.add("hidden");
+      spinner.style.display = "none";
+    }
     if (iframe) {
       iframe.classList.remove("hidden");
+      iframe.style.display = "block";
       let driveUrl = targetUrl;
       if (driveUrl.includes("drive.google.com")) {
         if (driveUrl.includes("/view")) {
@@ -2263,12 +2313,18 @@ function openModal(modalId) {
     loadUserProfile();
   }
   const m = document.getElementById(modalId);
-  if (m) m.classList.remove("hidden");
+  if (m) {
+    m.classList.remove("hidden");
+    m.style.display = "flex";
+  }
 }
 
 function closeModal(modalId) {
   const m = document.getElementById(modalId);
-  if (m) m.classList.add("hidden");
+  if (m) {
+    m.classList.add("hidden");
+    m.style.display = "none";
+  }
 }
 
 function openUpgradeModal(title) {
@@ -2375,12 +2431,13 @@ function checkVipGateAuth() {
     }
     try { updateTierBadgeUI(); } catch(e) {}
     gate.style.opacity = "0";
-    setTimeout(() => {
-      gate.classList.add("hidden");
-      gate.style.display = "none";
-    }, 200);
+    gate.style.pointerEvents = "none";
+    gate.classList.add("hidden");
+    gate.style.display = "none";
   } else {
     gate.classList.remove("hidden");
+    gate.style.display = "flex";
+    gate.style.pointerEvents = "auto";
     gate.style.opacity = "1";
     setTimeout(() => {
       const inp = document.getElementById("gateEmailInput");
