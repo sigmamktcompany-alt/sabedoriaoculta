@@ -62,8 +62,8 @@ export default {
         name = name ? name.trim() : email.split("@")[0];
         const defaultPassword = env.DEFAULT_PASSWORD || "cupula@33";
         const portalUrl = "https://sabedoriaoculta.com/app/";
-        const fromEmail = env.FROM_EMAIL || "Cúpula 33 <suporte@sabedoriaoculta.com>";
-        const resendKey = env.RESEND_API_KEY || "";
+        const fromEmail = env.FROM_EMAIL || "Cúpula 33 <onboarding@resend.dev>";
+        const resendKey = env.RESEND_API_KEY || "re_ZwdwULHi_MA8wrHM6fFcYDKAxavKx7LC5";
 
         const isRefund = ["refund", "chargeback", "cancel", "devolvida"].some(s => status.includes(s));
 

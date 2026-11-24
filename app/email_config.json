@@ -1,7 +1,7 @@
 {
   "provider": "resend",
-  "resend_api_key": "",
-  "from_email": "Cúpula 33 <suporte@sabedoriaoculta.com>",
+  "resend_api_key": "re_ZwdwULHi_MA8wrHM6fFcYDKAxavKx7LC5",
+  "from_email": "C\u00fapula 33 <onboarding@resend.dev>",
   "smtp_host": "smtp.hostinger.com",
   "smtp_port": 465,
   "smtp_user": "",
