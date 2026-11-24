@@ -28,6 +28,13 @@ const DEFAULT_LOCAL_BOOKS = [
   {"id":6,"title":"O Caibalion: As Sete Leis Herméticas","author":"Três Iniciados","category":"Hermetismo & Cabala","module":"Módulo I - Hermetismo & Cabala","cover":"assets/covers_extracted/cover_O_Caibalion_-_Edi__o_Definitiva.jpg","pdfUrl":"livros_pdf/01_O_Caibalion_Tres_Iniciados.pdf","pages":162,"tier":"basico","desc":"Os 7 princípios universais da filosofia hermética."}
 ];
 
+function getAllBooks() {
+  if (typeof window !== "undefined" && window.BOOKS_DATABASE && window.BOOKS_DATABASE.length > 0) {
+    return window.BOOKS_DATABASE;
+  }
+  return (typeof booksData !== "undefined" && booksData) ? booksData : [];
+}
+
 const booksData = (typeof window !== "undefined" && window.BOOKS_DATABASE && window.BOOKS_DATABASE.length > 0)
   ? window.BOOKS_DATABASE
   : DEFAULT_LOCAL_BOOKS;
@@ -681,7 +688,7 @@ function createBookCardHTML(book, isCarousel) {
     : "cursor-pointer group select-none transition-transform duration-200 active:scale-95";
 
   return `
-    <div onclick="handleBookClick(${book.id})" class="${containerClass}">
+    <div onclick="handleBookClick('${book.id}')\" class="${containerClass}">
       
       <!-- Container da Capa com Aspect Ratio 2:3 -->
       <div class="relative aspect-[2/3] rounded-2xl overflow-hidden mb-2.5 border border-white/10 group-hover:border-[#D4AF37] shadow-[0_8px_25px_rgba(0,0,0,0.7)] group-hover:shadow-[0_12px_30px_rgba(212,175,55,0.22)] transition-all duration-300 bg-[#0d0d0d]">
@@ -935,8 +942,8 @@ function renderCategoriesGrid() {
 function renderCategoryDetailGrid(categoryName) {
   const grid = document.getElementById("categoryDetailBooksGrid");
   if (!grid) return;
-
-  const filtered = booksData.filter(b => 
+  const all = getAllBooks();
+  const filtered = all.filter(b => 
     (b.category && b.category.toLowerCase().includes(categoryName.toLowerCase())) ||
     (b.module && b.module.toLowerCase().includes(categoryName.toLowerCase()))
   );
@@ -1226,8 +1233,12 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 function handleBookClick(bookId) {
-  const book = booksData.find(b => b.id === bookId);
-  if (!book) return;
+  const all = getAllBooks();
+  const book = all.find(b => String(b.id) === String(bookId));
+  if (!book) {
+    console.warn("Livro não encontrado com ID:", bookId);
+    return;
+  }
 
   currentBookModalData = book;
   openBookModal(book);
@@ -1769,47 +1780,22 @@ function bookmarkCurrentPage() {
 
 // SISTEMA DE MARCACAO & PERSISTENCIA DE LEITURA (LOCALSTORAGE)
 function saveReadingProgress(bookId, page, totalPages) {
-  const book = booksData.find(b => b.id === bookId);
-  if (!book) return;
-
-  const pct = Math.round((page / totalPages) * 100);
-  const data = {
-    bookId: book.id,
-    title: book.title,
-    author: book.author,
-    cover: book.cover,
-    category: book.category,
-    module: book.module || "Módulo I",
-    page: page,
-    totalPages: totalPages,
-    percent: pct,
-    pdfUrl: book.pdfUrl,
-    timestamp: new Date().toISOString()
-  };
-
-  localStorage.setItem("cupula33_active_reading", JSON.stringify(data));
-
-  // Salvar no mapa histórico de todos os livros
-  const allHistory = JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
-  allHistory[book.id] = data;
-  localStorage.setItem("cupula33_books_progress", JSON.stringify(allHistory));
-
-  checkReadingProgress();
-  renderContinueReading();
-  updateProfileXP();
+  if (typeof MemberDatabase !== "undefined") {
+    const item = MemberDatabase.saveBookProgress(bookId, page, totalPages);
+    checkReadingProgress();
+    renderContinueReading();
+    updateProfileXP();
+    return item;
+  }
 }
 
 function getSavedProgress(bookId) {
+  if (typeof MemberDatabase !== "undefined") {
+    return MemberDatabase.getBookProgress(bookId);
+  }
   try {
     const allHistory = JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
-    const prog = allHistory[bookId] || null;
-    // Se o progresso salvo for a página 56 ou 27 do livro 36 (artefato do bug anterior), expurga e inicia limpo
-    if (prog && (bookId === 36 || (prog.title && prog.title.toLowerCase().includes("enoque"))) && (prog.page === 56 || prog.page === 27)) {
-      delete allHistory[bookId];
-      localStorage.setItem("cupula33_books_progress", JSON.stringify(allHistory));
-      return null;
-    }
-    return prog;
+    return allHistory[String(bookId)] || allHistory[Number(bookId)] || null;
   } catch(e) {
     return null;
   }
@@ -1859,7 +1845,7 @@ function renderContinueReading() {
   }
 
   const cardsHTML = entries.map(item => `
-    <div onclick="handleBookClick(${item.bookId})" class="shrink-0 w-36 sm:w-44 group cursor-pointer text-left snap-start">
+    <div onclick="handleBookClick('${item.bookId}')\" class="shrink-0 w-36 sm:w-44 group cursor-pointer text-left snap-start">
       <div class="relative aspect-[3/4] rounded-2xl overflow-hidden bg-[#141414] border border-white/10 group-hover:border-yellow-500/60 shadow-lg transition-all duration-300">
         <img src="${item.cover || 'assets/logo.jpg'}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='assets/logo.jpg'">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
@@ -2164,6 +2150,150 @@ function writeString(view, offset, string) {
 
 // SISTEMA DE FREQUÊNCIAS DE SOLFEGGIO
 // ==========================================
+// BANCO DE DADOS DE MEMBROS & HISTÓRICO DE CLIENTES
+// ==========================================
+const MemberDatabase = {
+  getCurrentEmail() {
+    return (localStorage.getItem("cupula33_user_email") || "iniciado@cupula33.com").trim().toLowerCase();
+  },
+
+  getClientKey(email) {
+    const clean = (email || this.getCurrentEmail()).trim().toLowerCase();
+    return `cupula33_client_${clean}`;
+  },
+
+  getProgressKey(email) {
+    const clean = (email || this.getCurrentEmail()).trim().toLowerCase();
+    return `cupula33_books_progress_${clean}`;
+  },
+
+  getAllClientsIndex() {
+    try {
+      return JSON.parse(localStorage.getItem("cupula33_all_clients") || "{}");
+    } catch(e) {
+      return {};
+    }
+  },
+
+  saveClientRecord(clientData) {
+    const email = (clientData.email || this.getCurrentEmail()).trim().toLowerCase();
+    if (!email) return;
+
+    const key = this.getClientKey(email);
+    const existing = this.getClientRecord(email);
+    const updated = {
+      ...existing,
+      ...clientData,
+      email: email,
+      updatedAt: new Date().toISOString()
+    };
+
+    localStorage.setItem(key, JSON.stringify(updated));
+
+    // Atualiza índice mestre de clientes
+    const all = this.getAllClientsIndex();
+    all[email] = {
+      name: updated.name || "Iniciado",
+      tier: updated.tier || "master",
+      email: email,
+      lastActive: updated.updatedAt,
+      booksReadCount: Object.keys(updated.booksProgress || {}).length
+    };
+    localStorage.setItem("cupula33_all_clients", JSON.stringify(all));
+
+    return updated;
+  },
+
+  getClientRecord(email) {
+    const clean = (email || this.getCurrentEmail()).trim().toLowerCase();
+    const key = this.getClientKey(clean);
+    try {
+      const stored = localStorage.getItem(key);
+      if (stored) return JSON.parse(stored);
+    } catch(e) {}
+
+    const knownName = (typeof KNOWN_STUDENT_NAMES !== "undefined" && KNOWN_STUDENT_NAMES[clean]) || "";
+    return {
+      email: clean,
+      name: knownName || (clean.includes("@") ? clean.split("@")[0] : "Iniciado"),
+      tier: localStorage.getItem("cupula33_user_tier") || "master",
+      booksProgress: {},
+      myList: [],
+      roadmapCompleted: [],
+      activeReading: null,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+  },
+
+  saveBookProgress(bookId, page, totalPages) {
+    const email = this.getCurrentEmail();
+    const allBooks = getAllBooks();
+    const book = allBooks.find(b => String(b.id) === String(bookId));
+    if (!book) return;
+
+    const pct = totalPages > 0 ? Math.min(100, Math.round((page / totalPages) * 100)) : 0;
+    const progressItem = {
+      bookId: book.id,
+      title: book.title,
+      author: book.author,
+      cover: book.cover,
+      category: book.category,
+      module: book.module || "Módulo I",
+      page: page,
+      totalPages: totalPages,
+      percent: pct,
+      pdfUrl: book.pdfUrl,
+      timestamp: new Date().toISOString()
+    };
+
+    // 1. Salva na chave isolada do cliente
+    const clientProgress = this.getAllProgress(email);
+    clientProgress[String(book.id)] = progressItem;
+    localStorage.setItem(this.getProgressKey(email), JSON.stringify(clientProgress));
+
+    // 2. Atualiza registro completo do cliente
+    const client = this.getClientRecord(email);
+    client.booksProgress = clientProgress;
+    client.activeReading = progressItem;
+    this.saveClientRecord(client);
+
+    // 3. Salva legacy para retrocompatibilidade
+    localStorage.setItem("cupula33_active_reading", JSON.stringify(progressItem));
+    const legacyHistory = JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
+    legacyHistory[String(book.id)] = progressItem;
+    localStorage.setItem("cupula33_books_progress", JSON.stringify(legacyHistory));
+
+    return progressItem;
+  },
+
+  getAllProgress(email) {
+    const clean = (email || this.getCurrentEmail()).trim().toLowerCase();
+    const scopedKey = this.getProgressKey(clean);
+    try {
+      const scoped = localStorage.getItem(scopedKey);
+      if (scoped) return JSON.parse(scoped);
+    } catch(e) {}
+    // Novo cliente sempre inicia com progresso limpo e isolado
+    return {};
+  },
+
+  getBookProgress(bookId, email) {
+    const all = this.getAllProgress(email);
+    const prog = all[String(bookId)] || all[Number(bookId)] || null;
+    if (prog && (String(bookId) === "36" || (prog.title && prog.title.toLowerCase().includes("enoque"))) && (prog.page === 56 || prog.page === 27)) {
+      delete all[String(bookId)];
+      delete all[Number(bookId)];
+      localStorage.setItem(this.getProgressKey(email || this.getCurrentEmail()), JSON.stringify(all));
+      return null;
+    }
+    return prog;
+  }
+};
+
+window.MemberDatabase = MemberDatabase;
+
+// ==========================================
 // MOTOR DE FREQUÊNCIAS SAGRADAS (SOLFEGGIO BINAURAL 3.0)
 // ==========================================
 let currentOscillators = [];
@@ -2173,12 +2303,16 @@ function renderFrequencies() {
   const list = document.getElementById("frequenciesList");
   if (!list) return;
 
-  list.innerHTML = frequenciesData.map(f => {
-    const isLocked = currentTier === "basico" && f.tier === "master";
-    const isPlaying = activeFrequencyHz === f.hz;
+  // Se a grade já foi renderizada uma vez, apenas atualiza classes sem destruir a árvore DOM
+  if (list.children.length === frequenciesData.length) {
+    updateFrequencyUI(activeFrequencyHz);
+    return;
+  }
 
+  list.innerHTML = frequenciesData.map(f => {
+    const isPlaying = activeFrequencyHz === f.hz;
     return `
-      <div onclick="handleFrequencyClick(${f.hz})" class="esoteric-card rounded-2xl p-4.5 border ${isPlaying ? 'border-[#D4AF37] shadow-[0_0_25px_rgba(212,175,55,0.3)] bg-[#D4AF37]/5' : 'border-white/10 hover:border-[#D4AF37]/40'} flex flex-col justify-between transition-all duration-300 cursor-pointer group">
+      <div id="freq-card-${f.hz}" onclick="handleFrequencyClick(${f.hz}, event)" class="esoteric-card rounded-2xl p-4.5 border ${isPlaying ? 'border-[#D4AF37] shadow-[0_0_25px_rgba(212,175,55,0.3)] bg-[#D4AF37]/5' : 'border-white/10 hover:border-[#D4AF37]/40'} flex flex-col justify-between transition-all duration-300 cursor-pointer group">
         <div>
           <div class="flex items-center justify-between mb-2">
             <span class="text-xs font-mono font-bold text-[#D4AF37] px-2 py-0.5 rounded bg-[#D4AF37]/10 border border-[#D4AF37]/20">${f.hz} HZ</span>
@@ -2189,8 +2323,8 @@ function renderFrequencies() {
         </div>
         <div class="pt-2.5 border-t border-white/5 flex items-center justify-between">
           <span class="text-[10px] text-gray-500 font-mono">Onda Binaural</span>
-          <button class="px-3 py-1.5 rounded-xl ${isPlaying ? 'bg-[#D4AF37] text-black font-black' : 'bg-white/5 text-gray-300 group-hover:bg-[#D4AF37] group-hover:text-black font-bold'} text-[11px] flex items-center gap-1.5 transition-all duration-200 pointer-events-none">
-            <i data-lucide="${isPlaying ? 'pause' : 'play'}" class="w-3 h-3"></i>
+          <button id="freq-btn-${f.hz}" class="px-3 py-1.5 rounded-xl ${isPlaying ? 'bg-[#D4AF37] text-black font-black' : 'bg-white/5 text-gray-300 group-hover:bg-[#D4AF37] group-hover:text-black font-bold'} text-[11px] flex items-center gap-1.5 transition-all duration-200 pointer-events-none">
+            <i data-lucide="${isPlaying ? 'pause' : 'play'}" class="w-3.5 h-3.5"></i>
             <span>${isPlaying ? 'Tocando' : 'Ouvir'}</span>
           </button>
         </div>
@@ -2201,7 +2335,60 @@ function renderFrequencies() {
   if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
-function handleFrequencyClick(hz) {
+function updateFrequencyUI(currentActiveHz) {
+  frequenciesData.forEach(f => {
+    const card = document.getElementById(`freq-card-${f.hz}`);
+    const btn = document.getElementById(`freq-btn-${f.hz}`);
+    const isPlaying = currentActiveHz === f.hz;
+
+    if (card) {
+      if (isPlaying) {
+        card.className = "esoteric-card rounded-2xl p-4.5 border border-[#D4AF37] shadow-[0_0_25px_rgba(212,175,55,0.3)] bg-[#D4AF37]/5 flex flex-col justify-between transition-all duration-300 cursor-pointer group";
+      } else {
+        card.className = "esoteric-card rounded-2xl p-4.5 border border-white/10 hover:border-[#D4AF37]/40 flex flex-col justify-between transition-all duration-300 cursor-pointer group";
+      }
+    }
+
+    if (btn) {
+      if (isPlaying) {
+        btn.className = "px-3 py-1.5 rounded-xl bg-[#D4AF37] text-black font-black text-[11px] flex items-center gap-1.5 transition-all duration-200 pointer-events-none";
+        btn.innerHTML = `<i data-lucide="pause" class="w-3.5 h-3.5"></i><span>Tocando</span>`;
+      } else {
+        btn.className = "px-3 py-1.5 rounded-xl bg-white/5 text-gray-300 group-hover:bg-[#D4AF37] group-hover:text-black font-bold text-[11px] flex items-center gap-1.5 transition-all duration-200 pointer-events-none";
+        btn.innerHTML = `<i data-lucide="play" class="w-3.5 h-3.5"></i><span>Ouvir</span>`;
+      }
+    }
+  });
+
+  const badge = document.getElementById("playerCurrentHz");
+  const waveBox = document.getElementById("soundWaveBox");
+
+  if (currentActiveHz) {
+    const fObj = frequenciesData.find(x => x.hz === currentActiveHz);
+    if (badge) badge.textContent = `Sintonizado em ${currentActiveHz} Hz • ${fObj ? fObj.name.split('•')[1] || '' : ''}`;
+    if (waveBox) waveBox.classList.remove("wave-paused");
+  } else {
+    if (badge) badge.textContent = "Santuário em Silêncio";
+    if (waveBox) waveBox.classList.add("wave-paused");
+  }
+
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+}
+
+let lastFrequencyToggleTime = 0;
+
+function handleFrequencyClick(hz, event) {
+  if (event && event.stopPropagation) {
+    event.stopPropagation();
+  }
+
+  const now = Date.now();
+  // Debounce robusto de 500ms para aniquilar qualquer duplo clique de touch screen
+  if (now - lastFrequencyToggleTime < 500) {
+    return;
+  }
+  lastFrequencyToggleTime = now;
+
   const targetHz = parseInt(hz);
   if (activeFrequencyHz === targetHz) {
     stopFrequency(true);
@@ -2218,14 +2405,13 @@ async function playFrequency(hz, name) {
     stopFrequency(true);
     return;
   }
-  
-  // Cancela qualquer timeout pendente para que osciladores novos nunca sejam mortos por delay anterior
+
   if (stopFrequencyTimeout) {
     clearTimeout(stopFrequencyTimeout);
     stopFrequencyTimeout = null;
   }
 
-  // Interrompe osciladores antigos imediatamente de forma isolada
+  // Interrompe osciladores antigos imediatamente sem afetar o novo tom
   if (currentOscillators.length > 0) {
     const toStopNow = [...currentOscillators];
     currentOscillators = [];
@@ -2285,23 +2471,8 @@ async function playFrequency(hz, name) {
     currentOscillators = newOscs;
     activeFrequencyHz = targetHz;
 
-    const badge = document.getElementById("playerCurrentHz");
-    if (badge) badge.textContent = `Sintonizado em ${targetHz} Hz ${name ? '• ' + name : ''}`;
-    const waveBox = document.getElementById("soundWaveBox");
-    if (waveBox) waveBox.classList.remove("wave-paused");
-
-    document.querySelectorAll("[data-freq-btn]").forEach(btn => {
-      const bHz = parseInt(btn.getAttribute("data-freq-btn"));
-      if (bHz === targetHz) {
-        btn.classList.add("border-yellow-500", "bg-yellow-500/10", "shadow-[0_0_20px_rgba(234,179,8,0.3)]");
-        btn.classList.remove("border-white/10", "bg-white/5");
-      } else {
-        btn.classList.remove("border-yellow-500", "bg-yellow-500/10", "shadow-[0_0_20px_rgba(234,179,8,0.3)]");
-        btn.classList.add("border-white/10", "bg-white/5");
-      }
-    });
-
-    renderFrequencies();
+    // Atualiza a interface cirurgicamente sem reconstruir o DOM
+    updateFrequencyUI(targetHz);
     showToast(`Frequência de ${targetHz} Hz Sintonizada`);
   } catch (err) {
     console.error("Erro ao ativar frequência:", err);
@@ -2315,7 +2486,6 @@ function stopFrequency(showFeedback = true) {
     stopFrequencyTimeout = null;
   }
 
-  // Isola osciladores atuais para parada suave sem colidir com novas ativações
   const oscsToStop = [...currentOscillators];
   currentOscillators = [];
   const gainToRamp = masterGainNode;
@@ -2343,18 +2513,8 @@ function stopFrequency(showFeedback = true) {
   }, 90);
 
   activeFrequencyHz = null;
+  updateFrequencyUI(null);
 
-  const badge = document.getElementById("playerCurrentHz");
-  if (badge) badge.textContent = "Santuário em Silêncio";
-  const waveBox = document.getElementById("soundWaveBox");
-  if (waveBox) waveBox.classList.add("wave-paused");
-
-  document.querySelectorAll("[data-freq-btn]").forEach(btn => {
-    btn.classList.remove("border-yellow-500", "bg-yellow-500/10", "shadow-[0_0_20px_rgba(234,179,8,0.3)]");
-    btn.classList.add("border-white/10", "bg-white/5");
-  });
-
-  renderFrequencies();
   if (showFeedback) showToast("Frequência pausada.");
 }
 
@@ -2653,9 +2813,29 @@ async function authenticateGateLogin() {
   }
 
     if (authorized) {
-    localStorage.setItem("cupula33_user_email", email);
+    localStorage.setItem("cupula33_user_email", cleanEmail);
     localStorage.setItem("cupula33_user_tier", userTier);
     currentTier = userTier;
+
+    // Resgata o nome próprio cadastrado do cliente ou formata pelo prefixo
+    let clientName = (typeof KNOWN_STUDENT_NAMES !== "undefined" && KNOWN_STUDENT_NAMES[cleanEmail]) || "";
+    if (!clientName) {
+      const parts = cleanEmail.split("@")[0].replace(/[^a-zA-Z0-9]/g, " ").trim().split(/\s+/);
+      clientName = parts.map(p => p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()).join(" ");
+    }
+
+    if (typeof MemberDatabase !== "undefined") {
+      MemberDatabase.saveClientRecord({
+        email: cleanEmail,
+        name: clientName,
+        tier: userTier,
+        lastLogin: new Date().toISOString()
+      });
+    }
+
+    localStorage.setItem("cupula33_custom_name_" + cleanEmail, clientName);
+    localStorage.setItem("cupula33_custom_name", clientName);
+
     updateAllUserDisplays();
     updateProfileXP();
     renderContinueReading();
@@ -2787,7 +2967,7 @@ function renderModuleDetailContent(moduleCategory) {
       const curPage = progress ? progress.page : 1;
       
       return `
-        <div onclick="handleBookClick(${book.id})" class="glass-panel glass-panel-hover rounded-2xl overflow-hidden border border-gold-500/20 flex flex-col justify-between cursor-pointer group relative transition-all">
+        <div onclick="handleBookClick('${book.id}')\" class="glass-panel glass-panel-hover rounded-2xl overflow-hidden border border-gold-500/20 flex flex-col justify-between cursor-pointer group relative transition-all">
           <div class="relative aspect-[3/4] bg-dark-900 overflow-hidden">
             <img src="${book.cover}" alt="${book.title}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
             <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-dark-950/85 backdrop-blur-md text-[9px] font-bold text-gold-400 border border-gold-500/30 tracking-wider uppercase">
