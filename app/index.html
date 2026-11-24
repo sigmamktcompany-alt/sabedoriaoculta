@@ -51,8 +51,9 @@
       }
     }
   </script>
-    <!-- PDF.js Engine Core in Head -->
+    <!-- PDF.js Engine Core in Head with Worker -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
   <script>
     if (typeof pdfjsLib !== 'undefined') {
       pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
@@ -879,6 +880,6 @@
   <!-- SCRIPTS -->
   <script src="books_2500.json" type="application/json" id="rawBooksData"></script>
   
-  <script src="app.js?v=1795532979"></script>
+  <script src="app.js?v=1795538814"></script>
 </body>
 </html>

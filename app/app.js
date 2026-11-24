@@ -1487,10 +1487,18 @@ async function renderNativePDF(pdfUrl, startPage = 1) {
     const renderedPages = new Set();
     const pageContainers = [];
 
-    // Obter proporção da página 1 para estruturar placeholders
-    const samplePage = await currentPdfDoc.getPage(1);
-    const sampleViewport = samplePage.getViewport({ scale: 1 });
-    const ratio = sampleViewport.height / sampleViewport.width; // Ex: 1.414
+    // Obter proporção da página 1 para estruturar placeholders com timeout de segurança
+    let ratio = 1.414;
+    try {
+      const samplePage = await Promise.race([
+        currentPdfDoc.getPage(1),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('timeout getPage')), 4000))
+      ]);
+      const sampleViewport = samplePage.getViewport({ scale: 1 });
+      ratio = sampleViewport.height / sampleViewport.width;
+    } catch(e) {
+      console.warn('Usando ratio padrão 1.414:', e);
+    }
 
     // Criar containers das páginas com fundo branco nativo e sem bordas colapsadas
     for (let p = 1; p <= numPages; p++) {
