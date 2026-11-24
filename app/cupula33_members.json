@@ -99,13 +99,6 @@
       "status": "approved",
       "sale_code": "MANUAL_APPROVAL_OFFICIAL"
     },
-    "ricardoscola4@gmail.com": {
-      "name": "Ricardo André Scola",
-      "tier": "master",
-      "level": 1,
-      "active": true,
-      "date_added": "2026-11-24"
-    },
     "dweslley2003@gmail.com": {
       "name": "Weslley Dias",
       "tier": "master",
@@ -127,6 +120,18 @@
       "has_orderbump": true,
       "has_prosperidade_oculta": true,
       "date_added": "2026-11-24"
+    },
+    "sigma.mkt.company@gmail.com": {
+      "name": "Sigma Marketing",
+      "password": "cupula@33",
+      "tier": "master",
+      "level": 1,
+      "has_prosperidade": true,
+      "has_orderbump": true,
+      "active": true,
+      "status": "approved",
+      "sale_code": "DIRECT_SALE",
+      "updated_at": 1795558452.8387892
     }
   }
 }

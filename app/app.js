@@ -1,7 +1,7 @@
 const KNOWN_STUDENT_NAMES = {
+  "sigma.mkt.company@gmail.com": "MKT Teste",
   "joaomayamarcelo@gmail.com": "João Maya Marcelo",
   "dweslley2003@gmail.com": "Weslley Dias",
-  "ricardoscola4@gmail.com": "Ricardo André Scola",
   "loisianavida123@gmail.com": "Loisiana Lopes",
   "tjoaquim627@gmail.com": "Tamara S Joaquim",
   "paulo-reis51@hotmail.com": "Paulo Reis",
@@ -3068,9 +3068,9 @@ const SUPABASE_CONFIG = {
 };
 
 const MASTER_ALLOWLIST = [
+  "sigma.mkt.company@gmail.com",
   "joaomayamarcelo@gmail.com",
   "dweslley2003@gmail.com",
-  "ricardoscola4@gmail.com",
   "loisianavida123@gmail.com",
   "tjoaquim627@gmail.com",
   "paulo-reis51@hotmail.com",
@@ -3087,6 +3087,7 @@ const MASTER_ALLOWLIST = [
 
 // LISTA DE INICIADOS QUE ADQUIRIRAM O ORDER BUMP DA PROSPERIDADE MAÇÔNICA
 const ORDERBUMP_PROSPERIDADE_ALLOWLIST = [
+  "sigma.mkt.company@gmail.com",
   "tjoaquim627@gmail.com",
   "joaomayamarcelo@gmail.com",
   "mrobertor057@gmail.com",
