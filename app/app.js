@@ -1292,9 +1292,89 @@ function onReaderPageInputChange(val) {
 }
 
 // LEITOR EM TELA CHEIA
+// ==========================================
+// MOTOR NATIVO PDF.JS COM SCROLL CONTÍNUO (ESTILO ORDEM 137)
+// ==========================================
+if (typeof pdfjsLib !== "undefined") {
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+}
+
+const LOCAL_PDF_MAP = {
+  "3": "livros_pdf/Cabala_Comentários_de_um_Pedreiro_Sobre_a_Torá_Shemot_Êxodo.pdf",
+  "4": "livros_pdf/Cabala_Genética.pdf",
+  "8": "livros_pdf/Fundamentos_da_Cabala_Sêfer_Yetsirá__edição_revisada_e_ampli.pdf",
+  "9": "livros_pdf/Hermes_Trismegistos_o_Três_Vezes_Grande_e_Muitas_Vezes_.pdf",
+  "13": "livros_pdf/Tratado_da_sciencia_cabala_ou_noticia_de_arte_cabalistica.pdf",
+  "14": "livros_pdf/Tratado_da_sciencia_cabala_ou_Noticia_da_arte_cabalistica.pdf",
+  "21": "livros_pdf/Frabato_O_Mago_-_Franz_Bardon.pdf",
+  "26": "livros_pdf/Ritual_Onírico_Comunicação_Espiritual_Durante_o_Sono_Ma.pdf",
+  "27": "livros_pdf/Segredos_da_Magia_de_Umbanda_e_Quimbanda.pdf",
+  "32": "livros_pdf/01_O_Livro_de_Enoque_Completo.pdf",
+  "36": "livros_pdf/04_O_Livro_de_Enoque_Completo.pdf",
+  "37": "livros_pdf/Pistis_Sophia.pdf",
+  "40": "livros_pdf/Alquimia.pdf",
+  "41": "livros_pdf/Alquimia.pdf",
+  "42": "livros_pdf/Alquimia.pdf",
+  "44": "livros_pdf/Alquimia.pdf",
+  "46": "livros_pdf/A_Revelacao_Dos_Templarios_-_Lynn_Picknett_e_Clive_Prin.pdf",
+  "47": "livros_pdf/32_A_Acao_Secreta_da_Maconaria.pdf",
+  "48": "livros_pdf/As_Mansoes_Secretas_Da_Rosacruz.pdf",
+  "49": "livros_pdf/Cardeal_Rampolla_por_que_o_padre_Ricossa_busca_hoje_reabilit.pdf",
+  "51": "livros_pdf/H_P_Blavatsky_e_o_Caso_Coulomb.pdf",
+  "64": "livros_pdf/222_ANOS_GRANDE_ORIENTE_LUSITANO.pdf",
+  "65": "livros_pdf/64865430_A_Ciencia_Cabalistica_Lenain.pdf",
+  "72": "livros_pdf/A_Chave_Dos_Grandes_Misterios_Eliphas_Le.pdf",
+  "74": "livros_pdf/A_Energia_Dos_Raios.pdf",
+  "108": "livros_pdf/A_Teologia_Mistica_Como_Linguagem_Do_Sagrado.pdf",
+  "116": "livros_pdf/A_maçonaria_e_os_jesuitas_instrucção_pastoral_do_Bispo_de_Ol.pdf",
+  "152": "livros_pdf/Boletim_do_DESSEAK_-_n-ro_2_okt-nov1984.pdf",
+  "168": "livros_pdf/Carta_do_Passageiro_do_Abismo_Versão_Ritual_-_Adriano_B.pdf",
+  "181": "livros_pdf/Consagracao_Geral_Oleo_Santo.pdf",
+  "198": "livros_pdf/Ensaios_de_teatro_e_filosofia_do_Renascimento_ao_século_XVII.pdf",
+  "216": "livros_pdf/Frabato_O_Mago_-_Franz_Bardon.pdf",
+  "218": "livros_pdf/Francisco_de_Assis_Bezerra_de_Meneses.pdf",
+  "220": "livros_pdf/Fundamentos_Do_Misticismo_Tibetano_Lama_Anagarika_Govin.pdf",
+  "222": "livros_pdf/Gareth_Knight_Praticas_E_Exercicios_Ocultos.pdf",
+  "256": "livros_pdf/JERUSALÉM.pdf",
+  "264": "livros_pdf/LMTLT_3_MAG_PORT.pdf",
+  "268": "livros_pdf/08_O_Livro_da_Lei_Liber_AL_vel_Legis_Crowley.pdf",
+  "273": "livros_pdf/Livro_Dos_Espiritos_-Ed_2013.pdf",
+  "278": "livros_pdf/Livros_de_Astrologia.pdf",
+  "306": "livros_pdf/Mistérios_e_Práticas_da_Lei_de_Umbanda.pdf",
+  "307": "livros_pdf/05_Moral_e_Dogma_Albert_Pike.pdf",
+  "313": "livros_pdf/No_Reino_Da_Feiticaria.pdf",
+  "325": "livros_pdf/O_Diabo_Desmistificação_Completa_de_um_Mito.pdf",
+  "346": "livros_pdf/O_MAIOR_SEGREDO_-_DAVID_ICKE.pdf",
+  "363": "livros_pdf/O_Vaticano_Maçônico_Em_Nome_Do_Fantasioso_Jeová_Jahvéh_.pdf",
+  "372": "livros_pdf/OGrande_Computador_Celeste_Marcelo_Del_Debbio.pdf",
+  "374": "livros_pdf/OS_ENSINAMENTOS_SECRETOS_DE_TODO_OS_TEMPOS_-_MANLY_P_HALL.pdf",
+  "379": "livros_pdf/37_Os_Arquetipos_e_o_Inconsciente_Coletivo_Jung.pdf",
+  "385": "livros_pdf/Os_Protocolos_dos_Sábios_de_Sião.pdf",
+  "395": "livros_pdf/Pirḳe_rabi_Eliʻezer__hu_rabi_Eliʻezer_ben_horḳanus_ha-niḳra_.pdf",
+  "408": "livros_pdf/Psiquiatria_espiritismo_e_ciência_Um_diálogo_sobre_psic.pdf",
+  "417": "livros_pdf/Resenha_do_livro_e_link_para_download_online_Grimório_do_Sat.pdf",
+  "418": "livros_pdf/Revista_Espirita_-_Ano_I_-_1858.pdf",
+  "426": "livros_pdf/SHEMYAZA_O_Líder_dos_Vigilantes__A_Queda_o_Ensino_e_o_P.pdf",
+  "439": "livros_pdf/São_Cipriano_de_Cartago.pdf",
+  "442": "livros_pdf/Tarot_O_Livro_Azul.pdf",
+  "445": "livros_pdf/Teses_sobre_a_Comunidade_Terrivel.pdf",
+  "454": "livros_pdf/Um_Iniciante_na_Viagem_Astral_-_Saulo_Calderon.pdf",
+  "457": "livros_pdf/Umbanda_do_Brasil.pdf",
+  "458": "livros_pdf/Umbanda_e_o_Poder_da_Mediunidade.pdf",
+  "468": "livros_pdf/a-aguia--01011911-03.pdf",
+  "473": "livros_pdf/nro_2_11_ano_Grande_Oriente_do_Brazil_Jornal_Official_da_Maç.pdf",
+  "999": "livros_pdf/Manuscrito_Maconico_da_Prosperidade_Oculta.pdf",
+  "1": "livros_pdf/10_A_Tabua_de_Esmeralda_Hermes_Trismegisto.pdf",
+  "6": "livros_pdf/01_O_Caibalion_Tres_Iniciados.pdf"
+};
+
+let currentPdfDoc = null;
+let currentRenderObserver = null;
+let currentScrollObserver = null;
+let saveProgressDebounceTimer = null;
 let currentReaderPage = 1;
 
-function openReaderModal(book, startPage) {
+async function openReaderModal(book, startPage) {
   if (startPage === undefined) {
     const saved = getSavedProgress(book.id);
     startPage = saved ? saved.page : 1;
@@ -1307,22 +1387,213 @@ function openReaderModal(book, startPage) {
   if (rTitle) rTitle.textContent = book.title;
 
   updateReaderDisplay(book, startPage);
+  openModal("readerModal");
 
+  // Resolver URL do PDF (Prioridade: Mapeamento Local com CORS -> Fallback Drive)
   let targetUrl = book.pdfUrl;
-  if (targetUrl.includes("drive.google.com")) {
-    if (targetUrl.includes("/view")) {
-      targetUrl = targetUrl.replace(/\/view(\?.*)?$/, "/preview");
-    } else if (!targetUrl.includes("/preview")) {
-      targetUrl = targetUrl.replace(/\?.*$/, "") + "/preview";
-    }
+  if (LOCAL_PDF_MAP[book.id]) {
+    targetUrl = LOCAL_PDF_MAP[book.id];
+  } else if (book.id === 36 || (book.title && book.title.toLowerCase().includes("enoque"))) {
+    targetUrl = "livros_pdf/04_O_Livro_de_Enoque_Completo.pdf";
+  } else if (book.id === 999 || (book.title && book.title.toLowerCase().includes("prosperidade"))) {
+    targetUrl = "livros_pdf/Manuscrito_Maconico_da_Prosperidade_Oculta.pdf";
+  } else if (book.id === 1 || (book.title && book.title.toLowerCase().includes("esmeralda"))) {
+    targetUrl = "livros_pdf/10_A_Tabua_de_Esmeralda_Hermes_Trismegisto.pdf";
+  } else if (book.id === 6 || (book.title && book.title.toLowerCase().includes("caibalion"))) {
+    targetUrl = "livros_pdf/01_O_Caibalion_Tres_Iniciados.pdf";
   }
 
-  const finalUrl = startPage > 1 ? (targetUrl.split('#')[0] + "#page=" + startPage) : targetUrl;
-  const iframe = document.getElementById("readerIframe");
-  if (iframe) iframe.src = finalUrl;
+  const isLocalPDF = targetUrl && !targetUrl.includes("drive.google.com");
 
-  saveReadingProgress(book.id, startPage, book.pages);
-  openModal("readerModal");
+  const nativeContainer = document.getElementById("readerNativeContainer");
+  const iframe = document.getElementById("readerIframe");
+  const spinner = document.getElementById("readerLoadingSpinner");
+
+  if (isLocalPDF && typeof pdfjsLib !== "undefined") {
+    // MODO NATIVO COM SCROLL CONTÍNUO (ESTILO ORDEM 137)
+    if (iframe) {
+      iframe.classList.add("hidden");
+      iframe.src = "";
+    }
+    if (nativeContainer) nativeContainer.classList.remove("hidden");
+    
+    await renderNativePDF(targetUrl, startPage);
+  } else {
+    // FALLBACK DRIVE (IFRAME)
+    if (nativeContainer) nativeContainer.classList.add("hidden");
+    if (spinner) spinner.classList.add("hidden");
+    if (iframe) {
+      iframe.classList.remove("hidden");
+      let driveUrl = targetUrl;
+      if (driveUrl.includes("drive.google.com")) {
+        if (driveUrl.includes("/view")) {
+          driveUrl = driveUrl.replace(/\/view(\?.*)?$/, "/preview");
+        } else if (!driveUrl.includes("/preview")) {
+          driveUrl = driveUrl.replace(/\?.*$/, "") + "/preview";
+        }
+      }
+      iframe.src = driveUrl;
+    }
+    saveReadingProgress(book.id, startPage, book.pages);
+  }
+}
+
+async function renderNativePDF(pdfUrl, startPage = 1) {
+  const container = document.getElementById("readerNativeContainer");
+  const spinner = document.getElementById("readerLoadingSpinner");
+  const spinnerText = document.getElementById("readerLoadingText");
+  if (!container) return;
+
+  if (spinner) {
+    if (spinnerText) spinnerText.textContent = "Carregando páginas do manuscrito...";
+    spinner.classList.remove("hidden");
+  }
+
+  // Limpa observers anteriores e conteúdo
+  if (currentRenderObserver) currentRenderObserver.disconnect();
+  if (currentScrollObserver) currentScrollObserver.disconnect();
+  container.innerHTML = "";
+
+  try {
+    const loadingTask = pdfjsLib.getDocument({
+      url: pdfUrl,
+      cMapUrl: "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/cmaps/",
+      cMapPacked: true
+    });
+
+    currentPdfDoc = await loadingTask.promise;
+    const numPages = currentPdfDoc.numPages;
+    if (currentBookModalData) currentBookModalData.pages = numPages;
+
+    updateReaderDisplay(currentBookModalData, startPage);
+
+    const renderedPages = new Set();
+    const pageContainers = [];
+
+    // Obter proporção da página 1
+    const samplePage = await currentPdfDoc.getPage(1);
+    const sampleViewport = samplePage.getViewport({ scale: 1 });
+    const aspectRatio = sampleViewport.height / sampleViewport.width;
+
+    // Criar placeholders estruturados para cada página
+    for (let p = 1; p <= numPages; p++) {
+      const pageDiv = document.createElement("div");
+      pageDiv.id = `pdf-page-wrapper-${p}`;
+      pageDiv.dataset.pageNumber = p;
+      pageDiv.className = "pdf-page-wrapper relative w-full max-w-[850px] mx-auto rounded-xl shadow-2xl bg-[#141414] border border-white/5 overflow-hidden flex items-center justify-center transition-opacity duration-300";
+      pageDiv.style.aspectRatio = `1 / ${aspectRatio.toFixed(3)}`;
+
+      pageDiv.innerHTML = `
+        <div class="page-placeholder text-center text-gray-500 font-mono text-xs flex flex-col items-center gap-2 p-6">
+          <div class="w-6 h-6 border-2 border-yellow-500/20 border-t-yellow-500 rounded-full animate-spin"></div>
+          <span>Página ${p} de ${numPages}</span>
+        </div>
+      `;
+
+      container.appendChild(pageDiv);
+      pageContainers.push(pageDiv);
+    }
+
+    if (spinner) spinner.classList.add("hidden");
+
+    // Renderiza uma página específica em canvas HD
+    async function renderPageCanvas(pageNum, pageDiv) {
+      if (renderedPages.has(pageNum)) return;
+      renderedPages.add(pageNum);
+
+      try {
+        const page = await currentPdfDoc.getPage(pageNum);
+        const containerWidth = Math.min(850, window.innerWidth > 640 ? window.innerWidth - 64 : window.innerWidth - 16);
+        const scale = (containerWidth / page.getViewport({ scale: 1 }).width) * (window.devicePixelRatio || 1);
+        const viewport = page.getViewport({ scale: Math.max(1, scale) });
+
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        canvas.style.width = "100%";
+        canvas.style.height = "100%";
+        canvas.className = "w-full h-full object-contain rounded-xl";
+
+        const renderContext = {
+          canvasContext: ctx,
+          viewport: viewport
+        };
+
+        await page.render(renderContext).promise;
+
+        pageDiv.innerHTML = "";
+        pageDiv.appendChild(canvas);
+        pageDiv.style.aspectRatio = "";
+      } catch (err) {
+        console.error("Erro ao renderizar página " + pageNum, err);
+      }
+    }
+
+    // Renderizar imediatamente as páginas ao redor de startPage
+    const initialPages = [startPage, startPage + 1, startPage + 2, 1, 2].filter(p => p <= numPages);
+    initialPages.forEach(p => {
+      const div = document.getElementById(`pdf-page-wrapper-${p}`);
+      if (div) renderPageCanvas(p, div);
+    });
+
+    // Observer Lazy para renderizar conforme chega perto da tela
+    currentRenderObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const pageNum = parseInt(entry.target.dataset.pageNumber);
+          renderPageCanvas(pageNum, entry.target);
+        }
+      });
+    }, {
+      root: container,
+      rootMargin: "800px 0px 800px 0px"
+    });
+
+    pageContainers.forEach(div => currentRenderObserver.observe(div));
+
+    // Observer de Rolagem para atualizar progresso (Igual ao Ordem 137)
+    currentScrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const pageNum = parseInt(entry.target.dataset.pageNumber);
+          currentReaderPage = pageNum;
+          updateReaderDisplay(currentBookModalData, pageNum);
+
+          clearTimeout(saveProgressDebounceTimer);
+          saveProgressDebounceTimer = setTimeout(() => {
+            saveReadingProgress(currentBookModalData.id, pageNum, numPages);
+          }, 350);
+        }
+      });
+    }, {
+      root: container,
+      threshold: 0.5
+    });
+
+    pageContainers.forEach(div => currentScrollObserver.observe(div));
+
+    // Se começou numa página mais adiantada, rola até ela
+    if (startPage > 1 && startPage <= numPages) {
+      setTimeout(() => {
+        const targetDiv = document.getElementById(`pdf-page-wrapper-${startPage}`);
+        if (targetDiv) {
+          targetDiv.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 300);
+    }
+
+  } catch (err) {
+    console.error("Erro ao carregar PDF via PDF.js:", err);
+    if (spinner) spinner.classList.add("hidden");
+    showToast("Abrindo modo de leitura alternativo...");
+    const iframe = document.getElementById("readerIframe");
+    if (iframe) {
+      container.classList.add("hidden");
+      iframe.classList.remove("hidden");
+      iframe.src = pdfUrl;
+    }
+  }
 }
 
 function updateReaderDisplay(book, page) {
@@ -1347,6 +1618,12 @@ function changeReaderPage(delta) {
   
   updateReaderDisplay(currentBookModalData, currentReaderPage);
   saveReadingProgress(currentBookModalData.id, currentReaderPage, total);
+
+  // Se estiver no leitor nativo, rola suavemente até a página
+  const pageDiv = document.getElementById(`pdf-page-wrapper-${currentReaderPage}`);
+  if (pageDiv) {
+    pageDiv.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 }
 
 function adjustReaderPage(delta) {
@@ -1364,8 +1641,12 @@ function markCurrentBookCompleted() {
 }
 
 function closeReaderModal() {
+  if (currentRenderObserver) currentRenderObserver.disconnect();
+  if (currentScrollObserver) currentScrollObserver.disconnect();
   const iframe = document.getElementById("readerIframe");
   if (iframe) iframe.src = "";
+  const container = document.getElementById("readerNativeContainer");
+  if (container) container.innerHTML = "";
   closeModal("readerModal");
 }
 
