@@ -1647,6 +1647,17 @@ async function renderNativePDF(pdfUrl, startPage = 1) {
 
     const loadingTask = pdfjsLib.getDocument(pdfParam);
 
+    if (loadingTask.onProgress) {
+      loadingTask.onProgress = function(progress) {
+        if (progress && progress.total > 0 && spinnerText) {
+          const pct = Math.min(99, Math.round((progress.loaded / progress.total) * 100));
+          const mbLoaded = (progress.loaded / (1024 * 1024)).toFixed(1);
+          const mbTotal = (progress.total / (1024 * 1024)).toFixed(1);
+          spinnerText.textContent = `Carregando manuscrito (${pct}% • ${mbLoaded}MB de ${mbTotal}MB)...`;
+        }
+      };
+    }
+
     currentPdfDoc = await loadingTask.promise;
     const numPages = currentPdfDoc.numPages;
     if (currentBookModalData) currentBookModalData.pages = numPages;
