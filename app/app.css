@@ -3,15 +3,15 @@
 @tailwind utilities;
 
 :root {
-  --color-gold: #d4af37;
-  --color-gold-light: #f3e5ab;
-  --color-gold-dark: #aa8c2c;
-  --color-gold-glow: rgba(212, 175, 55, 0.25);
-  --bg-dark: #070709;
+  --color-gold: #D2042D;
+  --color-gold-light: #ff4d6d;
+  --color-gold-dark: #a00323;
+  --color-gold-glow: rgba(210, 4, 45, 0.35);
+  --bg-dark: #000000;
 }
 
 body {
-  background-color: #070709;
+  background-color: #000000;
   color: #e5e7eb;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
@@ -24,27 +24,27 @@ body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0d0e12;
+  background: #0a0a0a;
 }
 ::-webkit-scrollbar-thumb {
   background: #2a2e3d;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #d4af37;
+  background: #D2042D;
 }
 
 /* Glassmorphism Card (Estilo King's Code VIP) */
 .glass-panel {
-  background: rgba(13, 14, 18, 0.85);
+  background: rgba(18, 18, 18, 0.95);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(212, 175, 55, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .glass-panel-gold {
   background: linear-gradient(135deg, rgba(26, 21, 12, 0.9) 0%, rgba(13, 14, 18, 0.95) 100%);
-  border: 1px solid rgba(212, 175, 55, 0.4);
+  border: 1px solid rgba(210, 4, 45, 0.4);
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7), 0 0 20px -5px rgba(212, 175, 55, 0.15);
 }
 
@@ -52,7 +52,7 @@ body {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .glass-panel-hover:hover {
-  border-color: rgba(212, 175, 55, 0.55);
+  border-color: rgba(210, 4, 45, 0.6);
   transform: translateY(-3px);
   box-shadow: 0 14px 28px -6px rgba(0, 0, 0, 0.6), 0 0 20px -3px var(--color-gold-glow);
 }
@@ -65,7 +65,7 @@ body {
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
   background: rgba(24, 21, 14, 0.9);
-  border: 1px solid rgba(212, 175, 55, 0.4);
+  border: 1px solid rgba(210, 4, 45, 0.4);
   font-size: 0.7rem;
   font-weight: 700;
   color: #e8c879;
@@ -78,7 +78,7 @@ body {
   display: inline-block;
   width: 3px;
   height: 12px;
-  background-color: #d4af37;
+  background-color: #D2042D;
   margin: 0 1.5px;
   border-radius: 2px;
   animation: wave 1.2s infinite ease-in-out;
@@ -96,14 +96,14 @@ body {
 
 /* Gold Gradient Text */
 .gold-text {
-  background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa8c2c 100%);
+  background: linear-gradient(135deg, #f3e5ab 0%, #D2042D 50%, #aa8c2c 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 /* Bottom Nav bar active glow */
 .nav-active {
-  color: #d4af37 !important;
+  color: #D2042D !important;
   position: relative;
 }
 .nav-active::after {
@@ -114,9 +114,9 @@ body {
   transform: translateX(-50%);
   width: 16px;
   height: 2px;
-  background-color: #d4af37;
+  background-color: #D2042D;
   border-radius: 2px;
-  box-shadow: 0 0 8px #d4af37;
+  box-shadow: 0 0 8px #D2042D;
 }
 
 /* Modal animation */
@@ -139,7 +139,7 @@ body {
 
 /* Tab active pills */
 .tab-active {
-  background: linear-gradient(135deg, #d4af37 0%, #aa8c2c 100%) !important;
+  background: linear-gradient(135deg, #D2042D 0%, #aa8c2c 100%) !important;
   color: #000000 !important;
   font-weight: 800 !important;
   border-color: #f3e5ab !important;
