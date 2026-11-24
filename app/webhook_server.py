@@ -64,7 +64,7 @@ def load_config():
         "smtp_port": 465,
         "smtp_user": "",
         "smtp_password": "",
-        "portal_url": "https://sigmamarketingdigital.github.io/cupula33/app/",
+        "portal_url": "https://sabedoriaoculta.com/app/",
         "vip_group_url": "https://chat.whatsapp.com/invite/cupula33-vip",
         "default_password": "cupula@33"
     }
@@ -213,7 +213,7 @@ def send_email_smtp(host, port, user, password, from_email, to_email, subject, h
 
 def dispatch_access_email(name, email, password, has_orderbump=False):
     cfg = load_config()
-    portal_url = cfg.get("portal_url", "https://sigmamarketingdigital.github.io/cupula33/app/")
+    portal_url = cfg.get("portal_url", "https://sabedoriaoculta.com/app/")
     vip_group_url = cfg.get("vip_group_url", "https://chat.whatsapp.com/invite/cupula33-vip")
     from_email = cfg.get("from_email", "Cúpula 33 <onboarding@resend.dev>")
     subject = "Seu Acesso Master foi Liberado! • Cúpula 33"
@@ -339,7 +339,7 @@ def process_sale_payload(data):
     if active and should_send:
         email_res = dispatch_access_email(name, email, default_pass, has_orderbump=has_bump)
 
-    portal_url = cfg.get("portal_url", "https://sigmamarketingdigital.github.io/cupula33/app/")
+    portal_url = cfg.get("portal_url", "https://sabedoriaoculta.com/app/")
 
     return {
         "success": True,

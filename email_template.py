@@ -7,7 +7,7 @@ def render_cupula_email(
     name="Iniciado",
     email="",
     password="cupula@33",
-    portal_url="https://sigmamarketingdigital.github.io/cupula33/app/",
+    portal_url="https://sabedoriaoculta.com/app/",
     vip_group_url="https://chat.whatsapp.com/invite/cupula33-vip",
     has_orderbump=False
 ):
