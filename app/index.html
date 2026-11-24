@@ -51,7 +51,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="app.css?v=1795480900">
+  <link rel="stylesheet" href="app.css?v=1795482000">
 </head>
 
 <body class="bg-black text-gray-200 font-sans antialiased overflow-x-hidden selection:bg-yellow-500/30 selection:text-yellow-300">
@@ -74,7 +74,7 @@
         CÚPULA <span class="text-yellow-400">33</span>
       </h1>
       <p class="text-xs text-gray-400 mb-6">
-        Digite o e-mail utilizado na sua inscrição para desbloquear o acervo completo.
+        Digite seu e-mail cadastrado para liberar o acervo completo conforme sua conta.
       </p>
 
       <form onsubmit="event.preventDefault(); authenticateGateLogin();" class="space-y-4">
@@ -100,10 +100,10 @@
     </div>
   </div>
 
-  <!-- ==================== SIDEBAR DESKTOP (EXATAMENTE IGUAL À CAPTURA) ==================== -->
+  <!-- ==================== SIDEBAR DESKTOP (PADRÃO ORDEM 137 COM AMARELO) ==================== -->
   <aside id="desktopSidebar" class="hidden md:flex flex-col h-screen fixed left-0 top-0 bg-[#0a0a0a] border-r border-white/10 z-50 w-60 text-left select-none transition-all duration-300">
     
-    <!-- Top Brand: Caixa com Logo e Nome -->
+    <!-- Top Brand: Logo e Título -->
     <div class="p-4 flex items-center justify-between border-b border-white/10 relative">
       <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('home')">
         <div class="w-11 h-11 rounded-lg bg-black border border-white/15 p-1 flex items-center justify-center shadow-lg shrink-0">
@@ -115,24 +115,24 @@
         </div>
       </div>
 
-      <!-- Botão Chevron Toggle na borda (como nas capturas) -->
+      <!-- Botão Chevron Toggle na borda -->
       <button onclick="toggleSidebarCollapse()" class="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-yellow-500 hover:bg-yellow-400 rounded-full flex items-center justify-center border-2 border-black text-black hover:scale-110 transition shadow-lg z-10 cursor-pointer">
         <i id="sidebarChevronIcon" data-lucide="chevron-left" class="w-3.5 h-3.5 stroke-[3]"></i>
       </button>
     </div>
 
-    <!-- Navegação Vertical (Os 6 Menus Exatos das Capturas) -->
-    <nav class="flex-1 px-3 py-5 space-y-2 overflow-y-auto hide-scrollbar">
+    <!-- Navegação Vertical (Os 6 Menus Oficiais) -->
+    <nav class="flex-1 px-3 py-5 space-y-1.5 overflow-y-auto hide-scrollbar">
       
-      <!-- 1. Início -->
-      <button onclick="switchTab('home')" id="sideNav-home" class="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left cursor-pointer">
-        <i data-lucide="home" class="w-4 h-4"></i>
+      <!-- 1. Início (Ativo por padrão) -->
+      <button onclick="switchTab('home')" id="sideNav-home" class="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-bold text-yellow-400 bg-white/5 border border-yellow-500/40 transition-all text-left cursor-pointer">
+        <i data-lucide="home" class="w-4 h-4 text-yellow-400"></i>
         <span>Início</span>
       </button>
 
-      <!-- 2. Biblioteca (Ativo por padrão) -->
-      <button onclick="switchTab('library')" id="sideNav-library" class="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-bold text-yellow-400 bg-white/5 border border-yellow-500/40 transition-all text-left cursor-pointer">
-        <i data-lucide="library" class="w-4 h-4 text-yellow-400"></i>
+      <!-- 2. Biblioteca -->
+      <button onclick="switchTab('library')" id="sideNav-library" class="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left cursor-pointer">
+        <i data-lucide="library" class="w-4 h-4"></i>
         <span>Biblioteca</span>
       </button>
 
@@ -162,14 +162,14 @@
 
     </nav>
 
-    <!-- Card de Membro Inferior -->
+    <!-- Card de Membro Inferior Dinâmico (Carregado por e-mail) -->
     <div class="p-3.5 border-t border-white/10 bg-[#0d0d0d]">
       <div onclick="switchTab('profile')" class="flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 cursor-pointer transition">
         <div class="w-9 h-9 rounded-full overflow-hidden bg-white/5 border border-white/10 shrink-0">
           <img id="sidebarAvatarImg" src="assets/logo.jpg" alt="Avatar" class="w-full h-full object-cover">
         </div>
         <div class="flex-1 min-w-0">
-          <div id="sidebarUserName" class="text-xs font-bold text-white truncate">Paulo Reis</div>
+          <div id="sidebarUserName" class="text-xs font-bold text-white truncate">Carregando...</div>
           <div class="flex items-center gap-1.5 text-[10px] text-yellow-400 font-medium">
             <span class="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse"></span>
             <span id="sidebarTierLabel">Membro Master</span>
@@ -195,27 +195,31 @@
     </div>
   </header>
 
-  <!-- ==================== MOBILE BOTTOM NAVIGATION ==================== -->
+  <!-- ==================== MOBILE BOTTOM NAVIGATION (COM AS 6 ABAS) ==================== -->
   <nav class="md:hidden fixed bottom-0 left-0 w-full bg-[#0a0a0a]/95 backdrop-blur-md border-t border-white/10 z-50 pb-safe shadow-[0_-4px_20px_rgba(0,0,0,0.5)]">
-    <div class="flex justify-around items-center p-2">
-      <button id="navBtn-home" onclick="switchTab('home')" class="flex flex-col items-center gap-1 text-gray-400 text-[10px] font-medium py-1">
-        <i data-lucide="home" class="w-5 h-5"></i>
+    <div class="flex justify-around items-center p-1.5">
+      <button id="navBtn-home" onclick="switchTab('home')" class="flex flex-col items-center gap-0.5 text-yellow-400 text-[10px] font-bold py-1">
+        <i data-lucide="home" class="w-4 h-4"></i>
         <span>Início</span>
       </button>
-      <button id="navBtn-library" onclick="switchTab('library')" class="flex flex-col items-center gap-1 text-yellow-400 text-[10px] font-bold py-1">
-        <i data-lucide="library" class="w-5 h-5"></i>
+      <button id="navBtn-library" onclick="switchTab('library')" class="flex flex-col items-center gap-0.5 text-gray-400 text-[10px] font-medium py-1">
+        <i data-lucide="library" class="w-4 h-4"></i>
         <span>Biblioteca</span>
       </button>
-      <button id="navBtn-audiobooks" onclick="switchTab('audiobooks')" class="flex flex-col items-center gap-1 text-gray-400 text-[10px] font-medium py-1">
-        <i data-lucide="headphones" class="w-5 h-5"></i>
+      <button id="navBtn-audiobooks" onclick="switchTab('audiobooks')" class="flex flex-col items-center gap-0.5 text-gray-400 text-[10px] font-medium py-1">
+        <i data-lucide="headphones" class="w-4 h-4"></i>
         <span>Áudio</span>
       </button>
-      <button id="navBtn-courses" onclick="switchTab('courses')" class="flex flex-col items-center gap-1 text-gray-400 text-[10px] font-medium py-1">
-        <i data-lucide="play-circle" class="w-5 h-5"></i>
+      <button id="navBtn-courses" onclick="switchTab('courses')" class="flex flex-col items-center gap-0.5 text-gray-400 text-[10px] font-medium py-1">
+        <i data-lucide="play-circle" class="w-4 h-4"></i>
         <span>Cursos</span>
       </button>
-      <button id="navBtn-profile" onclick="switchTab('profile')" class="flex flex-col items-center gap-1 text-gray-400 text-[10px] font-medium py-1">
-        <i data-lucide="user" class="w-5 h-5"></i>
+      <button id="navBtn-community" onclick="switchTab('community')" class="flex flex-col items-center gap-0.5 text-gray-400 text-[10px] font-medium py-1">
+        <i data-lucide="users" class="w-4 h-4"></i>
+        <span>Comunidade</span>
+      </button>
+      <button id="navBtn-profile" onclick="switchTab('profile')" class="flex flex-col items-center gap-0.5 text-gray-400 text-[10px] font-medium py-1">
+        <i data-lucide="user" class="w-4 h-4"></i>
         <span>Perfil</span>
       </button>
     </div>
@@ -224,18 +228,18 @@
   <!-- ==================== CONTAINER PRINCIPAL ==================== -->
   <main id="mainContainer" class="min-h-screen pb-24 md:pl-60 bg-black text-gray-200 transition-all duration-300">
 
-    <!-- ==================== ABA 1: INÍCIO (SCREENSHOTS 6 E 7) ==================== -->
-    <section id="tab-home" class="app-tab-section hidden animate-fade-in">
+    <!-- ==================== ABA 1: INÍCIO (EXATAMENTE COMO NAS SCREENSHOTS 6 E 7) ==================== -->
+    <section id="tab-home" class="app-tab-section animate-fade-in">
       
-      <!-- HERO BANNER GIGANTE (ESTILO NETFLIX / SCREENSHOT 7) -->
+      <!-- HERO BANNER (SCREENSHOT 7) -->
       <div class="relative w-full h-[380px] sm:h-[460px] overflow-hidden bg-gradient-to-b from-[#181818] via-black to-black border-b border-white/10">
         <!-- Background Imagem -->
-        <div class="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-luminosity scale-105" style="background-image: url('assets/covers_extracted/cover_O_Livro_de_Enoque.jpg');"></div>
+        <div class="absolute inset-0 bg-cover bg-center opacity-45 mix-blend-luminosity scale-105" style="background-image: url('assets/covers_extracted/cover_O_Livro_de_Enoque.jpg');"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
         <div class="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
 
         <div class="relative max-w-5xl h-full flex flex-col justify-end px-6 sm:px-12 pb-10 z-10 text-left">
-          <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-yellow-500 text-black text-[10px] font-black uppercase tracking-wider mb-3 w-fit">
+          <div class="inline-flex items-center px-2.5 py-0.5 rounded bg-yellow-500 text-black text-[10px] font-black uppercase tracking-wider mb-3 w-fit">
             DESTAQUE
           </div>
 
@@ -244,16 +248,13 @@
           </h1>
 
           <p class="text-xs sm:text-sm text-gray-300 max-w-xl leading-relaxed mb-6 line-clamp-3">
-            O Livro de Enoque é um dos textos apócrifos mais influentes e misteriosos da tradição judaico-cristã, revelando as viagens celestiais, a queda dos sentinelas e a arquitetura do cosmos.
+            O Livro de Enoque é um dos textos apócrifos mais influentes e misteriosos da tradição judaico-cristã.
           </p>
 
           <div class="flex items-center gap-3">
-            <button onclick="handleBookClick(37)" class="px-7 py-3 rounded-xl bg-white hover:bg-gray-200 text-black font-extrabold text-xs uppercase tracking-wider flex items-center gap-2 shadow-2xl hover:scale-105 active:scale-95 transition-all cursor-pointer">
+            <button onclick="handleBookClick(36)" class="px-7 py-3 rounded-xl bg-white hover:bg-gray-200 text-black font-extrabold text-xs uppercase tracking-wider flex items-center gap-2 shadow-2xl hover:scale-105 active:scale-95 transition-all cursor-pointer">
               <i data-lucide="book-open" class="w-4 h-4 fill-black"></i>
-              <span>Ler Obra</span>
-            </button>
-            <button onclick="switchTab('library')" class="px-5 py-3 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-bold text-xs uppercase tracking-wider flex items-center gap-2 transition cursor-pointer">
-              <span>Explorar Biblioteca</span>
+              <span>Ler</span>
             </button>
           </div>
 
@@ -268,9 +269,23 @@
 
       <!-- CARDS EM DESTAQUE (SCREENSHOT 6) -->
       <div class="px-6 sm:px-12 py-10">
+        
+        <!-- CONTINUAR LENDO NA HOME (SE HOUVER LEITURA ATIVA) -->
+        <div id="homeContinueSection" class="hidden mb-10 max-w-5xl mx-auto">
+          <div class="flex items-center gap-2 mb-4">
+            <i data-lucide="clock" class="w-4 h-4 text-yellow-400"></i>
+            <h2 class="text-xs font-bold text-yellow-400 uppercase tracking-widest font-mono">
+              CONTINUAR LENDO
+            </h2>
+          </div>
+          <div id="homeContinueCarousel" class="flex overflow-x-auto gap-4 pb-4 hide-scrollbar scroll-smooth snap-x">
+            <!-- Injetado dinamicamente -->
+          </div>
+        </div>
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
           
-          <!-- Card 1: A Câmara Interna -->
+          <!-- Card 1: A Câmara Interna (Screenshot 6) -->
           <div onclick="switchTab('courses')" class="esoteric-card esoteric-card-hover rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between cursor-pointer group">
             <div class="flex items-start gap-4">
               <div class="w-24 sm:w-28 aspect-[3/4] rounded-xl overflow-hidden bg-black shrink-0 border border-white/10">
@@ -284,27 +299,27 @@
                   A Câmara Interna
                 </h3>
                 <p class="text-xs text-gray-400 leading-relaxed line-clamp-3">
-                  Ensinamentos e tradições ocultas reveladas em vídeo. Quebre as correntes da ignorância através das aulas magnas.
+                  Ensinamentos e tradições ocultas reveladas em vídeo.
                 </p>
               </div>
             </div>
           </div>
 
-          <!-- Card 2: Os Segredos da Prosperidade Maçônica -->
-          <div onclick="handleBookClick(1)" class="esoteric-card esoteric-card-hover rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between cursor-pointer group">
+          <!-- Card 2: Os Segredos da Prosperidade Maçônica (Screenshot 6) -->
+          <div onclick="handleBookClick(999)" class="esoteric-card esoteric-card-hover rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between cursor-pointer group">
             <div class="flex items-start gap-4">
               <div class="w-24 sm:w-28 aspect-[3/4] rounded-xl overflow-hidden bg-black shrink-0 border border-white/10">
-                <img src="assets/covers_extracted/cover_Cabala_Coment_rios_De_Um_Pedreiro_Sobre_A_Tor__Vayikr__Lev_t.jpg" alt="Prosperidade" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <img src="assets/covers_extracted/cover_Manuscrito_Maconico_da_Prosperidade_Oculta.jpg" alt="Os Segredos da Prosperidade Maçônica" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
               </div>
               <div class="flex-1 text-left">
                 <div class="inline-flex items-center gap-1.5 text-yellow-400 text-[10px] font-bold uppercase tracking-wider mb-1.5">
-                  <i data-lucide="book" class="w-3.5 h-3.5"></i> ACESSO PERMITIDO
+                  <i data-lucide="book-open" class="w-3.5 h-3.5"></i> ACESSO PERMITIDO
                 </div>
                 <h3 class="text-xl font-serif font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors">
                   Os Segredos da Prosperidade Maçônica
                 </h3>
                 <p class="text-xs text-gray-400 leading-relaxed line-clamp-3">
-                  Segredos usados por iniciados para atrair riqueza, prosperidade e influência. Rituais, códigos e transmutação mental.
+                  Segredos usados por maçons para atrair riqueza, prosperidade e influência. Rituais, códigos e...
                 </p>
               </div>
             </div>
@@ -312,7 +327,7 @@
 
         </div>
 
-        <!-- Citação Hermética no Rodapé da Home -->
+        <!-- Citação Hermética no Rodapé da Home (Screenshot 6) -->
         <div class="text-center mt-16 py-8 border-t border-white/5">
           <p class="font-serif italic text-gray-400 text-sm">
             "O que está embaixo é como o que está em cima."
@@ -323,12 +338,11 @@
     </section>
 
     <!-- ==================== ABA 2: BIBLIOTECA (SCREENSHOT 5) ==================== -->
-    <section id="tab-library" class="app-tab-section animate-fade-in">
-      
-      <!-- HEADER DA BIBLIOTECA COM BARRA AMARELA -->
+    <section id="tab-library" class="app-tab-section hidden animate-fade-in">
       <div class="px-6 sm:px-12 py-8">
+        
+        <!-- Header da Biblioteca com Barra Amarela -->
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
-          
           <div class="flex items-center space-x-4">
             <button id="libraryBackBtn" onclick="returnToDefaultLibrary()" class="hidden p-2.5 bg-white/5 rounded-full hover:bg-yellow-500 hover:text-black transition-colors text-gray-400 cursor-pointer">
               <i data-lucide="arrow-left" class="w-5 h-5"></i>
@@ -338,7 +352,6 @@
             </h1>
           </div>
 
-          <!-- Barra de Busca & Ações -->
           <div class="flex items-center gap-3 w-full md:w-auto">
             <div class="relative flex-1 md:w-80">
               <i data-lucide="search" class="w-4 h-4 text-gray-500 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
@@ -376,7 +389,7 @@
 
           <!-- FILEIRAS HORIZONTAIS DOS 6 MÓDULOS COM "VER TODOS" -->
           <div id="moduleRowsContainer" class="space-y-10">
-            <!-- Injetado dinamicamente com Hermetismo, Alquimia, etc. -->
+            <!-- Injetado dinamicamente -->
           </div>
 
           <!-- Lotes Completos do Drive -->
@@ -397,7 +410,7 @@
 
         </div>
 
-        <!-- 2. CATEGORIES GRID VIEW ("Selecione uma via de estudo") -->
+        <!-- 2. CATEGORIES GRID VIEW -->
         <div id="libraryCategoriesView" class="hidden animate-fade-in">
           <p class="text-gray-400 mb-6 font-medium">Selecione uma via de estudo:</p>
           <div id="categoriesGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -428,35 +441,33 @@
         </div>
 
       </div>
-
     </section>
 
     <!-- ==================== ABA 3: AUDIOLIVROS (SCREENSHOT 4) ==================== -->
     <section id="tab-audiobooks" class="app-tab-section hidden animate-fade-in">
       <div class="px-6 sm:px-12 py-8">
         
-        <!-- Header com barra amarela -->
         <div class="mb-10 text-left">
           <div class="flex items-center gap-3">
             <i data-lucide="headphones" class="w-6 h-6 text-yellow-400"></i>
             <h1 class="text-2xl sm:text-3xl font-serif text-white font-bold border-l-4 border-yellow-500 pl-4 tracking-tight">
-              Audiolivros & Frequências
+              Audiolivros
             </h1>
           </div>
           <p class="text-xs text-gray-400 mt-2 pl-7">
-            Ouça os manuscritos narrados e as frequências de ressonância 432Hz / 528Hz.
+            Ouça os manuscritos narrados.
           </p>
         </div>
 
-        <!-- Player de Frequências Sagradas Integrado -->
+        <!-- Player de Frequências Sagradas 100% Funcional e Audível -->
         <div class="esoteric-card rounded-3xl p-6 sm:p-8 mb-8 border border-white/10 max-w-4xl text-left">
           <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
             <div>
               <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400 text-[10px] font-bold uppercase tracking-wider mb-2 border border-yellow-500/30">
-                <i data-lucide="radio" class="w-3.5 h-3.5"></i> Santuário Binaural Ativo
+                <i data-lucide="radio" class="w-3.5 h-3.5"></i> Ressonância de Solfeggio Ativa
               </span>
-              <h2 class="text-xl font-serif font-bold text-white">Solfeggio & Batimentos Herméticos</h2>
-              <p class="text-xs text-gray-400 mt-1 max-w-lg">Ressonância sonora calibrada em tempo real para expansão da consciência e leitura profunda.</p>
+              <h2 class="text-xl font-serif font-bold text-white">Frequências Sonoras & Ondas Sagradas</h2>
+              <p class="text-xs text-gray-400 mt-1 max-w-lg">Batimentos binaurais de ondas puras calibrados para foco, dissolução de bloqueios e expansão mental.</p>
             </div>
 
             <div class="flex flex-col items-center sm:items-end gap-2.5">
@@ -468,29 +479,29 @@
                 <span class="wave-bar"></span>
                 <span id="playerCurrentHz" class="font-mono font-bold text-xs text-yellow-400">Santuário em Silêncio</span>
               </div>
-              <button onclick="stopFrequency(true)" class="text-xs text-gray-400 hover:text-white flex items-center gap-1 transition-colors">
+              <button onclick="stopFrequency(true)" class="text-xs text-gray-400 hover:text-white flex items-center gap-1 transition-colors cursor-pointer">
                 <i data-lucide="square" class="w-3.5 h-3.5"></i> Parar Frequência
               </button>
             </div>
           </div>
 
-          <!-- Botões das Frequências -->
+          <!-- Botões das Frequências com Ícones e Feedback em Tempo Real -->
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-white/10">
-            <button onclick="playFrequency(432, '432 Hz - Ressonância Áurea')" class="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left hover:border-yellow-500/50 transition">
+            <button onclick="playFrequency(432, 'Ressonância Áurea')" data-freq-btn="432" class="p-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left hover:border-yellow-500/50 transition cursor-pointer">
               <span class="text-yellow-400 font-bold text-sm block">432 Hz</span>
               <span class="text-[10px] text-gray-400">Clareza & Harmonia</span>
             </button>
-            <button onclick="playFrequency(528, '528 Hz - Transformação & Milagre')" class="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left hover:border-yellow-500/50 transition">
+            <button onclick="playFrequency(528, 'Transformação & Milagre')" data-freq-btn="528" class="p-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left hover:border-yellow-500/50 transition cursor-pointer">
               <span class="text-yellow-400 font-bold text-sm block">528 Hz</span>
               <span class="text-[10px] text-gray-400">Reparo & Centelha</span>
             </button>
-            <button onclick="playFrequency(396, '396 Hz - Liberação')" class="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left hover:border-yellow-500/50 transition">
+            <button onclick="playFrequency(396, 'Liberação')" data-freq-btn="396" class="p-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left hover:border-yellow-500/50 transition cursor-pointer">
               <span class="text-yellow-400 font-bold text-sm block">396 Hz</span>
               <span class="text-[10px] text-gray-400">Dissolução de Medo</span>
             </button>
-            <button onclick="playFrequency(963, '963 Hz - Conexão Superior')" class="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left hover:border-yellow-500/50 transition">
+            <button onclick="playFrequency(963, 'Conexão Cósmica')" data-freq-btn="963" class="p-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left hover:border-yellow-500/50 transition cursor-pointer">
               <span class="text-yellow-400 font-bold text-sm block">963 Hz</span>
-              <span class="text-[10px] text-gray-400">Conexão Cósmica</span>
+              <span class="text-[10px] text-gray-400">Conexão Divina</span>
             </button>
           </div>
         </div>
@@ -502,7 +513,6 @@
     <section id="tab-courses" class="app-tab-section hidden animate-fade-in">
       <div class="px-6 sm:px-12 py-8 text-left">
         
-        <!-- Header com barra amarela -->
         <div class="mb-8">
           <h1 class="text-2xl sm:text-3xl font-serif text-white font-bold border-l-4 border-yellow-500 pl-4 tracking-tight">
             Aulas & Sabedoria
@@ -529,7 +539,7 @@
               <p class="text-xs sm:text-sm text-gray-300 leading-relaxed mb-6">
                 Quebre as correntes da ignorância. Esta coletânea de vídeos revela os mecanismos ocultos da realidade e os mistérios do universo que foram escondidos de você por séculos. A verdade nua e crua.
               </p>
-              <button onclick="showToast('Acesso liberado no plano Master!')" class="px-6 py-3 rounded-xl bg-white hover:bg-gray-200 text-black font-extrabold text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg active:scale-95 transition cursor-pointer">
+              <button onclick="showToast('Aulas liberadas com sucesso!')" class="px-6 py-3 rounded-xl bg-white hover:bg-gray-200 text-black font-extrabold text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg active:scale-95 transition cursor-pointer">
                 <i data-lucide="lock" class="w-4 h-4"></i>
                 <span>Acessar Estrutura</span>
               </button>
@@ -568,11 +578,10 @@
       </div>
     </section>
 
-    <!-- ==================== ABA 5: COMUNIDADE (SCREENSHOT 2) ==================== -->
+    <!-- ==================== ABA 5: COMUNIDADE 100% FUNCIONAL (SCREENSHOT 2) ==================== -->
     <section id="tab-community" class="app-tab-section hidden animate-fade-in">
       <div class="px-6 sm:px-12 py-8 max-w-4xl text-left">
         
-        <!-- Header Geral -->
         <div class="flex items-center justify-between mb-6">
           <div>
             <h1 class="text-2xl sm:text-3xl font-serif text-white font-bold tracking-tight">
@@ -583,35 +592,38 @@
             </p>
           </div>
 
-          <button onclick="showToast('Filtrando suas discussões...')" class="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-medium text-gray-300 flex items-center gap-2 transition cursor-pointer">
+          <button onclick="filterCommunityPosts('Meus Posts')" class="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-medium text-gray-300 flex items-center gap-2 transition cursor-pointer">
             <i data-lucide="bookmark" class="w-3.5 h-3.5 text-yellow-400"></i>
             <span>Minhas Discussões</span>
           </button>
         </div>
 
         <!-- Filtros em Pílulas (Screenshot 2) -->
-        <div class="flex items-center gap-2 overflow-x-auto pb-2 hide-scrollbar mb-6">
-          <button class="px-4 py-1.5 rounded-full bg-yellow-500 text-black text-xs font-bold whitespace-nowrap">Tudo</button>
-          <button class="px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 text-xs font-medium whitespace-nowrap">Meus Posts</button>
-          <button class="px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 text-xs font-medium whitespace-nowrap">Dúvidas na interação do site</button>
-          <button class="px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 text-xs font-medium whitespace-nowrap">Teoria</button>
-          <button class="px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 text-xs font-medium whitespace-nowrap">Templo</button>
-          <button class="px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 text-xs font-medium whitespace-nowrap">Filtro de Livros</button>
+        <div class="flex items-center gap-2 overflow-x-auto pb-2 hide-scrollbar mb-6" id="communityFilterBar">
+          <button onclick="filterCommunityPosts('Tudo')" data-filter="Tudo" class="community-pill px-4 py-1.5 rounded-full bg-yellow-500 text-black text-xs font-bold whitespace-nowrap transition cursor-pointer">Tudo</button>
+          <button onclick="filterCommunityPosts('Meus Posts')" data-filter="Meus Posts" class="community-pill px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 text-xs font-medium whitespace-nowrap transition cursor-pointer">Meus Posts</button>
+          <button onclick="filterCommunityPosts('Dúvidas na interação do site')" data-filter="Dúvidas na interação do site" class="community-pill px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 text-xs font-medium whitespace-nowrap transition cursor-pointer">Dúvidas na interação do site</button>
+          <button onclick="filterCommunityPosts('Teoria')" data-filter="Teoria" class="community-pill px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 text-xs font-medium whitespace-nowrap transition cursor-pointer">Teoria</button>
+          <button onclick="filterCommunityPosts('Templo')" data-filter="Templo" class="community-pill px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 text-xs font-medium whitespace-nowrap transition cursor-pointer">Templo</button>
+          <button onclick="filterCommunityPosts('Filtro de Livros')" data-filter="Filtro de Livros" class="community-pill px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 text-xs font-medium whitespace-nowrap transition cursor-pointer">Filtro de Livros</button>
         </div>
 
         <!-- Post Composer (Screenshot 2) -->
         <div class="esoteric-card rounded-2xl p-5 mb-6 border border-white/10">
           <div class="flex items-start gap-3">
-            <div class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-gray-400 font-bold shrink-0">
+            <div id="composerAvatarLetter" class="w-9 h-9 rounded-full bg-yellow-500 text-black flex items-center justify-center font-bold text-xs shrink-0">
               ?
             </div>
             <textarea id="communityPostInput" rows="2" placeholder="Compartilhe seus pensamentos no Feed Geral..." class="w-full bg-transparent text-sm text-white placeholder-gray-500 focus:outline-none resize-none"></textarea>
           </div>
 
           <div class="flex items-center justify-between pt-3 mt-3 border-t border-white/5">
-            <button class="text-xs text-gray-400 hover:text-white flex items-center gap-1 transition">
-              <span>+ Resenha de Livro</span>
-            </button>
+            <select id="communityPostCategory" class="bg-white/5 border border-white/10 text-gray-400 text-xs rounded-lg px-2.5 py-1.5 focus:outline-none">
+              <option value="Teoria">Teoria</option>
+              <option value="Dúvidas na interação do site">Dúvidas na interação</option>
+              <option value="Templo">Templo</option>
+              <option value="Filtro de Livros">Filtro de Livros</option>
+            </select>
             <button onclick="publishCommunityPost()" class="px-5 py-2 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold flex items-center gap-1.5 transition cursor-pointer">
               <span>Publicar</span>
               <i data-lucide="send" class="w-3.5 h-3.5"></i>
@@ -619,71 +631,33 @@
           </div>
         </div>
 
-        <!-- Feed de Posts (Screenshot 2) -->
+        <!-- Feed de Posts Interativo -->
         <div id="communityFeedContainer" class="space-y-4">
-          <!-- Post 1 -->
-          <div class="esoteric-card rounded-2xl p-5 border border-white/10">
-            <div class="flex items-center gap-3 mb-2.5">
-              <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center font-bold text-xs text-white">J</div>
-              <div>
-                <div class="flex items-center gap-2">
-                  <span class="text-xs font-bold text-white">José Roberto Borges</span>
-                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-white/10 text-gray-400 font-mono">NÍVEL 1</span>
-                </div>
-                <span class="text-[10px] text-gray-500">22/11/2026, 22:02:41</span>
-              </div>
-            </div>
-            <span class="inline-block text-[10px] bg-white/5 border border-white/10 text-gray-400 px-2 py-0.5 rounded mb-2">DÚVIDAS NA INTERAÇÃO DO SITE</span>
-            <p class="text-xs text-gray-300">Pensei que era áudio book</p>
-            <div class="flex items-center gap-4 mt-4 pt-3 border-t border-white/5 text-gray-500 text-xs">
-              <button class="flex items-center gap-1 hover:text-yellow-400 transition"><i data-lucide="heart" class="w-3.5 h-3.5"></i> 0</button>
-              <button class="flex items-center gap-1 hover:text-white transition"><i data-lucide="message-square" class="w-3.5 h-3.5"></i> 0</button>
-            </div>
-          </div>
-
-          <!-- Post 2 -->
-          <div class="esoteric-card rounded-2xl p-5 border border-white/10">
-            <div class="flex items-center gap-3 mb-2.5">
-              <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center font-bold text-xs text-white">R</div>
-              <div>
-                <div class="flex items-center gap-2">
-                  <span class="text-xs font-bold text-white">Rodrigo ramon Braz palacios</span>
-                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-white/10 text-gray-400 font-mono">NÍVEL 1</span>
-                </div>
-                <span class="text-[10px] text-gray-500">18/11/2026, 23:17:39</span>
-              </div>
-            </div>
-            <p class="text-xs text-gray-300">No face aparece uma porção de livros que na verdade aqui não estão</p>
-            <div class="flex items-center gap-4 mt-4 pt-3 border-t border-white/5 text-gray-500 text-xs">
-              <button class="flex items-center gap-1 hover:text-yellow-400 transition"><i data-lucide="heart" class="w-3.5 h-3.5"></i> 0</button>
-              <button class="flex items-center gap-1 hover:text-white transition"><i data-lucide="message-square" class="w-3.5 h-3.5"></i> 0</button>
-            </div>
-          </div>
+          <!-- Injetado dinamicamente via JS -->
         </div>
 
       </div>
     </section>
 
-    <!-- ==================== ABA 6: PERFIL (SCREENSHOT 1) ==================== -->
+    <!-- ==================== ABA 6: PERFIL DINÂMICO (SCREENSHOT 1) ==================== -->
     <section id="tab-profile" class="app-tab-section hidden animate-fade-in">
       <div class="px-6 sm:px-12 py-10 max-w-3xl text-left">
         
-        <!-- Cabeçalho de Perfil com Avatar e Nível -->
         <div class="flex flex-col items-center text-center mb-8">
           <div class="relative mb-4">
             <div class="w-24 h-24 rounded-full overflow-hidden bg-[#181818] border-2 border-white/20 flex items-center justify-center">
               <img id="profileAvatarImg" src="assets/logo.jpg" alt="Avatar" class="w-full h-full object-cover">
             </div>
-            <span class="absolute -bottom-1 -right-1 px-2.5 py-0.5 rounded-full bg-yellow-500 text-black text-[10px] font-black uppercase tracking-wider shadow-lg">
+            <span id="profileLevelBadge" class="absolute -bottom-1 -right-1 px-2.5 py-0.5 rounded-full bg-yellow-500 text-black text-[10px] font-black uppercase tracking-wider shadow-lg">
               LVL 1
             </span>
           </div>
 
           <div class="flex items-center gap-2">
             <h1 id="profileDisplayName" class="text-2xl font-serif font-black text-white">
-              Paulo Reis
+              Carregando...
             </h1>
-            <button onclick="openModal('profileEditModal')" class="text-gray-400 hover:text-white transition cursor-pointer" title="Editar Nome">
+            <button onclick="promptEditUserName()" class="text-gray-400 hover:text-white transition cursor-pointer" title="Editar Nome">
               <i data-lucide="edit-3" class="w-4 h-4"></i>
             </button>
           </div>
@@ -692,11 +666,11 @@
           <!-- Barra de XP (Screenshot 1) -->
           <div class="w-full max-w-md esoteric-card rounded-2xl p-4 mt-6 border border-white/10">
             <div class="flex items-center justify-between text-[11px] mb-2 font-mono font-bold">
-              <span class="text-gray-400">XP: 0 / 300</span>
-              <span class="text-yellow-400">RUMO AO NÍVEL 2</span>
+              <span id="profileXpText" class="text-gray-400">XP: 0 / 300</span>
+              <span id="profileNextLvlText" class="text-yellow-400">RUMO AO NÍVEL 2</span>
             </div>
             <div class="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
-              <div class="h-full bg-yellow-500" style="width: 15%"></div>
+              <div id="profileXpBar" class="h-full bg-yellow-500" style="width: 15%"></div>
             </div>
           </div>
         </div>
@@ -708,7 +682,7 @@
               <i data-lucide="book-open" class="w-5 h-5"></i>
             </div>
             <div>
-              <div class="text-2xl font-bold text-white font-mono">0</div>
+              <div id="statCompletedBooks" class="text-2xl font-bold text-white font-mono">0</div>
               <div class="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">LIVROS CONCLUÍDOS</div>
             </div>
           </div>
@@ -718,7 +692,7 @@
               <i data-lucide="shield" class="w-5 h-5"></i>
             </div>
             <div>
-              <div class="text-xl font-bold text-white font-serif">Nível 1</div>
+              <div id="statCurrentLevel" class="text-xl font-bold text-white font-serif">Nível 1</div>
               <div class="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">GRAU ATUAL</div>
             </div>
           </div>
@@ -734,7 +708,7 @@
             <div class="p-4 flex items-center justify-between">
               <div>
                 <div class="text-xs text-gray-400">ID de Usuário</div>
-                <div class="text-xs text-gray-300 font-mono mt-0.5" id="profileUserId">cupula33-8c37-461b-bfb9-e2918a49383d</div>
+                <div class="text-xs text-gray-300 font-mono mt-0.5" id="profileUserId">cupula33-usr-8c37-461b</div>
               </div>
               <i data-lucide="shield" class="w-4 h-4 text-gray-600"></i>
             </div>
@@ -742,7 +716,7 @@
             <div class="p-4 flex items-center justify-between">
               <div>
                 <div class="text-xs text-gray-400">E-mail</div>
-                <div class="text-xs text-white font-medium mt-0.5" id="profileDisplayEmail">paulo-reis51@hotmail.com</div>
+                <div class="text-xs text-white font-medium mt-0.5" id="profileDisplayEmail">---</div>
               </div>
               <i data-lucide="mail" class="w-4 h-4 text-gray-600"></i>
             </div>
@@ -780,13 +754,11 @@
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
 
-      <!-- Capa no Lado Esquerdo -->
       <div class="w-full md:w-2/5 h-64 md:h-auto relative bg-black shrink-0 overflow-hidden">
         <img id="modalBookCover" src="" alt="Capa" class="w-full h-full object-cover">
         <div class="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-[#141414]"></div>
       </div>
 
-      <!-- Conteúdo no Lado Direito -->
       <div class="flex-1 p-6 md:p-8 flex flex-col justify-between overflow-y-auto">
         <div>
           <div class="flex items-center space-x-2 text-yellow-400 text-xs font-bold uppercase tracking-widest mb-2">
@@ -801,7 +773,6 @@
 
           <p id="modalBookAuthor" class="text-gray-400 text-xs mb-4">Por Acervo Cúpula 33</p>
 
-          <!-- Barra de Progresso -->
           <div id="modalProgressContainer" class="mb-5 bg-white/5 border border-white/10 p-3 rounded-xl">
             <div class="flex justify-between items-center mb-1.5 text-xs">
               <span class="text-gray-400 font-bold uppercase tracking-wider text-[10px]">Progresso da Leitura</span>
@@ -839,22 +810,36 @@
     </div>
   </div>
 
-  <!-- ==================== LEITOR DE PDF INTEGRADO (IFRAME MODAL) ==================== -->
+  <!-- ==================== LEITOR DE PDF INTEGRADO COM CONTROLE DE PÁGINAS E PROGRESSO ==================== -->
   <div id="readerModal" class="fixed inset-0 z-[1000] bg-black hidden flex flex-col">
     <div class="h-14 bg-[#0a0a0a] border-b border-white/10 px-4 flex items-center justify-between shrink-0">
       <div class="flex items-center gap-3">
         <button onclick="closeReaderModal()" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition cursor-pointer">
           <i data-lucide="arrow-left" class="w-5 h-5"></i>
         </button>
-        <span id="readerTitle" class="text-xs sm:text-sm font-bold text-white truncate max-w-xs sm:max-w-md">Leitor</span>
+        <div class="flex flex-col text-left">
+          <span id="readerTitle" class="text-xs sm:text-sm font-bold text-white truncate max-w-xs sm:max-w-md">Leitor</span>
+          <span id="readerProgressLabel" class="text-[10px] text-yellow-400 font-mono">Página 1 • 0% Concluído</span>
+        </div>
       </div>
 
       <div class="flex items-center gap-2">
-        <button onclick="bookmarkCurrentPage()" class="px-3 py-1.5 rounded-lg bg-yellow-500/20 text-yellow-400 border border-yellow-500/40 text-xs font-bold flex items-center gap-1.5 hover:bg-yellow-500 hover:text-black transition cursor-pointer">
-          <i data-lucide="bookmark" class="w-3.5 h-3.5"></i>
-          <span>Marcar Leitura</span>
+        <button onclick="changeReaderPage(-1)" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white text-xs font-bold transition cursor-pointer" title="Página Anterior">
+          <i data-lucide="chevron-left" class="w-4 h-4"></i>
+        </button>
+        <button onclick="changeReaderPage(1)" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white text-xs font-bold transition cursor-pointer" title="Próxima Página">
+          <i data-lucide="chevron-right" class="w-4 h-4"></i>
+        </button>
+        <button onclick="markCurrentBookCompleted()" class="px-3 py-1.5 rounded-lg bg-yellow-500 text-black text-xs font-bold flex items-center gap-1.5 hover:bg-yellow-400 transition cursor-pointer">
+          <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
+          <span>Concluir</span>
         </button>
       </div>
+    </div>
+
+    <!-- Barra de Progresso no Topo do Leitor -->
+    <div class="w-full h-1 bg-gray-900 shrink-0">
+      <div id="readerProgressBar" class="h-full bg-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.8)] transition-all duration-300" style="width: 0%"></div>
     </div>
 
     <div class="flex-1 w-full h-full relative bg-black">
@@ -862,8 +847,8 @@
     </div>
   </div>
 
-  <!-- ==================== SCRIPTS ==================== -->
+  <!-- SCRIPTS -->
   <script src="books_2500.json" type="application/json" id="rawBooksData"></script>
-  <script src="app.js?v=1795480900"></script>
+  <script src="app.js?v=1795482000"></script>
 </body>
 </html>
