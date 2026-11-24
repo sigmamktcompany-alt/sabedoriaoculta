@@ -75,6 +75,13 @@
       "active": true,
       "status": "approved",
       "sale_code": "MANUAL_APPROVAL_OFFICIAL"
+    },
+    "loisianavida123@gmail.com": {
+      "name": "Loisiana Lopes",
+      "tier": "master",
+      "active": true,
+      "status": "approved",
+      "sale_code": "MANUAL_APPROVAL_OFFICIAL"
     }
   }
 }

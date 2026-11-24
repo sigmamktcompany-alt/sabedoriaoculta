@@ -1,4 +1,5 @@
 const KNOWN_STUDENT_NAMES = {
+  "loisianavida123@gmail.com": "Loisiana Lopes",
   "tjoaquim627@gmail.com": "Tamara S Joaquim",
   "paulo-reis51@hotmail.com": "Paulo Reis",
   "mrobertor057@gmail.com": "Robertto Machado",
@@ -2209,13 +2210,36 @@ function handleFrequencyClick(hz) {
   }
 }
 
+let stopFrequencyTimeout = null;
+
 async function playFrequency(hz, name) {
   const targetHz = parseInt(hz);
   if (activeFrequencyHz === targetHz) {
     stopFrequency(true);
     return;
   }
-  stopFrequency(false);
+  
+  // Cancela qualquer timeout pendente para que osciladores novos nunca sejam mortos por delay anterior
+  if (stopFrequencyTimeout) {
+    clearTimeout(stopFrequencyTimeout);
+    stopFrequencyTimeout = null;
+  }
+
+  // Interrompe osciladores antigos imediatamente de forma isolada
+  if (currentOscillators.length > 0) {
+    const toStopNow = [...currentOscillators];
+    currentOscillators = [];
+    toStopNow.forEach(osc => {
+      try {
+        osc.stop();
+        osc.disconnect();
+      } catch(e) {}
+    });
+  }
+  if (masterGainNode) {
+    try { masterGainNode.disconnect(); } catch(e) {}
+    masterGainNode = null;
+  }
 
   try {
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
@@ -2230,30 +2254,35 @@ async function playFrequency(hz, name) {
       await audioCtx.resume();
     }
 
-    masterGainNode = audioCtx.createGain();
-    masterGainNode.gain.setValueAtTime(0.01, audioCtx.currentTime);
-    masterGainNode.gain.linearRampToValueAtTime(0.40, audioCtx.currentTime + 0.15);
-    masterGainNode.connect(audioCtx.destination);
+    const now = audioCtx.currentTime;
+    const gainNode = audioCtx.createGain();
+    gainNode.gain.setValueAtTime(0.001, now);
+    gainNode.gain.linearRampToValueAtTime(0.35, now + 0.15);
+    gainNode.connect(audioCtx.destination);
+    masterGainNode = gainNode;
 
-    // Oscilador 1: Tom Principal
+    const newOscs = [];
+
+    // Oscilador 1: Tom Principal (Solfeggio Puro)
     const osc1 = audioCtx.createOscillator();
     osc1.type = "sine";
-    osc1.frequency.setValueAtTime(targetHz, audioCtx.currentTime);
-    osc1.connect(masterGainNode);
+    osc1.frequency.setValueAtTime(targetHz, now);
+    osc1.connect(gainNode);
     osc1.start();
-    currentOscillators.push(osc1);
+    newOscs.push(osc1);
 
-    // Oscilador 2: Batimento Harmônico (+4 Hz)
+    // Oscilador 2: Batimento Harmônico Binaural (+4 Hz de modulação Theta)
     const osc2 = audioCtx.createOscillator();
     osc2.type = "sine";
-    osc2.frequency.setValueAtTime(targetHz + 4, audioCtx.currentTime);
+    osc2.frequency.setValueAtTime(targetHz + 4, now);
     const osc2Gain = audioCtx.createGain();
-    osc2Gain.gain.setValueAtTime(0.20, audioCtx.currentTime);
+    osc2Gain.gain.setValueAtTime(0.18, now);
     osc2.connect(osc2Gain);
-    osc2Gain.connect(masterGainNode);
+    osc2Gain.connect(gainNode);
     osc2.start();
-    currentOscillators.push(osc2);
+    newOscs.push(osc2);
 
+    currentOscillators = newOscs;
     activeFrequencyHz = targetHz;
 
     const badge = document.getElementById("playerCurrentHz");
@@ -2281,22 +2310,37 @@ async function playFrequency(hz, name) {
 }
 
 function stopFrequency(showFeedback = true) {
-  if (masterGainNode && audioCtx && audioCtx.state !== 'closed') {
+  if (stopFrequencyTimeout) {
+    clearTimeout(stopFrequencyTimeout);
+    stopFrequencyTimeout = null;
+  }
+
+  // Isola osciladores atuais para parada suave sem colidir com novas ativações
+  const oscsToStop = [...currentOscillators];
+  currentOscillators = [];
+  const gainToRamp = masterGainNode;
+  masterGainNode = null;
+
+  if (gainToRamp && audioCtx && audioCtx.state !== 'closed') {
     try {
-      masterGainNode.gain.setValueAtTime(masterGainNode.gain.value, audioCtx.currentTime);
-      masterGainNode.gain.linearRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+      const now = audioCtx.currentTime;
+      gainToRamp.gain.setValueAtTime(gainToRamp.gain.value, now);
+      gainToRamp.gain.linearRampToValueAtTime(0.0001, now + 0.08);
     } catch(e) {}
   }
 
-  setTimeout(() => {
-    currentOscillators.forEach(osc => {
+  stopFrequencyTimeout = setTimeout(() => {
+    oscsToStop.forEach(osc => {
       try {
         osc.stop();
         osc.disconnect();
       } catch(e) {}
     });
-    currentOscillators = [];
-  }, 120);
+    if (gainToRamp) {
+      try { gainToRamp.disconnect(); } catch(e) {}
+    }
+    stopFrequencyTimeout = null;
+  }, 90);
 
   activeFrequencyHz = null;
 
@@ -2481,6 +2525,7 @@ const SUPABASE_CONFIG = {
 };
 
 const MASTER_ALLOWLIST = [
+  "loisianavida123@gmail.com",
   "tjoaquim627@gmail.com",
   "paulo-reis51@hotmail.com",
   "mrobertor057@gmail.com",
