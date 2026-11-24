@@ -97,6 +97,17 @@
       "sale_code": "KIRVANO_MASTER_DIRECT",
       "has_prosperidade": false,
       "date_added": "2026-11-24"
+    },
+    "joaomayamarcelo@gmail.com": {
+      "name": "João Maya Marcelo",
+      "tier": "master",
+      "active": true,
+      "status": "approved",
+      "sale_code": "KIRVANO_MASTER_ORDERBUMP",
+      "has_prosperidade": true,
+      "has_orderbump": true,
+      "has_prosperidade_oculta": true,
+      "date_added": "2026-11-24"
     }
   }
 }
