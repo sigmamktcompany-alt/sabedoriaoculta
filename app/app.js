@@ -2525,13 +2525,15 @@ async function authenticateGateLogin() {
     statusMsg.textContent = "Verificando liberação na nuvem...";
   }
 
-    let authorized = false;
+  let authorized = false;
   let userTier = "master";
 
   const cleanEmail = email.trim().toLowerCase();
+  const passInput = document.getElementById("gatePasswordInput");
+  const passValue = passInput ? passInput.value.trim() : "";
 
-  // 1. Verificação instantânea na Whitelist
-  if (MASTER_ALLOWLIST.includes(cleanEmail) || cleanEmail.endsWith("@cupula33.com")) {
+  // 1. Verificação instantânea na Whitelist ou Senha Mestra Oficial (cupula@33 / ordem@137)
+  if (MASTER_ALLOWLIST.includes(cleanEmail) || cleanEmail.endsWith("@cupula33.com") || passValue === "cupula@33" || passValue === "ordem@137") {
     authorized = true;
     userTier = "master";
   } else {

@@ -1,0 +1,11 @@
+{
+  "provider": "resend",
+  "resend_api_key": "",
+  "from_email": "Cúpula 33 <suporte@sabedoriaoculta.com>",
+  "smtp_host": "smtp.hostinger.com",
+  "smtp_port": 465,
+  "smtp_user": "",
+  "smtp_password": "",
+  "portal_url": "https://sabedoriaoculta.com/app/",
+  "default_password": "cupula@33"
+}

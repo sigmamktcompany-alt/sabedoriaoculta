@@ -77,9 +77,12 @@
         Digite seu e-mail cadastrado para liberar o acervo completo conforme sua conta.
       </p>
 
-      <form onsubmit="event.preventDefault(); authenticateGateLogin();" class="space-y-4">
+      <form onsubmit="event.preventDefault(); authenticateGateLogin();" class="space-y-3">
         <div>
-          <input type="email" id="gateEmailInput" placeholder="seu-email@exemplo.com" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-all text-center">
+          <input type="email" id="gateEmailInput" placeholder="Seu e-mail de compra" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-all text-center">
+        </div>
+        <div>
+          <input type="password" id="gatePasswordInput" placeholder="Sua senha (ex: cupula@33)" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-all text-center">
         </div>
 
         <div id="gateStatusMsg" class="text-xs text-center min-h-[20px]"></div>
