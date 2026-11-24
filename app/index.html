@@ -382,106 +382,60 @@
 
     </section>
 
-    <!-- ==================== ABA 2: BIBLIOTECA (SCREENSHOT 5) ==================== -->
+    <!-- ==================== ABA 2: BIBLIOTECA (PADRÃO ORDEM 137 / CÚPULA 33) ==================== -->
     <section id="tab-library" class="app-tab-section hidden animate-fade-in">
-      <div class="px-6 sm:px-12 py-8">
+      <div class="px-4 sm:px-8 py-6 max-w-7xl mx-auto">
         
-        <!-- Header da Biblioteca com Barra Amarela -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
-          <div class="flex items-center space-x-4">
-            <button id="libraryBackBtn" onclick="returnToDefaultLibrary()" class="hidden p-2.5 bg-white/5 rounded-full hover:bg-yellow-500 hover:text-black transition-colors text-gray-400 cursor-pointer">
+        <!-- Header da Biblioteca com Barra Vermelha / Red Accent -->
+        <div class="flex items-center justify-between mb-5">
+          <div class="flex items-center space-x-3">
+            <button id="libraryBackBtn" onclick="returnToDefaultLibrary()" class="hidden p-2 bg-white/5 rounded-full hover:bg-red-600 hover:text-white transition-colors text-gray-400 cursor-pointer">
               <i data-lucide="arrow-left" class="w-5 h-5"></i>
             </button>
-            <h1 id="libraryMainTitle" class="text-2xl sm:text-3xl font-serif text-white border-l-4 border-yellow-500 pl-4 font-bold tracking-tight">
+            <h1 id="libraryMainTitle" class="text-2xl sm:text-3xl font-serif text-white border-l-4 border-red-600 pl-3 font-bold tracking-tight">
               Biblioteca
             </h1>
           </div>
+        </div>
 
-          <div class="flex items-center gap-3 w-full md:w-auto">
-            <div class="relative flex-1 md:w-80">
-              <i data-lucide="search" class="w-4 h-4 text-gray-500 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
-              <input type="text" id="searchInput" oninput="handleSearchInput(this.value)" placeholder="Buscar livros..." class="w-full bg-white/5 border border-white/10 rounded-full py-2.5 pl-10 pr-10 text-white placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-all text-xs sm:text-sm">
-              <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white cursor-pointer">
-                <i data-lucide="x" class="w-4 h-4"></i>
-              </button>
-            </div>
-
-            <button onclick="toggleCategoriesView()" id="btnToggleCategories" class="p-2.5 bg-white/5 border border-white/10 rounded-full text-gray-400 hover:text-white hover:border-yellow-500 transition-all cursor-pointer" title="Navegar por Categorias">
-              <i data-lucide="layout-grid" class="w-5 h-5"></i>
-            </button>
-
-            <button onclick="openMyList()" id="btnToggleMyList" class="p-2.5 bg-white/5 border border-white/10 rounded-full text-gray-400 hover:text-yellow-400 hover:border-yellow-500 transition-all cursor-pointer" title="Minha Lista">
-              <i data-lucide="bookmark" class="w-5 h-5"></i>
+        <!-- Barra de Busca e Ações Rápidas (Padrão Screenshot Ordem 137) -->
+        <div class="flex items-center gap-3 mb-6">
+          <div class="relative flex-1">
+            <i data-lucide="search" class="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+            <input type="text" id="searchInput" oninput="handleSearchInput(this.value)" placeholder="Buscar livros..." class="w-full bg-[#161616] border border-white/10 rounded-full py-2.5 pl-10 pr-10 text-white placeholder-gray-500 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all text-xs sm:text-sm">
+            <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white cursor-pointer">
+              <i data-lucide="x" class="w-4 h-4"></i>
             </button>
           </div>
-        </div>
 
-        <!-- BARRA DE CHIPS DE TEMAS / CATEGORIAS (PADRÃO ORDEM 137) -->
-        <div id="themeChipsContainer" class="flex items-center gap-2 overflow-x-auto pb-4 mb-4 hide-scrollbar">
-          <button onclick="filterByThemeChip('all')" class="theme-chip active px-4 py-1.5 rounded-full text-xs font-bold bg-yellow-500 text-black shadow-lg shadow-yellow-500/20 whitespace-nowrap transition-all cursor-pointer">
-            Todos (1.335)
+          <button onclick="toggleCategoriesView()" id="btnToggleCategories" class="p-2.5 bg-[#161616] border border-white/10 rounded-full text-gray-300 hover:text-white hover:border-red-600 transition-all cursor-pointer shrink-0" title="Navegar por Categorias">
+            <i data-lucide="layout-grid" class="w-5 h-5"></i>
           </button>
-          <button onclick="filterByThemeChip('Hermetismo & Cabala')" class="theme-chip px-3.5 py-1.5 rounded-full text-xs font-medium bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 whitespace-nowrap transition-all cursor-pointer">
-            Hermetismo & Cabala
-          </button>
-          <button onclick="filterByThemeChip('Grimórios & Alta Magia')" class="theme-chip px-3.5 py-1.5 rounded-full text-xs font-medium bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 whitespace-nowrap transition-all cursor-pointer">
-            Grimórios & Alta Magia
-          </button>
-          <button onclick="filterByThemeChip('Gnosticismo & Apócrifos')" class="theme-chip px-3.5 py-1.5 rounded-full text-xs font-medium bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 whitespace-nowrap transition-all cursor-pointer">
-            Gnosticismo & Apócrifos
-          </button>
-          <button onclick="filterByThemeChip('Alquimia & Transmutação')" class="theme-chip px-3.5 py-1.5 rounded-full text-xs font-medium bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 whitespace-nowrap transition-all cursor-pointer">
-            Alquimia & Espagíria
-          </button>
-          <button onclick="filterByThemeChip('Sociedades Secretas')" class="theme-chip px-3.5 py-1.5 rounded-full text-xs font-medium bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 whitespace-nowrap transition-all cursor-pointer">
-            Sociedades Secretas & Maçonaria
-          </button>
-          <button onclick="filterByThemeChip('Mente & Projeção Astral')" class="theme-chip px-3.5 py-1.5 rounded-full text-xs font-medium bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 whitespace-nowrap transition-all cursor-pointer">
-            Mente & Consciência
-          </button>
-          <button onclick="filterByThemeChip('Wicca & Bruxaria')" class="theme-chip px-3.5 py-1.5 rounded-full text-xs font-medium bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 whitespace-nowrap transition-all cursor-pointer">
-            Wicca & Bruxaria
-          </button>
-          <button onclick="filterByThemeChip('Thelema')" class="theme-chip px-3.5 py-1.5 rounded-full text-xs font-medium bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 whitespace-nowrap transition-all cursor-pointer">
-            Thelema & Crowley
+
+          <button onclick="openMyList()" id="btnToggleMyList" class="p-2.5 bg-[#161616] border border-white/10 rounded-full text-gray-300 hover:text-red-500 hover:border-red-600 transition-all cursor-pointer shrink-0" title="Minha Lista">
+            <i data-lucide="bookmark" class="w-5 h-5"></i>
           </button>
         </div>
 
-        <!-- 1. STREAMING ROWS VIEW -->
-        <div id="libraryStreamingView" class="space-y-10">
+        <!-- 1. STREAMING ROWS VIEW (CARROSSEIS ORDEM 137) -->
+        <div id="libraryStreamingView" class="space-y-8">
           
-          <!-- CONTINUAR LENDO (SCREENSHOT 5) -->
+          <!-- CONTINUAR LENDO -->
           <div id="sectionContinueReading" class="hidden">
-            <div class="flex items-center gap-2 mb-4">
-              <i data-lucide="clock" class="w-4 h-4 text-yellow-400"></i>
-              <h2 class="text-xs font-bold text-yellow-400 uppercase tracking-widest font-mono">
+            <div class="flex items-center gap-2 mb-3">
+              <i data-lucide="clock" class="w-4 h-4 text-red-500"></i>
+              <h2 class="text-xs font-bold text-red-500 uppercase tracking-widest font-mono">
                 CONTINUAR LENDO
               </h2>
             </div>
-            <div id="continueReadingCarousel" class="flex overflow-x-auto gap-4 pb-4 hide-scrollbar scroll-smooth snap-x">
+            <div id="continueReadingCarousel" class="flex overflow-x-auto gap-3.5 pb-2 hide-scrollbar scroll-smooth snap-x">
               <!-- Injetado dinamicamente -->
             </div>
           </div>
 
-          <!-- FILEIRAS HORIZONTAIS DOS 6 MÓDULOS COM "VER TODOS" -->
-          <div id="moduleRowsContainer" class="space-y-10">
-            <!-- Injetado dinamicamente -->
-          </div>
-
-          <!-- Temas & Categorias do Acervo Sagrado (Estilo Ordem 137) -->
-          <div class="pt-8 border-t border-white/10">
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
-              <div>
-                <span class="text-[10px] font-bold text-yellow-400 uppercase tracking-widest block mb-1">VIAS INICIÁTICAS</span>
-                <h3 class="font-cinzel font-bold text-xl text-white flex items-center gap-2">
-                  <i data-lucide="compass" class="w-5 h-5 text-yellow-400"></i> Temas & Categorias do Acervo
-                </h3>
-                <p class="text-xs text-gray-400 mt-1">Navegue pelas principais tradições e escolas de mistério para leitura integral direto no app.</p>
-              </div>
-            </div>
-            <div id="collectionsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <!-- Injetado via renderCollections (Cards de Temas com abertura direta) -->
-            </div>
+          <!-- FILEIRAS HORIZONTAIS POR CATEGORIA (EXATO ORDEM 137) -->
+          <div id="moduleRowsContainer" class="space-y-8">
+            <!-- Injetado dinamicamente via renderLibraryStreaming() -->
           </div>
 
         </div>
@@ -1320,6 +1274,6 @@
 
   <!-- SCRIPTS -->
   <script src="books_data.js?v=1795566000"></script>
-  <script src="app.js?v=1795562650"></script>
+  <script src="app.js?v=1795563300"></script>
 </body>
 </html>

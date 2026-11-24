@@ -852,41 +852,35 @@ function updateModalBookmarkUI(bookId) {
   if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
-// Criação do Card de Livro Estilo Cúpula 33 (Acabamento Dourado Nobre)
+// Criação do Card de Livro Estilo Ordem 137 / Cúpula 33
 function createBookCardHTML(book, isCarousel) {
   const isLocked = currentTier === "basico" && book.tier === "master";
   const savedProg = getSavedProgress(book.id);
   const progPercent = savedProg && book.pages ? Math.min(100, Math.round((savedProg.page / book.pages) * 100)) : 0;
   
   const containerClass = isCarousel 
-    ? "flex-none w-[145px] sm:w-[170px] cursor-pointer group snap-start select-none transition-transform duration-200 active:scale-95"
-    : "cursor-pointer group select-none transition-transform duration-200 active:scale-95";
+    ? "flex-none w-[120px] sm:w-[140px] cursor-pointer group snap-start select-none transition-transform duration-200 active:scale-95 text-left"
+    : "cursor-pointer group select-none transition-transform duration-200 active:scale-95 text-left";
 
   return `
     <div onclick="handleBookClick('${book.id}')" class="${containerClass}">
       
-      <!-- Container da Capa com Aspect Ratio 2:3 -->
-      <div class="relative aspect-[2/3] rounded-2xl overflow-hidden mb-2.5 border border-white/10 group-hover:border-[#D4AF37] shadow-[0_8px_25px_rgba(0,0,0,0.7)] group-hover:shadow-[0_12px_30px_rgba(212,175,55,0.22)] transition-all duration-300 bg-[#0d0d0d]">
-        <img src="${book.cover}" alt="${book.title}" loading="lazy" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 ${isLocked ? 'grayscale opacity-40' : ''}">
+      <!-- Container da Capa com Aspect Ratio 3:4 (Exato Ordem 137) -->
+      <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-2 border border-white/10 group-hover:border-red-600 shadow-[0_6px_20px_rgba(0,0,0,0.8)] transition-all duration-300 bg-[#121212]">
+        <img src="${book.cover}" alt="${book.title}" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 ${isLocked ? 'grayscale opacity-40' : ''}" onerror="this.onerror=null; this.src='assets/logo.jpg'">
         
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
 
         <!-- Botão de Detalhes (i) -->
-        <button type="button" onclick="event.stopPropagation(); openBookDetailsModal('${book.id}')" class="absolute top-2.5 right-2.5 z-20 w-7 h-7 rounded-full bg-black/75 hover:bg-[#D4AF37] hover:text-black text-gray-300 border border-white/20 flex items-center justify-center transition-all shadow-md active:scale-90 cursor-pointer" title="Ver Detalhes da Obra">
-          <i data-lucide="info" class="w-3.5 h-3.5"></i>
+        <button type="button" onclick="event.stopPropagation(); openBookDetailsModal('${book.id}')" class="absolute top-2 right-2 z-20 w-6 h-6 rounded-full bg-black/75 hover:bg-red-600 hover:text-white text-gray-300 border border-white/20 flex items-center justify-center transition-all shadow-md active:scale-90 cursor-pointer" title="Ver Detalhes">
+          <i data-lucide="info" class="w-3 h-3"></i>
         </button>
 
         <!-- Badges Superiores -->
-        <div class="absolute top-2.5 left-2.5 z-20 flex flex-col gap-1 items-start">
-          ${!isLocked && book.id <= 15 ? `
-            <div class="bg-gradient-to-r from-[#D4AF37] to-[#E5C158] text-black text-[9px] font-black px-2 py-0.5 rounded shadow-lg uppercase tracking-wider">
-              NOVO
-            </div>
-          ` : ''}
-
+        <div class="absolute top-2 left-2 z-20 flex flex-col gap-1 items-start">
           ${progPercent > 0 ? `
-            <div class="bg-black/85 backdrop-blur-md px-2 py-0.5 rounded-full border border-white/10 flex items-center shadow-lg">
-              <span class="w-1.5 h-1.5 rounded-full bg-[#D4AF37] mr-1.5 animate-pulse"></span>
+            <div class="bg-black/85 backdrop-blur-md px-1.5 py-0.5 rounded-full border border-white/10 flex items-center shadow-lg">
+              <span class="w-1.5 h-1.5 rounded-full bg-red-600 mr-1 animate-pulse"></span>
               <span class="text-[9px] font-bold text-white tracking-wider font-mono">${progPercent}%</span>
             </div>
           ` : ''}
@@ -894,27 +888,27 @@ function createBookCardHTML(book, isCarousel) {
 
         ${isLocked ? `
           <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/75 backdrop-blur-[2px] p-2 text-center">
-            <div class="w-9 h-9 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/40 flex items-center justify-center text-[#D4AF37] mb-1.5 shadow-lg">
+            <div class="w-8 h-8 rounded-full bg-red-600/20 border border-red-600/40 flex items-center justify-center text-red-500 mb-1 shadow-lg">
               <i data-lucide="lock" class="w-4 h-4"></i>
             </div>
-            <span class="text-[9px] font-black text-[#D4AF37] uppercase tracking-widest">Exclusivo Master</span>
+            <span class="text-[8px] font-black text-red-500 uppercase tracking-widest">Master</span>
           </div>
         ` : ''}
 
         <!-- Barra de Progresso no Rodapé da Capa -->
         ${progPercent > 0 ? `
           <div class="absolute bottom-0 left-0 w-full h-1 bg-black/80">
-            <div class="h-full bg-gradient-to-r from-[#AA7C11] via-[#D4AF37] to-[#F3E5AB] shadow-[0_0_8px_rgba(212,175,55,0.8)]" style="width: ${progPercent}%"></div>
+            <div class="h-full bg-gradient-to-r from-red-700 to-red-500 shadow-[0_0_8px_rgba(220,38,38,0.8)]" style="width: ${progPercent}%"></div>
           </div>
         ` : ''}
       </div>
 
-      <!-- Título & Autor -->
-      <h3 class="text-xs sm:text-sm font-semibold truncate text-white group-hover:text-[#D4AF37] transition-colors leading-snug">
+      <!-- Título & Autor (Exato Ordem 137) -->
+      <h3 class="text-xs font-semibold text-white group-hover:text-red-500 transition-colors line-clamp-2 leading-tight">
         ${book.title}
       </h3>
-      <p class="text-gray-400 text-[11px] truncate mt-0.5 font-medium">
-        ${book.author}
+      <p class="text-gray-400 text-[11px] truncate mt-1">
+        ${book.author || 'Desconhecido'}
       </p>
     </div>
   `;
@@ -1029,63 +1023,163 @@ function renderBooks() {
   if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
-// 1. Renderiza o Modo Streaming (Carrosséis Netflix / Cúpula 33)
+// Ordem canônica exata das categorias (conforme prints do app Ordem 137)
+const ORDEM_137_CATEGORIES = [
+  "Alquimia",
+  "Alta Magia",
+  "Budismo",
+  "Cabala",
+  "Benzimento",
+  "Bruxaria Natural",
+  "Banimento",
+  "Baralho Cigano",
+  "Arquétipos",
+  "Auto Conhecimento",
+  "Apometria",
+  "Aromaterapia",
+  "Animais",
+  "Anunnakis",
+  "Magia Lunar",
+  "Magia Sexual",
+  "Magia Elemental",
+  "Magia Enoquiana",
+  "Magia do Caos",
+  "Magia dos Metais",
+  "Magia Angelical",
+  "Magia das Fadas",
+  "Maçonaria",
+  "Iniciantes (Bruxaria)",
+  "Luciferianismo",
+  "Hermetismo",
+  "História e Enciclopédias"
+];
+
+function getBookCleanCategory(book) {
+  const cat = book.category || "";
+  const m = cat.match(/^([^()]+)\s*\(([^()]+)\)/);
+  let name = m ? m[1].trim() : cat.trim();
+  if (name === "Iniciantes") name = "Iniciantes (Bruxaria)";
+  return name || "Outros";
+}
+
+// 1. Renderiza o Modo Streaming (Carrosséis Ordem 137 / Cúpula 33)
 function renderLibraryStreaming() {
-  // A. Continuar Lendo
+  // A. Continuar Lendo (Conforme Screenshot 1 do Usuário)
   const secContinue = document.getElementById("sectionContinueReading");
   const carContinue = document.getElementById("continueReadingCarousel");
   if (secContinue && carContinue) {
-    const readingBooks = booksData.filter(b => {
-      const p = getSavedProgress(b.id);
-      return p && p.page > 0;
-    });
-    if (readingBooks.length > 0) {
+    const cleanEmail = (localStorage.getItem("cupula33_user_email") || "").trim().toLowerCase();
+    const allHistory = typeof MemberDatabase !== "undefined"
+      ? MemberDatabase.getAllProgress(cleanEmail)
+      : JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
+    const entries = Object.values(allHistory).sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
+
+    if (entries.length > 0) {
       secContinue.classList.remove("hidden");
-      carContinue.innerHTML = readingBooks.map(b => createBookCardHTML(b, true)).join("");
+      carContinue.innerHTML = entries.map(item => {
+        const bookObj = booksData.find(b => String(b.id) === String(item.bookId)) || {
+          id: item.bookId,
+          title: item.title,
+          author: item.author || 'Desconhecido',
+          cover: item.cover || 'assets/logo.jpg',
+          pages: 100
+        };
+        const progPercent = item.percent || 1;
+        return `
+          <div onclick="handleBookClick('${bookObj.id}')" class="flex-none w-[125px] sm:w-[145px] cursor-pointer group snap-start select-none transition-transform duration-200 active:scale-95 text-left">
+            <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-2 border border-white/10 group-hover:border-red-600 shadow-[0_6px_20px_rgba(0,0,0,0.8)] transition-all duration-300 bg-[#121212]">
+              <img src="${bookObj.cover}" alt="${bookObj.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='assets/logo.jpg'">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
+              <div class="absolute top-2 left-2 z-20 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-black/85 backdrop-blur-md border border-white/10 shadow">
+                <span class="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse"></span>
+                <span class="text-[9px] font-bold text-white font-mono">${progPercent}%</span>
+              </div>
+              <div class="absolute bottom-0 left-0 w-full h-1 bg-black/80">
+                <div class="h-full bg-gradient-to-r from-red-700 to-red-500 shadow-[0_0_8px_rgba(220,38,38,0.8)]" style="width: ${progPercent}%"></div>
+              </div>
+            </div>
+            <h3 class="text-xs font-semibold text-white group-hover:text-red-500 transition-colors line-clamp-1 leading-tight">
+              ${bookObj.title}
+            </h3>
+            <p class="text-gray-400 text-[11px] truncate mt-1">
+              ${bookObj.author || 'Desconhecido'}
+            </p>
+          </div>
+        `;
+      }).join("");
     } else {
-      secContinue.classList.add("hidden");
+      // Se ainda não leu nada, mostra 2 destaques padrão conforme print do Ordem 137
+      secContinue.classList.remove("hidden");
+      const sampleBooks = [
+        booksData.find(b => String(b.id) === "483") || booksData[0], // Estudos Alquímicos (Jung)
+        booksData.find(b => String(b.id) === "750") || booksData[1]  // Prosperidade Maçônica
+      ].filter(Boolean);
+
+      carContinue.innerHTML = sampleBooks.map((bookObj, idx) => {
+        const progPercent = idx === 0 ? 1 : 6;
+        return `
+          <div onclick="handleBookClick('${bookObj.id}')" class="flex-none w-[125px] sm:w-[145px] cursor-pointer group snap-start select-none transition-transform duration-200 active:scale-95 text-left">
+            <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-2 border border-white/10 group-hover:border-red-600 shadow-[0_6px_20px_rgba(0,0,0,0.8)] transition-all duration-300 bg-[#121212]">
+              <img src="${bookObj.cover}" alt="${bookObj.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='assets/logo.jpg'">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
+              <div class="absolute top-2 left-2 z-20 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-black/85 backdrop-blur-md border border-white/10 shadow">
+                <span class="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse"></span>
+                <span class="text-[9px] font-bold text-white font-mono">${progPercent}%</span>
+              </div>
+              <div class="absolute bottom-0 left-0 w-full h-1 bg-black/80">
+                <div class="h-full bg-gradient-to-r from-red-700 to-red-500 shadow-[0_0_8px_rgba(220,38,38,0.8)]" style="width: ${progPercent}%"></div>
+              </div>
+            </div>
+            <h3 class="text-xs font-semibold text-white group-hover:text-red-500 transition-colors line-clamp-1 leading-tight">
+              ${bookObj.title}
+            </h3>
+            <p class="text-gray-400 text-[11px] truncate mt-1">
+              ${bookObj.author || 'Desconhecido'}
+            </p>
+          </div>
+        `;
+      }).join("");
     }
   }
 
-  // B. Destaques
-  const carFeatured = document.getElementById("featuredBooksCarousel");
-  if (carFeatured) {
-    const featured = booksData.slice(0, 12);
-    carFeatured.innerHTML = featured.map(b => createBookCardHTML(b, true)).join("");
-  }
-
-  // C. As 6 Fileiras por Módulo
+  // B. Fileiras por Categoria (Estilo Ordem 137)
   const rowsContainer = document.getElementById("moduleRowsContainer");
   if (rowsContainer) {
-    rowsContainer.innerHTML = CANONICAL_MODULES.map(mod => {
-      const modBooks = booksData.filter(b => 
-        (b.module && (b.module.toLowerCase().includes(mod.code.toLowerCase()) || b.module.toLowerCase().includes(mod.name.toLowerCase()))) ||
-        (b.category && b.category.toLowerCase().includes(mod.name.toLowerCase()))
-      );
+    const groups = {};
+    booksData.forEach(b => {
+      const catName = getBookCleanCategory(b);
+      if (!groups[catName]) groups[catName] = [];
+      groups[catName].push(b);
+    });
 
-      if (modBooks.length === 0) return '';
+    // Ordenação estrita: Primeiro as 27 categorias dos screenshots, depois as restantes em ordem alfabética
+    const presentTarget = ORDEM_137_CATEGORIES.filter(c => groups[c] && groups[c].length > 0);
+    const remaining = Object.keys(groups).filter(c => !ORDEM_137_CATEGORIES.includes(c)).sort();
+    const categoriesToRender = [...presentTarget, ...remaining];
+
+    rowsContainer.innerHTML = categoriesToRender.map(catName => {
+      const catBooks = groups[catName] || [];
+      if (catBooks.length === 0) return '';
 
       return `
         <div>
-          <div class="flex items-center justify-between mb-3.5 group cursor-pointer" onclick="openCategoryDetail('${mod.name}')">
-            <h2 class="text-lg sm:text-xl font-serif text-white group-hover:text-[#eab308] transition-colors flex items-center gap-2">
-              <span class="text-xs font-mono font-bold text-[#eab308]">${mod.code}</span>
-              <span>${mod.name}</span>
+          <div class="flex items-center justify-between mb-3 group cursor-pointer" onclick="openCategoryDetail('${catName}')">
+            <h2 class="text-lg sm:text-xl font-serif text-white group-hover:text-red-500 transition-colors font-bold">
+              ${catName}
             </h2>
-            <span class="text-[11px] text-gray-500 uppercase tracking-widest group-hover:text-white transition-colors flex items-center gap-1">
-              Ver todos (${modBooks.length}) →
-            </span>
+            <button onclick="event.stopPropagation(); openCategoryDetail('${catName}')" class="text-xs text-gray-400 uppercase tracking-wider group-hover:text-white transition-colors cursor-pointer font-medium">
+              VER TODOS
+            </button>
           </div>
 
-          <div class="flex overflow-x-auto gap-4 pb-4 hide-scrollbar scroll-smooth snap-x">
-            ${modBooks.map(b => createBookCardHTML(b, true)).join("")}
+          <div class="flex overflow-x-auto gap-3.5 pb-2 hide-scrollbar scroll-smooth snap-x">
+            ${catBooks.map(b => createBookCardHTML(b, true)).join("")}
           </div>
         </div>
       `;
     }).join("");
   }
 
-  renderCollections();
   if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
@@ -1094,22 +1188,26 @@ function renderCategoriesGrid() {
   const grid = document.getElementById("categoriesGrid");
   if (!grid) return;
 
-  grid.innerHTML = CANONICAL_MODULES.map(mod => {
-    const count = booksData.filter(b => 
-      (b.module && (b.module.toLowerCase().includes(mod.code.toLowerCase()) || b.module.toLowerCase().includes(mod.name.toLowerCase()))) ||
-      (b.category && b.category.toLowerCase().includes(mod.name.toLowerCase()))
-    ).length;
+  const groups = {};
+  booksData.forEach(b => {
+    const catName = getBookCleanCategory(b);
+    if (!groups[catName]) groups[catName] = [];
+    groups[catName].push(b);
+  });
+
+  const presentTarget = ORDEM_137_CATEGORIES.filter(c => groups[c] && groups[c].length > 0);
+  const remaining = Object.keys(groups).filter(c => !ORDEM_137_CATEGORIES.includes(c)).sort();
+  const allCats = [...presentTarget, ...remaining];
+
+  grid.innerHTML = allCats.map(catName => {
+    const count = (groups[catName] || []).length;
 
     return `
-      <div onclick="openCategoryDetail('${mod.name}')" class="group relative h-36 overflow-hidden rounded-2xl border border-white/10 bg-[#141414] hover:border-[#eab308]/50 transition-all text-left p-6 flex flex-col justify-end cursor-pointer shadow-lg">
-        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 group-hover:text-[#eab308] transition-all">
-          <i data-lucide="${mod.icon}" class="w-14 h-14"></i>
-        </div>
+      <div onclick="openCategoryDetail('${catName}')" class="group relative h-32 overflow-hidden rounded-2xl border border-white/10 bg-[#141414] hover:border-red-600/60 transition-all text-left p-5 flex flex-col justify-end cursor-pointer shadow-lg">
         <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
         <div class="relative z-10">
-          <span class="text-[10px] font-mono font-bold text-[#eab308] tracking-widest block uppercase">${mod.code}</span>
-          <h3 class="text-lg font-serif font-bold text-white group-hover:text-[#eab308] transition-colors mt-0.5">${mod.name}</h3>
-          <p class="text-xs text-gray-500 mt-1">${count} Tratados & Manuscritos</p>
+          <h3 class="text-base font-serif font-bold text-white group-hover:text-red-500 transition-colors">${catName}</h3>
+          <p class="text-xs text-gray-400 mt-1">${count} Livros & Tratados</p>
         </div>
       </div>
     `;
@@ -1123,13 +1221,15 @@ function renderCategoryDetailGrid(categoryName) {
   const grid = document.getElementById("categoryDetailBooksGrid");
   if (!grid) return;
   const all = getAllBooks();
-  const filtered = all.filter(b => 
-    (b.category && b.category.toLowerCase().includes(categoryName.toLowerCase())) ||
-    (b.module && b.module.toLowerCase().includes(categoryName.toLowerCase()))
-  );
+  const filtered = all.filter(b => {
+    const cat = getBookCleanCategory(b);
+    return cat.toLowerCase() === categoryName.toLowerCase() ||
+           (b.category && b.category.toLowerCase().includes(categoryName.toLowerCase())) ||
+           (b.module && b.module.toLowerCase().includes(categoryName.toLowerCase()));
+  });
 
   if (filtered.length === 0) {
-    grid.innerHTML = `<div class="col-span-full py-16 text-center text-gray-500">Nenhuma obra localizada nesta via.</div>`;
+    grid.innerHTML = `<div class="col-span-full py-16 text-center text-gray-500">Nenhuma obra localizada nesta categoria.</div>`;
     return;
   }
 
