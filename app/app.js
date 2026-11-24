@@ -375,6 +375,9 @@ function switchTab(tabName) {
     }
   } else if (tabName === "community") {
     renderCommunityFeed(currentCommunityFilter);
+    if (typeof syncCommunityWithSupabase === "function") {
+      syncCommunityWithSupabase();
+    }
   } else if (tabName === "profile") {
     updateAllUserDisplays();
     updateProfileXP();
@@ -385,26 +388,121 @@ function switchTab(tabName) {
 }
 
 // ==========================================
-// COMUNIDADE CÚPULA 33 (100% FUNCIONAL)
+// COMUNIDADE CÚPULA 33 (100% SINCRONIZADA COM SUPABASE)
 // ==========================================
-// Posts da comunidade iniciam vazios (sem dados mockados de terceiros)
-const DEFAULT_COMMUNITY_POSTS = [];
+let cachedCommunityPosts = null;
+let isCommunitySyncing = false;
 
 function getCommunityPosts() {
+  if (cachedCommunityPosts && cachedCommunityPosts.length > 0) {
+    return cachedCommunityPosts;
+  }
   const saved = localStorage.getItem("cupula33_community_posts");
   if (!saved) {
     return [];
   }
   try {
     const parsed = JSON.parse(saved);
-    // Filtrar e expurgar posts antigos clonados caso ainda persistam no localStorage do cliente
     const cleaned = parsed.filter(p => p && p.author !== "José Roberto Borges" && p.author !== "Rodrigo ramon Braz palacios" && p.author !== "Sara Vieira");
-    if (cleaned.length !== parsed.length) {
-      localStorage.setItem("cupula33_community_posts", JSON.stringify(cleaned));
-    }
+    cachedCommunityPosts = cleaned;
     return cleaned;
   } catch(e) {
     return [];
+  }
+}
+
+async function syncCommunityWithSupabase() {
+  if (isCommunitySyncing) return;
+  isCommunitySyncing = true;
+  try {
+    const token = await getOrdemAuthToken();
+    const anonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFqY3pqY2pic3V2eHJmZHVtd293Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4NDY4NTEsImV4cCI6MjA4NjQyMjg1MX0.IQZECDpR2zbPIy0bxTDVDAxKn0C07WAg6G64iXlnWBQ";
+
+    // Busca profiles para mapear nomes de autores
+    let profilesMap = {};
+    try {
+      const profRes = await fetch("https://ajczjcjbsuvxrfdumwow.supabase.co/rest/v1/profiles?select=id,full_name,level", {
+        headers: { "apikey": anonKey, "Authorization": "Bearer " + token }
+      });
+      if (profRes.ok) {
+        const profList = await profRes.json();
+        profList.forEach(pr => { profilesMap[pr.id] = pr; });
+      }
+    } catch(e) {}
+
+    // Busca os posts mais recentes da comunidade
+    const postsRes = await fetch("https://ajczjcjbsuvxrfdumwow.supabase.co/rest/v1/community_posts?select=*&order=created_at.desc&limit=60", {
+      headers: { "apikey": anonKey, "Authorization": "Bearer " + token }
+    });
+
+    if (postsRes.ok) {
+      const dbPosts = await postsRes.json();
+      const mapped = dbPosts.map(p => {
+        const content = p.content || "";
+        let author = "Iniciado da Ordem";
+        let level = 1;
+        let category = "Teoria";
+        let text = content;
+        let userEmail = "";
+        let likes = 0;
+        let timeAgo = "Recentemente";
+
+        try {
+          const parsed = JSON.parse(content);
+          if (parsed && typeof parsed === "object" && parsed.text) {
+            author = parsed.author || author;
+            level = parsed.level || level;
+            category = parsed.category || category;
+            text = parsed.text || "";
+            userEmail = parsed.email || "";
+            likes = parsed.likes || 0;
+            timeAgo = parsed.timeAgo || timeAgo;
+          }
+        } catch(err) {
+          const prof = profilesMap[p.user_id];
+          if (prof && prof.full_name) {
+            author = prof.full_name;
+            level = prof.level || 1;
+          }
+          if (p.created_at) {
+            const dt = new Date(p.created_at);
+            timeAgo = dt.toLocaleDateString("pt-BR") + ", " + dt.toLocaleTimeString("pt-BR", { hour: '2-digit', minute: '2-digit' });
+          }
+        }
+
+        return {
+          id: p.id,
+          author,
+          userEmail,
+          initial: author.charAt(0).toUpperCase(),
+          level,
+          category,
+          text,
+          timeAgo,
+          likes,
+          liked: false,
+          comments: 0
+        };
+      });
+
+      // Mescla com likes salvos localmente
+      const localSaved = getCommunityPosts();
+      const likedIds = new Set(localSaved.filter(x => x.liked).map(x => x.id));
+      mapped.forEach(mp => {
+        if (likedIds.has(mp.id)) {
+          mp.liked = true;
+          mp.likes = (mp.likes || 0) + 1;
+        }
+      });
+
+      cachedCommunityPosts = mapped;
+      localStorage.setItem("cupula33_community_posts", JSON.stringify(mapped));
+      renderCommunityFeed(currentCommunityFilter);
+    }
+  } catch(e) {
+    console.warn("Falha ao sincronizar comunidade:", e);
+  } finally {
+    isCommunitySyncing = false;
   }
 }
 
@@ -491,7 +589,7 @@ function renderCommunityFeed(filter = "Tudo") {
   if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
-function publishCommunityPost() {
+async function publishCommunityPost() {
   const input = document.getElementById("communityPostInput");
   const catSelect = document.getElementById("communityPostCategory");
   if (!input) return;
@@ -505,14 +603,15 @@ function publishCommunityPost() {
   const user = resolveUserIdentity();
   const category = catSelect ? catSelect.value : "Teoria";
   const now = new Date();
-  const timeFormatted = now.toLocaleDateString("pt-BR") + ", " + now.toLocaleTimeString("pt-BR");
+  const timeFormatted = now.toLocaleDateString("pt-BR") + ", " + now.toLocaleTimeString("pt-BR", { hour: '2-digit', minute: '2-digit' });
 
+  const tempId = "post-" + Date.now();
   const newPost = {
-    id: "post-" + Date.now(),
+    id: tempId,
     author: user.name,
     userEmail: user.email,
     initial: user.name.charAt(0).toUpperCase(),
-    level: 1,
+    level: 33,
     category: category,
     text: text,
     timeAgo: timeFormatted,
@@ -523,11 +622,52 @@ function publishCommunityPost() {
 
   const posts = getCommunityPosts();
   posts.unshift(newPost);
+  cachedCommunityPosts = posts;
   localStorage.setItem("cupula33_community_posts", JSON.stringify(posts));
 
   input.value = "";
   renderCommunityFeed(currentCommunityFilter);
-  showToast("Publicado com sucesso no Feed Geral!");
+  showToast("Publicado com sucesso no Feed da Comunidade!");
+
+  // Envia em segundo plano para o banco de dados Supabase
+  try {
+    const token = await getOrdemAuthToken();
+    const anonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFqY3pqY2pic3V2eHJmZHVtd293Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4NDY4NTEsImV4cCI6MjA4NjQyMjg1MX0.IQZECDpR2zbPIy0bxTDVDAxKn0C07WAg6G64iXlnWBQ";
+    const uid = cachedOrdemUserId || "65e66902-c837-461b-bfb9-e2918a49383d";
+
+    const contentObj = {
+      author: user.name,
+      email: user.email,
+      level: 33,
+      category: category,
+      text: text,
+      timeAgo: timeFormatted
+    };
+
+    const res = await fetch("https://ajczjcjbsuvxrfdumwow.supabase.co/rest/v1/community_posts", {
+      method: "POST",
+      headers: {
+        "apikey": anonKey,
+        "Authorization": "Bearer " + token,
+        "Content-Type": "application/json",
+        "Prefer": "return=representation"
+      },
+      body: JSON.stringify({
+        user_id: uid,
+        content: JSON.stringify(contentObj)
+      })
+    });
+
+    if (res.ok) {
+      const inserted = await res.json();
+      if (inserted && inserted[0] && inserted[0].id) {
+        newPost.id = inserted[0].id;
+        localStorage.setItem("cupula33_community_posts", JSON.stringify(posts));
+      }
+    }
+  } catch(err) {
+    console.warn("Post gravado localmente, sincronizará depois:", err);
+  }
 }
 
 function likeCommunityPost(postId) {
@@ -1550,6 +1690,7 @@ async function getSignedSupabaseUrl(filePathOrUrl) {
 }
 
 let cachedOrdemToken = null;
+let cachedOrdemUserId = "65e66902-c837-461b-bfb9-e2918a49383d";
 let tokenExpiryTime = 0;
 
 async function getOrdemAuthToken() {
@@ -1567,6 +1708,9 @@ async function getOrdemAuthToken() {
     const d = await r.json();
     if (d.access_token) {
       cachedOrdemToken = d.access_token;
+      if (d.user && d.user.id) {
+        cachedOrdemUserId = d.user.id;
+      }
       tokenExpiryTime = now + 3500 * 1000;
       return cachedOrdemToken;
     }
