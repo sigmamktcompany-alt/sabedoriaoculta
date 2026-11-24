@@ -1,11 +1,12 @@
 {
   "provider": "resend",
-  "resend_api_key": "re_ZwdwULHi_MA8wrHM6fFcYDKAxavKx7LC5",
-  "from_email": "C\u00fapula 33 <onboarding@resend.dev>",
+  "resend_api_key": "re_6DLLvTuV_GNFRdUwdJGrTW2oZbYUTC3rU",
+  "from_email": "Cúpula 33 <acesso@sabedoriaoculta.com>",
   "smtp_host": "smtp.hostinger.com",
   "smtp_port": 465,
   "smtp_user": "",
   "smtp_password": "",
-  "portal_url": "https://sabedoriaoculta.com/app/",
+  "portal_url": "https://sigmamarketingdigital.github.io/cupula33/app/",
+  "vip_group_url": "https://chat.whatsapp.com/invite/cupula33-vip",
   "default_password": "cupula@33"
 }
