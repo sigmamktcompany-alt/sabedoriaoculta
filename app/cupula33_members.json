@@ -127,30 +127,6 @@
       "has_orderbump": true,
       "has_prosperidade_oculta": true,
       "date_added": "2026-11-24"
-    },
-    "carlos.bump.teste@gmail.com": {
-      "name": "Carlos Aluno Teste Bump",
-      "password": "cupula@33",
-      "tier": "master",
-      "level": 1,
-      "has_prosperidade": true,
-      "has_orderbump": true,
-      "active": true,
-      "status": "approved",
-      "sale_code": "DIRECT_SALE",
-      "updated_at": 1795557317.465312
-    },
-    "mariana.nobump.teste@gmail.com": {
-      "name": "Mariana Aluna Sem Bump",
-      "password": "cupula@33",
-      "tier": "master",
-      "level": 1,
-      "has_prosperidade": false,
-      "has_orderbump": false,
-      "active": true,
-      "status": "approved",
-      "sale_code": "DIRECT_SALE",
-      "updated_at": 1795557318.548699
     }
   }
 }

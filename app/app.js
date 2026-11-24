@@ -1,6 +1,4 @@
 const KNOWN_STUDENT_NAMES = {
-  "mariana.nobump.teste@gmail.com": "Mariana Aluna Sem Bump",
-  "carlos.bump.teste@gmail.com": "Carlos Aluno Teste Bump",
   "joaomayamarcelo@gmail.com": "João Maya Marcelo",
   "dweslley2003@gmail.com": "Weslley Dias",
   "ricardoscola4@gmail.com": "Ricardo André Scola",
@@ -3070,8 +3068,6 @@ const SUPABASE_CONFIG = {
 };
 
 const MASTER_ALLOWLIST = [
-  "mariana.nobump.teste@gmail.com",
-  "carlos.bump.teste@gmail.com",
   "joaomayamarcelo@gmail.com",
   "dweslley2003@gmail.com",
   "ricardoscola4@gmail.com",
@@ -3091,7 +3087,6 @@ const MASTER_ALLOWLIST = [
 
 // LISTA DE INICIADOS QUE ADQUIRIRAM O ORDER BUMP DA PROSPERIDADE MAÇÔNICA
 const ORDERBUMP_PROSPERIDADE_ALLOWLIST = [
-  "carlos.bump.teste@gmail.com",
   "tjoaquim627@gmail.com",
   "joaomayamarcelo@gmail.com",
   "mrobertor057@gmail.com",
