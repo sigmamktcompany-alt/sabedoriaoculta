@@ -603,6 +603,7 @@ async function publishCommunityPost() {
   }
 
   const user = resolveUserIdentity();
+  const userLevel = user.level || getUserLevel(user.email);
   const category = catSelect ? catSelect.value : "Teoria";
   const now = new Date();
   const timeFormatted = now.toLocaleDateString("pt-BR") + ", " + now.toLocaleTimeString("pt-BR", { hour: '2-digit', minute: '2-digit' });
@@ -613,7 +614,7 @@ async function publishCommunityPost() {
     author: user.name,
     userEmail: user.email,
     initial: user.name.charAt(0).toUpperCase(),
-    level: 33,
+    level: userLevel,
     category: category,
     text: text,
     timeAgo: timeFormatted,
@@ -640,7 +641,7 @@ async function publishCommunityPost() {
     const contentObj = {
       author: user.name,
       email: user.email,
-      level: 33,
+      level: userLevel,
       category: category,
       text: text,
       timeAgo: timeFormatted
@@ -1282,10 +1283,62 @@ function triggerDownloadFromDetails() {
 // Atualização de Informações do Membro no Sidebar e Telas
 
 // ==========================================
+// SISTEMA DE NÍVEIS & PROGRESSÃO INDIVIDUAL
+// ==========================================
+function getUserLevel(email) {
+  const cleanEmail = (email || localStorage.getItem("cupula33_user_email") || "").trim().toLowerCase();
+  if (!cleanEmail) return 1;
+
+  // Administradores da Ordem possuem Grau 33 (Mestre da Cúpula)
+  if (cleanEmail === "admin@cupula33.com" || cleanEmail === "sigmamarketing@gmail.com") {
+    const customAdminLvl = localStorage.getItem("cupula33_user_level_" + cleanEmail);
+    return customAdminLvl ? parseInt(customAdminLvl, 10) : 33;
+  }
+
+  // 1. Checa se já tem nível individual salvo no localStorage para esse aluno
+  const savedLvl = localStorage.getItem("cupula33_user_level_" + cleanEmail);
+  if (savedLvl) {
+    const parsed = parseInt(savedLvl, 10);
+    if (!isNaN(parsed) && parsed >= 1) return parsed;
+  }
+
+  // 2. Checa no banco de dados local isolado do MemberDatabase
+  if (typeof MemberDatabase !== "undefined") {
+    const rec = MemberDatabase.getClientRecord(cleanEmail);
+    if (rec && rec.level) {
+      const parsedRec = parseInt(rec.level, 10);
+      if (!isNaN(parsedRec) && parsedRec >= 1) return parsedRec;
+    }
+  }
+
+  // 3. Regra de Ouro: Todo aluno novo começa no Nível 1
+  return 1;
+}
+
+function setUserLevel(email, newLevel) {
+  const cleanEmail = (email || localStorage.getItem("cupula33_user_email") || "").trim().toLowerCase();
+  if (!cleanEmail) return;
+
+  const validLevel = Math.max(1, parseInt(newLevel, 10) || 1);
+  localStorage.setItem("cupula33_user_level_" + cleanEmail, String(validLevel));
+  localStorage.setItem("cupula33_user_level", String(validLevel));
+
+  if (typeof MemberDatabase !== "undefined") {
+    MemberDatabase.saveClientRecord({
+      email: cleanEmail,
+      level: validLevel
+    });
+  }
+
+  updateProfileXP();
+}
+
+// ==========================================
 // IDENTIDADE DINÂMICA DO CLIENTE CÚPULA 33
 // ==========================================
 function resolveUserIdentity() {
   const currentEmail = (localStorage.getItem("cupula33_user_email") || "").trim().toLowerCase();
+  const userLevel = getUserLevel(currentEmail);
   
   // 1. Nome customizado salvo pelo aluno
   const customKey = currentEmail ? "cupula33_custom_name_" + currentEmail : "cupula33_custom_name";
@@ -1294,7 +1347,8 @@ function resolveUserIdentity() {
     return {
       email: currentEmail || "membro@cupula33.com",
       name: customName.trim(),
-      tier: localStorage.getItem("cupula33_user_tier") || "master"
+      tier: localStorage.getItem("cupula33_user_tier") || "master",
+      level: userLevel
     };
   }
 
@@ -1303,7 +1357,8 @@ function resolveUserIdentity() {
     return {
       email: currentEmail,
       name: KNOWN_STUDENT_NAMES[currentEmail],
-      tier: localStorage.getItem("cupula33_user_tier") || "master"
+      tier: localStorage.getItem("cupula33_user_tier") || "master",
+      level: userLevel
     };
   }
 
@@ -1316,7 +1371,8 @@ function resolveUserIdentity() {
       return {
         email: currentEmail,
         name: formattedName,
-        tier: localStorage.getItem("cupula33_user_tier") || "master"
+        tier: localStorage.getItem("cupula33_user_tier") || "master",
+        level: userLevel
       };
     }
   }
@@ -1325,7 +1381,8 @@ function resolveUserIdentity() {
   return {
     email: currentEmail || "membro@cupula33.com",
     name: "Iniciado da Cúpula",
-    tier: localStorage.getItem("cupula33_user_tier") || "master"
+    tier: localStorage.getItem("cupula33_user_tier") || "master",
+    level: userLevel
   };
 }
 
@@ -2134,8 +2191,19 @@ function renderContinueReading() {
 }
 
 function updateProfileXP() {
-  const allHistory = JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
-  const entries = Object.values(allHistory);
+  const cleanEmail = (localStorage.getItem("cupula33_user_email") || "").trim().toLowerCase();
+  
+  // Resgata o histórico isolado de leitura do aluno
+  let allHistory = {};
+  if (typeof MemberDatabase !== "undefined") {
+    allHistory = MemberDatabase.getAllProgress(cleanEmail);
+  } else {
+    try {
+      allHistory = JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
+    } catch(e) {}
+  }
+
+  const entries = Object.values(allHistory || {});
   
   let totalPagesRead = 0;
   let completedCount = 0;
@@ -2146,7 +2214,27 @@ function updateProfileXP() {
   });
 
   const totalXP = (totalPagesRead * 2) + (completedCount * 50);
-  const level = Math.max(1, Math.floor(totalXP / 300) + 1);
+  
+  // Regra de Ouro: Todo aluno novo começa no Nível 1
+  const earnedLevel = Math.max(1, Math.floor(totalXP / 300) + 1);
+  const baseLevel = getUserLevel(cleanEmail);
+  const currentLevel = Math.max(baseLevel, earnedLevel);
+
+  // Memoriza na base do aluno
+  if (currentLevel > baseLevel) {
+    localStorage.setItem("cupula33_user_level_" + cleanEmail, String(currentLevel));
+    localStorage.setItem("cupula33_user_level", String(currentLevel));
+    if (typeof MemberDatabase !== "undefined") {
+      MemberDatabase.saveClientRecord({
+        email: cleanEmail,
+        level: currentLevel
+      });
+    }
+  } else {
+    localStorage.setItem("cupula33_user_level_" + cleanEmail, String(currentLevel));
+    localStorage.setItem("cupula33_user_level", String(currentLevel));
+  }
+
   const currentLevelXP = totalXP % 300;
   const pctToNext = Math.min(100, Math.round((currentLevelXP / 300) * 100));
 
@@ -2158,11 +2246,11 @@ function updateProfileXP() {
   const lvlBadge = document.getElementById("profileLevelBadge");
 
   if (xpText) xpText.textContent = `XP: ${currentLevelXP} / 300`;
-  if (nextLvlText) nextLvlText.textContent = `RUMO AO NÍVEL ${level + 1}`;
+  if (nextLvlText) nextLvlText.textContent = `RUMO AO NÍVEL ${currentLevel + 1}`;
   if (xpBar) xpBar.style.width = `${Math.max(5, pctToNext)}%`;
   if (statBooks) statBooks.textContent = completedCount;
-  if (statLvl) statLvl.textContent = `Nível ${level}`;
-  if (lvlBadge) lvlBadge.textContent = `LVL ${level}`;
+  if (statLvl) statLvl.textContent = `Nível ${currentLevel}`;
+  if (lvlBadge) lvlBadge.textContent = `LVL ${currentLevel}`;
 }
 
 function resumeLastReading() {
@@ -2448,6 +2536,7 @@ const MemberDatabase = {
       ...existing,
       ...clientData,
       email: email,
+      level: clientData.level !== undefined ? clientData.level : (existing.level || 1),
       updatedAt: new Date().toISOString()
     };
 
@@ -2458,6 +2547,7 @@ const MemberDatabase = {
     all[email] = {
       name: updated.name || "Iniciado",
       tier: updated.tier || "master",
+      level: updated.level || 1,
       email: email,
       lastActive: updated.updatedAt,
       booksReadCount: Object.keys(updated.booksProgress || {}).length
@@ -2476,10 +2566,12 @@ const MemberDatabase = {
     } catch(e) {}
 
     const knownName = (typeof KNOWN_STUDENT_NAMES !== "undefined" && KNOWN_STUDENT_NAMES[clean]) || "";
+    const savedLevel = localStorage.getItem("cupula33_user_level_" + clean) || 1;
     return {
       email: clean,
       name: knownName || (clean.includes("@") ? clean.split("@")[0] : "Iniciado"),
       tier: localStorage.getItem("cupula33_user_tier") || "master",
+      level: parseInt(savedLevel, 10) || 1,
       booksProgress: {},
       myList: [],
       roadmapCompleted: [],
@@ -3026,9 +3118,16 @@ function checkVipGateAuth() {
     } else if (localStorage.getItem("cupula33_has_prosperidade") !== "true") {
       localStorage.setItem("cupula33_has_prosperidade", "false");
     }
+
+    // Sincroniza nível individual do aluno
+    const studentLevel = getUserLevel(savedEmail);
+    localStorage.setItem("cupula33_user_level_" + savedEmail, String(studentLevel));
+    localStorage.setItem("cupula33_user_level", String(studentLevel));
+
     try { updateTierBadgeUI(); } catch(e) {}
     try { updateProsperidadeCardUI(); } catch(e) {}
     try { updateAllUserDisplays(); } catch(e) {}
+    try { updateProfileXP(); } catch(e) {}
     gate.style.opacity = "0";
     gate.style.pointerEvents = "none";
     setTimeout(() => {
@@ -3053,7 +3152,8 @@ async function verifyMemberInSupabase(email) {
   // 1. Checagem imediata na whitelist embutida
   if (MASTER_ALLOWLIST.includes(cleanEmail) || cleanEmail.endsWith("@cupula33.com")) {
     const hasBump = ORDERBUMP_PROSPERIDADE_ALLOWLIST.includes(cleanEmail);
-    return { authorized: true, tier: "master", has_prosperidade: hasBump };
+    const userLvl = getUserLevel(cleanEmail);
+    return { authorized: true, tier: "master", level: userLvl, has_prosperidade: hasBump };
   }
 
   // 2. Checagem no banco de membros local do site (cupula33_members.json)
@@ -3064,7 +3164,8 @@ async function verifyMemberInSupabase(email) {
       if (db && db.members && db.members[cleanEmail] && db.members[cleanEmail].active !== false) {
         const mem = db.members[cleanEmail];
         const hasBump = ORDERBUMP_PROSPERIDADE_ALLOWLIST.includes(cleanEmail) || !!(mem.has_prosperidade || mem.has_prosperidade_oculta || mem.has_orderbump);
-        return { authorized: true, tier: mem.tier || "master", has_prosperidade: hasBump };
+        const userLvl = mem.level || getUserLevel(cleanEmail);
+        return { authorized: true, tier: mem.tier || "master", level: userLvl, has_prosperidade: hasBump };
       }
     }
   } catch (err) {
@@ -3077,7 +3178,7 @@ async function verifyMemberInSupabase(email) {
     if (respLocal.ok) {
       const data = await respLocal.json();
       if (data && data.authorized) {
-        return { authorized: true, tier: data.tier || "master", has_prosperidade: false };
+        return { authorized: true, tier: data.tier || "master", level: data.level || 1, has_prosperidade: false };
       }
     }
   } catch (e) {}
@@ -3115,6 +3216,7 @@ async function authenticateGateLogin() {
   let authorized = false;
   let userTier = "master";
   let userHasBump = false;
+  let userLevel = 1;
 
   const cleanEmail = email.trim().toLowerCase();
   const passInput = document.getElementById("gatePasswordInput");
@@ -3125,6 +3227,7 @@ async function authenticateGateLogin() {
     authorized = true;
     userTier = "master";
     userHasBump = ORDERBUMP_PROSPERIDADE_ALLOWLIST.includes(cleanEmail);
+    userLevel = getUserLevel(cleanEmail);
   } else {
     // 2. Consulta na base de membros e na nuvem
     const result = await verifyMemberInSupabase(cleanEmail);
@@ -3132,6 +3235,7 @@ async function authenticateGateLogin() {
       authorized = true;
       userTier = result.tier;
       userHasBump = !!result.has_prosperidade;
+      userLevel = result.level || getUserLevel(cleanEmail);
     }
   }
 
@@ -3139,6 +3243,8 @@ async function authenticateGateLogin() {
     localStorage.setItem("cupula33_user_email", cleanEmail);
     localStorage.setItem("cupula33_user_tier", userTier);
     localStorage.setItem("cupula33_has_prosperidade", userHasBump ? "true" : "false");
+    localStorage.setItem("cupula33_user_level_" + cleanEmail, String(userLevel));
+    localStorage.setItem("cupula33_user_level", String(userLevel));
     currentTier = userTier;
 
     // Resgata o nome próprio cadastrado do cliente ou formata pelo prefixo
@@ -3153,6 +3259,7 @@ async function authenticateGateLogin() {
         email: cleanEmail,
         name: clientName,
         tier: userTier,
+        level: userLevel,
         lastLogin: new Date().toISOString()
       });
     }

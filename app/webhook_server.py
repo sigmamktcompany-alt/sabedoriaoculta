@@ -308,6 +308,7 @@ class WebhookAutomationHandler(BaseHTTPRequestHandler):
                         "name": name or email.split("@")[0].title(),
                         "password": default_pass,
                         "tier": "master",
+                        "level": 1,
                         "active": True,
                         "status": "approved",
                         "sale_code": str(sale_code),

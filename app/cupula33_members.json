@@ -2,43 +2,51 @@
   "members": {
     "suportesabedoriaoculta@gmail.com": {
       "tier": "master",
+      "level": 33,
       "active": true,
       "sale_code": "VIP_LIFETIME"
     },
     "admin@cupula33.com": {
       "tier": "master",
+      "level": 33,
       "active": true,
       "sale_code": "VIP_LIFETIME"
     },
     "sigmamarketing@gmail.com": {
       "tier": "master",
+      "level": 33,
       "active": true,
       "sale_code": "VIP_LIFETIME"
     },
     "teste@cupula33.com": {
       "tier": "master",
+      "level": 1,
       "active": true,
       "sale_code": "VIP_LIFETIME"
     },
     "novo_membro_vip@gmail.com": {
       "tier": "master",
+      "level": 1,
       "sale_code": "PPU_TESTE_33",
       "status": "approved",
       "time": 1795399703.687571
     },
     "testealuno@gmail.com": {
       "tier": "master",
+      "level": 1,
       "active": true,
       "sale_code": "VIP_LIFETIME"
     },
     "cliente@example.com": {
       "tier": "master",
+      "level": 1,
       "active": true,
       "sale_code": "VIP_LIFETIME"
     },
     "edurosalopes@vivaldi.net": {
       "name": "Carlos Eduardo Rosa Lopes",
       "tier": "master",
+      "level": 1,
       "active": true,
       "status": "approved",
       "sale_code": "VIP_STUDENT_OFFICIAL"
@@ -46,6 +54,7 @@
     "crazyled.delavelle9@gmail.com": {
       "name": "Emerson Ferreira",
       "tier": "master",
+      "level": 1,
       "active": true,
       "status": "approved",
       "sale_code": "VIP_STUDENT_OFFICIAL"
@@ -53,6 +62,7 @@
     "mrobertor057@gmail.com": {
       "name": "Robertto Machado",
       "tier": "master",
+      "level": 1,
       "active": true,
       "status": "approved",
       "sale_code": "VIP_STUDENT_OFFICIAL",
@@ -65,6 +75,7 @@
     "paulo-reis51@hotmail.com": {
       "name": "Paulo Reis",
       "tier": "master",
+      "level": 1,
       "active": true,
       "status": "approved",
       "sale_code": "MANUAL_APPROVAL_OFFICIAL"
@@ -72,6 +83,7 @@
     "tjoaquim627@gmail.com": {
       "name": "Tamara S Joaquim",
       "tier": "master",
+      "level": 1,
       "active": true,
       "status": "approved",
       "sale_code": "MANUAL_APPROVAL_OFFICIAL"
@@ -79,6 +91,7 @@
     "loisianavida123@gmail.com": {
       "name": "Loisiana Lopes",
       "tier": "master",
+      "level": 1,
       "active": true,
       "status": "approved",
       "sale_code": "MANUAL_APPROVAL_OFFICIAL"
@@ -86,12 +99,14 @@
     "ricardoscola4@gmail.com": {
       "name": "Ricardo André Scola",
       "tier": "master",
+      "level": 1,
       "active": true,
       "date_added": "2026-11-24"
     },
     "dweslley2003@gmail.com": {
       "name": "Weslley Dias",
       "tier": "master",
+      "level": 1,
       "active": true,
       "status": "approved",
       "sale_code": "KIRVANO_MASTER_DIRECT",
@@ -101,6 +116,7 @@
     "joaomayamarcelo@gmail.com": {
       "name": "João Maya Marcelo",
       "tier": "master",
+      "level": 1,
       "active": true,
       "status": "approved",
       "sale_code": "KIRVANO_MASTER_ORDERBUMP",
