@@ -51,6 +51,13 @@
       }
     }
   </script>
+    <!-- PDF.js Engine Core in Head -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    if (typeof pdfjsLib !== 'undefined') {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    }
+  </script>
   <link rel="stylesheet" href="app.css?v=1795484000">
 </head>
 
@@ -871,8 +878,7 @@
 
   <!-- SCRIPTS -->
   <script src="books_2500.json" type="application/json" id="rawBooksData"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
-  <script src="app.js?v=1795531611"></script>
+  
+  <script src="app.js?v=1795532979"></script>
 </body>
 </html>

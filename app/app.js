@@ -1492,19 +1492,18 @@ async function renderNativePDF(pdfUrl, startPage = 1) {
     const sampleViewport = samplePage.getViewport({ scale: 1 });
     const ratio = sampleViewport.height / sampleViewport.width; // Ex: 1.414
 
-    // Criar placeholders estruturados para cada página
+    // Criar containers das páginas com fundo branco nativo e sem bordas colapsadas
     for (let p = 1; p <= numPages; p++) {
       const pageDiv = document.createElement("div");
       pageDiv.id = `pdf-page-wrapper-${p}`;
       pageDiv.dataset.pageNumber = p;
-      pageDiv.className = "pdf-page-wrapper relative w-full max-w-[850px] mx-auto rounded-xl shadow-2xl bg-[#181818] border border-white/10 overflow-hidden flex flex-col items-center justify-center my-6 transition-all duration-300";
-      pageDiv.style.aspectRatio = `1 / ${ratio.toFixed(4)}`;
-      pageDiv.style.minHeight = "400px";
+      pageDiv.className = "pdf-page-wrapper relative w-full max-w-[850px] mx-auto rounded-xl shadow-2xl bg-white overflow-hidden flex flex-col items-center justify-center my-6 transition-all duration-300";
+      pageDiv.style.minHeight = Math.max(480, Math.round(window.innerHeight * 0.75)) + "px";
 
       pageDiv.innerHTML = `
-        <div class="page-placeholder text-center text-gray-400 font-mono text-xs flex flex-col items-center gap-3 p-8">
-          <div class="w-8 h-8 border-3 border-yellow-500/20 border-t-yellow-500 rounded-full animate-spin"></div>
-          <span class="tracking-widest uppercase text-[11px] text-yellow-500/80">Página ${p} de ${numPages}</span>
+        <div class="page-placeholder text-center text-gray-500 font-mono text-xs flex flex-col items-center gap-3 p-8 my-auto">
+          <div class="w-8 h-8 border-3 border-yellow-500/30 border-t-yellow-500 rounded-full animate-spin"></div>
+          <span class="tracking-widest uppercase text-[11px] text-gray-400 font-semibold">Página ${p} de ${numPages}</span>
         </div>
       `;
 
@@ -1550,9 +1549,9 @@ async function renderNativePDF(pdfUrl, startPage = 1) {
         await page.render(renderContext).promise;
 
         pageDiv.innerHTML = "";
-        pageDiv.style.minHeight = "";
-        pageDiv.style.aspectRatio = "";
-        pageDiv.className = "pdf-page-wrapper relative w-full max-w-[850px] mx-auto rounded-xl shadow-2xl bg-white border border-gray-300/30 overflow-hidden flex flex-col items-center my-6 transition-all duration-300";
+        pageDiv.style.minHeight = "auto";
+        pageDiv.style.aspectRatio = "auto";
+        pageDiv.className = "pdf-page-wrapper relative w-full max-w-[850px] mx-auto rounded-xl shadow-2xl bg-white overflow-hidden flex flex-col items-center my-6 transition-all duration-300";
         pageDiv.appendChild(canvas);
       } catch (err) {
         console.error("Erro ao renderizar página " + pageNum, err);
