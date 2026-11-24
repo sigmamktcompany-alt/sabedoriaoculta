@@ -3087,6 +3087,7 @@ const MASTER_ALLOWLIST = [
 
 // LISTA DE INICIADOS QUE ADQUIRIRAM O ORDER BUMP DA PROSPERIDADE MAÇÔNICA
 const ORDERBUMP_PROSPERIDADE_ALLOWLIST = [
+  "tjoaquim627@gmail.com",
   "joaomayamarcelo@gmail.com",
   "mrobertor057@gmail.com",
   "admin@cupula33.com",

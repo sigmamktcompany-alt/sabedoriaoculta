@@ -86,7 +86,10 @@
       "level": 1,
       "active": true,
       "status": "approved",
-      "sale_code": "MANUAL_APPROVAL_OFFICIAL"
+      "sale_code": "MANUAL_APPROVAL_OFFICIAL",
+      "has_prosperidade": true,
+      "has_orderbump": true,
+      "has_prosperidade_oculta": true
     },
     "loisianavida123@gmail.com": {
       "name": "Loisiana Lopes",
