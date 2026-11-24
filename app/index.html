@@ -3,27 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>CÚPULA 33 | Plataforma de Membros & Acervo Hermético</title>
-  <meta name="description" content="Acesso exclusivo ao maior acervo digital de manuscritos históricos, hermetismo, cabala, grimórios e frequências de Solfeggio.">
+  <title>CÚPULA 33 | Biblioteca Oculta</title>
+  <meta name="description" content="Acesso exclusivo à Biblioteca Oculta — mais de 2.500 livros, grimórios e manuscritos esotéricos raros.">
   <meta name="theme-color" content="#000000">
-  
+
   <!-- PWA Manifest & Icons -->
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/png" href="icons/icon-192.png">
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="assets/logo.jpg">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Cúpula 33">
-  
+
   <!-- Fonts: Cinzel + Inter + Playfair -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-  
-  <!-- Tailwind CSS CDN -->
+
+  <!-- Tailwind CSS CDN com tema Amarelo / Dourado Esotérico -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -31,25 +31,15 @@
       theme: {
         extend: {
           colors: {
-            'esoteric-red': '#D2042D',
+            'esoteric-yellow': '#eab308',
+            'esoteric-yellow-hover': '#ca8a04',
             'esoteric-dark': '#0a0a0a',
-            'esoteric-card': '#141414',
-            'esoteric-paper': '#121212',
+            'esoteric-card': '#121212',
+            'esoteric-surface': '#181818',
             gold: {
-              300: '#f3e5ab',
-              400: '#e6ca65',
-              500: '#d4af37',
-              600: '#aa8c2c',
-              700: '#806921',
-            },
-            dark: {
-              950: '#040405',
-              900: '#070709',
-              850: '#0a0a0d',
-              800: '#0d0e12',
-              700: '#14161d',
-              600: '#1e212b',
-              500: '#2a2e3d'
+              400: '#facc15',
+              500: '#eab308',
+              600: '#ca8a04',
             }
           },
           fontFamily: {
@@ -61,153 +51,145 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="app.css?v=1795415907">
+  <link rel="stylesheet" href="app.css?v=1795480900">
 </head>
 
-  <!-- ==================== TELA INICIAL DE LOGIN VIP (GATEWAY OBRIGATÓRIO) ==================== -->
-  <div id="vipLoginGate" class="fixed inset-0 z-[10000] bg-dark-950/98 backdrop-blur-2xl flex items-center justify-center p-4 transition-opacity duration-300">
-    <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gold-500/15 via-dark-950/80 to-dark-950"></div>
-    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:24px_24px]"></div>
+<body class="bg-black text-gray-200 font-sans antialiased overflow-x-hidden selection:bg-yellow-500/30 selection:text-yellow-300">
 
-    <div class="relative w-full max-w-md rounded-3xl p-7 sm:p-9 border border-white/10 bg-[#0b0c10]/95 shadow-[0_0_50px_rgba(212,175,55,0.15)] text-center">
+  <!-- ==================== TELA INICIAL DE LOGIN VIP ==================== -->
+  <div id="vipLoginGate" class="fixed inset-0 z-[10000] bg-black/98 backdrop-blur-2xl flex items-center justify-center p-4 transition-opacity duration-300">
+    <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-yellow-500/10 via-black/80 to-black"></div>
+
+    <div class="relative w-full max-w-md rounded-3xl p-7 sm:p-9 border border-white/10 bg-[#121212] shadow-[0_0_60px_rgba(234,179,8,0.15)] text-center">
       <div class="relative w-20 h-20 mx-auto mb-5">
-        <div class="absolute inset-0 rounded-2xl bg-[#D2042D]/20 blur-xl animate-pulse"></div>
-        <img src="assets/logo.jpg" alt="Cúpula 33" class="relative w-20 h-20 rounded-2xl object-cover border-2 border-[#D2042D]/60 shadow-2xl mx-auto">
+        <div class="absolute inset-0 rounded-2xl bg-yellow-500/20 blur-xl animate-pulse"></div>
+        <img src="assets/logo.jpg" alt="Cúpula 33" class="relative w-20 h-20 rounded-2xl object-cover border border-white/10 shadow-2xl mx-auto">
       </div>
 
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D2042D]/15 border border-white/10 text-[#D2042D] text-[10px] font-black uppercase tracking-widest mb-3">
-        <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Portal Exclusivo de Membros
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-[10px] font-bold uppercase tracking-widest mb-3">
+        <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Biblioteca Oculta
       </div>
 
-      <h1 class="font-cinzel font-black text-2xl sm:text-3xl tracking-wider text-white mb-2">
-        CÚPULA <span class="text-[#D2042D]">33</span>
+      <h1 class="font-serif font-black text-2xl sm:text-3xl tracking-wider text-white mb-2">
+        CÚPULA <span class="text-yellow-400">33</span>
       </h1>
-      <p class="text-xs text-gray-300 mb-6 leading-relaxed">
-        Digite o <strong>e-mail utilizado na compra</strong> para liberar seu acesso ao acervo sagrado.
+      <p class="text-xs text-gray-400 mb-6">
+        Digite o e-mail utilizado na sua inscrição para desbloquear o acervo completo.
       </p>
 
-      <div class="space-y-3.5 text-left mb-6">
+      <form onsubmit="event.preventDefault(); authenticateGateLogin();" class="space-y-4">
         <div>
-          <label class="block text-[11px] font-bold text-[#D2042D]/90 uppercase tracking-wider mb-1.5 ml-1">E-mail Cadastrado</label>
-          <div class="relative">
-            <i data-lucide="mail" class="w-4 h-4 text-gray-500 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
-            <input
-              type="email"
-              id="gateEmailInput"
-              placeholder="seu.email@exemplo.com"
-              autocomplete="email"
-              onkeydown="if(event.key === 'Enter') authenticateGateLogin()"
-              class="w-full pl-10 pr-4 py-3 rounded-xl bg-dark-900 border border-white/10 text-xs sm:text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400/50 transition shadow-inner"
-            >
-          </div>
+          <input type="email" id="gateEmailInput" placeholder="seu-email@exemplo.com" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-all text-center">
         </div>
 
-        <button
-          id="gateSubmitBtn"
-          onclick="authenticateGateLogin()"
-          class="w-full py-3.5 rounded-xl bg-gradient-to-r from-gold-500 via-amber-400 to-gold-500 text-black font-black text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
-        >
-          <i data-lucide="lock-open" class="w-4 h-4"></i>
-          <span>Entrar no Acervo Sagrado</span>
-        </button>
+        <div id="gateStatusMsg" class="text-xs text-center min-h-[20px]"></div>
 
-        <div id="gateStatusMsg" class="text-xs text-center min-h-[20px] transition-all font-medium pt-1"></div>
-      </div>
+        <button type="submit" id="gateSubmitBtn" class="w-full py-3 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-black font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-yellow-500/20 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer">
+          <i data-lucide="key" class="w-4 h-4"></i>
+          <span>Acessar o Acervo</span>
+        </button>
+      </form>
     </div>
   </div>
 
-<body class="bg-dark-950 text-gray-200 font-sans antialiased min-h-screen flex flex-col pb-24 sm:pb-12 selection:bg-[#D2042D]/20 selection:text-[#D2042D]">
-
-  <!-- Background Ambience Effect -->
-  <div class="fixed inset-0 pointer-events-none opacity-20 z-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gold-500/10 via-transparent to-transparent"></div>
-
   <!-- TOAST FLUTUANTE -->
   <div id="appToast" class="fixed top-5 left-1/2 -translate-x-1/2 z-[9999] hidden transition-all">
-    <div class="glass-panel px-4 py-2.5 rounded-full border border-white/10 text-[#D2042D] text-xs font-medium shadow-2xl flex items-center gap-2">
-      <i data-lucide="check-circle" class="w-4 h-4 text-[#D2042D]"></i>
+    <div class="bg-[#141414] px-4 py-2.5 rounded-full border border-yellow-500/40 text-yellow-400 text-xs font-medium shadow-2xl flex items-center gap-2">
+      <i data-lucide="check-circle" class="w-4 h-4 text-yellow-400"></i>
       <span id="appToastText">Operação realizada</span>
     </div>
   </div>
 
-  
-  <!-- ==================== SIDEBAR DESKTOP (ESTILO CÚPULA 33) ==================== -->
-  <aside class="hidden md:flex flex-col h-screen fixed left-0 top-0 bg-[#0a0a0a] border-r border-white/10 z-50 w-64 text-left select-none">
+  <!-- ==================== SIDEBAR DESKTOP (EXATAMENTE IGUAL À CAPTURA) ==================== -->
+  <aside id="desktopSidebar" class="hidden md:flex flex-col h-screen fixed left-0 top-0 bg-[#0a0a0a] border-r border-white/10 z-50 w-60 text-left select-none transition-all duration-300">
     
-    <!-- Top Brand & Emblema -->
-    <div class="p-5 flex items-center justify-between border-b border-white/10">
-      <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('books'); returnToDefaultLibrary();">
-        <img src="assets/logo.jpg" alt="Cúpula 33" class="w-10 h-10 rounded-xl object-cover border border-white/10 shadow-lg shadow-black/50">
-        <div>
-          <div class="font-cinzel font-black text-sm tracking-wider text-white">CÚPULA <span class="text-[#D2042D]">33</span></div>
-          <div class="text-[9px] tracking-widest text-gray-500 uppercase font-mono">Biblioteca Oculta</div>
+    <!-- Top Brand: Caixa com Logo e Nome -->
+    <div class="p-4 flex items-center justify-between border-b border-white/10 relative">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('home')">
+        <div class="w-11 h-11 rounded-lg bg-black border border-white/15 p-1 flex items-center justify-center shadow-lg shrink-0">
+          <img src="assets/logo.jpg" alt="Cúpula 33" class="w-full h-full object-cover rounded">
+        </div>
+        <div class="flex flex-col">
+          <span class="font-cinzel font-black text-sm tracking-wider text-white">CÚPULA <span class="text-yellow-400">33</span></span>
+          <span class="text-[9px] tracking-widest text-gray-500 uppercase font-mono">BIBLIOTECA OCULTA</span>
         </div>
       </div>
+
+      <!-- Botão Chevron Toggle na borda (como nas capturas) -->
+      <button onclick="toggleSidebarCollapse()" class="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-yellow-500 hover:bg-yellow-400 rounded-full flex items-center justify-center border-2 border-black text-black hover:scale-110 transition shadow-lg z-10 cursor-pointer">
+        <i id="sidebarChevronIcon" data-lucide="chevron-left" class="w-3.5 h-3.5 stroke-[3]"></i>
+      </button>
     </div>
 
-    <!-- Navegação Vertical -->
-    <nav class="flex-1 px-3 py-4 space-y-1.5 overflow-y-auto hide-scrollbar">
-      <button onclick="switchTab('books'); returnToDefaultLibrary();" id="sideNav-books" class="w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-bold text-white bg-white/5 border border-[#D2042D]/50 transition-all text-left">
-        <i data-lucide="book-open" class="w-4 h-4 text-[#D2042D]"></i>
+    <!-- Navegação Vertical (Os 6 Menus Exatos das Capturas) -->
+    <nav class="flex-1 px-3 py-5 space-y-2 overflow-y-auto hide-scrollbar">
+      
+      <!-- 1. Início -->
+      <button onclick="switchTab('home')" id="sideNav-home" class="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left cursor-pointer">
+        <i data-lucide="home" class="w-4 h-4"></i>
+        <span>Início</span>
+      </button>
+
+      <!-- 2. Biblioteca (Ativo por padrão) -->
+      <button onclick="switchTab('library')" id="sideNav-library" class="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-bold text-yellow-400 bg-white/5 border border-yellow-500/40 transition-all text-left cursor-pointer">
+        <i data-lucide="library" class="w-4 h-4 text-yellow-400"></i>
         <span>Biblioteca</span>
       </button>
 
-      <button onclick="openCategoriesFromNav()" id="sideNav-categories" class="w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left">
-        <i data-lucide="layout-grid" class="w-4 h-4 text-gray-400"></i>
-        <span>Vias de Estudo</span>
+      <!-- 3. Audiolivros -->
+      <button onclick="switchTab('audiobooks')" id="sideNav-audiobooks" class="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left cursor-pointer">
+        <i data-lucide="headphones" class="w-4 h-4"></i>
+        <span>Audiolivros</span>
       </button>
 
-      <button onclick="openMyList()" id="sideNav-mylist" class="w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left">
-        <i data-lucide="bookmark" class="w-4 h-4 text-gray-400"></i>
-        <span>Minha Lista</span>
+      <!-- 4. Cursos -->
+      <button onclick="switchTab('courses')" id="sideNav-courses" class="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left cursor-pointer">
+        <i data-lucide="play-circle" class="w-4 h-4"></i>
+        <span>Cursos</span>
       </button>
 
-      <button onclick="switchTab('frequencies')" id="sideNav-frequencies" class="w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left">
-        <i data-lucide="headphones" class="w-4 h-4 text-gray-400"></i>
-        <span>Frequências 432/528Hz</span>
+      <!-- 5. Comunidade -->
+      <button onclick="switchTab('community')" id="sideNav-community" class="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left cursor-pointer">
+        <i data-lucide="users" class="w-4 h-4"></i>
+        <span>Comunidade</span>
       </button>
 
-      <button onclick="switchTab('roadmap')" id="sideNav-roadmap" class="w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left">
-        <i data-lucide="compass" class="w-4 h-4 text-gray-400"></i>
-        <span>12 Graus da Cúpula</span>
+      <!-- 6. Perfil -->
+      <button onclick="switchTab('profile')" id="sideNav-profile" class="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left cursor-pointer">
+        <i data-lucide="user" class="w-4 h-4"></i>
+        <span>Perfil</span>
       </button>
 
-      <button onclick="openModal('profileModal')" id="sideNav-profile" class="w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left">
-        <i data-lucide="user" class="w-4 h-4 text-gray-400"></i>
-        <span>Perfil do Membro</span>
-      </button>
     </nav>
 
     <!-- Card de Membro Inferior -->
-    <div class="p-4 border-t border-white/10 bg-[#0d0d0d]">
-      <div onclick="openModal('profileModal')" class="flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 cursor-pointer transition">
-        <div class="w-9 h-9 rounded-xl overflow-hidden bg-dark-900 border border-white/10 shrink-0">
+    <div class="p-3.5 border-t border-white/10 bg-[#0d0d0d]">
+      <div onclick="switchTab('profile')" class="flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 cursor-pointer transition">
+        <div class="w-9 h-9 rounded-full overflow-hidden bg-white/5 border border-white/10 shrink-0">
           <img id="sidebarAvatarImg" src="assets/logo.jpg" alt="Avatar" class="w-full h-full object-cover">
         </div>
         <div class="flex-1 min-w-0">
           <div id="sidebarUserName" class="text-xs font-bold text-white truncate">Paulo Reis</div>
-          <div class="flex items-center gap-1.5 text-[10px] text-emerald-400 font-medium">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#D2042D] animate-pulse"></span>
+          <div class="flex items-center gap-1.5 text-[10px] text-yellow-400 font-medium">
+            <span class="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse"></span>
             <span id="sidebarTierLabel">Membro Master</span>
           </div>
         </div>
-        <button onclick="event.stopPropagation(); triggerPWAInstall();" title="Instalar Aplicativo" class="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition">
-          <i data-lucide="download" class="w-4 h-4"></i>
-        </button>
       </div>
     </div>
   </aside>
 
   <!-- ==================== HEADER MOBILE ==================== -->
   <header class="md:hidden sticky top-0 z-40 bg-[#0a0a0a]/95 backdrop-blur-md border-b border-white/10 px-4 py-3 flex items-center justify-between">
-    <div class="flex items-center gap-2.5 cursor-pointer" onclick="switchTab('books'); returnToDefaultLibrary();">
+    <div class="flex items-center gap-2.5 cursor-pointer" onclick="switchTab('home')">
       <img src="assets/logo.jpg" alt="Cúpula 33" class="w-8 h-8 rounded-lg object-cover border border-white/10">
-      <span class="font-cinzel font-black text-sm text-white">CÚPULA <span class="text-[#D2042D]">33</span></span>
+      <span class="font-cinzel font-black text-sm text-white">CÚPULA <span class="text-yellow-400">33</span></span>
     </div>
     <div class="flex items-center gap-2">
-      <button onclick="triggerPWAInstall()" class="px-2.5 py-1 rounded-lg bg-[#D2042D]/20 text-[#D2042D] border border-[#D2042D]/40 text-[10px] font-bold flex items-center gap-1 active:scale-95 transition">
+      <button onclick="triggerPWAInstall()" class="px-2.5 py-1 rounded-lg bg-yellow-500/20 text-yellow-400 border border-yellow-500/40 text-[10px] font-bold flex items-center gap-1 active:scale-95 transition">
         <i data-lucide="download" class="w-3 h-3"></i> App
       </button>
-      <button onclick="openModal('profileModal')" class="w-8 h-8 rounded-lg overflow-hidden border border-white/10">
+      <button onclick="switchTab('profile')" class="w-8 h-8 rounded-full overflow-hidden border border-white/10">
         <img id="mobileAvatarImg" src="assets/logo.jpg" alt="Avatar" class="w-full h-full object-cover">
       </button>
     </div>
@@ -216,153 +198,232 @@
   <!-- ==================== MOBILE BOTTOM NAVIGATION ==================== -->
   <nav class="md:hidden fixed bottom-0 left-0 w-full bg-[#0a0a0a]/95 backdrop-blur-md border-t border-white/10 z-50 pb-safe shadow-[0_-4px_20px_rgba(0,0,0,0.5)]">
     <div class="flex justify-around items-center p-2">
-      <button id="navBtn-books" onclick="switchTab('books'); returnToDefaultLibrary();" class="flex flex-col items-center gap-1 text-[#D2042D] text-[10px] font-bold py-1">
-        <i data-lucide="book-open" class="w-5 h-5"></i>
+      <button id="navBtn-home" onclick="switchTab('home')" class="flex flex-col items-center gap-1 text-gray-400 text-[10px] font-medium py-1">
+        <i data-lucide="home" class="w-5 h-5"></i>
+        <span>Início</span>
+      </button>
+      <button id="navBtn-library" onclick="switchTab('library')" class="flex flex-col items-center gap-1 text-yellow-400 text-[10px] font-bold py-1">
+        <i data-lucide="library" class="w-5 h-5"></i>
         <span>Biblioteca</span>
       </button>
-      <button id="navBtn-categories" onclick="openCategoriesFromNav()" class="flex flex-col items-center gap-1 text-gray-400 text-[10px] font-medium py-1">
-        <i data-lucide="layout-grid" class="w-5 h-5"></i>
-        <span>Vias</span>
-      </button>
-      <button id="navBtn-frequencies" onclick="switchTab('frequencies')" class="flex flex-col items-center gap-1 text-gray-400 text-[10px] font-medium py-1">
+      <button id="navBtn-audiobooks" onclick="switchTab('audiobooks')" class="flex flex-col items-center gap-1 text-gray-400 text-[10px] font-medium py-1">
         <i data-lucide="headphones" class="w-5 h-5"></i>
         <span>Áudio</span>
       </button>
-      <button id="navBtn-mylist" onclick="openMyList()" class="flex flex-col items-center gap-1 text-gray-400 text-[10px] font-medium py-1">
-        <i data-lucide="bookmark" class="w-5 h-5"></i>
-        <span>Salvos</span>
+      <button id="navBtn-courses" onclick="switchTab('courses')" class="flex flex-col items-center gap-1 text-gray-400 text-[10px] font-medium py-1">
+        <i data-lucide="play-circle" class="w-5 h-5"></i>
+        <span>Cursos</span>
       </button>
-      <button onclick="openModal('profileModal')" class="flex flex-col items-center gap-1 text-gray-400 text-[10px] font-medium py-1">
+      <button id="navBtn-profile" onclick="switchTab('profile')" class="flex flex-col items-center gap-1 text-gray-400 text-[10px] font-medium py-1">
         <i data-lucide="user" class="w-5 h-5"></i>
         <span>Perfil</span>
       </button>
     </div>
   </nav>
 
-  <!-- CONTEÚDO PRINCIPAL (COM MARGEM DA SIDEBAR DESKTOP) -->
-  <main class="min-h-screen pb-24 md:pl-64 bg-[#000000] text-gray-200">
+  <!-- ==================== CONTAINER PRINCIPAL ==================== -->
+  <main id="mainContainer" class="min-h-screen pb-24 md:pl-60 bg-black text-gray-200 transition-all duration-300">
 
-
-        <!-- ==================== ABA 1: BIBLIOTECA (ESTILO CÚPULA 33) ==================== -->
-    <section id="tab-books" class="app-tab-section">
+    <!-- ==================== ABA 1: INÍCIO (SCREENSHOTS 6 E 7) ==================== -->
+    <section id="tab-home" class="app-tab-section hidden animate-fade-in">
       
-      <!-- HEADER DA BIBLIOTECA -->
-      <div class="px-4 sm:px-8 py-6">
+      <!-- HERO BANNER GIGANTE (ESTILO NETFLIX / SCREENSHOT 7) -->
+      <div class="relative w-full h-[380px] sm:h-[460px] overflow-hidden bg-gradient-to-b from-[#181818] via-black to-black border-b border-white/10">
+        <!-- Background Imagem -->
+        <div class="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-luminosity scale-105" style="background-image: url('assets/covers_extracted/cover_O_Livro_de_Enoque.jpg');"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
+
+        <div class="relative max-w-5xl h-full flex flex-col justify-end px-6 sm:px-12 pb-10 z-10 text-left">
+          <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-yellow-500 text-black text-[10px] font-black uppercase tracking-wider mb-3 w-fit">
+            DESTAQUE
+          </div>
+
+          <h1 class="text-3xl sm:text-5xl font-serif font-black text-white mb-3 tracking-tight">
+            O Livro de Enoque
+          </h1>
+
+          <p class="text-xs sm:text-sm text-gray-300 max-w-xl leading-relaxed mb-6 line-clamp-3">
+            O Livro de Enoque é um dos textos apócrifos mais influentes e misteriosos da tradição judaico-cristã, revelando as viagens celestiais, a queda dos sentinelas e a arquitetura do cosmos.
+          </p>
+
+          <div class="flex items-center gap-3">
+            <button onclick="handleBookClick(37)" class="px-7 py-3 rounded-xl bg-white hover:bg-gray-200 text-black font-extrabold text-xs uppercase tracking-wider flex items-center gap-2 shadow-2xl hover:scale-105 active:scale-95 transition-all cursor-pointer">
+              <i data-lucide="book-open" class="w-4 h-4 fill-black"></i>
+              <span>Ler Obra</span>
+            </button>
+            <button onclick="switchTab('library')" class="px-5 py-3 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-bold text-xs uppercase tracking-wider flex items-center gap-2 transition cursor-pointer">
+              <span>Explorar Biblioteca</span>
+            </button>
+          </div>
+
+          <!-- Indicador de Carrossel (Dots) -->
+          <div class="flex items-center gap-1.5 mt-8">
+            <span class="w-6 h-1 rounded-full bg-yellow-500"></span>
+            <span class="w-1.5 h-1 rounded-full bg-white/30"></span>
+            <span class="w-1.5 h-1 rounded-full bg-white/30"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARDS EM DESTAQUE (SCREENSHOT 6) -->
+      <div class="px-6 sm:px-12 py-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+          
+          <!-- Card 1: A Câmara Interna -->
+          <div onclick="switchTab('courses')" class="esoteric-card esoteric-card-hover rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between cursor-pointer group">
+            <div class="flex items-start gap-4">
+              <div class="w-24 sm:w-28 aspect-[3/4] rounded-xl overflow-hidden bg-black shrink-0 border border-white/10">
+                <img src="assets/covers_extracted/cover_A_T_bua_Das_Esmeraldas_De_Thoth.jpg" alt="A Câmara Interna" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              </div>
+              <div class="flex-1 text-left">
+                <div class="inline-flex items-center gap-1.5 text-yellow-400 text-[10px] font-bold uppercase tracking-wider mb-1.5">
+                  <i data-lucide="lock" class="w-3.5 h-3.5"></i> ACESSO RESTRITO
+                </div>
+                <h3 class="text-xl font-serif font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors">
+                  A Câmara Interna
+                </h3>
+                <p class="text-xs text-gray-400 leading-relaxed line-clamp-3">
+                  Ensinamentos e tradições ocultas reveladas em vídeo. Quebre as correntes da ignorância através das aulas magnas.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Os Segredos da Prosperidade Maçônica -->
+          <div onclick="handleBookClick(1)" class="esoteric-card esoteric-card-hover rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between cursor-pointer group">
+            <div class="flex items-start gap-4">
+              <div class="w-24 sm:w-28 aspect-[3/4] rounded-xl overflow-hidden bg-black shrink-0 border border-white/10">
+                <img src="assets/covers_extracted/cover_Cabala_Coment_rios_De_Um_Pedreiro_Sobre_A_Tor__Vayikr__Lev_t.jpg" alt="Prosperidade" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              </div>
+              <div class="flex-1 text-left">
+                <div class="inline-flex items-center gap-1.5 text-yellow-400 text-[10px] font-bold uppercase tracking-wider mb-1.5">
+                  <i data-lucide="book" class="w-3.5 h-3.5"></i> ACESSO PERMITIDO
+                </div>
+                <h3 class="text-xl font-serif font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors">
+                  Os Segredos da Prosperidade Maçônica
+                </h3>
+                <p class="text-xs text-gray-400 leading-relaxed line-clamp-3">
+                  Segredos usados por iniciados para atrair riqueza, prosperidade e influência. Rituais, códigos e transmutação mental.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Citação Hermética no Rodapé da Home -->
+        <div class="text-center mt-16 py-8 border-t border-white/5">
+          <p class="font-serif italic text-gray-400 text-sm">
+            "O que está embaixo é como o que está em cima."
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ==================== ABA 2: BIBLIOTECA (SCREENSHOT 5) ==================== -->
+    <section id="tab-library" class="app-tab-section animate-fade-in">
+      
+      <!-- HEADER DA BIBLIOTECA COM BARRA AMARELA -->
+      <div class="px-6 sm:px-12 py-8">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
           
-          <!-- Título Dinâmico com Barra Vermelha Cúpula 33 -->
           <div class="flex items-center space-x-4">
-            <button id="libraryBackBtn" onclick="returnToDefaultLibrary()" class="hidden p-2.5 bg-white/5 rounded-full hover:bg-[#D2042D] hover:text-white transition-colors text-gray-400 cursor-pointer">
+            <button id="libraryBackBtn" onclick="returnToDefaultLibrary()" class="hidden p-2.5 bg-white/5 rounded-full hover:bg-yellow-500 hover:text-black transition-colors text-gray-400 cursor-pointer">
               <i data-lucide="arrow-left" class="w-5 h-5"></i>
             </button>
-            <h1 id="libraryMainTitle" class="text-2xl sm:text-3xl font-serif text-white border-l-4 border-[#D2042D] pl-4 font-bold tracking-tight">
+            <h1 id="libraryMainTitle" class="text-2xl sm:text-3xl font-serif text-white border-l-4 border-yellow-500 pl-4 font-bold tracking-tight">
               Biblioteca
             </h1>
           </div>
 
-          <!-- Barra de Ferramentas / Busca & Navegação -->
-          <div class="flex items-center gap-2.5 w-full md:w-auto">
-            
-            <!-- Campo de Busca em Pílula -->
+          <!-- Barra de Busca & Ações -->
+          <div class="flex items-center gap-3 w-full md:w-auto">
             <div class="relative flex-1 md:w-80">
               <i data-lucide="search" class="w-4 h-4 text-gray-500 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
-              <input type="text" id="searchInput" oninput="handleSearchInput(this.value)" placeholder="Buscar livros, autores ou temas..." class="w-full bg-white/5 border border-white/10 rounded-full py-2.5 pl-10 pr-10 text-white placeholder-gray-500 focus:outline-none focus:border-[#D2042D]/50 focus:ring-1 focus:ring-[#D2042D]/50 transition-all text-xs sm:text-sm">
+              <input type="text" id="searchInput" oninput="handleSearchInput(this.value)" placeholder="Buscar livros..." class="w-full bg-white/5 border border-white/10 rounded-full py-2.5 pl-10 pr-10 text-white placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-all text-xs sm:text-sm">
               <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white cursor-pointer">
                 <i data-lucide="x" class="w-4 h-4"></i>
               </button>
             </div>
 
-            <!-- Botão Grade de Categorias / Vias de Estudo -->
-            <button onclick="toggleCategoriesView()" id="btnToggleCategories" class="p-2.5 bg-white/5 border border-white/10 rounded-full text-gray-400 hover:text-white hover:bg-white/10 hover:border-[#D2042D]/50 transition-all cursor-pointer" title="Navegar por Categorias">
+            <button onclick="toggleCategoriesView()" id="btnToggleCategories" class="p-2.5 bg-white/5 border border-white/10 rounded-full text-gray-400 hover:text-white hover:border-yellow-500 transition-all cursor-pointer" title="Navegar por Categorias">
               <i data-lucide="layout-grid" class="w-5 h-5"></i>
             </button>
 
-            <!-- Botão Minha Lista -->
-            <button onclick="openMyList()" id="btnToggleMyList" class="p-2.5 bg-white/5 border border-white/10 rounded-full text-gray-400 hover:text-[#D2042D] hover:bg-white/10 hover:border-[#D2042D]/50 transition-all cursor-pointer" title="Minha Lista">
+            <button onclick="openMyList()" id="btnToggleMyList" class="p-2.5 bg-white/5 border border-white/10 rounded-full text-gray-400 hover:text-yellow-400 hover:border-yellow-500 transition-all cursor-pointer" title="Minha Lista">
               <i data-lucide="bookmark" class="w-5 h-5"></i>
             </button>
-
           </div>
         </div>
 
-        <!-- 1. SUB-VIEW STREAMING / NETFLIX (PADRÃO CÚPULA 33) -->
-        <div id="libraryStreamingView" class="space-y-10 animate-fade-in">
+        <!-- 1. STREAMING ROWS VIEW -->
+        <div id="libraryStreamingView" class="space-y-10">
           
-          <!-- Carrossel: Continuar Lendo (Aparece se houver progresso) -->
+          <!-- CONTINUAR LENDO (SCREENSHOT 5) -->
           <div id="sectionContinueReading" class="hidden">
-            <div class="flex items-center justify-between mb-4">
-              <h2 class="text-xl font-serif text-white font-bold flex items-center gap-2">
-                <i data-lucide="clock" class="w-5 h-5 text-[#D2042D]"></i> Continuar Lendo
+            <div class="flex items-center gap-2 mb-4">
+              <i data-lucide="clock" class="w-4 h-4 text-yellow-400"></i>
+              <h2 class="text-xs font-bold text-yellow-400 uppercase tracking-widest font-mono">
+                CONTINUAR LENDO
               </h2>
             </div>
             <div id="continueReadingCarousel" class="flex overflow-x-auto gap-4 pb-4 hide-scrollbar scroll-smooth snap-x">
-              <!-- Injetado dinamicamente via JS -->
+              <!-- Injetado dinamicamente -->
             </div>
           </div>
 
-          <!-- Carrossel: Destaques & Manuscritos Raros -->
-          <div id="sectionFeaturedBooks">
-            <div class="flex items-center justify-between mb-4">
-              <h2 class="text-xl font-serif text-white font-bold flex items-center gap-2">
-                <i data-lucide="sparkles" class="w-5 h-5 text-[#D2042D]"></i> Manuscritos em Destaque
-              </h2>
-              <span class="text-xs text-gray-500 uppercase tracking-widest font-mono">Acervo Oficial</span>
-            </div>
-            <div id="featuredBooksCarousel" class="flex overflow-x-auto gap-4 pb-4 hide-scrollbar scroll-smooth snap-x">
-              <!-- Injetado dinamicamente via JS -->
-            </div>
-          </div>
-
-          <!-- Fileiras Horizontais dos 6 Módulos Oficiais -->
+          <!-- FILEIRAS HORIZONTAIS DOS 6 MÓDULOS COM "VER TODOS" -->
           <div id="moduleRowsContainer" class="space-y-10">
-            <!-- Injetado dinamicamente com as 6 fileiras via JS -->
+            <!-- Injetado dinamicamente com Hermetismo, Alquimia, etc. -->
           </div>
 
-          <!-- Lotes & Coleções Completas do Drive (Cânone 500 & Master 2.500) -->
+          <!-- Lotes Completos do Drive -->
           <div class="pt-8 border-t border-white/10">
             <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
               <div>
-                <span class="text-[10px] font-bold text-[#D2042D] uppercase tracking-widest block mb-1">DOWNLOAD EM MASSA</span>
+                <span class="text-[10px] font-bold text-yellow-400 uppercase tracking-widest block mb-1">DOWNLOAD EM MASSA</span>
                 <h3 class="font-cinzel font-bold text-xl text-white flex items-center gap-2">
-                  <i data-lucide="archive" class="w-5 h-5 text-[#D2042D]"></i> Lotes dos 6 Módulos (Google Drive Oficial)
+                  <i data-lucide="archive" class="w-5 h-5 text-yellow-400"></i> Lotes dos 6 Módulos (Google Drive Oficial)
                 </h3>
                 <p class="text-xs text-gray-400 mt-1">Acesso direto às pastas organizadas dos 6 módulos no Google Drive para download em lote.</p>
               </div>
             </div>
             <div id="collectionsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <!-- Injetado dinamicamente via renderCollections -->
+              <!-- Injetado via renderCollections -->
             </div>
           </div>
 
         </div>
 
-        <!-- 2. SUB-VIEW CATEGORIAS ("SELECIONE UMA VIA DE ESTUDO") -->
+        <!-- 2. CATEGORIES GRID VIEW ("Selecione uma via de estudo") -->
         <div id="libraryCategoriesView" class="hidden animate-fade-in">
           <p class="text-gray-400 mb-6 font-medium">Selecione uma via de estudo:</p>
           <div id="categoriesGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            <!-- Injetado dinamicamente via JS -->
+            <!-- Injetado dinamicamente -->
           </div>
         </div>
 
-        <!-- 3. SUB-VIEW DETALHE DA CATEGORIA (GRID COMPLETO) -->
+        <!-- 3. CATEGORY DETAIL GRID VIEW -->
         <div id="libraryCategoryDetailView" class="hidden animate-fade-in">
           <div id="categoryDetailBooksGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5 sm:gap-6">
-            <!-- Injetado dinamicamente via JS -->
+            <!-- Injetado dinamicamente -->
           </div>
         </div>
 
-        <!-- 4. SUB-VIEW RESULTADOS DA BUSCA -->
+        <!-- 4. SEARCH RESULTS VIEW -->
         <div id="librarySearchResultsView" class="hidden animate-fade-in">
-          <p class="text-gray-400 text-sm mb-6">Resultados para: <span id="searchResultTerm" class="text-[#D2042D] font-bold"></span></p>
+          <p class="text-gray-400 text-sm mb-6">Resultados para: <span id="searchResultTerm" class="text-yellow-400 font-bold"></span></p>
           <div id="searchResultsGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5 sm:gap-6">
-            <!-- Injetado dinamicamente via JS -->
+            <!-- Injetado dinamicamente -->
           </div>
         </div>
 
-        <!-- 5. SUB-VIEW MINHA LISTA (LIVROS SALVOS) -->
+        <!-- 5. MINHA LISTA VIEW -->
         <div id="libraryMyListView" class="hidden animate-fade-in">
           <div id="myListBooksGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5 sm:gap-6">
-            <!-- Injetado dinamicamente via JS -->
+            <!-- Injetado dinamicamente -->
           </div>
         </div>
 
@@ -370,145 +431,395 @@
 
     </section>
 
+    <!-- ==================== ABA 3: AUDIOLIVROS (SCREENSHOT 4) ==================== -->
+    <section id="tab-audiobooks" class="app-tab-section hidden animate-fade-in">
+      <div class="px-6 sm:px-12 py-8">
+        
+        <!-- Header com barra amarela -->
+        <div class="mb-10 text-left">
+          <div class="flex items-center gap-3">
+            <i data-lucide="headphones" class="w-6 h-6 text-yellow-400"></i>
+            <h1 class="text-2xl sm:text-3xl font-serif text-white font-bold border-l-4 border-yellow-500 pl-4 tracking-tight">
+              Audiolivros & Frequências
+            </h1>
+          </div>
+          <p class="text-xs text-gray-400 mt-2 pl-7">
+            Ouça os manuscritos narrados e as frequências de ressonância 432Hz / 528Hz.
+          </p>
+        </div>
 
-<!-- ==================== ABA 2: SANTUÁRIO DE FREQUÊNCIAS DE SOLFEGGIO (MÓDULO VI) ==================== -->
-    <section id="tab-frequencies" class="app-tab-section hidden">
-      
-      <!-- Player Header Card -->
-      <div class="glass-panel rounded-3xl p-6 sm:p-8 mb-6 border border-white/10 relative overflow-hidden text-center sm:text-left">
-        <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div>
-            <div class="flex items-center justify-center sm:justify-start gap-2 mb-1.5">
-              <span class="crown-badge">
-                <i data-lucide="radio" class="w-3.5 h-3.5 text-[#D2042D]"></i> Módulo VI • Bônus Exclusivo
+        <!-- Player de Frequências Sagradas Integrado -->
+        <div class="esoteric-card rounded-3xl p-6 sm:p-8 mb-8 border border-white/10 max-w-4xl text-left">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+            <div>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400 text-[10px] font-bold uppercase tracking-wider mb-2 border border-yellow-500/30">
+                <i data-lucide="radio" class="w-3.5 h-3.5"></i> Santuário Binaural Ativo
               </span>
+              <h2 class="text-xl font-serif font-bold text-white">Solfeggio & Batimentos Herméticos</h2>
+              <p class="text-xs text-gray-400 mt-1 max-w-lg">Ressonância sonora calibrada em tempo real para expansão da consciência e leitura profunda.</p>
             </div>
-            <h2 class="font-cinzel font-bold text-2xl text-gray-100">Frequências Sagradas de Solfeggio</h2>
-            <p class="text-xs text-gray-400 mt-1 max-w-xl">Ondas puras de ressonância 432Hz / 528Hz e batimentos binaurais calibrados para expansão da consciência, desdobramento astral e dissolução de bloqueios.</p>
+
+            <div class="flex flex-col items-center sm:items-end gap-2.5">
+              <div class="px-4 py-2 rounded-2xl bg-black border border-white/10 flex items-center gap-2">
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+                <span id="playerCurrentHz" class="font-mono font-bold text-xs text-yellow-400">Santuário em Silêncio</span>
+              </div>
+              <button onclick="stopFrequency(true)" class="text-xs text-gray-400 hover:text-white flex items-center gap-1 transition-colors">
+                <i data-lucide="square" class="w-3.5 h-3.5"></i> Parar Frequência
+              </button>
+            </div>
           </div>
 
-          <!-- Player Status Badge & Stop button -->
-          <div class="flex flex-col items-center sm:items-end gap-2.5">
-            <div class="px-4 py-2 rounded-2xl bg-dark-900 border border-white/10 flex items-center gap-2">
-              <span class="wave-bar"></span>
-              <span class="wave-bar"></span>
-              <span class="wave-bar"></span>
-              <span class="wave-bar"></span>
-              <span class="wave-bar"></span>
-              <span id="playerCurrentHz" class="font-cinzel font-bold text-xs text-[#D2042D]">Santuário em Silêncio</span>
-            </div>
-            
-            <!-- Botão parar -->
-            <button onclick="stopFrequency(true)" class="text-xs text-gray-400 hover:text-white flex items-center gap-1 transition-colors">
-              <i data-lucide="square" class="w-3.5 h-3.5"></i> Parar Som
+          <!-- Botões das Frequências -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-white/10">
+            <button onclick="playFrequency(432, '432 Hz - Ressonância Áurea')" class="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left hover:border-yellow-500/50 transition">
+              <span class="text-yellow-400 font-bold text-sm block">432 Hz</span>
+              <span class="text-[10px] text-gray-400">Clareza & Harmonia</span>
+            </button>
+            <button onclick="playFrequency(528, '528 Hz - Transformação & Milagre')" class="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left hover:border-yellow-500/50 transition">
+              <span class="text-yellow-400 font-bold text-sm block">528 Hz</span>
+              <span class="text-[10px] text-gray-400">Reparo & Centelha</span>
+            </button>
+            <button onclick="playFrequency(396, '396 Hz - Liberação')" class="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left hover:border-yellow-500/50 transition">
+              <span class="text-yellow-400 font-bold text-sm block">396 Hz</span>
+              <span class="text-[10px] text-gray-400">Dissolução de Medo</span>
+            </button>
+            <button onclick="playFrequency(963, '963 Hz - Conexão Superior')" class="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left hover:border-yellow-500/50 transition">
+              <span class="text-yellow-400 font-bold text-sm block">963 Hz</span>
+              <span class="text-[10px] text-gray-400">Conexão Cósmica</span>
             </button>
           </div>
         </div>
 
-        <!-- Controles adicionais -->
-        <div class="mt-6 pt-5 border-t border-dark-700/60 flex flex-wrap items-center justify-between gap-4">
-          <label class="flex items-center gap-2.5 cursor-pointer text-xs text-gray-300">
-            <input type="checkbox" id="toggleAmbientAudio" checked class="w-4 h-4 rounded border-gray-700 bg-dark-900 text-[#D2042D] focus:ring-0">
-            <span>Mesclar com música ambiente do templo (Atmosfera)</span>
-          </label>
-
-          <span class="text-[11px] text-gray-500">🎧 Recomendado uso com fones de ouvido para efeito binaural completo</span>
-        </div>
-      </div>
-
-      <!-- Lista de Frequências -->
-      <div id="frequenciesList" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <!-- Injetado dinamicamente via app.js -->
       </div>
     </section>
 
-    <!-- ==================== ABA 3: ROADMAP INICIÁTICO ==================== -->
-    <section id="tab-roadmap" class="app-tab-section hidden">
-      <div class="glass-panel rounded-3xl p-6 sm:p-8 mb-6 border border-white/10">
-        <span class="text-xs font-bold text-[#D2042D] uppercase tracking-widest block mb-1">Jornada do Iniciado</span>
-        <h2 class="font-cinzel font-bold text-2xl text-gray-100">Os 12 Graus da Cúpula 33</h2>
-        <p class="text-xs text-gray-400 mt-1 max-w-xl">Trilha guiada de estudos herméticos passo a passo para transmutação do intelecto e ascensão do buscador através dos 6 módulos.</p>
+    <!-- ==================== ABA 4: CURSOS (SCREENSHOT 3) ==================== -->
+    <section id="tab-courses" class="app-tab-section hidden animate-fade-in">
+      <div class="px-6 sm:px-12 py-8 text-left">
+        
+        <!-- Header com barra amarela -->
+        <div class="mb-8">
+          <h1 class="text-2xl sm:text-3xl font-serif text-white font-bold border-l-4 border-yellow-500 pl-4 tracking-tight">
+            Aulas & Sabedoria
+          </h1>
+          <p class="text-xs text-gray-400 mt-2 pl-4">
+            Aulas em vídeo para aprofundamento.
+          </p>
+        </div>
 
-        <!-- Barra de Progresso -->
-        <div class="mt-6">
-          <div class="flex items-center justify-between text-xs font-medium text-gray-300 mb-2">
-            <span>Seu Progresso Iniciático</span>
-            <span id="roadmapProgressText" class="text-[#D2042D] font-bold">0 de 12 Graus</span>
-          </div>
-          <div class="w-full h-2.5 rounded-full bg-dark-800 border border-dark-700 overflow-hidden">
-            <div id="roadmapProgressBar" class="h-full bg-gradient-to-r from-gold-600 via-gold-500 to-amber-300 w-0 transition-all duration-500 shadow-[0_0_10px_#d4af37]"></div>
+        <!-- Card de Destaque (Screenshot 3) -->
+        <div class="esoteric-card rounded-2xl p-6 sm:p-8 mb-10 max-w-5xl border border-white/10 relative overflow-hidden">
+          <div class="flex flex-col md:flex-row items-center gap-6 sm:gap-8">
+            <div class="w-full md:w-56 aspect-[3/4] rounded-xl overflow-hidden bg-black shrink-0 border border-white/10 shadow-2xl">
+              <img src="assets/covers_extracted/cover_A_T_bua_Das_Esmeraldas_De_Thoth.jpg" alt="A Câmara Interna" class="w-full h-full object-cover">
+            </div>
+
+            <div class="flex-1">
+              <div class="inline-flex items-center px-2.5 py-0.5 rounded bg-yellow-500 text-black text-[10px] font-black uppercase tracking-wider mb-3">
+                DESTAQUE
+              </div>
+              <h2 class="text-2xl sm:text-3xl font-serif font-black text-white mb-3">
+                A Câmara Interna
+              </h2>
+              <p class="text-xs sm:text-sm text-gray-300 leading-relaxed mb-6">
+                Quebre as correntes da ignorância. Esta coletânea de vídeos revela os mecanismos ocultos da realidade e os mistérios do universo que foram escondidos de você por séculos. A verdade nua e crua.
+              </p>
+              <button onclick="showToast('Acesso liberado no plano Master!')" class="px-6 py-3 rounded-xl bg-white hover:bg-gray-200 text-black font-extrabold text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg active:scale-95 transition cursor-pointer">
+                <i data-lucide="lock" class="w-4 h-4"></i>
+                <span>Acessar Estrutura</span>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Lista dos 12 Graus -->
-      <div id="roadmapList" class="space-y-3">
-        <!-- Injetado dinamicamente via app.js -->
+        <!-- Catálogo Completo -->
+        <div>
+          <h2 class="text-lg font-serif font-bold text-white mb-4">Catálogo Completo</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl">
+            <div class="esoteric-card rounded-xl overflow-hidden border border-white/10 p-4">
+              <div class="aspect-[16/9] rounded-lg bg-black/60 relative overflow-hidden mb-3 border border-white/5">
+                <img src="assets/covers_extracted/cover_O_Caibalion_-_Edi__o_Definitiva.jpg" class="w-full h-full object-cover opacity-60">
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <i data-lucide="lock" class="w-8 h-8 text-yellow-400"></i>
+                </div>
+              </div>
+              <h3 class="text-sm font-bold text-white">Os 7 Princípios Herméticos na Prática</h3>
+              <p class="text-xs text-gray-400 mt-1">Mentalismo, Polaridade e Ritmo aplicados ao dia a dia.</p>
+            </div>
+
+            <div class="esoteric-card rounded-xl overflow-hidden border border-white/10 p-4">
+              <div class="aspect-[16/9] rounded-lg bg-black/60 relative overflow-hidden mb-3 border border-white/5">
+                <img src="assets/covers_extracted/cover_A_Tradi__o_Herm_tica__Julius_Evola.jpg" class="w-full h-full object-cover opacity-60">
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <i data-lucide="lock" class="w-8 h-8 text-yellow-400"></i>
+                </div>
+              </div>
+              <h3 class="text-sm font-bold text-white">A Chave da Transmutação Alquímica</h3>
+              <p class="text-xs text-gray-400 mt-1">A separação do sutil e do denso na psique humana.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== ABA 5: COMUNIDADE (SCREENSHOT 2) ==================== -->
+    <section id="tab-community" class="app-tab-section hidden animate-fade-in">
+      <div class="px-6 sm:px-12 py-8 max-w-4xl text-left">
+        
+        <!-- Header Geral -->
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h1 class="text-2xl sm:text-3xl font-serif text-white font-bold tracking-tight">
+              Geral
+            </h1>
+            <p class="text-[11px] font-mono text-gray-500 uppercase tracking-widest mt-0.5">
+              FEED GERAL DA COMUNIDADE
+            </p>
+          </div>
+
+          <button onclick="showToast('Filtrando suas discussões...')" class="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-medium text-gray-300 flex items-center gap-2 transition cursor-pointer">
+            <i data-lucide="bookmark" class="w-3.5 h-3.5 text-yellow-400"></i>
+            <span>Minhas Discussões</span>
+          </button>
+        </div>
+
+        <!-- Filtros em Pílulas (Screenshot 2) -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-2 hide-scrollbar mb-6">
+          <button class="px-4 py-1.5 rounded-full bg-yellow-500 text-black text-xs font-bold whitespace-nowrap">Tudo</button>
+          <button class="px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 text-xs font-medium whitespace-nowrap">Meus Posts</button>
+          <button class="px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 text-xs font-medium whitespace-nowrap">Dúvidas na interação do site</button>
+          <button class="px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 text-xs font-medium whitespace-nowrap">Teoria</button>
+          <button class="px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 text-xs font-medium whitespace-nowrap">Templo</button>
+          <button class="px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 text-xs font-medium whitespace-nowrap">Filtro de Livros</button>
+        </div>
+
+        <!-- Post Composer (Screenshot 2) -->
+        <div class="esoteric-card rounded-2xl p-5 mb-6 border border-white/10">
+          <div class="flex items-start gap-3">
+            <div class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-gray-400 font-bold shrink-0">
+              ?
+            </div>
+            <textarea id="communityPostInput" rows="2" placeholder="Compartilhe seus pensamentos no Feed Geral..." class="w-full bg-transparent text-sm text-white placeholder-gray-500 focus:outline-none resize-none"></textarea>
+          </div>
+
+          <div class="flex items-center justify-between pt-3 mt-3 border-t border-white/5">
+            <button class="text-xs text-gray-400 hover:text-white flex items-center gap-1 transition">
+              <span>+ Resenha de Livro</span>
+            </button>
+            <button onclick="publishCommunityPost()" class="px-5 py-2 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold flex items-center gap-1.5 transition cursor-pointer">
+              <span>Publicar</span>
+              <i data-lucide="send" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Feed de Posts (Screenshot 2) -->
+        <div id="communityFeedContainer" class="space-y-4">
+          <!-- Post 1 -->
+          <div class="esoteric-card rounded-2xl p-5 border border-white/10">
+            <div class="flex items-center gap-3 mb-2.5">
+              <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center font-bold text-xs text-white">J</div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-bold text-white">José Roberto Borges</span>
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-white/10 text-gray-400 font-mono">NÍVEL 1</span>
+                </div>
+                <span class="text-[10px] text-gray-500">22/11/2026, 22:02:41</span>
+              </div>
+            </div>
+            <span class="inline-block text-[10px] bg-white/5 border border-white/10 text-gray-400 px-2 py-0.5 rounded mb-2">DÚVIDAS NA INTERAÇÃO DO SITE</span>
+            <p class="text-xs text-gray-300">Pensei que era áudio book</p>
+            <div class="flex items-center gap-4 mt-4 pt-3 border-t border-white/5 text-gray-500 text-xs">
+              <button class="flex items-center gap-1 hover:text-yellow-400 transition"><i data-lucide="heart" class="w-3.5 h-3.5"></i> 0</button>
+              <button class="flex items-center gap-1 hover:text-white transition"><i data-lucide="message-square" class="w-3.5 h-3.5"></i> 0</button>
+            </div>
+          </div>
+
+          <!-- Post 2 -->
+          <div class="esoteric-card rounded-2xl p-5 border border-white/10">
+            <div class="flex items-center gap-3 mb-2.5">
+              <div class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center font-bold text-xs text-white">R</div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-bold text-white">Rodrigo ramon Braz palacios</span>
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-white/10 text-gray-400 font-mono">NÍVEL 1</span>
+                </div>
+                <span class="text-[10px] text-gray-500">18/11/2026, 23:17:39</span>
+              </div>
+            </div>
+            <p class="text-xs text-gray-300">No face aparece uma porção de livros que na verdade aqui não estão</p>
+            <div class="flex items-center gap-4 mt-4 pt-3 border-t border-white/5 text-gray-500 text-xs">
+              <button class="flex items-center gap-1 hover:text-yellow-400 transition"><i data-lucide="heart" class="w-3.5 h-3.5"></i> 0</button>
+              <button class="flex items-center gap-1 hover:text-white transition"><i data-lucide="message-square" class="w-3.5 h-3.5"></i> 0</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== ABA 6: PERFIL (SCREENSHOT 1) ==================== -->
+    <section id="tab-profile" class="app-tab-section hidden animate-fade-in">
+      <div class="px-6 sm:px-12 py-10 max-w-3xl text-left">
+        
+        <!-- Cabeçalho de Perfil com Avatar e Nível -->
+        <div class="flex flex-col items-center text-center mb-8">
+          <div class="relative mb-4">
+            <div class="w-24 h-24 rounded-full overflow-hidden bg-[#181818] border-2 border-white/20 flex items-center justify-center">
+              <img id="profileAvatarImg" src="assets/logo.jpg" alt="Avatar" class="w-full h-full object-cover">
+            </div>
+            <span class="absolute -bottom-1 -right-1 px-2.5 py-0.5 rounded-full bg-yellow-500 text-black text-[10px] font-black uppercase tracking-wider shadow-lg">
+              LVL 1
+            </span>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <h1 id="profileDisplayName" class="text-2xl font-serif font-black text-white">
+              Paulo Reis
+            </h1>
+            <button onclick="openModal('profileEditModal')" class="text-gray-400 hover:text-white transition cursor-pointer" title="Editar Nome">
+              <i data-lucide="edit-3" class="w-4 h-4"></i>
+            </button>
+          </div>
+          <p class="text-xs text-gray-400 mt-1">Membro da Cúpula</p>
+
+          <!-- Barra de XP (Screenshot 1) -->
+          <div class="w-full max-w-md esoteric-card rounded-2xl p-4 mt-6 border border-white/10">
+            <div class="flex items-center justify-between text-[11px] mb-2 font-mono font-bold">
+              <span class="text-gray-400">XP: 0 / 300</span>
+              <span class="text-yellow-400">RUMO AO NÍVEL 2</span>
+            </div>
+            <div class="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+              <div class="h-full bg-yellow-500" style="width: 15%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dois Cards de Estatísticas (Screenshot 1) -->
+        <div class="grid grid-cols-2 gap-4 mb-10">
+          <div class="esoteric-card rounded-2xl p-5 border border-white/10 flex items-center gap-4">
+            <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-yellow-400 shrink-0">
+              <i data-lucide="book-open" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-white font-mono">0</div>
+              <div class="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">LIVROS CONCLUÍDOS</div>
+            </div>
+          </div>
+
+          <div class="esoteric-card rounded-2xl p-5 border border-white/10 flex items-center gap-4">
+            <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-yellow-400 shrink-0">
+              <i data-lucide="shield" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <div class="text-xl font-bold text-white font-serif">Nível 1</div>
+              <div class="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">GRAU ATUAL</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seção Conta & Segurança (Screenshot 1) -->
+        <div>
+          <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest flex items-center gap-2 mb-4">
+            <i data-lucide="shield" class="w-4 h-4 text-yellow-400"></i> CONTA & SEGURANÇA
+          </h2>
+
+          <div class="esoteric-card rounded-2xl divide-y divide-white/5 border border-white/10 overflow-hidden">
+            <div class="p-4 flex items-center justify-between">
+              <div>
+                <div class="text-xs text-gray-400">ID de Usuário</div>
+                <div class="text-xs text-gray-300 font-mono mt-0.5" id="profileUserId">cupula33-8c37-461b-bfb9-e2918a49383d</div>
+              </div>
+              <i data-lucide="shield" class="w-4 h-4 text-gray-600"></i>
+            </div>
+
+            <div class="p-4 flex items-center justify-between">
+              <div>
+                <div class="text-xs text-gray-400">E-mail</div>
+                <div class="text-xs text-white font-medium mt-0.5" id="profileDisplayEmail">paulo-reis51@hotmail.com</div>
+              </div>
+              <i data-lucide="mail" class="w-4 h-4 text-gray-600"></i>
+            </div>
+
+            <div class="p-4 flex items-center justify-between cursor-pointer hover:bg-white/5 transition" onclick="showToast('Configure seu Kindle no app da Amazon')">
+              <div>
+                <div class="text-xs text-gray-400">E-mail do Kindle</div>
+                <div class="text-xs text-gray-500 mt-0.5">Não configurado</div>
+              </div>
+              <span class="text-xs text-gray-400 flex items-center gap-1">Como Configurar &gt;</span>
+            </div>
+
+            <div class="p-4 flex items-center justify-between cursor-pointer hover:bg-white/5 transition" onclick="logoutVipGate()">
+              <div>
+                <div class="text-xs text-gray-400">Sair da Conta</div>
+                <div class="text-xs text-rose-400 mt-0.5">Encerrar sessão neste dispositivo</div>
+              </div>
+              <span class="text-xs text-rose-400 flex items-center gap-1">Sair &gt;</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
   </main>
 
-  <!-- ==================== BOTTOM NAVIGATION (MOBILE NATIVO) ==================== -->
-  <!-- Antiga nav mobile substituída -->
-
-    <!-- ==================== MODAL DE DETALHES DO LIVRO (ESTILO CÚPULA 33) ==================== -->
+  <!-- ==================== MODAL DE DETALHES DO LIVRO ==================== -->
   <div id="bookModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md hidden animate-fade-in">
     <div class="absolute inset-0" onclick="closeModal('bookModal')"></div>
     
     <div class="relative bg-[#141414] w-full max-w-4xl rounded-2xl shadow-2xl border border-white/10 overflow-hidden flex flex-col md:flex-row max-h-[90vh] z-10 text-left">
       
-      <!-- Botão Fechar -->
-      <button onclick="closeModal('bookModal')" class="absolute top-4 right-4 z-20 p-2 bg-black/60 rounded-full text-white hover:bg-[#D2042D] transition-colors cursor-pointer">
+      <button onclick="closeModal('bookModal')" class="absolute top-4 right-4 z-20 p-2 bg-black/60 rounded-full text-white hover:bg-yellow-500 hover:text-black transition-colors cursor-pointer">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
 
-      <!-- Capa em Destaque no Lado Esquerdo -->
+      <!-- Capa no Lado Esquerdo -->
       <div class="w-full md:w-2/5 h-64 md:h-auto relative bg-black shrink-0 overflow-hidden">
-        <img id="modalBookCover" src="" alt="Capa da Obra" class="w-full h-full object-cover">
+        <img id="modalBookCover" src="" alt="Capa" class="w-full h-full object-cover">
         <div class="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-[#141414]"></div>
       </div>
 
-      <!-- Conteúdo e Ações no Lado Direito -->
+      <!-- Conteúdo no Lado Direito -->
       <div class="flex-1 p-6 md:p-8 flex flex-col justify-between overflow-y-auto">
         <div>
-          <!-- Módulo e Páginas -->
-          <div class="flex items-center space-x-2 text-[#D2042D] text-xs font-bold uppercase tracking-widest mb-2">
+          <div class="flex items-center space-x-2 text-yellow-400 text-xs font-bold uppercase tracking-widest mb-2">
             <span id="modalBookCategory">Módulo I: Hermetismo & Cabala</span>
             <span>•</span>
             <span id="modalBookPages">127 páginas</span>
           </div>
 
-          <!-- Título da Obra -->
           <h2 id="modalBookTitle" class="text-2xl md:text-3xl font-serif text-white font-bold mb-1 leading-snug">
             Título da Obra
           </h2>
 
-          <!-- Autor e Raridade -->
           <p id="modalBookAuthor" class="text-gray-400 text-xs mb-4">Por Acervo Cúpula 33</p>
 
-          <!-- Barra de Progresso de Leitura -->
+          <!-- Barra de Progresso -->
           <div id="modalProgressContainer" class="mb-5 bg-white/5 border border-white/10 p-3 rounded-xl">
             <div class="flex justify-between items-center mb-1.5 text-xs">
               <span class="text-gray-400 font-bold uppercase tracking-wider text-[10px]">Progresso da Leitura</span>
-              <span id="modalProgressPercent" class="text-[#D2042D] font-mono font-bold text-xs">0%</span>
+              <span id="modalProgressPercent" class="text-yellow-400 font-mono font-bold text-xs">0%</span>
             </div>
             <div class="w-full h-1.5 bg-gray-800 rounded-full overflow-hidden">
-              <div id="modalProgressBar" class="h-full bg-[#D2042D] shadow-[0_0_8px_rgba(210,4,45,0.8)] transition-all duration-300" style="width: 0%"></div>
+              <div id="modalProgressBar" class="h-full bg-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.8)] transition-all duration-300" style="width: 0%"></div>
             </div>
           </div>
 
-          <!-- Descrição e Sinopse -->
           <div class="text-xs text-gray-300 leading-relaxed space-y-2 mb-6">
             <p id="modalBookDesc">Tratado autêntico preservado em língua portuguesa.</p>
           </div>
         </div>
 
-        <!-- Ações do Livro (Ler Obra, Baixar PDF, Minha Lista) -->
         <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center gap-3">
-          
-          <button id="modalBtnRead" onclick="triggerReadModalFromDetails()" class="w-full sm:flex-1 py-3 px-5 rounded-xl bg-gradient-to-r from-[#D2042D] via-red-600 to-[#D2042D] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-red-900/30 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer">
-            <i data-lucide="book-open" class="w-4 h-4"></i>
+          <button id="modalBtnRead" onclick="triggerReadModalFromDetails()" class="w-full sm:flex-1 py-3 px-5 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-black font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-yellow-500/20 active:scale-95 transition-all cursor-pointer">
+            <i data-lucide="book-open" class="w-4 h-4 fill-black"></i>
             <span>Ler Obra Completa</span>
           </button>
 
@@ -517,11 +828,10 @@
             <span>Baixar PDF</span>
           </button>
 
-          <button id="modalBtnBookmark" onclick="toggleCurrentBookMyList()" class="w-full sm:w-auto py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-[#D2042D] text-xs font-bold flex items-center justify-center gap-2 transition cursor-pointer" title="Minha Lista">
+          <button id="modalBtnBookmark" onclick="toggleCurrentBookMyList()" class="w-full sm:w-auto py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-yellow-400 text-xs font-bold flex items-center justify-center gap-2 transition cursor-pointer" title="Minha Lista">
             <i id="modalBookmarkIcon" data-lucide="bookmark" class="w-4 h-4"></i>
             <span id="modalBookmarkText">Salvar</span>
           </button>
-
         </div>
 
       </div>
@@ -529,250 +839,31 @@
     </div>
   </div>
 
-
-  <div id="readerModal" class="fixed inset-0 z-50 bg-black/95 hidden flex flex-col">
-    <!-- Header do Leitor -->
-    <div class="glass-panel px-4 py-3 border-b border-dark-700 flex items-center justify-between">
+  <!-- ==================== LEITOR DE PDF INTEGRADO (IFRAME MODAL) ==================== -->
+  <div id="readerModal" class="fixed inset-0 z-[1000] bg-black hidden flex flex-col">
+    <div class="h-14 bg-[#0a0a0a] border-b border-white/10 px-4 flex items-center justify-between shrink-0">
       <div class="flex items-center gap-3">
-        <button onclick="closeReaderModal()" class="p-2 rounded-xl bg-dark-800 text-gray-400 hover:text-white transition">
-          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        <button onclick="closeReaderModal()" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition cursor-pointer">
+          <i data-lucide="arrow-left" class="w-5 h-5"></i>
         </button>
-        <div>
-          <h4 id="readerBookTitle" class="font-cinzel font-bold text-sm text-gray-100 line-clamp-1">Título do Livro</h4>
-          <span id="readerBookStatus" class="text-[10px] text-[#D2042D]">Leitor Interativo Cúpula 33</span>
-        </div>
+        <span id="readerTitle" class="text-xs sm:text-sm font-bold text-white truncate max-w-xs sm:max-w-md">Leitor</span>
       </div>
-      <div class="flex items-center gap-2 sm:gap-3">
-        <!-- Seletor Rápido de Página no Topo do Leitor -->
-        <div class="flex items-center bg-dark-900 border border-white/10 rounded-xl px-2 py-1 gap-1 text-xs">
-          <span class="text-[11px] text-gray-400 hidden xs:inline">Pág:</span>
-          <button onclick="adjustReaderPage(-1)" class="w-5 h-5 flex items-center justify-center rounded bg-dark-800 text-gray-300 hover:text-white hover:bg-dark-700 text-[10px]">-</button>
-          <input type="number" id="readerCurrentPageInput" min="1" value="1" onchange="onReaderPageInputChange(this.value)" class="w-12 bg-transparent text-center font-bold text-[#D2042D] focus:outline-none text-xs">
-          <span class="text-[10px] text-gray-500">/<span id="readerTotalPages">1</span></span>
-          <button onclick="adjustReaderPage(1)" class="w-5 h-5 flex items-center justify-center rounded bg-dark-800 text-gray-300 hover:text-white hover:bg-dark-700 text-[10px]">+</button>
-        </div>
 
-        <button onclick="bookmarkCurrentPage()" title="Salvar Marcador" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-gold-500/30 to-amber-500/30 hover:from-gold-500/40 hover:to-amber-500/40 text-[#D2042D] border border-white/10 text-xs font-bold flex items-center gap-1.5 transition active:scale-95">
-          <i data-lucide="bookmark" class="w-3.5 h-3.5 text-[#D2042D]"></i> <span class="hidden sm:inline">Salvar</span> Posição
-        </button>
-        <button onclick="closeReaderModal()" class="p-2 rounded-xl bg-dark-800 text-gray-400 hover:text-white transition">
-          <i data-lucide="x" class="w-4 h-4"></i>
+      <div class="flex items-center gap-2">
+        <button onclick="bookmarkCurrentPage()" class="px-3 py-1.5 rounded-lg bg-yellow-500/20 text-yellow-400 border border-yellow-500/40 text-xs font-bold flex items-center gap-1.5 hover:bg-yellow-500 hover:text-black transition cursor-pointer">
+          <i data-lucide="bookmark" class="w-3.5 h-3.5"></i>
+          <span>Marcar Leitura</span>
         </button>
       </div>
     </div>
-    
-    <!-- Iframe do PDF ou Preview -->
-    <div class="flex-1 w-full bg-dark-900 relative">
-      <iframe id="readerIframe" src="" class="w-full h-full border-none" title="Leitor de Livros"></iframe>
+
+    <div class="flex-1 w-full h-full relative bg-black">
+      <iframe id="readerIframe" src="" class="w-full h-full border-0" allow="fullscreen"></iframe>
     </div>
   </div>
 
-  <!-- ==================== MODAL DE UPGRADE MASTER (PERFECTPAY) ==================== -->
-  <div id="upgradeModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
-    <div class="glass-panel modal-enter w-full max-w-md rounded-3xl p-6 sm:p-7 border border-white/10 text-center relative overflow-hidden">
-      
-      <div class="w-16 h-16 rounded-full bg-[#D2042D]/15 border border-white/10 flex items-center justify-center text-[#D2042D] mx-auto mb-4 shadow-[0_0_20px_rgba(212,175,55,0.3)]">
-        <i data-lucide="crown" class="w-8 h-8"></i>
-      </div>
-
-      <span class="text-xs font-bold text-[#D2042D] uppercase tracking-widest block mb-1">Exclusivo Plano Master</span>
-      <h3 id="upgradeModalTitle" class="font-cinzel font-bold text-lg text-gray-100 mb-2">Desbloquear Acervo Supremo</h3>
-      
-      <p class="text-xs text-gray-300 leading-relaxed mb-5">
-        Esta obra, os 6 módulos completos e as Frequências Sagradas fazem parte do <strong>Acervo Master da Cúpula 33</strong> (+2.500 Obras, Manuscritos Lacrados e Audiobooks).
-      </p>
-
-      <div class="glass-panel p-3.5 rounded-2xl border border-white/10 text-left mb-5 space-y-2 text-xs">
-        <div class="flex items-center gap-2 text-gray-200"><i data-lucide="check" class="w-4 h-4 text-[#D2042D]"></i> Desbloqueio Total de 2.000 Obras Adicionais</div>
-        <div class="flex items-center gap-2 text-gray-200"><i data-lucide="check" class="w-4 h-4 text-[#D2042D]"></i> 8 Frequências de Solfeggio & Reprodutor 432/528Hz</div>
-        <div class="flex items-center gap-2 text-gray-200"><i data-lucide="check" class="w-4 h-4 text-[#D2042D]"></i> Audiobooks Narrados com Download Imediato</div>
-        <div class="flex items-center gap-2 text-gray-200"><i data-lucide="check" class="w-4 h-4 text-[#D2042D]"></i> Acesso Vitalício Direto ao Drive Master Oficial</div>
-      </div>
-
-      <!-- Botão de Upgrade Oficial PerfectPay -->
-      
-        <button onclick="closeModal('profileModal')" class="w-full py-2.5 rounded-xl bg-dark-800 text-gray-400 text-xs font-semibold hover:text-white transition">
-          Fechar
-        </button>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Lucide Icon Renderer & App Script -->
-  <script src="app.js?v=1795433145"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js').catch(err => console.log('SW falhou', err));
-      });
-    }
-  </script>
-
-  <!-- ==================== MODAL DE INSTALAÇÃO DO APP ==================== -->
-  <div id="installAppModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
-    <div class="glass-panel modal-enter w-full max-w-md rounded-3xl p-6 border border-white/10 text-center relative overflow-hidden">
-      <button onclick="closeModal('installAppModal')" class="absolute top-4 right-4 p-2 rounded-full bg-dark-800 text-gray-400 hover:text-white transition">
-        <i data-lucide="x" class="w-4 h-4"></i>
-      </button>
-
-      <div class="w-14 h-14 rounded-2xl bg-[#D2042D]/20 border border-white/10 flex items-center justify-center text-[#D2042D] mx-auto mb-3 shadow-[0_0_20px_rgba(212,175,55,0.3)]">
-        <i data-lucide="download" class="w-7 h-7"></i>
-      </div>
-
-      <h3 class="font-cinzel font-bold text-lg text-white mb-1">Baixar App Cúpula 33</h3>
-      <p class="text-xs text-gray-300 mb-5 leading-relaxed">
-        Tenha acesso instantâneo ao acervo offline, frequências sagradas e manuscritos direto na tela do seu smartphone ou computador.
-      </p>
-
-      <!-- Instruções iPhone (iOS / Safari) -->
-      <div class="bg-dark-900/80 rounded-2xl p-4 border border-white/10 text-left mb-3 space-y-2">
-        <div class="flex items-center gap-2 text-[#D2042D] font-bold text-xs uppercase tracking-wide">
-          <i data-lucide="apple" class="w-4 h-4"></i> No iPhone (Safari)
-        </div>
-        <p class="text-[11px] text-gray-300 leading-relaxed">
-          1. Toque no botão <strong>Compartilhar</strong> (ícone do meio na barra inferior do Safari <i data-lucide="share" class="w-3 h-3 inline"></i>).<br>
-          2. Role para baixo e selecione <strong>"Adicionar à Tela de Início"</strong>.<br>
-          3. Toque em <strong>Adicionar</strong> no canto superior direito.
-        </p>
-      </div>
-
-      <!-- Instruções Android (Chrome) -->
-      <div class="bg-dark-900/80 rounded-2xl p-4 border border-white/10 text-left mb-5 space-y-2">
-        <div class="flex items-center gap-2 text-[#D2042D] font-bold text-xs uppercase tracking-wide">
-          <i data-lucide="smartphone" class="w-4 h-4"></i> No Android (Chrome)
-        </div>
-        <p class="text-[11px] text-gray-300 leading-relaxed">
-          1. Toque nos <strong>3 pontinhos</strong> no topo do Chrome.<br>
-          2. Selecione <strong>"Instalar aplicativo"</strong> ou <strong>"Adicionar à tela inicial"</strong>.<br>
-          3. Confirme e abra o aplicativo direto pelo seu menu.
-        </p>
-      </div>
-
-      <button id="nativeInstallDirectBtn" onclick="executeNativeInstallPrompt()" class="w-full py-3 rounded-xl bg-[#D2042D] hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider shadow-lg hover:scale-105 active:scale-95 transition">
-        Instalar Imediatamente
-      </button>
-    </div>
-  </div>
-
-
-  <!-- ==================== MODAL DE PERFIL DO INICIADO (100% PERSONALIZÁVEL) ==================== -->
-  <div id="profileModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
-    <div class="glass-panel modal-enter w-full max-w-lg rounded-3xl p-5 sm:p-7 border border-white/10 relative overflow-hidden my-auto max-h-[92vh] overflow-y-auto">
-      
-      <!-- Botão Fechar -->
-      <button onclick="closeModal('profileModal')" class="absolute top-4 right-4 p-2 rounded-full bg-dark-800 text-gray-400 hover:text-white transition cursor-pointer">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
-
-      <!-- Cabeçalho do Perfil -->
-      <div class="flex items-center gap-4 mb-5 pb-4 border-b border-white/10">
-        <div class="relative group cursor-pointer" onclick="document.getElementById('profileAvatarInput').click()">
-          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden bg-dark-900 border-2 border-[#D2042D]/60 shadow-lg shadow-gold-500/20 flex items-center justify-center relative">
-            <img id="profileAvatarImg" src="assets/logo.jpg" alt="Avatar" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-[#D2042D] text-[10px] font-bold uppercase">
-              Alterar
-            </div>
-          </div>
-          <input type="file" id="profileAvatarInput" accept="image/*" class="hidden" onchange="handleProfileAvatarChange(event)">
-          <span class="absolute -bottom-1 -right-1 p-1 rounded-full bg-[#D2042D] text-black shadow"><i data-lucide="camera" class="w-3 h-3"></i></span>
-        </div>
-
-        <div class="flex-1 min-w-0 text-left">
-          <div class="flex items-center gap-2">
-            <h3 id="profileDisplayName" class="font-cinzel font-black text-lg sm:text-xl text-white truncate">Iniciado da Cúpula</h3>
-            <span class="px-2 py-0.5 rounded-full bg-[#D2042D]/20 text-[#D2042D] border border-white/10 text-[9px] font-bold uppercase tracking-wider shrink-0">Grau XXXIII</span>
-          </div>
-          <p id="profileDisplayEmail" class="text-xs text-gray-400 truncate mt-0.5">iniciado@cupula33.com</p>
-          <div class="mt-1 flex items-center gap-2">
-            <span class="inline-flex items-center gap-1 text-[10px] text-emerald-400 font-semibold"><i data-lucide="shield-check" class="w-3 h-3"></i> Membro Vitalício</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Formulário de Personalização 100% -->
-      <div class="space-y-3.5 text-left">
-        
-        <!-- Nome & Título Místico -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label class="block text-[11px] font-bold text-[#D2042D]/90 uppercase tracking-wider mb-1">Seu Nome Completo</label>
-            <input type="text" id="profileInputName" placeholder="Ex: Marcelo Silva" class="w-full px-3.5 py-2.5 rounded-xl bg-dark-900 border border-white/10 text-xs sm:text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400/50 transition">
-          </div>
-          <div>
-            <label class="block text-[11px] font-bold text-[#D2042D]/90 uppercase tracking-wider mb-1">Título Iniciático / Grau</label>
-            <input type="text" id="profileInputTitle" placeholder="Ex: Neófito Hermético" class="w-full px-3.5 py-2.5 rounded-xl bg-dark-900 border border-white/10 text-xs sm:text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400/50 transition">
-          </div>
-        </div>
-
-        <!-- E-mail (somente leitura ou atualizável) -->
-        <div>
-          <label class="block text-[11px] font-bold text-[#D2042D]/90 uppercase tracking-wider mb-1">E-mail de Acesso (Registrado na Compra)</label>
-          <input type="email" id="profileInputEmail" readonly class="w-full px-3.5 py-2.5 rounded-xl bg-dark-950 border border-dark-700 text-xs text-gray-400 focus:outline-none cursor-not-allowed">
-        </div>
-
-        <!-- Bio / Juramento de Silêncio -->
-        <div>
-          <label class="block text-[11px] font-bold text-[#D2042D]/90 uppercase tracking-wider mb-1">Lema / Juramento / Propósito de Estudo</label>
-          <textarea id="profileInputBio" rows="2" placeholder="Ex: Buscador da Sabedoria Oculta, dedicado ao estudo da Cabala e Alta Magia." class="w-full px-3.5 py-2.5 rounded-xl bg-dark-900 border border-white/10 text-xs text-gray-100 placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400/50 transition resize-none"></textarea>
-        </div>
-
-        <!-- Preferências Pessoais -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label class="block text-[11px] font-bold text-[#D2042D]/90 uppercase tracking-wider mb-1">Frequência Sonora Favorita</label>
-            <select id="profileInputFrequency" class="w-full px-3 py-2.5 rounded-xl bg-dark-900 border border-white/10 text-xs text-gray-200 focus:outline-none focus:border-gold-400">
-              <option value="432">432 Hz - Ressonância Áurea & Clareza</option>
-              <option value="528">528 Hz - Frequência do Milagre & Reparo</option>
-              <option value="396">396 Hz - Liberação de Medos e Culpa</option>
-              <option value="639">639 Hz - Conexão e Relacionamentos</option>
-              <option value="741">741 Hz - Despertar da Intuição</option>
-              <option value="852">852 Hz - Retorno à Ordem Espiritual</option>
-              <option value="963">963 Hz - Conexão com a Luz Divina</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-[11px] font-bold text-[#D2042D]/90 uppercase tracking-wider mb-1">Módulo de Foco Principal</label>
-            <select id="profileInputFocusModule" class="w-full px-3 py-2.5 rounded-xl bg-dark-900 border border-white/10 text-xs text-gray-200 focus:outline-none focus:border-gold-400">
-              <option value="Módulo I">Módulo I: Cabala & Hermetismo</option>
-              <option value="Módulo II">Módulo II: Grimórios & Alta Magia</option>
-              <option value="Módulo III">Módulo III: Gnosticismo & Apócrifos</option>
-              <option value="Módulo IV">Módulo IV: Alquimia & Transmutação</option>
-              <option value="Módulo V">Módulo V: Sociedades Secretas</option>
-              <option value="Módulo VI">Módulo VI: Mente & Projeção Astral</option>
-            </select>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Ações do Perfil -->
-      <div class="mt-6 pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center gap-2.5">
-        <button onclick="saveUserProfile()" class="w-full sm:flex-1 py-3 px-4 rounded-xl bg-[#D2042D] hover:bg-red-700 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer">
-          <i data-lucide="save" class="w-4 h-4"></i> Salvar Alterações
-        </button>
-        <button onclick="logoutVipGate()" class="w-full sm:w-auto py-3 px-4 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 text-xs font-bold flex items-center justify-center gap-2 transition cursor-pointer">
-          <i data-lucide="log-out" class="w-4 h-4"></i> Sair da Conta
-        </button>
-      </div>
-
-    </div>
-  </div>
-
-
-  
-
-      <div class="space-y-2.5">
-        <a href="https://checkout.perfectpay.com.br/checkout/PPCCKT15GEJ00Q" target="_blank" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 text-black font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl hover:scale-[1.02] active:scale-[0.98] transition cursor-pointer">
-          <i data-lucide="unlock" class="w-4 h-4"></i> Desbloquear Manuscrito Agora
-        </a>
-        <button onclick="closeModal('orderbumpModal')" class="w-full py-2.5 rounded-xl bg-dark-800 text-gray-400 text-xs font-semibold hover:text-white transition cursor-pointer">
-          Voltar ao Acervo
-        </button>
-      </div>
-
-    </div>
-  </div>
-
+  <!-- ==================== SCRIPTS ==================== -->
+  <script src="books_2500.json" type="application/json" id="rawBooksData"></script>
+  <script src="app.js?v=1795480900"></script>
 </body>
 </html>

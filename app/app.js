@@ -285,49 +285,113 @@ function setUserTier(newTier, showNotification) {
 }
 
 // NAVEGAÇÃO DE ABAS DO APP
+
+let isSidebarCollapsed = false;
+
+function toggleSidebarCollapse() {
+  const sidebar = document.getElementById("desktopSidebar");
+  const main = document.getElementById("mainContainer");
+  const icon = document.getElementById("sidebarChevronIcon");
+  if (!sidebar) return;
+
+  isSidebarCollapsed = !isSidebarCollapsed;
+  if (isSidebarCollapsed) {
+    sidebar.classList.add("-translate-x-full");
+    if (main) main.classList.remove("md:pl-60");
+    if (icon) icon.setAttribute("data-lucide", "chevron-right");
+  } else {
+    sidebar.classList.remove("-translate-x-full");
+    if (main) main.classList.add("md:pl-60");
+    if (icon) icon.setAttribute("data-lucide", "chevron-left");
+  }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+}
+
 function switchTab(tabName) {
-  const tabs = ["books", "frequencies", "roadmap"];
-  tabs.forEach(t => {
+  const allTabs = ["home", "library", "audiobooks", "courses", "community", "profile"];
+  
+  allTabs.forEach(t => {
     const sec = document.getElementById("tab-" + t);
-    const navBtn = document.getElementById("navBtn-" + t);
-    const tabBtn = document.getElementById("tabBtn-" + t);
     const sideBtn = document.getElementById("sideNav-" + t);
+    const navBtn = document.getElementById("navBtn-" + t);
 
     if (t === tabName) {
       if (sec) sec.classList.remove("hidden");
-      if (navBtn) navBtn.className = "flex flex-col items-center gap-1 text-[#D2042D] text-[10px] font-bold py-1";
-      if (tabBtn) {
-        tabBtn.classList.add("tab-active");
-        tabBtn.classList.remove("text-gray-400");
-      }
+      
+      // Sidebar desktop active
       if (sideBtn) {
-        sideBtn.className = "w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-bold text-white bg-white/5 border border-[#D2042D]/50 transition-all text-left";
+        sideBtn.className = "w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-bold text-yellow-400 bg-white/5 border border-yellow-500/40 transition-all text-left cursor-pointer";
         const icon = sideBtn.querySelector("i, svg");
-        if (icon) icon.className = "w-4 h-4 text-[#D2042D]";
+        if (icon) icon.className = "w-4 h-4 text-yellow-400";
+      }
+
+      // Mobile bottom nav active
+      if (navBtn) {
+        navBtn.className = "flex flex-col items-center gap-1 text-yellow-400 text-[10px] font-bold py-1";
       }
     } else {
       if (sec) sec.classList.add("hidden");
-      if (navBtn) navBtn.className = "flex flex-col items-center gap-1 text-gray-400 text-[10px] font-medium py-1";
-      if (tabBtn) {
-        tabBtn.classList.remove("tab-active");
-        tabBtn.classList.add("text-gray-400");
-      }
+
+      // Sidebar desktop inactive
       if (sideBtn) {
-        sideBtn.className = "w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left";
+        sideBtn.className = "w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left cursor-pointer";
         const icon = sideBtn.querySelector("i, svg");
-        if (icon) icon.className = "w-4 h-4 text-gray-400";
+        if (icon) icon.className = "w-4 h-4";
+      }
+
+      // Mobile bottom nav inactive
+      if (navBtn) {
+        navBtn.className = "flex flex-col items-center gap-1 text-gray-400 text-[10px] font-medium py-1";
       }
     }
   });
 
-  const sideCat = document.getElementById("sideNav-categories");
-  const sideList = document.getElementById("sideNav-mylist");
-  if (tabName !== "books") {
-    if (sideCat) sideCat.className = "w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left";
-    if (sideList) sideList.className = "w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left";
+  if (tabName === "library") {
+    renderBooks();
   }
 
   window.scrollTo({ top: 0, behavior: "smooth" });
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+}
+
+function publishCommunityPost() {
+  const input = document.getElementById("communityPostInput");
+  const feed = document.getElementById("communityFeedContainer");
+  if (!input || !feed) return;
+
+  const text = input.value.trim();
+  if (!text) {
+    showToast("Digite algo para publicar na comunidade.");
+    return;
+  }
+
+  const currentEmail = (localStorage.getItem("cupula33_user_email") || "paulo-reis51@hotmail.com").trim().toLowerCase();
+  const userName = (typeof KNOWN_STUDENT_NAMES !== "undefined" && KNOWN_STUDENT_NAMES[currentEmail]) || "Iniciado da Cúpula";
+  const initial = userName.charAt(0).toUpperCase();
+
+  const newPostHTML = `
+    <div class="esoteric-card rounded-2xl p-5 border border-white/10 animate-fade-in">
+      <div class="flex items-center gap-3 mb-2.5">
+        <div class="w-8 h-8 rounded-full bg-yellow-500 text-black flex items-center justify-center font-bold text-xs">${initial}</div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold text-white">${userName}</span>
+            <span class="text-[9px] px-1.5 py-0.5 rounded bg-yellow-500/20 text-yellow-400 font-mono font-bold">NÍVEL 1</span>
+          </div>
+          <span class="text-[10px] text-gray-500">Agora mesmo</span>
+        </div>
+      </div>
+      <p class="text-xs text-gray-200 mt-2">${text}</p>
+      <div class="flex items-center gap-4 mt-4 pt-3 border-t border-white/5 text-gray-500 text-xs">
+        <button onclick="this.classList.toggle('text-yellow-400')" class="flex items-center gap-1 hover:text-yellow-400 transition"><i data-lucide="heart" class="w-3.5 h-3.5"></i> 0</button>
+        <button class="flex items-center gap-1 hover:text-white transition"><i data-lucide="message-square" class="w-3.5 h-3.5"></i> 0</button>
+      </div>
+    </div>
+  `;
+
+  feed.insertAdjacentHTML("afterbegin", newPostHTML);
+  input.value = "";
+  showToast("Publicado na comunidade!");
   if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
@@ -456,11 +520,11 @@ function updateModalBookmarkUI(bookId) {
   
   const saved = isBookInMyList(bookId);
   if (saved) {
-    btn.className = "w-full sm:w-auto py-3 px-4 rounded-xl bg-[#D2042D]/20 border border-[#D2042D]/60 text-[#D2042D] text-xs font-bold flex items-center justify-center gap-2 transition cursor-pointer";
+    btn.className = "w-full sm:w-auto py-3 px-4 rounded-xl bg-[#eab308]/20 border border-[#eab308]/60 text-[#eab308] text-xs font-bold flex items-center justify-center gap-2 transition cursor-pointer";
     if (text) text.textContent = "Salvo na Lista";
-    if (icon) icon.className = "w-4 h-4 fill-[#D2042D]";
+    if (icon) icon.className = "w-4 h-4 fill-[#eab308]";
   } else {
-    btn.className = "w-full sm:w-auto py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-[#D2042D] text-xs font-bold flex items-center justify-center gap-2 transition cursor-pointer";
+    btn.className = "w-full sm:w-auto py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-[#eab308] text-xs font-bold flex items-center justify-center gap-2 transition cursor-pointer";
     if (text) text.textContent = "Salvar";
     if (icon) icon.className = "w-4 h-4";
   }
@@ -481,7 +545,7 @@ function createBookCardHTML(book, isCarousel) {
     <div onclick="handleBookClick(${book.id})" class="${containerClass}">
       
       <!-- Container da Capa com Aspect Ratio 2:3 -->
-      <div class="relative aspect-[2/3] rounded-xl overflow-hidden mb-2.5 border border-white/10 group-hover:border-[#D2042D] shadow-lg shadow-black/60 transition-all bg-[#0d0d0d]">
+      <div class="relative aspect-[2/3] rounded-xl overflow-hidden mb-2.5 border border-white/10 group-hover:border-[#eab308] shadow-lg shadow-black/60 transition-all bg-[#0d0d0d]">
         <img src="${book.cover}" alt="${book.title}" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${isLocked ? 'grayscale opacity-50' : ''}">
         
         <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
@@ -489,14 +553,14 @@ function createBookCardHTML(book, isCarousel) {
         <!-- Badges Superiores -->
         <div class="absolute top-2 left-2 z-20 flex flex-col gap-1 items-start">
           ${!isLocked && book.id <= 15 ? `
-            <div class="bg-[#D2042D] text-white text-[9px] font-black px-2 py-0.5 rounded shadow-lg uppercase tracking-wider">
+            <div class="bg-[#eab308] text-white text-[9px] font-black px-2 py-0.5 rounded shadow-lg uppercase tracking-wider">
               NOVO
             </div>
           ` : ''}
 
           ${progPercent > 0 ? `
             <div class="bg-black/80 backdrop-blur-md px-2 py-0.5 rounded-full border border-white/10 flex items-center shadow-lg">
-              <span class="w-1.5 h-1.5 rounded-full bg-[#D2042D] mr-1.5 animate-pulse"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-[#eab308] mr-1.5 animate-pulse"></span>
               <span class="text-[9px] font-bold text-white tracking-wider">${progPercent}%</span>
             </div>
           ` : ''}
@@ -512,13 +576,13 @@ function createBookCardHTML(book, isCarousel) {
         <!-- Barra de Progresso no Rodapé da Capa -->
         ${progPercent > 0 ? `
           <div class="absolute bottom-0 left-0 w-full h-1 bg-gray-900/80">
-            <div class="h-full bg-[#D2042D] shadow-[0_0_8px_rgba(210,4,45,0.8)]" style="width: ${progPercent}%"></div>
+            <div class="h-full bg-[#eab308] shadow-[0_0_8px_rgba(210,4,45,0.8)]" style="width: ${progPercent}%"></div>
           </div>
         ` : ''}
       </div>
 
       <!-- Título & Autor -->
-      <h3 class="text-xs sm:text-sm font-medium truncate text-white group-hover:text-[#D2042D] transition-colors leading-snug">
+      <h3 class="text-xs sm:text-sm font-medium truncate text-white group-hover:text-[#eab308] transition-colors leading-snug">
         ${book.title}
       </h3>
       <p class="text-gray-500 text-[11px] truncate mt-0.5">
@@ -615,8 +679,8 @@ function renderLibraryStreaming() {
       return `
         <div>
           <div class="flex items-center justify-between mb-3.5 group cursor-pointer" onclick="openCategoryDetail('${mod.name}')">
-            <h2 class="text-lg sm:text-xl font-serif text-white group-hover:text-[#D2042D] transition-colors flex items-center gap-2">
-              <span class="text-xs font-mono font-bold text-[#D2042D]">${mod.code}</span>
+            <h2 class="text-lg sm:text-xl font-serif text-white group-hover:text-[#eab308] transition-colors flex items-center gap-2">
+              <span class="text-xs font-mono font-bold text-[#eab308]">${mod.code}</span>
               <span>${mod.name}</span>
             </h2>
             <span class="text-[11px] text-gray-500 uppercase tracking-widest group-hover:text-white transition-colors flex items-center gap-1">
@@ -648,14 +712,14 @@ function renderCategoriesGrid() {
     ).length;
 
     return `
-      <div onclick="openCategoryDetail('${mod.name}')" class="group relative h-36 overflow-hidden rounded-2xl border border-white/10 bg-[#141414] hover:border-[#D2042D]/50 transition-all text-left p-6 flex flex-col justify-end cursor-pointer shadow-lg">
-        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 group-hover:text-[#D2042D] transition-all">
+      <div onclick="openCategoryDetail('${mod.name}')" class="group relative h-36 overflow-hidden rounded-2xl border border-white/10 bg-[#141414] hover:border-[#eab308]/50 transition-all text-left p-6 flex flex-col justify-end cursor-pointer shadow-lg">
+        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 group-hover:text-[#eab308] transition-all">
           <i data-lucide="${mod.icon}" class="w-14 h-14"></i>
         </div>
         <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
         <div class="relative z-10">
-          <span class="text-[10px] font-mono font-bold text-[#D2042D] tracking-widest block uppercase">${mod.code}</span>
-          <h3 class="text-lg font-serif font-bold text-white group-hover:text-[#D2042D] transition-colors mt-0.5">${mod.name}</h3>
+          <span class="text-[10px] font-mono font-bold text-[#eab308] tracking-widest block uppercase">${mod.code}</span>
+          <h3 class="text-lg font-serif font-bold text-white group-hover:text-[#eab308] transition-colors mt-0.5">${mod.name}</h3>
           <p class="text-xs text-gray-500 mt-1">${count} Tratados & Manuscritos</p>
         </div>
       </div>
@@ -717,7 +781,7 @@ function handleSearchInput(query) {
       grid.innerHTML = `
         <div class="col-span-full py-16 text-center text-gray-500">
           <p class="text-sm">Nenhum manuscrito encontrado para "${q}".</p>
-          <button onclick="clearSearch()" class="mt-4 px-4 py-2 rounded-xl bg-white/5 text-[#D2042D] border border-[#D2042D]/40 text-xs font-bold hover:bg-[#D2042D] hover:text-white transition">
+          <button onclick="clearSearch()" class="mt-4 px-4 py-2 rounded-xl bg-white/5 text-[#eab308] border border-[#eab308]/40 text-xs font-bold hover:bg-[#eab308] hover:text-white transition">
             Limpar Busca
           </button>
         </div>
@@ -750,7 +814,7 @@ function renderMyListGrid() {
         <i data-lucide="bookmark" class="w-10 h-10 mx-auto text-gray-600 mb-2"></i>
         <p class="text-sm text-gray-300 font-serif">Sua lista de estudos está vazia.</p>
         <p class="text-xs text-gray-500 mt-1">Toque em "Salvar" nos detalhes de qualquer obra para adicioná-la aqui.</p>
-        <button onclick="returnToDefaultLibrary()" class="mt-5 px-5 py-2.5 rounded-xl bg-[#D2042D]/20 text-[#D2042D] border border-[#D2042D]/40 text-xs font-bold hover:bg-[#D2042D] hover:text-white transition">
+        <button onclick="returnToDefaultLibrary()" class="mt-5 px-5 py-2.5 rounded-xl bg-[#eab308]/20 text-[#eab308] border border-[#eab308]/40 text-xs font-bold hover:bg-[#eab308] hover:text-white transition">
           Explorar Acervo
         </button>
       </div>
