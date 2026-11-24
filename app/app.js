@@ -772,9 +772,12 @@ let libraryViewMode = 'streaming'; // 'streaming' | 'categories' | 'category_det
 let activeCategoryName = null;
 // currentBookModalData is declared at top
 
-// Gestão de Minha Lista (Bookmarks)
+// Gestão de Minha Lista (Bookmarks Isolados por Aluno)
 function getMyList() {
+  const email = (localStorage.getItem("cupula33_user_email") || "iniciado").trim().toLowerCase();
   try {
+    const scoped = localStorage.getItem(`cupula33_my_list_${email}`);
+    if (scoped) return JSON.parse(scoped);
     return JSON.parse(localStorage.getItem("cupula33_my_list") || "[]");
   } catch(e) {
     return [];
@@ -788,6 +791,7 @@ function isBookInMyList(bookId) {
 
 function toggleCurrentBookMyList() {
   if (!currentBookModalData) return;
+  const email = (localStorage.getItem("cupula33_user_email") || "iniciado").trim().toLowerCase();
   const id = Number(currentBookModalData.id);
   let list = getMyList();
   
@@ -799,6 +803,7 @@ function toggleCurrentBookMyList() {
     showToast("Adicionado à Minha Lista");
   }
   
+  localStorage.setItem(`cupula33_my_list_${email}`, JSON.stringify(list));
   localStorage.setItem("cupula33_my_list", JSON.stringify(list));
   updateModalBookmarkUI(id);
   
@@ -2114,7 +2119,10 @@ function getSavedProgress(bookId) {
     return MemberDatabase.getBookProgress(bookId);
   }
   try {
-    const allHistory = JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
+    const cleanEmail = (localStorage.getItem("cupula33_user_email") || "").trim().toLowerCase();
+  const allHistory = typeof MemberDatabase !== "undefined"
+    ? MemberDatabase.getAllProgress(cleanEmail)
+    : JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
     return allHistory[String(bookId)] || allHistory[Number(bookId)] || null;
   } catch(e) {
     return null;
@@ -2123,7 +2131,8 @@ function getSavedProgress(bookId) {
 
 function checkReadingProgress() {
   const section = document.getElementById("resumeReadingSection");
-  const stored = localStorage.getItem("cupula33_active_reading");
+  const cleanEmail = (localStorage.getItem("cupula33_user_email") || "").trim().toLowerCase();
+  const stored = localStorage.getItem(`cupula33_active_reading_${cleanEmail}`) || localStorage.getItem("cupula33_active_reading");
   if (!section) return;
 
   if (!stored) {
@@ -2150,7 +2159,10 @@ function checkReadingProgress() {
 }
 
 function renderContinueReading() {
-  const allHistory = JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
+  const cleanEmail = (localStorage.getItem("cupula33_user_email") || "").trim().toLowerCase();
+  const allHistory = typeof MemberDatabase !== "undefined"
+    ? MemberDatabase.getAllProgress(cleanEmail)
+    : JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
   const entries = Object.values(allHistory).sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
 
   const homeSection = document.getElementById("homeContinueSection");
@@ -2254,7 +2266,8 @@ function updateProfileXP() {
 }
 
 function resumeLastReading() {
-  const stored = localStorage.getItem("cupula33_active_reading");
+  const cleanEmail = (localStorage.getItem("cupula33_user_email") || "").trim().toLowerCase();
+  const stored = localStorage.getItem(`cupula33_active_reading_${cleanEmail}`) || localStorage.getItem("cupula33_active_reading");
   if (!stored) return;
   try {
     const data = JSON.parse(stored);
@@ -2266,6 +2279,8 @@ function resumeLastReading() {
 }
 
 function clearReadingProgress() {
+  const cleanEmail = (localStorage.getItem("cupula33_user_email") || "").trim().toLowerCase();
+  localStorage.removeItem(`cupula33_active_reading_${cleanEmail}`);
   localStorage.removeItem("cupula33_active_reading");
   checkReadingProgress();
   renderContinueReading();
@@ -2873,12 +2888,23 @@ function stopFrequency(showFeedback = true) {
   if (showFeedback) showToast("Frequência pausada.");
 }
 
-// SISTEMA DO ROADMAP INICIÁTICO
+// SISTEMA DO ROADMAP INICIÁTICO (ISOLADO POR ALUNO)
+function getRoadmapCompleted() {
+  const cleanEmail = (localStorage.getItem("cupula33_user_email") || "iniciado").trim().toLowerCase();
+  try {
+    const scoped = localStorage.getItem(`cupula33_roadmap_completed_${cleanEmail}`);
+    if (scoped) return JSON.parse(scoped);
+    return JSON.parse(localStorage.getItem("cupula33_roadmap_completed") || "[]");
+  } catch(e) {
+    return [];
+  }
+}
+
 function renderRoadmap() {
   const list = document.getElementById("roadmapList");
   if (!list) return;
 
-  const completed = JSON.parse(localStorage.getItem("cupula33_roadmap_completed") || "[]");
+  const completed = getRoadmapCompleted();
   const pct = Math.round((completed.length / roadmapData.length) * 100);
 
   const progText = document.getElementById("roadmapProgressText");
@@ -2913,13 +2939,15 @@ function renderRoadmap() {
 }
 
 function toggleRoadmapGrade(grade) {
-  let completed = JSON.parse(localStorage.getItem("cupula33_roadmap_completed") || "[]");
+  const cleanEmail = (localStorage.getItem("cupula33_user_email") || "iniciado").trim().toLowerCase();
+  let completed = getRoadmapCompleted();
   if (completed.includes(grade)) {
     completed = completed.filter(g => g !== grade);
   } else {
     completed.push(grade);
     showToast("Grau " + grade + " concluído com sucesso!");
   }
+  localStorage.setItem(`cupula33_roadmap_completed_${cleanEmail}`, JSON.stringify(completed));
   localStorage.setItem("cupula33_roadmap_completed", JSON.stringify(completed));
   renderRoadmap();
 }
@@ -3336,6 +3364,13 @@ function loginWithEmail() {
 function logoutVipGate() {
   localStorage.removeItem("cupula33_user_email");
   localStorage.removeItem("cupula33_user_tier");
+  localStorage.removeItem("cupula33_has_prosperidade");
+  localStorage.removeItem("cupula33_user_level");
+  localStorage.removeItem("cupula33_custom_name");
+  localStorage.removeItem("cupula33_active_reading");
+  localStorage.removeItem("cupula33_my_list");
+  localStorage.removeItem("cupula33_books_progress");
+  localStorage.removeItem("cupula33_roadmap_completed");
   window.location.reload();
 }
 
@@ -3389,7 +3424,10 @@ function renderModuleDetailContent(moduleCategory) {
   if (titleEl) titleEl.textContent = moduleCategory;
   if (countEl) countEl.textContent = moduleBooks.length + " Manuscritos & Tratados";
   
-  const allHistory = JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
+  const cleanEmail = (localStorage.getItem("cupula33_user_email") || "").trim().toLowerCase();
+  const allHistory = typeof MemberDatabase !== "undefined"
+    ? MemberDatabase.getAllProgress(cleanEmail)
+    : JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
   
   if (gridEl) {
     gridEl.innerHTML = moduleBooks.map(book => {
