@@ -65,6 +65,19 @@ export default {
         const fromEmail = env.FROM_EMAIL || "Cúpula 33 <onboarding@resend.dev>";
         const resendKey = env.RESEND_API_KEY || "re_ZwdwULHi_MA8wrHM6fFcYDKAxavKx7LC5";
 
+                // Validação opcional de Token de segurança da Kirvano
+        const authHeader = request.headers.get("Authorization") || "";
+        const kirvanoToken = request.headers.get("x-kirvano-token") || request.headers.get("X-Kirvano-Token") || "";
+        const expectedToken = env.KIRVANO_TOKEN || "Resend@Resend";
+
+        // Se a requisição enviar token ou se esperamos token, valida
+        if (kirvanoToken && kirvanoToken !== expectedToken) {
+          return new Response(JSON.stringify({ success: false, error: "Token Kirvano invalido" }), {
+            status: 401,
+            headers: { "Content-Type": "application/json" }
+          });
+        }
+
         const isRefund = ["refund", "chargeback", "cancel", "devolvida"].some(s => status.includes(s));
 
         if (isRefund) {
