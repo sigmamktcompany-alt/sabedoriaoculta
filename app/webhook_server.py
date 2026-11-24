@@ -441,13 +441,6 @@ class WebhookAutomationHandler(BaseHTTPRequestHandler):
         # 2. Status geral do sistema (/api/status)
         if path in ["/api/status", "/status"]:
             cfg = load_config()
-    local_cfg = os.path.join(BASE_DIR, "email_config.local.json")
-    if os.path.exists(local_cfg):
-        try:
-            with open(local_cfg, "r", encoding="utf-8") as f:
-                cfg.update(json.load(f))
-        except Exception:
-            pass
             db = load_local_members()
             self._set_cors_headers(200)
             self.wfile.write(json.dumps({
