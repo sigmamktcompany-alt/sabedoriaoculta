@@ -1073,7 +1073,11 @@ function triggerReadModalFromDetails() {
   if (!currentBookModalData) return;
   closeModal("bookModal");
   const saved = getSavedProgress(currentBookModalData.id);
-  const page = saved ? saved.page : 1;
+  // Se já leu antes, continua onde parou; se passou do total ou for inválido, inicia na página 1
+  let page = 1;
+  if (saved && saved.page && saved.page >= 1 && saved.page <= (currentBookModalData.pages || 1000)) {
+    page = saved.page;
+  }
   openReaderModal(currentBookModalData, page);
 }
 
@@ -1290,8 +1294,11 @@ function onReaderPageInputChange(val) {
 // ==========================================
 // MOTOR NATIVO PDF.JS COM SCROLL CONTÍNUO (ESTILO ORDEM 137)
 // ==========================================
+if (typeof window["pdfjs-dist/build/pdf"] !== "undefined") {
+  window.pdfjsLib = window["pdfjs-dist/build/pdf"];
+}
 if (typeof pdfjsLib !== "undefined") {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
 }
 
 const LOCAL_PDF_MAP = {
@@ -1474,7 +1481,7 @@ async function renderNativePDF(pdfUrl, startPage = 1) {
   try {
     const loadingTask = pdfjsLib.getDocument({
       url: pdfUrl,
-      cMapUrl: "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/cmaps/",
+      cMapUrl: "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/cmaps/",
       cMapPacked: true
     });
 
@@ -1588,23 +1595,32 @@ async function renderNativePDF(pdfUrl, startPage = 1) {
 
     pageContainers.forEach(div => currentRenderObserver.observe(div));
 
-    // Observer de Rolagem para atualizar progresso (Igual ao Ordem 137)
+    // Observer de Rolagem para atualizar progresso com debounce
     currentScrollObserver = new IntersectionObserver((entries) => {
+      // Pega a entrada visível com maior intersecção
+      let bestEntry = null;
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          const pageNum = parseInt(entry.target.dataset.pageNumber);
+          if (!bestEntry || entry.intersectionRatio > bestEntry.intersectionRatio) {
+            bestEntry = entry;
+          }
+        }
+      });
+      if (bestEntry) {
+        const pageNum = parseInt(bestEntry.target.dataset.pageNumber);
+        if (!isNaN(pageNum) && pageNum > 0) {
           currentReaderPage = pageNum;
           updateReaderDisplay(currentBookModalData, pageNum);
 
           clearTimeout(saveProgressDebounceTimer);
           saveProgressDebounceTimer = setTimeout(() => {
             saveReadingProgress(currentBookModalData.id, pageNum, numPages);
-          }, 350);
+          }, 800);
         }
-      });
+      }
     }, {
       root: container,
-      threshold: 0.4
+      threshold: [0.1, 0.3, 0.6]
     });
 
     pageContainers.forEach(div => currentScrollObserver.observe(div));
