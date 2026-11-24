@@ -3288,8 +3288,8 @@ function toggleModuleAccordion() {
   }
 }
 
-// MODAL DE BLOQUEIO DE CURSOS (A CÂMARA INTERNA)
-function openCourseLockedNotice(courseTitle = "A Câmara Interna") {
+// MODAL DE BLOQUEIO DE CURSOS (O NÚCLEO)
+function openCourseLockedNotice(courseTitle = "O Núcleo") {
   const modal = document.getElementById("courseLockedModal");
   if (modal) {
     const titleEl = document.getElementById("courseLockedModalTitle");
@@ -3297,7 +3297,7 @@ function openCourseLockedNotice(courseTitle = "A Câmara Interna") {
     modal.classList.remove("hidden");
     if (window.lucide) try { lucide.createIcons(); } catch(e) {}
   } else {
-    showToast("Conteúdo reservado aos alunos da Câmara Interna.");
+    showToast("Conteúdo reservado aos alunos de O Núcleo.");
   }
 }
 
