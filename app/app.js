@@ -500,6 +500,8 @@ async function syncCommunityWithSupabase() {
         const a = (p.author || "").toLowerCase();
         const em = (p.userEmail || "").toLowerCase();
         const t = (p.text || "").toLowerCase();
+        const blockedPhrases = ["aparece uma porção", "não estão", "câmara interna", "camara interna", "não abri"];
+        if (blockedPhrases.some(bp => t.includes(bp))) return false;
         return !a.includes("ricardo") && !a.includes("scola") &&
                !em.includes("ricardo") && !em.includes("scola") &&
                !t.includes("ricardoscola") &&
