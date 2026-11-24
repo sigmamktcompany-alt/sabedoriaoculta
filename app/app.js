@@ -3321,8 +3321,8 @@ function updateProsperidadeCardUI() {
       badge.className = "inline-flex items-center gap-1.5 text-yellow-400 text-[10px] font-bold uppercase tracking-wider mb-1.5";
       badge.innerHTML = `<i data-lucide="book-open" class="w-3.5 h-3.5"></i> ACESSO PERMITIDO`;
     } else {
-      badge.className = "inline-flex items-center gap-1.5 text-amber-400/90 text-[10px] font-bold uppercase tracking-wider mb-1.5";
-      badge.innerHTML = `<i data-lucide="lock" class="w-3.5 h-3.5"></i> COMPLEMENTO ORDER BUMP`;
+      badge.className = "inline-flex items-center gap-1.5 text-yellow-400 text-[10px] font-bold uppercase tracking-wider mb-1.5";
+      badge.innerHTML = `<i data-lucide="lock" class="w-3.5 h-3.5"></i> ACESSO EXCLUSIVO`;
     }
   }
   if (lock) {
