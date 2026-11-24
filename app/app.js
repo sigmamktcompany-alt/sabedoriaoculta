@@ -688,7 +688,7 @@ function createBookCardHTML(book, isCarousel) {
     : "cursor-pointer group select-none transition-transform duration-200 active:scale-95";
 
   return `
-    <div onclick="handleBookClick('${book.id}')\" class="${containerClass}">
+    <div onclick="handleBookClick('${book.id}')" class="${containerClass}">
       
       <!-- Container da Capa com Aspect Ratio 2:3 -->
       <div class="relative aspect-[2/3] rounded-2xl overflow-hidden mb-2.5 border border-white/10 group-hover:border-[#D4AF37] shadow-[0_8px_25px_rgba(0,0,0,0.7)] group-hover:shadow-[0_12px_30px_rgba(212,175,55,0.22)] transition-all duration-300 bg-[#0d0d0d]">
@@ -1845,7 +1845,7 @@ function renderContinueReading() {
   }
 
   const cardsHTML = entries.map(item => `
-    <div onclick="handleBookClick('${item.bookId}')\" class="shrink-0 w-36 sm:w-44 group cursor-pointer text-left snap-start">
+    <div onclick="handleBookClick('${item.bookId}')" class="shrink-0 w-36 sm:w-44 group cursor-pointer text-left snap-start">
       <div class="relative aspect-[3/4] rounded-2xl overflow-hidden bg-[#141414] border border-white/10 group-hover:border-yellow-500/60 shadow-lg transition-all duration-300">
         <img src="${item.cover || 'assets/logo.jpg'}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='assets/logo.jpg'">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
@@ -2967,7 +2967,7 @@ function renderModuleDetailContent(moduleCategory) {
       const curPage = progress ? progress.page : 1;
       
       return `
-        <div onclick="handleBookClick('${book.id}')\" class="glass-panel glass-panel-hover rounded-2xl overflow-hidden border border-gold-500/20 flex flex-col justify-between cursor-pointer group relative transition-all">
+        <div onclick="handleBookClick('${book.id}')" class="glass-panel glass-panel-hover rounded-2xl overflow-hidden border border-gold-500/20 flex flex-col justify-between cursor-pointer group relative transition-all">
           <div class="relative aspect-[3/4] bg-dark-900 overflow-hidden">
             <img src="${book.cover}" alt="${book.title}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
             <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-dark-950/85 backdrop-blur-md text-[9px] font-bold text-gold-400 border border-gold-500/30 tracking-wider uppercase">
