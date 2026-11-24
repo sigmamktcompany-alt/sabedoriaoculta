@@ -82,6 +82,12 @@
       "active": true,
       "status": "approved",
       "sale_code": "MANUAL_APPROVAL_OFFICIAL"
+    },
+    "ricardoscola4@gmail.com": {
+      "name": "Ricardo André Scola",
+      "tier": "master",
+      "active": true,
+      "date_added": "2026-11-24"
     }
   }
 }

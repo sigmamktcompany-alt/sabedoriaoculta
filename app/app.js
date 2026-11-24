@@ -1,4 +1,5 @@
 const KNOWN_STUDENT_NAMES = {
+  "ricardoscola4@gmail.com": "Ricardo André Scola",
   "loisianavida123@gmail.com": "Loisiana Lopes",
   "tjoaquim627@gmail.com": "Tamara S Joaquim",
   "paulo-reis51@hotmail.com": "Paulo Reis",
@@ -2772,6 +2773,7 @@ const SUPABASE_CONFIG = {
 };
 
 const MASTER_ALLOWLIST = [
+  "ricardoscola4@gmail.com",
   "loisianavida123@gmail.com",
   "tjoaquim627@gmail.com",
   "paulo-reis51@hotmail.com",
