@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sandbox Cúpula 33 - Testador de Vendas & E-mails Resend</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090a0f;
+      --card-bg: rgba(18, 20, 29, 0.85);
+      --card-border: rgba(212, 175, 55, 0.25);
+      --gold: #d4af37;
+      --gold-bright: #ffd700;
+      --gold-dark: #8c7320;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --success: #10b981;
+      --error: #ef4444;
+      --warning: #f59e0b;
+      --info: #3b82f6;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 10% 80%, rgba(59, 130, 246, 0.04) 0%, transparent 50%);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      padding: 24px 16px;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-weight: 900;
+      font-size: 20px;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      letter-spacing: 1px;
+      color: #fff;
+    }
+
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: var(--success);
+    }
+
+    .badge-status.offline {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: rgba(239, 68, 68, 0.4);
+      color: var(--error);
+    }
+
+    .badge-status .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 8px currentColor;
+    }
+
+    .grid-main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 960px) {
+      .grid-main { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 24px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      margin-bottom: 24px;
+    }
+
+    .card-title {
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      color: var(--gold-bright);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 12px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    input[type="text"], input[type="email"], select {
+      width: 100%;
+      padding: 12px 14px;
+      background: rgba(10, 12, 18, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 14px;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 12px rgba(212, 175, 55, 0.25);
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      cursor: pointer;
+      margin-bottom: 12px;
+      user-select: none;
+    }
+
+    .checkbox-group input {
+      accent-color: var(--gold);
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .checkbox-group span {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s;
+      border: none;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold-bright), var(--gold-dark));
+      color: #000;
+      box-shadow: 0 4px 18px rgba(212, 175, 55, 0.3);
+    }
+
+    .btn-gold:hover {
+      filter: brightness(1.15);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    /* Terminal Console */
+    .console-box {
+      background: #050608;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 14px;
+      font-family: 'Fira Code', monospace;
+      font-size: 13px;
+      color: #38bdf8;
+      min-height: 280px;
+      max-height: 380px;
+      overflow-y: auto;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+
+    .log-line { margin-bottom: 6px; }
+    .log-time { color: #64748b; }
+    .log-success { color: var(--success); }
+    .log-error { color: var(--error); }
+    .log-warn { color: var(--warning); }
+    .log-info { color: #38bdf8; }
+
+    /* Results preview */
+    .pill-result {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+
+    .pill-result strong { color: #fff; }
+    .pill-val { font-family: 'Fira Code', monospace; }
+
+    .tag-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .tag-gold { background: rgba(212, 175, 55, 0.2); color: var(--gold-bright); border: 1px solid rgba(212, 175, 55, 0.4); }
+    .tag-green { background: rgba(16, 185, 129, 0.2); color: var(--success); }
+    .tag-red { background: rgba(239, 68, 68, 0.2); color: var(--error); }
+
+    /* Email iframe preview */
+    .email-preview-frame {
+      width: 100%;
+      height: 480px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      background: #000;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="brand-icon">33</div>
+        <div>
+          <h1>CÚPULA 33 • SANDBOX DE VENDAS & E-MAIL</h1>
+          <p style="font-size: 13px; color: var(--text-muted); margin-top: 3px;">
+            Ambiente de Testes Automatizados para Liberação de Acesso e Resend
+          </p>
+        </div>
+      </div>
+      <div>
+        <div id="serverStatusBadge" class="badge-status">
+          <span class="dot"></span>
+          <span id="serverStatusText">Verificando Webhook...</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="grid-main">
+      <!-- Coluna Esquerda: Formulários de Teste -->
+      <div>
+        <!-- Card 1: Simulação de Venda Aprovada -->
+        <div class="card">
+          <div class="card-title">
+            <span>⚡</span> Simular Venda Aprovada (Kiwify / Kirvano)
+          </div>
+
+          <div class="form-group">
+            <label>Nome do Aluno</label>
+            <input type="text" id="simNome" value="Thiago Oliveira">
+          </div>
+
+          <div class="form-group">
+            <label>E-mail do Aluno</label>
+            <input type="email" id="simEmail" value="thiago.teste@gmail.com">
+          </div>
+
+          <div class="form-group">
+            <label>Plano Escolhido</label>
+            <select id="simTier">
+              <option value="master">Acesso Master (2.500 Obras R$ 37,00)</option>
+              <option value="basico">Acesso Básico (500 Obras R$ 24,90)</option>
+            </select>
+          </div>
+
+          <label class="checkbox-group">
+            <input type="checkbox" id="simOrderBump" checked>
+            <span>Incluir Order Bump: <strong>Manuscrito da Prosperidade (R$ 19,90)</strong></span>
+          </label>
+
+          <label class="checkbox-group">
+            <input type="checkbox" id="simSendEmail" checked>
+            <span>Disparar E-mail de Boas-Vindas via Resend</span>
+          </label>
+
+          <button id="btnSimulateSale" class="btn btn-gold" onclick="simulateSale()">
+            <span>🚀</span> Executar Liberação Imediata
+          </button>
+        </div>
+
+        <!-- Card 2: Testador de API Key Resend -->
+        <div class="card">
+          <div class="card-title">
+            <span>✉️</span> Diagnóstico e Teste da Chave Resend
+          </div>
+          <div class="form-group">
+            <label>Chave de API do Resend (resend.com/api-keys)</label>
+            <input type="text" id="resendApiKey" placeholder="Cole sua chave re_... aqui">
+          </div>
+          <div class="form-group">
+            <label>E-mail de Destino para Teste</label>
+            <input type="email" id="resendTestEmail" value="joaomayamarcelo@gmail.com">
+          </div>
+          <button class="btn btn-secondary" onclick="testResendKey()">
+            <span>⚡</span> Testar Disparo Direto via Resend
+          </button>
+        </div>
+      </div>
+
+      <!-- Coluna Direita: Live Logs & Verificação -->
+      <div>
+        <!-- Card 3: Console de Logs -->
+        <div class="card">
+          <div class="card-title" style="justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span>🖥️</span> Console de Execução em Tempo Real
+            </div>
+            <button onclick="clearConsole()" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 11px;">LIMPAR</button>
+          </div>
+          <div id="consoleLog" class="console-box">
+            <div class="log-line log-info">[SISTEMA] Sandbox inicializada pronta para testes.</div>
+          </div>
+        </div>
+
+        <!-- Card 4: Status do Último Aluno Processado -->
+        <div class="card">
+          <div class="card-title">
+            <span>👤</span> Estado Atual do Cadastro no App
+          </div>
+          <div id="studentStateContainer">
+            <div class="pill-result">
+              <span>E-mail:</span>
+              <strong id="stateEmail">-</strong>
+            </div>
+            <div class="pill-result">
+              <span>Nível Inicial:</span>
+              <span id="stateLevel" class="tag-badge tag-green">Nível 1</span>
+            </div>
+            <div class="pill-result">
+              <span>Tier de Acesso:</span>
+              <span id="stateTier" class="tag-badge tag-gold">Master (2.500)</span>
+            </div>
+            <div class="pill-result">
+              <span>Manuscrito da Prosperidade:</span>
+              <span id="stateProsperidade" class="tag-badge tag-gold">LIBERADO</span>
+            </div>
+            <div class="pill-result">
+              <span>Disparo Resend:</span>
+              <span id="stateResend" class="tag-badge tag-green">Sucesso</span>
+            </div>
+
+            <div style="margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+              <button class="btn btn-secondary" onclick="verifyStudent()">
+                <span>🔍</span> Verificar no DB
+              </button>
+              <button class="btn btn-gold" onclick="openAppAsStudent()">
+                <span>👁️</span> Abrir App como Aluno
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preview do E-mail -->
+    <div class="card" style="margin-top: 10px;">
+      <div class="card-title">
+        <span>👁️</span> Preview do E-mail que o Aluno Recebe
+      </div>
+      <iframe id="emailPreviewFrame" class="email-preview-frame"></iframe>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE = window.location.origin;
+
+    function log(message, type = 'info') {
+      const consoleEl = document.getElementById('consoleLog');
+      const time = new Date().toLocaleTimeString();
+      const line = document.createElement('div');
+      line.className = `log-line log-${type}`;
+      line.innerHTML = `<span class="log-time">[${time}]</span> ${message}`;
+      consoleEl.appendChild(line);
+      consoleEl.scrollTop = consoleEl.scrollHeight;
+    }
+
+    function clearConsole() {
+      document.getElementById('consoleLog').innerHTML = '';
+      log('Console limpo.', 'info');
+    }
+
+    async function checkServerStatus() {
+      const badge = document.getElementById('serverStatusBadge');
+      const text = document.getElementById('serverStatusText');
+      try {
+        const res = await fetch(`${API_BASE}/api/status`);
+        if (res.ok) {
+          const data = await res.json();
+          badge.className = 'badge-status';
+          text.textContent = `Webhook Ativo • ${data.total_members} Alunos Cadastrados`;
+          log(`Webhook online na porta 8033. Total de alunos: ${data.total_members}`, 'success');
+        } else {
+          throw new Error();
+        }
+      } catch (err) {
+        badge.className = 'badge-status offline';
+        text.textContent = 'Webhook Offline (Inicie o webhook_server.py)';
+        log('Aviso: Webhook server não está respondendo em /api/status. Execute: python3 app/webhook_server.py', 'warn');
+      }
+    }
+
+    async function simulateSale() {
+      const btn = document.getElementById('btnSimulateSale');
+      btn.disabled = true;
+      btn.innerHTML = '<span>⏳</span> Processando Venda...';
+
+      const nome = document.getElementById('simNome').value.trim();
+      const email = document.getElementById('simEmail').value.trim().toLowerCase();
+      const tier = document.getElementById('simTier').value;
+      const hasOrderBump = document.getElementById('simOrderBump').checked;
+      const sendEmail = document.getElementById('simSendEmail').checked;
+
+      log(`Iniciando simulação de venda para: ${email} (${nome})...`, 'info');
+      log(`Configuração: Plano = ${tier.toUpperCase()}, Order Bump Prosperidade = ${hasOrderBump ? 'SIM' : 'NÃO'}, Disparar Resend = ${sendEmail ? 'SIM' : 'NÃO'}`, 'info');
+
+      try {
+        const payload = {
+          event: "order_approved",
+          customer: { name: nome, email: email },
+          product: { name: tier === 'master' ? "Acesso Master Cúpula 33 (2.500 Obras)" : "Acesso Básico Cúpula 33" },
+          order_bump: hasOrderBump ? [{ name: "Manuscrito Maçônico da Prosperidade", id: "prosperidade" }] : [],
+          send_email: sendEmail
+        };
+
+        const res = await fetch(`${API_BASE}/api/simulate-sale`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await res.json();
+
+        if (res.ok && result.success) {
+          log(`[SUCESSO] Venda aprovada e processada com sucesso!`, 'success');
+          log(`-> Membro salvo no banco: Nível ${result.level}, Tier ${result.tier}`, 'success');
+          log(`-> Manuscrito da Prosperidade: ${result.has_prosperidade ? 'LIBERADO (Flag True)' : 'BLOQUEADO (Não comprou Order Bump)'}`, 'info');
+
+          if (result.email_dispatched && result.email_dispatched.success) {
+            log(`-> E-mail Resend DISPARADO com sucesso! (ID: ${result.email_dispatched.resend_id || 'ok'})`, 'success');
+          } else {
+            const errDetail = result.email_dispatched?.error || 'Desmarcado ou Erro na Chave Resend';
+            log(`-> E-mail Resend: ${errDetail}`, result.email_dispatched?.error ? 'warn' : 'info');
+          }
+
+          updateStateCard(result, result.email_dispatched?.success, result.email_dispatched?.error);
+          updateEmailPreview(email, nome, hasOrderBump);
+        } else {
+          log(`Erro no processamento da venda: ${result.error || 'Falha na requisição'}`, 'error');
+        }
+      } catch (err) {
+        log(`Erro de rede ao conectar com o Webhook: ${err.message}`, 'error');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<span>🚀</span> Executar Liberação Imediata';
+      }
+    }
+
+    function updateStateCard(data, emailSent, emailError) {
+      document.getElementById('stateEmail').textContent = data.email;
+      document.getElementById('stateLevel').textContent = `Nível ${data.level || 1}`;
+      document.getElementById('stateTier').textContent = data.tier === 'master' ? 'Master (2.500 Obras)' : 'Básico (500 Obras)';
+      
+      const propBadge = document.getElementById('stateProsperidade');
+      if (data.has_prosperidade) {
+        propBadge.className = 'tag-badge tag-gold';
+        propBadge.textContent = 'LIBERADO (Order Bump)';
+      } else {
+        propBadge.className = 'tag-badge tag-red';
+        propBadge.textContent = 'BLOQUEADO (Sem Order Bump)';
+      }
+
+      const resendBadge = document.getElementById('stateResend');
+      if (emailSent) {
+        resendBadge.className = 'tag-badge tag-green';
+        resendBadge.textContent = 'Enviado via Resend';
+      } else {
+        resendBadge.className = 'tag-badge tag-red';
+        resendBadge.textContent = emailError ? 'Falhou (Verifique a Chave)' : 'Não solicitado';
+      }
+    }
+
+    async function testResendKey() {
+      const key = document.getElementById('resendApiKey').value.trim();
+      const email = document.getElementById('resendTestEmail').value.trim();
+
+      if (!key) {
+        log('Aviso: Digite ou cole uma chave de API do Resend para testar.', 'warn');
+        return;
+      }
+
+      log(`Enviando teste de e-mail via Resend para ${email} com a chave fornecida...`, 'info');
+
+      try {
+        const res = await fetch(`${API_BASE}/api/test-resend`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ api_key: key, email: email })
+        });
+        const result = await res.json();
+
+        if (res.ok && result.success) {
+          log(`[RESEND 200 OK] E-mail entregue com sucesso! Resend ID: ${result.data?.id}`, 'success');
+        } else {
+          log(`[RESEND ERRO] Falha no envio: ${result.error || JSON.stringify(result)}`, 'error');
+        }
+      } catch (err) {
+        log(`Erro de conexão com o endpoint de teste: ${err.message}`, 'error');
+      }
+    }
+
+    async function verifyStudent() {
+      const email = document.getElementById('simEmail').value.trim().toLowerCase();
+      log(`Consultando base de dados para o e-mail: ${email}...`, 'info');
+      try {
+        const res = await fetch(`${API_BASE}/api/verify?email=${encodeURIComponent(email)}`);
+        const result = await res.json();
+        if (result.found) {
+          log(`Aluno ENCONTRADO na base de dados!`, 'success');
+          log(JSON.stringify(result.member, null, 2), 'info');
+          updateStateCard(result.member, true, null);
+        } else {
+          log(`Aluno ${email} NÃO está cadastrado no banco.`, 'warn');
+        }
+      } catch (err) {
+        log(`Erro ao verificar aluno: ${err.message}`, 'error');
+      }
+    }
+
+    function openAppAsStudent() {
+      const email = document.getElementById('simEmail').value.trim().toLowerCase();
+      const url = `${API_BASE}/index.html?login_email=${encodeURIComponent(email)}`;
+      log(`Abrindo Cúpula 33 autenticado como ${email}...`, 'info');
+      window.open(url, '_blank');
+    }
+
+    function updateEmailPreview(email, nome, hasOrderBump) {
+      const frame = document.getElementById('emailPreviewFrame');
+      // Carrega preview direto do endpoint
+      frame.src = `${API_BASE}/api/email-preview?email=${encodeURIComponent(email)}&name=${encodeURIComponent(nome)}&orderbump=${hasOrderBump ? '1' : '0'}`;
+    }
+
+    // Inicialização
+    window.addEventListener('load', () => {
+      checkServerStatus();
+      updateEmailPreview('thiago.teste@gmail.com', 'Thiago Oliveira', true);
+    });
+  </script>
+</body>
+</html>
