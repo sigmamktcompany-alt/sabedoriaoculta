@@ -68,6 +68,13 @@
       "active": true,
       "status": "approved",
       "sale_code": "MANUAL_APPROVAL_OFFICIAL"
+    },
+    "tjoaquim627@gmail.com": {
+      "name": "Tamara S Joaquim",
+      "tier": "master",
+      "active": true,
+      "status": "approved",
+      "sale_code": "MANUAL_APPROVAL_OFFICIAL"
     }
   }
 }
