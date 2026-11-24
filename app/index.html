@@ -248,6 +248,24 @@
   <!-- ==================== CONTAINER PRINCIPAL ==================== -->
   <main id="mainContainer" class="min-h-screen pb-24 md:pl-60 bg-black text-gray-200 transition-all duration-300">
 
+    <!-- BANNER DE AVISO DE ATUALIZAÇÃO / INSTABILIDADES -->
+    <div id="systemUpdateBanner" class="w-full bg-gradient-to-r from-amber-950/90 via-black to-amber-950/90 border-b border-yellow-500/35 px-4 py-2.5 sm:py-3 text-xs text-yellow-200/90 shadow-xl relative z-30 transition-all duration-300">
+      <div class="max-w-6xl mx-auto flex items-center justify-between gap-3">
+        <div class="flex items-center gap-2.5 min-w-0">
+          <div class="w-7 h-7 rounded-full bg-yellow-500/20 border border-yellow-500/50 flex items-center justify-center shrink-0 animate-pulse text-yellow-400 shadow-[0_0_12px_rgba(234,179,8,0.25)]">
+            <i data-lucide="refresh-cw" class="w-3.5 h-3.5 animate-spin" style="animation-duration: 4s;"></i>
+          </div>
+          <p class="leading-snug text-[11px] sm:text-xs">
+            <span class="font-extrabold text-yellow-400 uppercase tracking-wider text-[10px] sm:text-[11px] mr-1 px-1.5 py-0.5 rounded bg-yellow-500/10 border border-yellow-500/20">ATUALIZAÇÃO EM ANDAMENTO</span>
+            O acervo da Cúpula 33 está sendo atualizado e expandido neste momento. Pequenas instabilidades temporárias podem ocorrer na plataforma, mas nossa equipe já está finalizando as otimizações.
+          </p>
+        </div>
+        <button onclick="dismissUpdateBanner()" class="text-gray-400 hover:text-white p-1 rounded-lg hover:bg-white/10 transition shrink-0 cursor-pointer" title="Dispensar aviso">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+
     <!-- ==================== ABA 1: INÍCIO (EXATAMENTE COMO NAS SCREENSHOTS 6 E 7) ==================== -->
     <section id="tab-home" class="app-tab-section animate-fade-in">
       
@@ -392,6 +410,37 @@
           </div>
         </div>
 
+        <!-- BARRA DE CHIPS DE TEMAS / CATEGORIAS (PADRÃO ORDEM 137) -->
+        <div id="themeChipsContainer" class="flex items-center gap-2 overflow-x-auto pb-4 mb-4 hide-scrollbar">
+          <button onclick="filterByThemeChip('all')" class="theme-chip active px-4 py-1.5 rounded-full text-xs font-bold bg-yellow-500 text-black shadow-lg shadow-yellow-500/20 whitespace-nowrap transition-all cursor-pointer">
+            Todos (1.335)
+          </button>
+          <button onclick="filterByThemeChip('Hermetismo & Cabala')" class="theme-chip px-3.5 py-1.5 rounded-full text-xs font-medium bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 whitespace-nowrap transition-all cursor-pointer">
+            Hermetismo & Cabala
+          </button>
+          <button onclick="filterByThemeChip('Grimórios & Alta Magia')" class="theme-chip px-3.5 py-1.5 rounded-full text-xs font-medium bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 whitespace-nowrap transition-all cursor-pointer">
+            Grimórios & Alta Magia
+          </button>
+          <button onclick="filterByThemeChip('Gnosticismo & Apócrifos')" class="theme-chip px-3.5 py-1.5 rounded-full text-xs font-medium bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 whitespace-nowrap transition-all cursor-pointer">
+            Gnosticismo & Apócrifos
+          </button>
+          <button onclick="filterByThemeChip('Alquimia & Transmutação')" class="theme-chip px-3.5 py-1.5 rounded-full text-xs font-medium bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 whitespace-nowrap transition-all cursor-pointer">
+            Alquimia & Espagíria
+          </button>
+          <button onclick="filterByThemeChip('Sociedades Secretas')" class="theme-chip px-3.5 py-1.5 rounded-full text-xs font-medium bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 whitespace-nowrap transition-all cursor-pointer">
+            Sociedades Secretas & Maçonaria
+          </button>
+          <button onclick="filterByThemeChip('Mente & Projeção Astral')" class="theme-chip px-3.5 py-1.5 rounded-full text-xs font-medium bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 whitespace-nowrap transition-all cursor-pointer">
+            Mente & Consciência
+          </button>
+          <button onclick="filterByThemeChip('Wicca & Bruxaria')" class="theme-chip px-3.5 py-1.5 rounded-full text-xs font-medium bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 whitespace-nowrap transition-all cursor-pointer">
+            Wicca & Bruxaria
+          </button>
+          <button onclick="filterByThemeChip('Thelema')" class="theme-chip px-3.5 py-1.5 rounded-full text-xs font-medium bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 whitespace-nowrap transition-all cursor-pointer">
+            Thelema & Crowley
+          </button>
+        </div>
+
         <!-- 1. STREAMING ROWS VIEW -->
         <div id="libraryStreamingView" class="space-y-10">
           
@@ -413,19 +462,19 @@
             <!-- Injetado dinamicamente -->
           </div>
 
-          <!-- Lotes Completos do Drive -->
+          <!-- Temas & Categorias do Acervo Sagrado (Estilo Ordem 137) -->
           <div class="pt-8 border-t border-white/10">
             <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
               <div>
-                <span class="text-[10px] font-bold text-yellow-400 uppercase tracking-widest block mb-1">DOWNLOAD EM MASSA</span>
+                <span class="text-[10px] font-bold text-yellow-400 uppercase tracking-widest block mb-1">VIAS INICIÁTICAS</span>
                 <h3 class="font-cinzel font-bold text-xl text-white flex items-center gap-2">
-                  <i data-lucide="archive" class="w-5 h-5 text-yellow-400"></i> Lotes dos 6 Módulos (Google Drive Oficial)
+                  <i data-lucide="compass" class="w-5 h-5 text-yellow-400"></i> Temas & Categorias do Acervo
                 </h3>
-                <p class="text-xs text-gray-400 mt-1">Acesso direto às pastas organizadas dos 6 módulos no Google Drive para download em lote.</p>
+                <p class="text-xs text-gray-400 mt-1">Navegue pelas principais tradições e escolas de mistério para leitura integral direto no app.</p>
               </div>
             </div>
             <div id="collectionsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <!-- Injetado via renderCollections -->
+              <!-- Injetado via renderCollections (Cards de Temas com abertura direta) -->
             </div>
           </div>
 
@@ -888,8 +937,7 @@
   </div>
 
   <!-- SCRIPTS -->
-  <script src="books_2500.json" type="application/json" id="rawBooksData"></script>
-  
-  <script src="app.js?v=1795540999"></script>
+  <script src="books_data.js?v=1795542000"></script>
+  <script src="app.js?v=1795542000"></script>
 </body>
 </html>

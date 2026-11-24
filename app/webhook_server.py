@@ -6,7 +6,7 @@ Recursos:
 1. Recebe webhooks de compra aprovada (Kirvano, PerfectPay, Kiwify, Hotmart).
 2. Cadastra automaticamente o aluno com plano Master em app/cupula33_members.json e Supabase.
 3. Gera login e senha de acesso exclusivos para o cliente.
-4. Envia imediatamente o e-mail de boas-vindas com credenciais via Resend API ou SMTP (Hostinger/Gmail).
+4. Envia imediatamente o e-mail de boas-vindas com credenciais via Resend API ou SMTP.
 """
 
 from http.server import HTTPServer, BaseHTTPRequestHandler
@@ -14,13 +14,25 @@ import json
 import urllib.parse
 import urllib.request
 import os
+import sys
 import time
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-PORT = 8033
+# Inclui diretório raiz para importar email_template se necessário
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+ROOT_DIR = os.path.dirname(BASE_DIR)
+if ROOT_DIR not in sys.path:
+    sys.path.insert(0, ROOT_DIR)
+
+try:
+    from email_template import render_cupula_email
+except ImportError:
+    def render_cupula_email(name, email, password, portal_url, vip_group_url):
+        return f"<p>Acesso Liberado para {name} ({email}) - Senha: {password}</p>"
+
+PORT = 8033
 CONFIG_FILE = os.path.join(BASE_DIR, "email_config.json")
 DATA_FILE = os.path.join(BASE_DIR, "cupula33_members.json")
 
@@ -40,13 +52,14 @@ MASTER_EMAILS = [
 def load_config():
     default_cfg = {
         "provider": "resend",
-        "resend_api_key": os.environ.get("RESEND_API_KEY", ""),
-        "from_email": "Cúpula 33 <suporte@sabedoriaoculta.com>",
+        "resend_api_key": os.environ.get("RESEND_API_KEY", "re_ZwdwULHi_MA8wrHM6fFcYDKAxavKx7LC5"),
+        "from_email": "Cúpula 33 <onboarding@resend.dev>",
         "smtp_host": "smtp.hostinger.com",
         "smtp_port": 465,
         "smtp_user": "",
         "smtp_password": "",
-        "portal_url": "https://sabedoriaoculta.com/app/",
+        "portal_url": "https://sigmamarketingdigital.github.io/cupula33/app/",
+        "vip_group_url": "https://chat.whatsapp.com/invite/cupula33-vip",
         "default_password": "cupula@33"
     }
     if os.path.exists(CONFIG_FILE):
@@ -93,7 +106,6 @@ def supabase_upsert_member(email, name=None, tier="master", sale_code=None, acti
         with urllib.request.urlopen(req, timeout=5) as r:
             return json.loads(r.read().decode("utf-8"))
     except Exception:
-        # Se já existir, tenta PATCH
         try:
             url_patch = f"{SUPABASE_URL}/rest/v1/members?email=eq.{urllib.parse.quote(email)}"
             req_p = urllib.request.Request(url_patch, data=json.dumps(payload).encode("utf-8"), headers=headers, method="PATCH")
@@ -103,98 +115,12 @@ def supabase_upsert_member(email, name=None, tier="master", sale_code=None, acti
             print(f"[SUPABASE UPSERT] {e2}")
     return None
 
-def build_welcome_email_html(name, email, password, portal_url):
-    display_name = name or email.split("@")[0].title()
-    return f"""<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <title>Acesso Liberado • Cúpula 33</title>
-  <style>
-    body {{ margin: 0; padding: 0; background-color: #050505; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #dcdcdc; }}
-    .wrapper {{ width: 100%; max-width: 600px; margin: 0 auto; background-color: #0d0d0d; border: 1px solid #222222; border-radius: 16px; overflow: hidden; }}
-    .header {{ padding: 36px 24px 20px 24px; text-align: center; background: radial-gradient(circle at center, rgba(234,179,8,0.12), transparent 70%); border-bottom: 1px solid #1a1a1a; }}
-    .badge {{ display: inline-block; padding: 4px 12px; background: rgba(234,179,8,0.15); border: 1px solid rgba(234,179,8,0.4); border-radius: 999px; color: #facc15; font-size: 11px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }}
-    .title {{ font-size: 26px; font-weight: 900; color: #ffffff; margin: 0 0 6px 0; letter-spacing: 1px; font-family: Georgia, serif; }}
-    .subtitle {{ font-size: 13px; color: #888888; margin: 0; }}
-    .body {{ padding: 32px 28px; }}
-    .greeting {{ font-size: 18px; color: #ffffff; font-weight: bold; margin-bottom: 16px; }}
-    .text {{ font-size: 14px; line-height: 1.7; color: #b5b5b5; margin-bottom: 24px; }}
-    .card-creds {{ background: #141414; border: 1px solid rgba(234,179,8,0.3); border-radius: 14px; padding: 22px; margin-bottom: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }}
-    .cred-row {{ display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #202020; }}
-    .cred-row:last-child {{ border-bottom: none; }}
-    .cred-label {{ font-size: 12px; color: #777777; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; }}
-    .cred-val {{ font-size: 14px; color: #facc15; font-family: monospace; font-weight: bold; }}
-    .btn-container {{ text-align: center; margin: 32px 0 24px 0; }}
-    .btn {{ display: inline-block; background: #eab308; color: #000000 !important; text-decoration: none; font-size: 13px; font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase; padding: 16px 36px; border-radius: 12px; box-shadow: 0 0 25px rgba(234,179,8,0.35); }}
-    .features {{ background: #111111; border-radius: 12px; padding: 18px 22px; margin-top: 24px; border: 1px solid #1c1c1c; }}
-    .feature-item {{ font-size: 13px; color: #999999; margin: 6px 0; }}
-    .feature-item strong {{ color: #ffffff; }}
-    .footer {{ padding: 24px; text-align: center; border-top: 1px solid #181818; font-size: 11px; color: #555555; }}
-  </style>
-</head>
-<body>
-  <div style="padding: 24px 12px;">
-    <div class="wrapper">
-      <div class="header">
-        <span class="badge">Iniciação Confirmada</span>
-        <h1 class="title">CÚPULA 33</h1>
-        <p class="subtitle">Acesso Oficial ao Acervo Hermético & Biblioteca Oculta</p>
-      </div>
-      
-      <div class="body">
-        <div class="greeting">Saudações, {display_name}! 🏛️</div>
-        
-        <p class="text">
-          Seu pagamento foi confirmado e sua matrícula na <strong>Cúpula 33</strong> já foi ativada com <strong>Plano Master Vitalício</strong>.
-          Abaixo estão seus dados de acesso exclusivos à plataforma:
-        </p>
-
-        <div class="card-creds">
-          <div class="cred-row">
-            <span class="cred-label">Link do Portal:</span>
-            <span class="cred-val"><a href="{portal_url}" style="color: #facc15; text-decoration: underline;">{portal_url}</a></span>
-          </div>
-          <div class="cred-row">
-            <span class="cred-label">Seu Login:</span>
-            <span class="cred-val">{email}</span>
-          </div>
-          <div class="cred-row">
-            <span class="cred-label">Sua Senha:</span>
-            <span class="cred-val">{password}</span>
-          </div>
-        </div>
-
-        <div class="btn-container">
-          <a href="{portal_url}" target="_blank" class="btn">ACESSAR O ACERVO AGORA ➔</a>
-        </div>
-
-        <div class="features">
-          <div class="feature-item">✓ <strong>2.500+ Manuscritos Raros:</strong> Alquimia, Hermetismo, Grimórios e Apócrifos.</div>
-          <div class="feature-item">✓ <strong>Leitor Contínuo HD:</strong> Leitura fluida no computador, tablet ou celular.</div>
-          <div class="feature-item">✓ <strong>Frequências Sagradas:</strong> Ondas 432Hz, 528Hz e 963Hz integradas.</div>
-          <div class="feature-item">✓ <strong>Comunidade Secreta:</strong> Espaço fechado de debates e resenhas.</div>
-        </div>
-
-        <p class="text" style="margin-top: 24px; font-size: 12px; color: #777777;">
-          💡 <em>Dica de Ouro:</em> Você pode instalar nosso aplicativo direto na tela inicial do seu celular (iPhone ou Android) clicando no botão "App" dentro da plataforma.
-        </p>
-      </div>
-
-      <div class="footer">
-        Cúpula 33 • Conhecimento Oculto para Iniciados.<br>
-        Se precisar de ajuda com seu acesso, responda a este e-mail.
-      </div>
-    </div>
-  </div>
-</body>
-</html>"""
-
 def send_email_resend(api_key, from_email, to_email, subject, html_content):
     url = "https://api.resend.com/emails"
     headers = {
         "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "User-Agent": "Cupula33-Webhook-Server/1.0"
     }
     payload = {
         "from": from_email,
@@ -211,7 +137,7 @@ def send_email_resend(api_key, from_email, to_email, subject, html_content):
     except urllib.error.HTTPError as e:
         err_msg = e.read().decode("utf-8")
         print(f"[RESEND HTTP ERROR {e.code}] {err_msg}")
-        return {"success": False, "error": err_msg}
+        return {"success": False, "error": err_msg, "code": e.code}
     except Exception as e:
         print(f"[RESEND ERROR] {e}")
         return {"success": False, "error": str(e)}
@@ -242,10 +168,17 @@ def send_email_smtp(host, port, user, password, from_email, to_email, subject, h
 
 def dispatch_access_email(name, email, password):
     cfg = load_config()
-    portal_url = cfg.get("portal_url", "https://sabedoriaoculta.com/app/")
-    from_email = cfg.get("from_email", "Cúpula 33 <suporte@sabedoriaoculta.com>")
+    portal_url = cfg.get("portal_url", "https://sigmamarketingdigital.github.io/cupula33/app/")
+    vip_group_url = cfg.get("vip_group_url", "https://chat.whatsapp.com/invite/cupula33-vip")
+    from_email = cfg.get("from_email", "Cúpula 33 <onboarding@resend.dev>")
     subject = "Seu Acesso Master foi Liberado! • Cúpula 33"
-    html = build_welcome_email_html(name, email, password, portal_url)
+    html = render_cupula_email(
+        name=name,
+        email=email,
+        password=password,
+        portal_url=portal_url,
+        vip_group_url=vip_group_url
+    )
 
     resend_key = cfg.get("resend_api_key", "").strip()
     smtp_user = cfg.get("smtp_user", "").strip()
@@ -276,7 +209,7 @@ class WebhookAutomationHandler(BaseHTTPRequestHandler):
         self.send_header("Content-Type", content_type)
         self.send_header("Access-Control-Allow-Origin", "*")
         self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-        self.send_header("Access-Control-Allow-Headers", "Content-Type, Authorization, apikey")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type, Authorization, apikey, x-kirvano-token, X-Kirvano-Token")
         self.end_headers()
 
     def do_OPTIONS(self):
