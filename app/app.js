@@ -405,7 +405,15 @@ function getCommunityPosts() {
   }
   try {
     const parsed = JSON.parse(saved);
-    const cleaned = parsed.filter(p => p && p.author !== "José Roberto Borges" && p.author !== "Rodrigo ramon Braz palacios" && p.author !== "Sara Vieira");
+    const cleaned = parsed.filter(p => {
+      if (!p) return false;
+      const author = (p.author || "").toLowerCase();
+      const email = (p.userEmail || "").toLowerCase();
+      const text = (p.text || p.content || "").toLowerCase();
+      return !author.includes("ricardo") && !author.includes("scola") &&
+             !email.includes("ricardo") && !email.includes("scola") &&
+             author !== "josé roberto borges" && author !== "rodrigo ramon braz palacios" && author !== "sara vieira";
+    });
     cachedCommunityPosts = cleaned;
     return cleaned;
   } catch(e) {
@@ -439,7 +447,8 @@ async function syncCommunityWithSupabase() {
 
     if (postsRes.ok) {
       const dbPosts = await postsRes.json();
-      const mapped = dbPosts.map(p => {
+      const mapped = dbPosts
+        .map(p => {
         const content = p.content || "";
         let author = "Iniciado da Ordem";
         let level = 1;
@@ -485,6 +494,16 @@ async function syncCommunityWithSupabase() {
           liked: false,
           comments: 0
         };
+      })
+      .filter(p => {
+        if (!p) return false;
+        const a = (p.author || "").toLowerCase();
+        const em = (p.userEmail || "").toLowerCase();
+        const t = (p.text || "").toLowerCase();
+        return !a.includes("ricardo") && !a.includes("scola") &&
+               !em.includes("ricardo") && !em.includes("scola") &&
+               !t.includes("ricardoscola") &&
+               a !== "josé roberto borges" && a !== "rodrigo ramon braz palacios" && a !== "sara vieira";
       });
 
       // Mescla com likes salvos localmente
