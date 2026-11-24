@@ -376,58 +376,24 @@ function switchTab(tabName) {
 // ==========================================
 // COMUNIDADE CÚPULA 33 (100% FUNCIONAL)
 // ==========================================
-const DEFAULT_COMMUNITY_POSTS = [
-  {
-    id: "post-1",
-    author: "José Roberto Borges",
-    userEmail: "jroberto@exemplo.com",
-    initial: "J",
-    level: 1,
-    category: "Dúvidas na interação do site",
-    text: "Pensei que era áudio book",
-    timeAgo: "22/11/2026, 22:02:41",
-    likes: 2,
-    liked: false,
-    comments: 0
-  },
-  {
-    id: "post-2",
-    author: "Rodrigo ramon Braz palacios",
-    userEmail: "rodrigo.palacios@exemplo.com",
-    initial: "R",
-    level: 1,
-    category: "Teoria",
-    text: "No face aparece uma porção de livros que na verdade aqui não estão",
-    timeAgo: "18/11/2026, 23:17:39",
-    likes: 5,
-    liked: false,
-    comments: 0
-  },
-  {
-    id: "post-3",
-    author: "Sara Vieira",
-    userEmail: "elevarevenue@gmail.com",
-    initial: "S",
-    level: 1,
-    category: "Templo",
-    text: "Iniciando os estudos hoje com O Livro de Enoque e A Tábua de Esmeraldas. A profundidade dos textos é incomparável.",
-    timeAgo: "15/11/2026, 14:30:12",
-    likes: 9,
-    liked: false,
-    comments: 3
-  }
-];
+// Posts da comunidade iniciam vazios (sem dados mockados de terceiros)
+const DEFAULT_COMMUNITY_POSTS = [];
 
 function getCommunityPosts() {
   const saved = localStorage.getItem("cupula33_community_posts");
   if (!saved) {
-    localStorage.setItem("cupula33_community_posts", JSON.stringify(DEFAULT_COMMUNITY_POSTS));
-    return DEFAULT_COMMUNITY_POSTS;
+    return [];
   }
   try {
-    return JSON.parse(saved);
+    const parsed = JSON.parse(saved);
+    // Filtrar e expurgar posts antigos clonados caso ainda persistam no localStorage do cliente
+    const cleaned = parsed.filter(p => p && p.author !== "José Roberto Borges" && p.author !== "Rodrigo ramon Braz palacios" && p.author !== "Sara Vieira");
+    if (cleaned.length !== parsed.length) {
+      localStorage.setItem("cupula33_community_posts", JSON.stringify(cleaned));
+    }
+    return cleaned;
   } catch(e) {
-    return DEFAULT_COMMUNITY_POSTS;
+    return [];
   }
 }
 
