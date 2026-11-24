@@ -160,7 +160,7 @@ def supabase_upsert_member(email, name=None, tier="master", sale_code=None, acti
             pass
     return None
 
-def send_email_resend(api_key, from_email, to_email, subject, html_content):
+def send_email_resend(api_key, from_email, to_email, subject, html_content=None, template_id=None, template_vars=None):
     url = "https://api.resend.com/emails"
     headers = {
         "Authorization": f"Bearer {api_key}",
@@ -169,10 +169,16 @@ def send_email_resend(api_key, from_email, to_email, subject, html_content):
     }
     payload = {
         "from": from_email,
-        "to": [to_email],
-        "subject": subject,
-        "html": html_content
+        "to": [to_email]
     }
+    if template_id:
+        payload["template"] = {"id": template_id}
+        if template_vars:
+            payload["template"]["variables"] = template_vars
+    else:
+        payload["subject"] = subject
+        payload["html"] = html_content
+
     req = urllib.request.Request(url, data=json.dumps(payload).encode("utf-8"), headers=headers, method="POST")
     try:
         with urllib.request.urlopen(req, timeout=10) as resp:
@@ -213,6 +219,13 @@ def send_email_smtp(host, port, user, password, from_email, to_email, subject, h
 
 def dispatch_access_email(name, email, password, has_orderbump=False):
     cfg = load_config()
+    local_cfg = os.path.join(BASE_DIR, "email_config.local.json")
+    if os.path.exists(local_cfg):
+        try:
+            with open(local_cfg, "r", encoding="utf-8") as f:
+                cfg.update(json.load(f))
+        except Exception:
+            pass
     portal_url = cfg.get("portal_url", "https://sabedoriaoculta.com/app/")
     vip_group_url = cfg.get("vip_group_url", "https://chat.whatsapp.com/invite/cupula33-vip")
     from_email = cfg.get("from_email", "Cúpula 33 <onboarding@resend.dev>")
@@ -230,10 +243,26 @@ def dispatch_access_email(name, email, password, has_orderbump=False):
     smtp_user = cfg.get("smtp_user", "").strip()
     smtp_pass = cfg.get("smtp_password", "").strip()
 
-    # 1. Tentar Resend se configurado
+    # 1. Tentar Resend se configurado (prioriza o template cadastrado no Resend)
     if resend_key and resend_key.startswith("re_"):
         print(f"[DISPATCH] Tentando envio via Resend para {email}...")
-        res = send_email_resend(resend_key, from_email, email, subject, html)
+        template_id = cfg.get("resend_template_id", "c0225bd8-6763-4f23-820f-a35dfb6aa868")
+        template_vars = {
+            "name": name,
+            "email": email,
+            "password": password,
+            "portal_url": portal_url,
+            "vip_group_url": vip_group_url
+        }
+        res = send_email_resend(
+            resend_key,
+            from_email,
+            email,
+            subject,
+            html_content=html,
+            template_id=template_id,
+            template_vars=template_vars
+        )
         res["html_preview"] = html
         return res
 
@@ -304,6 +333,13 @@ def process_sale_payload(data):
 
     tier = data.get("tier") or "master"
     cfg = load_config()
+    local_cfg = os.path.join(BASE_DIR, "email_config.local.json")
+    if os.path.exists(local_cfg):
+        try:
+            with open(local_cfg, "r", encoding="utf-8") as f:
+                cfg.update(json.load(f))
+        except Exception:
+            pass
     default_pass = cfg.get("default_password", "cupula@33")
 
     # 1. Gravar em cupula33_members.json
@@ -405,6 +441,13 @@ class WebhookAutomationHandler(BaseHTTPRequestHandler):
         # 2. Status geral do sistema (/api/status)
         if path in ["/api/status", "/status"]:
             cfg = load_config()
+    local_cfg = os.path.join(BASE_DIR, "email_config.local.json")
+    if os.path.exists(local_cfg):
+        try:
+            with open(local_cfg, "r", encoding="utf-8") as f:
+                cfg.update(json.load(f))
+        except Exception:
+            pass
             db = load_local_members()
             self._set_cors_headers(200)
             self.wfile.write(json.dumps({
