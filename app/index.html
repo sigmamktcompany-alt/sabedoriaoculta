@@ -51,13 +51,13 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="app.css?v=1795482000">
+  <link rel="stylesheet" href="app.css?v=1795484000">
 </head>
 
 <body class="bg-black text-gray-200 font-sans antialiased overflow-x-hidden selection:bg-yellow-500/30 selection:text-yellow-300">
 
   <!-- ==================== TELA INICIAL DE LOGIN VIP ==================== -->
-  <div id="vipLoginGate" class="fixed inset-0 z-[10000] bg-black/98 backdrop-blur-2xl flex items-center justify-center p-4 transition-opacity duration-300 hidden">
+  <div id="vipLoginGate" class="fixed inset-0 z-[20000] bg-black/98 backdrop-blur-2xl flex items-center justify-center p-4 transition-opacity duration-300">
     <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-yellow-500/10 via-black/80 to-black"></div>
 
     <div class="relative w-full max-w-md rounded-3xl p-7 sm:p-9 border border-white/10 bg-[#121212] shadow-[0_0_60px_rgba(234,179,8,0.15)] text-center">
@@ -163,8 +163,8 @@
     </nav>
 
     <!-- Card de Membro Inferior Dinâmico (Carregado por e-mail) -->
-    <div class="p-3.5 border-t border-white/10 bg-[#0d0d0d]">
-      <div onclick="switchTab('profile')" class="flex items-center gap-3 p-2 rounded-xl hover:bg-white/5 cursor-pointer transition">
+    <div class="p-3.5 border-t border-white/10 bg-[#0d0d0d] flex items-center justify-between gap-2">
+      <div onclick="switchTab('profile')" class="flex items-center gap-3 p-1.5 rounded-xl hover:bg-white/5 cursor-pointer transition flex-1 min-w-0" title="Ver Perfil">
         <div class="w-9 h-9 rounded-full overflow-hidden bg-white/5 border border-white/10 shrink-0">
           <img id="sidebarAvatarImg" src="assets/logo.jpg" alt="Avatar" class="w-full h-full object-cover">
         </div>
@@ -176,6 +176,9 @@
           </div>
         </div>
       </div>
+      <button onclick="logoutVipGate()" title="Sair / Trocar Usuário" class="p-2 rounded-lg text-gray-500 hover:text-rose-400 hover:bg-white/5 transition cursor-pointer shrink-0">
+        <i data-lucide="log-out" class="w-4 h-4"></i>
+      </button>
     </div>
   </aside>
 
@@ -306,7 +309,7 @@
           </div>
 
           <!-- Card 2: Os Segredos da Prosperidade Maçônica (Screenshot 6) -->
-          <div onclick="handleBookClick(999)" class="esoteric-card esoteric-card-hover rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between cursor-pointer group">
+          <div onclick="openReaderModalDirect(999)" class="esoteric-card esoteric-card-hover rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between cursor-pointer group">
             <div class="flex items-start gap-4">
               <div class="w-24 sm:w-28 aspect-[3/4] rounded-xl overflow-hidden bg-black shrink-0 border border-white/10">
                 <img src="assets/covers_extracted/cover_Manuscrito_Maconico_da_Prosperidade_Oculta.jpg" alt="Os Segredos da Prosperidade Maçônica" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -864,6 +867,6 @@
   <script src="books_2500.json" type="application/json" id="rawBooksData"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
-  <script src="app.js?v=1795482000"></script>
+  <script src="app.js?v=1795484000"></script>
 </body>
 </html>

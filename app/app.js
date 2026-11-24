@@ -1496,7 +1496,7 @@ async function renderNativePDF(pdfUrl, startPage = 1) {
   if (!container) return;
 
   if (spinner) {
-    if (spinnerText) spinnerText.textContent = "Carregando páginas do manuscrito...";
+    if (spinnerText) spinnerText.textContent = "Carregando manuscrito...";
     spinner.classList.remove("hidden");
   }
 
@@ -1521,23 +1521,24 @@ async function renderNativePDF(pdfUrl, startPage = 1) {
     const renderedPages = new Set();
     const pageContainers = [];
 
-    // Obter proporção da página 1
+    // Obter proporção da página 1 para estruturar placeholders
     const samplePage = await currentPdfDoc.getPage(1);
     const sampleViewport = samplePage.getViewport({ scale: 1 });
-    const aspectRatio = sampleViewport.height / sampleViewport.width;
+    const ratio = sampleViewport.height / sampleViewport.width; // Ex: 1.414
 
     // Criar placeholders estruturados para cada página
     for (let p = 1; p <= numPages; p++) {
       const pageDiv = document.createElement("div");
       pageDiv.id = `pdf-page-wrapper-${p}`;
       pageDiv.dataset.pageNumber = p;
-      pageDiv.className = "pdf-page-wrapper relative w-full max-w-[850px] mx-auto rounded-xl shadow-2xl bg-[#141414] border border-white/5 overflow-hidden flex items-center justify-center transition-opacity duration-300";
-      pageDiv.style.aspectRatio = `1 / ${aspectRatio.toFixed(3)}`;
+      pageDiv.className = "pdf-page-wrapper relative w-full max-w-[850px] mx-auto rounded-xl shadow-2xl bg-[#181818] border border-white/10 overflow-hidden flex flex-col items-center justify-center my-6 transition-all duration-300";
+      pageDiv.style.aspectRatio = `1 / ${ratio.toFixed(4)}`;
+      pageDiv.style.minHeight = "400px";
 
       pageDiv.innerHTML = `
-        <div class="page-placeholder text-center text-gray-500 font-mono text-xs flex flex-col items-center gap-2 p-6">
-          <div class="w-6 h-6 border-2 border-yellow-500/20 border-t-yellow-500 rounded-full animate-spin"></div>
-          <span>Página ${p} de ${numPages}</span>
+        <div class="page-placeholder text-center text-gray-400 font-mono text-xs flex flex-col items-center gap-3 p-8">
+          <div class="w-8 h-8 border-3 border-yellow-500/20 border-t-yellow-500 rounded-full animate-spin"></div>
+          <span class="tracking-widest uppercase text-[11px] text-yellow-500/80">Página ${p} de ${numPages}</span>
         </div>
       `;
 
@@ -1547,24 +1548,33 @@ async function renderNativePDF(pdfUrl, startPage = 1) {
 
     if (spinner) spinner.classList.add("hidden");
 
-    // Renderiza uma página específica em canvas HD
+    // Renderiza uma página específica em canvas HD com fundo branco opaco
     async function renderPageCanvas(pageNum, pageDiv) {
       if (renderedPages.has(pageNum)) return;
       renderedPages.add(pageNum);
 
       try {
         const page = await currentPdfDoc.getPage(pageNum);
-        const containerWidth = Math.min(850, window.innerWidth > 640 ? window.innerWidth - 64 : window.innerWidth - 16);
-        const scale = (containerWidth / page.getViewport({ scale: 1 }).width) * (window.devicePixelRatio || 1);
-        const viewport = page.getViewport({ scale: Math.max(1, scale) });
+        const containerWidth = Math.min(850, window.innerWidth > 640 ? window.innerWidth - 64 : window.innerWidth - 24);
+        const unscaledViewport = page.getViewport({ scale: 1 });
+        const pixelRatio = window.devicePixelRatio || 1;
+        const displayScale = containerWidth / unscaledViewport.width;
+        // Limita o fator de escala de render para evitar estouro de memória da GPU
+        const renderScale = displayScale * Math.min(pixelRatio, 2.5);
+        const viewport = page.getViewport({ scale: Math.max(1, renderScale) });
 
         const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
-        canvas.height = viewport.height;
+        const ctx = canvas.getContext("2d", { alpha: false });
         canvas.width = viewport.width;
+        canvas.height = viewport.height;
         canvas.style.width = "100%";
-        canvas.style.height = "100%";
-        canvas.className = "w-full h-full object-contain rounded-xl";
+        canvas.style.height = "auto";
+        canvas.style.display = "block";
+        canvas.className = "w-full h-auto block rounded-xl shadow-lg";
+
+        // Preenche com branco opaco antes de desenhar o PDF para evitar texto preto sobre fundo transparente/escuro
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         const renderContext = {
           canvasContext: ctx,
@@ -1574,15 +1584,17 @@ async function renderNativePDF(pdfUrl, startPage = 1) {
         await page.render(renderContext).promise;
 
         pageDiv.innerHTML = "";
-        pageDiv.appendChild(canvas);
+        pageDiv.style.minHeight = "";
         pageDiv.style.aspectRatio = "";
+        pageDiv.className = "pdf-page-wrapper relative w-full max-w-[850px] mx-auto rounded-xl shadow-2xl bg-white border border-gray-300/30 overflow-hidden flex flex-col items-center my-6 transition-all duration-300";
+        pageDiv.appendChild(canvas);
       } catch (err) {
         console.error("Erro ao renderizar página " + pageNum, err);
       }
     }
 
     // Renderizar imediatamente as páginas ao redor de startPage
-    const initialPages = [startPage, startPage + 1, startPage + 2, 1, 2].filter(p => p <= numPages);
+    const initialPages = [startPage, startPage + 1, startPage + 2, 1, 2].filter((p, idx, arr) => p <= numPages && arr.indexOf(p) === idx);
     initialPages.forEach(p => {
       const div = document.getElementById(`pdf-page-wrapper-${p}`);
       if (div) renderPageCanvas(p, div);
@@ -1598,7 +1610,7 @@ async function renderNativePDF(pdfUrl, startPage = 1) {
       });
     }, {
       root: container,
-      rootMargin: "800px 0px 800px 0px"
+      rootMargin: "900px 0px 900px 0px"
     });
 
     pageContainers.forEach(div => currentRenderObserver.observe(div));
@@ -1619,7 +1631,7 @@ async function renderNativePDF(pdfUrl, startPage = 1) {
       });
     }, {
       root: container,
-      threshold: 0.5
+      threshold: 0.4
     });
 
     pageContainers.forEach(div => currentScrollObserver.observe(div));
@@ -2422,20 +2434,23 @@ const MASTER_ALLOWLIST = [
 
 function checkVipGateAuth() {
   const gate = document.getElementById("vipLoginGate");
-  const savedEmail = localStorage.getItem("cupula33_user_email");
+  const savedEmail = (localStorage.getItem("cupula33_user_email") || "").trim().toLowerCase();
   const savedTier = localStorage.getItem("cupula33_user_tier");
 
   if (!gate) return;
 
-    if (savedEmail) {
+  if (savedEmail) {
     if (savedTier === "master") {
       currentTier = "master";
     }
     try { updateTierBadgeUI(); } catch(e) {}
+    try { updateAllUserDisplays(); } catch(e) {}
     gate.style.opacity = "0";
     gate.style.pointerEvents = "none";
-    gate.classList.add("hidden");
-    gate.style.display = "none";
+    setTimeout(() => {
+      gate.classList.add("hidden");
+      gate.style.display = "none";
+    }, 200);
   } else {
     gate.classList.remove("hidden");
     gate.style.display = "flex";
@@ -2603,10 +2618,12 @@ function logoutVipGate() {
   window.location.reload();
 }
 
-// Inicializar verificação de login VIP assim que a página carregar
-window.addEventListener("DOMContentLoaded", () => {
+// Inicializar verificação de login VIP assim que o script rodar sem travar em DOMContentLoaded
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", checkVipGateAuth);
+} else {
   checkVipGateAuth();
-});
+}
 
 // ==========================================
 // PÁGINA DEDICADA DE MÓDULO (ESTILO BRAINSYNC)
