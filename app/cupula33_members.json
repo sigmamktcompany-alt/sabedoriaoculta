@@ -132,6 +132,20 @@
       "status": "approved",
       "sale_code": "DIRECT_SALE",
       "updated_at": 1795558452.8387892
+    },
+    "josecar2neiro@gmail.com": {
+      "name": "José de Jesus Carneiro",
+      "password": "cupula@33",
+      "tier": "master",
+      "level": 1,
+      "has_prosperidade": true,
+      "has_orderbump": true,
+      "has_prosperidade_oculta": true,
+      "active": true,
+      "status": "approved",
+      "sale_code": "MANUAL_APPROVAL_MASTER_BUMP",
+      "date_added": "2026-11-25",
+      "updated_at": 1795597814.2589052
     }
   }
 }
