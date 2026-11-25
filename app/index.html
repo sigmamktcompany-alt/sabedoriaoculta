@@ -68,6 +68,46 @@
     }
   </script>
   <link rel="stylesheet" href="app.css?v=1795540999">
+  <!-- CSS DEFINITIVO PARA O DECK LATERAL / SIDEBAR DESKTOP -->
+  <style>
+    @media (min-width: 768px) {
+      #desktopSidebar {
+        display: flex !important;
+        flex-direction: column !important;
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        width: 15rem !important; /* 240px (w-60) */
+        height: 100vh !important;
+        z-index: 50 !important;
+        background-color: #0a0a0a !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+        transform: translateX(0) !important;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      }
+      #desktopSidebar.-translate-x-full {
+        transform: translateX(-100%) !important;
+      }
+      #mainContainer {
+        padding-left: 15rem !important;
+      }
+      #mainContainer.no-sidebar {
+        padding-left: 0 !important;
+      }
+      header.md\:hidden, nav.md\:hidden {
+        display: none !important;
+      }
+    }
+    @media (max-width: 767px) {
+      #desktopSidebar {
+        display: none !important;
+      }
+      #mainContainer {
+        padding-left: 0 !important;
+      }
+    }
+  </style>
 </head>
 
 <body
@@ -1478,7 +1518,7 @@
 
   <!-- SCRIPTS -->
   <script src="books_data.js?v=1795569000"></script>
-  <script src="app.js?v=1795569000"></script>
+  <script src="app.js?v=1795572000"></script>
 </body>
 
 </html>

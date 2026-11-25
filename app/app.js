@@ -316,11 +316,17 @@ function toggleSidebarCollapse() {
   isSidebarCollapsed = !isSidebarCollapsed;
   if (isSidebarCollapsed) {
     sidebar.classList.add("-translate-x-full");
-    if (main) main.classList.remove("md:pl-60");
+    if (main) {
+      main.classList.remove("md:pl-60");
+      main.classList.add("no-sidebar");
+    }
     if (icon) icon.setAttribute("data-lucide", "chevron-right");
   } else {
     sidebar.classList.remove("-translate-x-full");
-    if (main) main.classList.add("md:pl-60");
+    if (main) {
+      main.classList.add("md:pl-60");
+      main.classList.remove("no-sidebar");
+    }
     if (icon) icon.setAttribute("data-lucide", "chevron-left");
   }
   if (window.lucide) try { lucide.createIcons(); } catch(e) {}
