@@ -68,6 +68,46 @@
     }
   </script>
   <link rel="stylesheet" href="app.css?v=1795540999">
+  <!-- CSS DEFINITIVO PARA O DECK LATERAL / SIDEBAR DESKTOP -->
+  <style>
+    @media (min-width: 768px) {
+      #desktopSidebar {
+        display: flex !important;
+        flex-direction: column !important;
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        width: 15rem !important; /* 240px (w-60) */
+        height: 100vh !important;
+        z-index: 50 !important;
+        background-color: #0a0a0a !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+        transform: translateX(0) !important;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      }
+      #desktopSidebar.-translate-x-full {
+        transform: translateX(-100%) !important;
+      }
+      #mainContainer {
+        padding-left: 15rem !important;
+      }
+      #mainContainer.no-sidebar {
+        padding-left: 0 !important;
+      }
+      header.md\:hidden, nav.md\:hidden {
+        display: none !important;
+      }
+    }
+    @media (max-width: 767px) {
+      #desktopSidebar {
+        display: none !important;
+      }
+      #mainContainer {
+        padding-left: 0 !important;
+      }
+    }
+  </style>
 </head>
 
 <body
@@ -82,9 +122,6 @@
 
     <div
       class="relative w-full max-w-md rounded-3xl p-7 sm:p-9 border border-white/10 bg-[#121212] shadow-[0_0_60px_rgba(234,179,8,0.15)] text-center">
-      <button id="gateCloseBtn" onclick="closeVipGateIfAuth()" type="button"
-        class="hidden absolute top-4 right-4 w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white flex items-center justify-center transition-all cursor-pointer text-sm"
-        title="Continuar no Acervo">✕</button>
       <div class="relative w-20 h-20 mx-auto mb-5">
         <div class="absolute inset-0 rounded-2xl bg-yellow-500/20 blur-xl animate-pulse"></div>
         <img src="assets/logo.jpg" alt="Cúpula 33"
@@ -137,23 +174,24 @@
   <aside id="desktopSidebar"
     class="hidden md:flex flex-col h-screen fixed left-0 top-0 bg-[#0a0a0a] border-r border-white/10 z-50 w-60 text-left select-none transition-all duration-300">
 
-    <!-- Top Brand: Logo e Título -->
+    <!-- Top Brand: Logo e Título (Padrão Ordem 137 com Logo Cúpula 33) -->
     <div class="p-4 flex items-center justify-between border-b border-white/10 relative">
       <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('home')">
         <div
-          class="w-11 h-11 rounded-lg bg-black border border-white/15 p-1 flex items-center justify-center shadow-lg shrink-0">
-          <img src="assets/logo.jpg" alt="Cúpula 33" class="w-full h-full object-cover rounded">
+          class="w-12 h-12 rounded-xl bg-black border border-yellow-500/30 p-1 flex items-center justify-center shadow-lg shrink-0 overflow-hidden">
+          <img src="assets/cupula33_badge_logo.jpg" alt="Cúpula 33" class="w-full h-full object-cover rounded-lg" onerror="this.onerror=null; this.src='assets/logo.jpg'">
         </div>
         <div class="flex flex-col">
           <span class="font-cinzel font-black text-sm tracking-wider text-white">CÚPULA <span
               class="text-yellow-400">33</span></span>
-          <span class="text-[9px] tracking-widest text-gray-500 uppercase font-mono">BIBLIOTECA OCULTA</span>
+          <span class="text-[9px] tracking-widest text-yellow-500/70 uppercase font-mono">BIBLIOTECA OCULTA</span>
         </div>
       </div>
 
-      <!-- Botão Chevron Toggle na borda -->
+      <!-- Botão Chevron Toggle na borda (Exato Ordem 137 em Amarelo) -->
       <button onclick="toggleSidebarCollapse()"
-        class="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-yellow-500 hover:bg-yellow-400 rounded-full flex items-center justify-center border-2 border-black text-black hover:scale-110 transition shadow-lg z-10 cursor-pointer">
+        class="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-yellow-500 hover:bg-yellow-400 rounded-full flex items-center justify-center border-2 border-black text-black hover:scale-110 transition shadow-lg z-10 cursor-pointer"
+        title="Recolher / Expandir Menu">
         <i id="sidebarChevronIcon" data-lucide="chevron-left" class="w-3.5 h-3.5 stroke-[3]"></i>
       </button>
     </div>
@@ -396,7 +434,7 @@
                   O Núcleo
                 </h3>
                 <p class="text-xs text-gray-400 leading-relaxed line-clamp-3">
-                  Ensinamentos e tradições ocultas reveladas em vídeo.
+                  Rompa o véu da ilusão. Esta coletânea exclusiva expõe os mecanismos ocultos que governam a realidade e os segredos milenares mantidos longe do seu alcance. Sem filtros. Sem meias-verdades. Apenas o conhecimento que nunca quiseram que você descobrisse.
                 </p>
               </div>
             </div>
@@ -406,12 +444,9 @@
           <div onclick="handleBookClick(999)"
             class="esoteric-card esoteric-card-hover rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between cursor-pointer group">
             <div class="flex items-start gap-4">
-              <div
-                class="w-24 sm:w-28 aspect-[3/4] rounded-xl overflow-hidden bg-black shrink-0 border border-white/10 relative">
-                <img src="assets/cover_prosperidade_maconica_real.jpg" alt="Os Segredos da Prosperidade Maçônica"
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                <div id="homeProsperidadeCoverLock"
-                  class="hidden absolute top-2 right-2 w-7 h-7 rounded-lg bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-yellow-400 shadow-md">
+              <div class="w-24 sm:w-28 aspect-[3/4] rounded-xl overflow-hidden bg-black shrink-0 border border-white/10 relative">
+                <img src="assets/cover_prosperidade_maconica_real.jpg?v=1795569000" alt="Os Segredos da Prosperidade Maçônica" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div id="homeProsperidadeCoverLock" class="hidden absolute top-2 right-2 w-7 h-7 rounded-lg bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-yellow-400 shadow-md">
                   <i data-lucide="lock" class="w-3.5 h-3.5"></i>
                 </div>
               </div>
@@ -432,6 +467,122 @@
 
         </div>
 
+        <!-- ================= TRILHAS POR GRAUS (GRAU I AO GRAU IV) ================= -->
+        <div class="mt-12 max-w-5xl mx-auto text-left">
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-3">
+              <div class="w-1.5 h-6 bg-yellow-500 rounded-full"></div>
+              <div>
+                <h2 class="text-xl sm:text-2xl font-serif font-bold text-white tracking-wide">
+                  Trilhas por Graus
+                </h2>
+                <p class="text-xs text-gray-400 mt-0.5">
+                  Catalogação estruturada do Grau I (Neófito) ao Grau IV (Mestre)
+                </p>
+              </div>
+            </div>
+            <span class="text-[10px] font-mono uppercase tracking-widest text-yellow-500/80 font-bold hidden sm:inline-block">
+              Progressão Sagrada
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            
+            <!-- Grau I: Neófito -->
+            <div onclick="filterLibraryByGrau(1)" class="esoteric-card esoteric-card-hover rounded-2xl p-5 border border-white/10 hover:border-yellow-500/50 cursor-pointer flex flex-col justify-between group transition-all">
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="px-2.5 py-0.5 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-[10px] font-bold font-mono tracking-wider">
+                    GRAU I
+                  </span>
+                  <i data-lucide="compass" class="w-4 h-4 text-yellow-500/80 group-hover:scale-110 transition-transform"></i>
+                </div>
+                <h3 class="text-base font-serif font-bold text-white group-hover:text-yellow-400 transition-colors">
+                  Neófito
+                </h3>
+                <span class="text-[10px] text-gray-400 font-mono block mt-0.5 mb-2.5">Fundamentos & Iniciação</span>
+                <p class="text-xs text-gray-400 leading-relaxed line-clamp-3">
+                  Mentalismo, as 7 Leis Cósmicas e os pilares herméticos fundamentais que sustentam toda a sabedoria velada.
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[11px] text-gray-400 group-hover:text-yellow-400 transition-colors font-medium">
+                <span>139 Obras</span>
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </div>
+            </div>
+
+            <!-- Grau II: Adepto -->
+            <div onclick="filterLibraryByGrau(2)" class="esoteric-card esoteric-card-hover rounded-2xl p-5 border border-white/10 hover:border-yellow-500/50 cursor-pointer flex flex-col justify-between group transition-all">
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="px-2.5 py-0.5 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-[10px] font-bold font-mono tracking-wider">
+                    GRAU II
+                  </span>
+                  <i data-lucide="flame" class="w-4 h-4 text-yellow-500/80 group-hover:scale-110 transition-transform"></i>
+                </div>
+                <h3 class="text-base font-serif font-bold text-white group-hover:text-yellow-400 transition-colors">
+                  Adepto
+                </h3>
+                <span class="text-[10px] text-gray-400 font-mono block mt-0.5 mb-2.5">Alquimia & Magia Prática</span>
+                <p class="text-xs text-gray-400 leading-relaxed line-clamp-3">
+                  A Grande Obra, transmutação mental, simbolismo hermético e a decodificação dos tratados clássicos de Paracelso e Jung.
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[11px] text-gray-400 group-hover:text-yellow-400 transition-colors font-medium">
+                <span>755 Obras</span>
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </div>
+            </div>
+
+            <!-- Grau III: Filósofo -->
+            <div onclick="filterLibraryByGrau(3)" class="esoteric-card esoteric-card-hover rounded-2xl p-5 border border-white/10 hover:border-yellow-500/50 cursor-pointer flex flex-col justify-between group transition-all">
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="px-2.5 py-0.5 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-[10px] font-bold font-mono tracking-wider">
+                    GRAU III
+                  </span>
+                  <i data-lucide="eye" class="w-4 h-4 text-yellow-500/80 group-hover:scale-110 transition-transform"></i>
+                </div>
+                <h3 class="text-base font-serif font-bold text-white group-hover:text-yellow-400 transition-colors">
+                  Filósofo
+                </h3>
+                <span class="text-[10px] text-gray-400 font-mono block mt-0.5 mb-2.5">Gnosticismo & Apócrifos</span>
+                <p class="text-xs text-gray-400 leading-relaxed line-clamp-3">
+                  Textos apócrifos celestes, os manuscritos de Nag Hammadi, a queda dos sentinelas e as chaves da Cabala profunda.
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[11px] text-gray-400 group-hover:text-yellow-400 transition-colors font-medium">
+                <span>122 Obras</span>
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </div>
+            </div>
+
+            <!-- Grau IV: Mestre -->
+            <div onclick="filterLibraryByGrau(4)" class="esoteric-card esoteric-card-hover rounded-2xl p-5 border border-yellow-500/30 bg-gradient-to-b from-yellow-500/5 to-transparent hover:border-yellow-500/60 cursor-pointer flex flex-col justify-between group transition-all shadow-lg">
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="px-2.5 py-0.5 rounded-full bg-yellow-500/20 border border-yellow-500/40 text-yellow-400 text-[10px] font-black font-mono tracking-wider shadow-sm">
+                    GRAU IV • SUPREMO
+                  </span>
+                  <i data-lucide="crown" class="w-4 h-4 text-yellow-400 group-hover:scale-110 transition-transform"></i>
+                </div>
+                <h3 class="text-base font-serif font-bold text-white group-hover:text-yellow-400 transition-colors">
+                  Mestre 33
+                </h3>
+                <span class="text-[10px] text-yellow-500/80 font-mono block mt-0.5 mb-2.5">Sociedades Secretas & Prosperidade</span>
+                <p class="text-xs text-gray-300 leading-relaxed line-clamp-3">
+                  Rituais ocultos da Maçonaria e Rosacruz para atração de prosperidade, influência e a consumação do ápice iniciático.
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-[11px] text-yellow-400 font-bold">
+                <span>735 Obras</span>
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
         <!-- Citação Hermética no Rodapé da Home (Screenshot 6) -->
         <div class="text-center mt-16 py-8 border-t border-white/5">
           <p class="font-serif italic text-gray-400 text-sm">
@@ -446,42 +597,67 @@
     <section id="tab-library" class="app-tab-section hidden animate-fade-in">
       <div class="px-4 sm:px-8 py-6 max-w-7xl mx-auto">
 
-        <!-- Header da Biblioteca com Barra Vermelha / Red Accent -->
-        <div class="flex items-center justify-between mb-5">
-          <div class="flex items-center space-x-3">
+        <!-- Header da Biblioteca + Barra de Busca (Padrão Ordem 137 Desktop/Mobile com Amarelo) -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+          <!-- Título com Acento Amarelo -->
+          <div class="flex items-center space-x-3 shrink-0">
             <button id="libraryBackBtn" onclick="returnToDefaultLibrary()"
-              class="hidden p-2 bg-white/5 rounded-full hover:bg-red-600 hover:text-white transition-colors text-gray-400 cursor-pointer">
+              class="hidden p-2 bg-white/5 rounded-full hover:bg-yellow-500 hover:text-black transition-colors text-gray-400 cursor-pointer">
               <i data-lucide="arrow-left" class="w-5 h-5"></i>
             </button>
             <h1 id="libraryMainTitle"
-              class="text-2xl sm:text-3xl font-serif text-white border-l-4 border-red-600 pl-3 font-bold tracking-tight">
+              class="text-2xl sm:text-3xl font-serif text-white border-l-4 border-yellow-500 pl-3 font-bold tracking-tight">
               Biblioteca
             </h1>
           </div>
-        </div>
 
-        <!-- Barra de Busca e Ações Rápidas (Padrão Screenshot Ordem 137) -->
-        <div class="flex items-center gap-3 mb-6">
-          <div class="relative flex-1">
-            <i data-lucide="search" class="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
-            <input type="text" id="searchInput" oninput="handleSearchInput(this.value)" placeholder="Buscar livros..."
-              class="w-full bg-[#161616] border border-white/10 rounded-full py-2.5 pl-10 pr-10 text-white placeholder-gray-500 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all text-xs sm:text-sm">
-            <button id="clearSearchBtn" onclick="clearSearch()"
-              class="hidden absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white cursor-pointer">
-              <i data-lucide="x" class="w-4 h-4"></i>
+          <!-- Barra de Busca e Ações Rápidas -->
+          <div class="flex items-center gap-3 w-full md:max-w-md">
+            <div class="relative flex-1">
+              <i data-lucide="search" class="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+              <input type="text" id="searchInput" oninput="handleSearchInput(this.value)" placeholder="Buscar livros..."
+                class="w-full bg-[#161616] border border-white/10 rounded-full py-2.5 pl-10 pr-10 text-white placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-all text-xs sm:text-sm">
+              <button id="clearSearchBtn" onclick="clearSearch()"
+                class="hidden absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white cursor-pointer">
+                <i data-lucide="x" class="w-4 h-4"></i>
+              </button>
+            </div>
+
+            <button onclick="toggleCategoriesView()" id="btnToggleCategories"
+              class="p-2.5 bg-[#161616] border border-white/10 rounded-full text-gray-300 hover:text-white hover:border-yellow-500 transition-all cursor-pointer shrink-0"
+              title="Navegar por Categorias">
+              <i data-lucide="layout-grid" class="w-5 h-5"></i>
+            </button>
+
+            <button onclick="openMyList()" id="btnToggleMyList"
+              class="p-2.5 bg-[#161616] border border-white/10 rounded-full text-gray-300 hover:text-yellow-400 hover:border-yellow-500 transition-all cursor-pointer shrink-0"
+              title="Minha Lista">
+              <i data-lucide="bookmark" class="w-5 h-5"></i>
             </button>
           </div>
+        </div>
 
-          <button onclick="toggleCategoriesView()" id="btnToggleCategories"
-            class="p-2.5 bg-[#161616] border border-white/10 rounded-full text-gray-300 hover:text-white hover:border-red-600 transition-all cursor-pointer shrink-0"
-            title="Navegar por Categorias">
-            <i data-lucide="layout-grid" class="w-5 h-5"></i>
+        <!-- FILTROS DE TRILHAS POR GRAUS -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-4 hide-scrollbar">
+          <button onclick="filterLibraryByGrau('all')" id="btnGrau-all"
+            class="grau-pill-btn px-4 py-2 rounded-full bg-yellow-500 text-black text-xs font-bold transition-all shrink-0 cursor-pointer shadow-md">
+            Todas as Obras
           </button>
-
-          <button onclick="openMyList()" id="btnToggleMyList"
-            class="p-2.5 bg-[#161616] border border-white/10 rounded-full text-gray-300 hover:text-red-500 hover:border-red-600 transition-all cursor-pointer shrink-0"
-            title="Minha Lista">
-            <i data-lucide="bookmark" class="w-5 h-5"></i>
+          <button onclick="filterLibraryByGrau(1)" id="btnGrau-1"
+            class="grau-pill-btn px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 text-xs font-medium transition-all shrink-0 cursor-pointer flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span> Grau I • Neófito
+          </button>
+          <button onclick="filterLibraryByGrau(2)" id="btnGrau-2"
+            class="grau-pill-btn px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 text-xs font-medium transition-all shrink-0 cursor-pointer flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span> Grau II • Adepto
+          </button>
+          <button onclick="filterLibraryByGrau(3)" id="btnGrau-3"
+            class="grau-pill-btn px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10 text-xs font-medium transition-all shrink-0 cursor-pointer flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span> Grau III • Filósofo
+          </button>
+          <button onclick="filterLibraryByGrau(4)" id="btnGrau-4"
+            class="grau-pill-btn px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-yellow-500/30 text-xs font-bold transition-all shrink-0 cursor-pointer flex items-center gap-1.5 shadow-sm text-yellow-400">
+            <span class="w-1.5 h-1.5 rounded-full bg-yellow-400"></span> Grau IV • Mestre
           </button>
         </div>
 
@@ -491,8 +667,8 @@
           <!-- CONTINUAR LENDO -->
           <div id="sectionContinueReading" class="hidden">
             <div class="flex items-center gap-2 mb-3">
-              <i data-lucide="clock" class="w-4 h-4 text-red-500"></i>
-              <h2 class="text-xs font-bold text-red-500 uppercase tracking-widest font-mono">
+              <i data-lucide="clock" class="w-4 h-4 text-yellow-500"></i>
+              <h2 class="text-xs font-bold text-yellow-500 uppercase tracking-widest font-mono">
                 CONTINUAR LENDO
               </h2>
             </div>
@@ -548,89 +724,81 @@
 
     <!-- ==================== ABA 3: ÁUDIOS & FREQUÊNCIAS ==================== -->
     <section id="tab-audiobooks" class="app-tab-section hidden animate-fade-in">
-      <div class="px-6 sm:px-12 py-8">
+      <div class="px-4 sm:px-8 lg:px-12 py-6 max-w-7xl mx-auto">
 
-        <!-- Header com Título e Seletor dos 2 Grupos -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 text-left">
-          <div>
-            <div class="flex items-center gap-3">
-              <i data-lucide="headphones" class="w-6 h-6 text-yellow-400"></i>
-              <h1 id="audioMainHeaderTitle"
-                class="text-2xl sm:text-3xl font-serif text-white font-bold border-l-4 border-yellow-500 pl-4 tracking-tight">
-                Áudios & Frequências
-              </h1>
-            </div>
-            <p id="audioMainHeaderSubtitle" class="text-xs text-gray-400 mt-2 pl-7">
-              Selecione o grupo desejado: Frequências Sonoras de Solfeggio ou Audiolivros narrados.
-            </p>
+        <!-- Header com Título e Seletor dos 2 Grupos (Totalmente Responsivo) -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 text-left">
+          <div class="flex items-center space-x-3 shrink-0">
+            <h1 id="audioMainHeaderTitle"
+              class="text-2xl sm:text-3xl font-serif text-white border-l-4 border-yellow-500 pl-3.5 font-bold tracking-tight">
+              Áudios & Frequências
+            </h1>
           </div>
 
           <!-- SELETOR DOS DOIS GRUPOS: FREQUÊNCIAS SONORAS vs AUDIOLIVROS -->
           <div
-            class="inline-flex items-center p-1.5 rounded-2xl bg-white/5 border border-white/10 shadow-lg backdrop-blur-md">
+            class="inline-flex items-center p-1 rounded-2xl bg-[#141414] border border-white/10 shadow-lg w-full sm:w-auto justify-center sm:justify-start">
             <button id="groupBtnFrequencies" onclick="switchAudioGroup('frequencies')"
-              class="px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer bg-yellow-500 text-black shadow-lg shadow-yellow-500/20">
-              <i data-lucide="radio" class="w-4 h-4"></i>
+              class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer bg-yellow-500 text-black shadow-lg shadow-yellow-500/20">
+              <i data-lucide="radio" class="w-3.5 h-3.5"></i>
               <span>Frequências Sonoras</span>
             </button>
             <button id="groupBtnAudiobooks" onclick="switchAudioGroup('audiobooks')"
-              class="px-5 py-2.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
-              <i data-lucide="book-open" class="w-4 h-4"></i>
+              class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-medium text-gray-400 hover:text-white transition-all flex items-center justify-center gap-2 cursor-pointer">
+              <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
               <span>Audiolivros</span>
             </button>
           </div>
         </div>
 
-        <!-- GRUPO 1: FREQUÊNCIAS SONORAS -->
-        <div id="groupViewFrequencies" class="space-y-8 animate-fade-in">
-          <!-- Player de Frequências Sagradas 100% Funcional e Audível -->
-          <div
-            class="esoteric-card rounded-3xl p-6 sm:p-8 mb-10 border border-white/10 max-w-5xl text-left relative overflow-hidden">
-            <div class="absolute -right-16 -top-16 w-56 h-56 rounded-full bg-[#D4AF37]/5 blur-3xl pointer-events-none">
-            </div>
-
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 relative z-10">
-              <div>
-                <span
-                  class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D4AF37]/10 text-[#D4AF37] text-[10px] font-bold uppercase tracking-wider mb-2 border border-[#D4AF37]/30 shadow-sm">
-                  <i data-lucide="radio" class="w-3.5 h-3.5"></i> Ressonância de Solfeggio Ativa
-                </span>
-                <h2 class="text-xl sm:text-2xl font-serif font-bold text-white">Frequências Sonoras & Ondas Sagradas
-                </h2>
-                <p class="text-xs text-gray-400 mt-1.5 max-w-lg leading-relaxed">Batimentos binaurais de ondas senoidais
-                  puras calibrados para concentração profunda, desbloqueio de chakras e expansão da consciência.</p>
+        <!-- GRUPO 1: FREQUÊNCIAS SONORAS SAGRADAS -->
+        <div id="groupViewFrequencies" class="space-y-6 animate-fade-in text-left">
+          
+          <!-- Banner de Status & Sintonia (Compacto e Harmonioso) -->
+          <div class="esoteric-card rounded-2xl p-4 sm:p-5 border border-white/10 relative overflow-hidden bg-gradient-to-r from-[#121212] via-black to-[#121212]">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative z-10">
+              <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-yellow-400 shadow-md shrink-0">
+                  <i data-lucide="radio" class="w-5 h-5 animate-pulse"></i>
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-xs font-mono font-bold text-yellow-400 uppercase tracking-widest">MATRIZ DE SOLFEGGIO</span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
+                    <span class="text-[10px] font-mono text-gray-400">432Hz - 963Hz</span>
+                  </div>
+                  <p class="text-xs text-gray-300 mt-0.5 leading-snug">Batimentos binaurais de ondas senoidais puras para meditação, estudo e alinhamento dos chakras.</p>
+                </div>
               </div>
 
-              <div class="flex flex-col items-center sm:items-end gap-2.5 shrink-0">
-                <div id="soundWaveBox"
-                  class="px-4 py-2.5 rounded-2xl bg-black/90 border border-white/15 flex items-center gap-2.5 shadow-lg wave-paused">
+              <!-- Status Atual do Player -->
+              <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end border-t sm:border-t-0 pt-2.5 sm:pt-0 border-white/5">
+                <div id="soundWaveBox" class="px-3.5 py-1.5 rounded-xl bg-black border border-white/15 flex items-center gap-2 shadow-lg wave-paused shrink-0">
                   <span class="wave-bar"></span>
                   <span class="wave-bar"></span>
                   <span class="wave-bar"></span>
                   <span class="wave-bar"></span>
                   <span class="wave-bar"></span>
-                  <span id="playerCurrentHz" class="font-mono font-bold text-xs text-[#D4AF37] tracking-wide">Santuário
-                    em Silêncio</span>
+                  <span id="playerCurrentHz" class="font-mono font-bold text-xs text-yellow-400 tracking-wide">Santuário em Silêncio</span>
                 </div>
-                <button onclick="stopFrequency(true)"
-                  class="text-xs text-gray-400 hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer py-1 px-2.5 rounded-lg hover:bg-white/5">
-                  <i data-lucide="square" class="w-3.5 h-3.5"></i> Parar Frequência
+                <button onclick="stopFrequency(true)" class="text-xs text-gray-400 hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer py-1.5 px-3 rounded-xl hover:bg-white/10 border border-white/10 shrink-0">
+                  <i data-lucide="square" class="w-3.5 h-3.5"></i> Parar
                 </button>
               </div>
             </div>
+          </div>
 
-            <!-- Grade Dinâmica Completa com as 8 Frequências Sagradas de Solfeggio -->
-            <div class="mt-8 pt-6 border-t border-white/10 relative z-10">
-              <div class="flex items-center justify-between mb-4">
-                <span class="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Sintonizar Matriz
-                  Sonora</span>
-                <span class="text-[10px] font-mono text-[#D4AF37]">Ondas Senoidais 432Hz - 963Hz</span>
-              </div>
-              <div id="frequenciesList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
-                <!-- Injetado dinamicamente via renderFrequencies() -->
-              </div>
+          <!-- Grade das 8 Frequências Sagradas (Proporção Impecável Mobile & Desktop) -->
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-[11px] font-bold text-gray-400 uppercase tracking-widest font-mono">SINTONIZAR MATRIZ SONORA</span>
+              <span class="text-[10px] font-mono text-yellow-500/80">8 Ondas Disponíveis</span>
+            </div>
+            <div id="frequenciesList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              <!-- Injetado dinamicamente via renderFrequencies() -->
             </div>
           </div>
+
         </div>
 
         <!-- GRUPO 2: AUDIOLIVROS -->
@@ -696,12 +864,10 @@
           <!-- Descrição com Ver Mais -->
           <div class="max-w-xl mx-auto mb-6">
             <p id="courseDescShort" class="text-xs text-gray-300 leading-relaxed">
-              Quebre as correntes da ignorância. Esta coletânea de vídeos revela os mecanismos ocultos da realidade e os
-              mistérios do...
+              Rompa o véu da ilusão. Esta coletânea exclusiva expõe os mecanismos ocultos que governam a realidade e os segredos milenares mantidos longe do seu alcance...
             </p>
             <p id="courseDescFull" class="hidden text-xs text-gray-300 leading-relaxed">
-              Quebre as correntes da ignorância. Esta coletânea de vídeos revela os mecanismos ocultos da realidade e os
-              mistérios do universo que foram escondidos de você por séculos. A verdade nua e crua.
+              Rompa o véu da ilusão. Esta coletânea exclusiva expõe os mecanismos ocultos que governam a realidade e os segredos milenares mantidos longe do seu alcance. Sem filtros. Sem meias-verdades. Apenas o conhecimento que nunca quiseram que você descobrisse.
             </p>
             <button onclick="toggleCourseDesc()" id="btnToggleCourseDesc"
               class="mt-2 text-[11px] font-bold text-gray-400 hover:text-white uppercase tracking-wider transition cursor-pointer flex items-center justify-center gap-1 mx-auto">
@@ -1064,17 +1230,15 @@
 
       <!-- Conteúdo com Scroll -->
       <div class="overflow-y-auto px-5 sm:px-6 py-5 hide-scrollbar flex-1 space-y-4">
-
+        
         <!-- Capa do Livro Grande (Banner Topo com Degradê Suave) -->
-        <div
-          class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-[#0d0d0d] border border-white/10 shadow-2xl flex items-center justify-center">
+        <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-[#0d0d0d] border border-white/10 shadow-2xl flex items-center justify-center">
           <img id="modalBookCover" src="" alt="Capa" class="w-full h-full object-cover">
           <div class="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent"></div>
         </div>
 
         <!-- Categoria e Total de Páginas em Dourado/Amarelo -->
-        <div
-          class="flex items-center gap-2 text-yellow-500 font-mono text-[10px] sm:text-xs font-bold uppercase tracking-widest pt-1">
+        <div class="flex items-center gap-2 text-yellow-500 font-mono text-[10px] sm:text-xs font-bold uppercase tracking-widest pt-1">
           <span id="modalBookCategory">ALQUIMIA</span>
           <span class="text-gray-600">•</span>
           <span id="modalBookPages">679 PÁGINAS</span>
@@ -1247,12 +1411,10 @@
         <!-- Sinopse com Expansão LER MAIS -->
         <div class="mb-6">
           <p id="modalDescShort" class="text-xs text-gray-300 leading-relaxed">
-            Quebre as correntes da ignorância. Esta coletânea de vídeos revela os mecanismos ocultos da realidade e os
-            mistérios do...
+            Rompa o véu da ilusão. Esta coletânea exclusiva expõe os mecanismos ocultos que governam a realidade e os segredos milenares mantidos longe do seu alcance...
           </p>
           <p id="modalDescFull" class="hidden text-xs text-gray-300 leading-relaxed">
-            Quebre as correntes da ignorância. Esta coletânea de vídeos revela os mecanismos ocultos da realidade e os
-            mistérios do universo que foram escondidos de você por séculos. A verdade nua e crua.
+            Rompa o véu da ilusão. Esta coletânea exclusiva expõe os mecanismos ocultos que governam a realidade e os segredos milenares mantidos longe do seu alcance. Sem filtros. Sem meias-verdades. Apenas o conhecimento que nunca quiseram que você descobrisse.
           </p>
           <button onclick="toggleModalDesc()" id="btnToggleModalDesc"
             class="mt-1 text-[10px] font-bold text-gray-400 hover:text-white uppercase tracking-wider transition cursor-pointer flex items-center gap-1">
@@ -1444,8 +1606,7 @@
 
       <div class="flex items-center gap-4 mb-5">
         <div class="w-14 h-20 rounded-xl overflow-hidden border border-yellow-500/40 shrink-0 shadow-lg bg-black">
-          <img src="assets/cover_prosperidade_maconica_real.jpg" alt="Prosperidade Maçônica"
-            class="w-full h-full object-cover">
+          <img src="assets/cover_prosperidade_maconica_real.jpg?v=1795569000" alt="Prosperidade Maçônica" class="w-full h-full object-cover">
         </div>
         <div>
           <div
@@ -1464,8 +1625,7 @@
           arquétipos de influência preservados sob sigilo.
         </p>
         <p class="text-yellow-400/90 font-medium">
-          O acesso a esta obra é liberado exclusivamente para iniciados que adicionaram o <strong
-            class="text-white">Acesso Exclusivo da Prosperidade</strong> no momento da inscrição na Kirvano.
+          O acesso a esta obra é liberado exclusivamente para iniciados que adicionaram o <strong class="text-white">Acesso Exclusivo da Prosperidade</strong> no momento da inscrição na Kirvano.
         </p>
       </div>
 
@@ -1485,8 +1645,8 @@
   </div>
 
   <!-- SCRIPTS -->
-  <script src="books_data.js?v=1795570800"></script>
-  <script src="app.js?v=1795570800"></script>
+  <script src="books_data.js?v=1795585000"></script>
+  <script src="app.js?v=1795585000"></script>
 </body>
 
 </html>

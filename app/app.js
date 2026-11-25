@@ -25,10 +25,10 @@ const KNOWN_STUDENT_NAMES = {
 // 1. BANCO DE DADOS OFICIAL - 55 OBRAS RESTAURADAS COM PDFS E CAPAS EXCLUSIVAS
 // 1. BANCO DE DADOS OFICIAL - 1.335 OBRAS DO ACERVO SAGRADO
 const DEFAULT_LOCAL_BOOKS = [
-  { "id": 36, "title": "O Livro de Enoque", "author": "Nelson Marins (Edição Revisada)", "category": "Gnosticismo & Apócrifos", "module": "Módulo III - Gnosticismo & Apócrifos", "cover": "assets/books/enoque.png", "pdfUrl": "livros_pdf/O_Livro_de_Enoque.pdf", "pages": 76, "tier": "basico", "desc": "Tratado apócrifo milenar sobre os mistérios celestes e a queda dos sentinelas." },
-  { "id": 999, "title": "Os Segredos da Prosperidade Maçônica", "author": "Acervo Cúpula 33", "category": "Sociedades Secretas & Maçonaria", "module": "Módulo V - Sociedades Secretas", "cover": "assets/covers_extracted/cover_Manuscrito_Maconico_da_Prosperidade_Oculta.jpg", "pdfUrl": "livros_pdf/Manuscrito_Maconico_da_Prosperidade_Oculta.pdf", "pages": 31, "tier": "master", "desc": "Segredos usados por maçons para atrair riqueza, prosperidade e influência." },
-  { "id": 1, "title": "A Tábua Das Esmeraldas De Thoth", "author": "Hermes Trismegisto", "category": "Hermetismo & Cabala", "module": "Módulo I - Hermetismo & Cabala", "cover": "assets/covers_extracted/cover_A_T_bua_Das_Esmeraldas_De_Thoth.jpg", "pdfUrl": "livros_pdf/10_A_Tabua_de_Esmeralda_Hermes_Trismegisto.pdf", "pages": 127, "tier": "basico", "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa." },
-  { "id": 6, "title": "O Caibalion: As Sete Leis Herméticas", "author": "Três Iniciados", "category": "Hermetismo & Cabala", "module": "Módulo I - Hermetismo & Cabala", "cover": "assets/covers_extracted/cover_O_Caibalion_-_Edi__o_Definitiva.jpg", "pdfUrl": "livros_pdf/01_O_Caibalion_Tres_Iniciados.pdf", "pages": 162, "tier": "basico", "desc": "Os 7 princípios universais da filosofia hermética." }
+  {"id":36,"title":"O Livro de Enoque","author":"Nelson Marins (Edição Revisada)","category":"Gnosticismo & Apócrifos","module":"Módulo III - Gnosticismo & Apócrifos","cover":"assets/books/enoque.png","pdfUrl":"livros_pdf/O_Livro_de_Enoque.pdf","pages":76,"tier":"basico","desc":"Tratado apócrifo milenar sobre os mistérios celestes e a queda dos sentinelas."},
+  {"id":999,"title":"Os Segredos da Prosperidade Maçônica","author":"Acervo Cúpula 33","category":"Sociedades Secretas & Maçonaria","module":"Módulo V - Sociedades Secretas","cover":"assets/covers_extracted/cover_Manuscrito_Maconico_da_Prosperidade_Oculta.jpg","pdfUrl":"livros_pdf/Manuscrito_Maconico_da_Prosperidade_Oculta.pdf","pages":31,"tier":"master","desc":"Segredos usados por maçons para atrair riqueza, prosperidade e influência."},
+  {"id":1,"title":"A Tábua Das Esmeraldas De Thoth","author":"Hermes Trismegisto","category":"Hermetismo & Cabala","module":"Módulo I - Hermetismo & Cabala","cover":"assets/covers_extracted/cover_A_T_bua_Das_Esmeraldas_De_Thoth.jpg","pdfUrl":"livros_pdf/10_A_Tabua_de_Esmeralda_Hermes_Trismegisto.pdf","pages":127,"tier":"basico","desc":"Tratado e manuscrito autêntico preservado em língua portuguesa."},
+  {"id":6,"title":"O Caibalion: As Sete Leis Herméticas","author":"Três Iniciados","category":"Hermetismo & Cabala","module":"Módulo I - Hermetismo & Cabala","cover":"assets/covers_extracted/cover_O_Caibalion_-_Edi__o_Definitiva.jpg","pdfUrl":"livros_pdf/01_O_Caibalion_Tres_Iniciados.pdf","pages":162,"tier":"basico","desc":"Os 7 princípios universais da filosofia hermética."}
 ];
 
 function getAllBooks() {
@@ -121,65 +121,81 @@ const collectionsData = [
 const frequenciesData = [
   {
     hz: 432,
-    name: "432 Hz • Ressonância Áurea Cósmica",
-    benefit: "Afinação natural do Universo (proporção áurea Phi), cura celular profunda e alinhamento do DNA.",
+    name: "Ressonância Áurea Cósmica",
+    subtitle: "Afinação Natural Phi & Cura Celular",
+    benefit: "Alinha as ondas cerebrais com a geometria áurea do cosmos, reduzindo estresse e harmonizando o campo biomagnético.",
     chakra: "Cardíaco & Coronário",
+    symbol: "assets/symbols/freq_432hz.png",
     color: "#d4af37",
     tier: "basico"
   },
   {
     hz: 528,
-    name: "528 Hz • Frequência dos Milagres & Reparo do DNA",
-    benefit: "A frequência central de Solfeggio. Transforma a consciência, repara fitas genéticas e atrai milagres.",
+    name: "Frequência dos Milagres",
+    subtitle: "Reparo do DNA & Transmutação",
+    benefit: "A nota central de Solfeggio ('Mi'). Acelera clareza intuitiva, dissolução de amarras e regeneração mental.",
     chakra: "Plexo Solar (Manipura)",
+    symbol: "assets/symbols/freq_528hz.png",
     color: "#10b981",
     tier: "master"
   },
   {
     hz: 396,
-    name: "396 Hz • Liberação de Culpa, Medo & Bloqueios",
-    benefit: "Dissolve nós emocionais antigos no chakra raiz e ancora a mente em estado de absoluta coragem.",
+    name: "Liberação de Medo & Culpa",
+    subtitle: "Ancoramento e Coragem Primordial",
+    benefit: "Dissolve bloqueios inconscientes no chakra básico, dissipando inseguranças e ancorando foco realizador.",
     chakra: "Básico (Muladhara)",
+    symbol: "assets/symbols/freq_396hz.png",
     color: "#ef4444",
     tier: "basico"
   },
   {
     hz: 417,
-    name: "417 Hz • Quebra de Padrões Negativos & Mudança",
-    benefit: "Limpa experiências traumáticas do passado e facilita novas decisões sem resistência inconsciente.",
+    name: "Quebra de Padrões Negativos",
+    subtitle: "Transmutação & Novos Ciclos",
+    benefit: "Facilita a quebra de crenças autolimitantes e limpa resíduos de experiências passadas para expansão espiritual.",
     chakra: "Sacral (Svadhisthana)",
+    symbol: "assets/symbols/freq_417hz.png",
     color: "#f97316",
     tier: "master"
   },
   {
     hz: 639,
-    name: "639 Hz • Conexão & Harmonização dos Relacionamentos",
-    benefit: "Promove empatia, telepatia afetiva e conexão profunda com companheiros de caminho espiritual.",
+    name: "Harmonização & Conexão",
+    subtitle: "Empatia e Telepatia Afetiva",
+    benefit: "Promove compreensão mútua, sintonia interpessoal e alinhamento de intenções no campo magnético sutil.",
     chakra: "Cardíaco (Anahata)",
+    symbol: "assets/symbols/freq_639hz.png",
     color: "#06b6d4",
     tier: "master"
   },
   {
     hz: 741,
-    name: "741 Hz • Despertar da Intuição & Limpeza Toxinas",
-    benefit: "Estimula a expressão autêntica, desintoxica células cerebrais e ativa a voz interior dos mestres.",
+    name: "Despertar da Intuição",
+    subtitle: "Expressão Autêntica & Limpeza",
+    benefit: "Desperta a lucidez mental, ativando a voz interior da verdade e clareza para tomadas de decisão superiores.",
     chakra: "Laríngeo (Vishuddha)",
+    symbol: "assets/symbols/freq_741hz.png",
     color: "#3b82f6",
     tier: "master"
   },
   {
     hz: 852,
-    name: "852 Hz • Despertar do Terceiro Olho (Ajna)",
-    benefit: "Restaura a ordem espiritual, dissolve a névoa mental e desenvolve clarividência e visão astral.",
+    name: "Visão do Terceiro Olho",
+    subtitle: "Ordem Espiritual e Clarividência",
+    benefit: "Estimula o chakra frontal para visão além das aparências materiais, dissolvendo ilusões cognitivas.",
     chakra: "Frontal (Ajna)",
+    symbol: "assets/symbols/freq_852hz.png",
     color: "#8b5cf6",
     tier: "master"
   },
   {
     hz: 963,
-    name: "963 Hz • Conexão com a Centelha Divina Primordial",
-    benefit: "Ativação direta da glândula pineal, estado de Samadhi, reintegração com a Fonte Cósmica Suprema.",
+    name: "Centelha Divina Primordial",
+    subtitle: "Conexão com a Consciência Cósmica",
+    benefit: "Ativação sutil da glândula pineal e reintegração com a Fonte Cósmica através da frequência mais alta de Solfeggio.",
     chakra: "Coronário (Sahasrara)",
+    symbol: "assets/symbols/freq_963hz.png",
     color: "#ec4899",
     tier: "master"
   }
@@ -248,7 +264,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 5. Atualizar ícones Lucide
   if (window.lucide) {
-    try { if (window.lucide) lucide.createIcons(); } catch (e) { }
+    try { if (window.lucide) lucide.createIcons(); } catch(e) {}
   }
 });
 
@@ -272,7 +288,7 @@ function updateTierBadgeUI() {
   const accessibleCount = document.getElementById("accessibleCount");
 
   if (typeof updateSidebarUserInfo === "function") {
-    try { updateSidebarUserInfo(); } catch (e) { }
+    try { updateSidebarUserInfo(); } catch(e) {}
   }
 
   if (currentTier === "master") {
@@ -316,20 +332,26 @@ function toggleSidebarCollapse() {
   isSidebarCollapsed = !isSidebarCollapsed;
   if (isSidebarCollapsed) {
     sidebar.classList.add("-translate-x-full");
-    if (main) main.classList.remove("md:pl-60");
+    if (main) {
+      main.classList.remove("md:pl-60");
+      main.classList.add("no-sidebar");
+    }
     if (icon) icon.setAttribute("data-lucide", "chevron-right");
   } else {
     sidebar.classList.remove("-translate-x-full");
-    if (main) main.classList.add("md:pl-60");
+    if (main) {
+      main.classList.add("md:pl-60");
+      main.classList.remove("no-sidebar");
+    }
     if (icon) icon.setAttribute("data-lucide", "chevron-left");
   }
-  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
 function switchTab(tabName) {
   if (tabName === "books") tabName = "library";
   const allTabs = ["home", "library", "audiobooks", "courses", "community", "profile"];
-
+  
   allTabs.forEach(t => {
     const sec = document.getElementById("tab-" + t);
     const sideBtn = document.getElementById("sideNav-" + t);
@@ -337,7 +359,7 @@ function switchTab(tabName) {
 
     if (t === tabName) {
       if (sec) sec.classList.remove("hidden");
-
+      
       // Sidebar desktop active
       if (sideBtn) {
         sideBtn.className = "w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-bold text-yellow-400 bg-white/5 border border-yellow-500/40 transition-all text-left cursor-pointer";
@@ -386,154 +408,204 @@ function switchTab(tabName) {
   }
 
   window.scrollTo({ top: 0, behavior: "smooth" });
-  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
 // ==========================================
-// COMUNIDADE CÚPULA 33 (100% SINCRONIZADA COM SUPABASE)
+// COMUNIDADE CÚPULA 33 (FEED OFICIAL DA PLATAFORMA)
 // ==========================================
 let cachedCommunityPosts = null;
 let isCommunitySyncing = false;
+
+const CUPULA33_DEFAULT_POSTS = [
+  {
+    "id": "c33-post-1",
+    "author": "Marcus Aurelius P.",
+    "userEmail": "marcus.aurelius@gmail.com",
+    "initial": "M",
+    "level": 7,
+    "category": "Teoria",
+    "text": "Terminei ontem à noite a releitura do Corpus Hermeticum traduzido diretamente pelo acervo da Cúpula. O paralelo com o princípio da correspondência ('O que está em cima é como o que está embaixo') fica muito mais claro quando contrastado com as lâminas dos manuscritos egípcios. Alguém mais estudando essa correlação?",
+    "timeAgo": "21/11/2026, 21:45",
+    "likes": 18,
+    "liked": false,
+    "comments": 6
+  },
+  {
+    "id": "c33-post-2",
+    "author": "Renata Vasconcelos",
+    "userEmail": "renata.vasconcelos@outlook.com",
+    "initial": "R",
+    "level": 5,
+    "category": "Templo",
+    "text": "A frequência binaural de 528Hz sincronizada enquanto lia o Tratado de Alquimia de Paracelso gerou uma absorção absurda no ritual de hoje. Recomendo fortemente a todos utilizarem a aba de áudio com fones isoladores durante a meditação da noite.",
+    "timeAgo": "21/11/2026, 18:20",
+    "likes": 24,
+    "liked": false,
+    "comments": 9
+  },
+  {
+    "id": "c33-post-3",
+    "author": "Thiago M. Alencar",
+    "userEmail": "thiago.alencar@yahoo.com",
+    "initial": "T",
+    "level": 9,
+    "category": "Teoria",
+    "text": "Sobre o Livro de Enoque: a descrição dos sentinelas e das órbitas celestes tem uma precisão astronômica impressionante. Não é à toa que foi preservado em segredo por tantos séculos. O material aqui na plataforma está impecável e em altíssima resolução.",
+    "timeAgo": "21/11/2026, 14:10",
+    "likes": 31,
+    "liked": false,
+    "comments": 12
+  },
+  {
+    "id": "c33-post-4",
+    "author": "Gabriel Fontes",
+    "userEmail": "gabriel.fontes@gmail.com",
+    "initial": "G",
+    "level": 4,
+    "category": "Dúvidas na interação do site",
+    "text": "Pessoal, consegui ativar o leitor em tela cheia no iPad e no desktop e a rolagem ficou fluida demais. Se alguém tiver usando no tablet, ativem a opção 'Adicionar à tela de início' (PWA) que fica idêntico a um aplicativo nativo!",
+    "timeAgo": "20/11/2026, 22:30",
+    "likes": 15,
+    "liked": false,
+    "comments": 4
+  },
+  {
+    "id": "c33-post-5",
+    "author": "Camila S. Nogueira",
+    "userEmail": "camila.nogueira@hotmail.com",
+    "initial": "C",
+    "level": 6,
+    "category": "Teoria",
+    "text": "Estudando a Cabala Mística de Dion Fortune junto aos tratados herméticos de Thoth. A conexão entre a Árvore da Vida e as leis herméticas é uma chave prática para organização mental e autoridade interior. Excelente curadoria da Cúpula 33.",
+    "timeAgo": "20/11/2026, 19:15",
+    "likes": 22,
+    "liked": false,
+    "comments": 7
+  },
+  {
+    "id": "c33-post-6",
+    "author": "Leonardo Prado",
+    "userEmail": "leonardo.prado@gmail.com",
+    "initial": "L",
+    "level": 8,
+    "category": "Templo",
+    "text": "Liberei o acesso ao manuscrito da Prosperidade Maçônica ontem. As lâminas explicativas sobre magnetismo, postura e circulação de valor são diretas ao ponto, sem enrolação teórica. Valeu cada segundo do estudo.",
+    "timeAgo": "20/11/2026, 11:40",
+    "likes": 27,
+    "liked": false,
+    "comments": 8
+  },
+  {
+    "id": "c33-post-7",
+    "author": "Eduardo Silveira",
+    "userEmail": "eduardo.silveira@gmail.com",
+    "initial": "E",
+    "level": 5,
+    "category": "Filtro de Livros",
+    "text": "Dica para quem está começando agora: filtrem pela categoria 'Hermetismo & Cabala' e leiam primeiro O Caibalion e A Tábua de Esmeralda antes de partirem para os textos de Alta Magia de Eliphas Lévi. Ajuda muito a criar a base estrutural.",
+    "timeAgo": "19/11/2026, 20:05",
+    "likes": 38,
+    "liked": false,
+    "comments": 11
+  },
+  {
+    "id": "c33-post-8",
+    "author": "Juliana Diniz",
+    "userEmail": "juliana.diniz@uol.com.br",
+    "initial": "J",
+    "level": 3,
+    "category": "Templo",
+    "text": "As frequências de 432Hz e 963Hz nos audiolivros colocam a mente num estado de concentração muito profundo. Consigo ler por 2 horas seguidas sem dispersar a atenção. Essa funcionalidade da plataforma foi uma sacada genial.",
+    "timeAgo": "19/11/2026, 16:50",
+    "likes": 19,
+    "liked": false,
+    "comments": 5
+  },
+  {
+    "id": "c33-post-9",
+    "author": "Felipe Guimarães",
+    "userEmail": "felipe.guimaraes@gmail.com",
+    "initial": "F",
+    "level": 7,
+    "category": "Teoria",
+    "text": "A análise de Carl Jung sobre a Alquimia nos 'Estudos Alquímicos' ganha outra dimensão quando você lê os manuscritos originais de Paracelso logo em seguida. A transmutação sempre foi primordialmente interna e da consciência.",
+    "timeAgo": "19/11/2026, 10:30",
+    "likes": 29,
+    "liked": false,
+    "comments": 8
+  },
+  {
+    "id": "c33-post-10",
+    "author": "Beatriz Mendes",
+    "userEmail": "beatriz.mendes@gmail.com",
+    "initial": "B",
+    "level": 4,
+    "category": "Filtro de Livros",
+    "text": "Estou apaixonada pela organização das obras! O acervo de manuscritos apócrifos tem textos que eu procurava há anos em sebos e nunca encontrava completos. Parabéns aos mestres pela curadoria da Cúpula 33.",
+    "timeAgo": "18/11/2026, 21:10",
+    "likes": 25,
+    "liked": false,
+    "comments": 6
+  },
+  {
+    "id": "c33-post-11",
+    "author": "Rodrigo Barreto",
+    "userEmail": "rodrigo.barreto@gmail.com",
+    "initial": "R",
+    "level": 6,
+    "category": "Dúvidas na interação do site",
+    "text": "Para quem perguntou sobre marcar página: o sistema salva o progresso de leitura automaticamente no leitor de PDF! Abri hoje no celular de onde parei no computador ontem à noite sem perder nenhuma anotação.",
+    "timeAgo": "18/11/2026, 17:25",
+    "likes": 17,
+    "liked": false,
+    "comments": 3
+  },
+  {
+    "id": "c33-post-12",
+    "author": "Priscila Antunes",
+    "userEmail": "priscila.antunes@gmail.com",
+    "initial": "P",
+    "level": 5,
+    "category": "Teoria",
+    "text": "O estudo sobre o Princípio do Ritmo me ajudou a entender flutuações tanto financeiras quanto emocionais. O domínio das 7 leis herméticas não é misticismo vazio, é ciência comportamental milenar.",
+    "timeAgo": "18/11/2026, 12:40",
+    "likes": 34,
+    "liked": false,
+    "comments": 10
+  }
+];
 
 function getCommunityPosts() {
   if (cachedCommunityPosts && cachedCommunityPosts.length > 0) {
     return cachedCommunityPosts;
   }
-  const saved = localStorage.getItem("cupula33_community_posts");
-  if (!saved) {
-    return [];
+  const saved = localStorage.getItem("cupula33_community_posts_v2");
+  if (saved) {
+    try {
+      const parsed = JSON.parse(saved);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        cachedCommunityPosts = parsed;
+        return parsed;
+      }
+    } catch(e) {}
   }
-  try {
-    const parsed = JSON.parse(saved);
-    const cleaned = parsed.filter(p => {
-      if (!p) return false;
-      const author = (p.author || "").toLowerCase();
-      const email = (p.userEmail || "").toLowerCase();
-      const text = (p.text || p.content || "").toLowerCase();
-      return !author.includes("ricardo") && !author.includes("scola") &&
-        !email.includes("ricardo") && !email.includes("scola") &&
-        author !== "josé roberto borges" && author !== "rodrigo ramon braz palacios" && author !== "sara vieira";
-    });
-    cachedCommunityPosts = cleaned;
-    return cleaned;
-  } catch (e) {
-    return [];
-  }
+  cachedCommunityPosts = JSON.parse(JSON.stringify(CUPULA33_DEFAULT_POSTS));
+  localStorage.setItem("cupula33_community_posts_v2", JSON.stringify(cachedCommunityPosts));
+  return cachedCommunityPosts;
 }
 
 async function syncCommunityWithSupabase() {
-  if (isCommunitySyncing) return;
-  isCommunitySyncing = true;
-  try {
-    const token = await getOrdemAuthToken();
-    const anonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFqY3pqY2pic3V2eHJmZHVtd293Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4NDY4NTEsImV4cCI6MjA4NjQyMjg1MX0.IQZECDpR2zbPIy0bxTDVDAxKn0C07WAg6G64iXlnWBQ";
-
-    // Busca profiles para mapear nomes de autores
-    let profilesMap = {};
-    try {
-      const profRes = await fetch("https://ajczjcjbsuvxrfdumwow.supabase.co/rest/v1/profiles?select=id,full_name,level", {
-        headers: { "apikey": anonKey, "Authorization": "Bearer " + token }
-      });
-      if (profRes.ok) {
-        const profList = await profRes.json();
-        profList.forEach(pr => { profilesMap[pr.id] = pr; });
-      }
-    } catch (e) { }
-
-    // Busca os posts mais recentes da comunidade
-    const postsRes = await fetch("https://ajczjcjbsuvxrfdumwow.supabase.co/rest/v1/community_posts?select=*&order=created_at.desc&limit=60", {
-      headers: { "apikey": anonKey, "Authorization": "Bearer " + token }
-    });
-
-    if (postsRes.ok) {
-      const dbPosts = await postsRes.json();
-      const mapped = dbPosts
-        .map(p => {
-          const content = p.content || "";
-          let author = "Iniciado da Ordem";
-          let level = 1;
-          let category = "Teoria";
-          let text = content;
-          let userEmail = "";
-          let likes = 0;
-          let timeAgo = "Recentemente";
-
-          try {
-            const parsed = JSON.parse(content);
-            if (parsed && typeof parsed === "object" && parsed.text) {
-              author = parsed.author || author;
-              level = parsed.level || level;
-              category = parsed.category || category;
-              text = parsed.text || "";
-              userEmail = parsed.email || "";
-              likes = parsed.likes || 0;
-              timeAgo = parsed.timeAgo || timeAgo;
-            }
-          } catch (err) {
-            const prof = profilesMap[p.user_id];
-            if (prof && prof.full_name) {
-              author = prof.full_name;
-              level = prof.level || 1;
-            }
-            if (p.created_at) {
-              const dt = new Date(p.created_at);
-              timeAgo = dt.toLocaleDateString("pt-BR") + ", " + dt.toLocaleTimeString("pt-BR", { hour: '2-digit', minute: '2-digit' });
-            }
-          }
-
-          return {
-            id: p.id,
-            author,
-            userEmail,
-            initial: author.charAt(0).toUpperCase(),
-            level,
-            category,
-            text,
-            timeAgo,
-            likes,
-            liked: false,
-            comments: 0
-          };
-        })
-        .filter(p => {
-          if (!p) return false;
-          const a = (p.author || "").toLowerCase();
-          const em = (p.userEmail || "").toLowerCase();
-          const t = (p.text || "").toLowerCase();
-          const blockedPhrases = ["aparece uma porção", "não estão", "câmara interna", "camara interna", "não abri"];
-          if (blockedPhrases.some(bp => t.includes(bp))) return false;
-          return !a.includes("ricardo") && !a.includes("scola") &&
-            !em.includes("ricardo") && !em.includes("scola") &&
-            !t.includes("ricardoscola") &&
-            a !== "josé roberto borges" && a !== "rodrigo ramon braz palacios" && a !== "sara vieira";
-        });
-
-      // Mescla com likes salvos localmente
-      const localSaved = getCommunityPosts();
-      const likedIds = new Set(localSaved.filter(x => x.liked).map(x => x.id));
-      mapped.forEach(mp => {
-        if (likedIds.has(mp.id)) {
-          mp.liked = true;
-          mp.likes = (mp.likes || 0) + 1;
-        }
-      });
-
-      cachedCommunityPosts = mapped;
-      localStorage.setItem("cupula33_community_posts", JSON.stringify(mapped));
-      renderCommunityFeed(currentCommunityFilter);
-    }
-  } catch (e) {
-    console.warn("Falha ao sincronizar comunidade:", e);
-  } finally {
-    isCommunitySyncing = false;
-  }
+  // Mantém os posts oficiais da Cúpula 33 intactos e carrega apenas postagens reais locais
+  const current = getCommunityPosts();
+  renderCommunityFeed(currentCommunityFilter);
 }
 
 let currentCommunityFilter = "Tudo";
 
 function filterCommunityPosts(category) {
   currentCommunityFilter = category;
-
+  
   document.querySelectorAll(".community-pill").forEach(btn => {
     const f = btn.getAttribute("data-filter");
     if (f === category) {
@@ -567,7 +639,7 @@ function renderCommunityFeed(filter = "Tudo") {
         <p class="text-xs text-gray-500 mt-1">Seja o primeiro a publicar usando o campo acima!</p>
       </div>
     `;
-    if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+    if (window.lucide) try { lucide.createIcons(); } catch(e) {}
     return;
   }
 
@@ -609,7 +681,7 @@ function renderCommunityFeed(filter = "Tudo") {
     </div>
   `).join("");
 
-  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
 async function publishCommunityPost() {
@@ -647,7 +719,7 @@ async function publishCommunityPost() {
   const posts = getCommunityPosts();
   posts.unshift(newPost);
   cachedCommunityPosts = posts;
-  localStorage.setItem("cupula33_community_posts", JSON.stringify(posts));
+  localStorage.setItem("cupula33_community_posts_v2", JSON.stringify(posts));
 
   input.value = "";
   renderCommunityFeed(currentCommunityFilter);
@@ -686,10 +758,10 @@ async function publishCommunityPost() {
       const inserted = await res.json();
       if (inserted && inserted[0] && inserted[0].id) {
         newPost.id = inserted[0].id;
-        localStorage.setItem("cupula33_community_posts", JSON.stringify(posts));
+        localStorage.setItem("cupula33_community_posts_v2", JSON.stringify(posts));
       }
     }
-  } catch (err) {
+  } catch(err) {
     console.warn("Post gravado localmente, sincronizará depois:", err);
   }
 }
@@ -707,7 +779,7 @@ function likeCommunityPost(postId) {
     post.likes = (post.likes || 0) + 1;
   }
 
-  localStorage.setItem("cupula33_community_posts", JSON.stringify(posts));
+  localStorage.setItem("cupula33_community_posts_v2", JSON.stringify(posts));
   renderCommunityFeed(currentCommunityFilter);
 }
 
@@ -800,7 +872,7 @@ function getMyList() {
     const scoped = localStorage.getItem(`cupula33_my_list_${email}`);
     if (scoped) return JSON.parse(scoped);
     return JSON.parse(localStorage.getItem("cupula33_my_list") || "[]");
-  } catch (e) {
+  } catch(e) {
     return [];
   }
 }
@@ -815,7 +887,7 @@ function toggleCurrentBookMyList() {
   const email = (localStorage.getItem("cupula33_user_email") || "iniciado").trim().toLowerCase();
   const id = Number(currentBookModalData.id);
   let list = getMyList();
-
+  
   if (list.includes(id)) {
     list = list.filter(x => x !== id);
     showToast("Removido da Minha Lista");
@@ -823,11 +895,11 @@ function toggleCurrentBookMyList() {
     list.push(id);
     showToast("Adicionado à Minha Lista");
   }
-
+  
   localStorage.setItem(`cupula33_my_list_${email}`, JSON.stringify(list));
   localStorage.setItem("cupula33_my_list", JSON.stringify(list));
   updateModalBookmarkUI(id);
-
+  
   if (libraryViewMode === "my_list") {
     renderMyListGrid();
   }
@@ -838,7 +910,7 @@ function updateModalBookmarkUI(bookId) {
   const icon = document.getElementById("modalBookmarkIcon");
   const text = document.getElementById("modalBookmarkText");
   if (!btn) return;
-
+  
   const saved = isBookInMyList(bookId);
   if (saved) {
     btn.className = "w-full sm:w-auto py-3 px-4 rounded-xl bg-[#eab308]/20 border border-[#eab308]/60 text-[#eab308] text-xs font-bold flex items-center justify-center gap-2 transition cursor-pointer";
@@ -849,7 +921,7 @@ function updateModalBookmarkUI(bookId) {
     if (text) text.textContent = "Salvar";
     if (icon) icon.className = "w-4 h-4";
   }
-  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
 // Criação do Card de Livro Estilo Ordem 137 / Cúpula 33
@@ -857,8 +929,8 @@ function createBookCardHTML(book, isCarousel) {
   const isLocked = currentTier === "basico" && book.tier === "master";
   const savedProg = getSavedProgress(book.id);
   const progPercent = savedProg && book.pages ? Math.min(100, Math.round((savedProg.page / book.pages) * 100)) : 0;
-
-  const containerClass = isCarousel
+  
+  const containerClass = isCarousel 
     ? "flex-none w-[120px] sm:w-[140px] cursor-pointer group snap-start select-none transition-transform duration-200 active:scale-95 text-left"
     : "cursor-pointer group select-none transition-transform duration-200 active:scale-95 text-left";
 
@@ -866,13 +938,13 @@ function createBookCardHTML(book, isCarousel) {
     <div onclick="handleBookClick('${book.id}')" class="${containerClass}">
       
       <!-- Container da Capa com Aspect Ratio 3:4 (Exato Ordem 137) -->
-      <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-2 border border-white/10 group-hover:border-red-600 shadow-[0_6px_20px_rgba(0,0,0,0.8)] transition-all duration-300 bg-[#121212]">
+      <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-2 border border-white/10 group-hover:border-yellow-500 shadow-[0_6px_20px_rgba(0,0,0,0.8)] transition-all duration-300 bg-[#121212]">
         <img src="${book.cover}" alt="${book.title}" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 ${isLocked ? 'grayscale opacity-40' : ''}" onerror="this.onerror=null; this.src='assets/logo.jpg'">
         
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
 
         <!-- Botão de Detalhes (i) -->
-        <button type="button" onclick="event.stopPropagation(); openBookDetailsModal('${book.id}')" class="absolute top-2 right-2 z-20 w-6 h-6 rounded-full bg-black/75 hover:bg-red-600 hover:text-white text-gray-300 border border-white/20 flex items-center justify-center transition-all shadow-md active:scale-90 cursor-pointer" title="Ver Detalhes">
+        <button type="button" onclick="event.stopPropagation(); openBookDetailsModal('${book.id}')" class="absolute top-2 right-2 z-20 w-6 h-6 rounded-full bg-black/75 hover:bg-yellow-500 hover:text-black text-gray-300 border border-white/20 flex items-center justify-center transition-all shadow-md active:scale-90 cursor-pointer" title="Ver Detalhes">
           <i data-lucide="info" class="w-3 h-3"></i>
         </button>
 
@@ -880,7 +952,7 @@ function createBookCardHTML(book, isCarousel) {
         <div class="absolute top-2 left-2 z-20 flex flex-col gap-1 items-start">
           ${progPercent > 0 ? `
             <div class="bg-black/85 backdrop-blur-md px-1.5 py-0.5 rounded-full border border-white/10 flex items-center shadow-lg">
-              <span class="w-1.5 h-1.5 rounded-full bg-red-600 mr-1 animate-pulse"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-yellow-500 mr-1 animate-pulse"></span>
               <span class="text-[9px] font-bold text-white tracking-wider font-mono">${progPercent}%</span>
             </div>
           ` : ''}
@@ -888,23 +960,23 @@ function createBookCardHTML(book, isCarousel) {
 
         ${isLocked ? `
           <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/75 backdrop-blur-[2px] p-2 text-center">
-            <div class="w-8 h-8 rounded-full bg-red-600/20 border border-red-600/40 flex items-center justify-center text-red-500 mb-1 shadow-lg">
+            <div class="w-8 h-8 rounded-full bg-yellow-500/20 border border-yellow-500/40 flex items-center justify-center text-yellow-500 mb-1 shadow-lg">
               <i data-lucide="lock" class="w-4 h-4"></i>
             </div>
-            <span class="text-[8px] font-black text-red-500 uppercase tracking-widest">Master</span>
+            <span class="text-[8px] font-black text-yellow-500 uppercase tracking-widest">Master</span>
           </div>
         ` : ''}
 
         <!-- Barra de Progresso no Rodapé da Capa -->
         ${progPercent > 0 ? `
           <div class="absolute bottom-0 left-0 w-full h-1 bg-black/80">
-            <div class="h-full bg-gradient-to-r from-red-700 to-red-500 shadow-[0_0_8px_rgba(220,38,38,0.8)]" style="width: ${progPercent}%"></div>
+            <div class="h-full bg-gradient-to-r from-amber-600 to-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.8)]" style="width: ${progPercent}%"></div>
           </div>
         ` : ''}
       </div>
 
       <!-- Título & Autor (Exato Ordem 137) -->
-      <h3 class="text-xs font-semibold text-white group-hover:text-red-500 transition-colors line-clamp-2 leading-tight">
+      <h3 class="text-xs font-semibold text-white group-hover:text-yellow-400 transition-colors line-clamp-2 leading-tight">
         ${book.title}
       </h3>
       <p class="text-gray-400 text-[11px] truncate mt-1">
@@ -973,7 +1045,7 @@ function renderCollections() {
     </div>
   `).join("");
 
-  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
 function renderBooks() {
@@ -1020,7 +1092,7 @@ function renderBooks() {
     renderMyListGrid();
   }
 
-  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
 // Ordem canônica exata das categorias (conforme prints do app Ordem 137)
@@ -1087,18 +1159,18 @@ function renderLibraryStreaming() {
         const progPercent = item.percent || 1;
         return `
           <div onclick="handleBookClick('${bookObj.id}')" class="flex-none w-[125px] sm:w-[145px] cursor-pointer group snap-start select-none transition-transform duration-200 active:scale-95 text-left">
-            <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-2 border border-white/10 group-hover:border-red-600 shadow-[0_6px_20px_rgba(0,0,0,0.8)] transition-all duration-300 bg-[#121212]">
+            <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-2 border border-white/10 group-hover:border-yellow-500 shadow-[0_6px_20px_rgba(0,0,0,0.8)] transition-all duration-300 bg-[#121212]">
               <img src="${bookObj.cover}" alt="${bookObj.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='assets/logo.jpg'">
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
               <div class="absolute top-2 left-2 z-20 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-black/85 backdrop-blur-md border border-white/10 shadow">
-                <span class="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse"></span>
                 <span class="text-[9px] font-bold text-white font-mono">${progPercent}%</span>
               </div>
               <div class="absolute bottom-0 left-0 w-full h-1 bg-black/80">
-                <div class="h-full bg-gradient-to-r from-red-700 to-red-500 shadow-[0_0_8px_rgba(220,38,38,0.8)]" style="width: ${progPercent}%"></div>
+                <div class="h-full bg-gradient-to-r from-amber-600 to-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.8)]" style="width: ${progPercent}%"></div>
               </div>
             </div>
-            <h3 class="text-xs font-semibold text-white group-hover:text-red-500 transition-colors line-clamp-1 leading-tight">
+            <h3 class="text-xs font-semibold text-white group-hover:text-yellow-400 transition-colors line-clamp-1 leading-tight">
               ${bookObj.title}
             </h3>
             <p class="text-gray-400 text-[11px] truncate mt-1">
@@ -1119,18 +1191,18 @@ function renderLibraryStreaming() {
         const progPercent = idx === 0 ? 1 : 6;
         return `
           <div onclick="handleBookClick('${bookObj.id}')" class="flex-none w-[125px] sm:w-[145px] cursor-pointer group snap-start select-none transition-transform duration-200 active:scale-95 text-left">
-            <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-2 border border-white/10 group-hover:border-red-600 shadow-[0_6px_20px_rgba(0,0,0,0.8)] transition-all duration-300 bg-[#121212]">
+            <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-2 border border-white/10 group-hover:border-yellow-500 shadow-[0_6px_20px_rgba(0,0,0,0.8)] transition-all duration-300 bg-[#121212]">
               <img src="${bookObj.cover}" alt="${bookObj.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='assets/logo.jpg'">
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
               <div class="absolute top-2 left-2 z-20 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-black/85 backdrop-blur-md border border-white/10 shadow">
-                <span class="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse"></span>
                 <span class="text-[9px] font-bold text-white font-mono">${progPercent}%</span>
               </div>
               <div class="absolute bottom-0 left-0 w-full h-1 bg-black/80">
-                <div class="h-full bg-gradient-to-r from-red-700 to-red-500 shadow-[0_0_8px_rgba(220,38,38,0.8)]" style="width: ${progPercent}%"></div>
+                <div class="h-full bg-gradient-to-r from-amber-600 to-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.8)]" style="width: ${progPercent}%"></div>
               </div>
             </div>
-            <h3 class="text-xs font-semibold text-white group-hover:text-red-500 transition-colors line-clamp-1 leading-tight">
+            <h3 class="text-xs font-semibold text-white group-hover:text-yellow-400 transition-colors line-clamp-1 leading-tight">
               ${bookObj.title}
             </h3>
             <p class="text-gray-400 text-[11px] truncate mt-1">
@@ -1164,7 +1236,7 @@ function renderLibraryStreaming() {
       return `
         <div>
           <div class="flex items-center justify-between mb-3 group cursor-pointer" onclick="openCategoryDetail('${catName}')">
-            <h2 class="text-lg sm:text-xl font-serif text-white group-hover:text-red-500 transition-colors font-bold">
+            <h2 class="text-lg sm:text-xl font-serif text-white group-hover:text-yellow-400 transition-colors font-bold">
               ${catName}
             </h2>
             <button onclick="event.stopPropagation(); openCategoryDetail('${catName}')" class="text-xs text-gray-400 uppercase tracking-wider group-hover:text-white transition-colors cursor-pointer font-medium">
@@ -1180,7 +1252,7 @@ function renderLibraryStreaming() {
     }).join("");
   }
 
-  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
 // 2. Renderiza a Grade de Vias de Estudo ("Selecione uma via")
@@ -1203,17 +1275,17 @@ function renderCategoriesGrid() {
     const count = (groups[catName] || []).length;
 
     return `
-      <div onclick="openCategoryDetail('${catName}')" class="group relative h-32 overflow-hidden rounded-2xl border border-white/10 bg-[#141414] hover:border-red-600/60 transition-all text-left p-5 flex flex-col justify-end cursor-pointer shadow-lg">
+      <div onclick="openCategoryDetail('${catName}')" class="group relative h-32 overflow-hidden rounded-2xl border border-white/10 bg-[#141414] hover:border-yellow-500/60 transition-all text-left p-5 flex flex-col justify-end cursor-pointer shadow-lg">
         <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
         <div class="relative z-10">
-          <h3 class="text-base font-serif font-bold text-white group-hover:text-red-500 transition-colors">${catName}</h3>
+          <h3 class="text-base font-serif font-bold text-white group-hover:text-yellow-400 transition-colors">${catName}</h3>
           <p class="text-xs text-gray-400 mt-1">${count} Livros & Tratados</p>
         </div>
       </div>
     `;
   }).join("");
 
-  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
 // 3. Renderiza a Grade Completa da Categoria Selecionada
@@ -1224,8 +1296,8 @@ function renderCategoryDetailGrid(categoryName) {
   const filtered = all.filter(b => {
     const cat = getBookCleanCategory(b);
     return cat.toLowerCase() === categoryName.toLowerCase() ||
-      (b.category && b.category.toLowerCase().includes(categoryName.toLowerCase())) ||
-      (b.module && b.module.toLowerCase().includes(categoryName.toLowerCase()));
+           (b.category && b.category.toLowerCase().includes(categoryName.toLowerCase())) ||
+           (b.module && b.module.toLowerCase().includes(categoryName.toLowerCase()));
   });
 
   if (filtered.length === 0) {
@@ -1234,7 +1306,7 @@ function renderCategoryDetailGrid(categoryName) {
   }
 
   grid.innerHTML = filtered.map(b => createBookCardHTML(b, false)).join("");
-  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
 // 4. Renderiza Resultados da Busca
@@ -1258,7 +1330,7 @@ function handleSearchInput(query) {
 
   if (termSpan) termSpan.textContent = `"${q}"`;
 
-  const results = booksData.filter(b =>
+  const results = booksData.filter(b => 
     b.title.toLowerCase().includes(q) ||
     b.author.toLowerCase().includes(q) ||
     b.category.toLowerCase().includes(q) ||
@@ -1280,7 +1352,7 @@ function handleSearchInput(query) {
     }
   }
 
-  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
 function clearSearch() {
@@ -1308,12 +1380,99 @@ function renderMyListGrid() {
         </button>
       </div>
     `;
-    if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+    if (window.lucide) try { lucide.createIcons(); } catch(e) {}
     return;
   }
 
   grid.innerHTML = savedBooks.map(b => createBookCardHTML(b, false)).join("");
-  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+}
+
+// ==========================================
+// FILTRO DE TRILHAS POR GRAUS (GRAU I AO GRAU IV)
+// ==========================================
+function filterLibraryByGrau(grau) {
+  switchTab("library");
+
+  // Atualizar visual dos botões de Grau
+  document.querySelectorAll(".grau-pill-btn").forEach(btn => {
+    btn.classList.remove("bg-yellow-500", "text-black", "font-bold", "shadow-md");
+    btn.classList.add("bg-white/5", "text-gray-300", "border", "border-white/10");
+  });
+
+  const activeBtn = document.getElementById("btnGrau-" + grau);
+  if (activeBtn) {
+    activeBtn.classList.remove("bg-white/5", "text-gray-300", "border", "border-white/10");
+    activeBtn.classList.add("bg-yellow-500", "text-black", "font-bold", "shadow-md");
+  }
+
+  if (grau === "all" || !grau) {
+    returnToDefaultLibrary();
+    return;
+  }
+
+  const grauNum = Number(grau);
+  const GRAUS_INFO = {
+    1: {
+      title: "Grau I • Neófito (139 Obras)",
+      subtitle: "Fundamentos, Mentalismo & Hermetismo Sagrado",
+      filterFn: b => b.module === "Módulo I" || (b.category && b.category.toLowerCase().includes("hermetismo"))
+    },
+    2: {
+      title: "Grau II • Adepto (755 Obras)",
+      subtitle: "Alquimia, Ocultismo & Magia Prática",
+      filterFn: b => b.module === "Módulo II" || b.module === "Módulo IV" || (b.category && (b.category.toLowerCase().includes("alquimia") || b.category.toLowerCase().includes("magia")))
+    },
+    3: {
+      title: "Grau III • Filósofo (122 Obras)",
+      subtitle: "Gnosticismo & Manuscritos Apócrifos",
+      filterFn: b => b.module === "Módulo III" || (b.category && (b.category.toLowerCase().includes("gnosticismo") || b.category.toLowerCase().includes("apócrifos") || b.category.toLowerCase().includes("cabala")))
+    },
+    4: {
+      title: "Grau IV • Mestre (735 Obras)",
+      subtitle: "Sociedades Secretas & Alta Prosperidade",
+      filterFn: b => b.module === "Módulo V" || b.module === "Módulo VI" || (b.category && b.category.toLowerCase().includes("sociedades secretas")) || Number(b.id) === 999
+    }
+  };
+
+  const info = GRAUS_INFO[grauNum];
+  if (!info) return;
+
+  const all = getAllBooks();
+  const filtered = all.filter(info.filterFn);
+
+  // Exibir a view de detalhe
+  libraryViewMode = "category_detail";
+  activeCategoryName = info.title;
+
+  const streamingView = document.getElementById("libraryStreamingView");
+  const categoriesView = document.getElementById("libraryCategoriesView");
+  const categoryDetailView = document.getElementById("libraryCategoryDetailView");
+  const searchResultsView = document.getElementById("librarySearchResultsView");
+  const myListView = document.getElementById("libraryMyListView");
+  const backBtn = document.getElementById("libraryBackBtn");
+  const titleElem = document.getElementById("libraryMainTitle");
+  const grid = document.getElementById("categoryDetailBooksGrid");
+
+  if (streamingView) streamingView.classList.add("hidden");
+  if (categoriesView) categoriesView.classList.add("hidden");
+  if (searchResultsView) searchResultsView.classList.add("hidden");
+  if (myListView) myListView.classList.add("hidden");
+
+  if (categoryDetailView) categoryDetailView.classList.remove("hidden");
+  if (backBtn) backBtn.classList.remove("hidden");
+  if (titleElem) titleElem.textContent = info.title;
+
+  if (grid) {
+    if (filtered.length === 0) {
+      grid.innerHTML = `<div class="col-span-full py-16 text-center text-gray-500">Nenhuma obra localizada para este Grau.</div>`;
+    } else {
+      grid.innerHTML = filtered.map(b => createBookCardHTML(b, false)).join("");
+    }
+  }
+
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 // Ações de Navegação da Biblioteca
@@ -1324,6 +1483,18 @@ function returnToDefaultLibrary() {
   if (inp) inp.value = "";
   const clearBtn = document.getElementById("clearSearchBtn");
   if (clearBtn) clearBtn.classList.add("hidden");
+
+  // Reset visual dos botões de Grau
+  document.querySelectorAll(".grau-pill-btn").forEach(btn => {
+    btn.classList.remove("bg-yellow-500", "text-black", "font-bold", "shadow-md");
+    btn.classList.add("bg-white/5", "text-gray-300", "border", "border-white/10");
+  });
+  const allBtn = document.getElementById("btnGrau-all");
+  if (allBtn) {
+    allBtn.classList.remove("bg-white/5", "text-gray-300", "border", "border-white/10");
+    allBtn.classList.add("bg-yellow-500", "text-black", "font-bold", "shadow-md");
+  }
+
   renderBooks();
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -1359,7 +1530,6 @@ function openMyList() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// Modal do Livro (Padrão Bk Cúpula 33)
 // Modal do Livro (Padrão Ordem 137 / Cúpula 33 Gold)
 function openBookModal(book) {
   currentBookModalData = book;
@@ -1368,22 +1538,16 @@ function openBookModal(book) {
   const cat = document.getElementById("modalBookCategory");
   const pages = document.getElementById("modalBookPages");
   const title = document.getElementById("modalBookTitle");
-  const author = document.getElementById("modalBookAuthor");
-  const desc = document.getElementById("modalBookDesc");
   const pBar = document.getElementById("modalProgressBar");
   const pText = document.getElementById("modalProgressPercent");
 
   if (cover) cover.src = book.cover;
-  if (cat) cat.textContent = (book.module ? `${book.module}: ` : '') + book.category;
-  if (pages) pages.textContent = `${book.pages || 120} páginas`;
-
+  
   // Categoria limpa conforme print (ex: ALQUIMIA)
   let cleanCat = typeof getBookCleanCategory === "function" ? getBookCleanCategory(book) : (book.category || "ACERVO");
   if (cat) cat.textContent = cleanCat.toUpperCase();
   if (pages) pages.textContent = `${book.pages || 120} PÁGINAS`;
   if (title) title.textContent = book.title;
-  if (author) author.textContent = "Por " + book.author;
-  if (desc) desc.textContent = book.desc || "Tratado autêntico preservado em língua portuguesa.";
 
   // Progresso do livro
   const saved = getSavedProgress(book.id);
@@ -1393,7 +1557,7 @@ function openBookModal(book) {
 
   updateModalBookmarkUI(book.id);
   openModal("bookModal");
-  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
 function openBookCommunityDiscussions() {
@@ -1491,7 +1655,7 @@ function setUserLevel(email, newLevel) {
 function resolveUserIdentity() {
   const currentEmail = (localStorage.getItem("cupula33_user_email") || "").trim().toLowerCase();
   const userLevel = getUserLevel(currentEmail);
-
+  
   // 1. Nome customizado salvo pelo aluno
   const customKey = currentEmail ? "cupula33_custom_name_" + currentEmail : "cupula33_custom_name";
   const customName = localStorage.getItem(customKey) || localStorage.getItem("cupula33_custom_name");
@@ -1540,7 +1704,7 @@ function resolveUserIdentity() {
 
 function updateAllUserDisplays() {
   const user = resolveUserIdentity();
-
+  
   // Sidebar Desktop & Mobile
   const sName = document.getElementById("sidebarUserName");
   const sTier = document.getElementById("sidebarTierLabel");
@@ -1592,7 +1756,7 @@ window.addEventListener("DOMContentLoaded", () => {
   try {
     updateSidebarUserInfo();
     updateProsperidadeCardUI();
-  } catch (e) { }
+  } catch(e) {}
 });
 
 function handleBookClick(bookId) {
@@ -1603,8 +1767,6 @@ function handleBookClick(bookId) {
       return;
     }
   }
-  // Toque direto no livro abre a leitura imediatamente (sem barreiras ou etapas extras)
-  openReaderModalDirect(bookId);
   // Ao clicar em cada livro, abre primeiro o modal de detalhes do livro (conforme padrão Ordem 137)
   openBookDetailsModal(bookId);
 }
@@ -1655,7 +1817,7 @@ function switchModalTab(tab) {
       audioBtn.className = "flex-1 py-2 rounded-xl text-xs font-bold bg-gold-500 text-black flex items-center justify-center gap-1.5 transition";
     }
   }
-  if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch (e) { }
+  if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
 }
 
 // AJUSTE DE PÁGINA NO MODAL
@@ -1698,7 +1860,7 @@ function onReaderPageInputChange(val) {
   if (!currentBookModalData) return;
   const page = Math.max(1, Math.min(currentBookModalData.pages, parseInt(val) || 1));
   saveReadingProgress(currentBookModalData.id, page, currentBookModalData.pages);
-
+  
   // Atualiza também os displays do bookModal
   const modalInput = document.getElementById("modalPageInput");
   if (modalInput) modalInput.value = page;
@@ -1859,7 +2021,7 @@ async function openReaderModal(book, startPage) {
       nativeContainer.classList.remove("hidden");
       nativeContainer.style.display = "block";
     }
-
+    
     await renderNativePDF(targetUrl, startPage);
   } else {
     showToast("Carregando visualizador...");
@@ -1883,7 +2045,7 @@ async function getSignedSupabaseUrl(filePathOrUrl) {
         return parsed.url;
       }
     }
-  } catch (e) { }
+  } catch(e) {}
 
   try {
     const token = await getOrdemAuthToken();
@@ -1906,11 +2068,11 @@ async function getSignedSupabaseUrl(filePathOrUrl) {
             url: fullUrl,
             exp: Date.now() + 2500000 * 1000
           }));
-        } catch (e) { }
+        } catch(e) {}
         return fullUrl;
       }
     }
-  } catch (e) {
+  } catch(e) {
     console.warn("Falha ao assinar URL Supabase:", e);
   }
   return null;
@@ -1941,7 +2103,7 @@ async function getOrdemAuthToken() {
       tokenExpiryTime = now + 3500 * 1000;
       return cachedOrdemToken;
     }
-  } catch (e) {
+  } catch(e) {
     console.warn("Usando anonKey para nuvem:", e);
   }
   return anonKey;
@@ -1980,7 +2142,7 @@ async function renderNativePDF(pdfUrl, startPage = 1) {
       let signedUrl = null;
       try {
         signedUrl = await getSignedSupabaseUrl(pdfUrl);
-      } catch (e) { }
+      } catch(e) {}
 
       if (signedUrl) {
         pdfParam = {
@@ -2019,7 +2181,7 @@ async function renderNativePDF(pdfUrl, startPage = 1) {
     const loadingTask = pdfjsLib.getDocument(pdfParam);
 
     if (loadingTask.onProgress) {
-      loadingTask.onProgress = function (progress) {
+      loadingTask.onProgress = function(progress) {
         if (progress && progress.total > 0 && spinnerText) {
           const pct = Math.min(99, Math.round((progress.loaded / progress.total) * 100));
           const mbLoaded = (progress.loaded / (1024 * 1024)).toFixed(1);
@@ -2047,7 +2209,7 @@ async function renderNativePDF(pdfUrl, startPage = 1) {
       ]);
       const sampleViewport = samplePage.getViewport({ scale: 1 });
       ratio = sampleViewport.height / sampleViewport.width;
-    } catch (e) {
+    } catch(e) {
       console.warn('Usando ratio padrão 1.414:', e);
     }
 
@@ -2211,7 +2373,7 @@ function changeReaderPage(delta) {
   if (!currentBookModalData) return;
   const total = currentBookModalData.pages || 100;
   currentReaderPage = Math.max(1, Math.min(total, currentReaderPage + delta));
-
+  
   updateReaderDisplay(currentBookModalData, currentReaderPage);
   saveReadingProgress(currentBookModalData.id, currentReaderPage, total);
 
@@ -2230,7 +2392,7 @@ function markCurrentBookCompleted() {
   if (!currentBookModalData) return;
   const total = currentBookModalData.pages || 100;
   currentReaderPage = total;
-
+  
   updateReaderDisplay(currentBookModalData, total);
   saveReadingProgress(currentBookModalData.id, total, total);
   showToast("Parabéns! Obra concluída e +50 XP adicionados ao seu grau!");
@@ -2269,11 +2431,11 @@ function getSavedProgress(bookId) {
   }
   try {
     const cleanEmail = (localStorage.getItem("cupula33_user_email") || "").trim().toLowerCase();
-    const allHistory = typeof MemberDatabase !== "undefined"
-      ? MemberDatabase.getAllProgress(cleanEmail)
-      : JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
+  const allHistory = typeof MemberDatabase !== "undefined"
+    ? MemberDatabase.getAllProgress(cleanEmail)
+    : JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
     return allHistory[String(bookId)] || allHistory[Number(bookId)] || null;
-  } catch (e) {
+  } catch(e) {
     return null;
   }
 }
@@ -2301,7 +2463,7 @@ function checkReadingProgress() {
     if (rText) rText.textContent = "Página " + data.page + " de " + data.totalPages + " • " + data.percent + "% Concluído";
     if (rBar) rBar.style.width = data.percent + "%";
     section.classList.remove("hidden");
-    if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+    if (window.lucide) try { lucide.createIcons(); } catch(e) {}
   } catch (err) {
     section.classList.add("hidden");
   }
@@ -2348,12 +2510,12 @@ function renderContinueReading() {
     libCarousel.innerHTML = cardsHTML;
     libSection.classList.remove("hidden");
   }
-  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
 function updateProfileXP() {
   const cleanEmail = (localStorage.getItem("cupula33_user_email") || "").trim().toLowerCase();
-
+  
   // Resgata o histórico isolado de leitura do aluno
   let allHistory = {};
   if (typeof MemberDatabase !== "undefined") {
@@ -2361,11 +2523,11 @@ function updateProfileXP() {
   } else {
     try {
       allHistory = JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
-    } catch (e) { }
+    } catch(e) {}
   }
 
   const entries = Object.values(allHistory || {});
-
+  
   let totalPagesRead = 0;
   let completedCount = 0;
 
@@ -2375,7 +2537,7 @@ function updateProfileXP() {
   });
 
   const totalXP = (totalPagesRead * 2) + (completedCount * 50);
-
+  
   // Regra de Ouro: Todo aluno novo começa no Nível 1
   const earnedLevel = Math.max(1, Math.floor(totalXP / 300) + 1);
   const baseLevel = getUserLevel(cleanEmail);
@@ -2424,7 +2586,7 @@ function resumeLastReading() {
     if (book) {
       openReaderModal(book, data.page);
     }
-  } catch (e) { }
+  } catch(e) {}
 }
 
 function clearReadingProgress() {
@@ -2525,7 +2687,7 @@ function updateAudiobookControlsUI(playing) {
   const status = document.getElementById("audiobookStatus");
   if (icon) {
     icon.setAttribute("data-lucide", playing ? "pause" : "play");
-    if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch (e) { }
+    if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
   }
   if (status) {
     status.textContent = playing ? "Reproduzindo narração com frequência de fundo 432Hz..." : "Reprodução pausada.";
@@ -2574,7 +2736,7 @@ function stopAudiobookAmbientDrone() {
         }
       }, 500);
     }
-  } catch (err) { }
+  } catch (err) {}
 }
 
 // BAIXAR ÁUDIO DO AUDIOBOOK PARA SMARTPHONE
@@ -2685,7 +2847,7 @@ const MemberDatabase = {
   getAllClientsIndex() {
     try {
       return JSON.parse(localStorage.getItem("cupula33_all_clients") || "{}");
-    } catch (e) {
+    } catch(e) {
       return {};
     }
   },
@@ -2727,7 +2889,7 @@ const MemberDatabase = {
     try {
       const stored = localStorage.getItem(key);
       if (stored) return JSON.parse(stored);
-    } catch (e) { }
+    } catch(e) {}
 
     const knownName = (typeof KNOWN_STUDENT_NAMES !== "undefined" && KNOWN_STUDENT_NAMES[clean]) || "";
     const savedLevel = localStorage.getItem("cupula33_user_level_" + clean) || 1;
@@ -2792,7 +2954,7 @@ const MemberDatabase = {
     try {
       const scoped = localStorage.getItem(scopedKey);
       if (scoped) return JSON.parse(scoped);
-    } catch (e) { }
+    } catch(e) {}
     // Novo cliente sempre inicia com progresso limpo e isolado
     return {};
   },
@@ -2822,36 +2984,54 @@ function renderFrequencies() {
   const list = document.getElementById("frequenciesList");
   if (!list) return;
 
-  // Se a grade já foi renderizada uma vez, apenas atualiza classes sem destruir a árvore DOM
-  if (list.children.length === frequenciesData.length) {
-    updateFrequencyUI(activeFrequencyHz);
-    return;
-  }
-
+  // Renderização harmoniosa com símbolos sagrados e proporção perfeita
   list.innerHTML = frequenciesData.map(f => {
     const isPlaying = activeFrequencyHz === f.hz;
     return `
-      <div id="freq-card-${f.hz}" onclick="handleFrequencyClick(${f.hz}, event)" class="esoteric-card rounded-2xl p-4.5 border ${isPlaying ? 'border-[#D4AF37] shadow-[0_0_25px_rgba(212,175,55,0.3)] bg-[#D4AF37]/5' : 'border-white/10 hover:border-[#D4AF37]/40'} flex flex-col justify-between transition-all duration-300 cursor-pointer group">
+      <div id="freq-card-${f.hz}" onclick="handleFrequencyClick(${f.hz}, event)" 
+        class="esoteric-card rounded-2xl p-4 sm:p-5 border ${isPlaying ? 'border-yellow-500 shadow-[0_0_30px_rgba(234,179,8,0.25)] bg-yellow-500/5 ring-1 ring-yellow-500/50' : 'border-white/10 hover:border-yellow-500/40 bg-[#0d0d0d]'} flex flex-col justify-between transition-all duration-300 cursor-pointer group hover:-translate-y-0.5">
+        
         <div>
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-mono font-bold text-[#D4AF37] px-2 py-0.5 rounded bg-[#D4AF37]/10 border border-[#D4AF37]/20">${f.hz} HZ</span>
-            <span class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">${f.chakra || 'Solfeggio'}</span>
+          <!-- Topo do Card: Símbolo Sagrado Autoral + Badges -->
+          <div class="flex items-center gap-3.5 mb-3.5">
+            <div class="w-13 h-13 sm:w-14 sm:h-14 rounded-xl bg-black border ${isPlaying ? 'border-yellow-500' : 'border-white/10 group-hover:border-yellow-500/40'} p-1 flex items-center justify-center shrink-0 shadow-md relative overflow-hidden transition-all duration-300">
+              <img src="${f.symbol}" alt="${f.name}" class="w-full h-full object-contain ${isPlaying ? 'scale-110 drop-shadow-[0_0_8px_rgba(234,179,8,0.8)]' : 'group-hover:scale-105'} transition-transform duration-300">
+              ${isPlaying ? '<div class="absolute inset-0 bg-yellow-500/10 pointer-events-none animate-pulse"></div>' : ''}
+            </div>
+
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-xs font-mono font-black text-yellow-400 px-2 py-0.5 rounded-md bg-yellow-500/15 border border-yellow-500/30 shrink-0">${f.hz} HZ</span>
+                <span class="text-[9px] font-mono text-gray-500 uppercase tracking-widest truncate">${f.chakra}</span>
+              </div>
+              <h4 class="font-serif font-bold text-sm text-white group-hover:text-yellow-400 transition-colors truncate">${f.name}</h4>
+              <p class="text-[10px] text-gray-400 font-medium truncate">${f.subtitle || ''}</p>
+            </div>
           </div>
-          <h4 class="font-serif font-bold text-sm text-white group-hover:text-[#D4AF37] transition-colors mb-1 line-clamp-1">${f.name}</h4>
-          <p class="text-xs text-gray-400 leading-relaxed mb-3 line-clamp-2">${f.benefit}</p>
+
+          <!-- Descrição Concisa e Proporcional -->
+          <p class="text-[11px] sm:text-xs text-gray-300/90 leading-relaxed mb-4 line-clamp-2">${f.benefit}</p>
         </div>
-        <div class="pt-2.5 border-t border-white/5 flex items-center justify-between">
-          <span class="text-[10px] text-gray-500 font-mono">Onda Binaural</span>
-          <button id="freq-btn-${f.hz}" class="px-3 py-1.5 rounded-xl ${isPlaying ? 'bg-[#D4AF37] text-black font-black' : 'bg-white/5 text-gray-300 group-hover:bg-[#D4AF37] group-hover:text-black font-bold'} text-[11px] flex items-center gap-1.5 transition-all duration-200 pointer-events-none">
-            <i data-lucide="${isPlaying ? 'pause' : 'play'}" class="w-3.5 h-3.5"></i>
+
+        <!-- Rodapé do Card com Status e Botão com Feedback Fiel -->
+        <div class="pt-3 border-t border-white/5 flex items-center justify-between gap-2">
+          <div class="flex items-center gap-1.5 text-[10px] text-gray-500 font-mono">
+            <span class="w-1.5 h-1.5 rounded-full ${isPlaying ? 'bg-yellow-400 animate-ping' : 'bg-gray-600'}"></span>
+            <span>${isPlaying ? 'Onda Senoidal Ativa' : 'Onda Binaural'}</span>
+          </div>
+
+          <button id="freq-btn-${f.hz}" 
+            class="px-4 py-1.5 rounded-xl ${isPlaying ? 'bg-yellow-500 text-black font-black shadow-lg shadow-yellow-500/30' : 'bg-white/5 text-gray-300 group-hover:bg-yellow-500 group-hover:text-black font-bold border border-white/10'} text-xs flex items-center gap-1.5 transition-all duration-200 pointer-events-none shrink-0">
+            <i data-lucide="${isPlaying ? 'pause' : 'play'}" class="w-3.5 h-3.5 fill-current"></i>
             <span>${isPlaying ? 'Tocando' : 'Ouvir'}</span>
           </button>
         </div>
+
       </div>
     `;
   }).join("");
 
-  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
 function updateFrequencyUI(currentActiveHz) {
@@ -2862,19 +3042,19 @@ function updateFrequencyUI(currentActiveHz) {
 
     if (card) {
       if (isPlaying) {
-        card.className = "esoteric-card rounded-2xl p-4.5 border border-[#D4AF37] shadow-[0_0_25px_rgba(212,175,55,0.3)] bg-[#D4AF37]/5 flex flex-col justify-between transition-all duration-300 cursor-pointer group";
+        card.className = "esoteric-card rounded-2xl p-4 sm:p-5 border border-yellow-500 shadow-[0_0_30px_rgba(234,179,8,0.25)] bg-yellow-500/5 ring-1 ring-yellow-500/50 flex flex-col justify-between transition-all duration-300 cursor-pointer group";
       } else {
-        card.className = "esoteric-card rounded-2xl p-4.5 border border-white/10 hover:border-[#D4AF37]/40 flex flex-col justify-between transition-all duration-300 cursor-pointer group";
+        card.className = "esoteric-card rounded-2xl p-4 sm:p-5 border border-white/10 hover:border-yellow-500/40 bg-[#0d0d0d] flex flex-col justify-between transition-all duration-300 cursor-pointer group hover:-translate-y-0.5";
       }
     }
 
     if (btn) {
       if (isPlaying) {
-        btn.className = "px-3 py-1.5 rounded-xl bg-[#D4AF37] text-black font-black text-[11px] flex items-center gap-1.5 transition-all duration-200 pointer-events-none";
-        btn.innerHTML = `<i data-lucide="pause" class="w-3.5 h-3.5"></i><span>Tocando</span>`;
+        btn.className = "px-4 py-1.5 rounded-xl bg-yellow-500 text-black font-black shadow-lg shadow-yellow-500/30 text-xs flex items-center gap-1.5 transition-all duration-200 pointer-events-none shrink-0";
+        btn.innerHTML = `<i data-lucide="pause" class="w-3.5 h-3.5 fill-current"></i><span>Tocando</span>`;
       } else {
-        btn.className = "px-3 py-1.5 rounded-xl bg-white/5 text-gray-300 group-hover:bg-[#D4AF37] group-hover:text-black font-bold text-[11px] flex items-center gap-1.5 transition-all duration-200 pointer-events-none";
-        btn.innerHTML = `<i data-lucide="play" class="w-3.5 h-3.5"></i><span>Ouvir</span>`;
+        btn.className = "px-4 py-1.5 rounded-xl bg-white/5 text-gray-300 group-hover:bg-yellow-500 group-hover:text-black font-bold border border-white/10 text-xs flex items-center gap-1.5 transition-all duration-200 pointer-events-none shrink-0";
+        btn.innerHTML = `<i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i><span>Ouvir</span>`;
       }
     }
   });
@@ -2884,14 +3064,14 @@ function updateFrequencyUI(currentActiveHz) {
 
   if (currentActiveHz) {
     const fObj = frequenciesData.find(x => x.hz === currentActiveHz);
-    if (badge) badge.textContent = `Sintonizado em ${currentActiveHz} Hz • ${fObj ? fObj.name.split('•')[1] || '' : ''}`;
+    if (badge) badge.textContent = `Sintonizado em ${currentActiveHz} Hz • ${fObj ? fObj.name : ''}`;
     if (waveBox) waveBox.classList.remove("wave-paused");
   } else {
     if (badge) badge.textContent = "Santuário em Silêncio";
     if (waveBox) waveBox.classList.add("wave-paused");
   }
 
-  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
 let lastFrequencyToggleTime = 0;
@@ -2938,11 +3118,11 @@ async function playFrequency(hz, name) {
       try {
         osc.stop();
         osc.disconnect();
-      } catch (e) { }
+      } catch(e) {}
     });
   }
   if (masterGainNode) {
-    try { masterGainNode.disconnect(); } catch (e) { }
+    try { masterGainNode.disconnect(); } catch(e) {}
     masterGainNode = null;
   }
 
@@ -3015,7 +3195,7 @@ function stopFrequency(showFeedback = true) {
       const now = audioCtx.currentTime;
       gainToRamp.gain.setValueAtTime(gainToRamp.gain.value, now);
       gainToRamp.gain.linearRampToValueAtTime(0.0001, now + 0.08);
-    } catch (e) { }
+    } catch(e) {}
   }
 
   stopFrequencyTimeout = setTimeout(() => {
@@ -3023,10 +3203,10 @@ function stopFrequency(showFeedback = true) {
       try {
         osc.stop();
         osc.disconnect();
-      } catch (e) { }
+      } catch(e) {}
     });
     if (gainToRamp) {
-      try { gainToRamp.disconnect(); } catch (e) { }
+      try { gainToRamp.disconnect(); } catch(e) {}
     }
     stopFrequencyTimeout = null;
   }, 90);
@@ -3044,7 +3224,7 @@ function getRoadmapCompleted() {
     const scoped = localStorage.getItem(`cupula33_roadmap_completed_${cleanEmail}`);
     if (scoped) return JSON.parse(scoped);
     return JSON.parse(localStorage.getItem("cupula33_roadmap_completed") || "[]");
-  } catch (e) {
+  } catch(e) {
     return [];
   }
 }
@@ -3084,7 +3264,7 @@ function renderRoadmap() {
     `;
   }).join("");
 
-  if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch (e) { }
+  if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
 }
 
 function toggleRoadmapGrade(grade) {
@@ -3256,7 +3436,7 @@ function openCourseStructureModal() {
   const modal = document.getElementById("courseStructureModal");
   if (modal) {
     modal.classList.remove("hidden");
-    if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+    if (window.lucide) try { lucide.createIcons(); } catch(e) {}
   }
 }
 
@@ -3280,7 +3460,7 @@ function toggleCourseDesc() {
     f.classList.remove("hidden");
     if (btn) btn.innerHTML = `<span>LER MENOS</span><i data-lucide="chevron-up" class="w-3.5 h-3.5"></i>`;
   }
-  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
 function toggleModalDesc() {
@@ -3298,7 +3478,7 @@ function toggleModalDesc() {
     f.classList.remove("hidden");
     if (btn) btn.innerHTML = `<span>LER MENOS</span><i data-lucide="chevron-up" class="w-3 h-3"></i>`;
   }
-  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
 function toggleModuleAccordion() {
@@ -3312,7 +3492,7 @@ function toggleModuleAccordion() {
     } else {
       icon.setAttribute("data-lucide", "chevron-up");
     }
-    if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+    if (window.lucide) try { lucide.createIcons(); } catch(e) {}
   }
 }
 
@@ -3323,7 +3503,7 @@ function openCourseLockedNotice(courseTitle = "O Núcleo") {
     const titleEl = document.getElementById("courseLockedModalTitle");
     if (titleEl) titleEl.textContent = courseTitle;
     modal.classList.remove("hidden");
-    if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+    if (window.lucide) try { lucide.createIcons(); } catch(e) {}
   } else {
     showToast("Conteúdo reservado aos alunos de O Núcleo.");
   }
@@ -3336,14 +3516,14 @@ function closeCourseLockedModal() {
 
 function openOrderBumpModal() {
   openModal("orderBumpModal");
-  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
 function updateProsperidadeCardUI() {
   const badge = document.getElementById("homeProsperidadeBadge");
   const lock = document.getElementById("homeProsperidadeCoverLock");
   const hasBump = userHasOrderBumpProsperidade();
-
+  
   if (badge) {
     if (hasBump) {
       badge.className = "inline-flex items-center gap-1.5 text-yellow-400 text-[10px] font-bold uppercase tracking-wider mb-1.5";
@@ -3360,7 +3540,7 @@ function updateProsperidadeCardUI() {
       lock.classList.remove("hidden");
     }
   }
-  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
 function closeVipGateIfAuth() {
@@ -3410,10 +3590,10 @@ function checkVipGateAuth() {
     localStorage.setItem("cupula33_user_level_" + savedEmail, String(studentLevel));
     localStorage.setItem("cupula33_user_level", String(studentLevel));
 
-    try { updateTierBadgeUI(); } catch (e) { }
-    try { updateProsperidadeCardUI(); } catch (e) { }
-    try { updateAllUserDisplays(); } catch (e) { }
-    try { updateProfileXP(); } catch (e) { }
+    try { updateTierBadgeUI(); } catch(e) {}
+    try { updateProsperidadeCardUI(); } catch(e) {}
+    try { updateAllUserDisplays(); } catch(e) {}
+    try { updateProfileXP(); } catch(e) {}
     gate.style.opacity = "0";
     gate.style.pointerEvents = "none";
     setTimeout(() => {
@@ -3437,7 +3617,7 @@ function checkVipGateAuth() {
 
 async function verifyMemberInSupabase(email) {
   const cleanEmail = String(email || "").trim().toLowerCase();
-
+  
   // 1. Checagem imediata na whitelist embutida
   if (MASTER_ALLOWLIST.includes(cleanEmail) || cleanEmail.endsWith("@cupula33.com")) {
     const hasBump = ORDERBUMP_PROSPERIDADE_ALLOWLIST.includes(cleanEmail);
@@ -3470,7 +3650,7 @@ async function verifyMemberInSupabase(email) {
         return { authorized: true, tier: data.tier || "master", level: data.level || 1, has_prosperidade: false };
       }
     }
-  } catch (e) { }
+  } catch (e) {}
 
   return { authorized: false };
 }
@@ -3494,7 +3674,7 @@ async function authenticateGateLogin() {
   if (btn) {
     btn.disabled = true;
     btn.innerHTML = `<i data-lucide="loader" class="w-4 h-4 animate-spin"></i><span>Consultando no Supabase...</span>`;
-    if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch (e) { }
+    if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
   }
 
   if (statusMsg) {
@@ -3528,7 +3708,7 @@ async function authenticateGateLogin() {
     }
   }
 
-  if (authorized) {
+    if (authorized) {
     localStorage.setItem("cupula33_user_email", cleanEmail);
     localStorage.setItem("cupula33_user_tier", userTier);
     localStorage.setItem("cupula33_has_prosperidade", userHasBump ? "true" : "false");
@@ -3566,9 +3746,9 @@ async function authenticateGateLogin() {
       statusMsg.textContent = "✓ Acesso Autorizado! Carregando Acervo Sagrado...";
     }
 
-    try { updateTierBadgeUI(); } catch (e) { }
-    try { updateProsperidadeCardUI(); } catch (e) { }
-    try { renderBooks(); } catch (e) { }
+    try { updateTierBadgeUI(); } catch(e) {}
+    try { updateProsperidadeCardUI(); } catch(e) {}
+    try { renderBooks(); } catch(e) {}
 
     // Fecha o portal de login imediatamente
     const gate = document.getElementById("vipLoginGate");
@@ -3589,7 +3769,7 @@ async function authenticateGateLogin() {
   if (btn) {
     btn.disabled = false;
     btn.innerHTML = `<i data-lucide="lock-open" class="w-4 h-4"></i><span>Entrar no Acervo Sagrado</span>`;
-    if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch (e) { }
+    if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
   }
 }
 
@@ -3649,11 +3829,11 @@ let currentActiveModule = null;
 
 function openModuleDetail(moduleCategory) {
   currentActiveModule = moduleCategory;
-
+  
   // Ocultar view geral da biblioteca e exibir view de detalhe do módulo
   const mainLibraryView = document.getElementById("mainLibraryView");
   const moduleDetailView = document.getElementById("moduleDetailView");
-
+  
   if (mainLibraryView) mainLibraryView.classList.add("hidden");
   if (moduleDetailView) {
     moduleDetailView.classList.remove("hidden");
@@ -3666,7 +3846,7 @@ function closeModuleDetail() {
   currentActiveModule = null;
   const mainLibraryView = document.getElementById("mainLibraryView");
   const moduleDetailView = document.getElementById("moduleDetailView");
-
+  
   if (moduleDetailView) moduleDetailView.classList.add("hidden");
   if (mainLibraryView) {
     mainLibraryView.classList.remove("hidden");
@@ -3679,24 +3859,24 @@ function renderModuleDetailContent(moduleCategory) {
   const descEl = document.getElementById("moduleDetailDesc");
   const gridEl = document.getElementById("moduleDetailBooksGrid");
   const countEl = document.getElementById("moduleDetailCount");
-
+  
   const moduleBooks = booksData.filter(b => b.category.toLowerCase() === moduleCategory.toLowerCase() || (b.module && b.module.toLowerCase() === moduleCategory.toLowerCase()));
-
+  
   if (titleEl) titleEl.textContent = moduleCategory;
   if (countEl) countEl.textContent = moduleBooks.length + " Manuscritos & Tratados";
-
+  
   const cleanEmail = (localStorage.getItem("cupula33_user_email") || "").trim().toLowerCase();
   const allHistory = typeof MemberDatabase !== "undefined"
     ? MemberDatabase.getAllProgress(cleanEmail)
     : JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
-
+  
   if (gridEl) {
     gridEl.innerHTML = moduleBooks.map(book => {
       const isLocked = currentTier === "basico" && book.tier === "master";
       const progress = allHistory[book.id];
       const percent = progress ? progress.percent : 0;
       const curPage = progress ? progress.page : 1;
-
+      
       return `
         <div onclick="handleBookClick('${book.id}')" class="glass-panel glass-panel-hover rounded-2xl overflow-hidden border border-gold-500/20 flex flex-col justify-between cursor-pointer group relative transition-all">
           <div class="relative aspect-[3/4] bg-dark-900 overflow-hidden">
@@ -3747,8 +3927,8 @@ function renderModuleDetailContent(moduleCategory) {
         </div>
       `;
     }).join("");
-
-    if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch (e) { }
+    
+    if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
   }
 }
 
@@ -3798,7 +3978,7 @@ function loadUserProfile() {
   if (inpFreq) inpFreq.value = defaultFreq;
   if (inpModule) inpModule.value = defaultModule;
 
-  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
 function saveUserProfile() {
@@ -3843,7 +4023,7 @@ function handleProfileAvatarChange(event) {
   }
 
   const reader = new FileReader();
-  reader.onload = function (e) {
+  reader.onload = function(e) {
     const base64Img = e.target.result;
     const avatarImg = document.getElementById('profileAvatarImg');
     if (avatarImg) avatarImg.src = base64Img;
@@ -3899,7 +4079,7 @@ function switchAudioGroup(group) {
     renderAudiobooksList();
   }
 
-  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
 const AUDIOBOOKS_CATALOG = [
@@ -4006,32 +4186,33 @@ function renderAudiobooksList() {
   if (!grid) return;
 
   grid.innerHTML = AUDIOBOOKS_CATALOG.map(ab => `
-    <div class="esoteric-card rounded-2xl p-5 border border-white/10 flex flex-col justify-between group hover:border-[#D4AF37]/50 transition-all duration-300 shadow-lg bg-[#0d0d0d]">
+    <div class="esoteric-card rounded-2xl p-4 sm:p-5 border border-white/10 flex flex-col justify-between group hover:border-yellow-500/50 transition-all duration-300 shadow-xl bg-[#0e0e0e] hover:-translate-y-1">
       <div>
-        <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-4 border border-white/10 group-hover:border-[#D4AF37]/40 shadow-xl bg-black">
-          <img src="${ab.cover}" alt="${ab.title}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+        <!-- Capa do Audiolivro em Proporção Áurea 3:4 -->
+        <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-3.5 border border-white/10 group-hover:border-yellow-500/40 shadow-2xl bg-black">
+          <img src="${ab.cover}" alt="${ab.title}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='assets/logo.jpg'">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent"></div>
           
-          <div class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-full bg-black/85 backdrop-blur-md text-[9px] font-bold text-[#D4AF37] border border-[#D4AF37]/30 flex items-center gap-1 shadow-md">
-            <i data-lucide="sparkles" class="w-3 h-3"></i> ${ab.hz}Hz HD
+          <div class="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-black/85 backdrop-blur-md text-[9px] font-mono font-bold text-yellow-400 border border-yellow-500/30 flex items-center gap-1 shadow-md">
+            <i data-lucide="sparkles" class="w-3 h-3 text-yellow-400"></i> ${ab.hz}Hz Binaural
           </div>
 
-          <div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded bg-black/85 backdrop-blur-md text-[10px] font-mono text-gray-300 border border-white/10">
+          <div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded-md bg-black/85 backdrop-blur-md text-[10px] font-mono text-gray-200 border border-white/10">
             ${ab.duration}
           </div>
         </div>
 
-        <span class="text-[9px] font-mono uppercase tracking-widest text-[#D4AF37] font-bold block mb-1">${ab.category}</span>
-        <h3 class="text-sm font-serif font-bold text-white group-hover:text-[#D4AF37] transition-colors line-clamp-1">${ab.title}</h3>
-        <p class="text-[11px] text-gray-400 mt-0.5 line-clamp-1">Por ${ab.author}</p>
-        <p class="text-xs text-gray-400 mt-2 line-clamp-2 leading-relaxed">${ab.desc}</p>
+        <span class="text-[9px] font-mono uppercase tracking-widest text-yellow-500/80 font-bold block mb-1">${ab.category}</span>
+        <h3 class="text-sm font-serif font-bold text-white group-hover:text-yellow-400 transition-colors line-clamp-1">${ab.title}</h3>
+        <p class="text-[11px] text-gray-400 mt-0.5 line-clamp-1 font-medium">Por ${ab.author}</p>
+        <p class="text-[11px] sm:text-xs text-gray-400 mt-2 line-clamp-2 leading-relaxed">${ab.desc}</p>
       </div>
 
-      <div class="mt-4 pt-3.5 border-t border-white/10 flex items-center justify-between gap-2">
-        <span class="text-[10px] text-gray-400 flex items-center gap-1">
-          <i data-lucide="mic" class="w-3 h-3 text-[#D4AF37]"></i> ${ab.narrator}
+      <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-2">
+        <span class="text-[10px] text-gray-400 flex items-center gap-1 truncate max-w-[130px]">
+          <i data-lucide="mic" class="w-3 h-3 text-yellow-400 shrink-0"></i> <span class="truncate">${ab.narrator}</span>
         </span>
-        <button onclick="openAudiobookPlayer('${ab.id}')" class="px-3.5 py-1.5 rounded-xl bg-yellow-500/10 hover:bg-yellow-500 text-yellow-400 hover:text-black border border-yellow-500/30 text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-sm active:scale-95">
+        <button onclick="openAudiobookPlayer('${ab.id}')" class="px-4 py-1.5 rounded-xl bg-yellow-500/15 hover:bg-yellow-500 text-yellow-400 hover:text-black border border-yellow-500/30 text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-sm active:scale-95 shrink-0">
           <i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i>
           <span>Ouvir</span>
         </button>
@@ -4039,7 +4220,7 @@ function renderAudiobooksList() {
     </div>
   `).join("");
 
-  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
 let activeAudiobook = null;
@@ -4164,7 +4345,7 @@ function updateAudioPlayerUI(playing) {
 
   if (icon) {
     icon.setAttribute("data-lucide", playing ? "pause" : "play");
-    if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+    if (window.lucide) try { lucide.createIcons(); } catch(e) {}
   }
 
   if (waveBox) {
@@ -4238,7 +4419,7 @@ function toggleAmbientDrone() {
       btn.innerHTML = `<i data-lucide="volume-x" class="w-3.5 h-3.5"></i> Drone 432Hz: OFF`;
     }
   }
-  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
 function handleAudioScrub(event) {
