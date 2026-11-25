@@ -866,13 +866,13 @@ function createBookCardHTML(book, isCarousel) {
     <div onclick="handleBookClick('${book.id}')" class="${containerClass}">
       
       <!-- Container da Capa com Aspect Ratio 3:4 (Exato Ordem 137) -->
-      <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-2 border border-white/10 group-hover:border-red-600 shadow-[0_6px_20px_rgba(0,0,0,0.8)] transition-all duration-300 bg-[#121212]">
+      <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-2 border border-white/10 group-hover:border-yellow-500 shadow-[0_6px_20px_rgba(0,0,0,0.8)] transition-all duration-300 bg-[#121212]">
         <img src="${book.cover}" alt="${book.title}" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 ${isLocked ? 'grayscale opacity-40' : ''}" onerror="this.onerror=null; this.src='assets/logo.jpg'">
         
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
 
         <!-- Botão de Detalhes (i) -->
-        <button type="button" onclick="event.stopPropagation(); openBookDetailsModal('${book.id}')" class="absolute top-2 right-2 z-20 w-6 h-6 rounded-full bg-black/75 hover:bg-red-600 hover:text-white text-gray-300 border border-white/20 flex items-center justify-center transition-all shadow-md active:scale-90 cursor-pointer" title="Ver Detalhes">
+        <button type="button" onclick="event.stopPropagation(); openBookDetailsModal('${book.id}')" class="absolute top-2 right-2 z-20 w-6 h-6 rounded-full bg-black/75 hover:bg-yellow-500 hover:text-black text-gray-300 border border-white/20 flex items-center justify-center transition-all shadow-md active:scale-90 cursor-pointer" title="Ver Detalhes">
           <i data-lucide="info" class="w-3 h-3"></i>
         </button>
 
@@ -880,7 +880,7 @@ function createBookCardHTML(book, isCarousel) {
         <div class="absolute top-2 left-2 z-20 flex flex-col gap-1 items-start">
           ${progPercent > 0 ? `
             <div class="bg-black/85 backdrop-blur-md px-1.5 py-0.5 rounded-full border border-white/10 flex items-center shadow-lg">
-              <span class="w-1.5 h-1.5 rounded-full bg-red-600 mr-1 animate-pulse"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-yellow-500 mr-1 animate-pulse"></span>
               <span class="text-[9px] font-bold text-white tracking-wider font-mono">${progPercent}%</span>
             </div>
           ` : ''}
@@ -888,23 +888,23 @@ function createBookCardHTML(book, isCarousel) {
 
         ${isLocked ? `
           <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/75 backdrop-blur-[2px] p-2 text-center">
-            <div class="w-8 h-8 rounded-full bg-red-600/20 border border-red-600/40 flex items-center justify-center text-red-500 mb-1 shadow-lg">
+            <div class="w-8 h-8 rounded-full bg-yellow-500/20 border border-yellow-500/40 flex items-center justify-center text-yellow-500 mb-1 shadow-lg">
               <i data-lucide="lock" class="w-4 h-4"></i>
             </div>
-            <span class="text-[8px] font-black text-red-500 uppercase tracking-widest">Master</span>
+            <span class="text-[8px] font-black text-yellow-500 uppercase tracking-widest">Master</span>
           </div>
         ` : ''}
 
         <!-- Barra de Progresso no Rodapé da Capa -->
         ${progPercent > 0 ? `
           <div class="absolute bottom-0 left-0 w-full h-1 bg-black/80">
-            <div class="h-full bg-gradient-to-r from-red-700 to-red-500 shadow-[0_0_8px_rgba(220,38,38,0.8)]" style="width: ${progPercent}%"></div>
+            <div class="h-full bg-gradient-to-r from-amber-600 to-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.8)]" style="width: ${progPercent}%"></div>
           </div>
         ` : ''}
       </div>
 
       <!-- Título & Autor (Exato Ordem 137) -->
-      <h3 class="text-xs font-semibold text-white group-hover:text-red-500 transition-colors line-clamp-2 leading-tight">
+      <h3 class="text-xs font-semibold text-white group-hover:text-yellow-400 transition-colors line-clamp-2 leading-tight">
         ${book.title}
       </h3>
       <p class="text-gray-400 text-[11px] truncate mt-1">
@@ -1087,18 +1087,18 @@ function renderLibraryStreaming() {
         const progPercent = item.percent || 1;
         return `
           <div onclick="handleBookClick('${bookObj.id}')" class="flex-none w-[125px] sm:w-[145px] cursor-pointer group snap-start select-none transition-transform duration-200 active:scale-95 text-left">
-            <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-2 border border-white/10 group-hover:border-red-600 shadow-[0_6px_20px_rgba(0,0,0,0.8)] transition-all duration-300 bg-[#121212]">
+            <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-2 border border-white/10 group-hover:border-yellow-500 shadow-[0_6px_20px_rgba(0,0,0,0.8)] transition-all duration-300 bg-[#121212]">
               <img src="${bookObj.cover}" alt="${bookObj.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='assets/logo.jpg'">
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
               <div class="absolute top-2 left-2 z-20 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-black/85 backdrop-blur-md border border-white/10 shadow">
-                <span class="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse"></span>
                 <span class="text-[9px] font-bold text-white font-mono">${progPercent}%</span>
               </div>
               <div class="absolute bottom-0 left-0 w-full h-1 bg-black/80">
-                <div class="h-full bg-gradient-to-r from-red-700 to-red-500 shadow-[0_0_8px_rgba(220,38,38,0.8)]" style="width: ${progPercent}%"></div>
+                <div class="h-full bg-gradient-to-r from-amber-600 to-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.8)]" style="width: ${progPercent}%"></div>
               </div>
             </div>
-            <h3 class="text-xs font-semibold text-white group-hover:text-red-500 transition-colors line-clamp-1 leading-tight">
+            <h3 class="text-xs font-semibold text-white group-hover:text-yellow-400 transition-colors line-clamp-1 leading-tight">
               ${bookObj.title}
             </h3>
             <p class="text-gray-400 text-[11px] truncate mt-1">
@@ -1119,18 +1119,18 @@ function renderLibraryStreaming() {
         const progPercent = idx === 0 ? 1 : 6;
         return `
           <div onclick="handleBookClick('${bookObj.id}')" class="flex-none w-[125px] sm:w-[145px] cursor-pointer group snap-start select-none transition-transform duration-200 active:scale-95 text-left">
-            <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-2 border border-white/10 group-hover:border-red-600 shadow-[0_6px_20px_rgba(0,0,0,0.8)] transition-all duration-300 bg-[#121212]">
+            <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-2 border border-white/10 group-hover:border-yellow-500 shadow-[0_6px_20px_rgba(0,0,0,0.8)] transition-all duration-300 bg-[#121212]">
               <img src="${bookObj.cover}" alt="${bookObj.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='assets/logo.jpg'">
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
               <div class="absolute top-2 left-2 z-20 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-black/85 backdrop-blur-md border border-white/10 shadow">
-                <span class="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse"></span>
                 <span class="text-[9px] font-bold text-white font-mono">${progPercent}%</span>
               </div>
               <div class="absolute bottom-0 left-0 w-full h-1 bg-black/80">
-                <div class="h-full bg-gradient-to-r from-red-700 to-red-500 shadow-[0_0_8px_rgba(220,38,38,0.8)]" style="width: ${progPercent}%"></div>
+                <div class="h-full bg-gradient-to-r from-amber-600 to-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.8)]" style="width: ${progPercent}%"></div>
               </div>
             </div>
-            <h3 class="text-xs font-semibold text-white group-hover:text-red-500 transition-colors line-clamp-1 leading-tight">
+            <h3 class="text-xs font-semibold text-white group-hover:text-yellow-400 transition-colors line-clamp-1 leading-tight">
               ${bookObj.title}
             </h3>
             <p class="text-gray-400 text-[11px] truncate mt-1">
@@ -1164,7 +1164,7 @@ function renderLibraryStreaming() {
       return `
         <div>
           <div class="flex items-center justify-between mb-3 group cursor-pointer" onclick="openCategoryDetail('${catName}')">
-            <h2 class="text-lg sm:text-xl font-serif text-white group-hover:text-red-500 transition-colors font-bold">
+            <h2 class="text-lg sm:text-xl font-serif text-white group-hover:text-yellow-400 transition-colors font-bold">
               ${catName}
             </h2>
             <button onclick="event.stopPropagation(); openCategoryDetail('${catName}')" class="text-xs text-gray-400 uppercase tracking-wider group-hover:text-white transition-colors cursor-pointer font-medium">
@@ -1203,10 +1203,10 @@ function renderCategoriesGrid() {
     const count = (groups[catName] || []).length;
 
     return `
-      <div onclick="openCategoryDetail('${catName}')" class="group relative h-32 overflow-hidden rounded-2xl border border-white/10 bg-[#141414] hover:border-red-600/60 transition-all text-left p-5 flex flex-col justify-end cursor-pointer shadow-lg">
+      <div onclick="openCategoryDetail('${catName}')" class="group relative h-32 overflow-hidden rounded-2xl border border-white/10 bg-[#141414] hover:border-yellow-500/60 transition-all text-left p-5 flex flex-col justify-end cursor-pointer shadow-lg">
         <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
         <div class="relative z-10">
-          <h3 class="text-base font-serif font-bold text-white group-hover:text-red-500 transition-colors">${catName}</h3>
+          <h3 class="text-base font-serif font-bold text-white group-hover:text-yellow-400 transition-colors">${catName}</h3>
           <p class="text-xs text-gray-400 mt-1">${count} Livros & Tratados</p>
         </div>
       </div>
