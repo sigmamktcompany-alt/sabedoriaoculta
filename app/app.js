@@ -944,7 +944,7 @@ function createBookCardHTML(book, isCarousel) {
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
 
         <!-- Botão de Detalhes (i) -->
-        <button type="button" onclick="event.stopPropagation(); openBookDetailsModal('${book.id}')" class="absolute top-2 right-2 z-20 w-6 h-6 rounded-full bg-black/75 hover:bg-yellow-500 hover:text-black text-gray-300 border border-white/20 flex items-center justify-center transition-all shadow-md active:scale-90 cursor-pointer" title="Ver Detalhes">
+        <button type="button" onclick="event.stopPropagation(); openBookDetailsModal('${book.id}')" class="absolute top-2 right-2 z-20 w-6 h-6 rounded-full bg-black/85 hover:bg-[#D4AF37] text-yellow-400 hover:text-black border border-yellow-500/50 flex items-center justify-center transition-all shadow-[0_0_10px_rgba(212,175,55,0.3)] active:scale-90 cursor-pointer" title="Ver Detalhes">
           <i data-lucide="info" class="w-3 h-3"></i>
         </button>
 
@@ -1226,6 +1226,7 @@ function renderLibraryStreaming() {
         title: "Trilha Grau I • Neófito",
         tagline: "Fundamentos, Mentalismo & Hermetismo Sagrado",
         module: "Módulo I",
+        icon: "compass",
         filterFn: b => b.module === "Módulo I" || (b.category && b.category.toLowerCase().includes("hermetismo"))
       },
       {
@@ -1233,6 +1234,7 @@ function renderLibraryStreaming() {
         title: "Trilha Grau II • Adepto",
         tagline: "Alquimia, Ocultismo & Magia Prática",
         module: "Módulo II",
+        icon: "flame",
         filterFn: b => b.module === "Módulo II" || b.module === "Módulo IV" || (b.category && (b.category.toLowerCase().includes("alquimia") || b.category.toLowerCase().includes("magia")))
       },
       {
@@ -1240,6 +1242,7 @@ function renderLibraryStreaming() {
         title: "Trilha Grau III • Filósofo",
         tagline: "Gnosticismo & Manuscritos Apócrifos",
         module: "Módulo III",
+        icon: "eye",
         filterFn: b => b.module === "Módulo III" || (b.category && (b.category.toLowerCase().includes("gnosticismo") || b.category.toLowerCase().includes("apócrifos")))
       },
       {
@@ -1247,6 +1250,7 @@ function renderLibraryStreaming() {
         title: "Trilha Grau IV • Mestre",
         tagline: "Sociedades Secretas & Alta Prosperidade",
         module: "Módulo V",
+        icon: "crown",
         filterFn: b => b.module === "Módulo V" || b.module === "Módulo VI" || (b.category && b.category.toLowerCase().includes("sociedades secretas")) || Number(b.id) === 999
       }
     ];
@@ -1257,20 +1261,21 @@ function renderLibraryStreaming() {
       const displayBooks = grauBooks.slice(0, 20);
 
       return `
-        <div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-yellow-500/5 via-black/40 to-black/80 border border-yellow-500/20 shadow-xl mb-8">
+        <div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-yellow-500/10 via-black/50 to-black/80 border border-yellow-500/30 shadow-[0_4px_25px_rgba(212,175,55,0.08)] mb-8">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 cursor-pointer" onclick="filterLibraryByGrau(${grau.num})">
             <div>
-              <div class="flex items-center gap-2">
-                <span class="px-2 py-0.5 rounded-full bg-yellow-500/15 border border-yellow-500/40 text-yellow-400 text-[10px] font-mono font-bold tracking-wider">
+              <div class="flex items-center gap-2.5">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#E5C158] text-black text-[11px] font-black font-mono tracking-wider shadow-[0_0_15px_rgba(212,175,55,0.45)] border border-yellow-300/60">
+                  <i data-lucide="${grau.icon}" class="w-3.5 h-3.5 text-black"></i>
                   GRAU ${["I", "II", "III", "IV"][grau.num - 1]}
                 </span>
                 <h2 class="text-lg sm:text-xl font-serif text-white hover:text-yellow-400 transition-colors font-bold">
                   ${grau.title}
                 </h2>
               </div>
-              <p class="text-xs text-gray-400 mt-0.5">${grau.tagline} • <strong class="text-yellow-500/90 font-mono">${grauBooks.length} Obras Catalogadas</strong></p>
+              <p class="text-xs text-gray-400 mt-1">${grau.tagline} • <strong class="text-yellow-400 font-mono">${grauBooks.length} Obras Catalogadas</strong></p>
             </div>
-            <button onclick="event.stopPropagation(); filterLibraryByGrau(${grau.num})" class="self-start sm:self-auto text-xs text-yellow-400 font-bold uppercase tracking-wider hover:underline flex items-center gap-1 cursor-pointer">
+            <button onclick="event.stopPropagation(); filterLibraryByGrau(${grau.num})" class="self-start sm:self-auto text-xs text-yellow-400 hover:text-yellow-300 font-bold uppercase tracking-wider hover:underline flex items-center gap-1 cursor-pointer">
               <span>Explorar Trilha</span>
               <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
             </button>
@@ -1471,14 +1476,14 @@ function filterLibraryByGrau(grau) {
 
   // Atualizar visual dos botões de Grau
   document.querySelectorAll(".grau-pill-btn").forEach(btn => {
-    btn.classList.remove("bg-yellow-500", "text-black", "font-bold", "shadow-md");
+    btn.classList.remove("bg-gradient-to-r", "from-[#D4AF37]", "to-[#E5C158]", "text-black", "font-black", "shadow-[0_0_15px_rgba(212,175,55,0.4)]", "bg-yellow-500", "font-bold", "shadow-md");
     btn.classList.add("bg-white/5", "text-gray-300", "border", "border-white/10");
   });
 
   const activeBtn = document.getElementById("btnGrau-" + grau);
   if (activeBtn) {
     activeBtn.classList.remove("bg-white/5", "text-gray-300", "border", "border-white/10");
-    activeBtn.classList.add("bg-yellow-500", "text-black", "font-bold", "shadow-md");
+    activeBtn.classList.add("bg-gradient-to-r", "from-[#D4AF37]", "to-[#E5C158]", "text-black", "font-black", "shadow-[0_0_15px_rgba(212,175,55,0.4)]");
   }
 
   if (grau === "all" || !grau) {
