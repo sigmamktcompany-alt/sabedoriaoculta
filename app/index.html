@@ -730,7 +730,7 @@
     <section id="tab-audiobooks" class="app-tab-section hidden animate-fade-in">
       <div class="px-4 sm:px-8 lg:px-12 py-6 max-w-7xl mx-auto">
 
-        <!-- Header com Título e Seletor dos 2 Grupos (Totalmente Responsivo) -->
+        <!-- Header com Título e Seletor dos 2 Grupos (Totalmente Responsivo & Proporcional) -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 text-left">
           <div class="flex items-center space-x-3 shrink-0">
             <h1 id="audioMainHeaderTitle"
@@ -741,14 +741,14 @@
 
           <!-- SELETOR DOS DOIS GRUPOS: FREQUÊNCIAS SONORAS vs AUDIOLIVROS -->
           <div
-            class="inline-flex items-center p-1 rounded-2xl bg-[#141414] border border-white/10 shadow-lg w-full sm:w-auto justify-center sm:justify-start">
+            class="inline-flex items-center p-1 rounded-full bg-[#141414] border border-white/10 shadow-lg shrink-0 self-start sm:self-auto">
             <button id="groupBtnFrequencies" onclick="switchAudioGroup('frequencies')"
-              class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer bg-yellow-500 text-black shadow-lg shadow-yellow-500/20">
+              class="px-4 py-1.5 rounded-full text-xs font-black transition-all flex items-center justify-center gap-1.5 cursor-pointer bg-gradient-to-r from-[#D4AF37] to-[#E5C158] text-black shadow-md whitespace-nowrap">
               <i data-lucide="radio" class="w-3.5 h-3.5"></i>
               <span>Frequências Sonoras</span>
             </button>
             <button id="groupBtnAudiobooks" onclick="switchAudioGroup('audiobooks')"
-              class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-xs font-medium text-gray-400 hover:text-white transition-all flex items-center justify-center gap-2 cursor-pointer">
+              class="px-4 py-1.5 rounded-full text-xs font-medium text-gray-400 hover:text-white transition-all flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap">
               <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
               <span>Audiolivros</span>
             </button>
@@ -760,7 +760,7 @@
           
           <!-- Banner de Status & Sintonia (Compacto e Harmonioso) -->
           <div class="esoteric-card rounded-2xl p-4 sm:p-5 border border-white/10 relative overflow-hidden bg-gradient-to-r from-[#121212] via-black to-[#121212]">
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative z-10">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
               <div class="flex items-center gap-3.5">
                 <div class="w-10 h-10 rounded-xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-yellow-400 shadow-md shrink-0">
                   <i data-lucide="radio" class="w-5 h-5 animate-pulse"></i>
@@ -776,14 +776,14 @@
               </div>
 
               <!-- Status Atual do Player -->
-              <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end border-t sm:border-t-0 pt-2.5 sm:pt-0 border-white/5">
-                <div id="soundWaveBox" class="px-3.5 py-1.5 rounded-xl bg-black border border-white/15 flex items-center gap-2 shadow-lg wave-paused shrink-0">
+              <div class="flex items-center gap-2.5 w-full md:w-auto justify-between md:justify-end border-t md:border-t-0 pt-3 md:pt-0 border-white/5">
+                <div id="soundWaveBox" class="px-3 py-1.5 rounded-xl bg-black border border-white/15 flex items-center gap-2 shadow-lg wave-paused shrink-0 max-w-[210px] sm:max-w-none overflow-hidden">
                   <span class="wave-bar"></span>
                   <span class="wave-bar"></span>
                   <span class="wave-bar"></span>
                   <span class="wave-bar"></span>
                   <span class="wave-bar"></span>
-                  <span id="playerCurrentHz" class="font-mono font-bold text-xs text-yellow-400 tracking-wide">Santuário em Silêncio</span>
+                  <span id="playerCurrentHz" class="font-mono font-bold text-xs text-yellow-400 tracking-wide truncate">Santuário em Silêncio</span>
                 </div>
                 <button onclick="stopFrequency(true)" class="text-xs text-gray-400 hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer py-1.5 px-3 rounded-xl hover:bg-white/10 border border-white/10 shrink-0">
                   <i data-lucide="square" class="w-3.5 h-3.5"></i> Parar
@@ -1665,8 +1665,8 @@
   </div>
 
   <!-- SCRIPTS -->
-  <script src="books_data.js?v=1795591000"></script>
-  <script src="app.js?v=1795591000"></script>
+  <script src="books_data.js?v=1795593000"></script>
+  <script src="app.js?v=1795593000"></script>
 </body>
 
 </html>

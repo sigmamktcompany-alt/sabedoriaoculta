@@ -3243,44 +3243,44 @@ function renderFrequencies() {
   const list = document.getElementById("frequenciesList");
   if (!list) return;
 
-  // Renderização harmoniosa com símbolos sagrados e proporção perfeita
+  // Renderização harmoniosa com símbolos sagrados rigorosamente enquadrados
   list.innerHTML = frequenciesData.map(f => {
     const isPlaying = activeFrequencyHz === f.hz;
     return `
       <div id="freq-card-${f.hz}" onclick="handleFrequencyClick(${f.hz}, event)" 
-        class="esoteric-card rounded-2xl p-4 sm:p-5 border ${isPlaying ? 'border-yellow-500 shadow-[0_0_30px_rgba(234,179,8,0.25)] bg-yellow-500/5 ring-1 ring-yellow-500/50' : 'border-white/10 hover:border-yellow-500/40 bg-[#0d0d0d]'} flex flex-col justify-between transition-all duration-300 cursor-pointer group hover:-translate-y-0.5">
+        class="esoteric-card rounded-2xl p-4 sm:p-5 border ${isPlaying ? 'border-yellow-500 shadow-[0_0_25px_rgba(234,179,8,0.25)] bg-yellow-500/5 ring-1 ring-yellow-500/50' : 'border-white/10 hover:border-yellow-500/40 bg-[#0d0d0d]'} flex flex-col justify-between transition-all duration-300 cursor-pointer group hover:-translate-y-0.5">
         
         <div>
-          <!-- Topo do Card: Símbolo Sagrado Autoral + Badges -->
-          <div class="flex items-center gap-3.5 mb-3.5">
-            <div class="w-13 h-13 sm:w-14 sm:h-14 rounded-xl bg-black border ${isPlaying ? 'border-yellow-500' : 'border-white/10 group-hover:border-yellow-500/40'} p-1 flex items-center justify-center shrink-0 shadow-md relative overflow-hidden transition-all duration-300">
-              <img src="${f.symbol}" alt="${f.name}" class="w-full h-full object-contain ${isPlaying ? 'scale-110 drop-shadow-[0_0_8px_rgba(234,179,8,0.8)]' : 'group-hover:scale-105'} transition-transform duration-300">
+          <!-- Topo do Card: Símbolo Sagrado Autoral (Enquadrado 48x48) + Badges -->
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-12 h-12 min-w-[48px] max-w-[48px] h-[48px] max-h-[48px] rounded-xl bg-black border ${isPlaying ? 'border-yellow-500 shadow-[0_0_10px_rgba(234,179,8,0.4)]' : 'border-white/10 group-hover:border-yellow-500/40'} p-1.5 flex items-center justify-center shrink-0 relative overflow-hidden transition-all duration-300">
+              <img src="${f.symbol}" alt="${f.name}" class="w-full h-full object-contain ${isPlaying ? 'scale-110 drop-shadow-[0_0_6px_rgba(234,179,8,0.8)]' : 'group-hover:scale-105'} transition-transform duration-300">
               ${isPlaying ? '<div class="absolute inset-0 bg-yellow-500/10 pointer-events-none animate-pulse"></div>' : ''}
             </div>
 
             <div class="flex-1 min-w-0">
-              <div class="flex items-center gap-2 mb-1">
+              <div class="flex items-center justify-between gap-1 mb-1">
                 <span class="text-xs font-mono font-black text-yellow-400 px-2 py-0.5 rounded-md bg-yellow-500/15 border border-yellow-500/30 shrink-0">${f.hz} HZ</span>
                 <span class="text-[9px] font-mono text-gray-500 uppercase tracking-widest truncate">${f.chakra}</span>
               </div>
               <h4 class="font-serif font-bold text-sm text-white group-hover:text-yellow-400 transition-colors truncate">${f.name}</h4>
-              <p class="text-[10px] text-gray-400 font-medium truncate">${f.subtitle || ''}</p>
             </div>
           </div>
 
-          <!-- Descrição Concisa e Proporcional -->
-          <p class="text-[11px] sm:text-xs text-gray-300/90 leading-relaxed mb-4 line-clamp-2">${f.benefit}</p>
+          <!-- Subtítulo e Benefício -->
+          <p class="text-[11px] text-yellow-500/80 font-medium truncate mb-1.5">${f.subtitle || ''}</p>
+          <p class="text-[11px] sm:text-xs text-gray-400 leading-relaxed mb-4 line-clamp-2">${f.benefit}</p>
         </div>
 
         <!-- Rodapé do Card com Status e Botão com Feedback Fiel -->
         <div class="pt-3 border-t border-white/5 flex items-center justify-between gap-2">
           <div class="flex items-center gap-1.5 text-[10px] text-gray-500 font-mono">
             <span class="w-1.5 h-1.5 rounded-full ${isPlaying ? 'bg-yellow-400 animate-ping' : 'bg-gray-600'}"></span>
-            <span>${isPlaying ? 'Onda Senoidal Ativa' : 'Onda Binaural'}</span>
+            <span>${isPlaying ? 'Onda Ativa' : 'Onda Binaural'}</span>
           </div>
 
           <button id="freq-btn-${f.hz}" 
-            class="px-4 py-1.5 rounded-xl ${isPlaying ? 'bg-yellow-500 text-black font-black shadow-lg shadow-yellow-500/30' : 'bg-white/5 text-gray-300 group-hover:bg-yellow-500 group-hover:text-black font-bold border border-white/10'} text-xs flex items-center gap-1.5 transition-all duration-200 pointer-events-none shrink-0">
+            class="px-4 py-1.5 rounded-xl ${isPlaying ? 'bg-gradient-to-r from-[#D4AF37] to-[#E5C158] text-black font-black shadow-lg shadow-yellow-500/30' : 'bg-white/5 text-gray-300 group-hover:bg-gradient-to-r group-hover:from-[#D4AF37] group-hover:to-[#E5C158] group-hover:text-black font-bold border border-white/10'} text-xs flex items-center gap-1.5 transition-all duration-200 pointer-events-none shrink-0">
             <i data-lucide="${isPlaying ? 'pause' : 'play'}" class="w-3.5 h-3.5 fill-current"></i>
             <span>${isPlaying ? 'Tocando' : 'Ouvir'}</span>
           </button>
@@ -3301,7 +3301,7 @@ function updateFrequencyUI(currentActiveHz) {
 
     if (card) {
       if (isPlaying) {
-        card.className = "esoteric-card rounded-2xl p-4 sm:p-5 border border-yellow-500 shadow-[0_0_30px_rgba(234,179,8,0.25)] bg-yellow-500/5 ring-1 ring-yellow-500/50 flex flex-col justify-between transition-all duration-300 cursor-pointer group";
+        card.className = "esoteric-card rounded-2xl p-4 sm:p-5 border border-yellow-500 shadow-[0_0_25px_rgba(234,179,8,0.25)] bg-yellow-500/5 ring-1 ring-yellow-500/50 flex flex-col justify-between transition-all duration-300 cursor-pointer group";
       } else {
         card.className = "esoteric-card rounded-2xl p-4 sm:p-5 border border-white/10 hover:border-yellow-500/40 bg-[#0d0d0d] flex flex-col justify-between transition-all duration-300 cursor-pointer group hover:-translate-y-0.5";
       }
@@ -3309,10 +3309,10 @@ function updateFrequencyUI(currentActiveHz) {
 
     if (btn) {
       if (isPlaying) {
-        btn.className = "px-4 py-1.5 rounded-xl bg-yellow-500 text-black font-black shadow-lg shadow-yellow-500/30 text-xs flex items-center gap-1.5 transition-all duration-200 pointer-events-none shrink-0";
+        btn.className = "px-4 py-1.5 rounded-xl bg-gradient-to-r from-[#D4AF37] to-[#E5C158] text-black font-black shadow-lg shadow-yellow-500/30 text-xs flex items-center gap-1.5 transition-all duration-200 pointer-events-none shrink-0";
         btn.innerHTML = `<i data-lucide="pause" class="w-3.5 h-3.5 fill-current"></i><span>Tocando</span>`;
       } else {
-        btn.className = "px-4 py-1.5 rounded-xl bg-white/5 text-gray-300 group-hover:bg-yellow-500 group-hover:text-black font-bold border border-white/10 text-xs flex items-center gap-1.5 transition-all duration-200 pointer-events-none shrink-0";
+        btn.className = "px-4 py-1.5 rounded-xl bg-white/5 text-gray-300 group-hover:bg-gradient-to-r group-hover:from-[#D4AF37] group-hover:to-[#E5C158] group-hover:text-black font-bold border border-white/10 text-xs flex items-center gap-1.5 transition-all duration-200 pointer-events-none shrink-0";
         btn.innerHTML = `<i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i><span>Ouvir</span>`;
       }
     }
@@ -4314,26 +4314,21 @@ function switchAudioGroup(group) {
   const viewAud = document.getElementById("groupViewAudiobooks");
   const subTitle = document.getElementById("audioMainHeaderSubtitle");
 
+  const activeClass = "px-4 py-1.5 rounded-full text-xs font-black transition-all flex items-center justify-center gap-1.5 cursor-pointer bg-gradient-to-r from-[#D4AF37] to-[#E5C158] text-black shadow-md whitespace-nowrap";
+  const inactiveClass = "px-4 py-1.5 rounded-full text-xs font-medium text-gray-400 hover:text-white transition-all flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap";
+
   if (group === "frequencies") {
     if (viewFreq) viewFreq.classList.remove("hidden");
     if (viewAud) viewAud.classList.add("hidden");
-    if (btnFreq) {
-      btnFreq.className = "px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer bg-yellow-500 text-black shadow-lg shadow-yellow-500/20";
-    }
-    if (btnAud) {
-      btnAud.className = "px-5 py-2.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white transition-all flex items-center gap-2 cursor-pointer";
-    }
+    if (btnFreq) btnFreq.className = activeClass;
+    if (btnAud) btnAud.className = inactiveClass;
     if (subTitle) subTitle.textContent = "Batimentos binaurais de ondas senoidais puras calibrados para concentração profunda, desbloqueio de chakras e expansão da consciência.";
     renderFrequencies();
   } else {
     if (viewFreq) viewFreq.classList.add("hidden");
     if (viewAud) viewAud.classList.remove("hidden");
-    if (btnAud) {
-      btnAud.className = "px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer bg-yellow-500 text-black shadow-lg shadow-yellow-500/20";
-    }
-    if (btnFreq) {
-      btnFreq.className = "px-5 py-2.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white transition-all flex items-center gap-2 cursor-pointer";
-    }
+    if (btnAud) btnAud.className = activeClass;
+    if (btnFreq) btnFreq.className = inactiveClass;
     if (subTitle) subTitle.textContent = "Obras sagradas e tratados herméticos narrados com frequência de fundo em 432Hz.";
     renderAudiobooksList();
   }
