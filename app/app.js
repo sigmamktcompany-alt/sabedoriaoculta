@@ -1219,38 +1219,30 @@ function renderLibraryStreaming() {
   if (rowsContainer) {
     const allBooksList = getAllBooks();
 
-    // 1. CARROSSEIS DAS TRILHAS POR GRAUS (GRAU I AO GRAU IV)
+    // 1. CARROSSEIS DAS TRILHAS POR GRAUS (GRAU I AO GRAU IV - DESIGN PADRÃO E NATIVO)
     const GRAUS_DEF = [
       {
         num: 1,
-        title: "Trilha Grau I • Neófito",
-        tagline: "Fundamentos, Mentalismo & Hermetismo Sagrado",
+        title: "Grau I • Neófito",
         module: "Módulo I",
-        icon: "compass",
         filterFn: b => b.module === "Módulo I" || (b.category && b.category.toLowerCase().includes("hermetismo"))
       },
       {
         num: 2,
-        title: "Trilha Grau II • Adepto",
-        tagline: "Alquimia, Ocultismo & Magia Prática",
+        title: "Grau II • Adepto",
         module: "Módulo II",
-        icon: "flame",
         filterFn: b => b.module === "Módulo II" || b.module === "Módulo IV" || (b.category && (b.category.toLowerCase().includes("alquimia") || b.category.toLowerCase().includes("magia")))
       },
       {
         num: 3,
-        title: "Trilha Grau III • Filósofo",
-        tagline: "Gnosticismo & Manuscritos Apócrifos",
+        title: "Grau III • Filósofo",
         module: "Módulo III",
-        icon: "eye",
         filterFn: b => b.module === "Módulo III" || (b.category && (b.category.toLowerCase().includes("gnosticismo") || b.category.toLowerCase().includes("apócrifos")))
       },
       {
         num: 4,
-        title: "Trilha Grau IV • Mestre",
-        tagline: "Sociedades Secretas & Alta Prosperidade",
+        title: "Grau IV • Mestre",
         module: "Módulo V",
-        icon: "crown",
         filterFn: b => b.module === "Módulo V" || b.module === "Módulo VI" || (b.category && b.category.toLowerCase().includes("sociedades secretas")) || Number(b.id) === 999
       }
     ];
@@ -1261,23 +1253,13 @@ function renderLibraryStreaming() {
       const displayBooks = grauBooks.slice(0, 20);
 
       return `
-        <div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-yellow-500/10 via-black/50 to-black/80 border border-yellow-500/30 shadow-[0_4px_25px_rgba(212,175,55,0.08)] mb-8">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 cursor-pointer" onclick="filterLibraryByGrau(${grau.num})">
-            <div>
-              <div class="flex items-center gap-2.5">
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#E5C158] text-black text-[11px] font-black font-mono tracking-wider shadow-[0_0_15px_rgba(212,175,55,0.45)] border border-yellow-300/60">
-                  <i data-lucide="${grau.icon}" class="w-3.5 h-3.5 text-black"></i>
-                  GRAU ${["I", "II", "III", "IV"][grau.num - 1]}
-                </span>
-                <h2 class="text-lg sm:text-xl font-serif text-white hover:text-yellow-400 transition-colors font-bold">
-                  ${grau.title}
-                </h2>
-              </div>
-              <p class="text-xs text-gray-400 mt-1">${grau.tagline} • <strong class="text-yellow-400 font-mono">${grauBooks.length} Obras Catalogadas</strong></p>
-            </div>
-            <button onclick="event.stopPropagation(); filterLibraryByGrau(${grau.num})" class="self-start sm:self-auto text-xs text-yellow-400 hover:text-yellow-300 font-bold uppercase tracking-wider hover:underline flex items-center gap-1 cursor-pointer">
-              <span>Explorar Trilha</span>
-              <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+        <div>
+          <div class="flex items-center justify-between mb-3 group cursor-pointer" onclick="filterLibraryByGrau(${grau.num})">
+            <h2 class="text-lg sm:text-xl font-serif text-yellow-500 group-hover:text-yellow-400 transition-colors font-bold">
+              ${grau.title}
+            </h2>
+            <button onclick="event.stopPropagation(); filterLibraryByGrau(${grau.num})" class="text-xs text-gray-400 uppercase tracking-wider group-hover:text-white transition-colors cursor-pointer font-medium">
+              VER TODOS
             </button>
           </div>
 
