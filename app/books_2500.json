@@ -1,5 +1,22 @@
 [
   {
+    "id": 3302,
+    "title": "O Círculo de Selamento & Banimento de Emergência",
+    "author": "Acervo Cúpula 33 (Tradição Oculta)",
+    "category": "Alta Magia (Grimórios & Alta Magia)",
+    "module": "Módulo V",
+    "rarity": "Raríssimo (Manuscrito Restaurado)",
+    "pages": 16,
+    "cover": "assets/cover_circulo_selamento_banimento.jpg",
+    "tier": "master",
+    "desc": "Manual de Blindagem Psíquica Rápida, Fechamento de Corpo e Purificação de Espaços Ocultos contra Cargas Negativas e Vampirismo Energético.",
+    "pdfUrl": "livros_pdf/circulo_selamento_banimento_emergencia.pdf",
+    "directDownloadUrl": "livros_pdf/circulo_selamento_banimento_emergencia.pdf",
+    "isDownloaded": true,
+    "isOrderBump": true,
+    "fileSizeMb": 0.85
+  },
+  {
     "id": 1,
     "title": "A Tábua Das Esmeraldas De Thoth",
     "author": "Acervo Cúpula 33 (Tradição Oculta)",
