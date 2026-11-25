@@ -2922,6 +2922,9 @@ function restartAudiobook() {
 
 function setAudioSpeed(speed) {
   currentAudioSpeed = speed;
+  if (globalRealAudio) {
+    globalRealAudio.playbackRate = currentAudioSpeed;
+  }
   document.querySelectorAll(".audio-speed-btn").forEach(btn => {
     if (parseFloat(btn.getAttribute("data-speed")) === speed) {
       btn.className = "audio-speed-btn px-2.5 py-1 rounded-lg bg-gold-500/20 text-gold-400 border border-gold-500/40 font-bold";
@@ -4311,15 +4314,16 @@ function switchAudioGroup(group) {
 const AUDIOBOOKS_CATALOG = [
   {
     id: 6,
-    title: "O Caibalion: As Sete Leis Herméticas",
+    title: "O Caibalion: Edição Integral e Comentada",
     author: "Três Iniciados",
-    narrator: "Voz Iniciática Cúpula 33",
-    duration: "3h 45min",
-    totalSeconds: 13500,
+    narrator: "Áudio Livro Completo (8h 50min)",
+    duration: "8h 50min",
+    totalSeconds: 31808,
     cover: "assets/covers_extracted/cover_O_Caibalion_-_Edi__o_Definitiva.jpg",
     category: "Hermetismo & Cabala",
     hz: 432,
-    desc: "A transmissão oral dos sete princípios universais de Hermes Trismegisto: Mentalismo, Correspondência, Vibração, Polaridade, Ritmo, Causa e Efeito, e Gênero."
+    audioUrl: "assets/audio/o_caibalion_audiobook.mp3",
+    desc: "A transmissão oral integral e definitiva de O Caibalion comentada com som ambiente e as sete leis cósmicas imutáveis de Hermes Trismegisto."
   },
   {
     id: 36,
@@ -4498,6 +4502,44 @@ function closeAudiobookPlayerModal() {
   stopAudiobookAmbientDrone();
 }
 
+let globalRealAudio = null;
+
+function getRealAudioElement() {
+  if (!globalRealAudio) {
+    globalRealAudio = new Audio();
+    globalRealAudio.preload = "auto";
+
+    globalRealAudio.addEventListener("timeupdate", () => {
+      if (activeAudiobook && activeAudiobook.audioUrl && isAudiobookPlaying) {
+        audiobookCurrentTime = Math.floor(globalRealAudio.currentTime);
+        updateAudioProgressUI();
+      }
+    });
+
+    globalRealAudio.addEventListener("ended", () => {
+      pauseAudiobookPlayback();
+      audiobookCurrentTime = 0;
+      updateAudioProgressUI();
+    });
+
+    globalRealAudio.addEventListener("error", (e) => {
+      console.warn("Erro no player real de áudio:", e);
+      showToast("Carregando fluxo de áudio...");
+    });
+  }
+  return globalRealAudio;
+}
+
+function formatAudioTime(seconds) {
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  const s = Math.floor(seconds % 60);
+  if (h > 0) {
+    return String(h).padStart(2, "0") + ":" + String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+  }
+  return String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+}
+
 function startAudiobookPlayback() {
   if (isDroneEnabled) {
     startAudiobookAmbientDrone();
@@ -4506,9 +4548,22 @@ function startAudiobookPlayback() {
   isAudiobookPlaying = true;
   updateAudioPlayerUI(true);
 
-  if ('speechSynthesis' in window && activeAudiobook) {
+  if (activeAudiobook && activeAudiobook.audioUrl) {
+    const audio = getRealAudioElement();
+    if (!audio.src || !audio.src.includes(activeAudiobook.audioUrl)) {
+      audio.src = activeAudiobook.audioUrl;
+      if (audiobookCurrentTime > 0) {
+        audio.currentTime = audiobookCurrentTime;
+      }
+    }
+    audio.playbackRate = currentAudioSpeed;
+    audio.play().catch(err => {
+      console.warn("Autoplay impedido pelo navegador:", err);
+      pauseAudiobookPlayback();
+    });
+  } else if ('speechSynthesis' in window && activeAudiobook) {
     window.speechSynthesis.cancel();
-    const narrationText = "Iniciação ao audiolivro sagrado: " + activeAudiobook.title + ". Obra de " + activeAudiobook.author + ". Narrado em frequência áurea de 432 hertz para os membros da Cúpula 33. " + activeAudiobook.desc + ". Respire profundamente e permita que os ensinamentos da tradição ancestral iluminem sua mente.";
+    const narrationText = "Iniciação ao audiolivro sagrado: " + activeAudiobook.title + ". Obra de " + activeAudiobook.author + ". Narrado em frequência áurea de 432 hertz para os membros da Cúpula 33. " + activeAudiobook.desc;
     audiobookUtterance = new SpeechSynthesisUtterance(narrationText);
     audiobookUtterance.lang = 'pt-BR';
     audiobookUtterance.rate = currentAudioSpeed;
@@ -4523,20 +4578,23 @@ function startAudiobookPlayback() {
     };
 
     window.speechSynthesis.speak(audiobookUtterance);
-  }
 
-  clearInterval(audiobookTimer);
-  audiobookTimer = setInterval(() => {
-    if (isAudiobookPlaying && activeAudiobook) {
-      audiobookCurrentTime += 1;
-      updateAudioProgressUI();
-    }
-  }, 1000);
+    clearInterval(audiobookTimer);
+    audiobookTimer = setInterval(() => {
+      if (isAudiobookPlaying && activeAudiobook) {
+        audiobookCurrentTime += 1;
+        updateAudioProgressUI();
+      }
+    }, 1000);
+  }
 }
 
 function pauseAudiobookPlayback() {
   isAudiobookPlaying = false;
   clearInterval(audiobookTimer);
+  if (globalRealAudio) {
+    globalRealAudio.pause();
+  }
   if ('speechSynthesis' in window) {
     window.speechSynthesis.pause();
   }
@@ -4547,7 +4605,9 @@ function toggleAudiobookPlay() {
   if (isAudiobookPlaying) {
     pauseAudiobookPlayback();
   } else {
-    if ('speechSynthesis' in window && window.speechSynthesis.paused) {
+    if (activeAudiobook && activeAudiobook.audioUrl) {
+      startAudiobookPlayback();
+    } else if ('speechSynthesis' in window && window.speechSynthesis.paused) {
       window.speechSynthesis.resume();
       isAudiobookPlaying = true;
       updateAudioPlayerUI(true);
@@ -4588,31 +4648,42 @@ function updateAudioProgressUI() {
   if (!activeAudiobook) return;
   const bar = document.getElementById("abProgressBar");
   const curTime = document.getElementById("abCurrentTime");
+  const totalTime = document.getElementById("abTotalTime");
 
   const total = activeAudiobook.totalSeconds || 3600;
   const pct = Math.min(100, (audiobookCurrentTime / total) * 100);
 
   if (bar) bar.style.width = pct + "%";
   if (curTime) {
-    const mins = Math.floor(audiobookCurrentTime / 60);
-    const secs = audiobookCurrentTime % 60;
-    curTime.textContent = String(mins).padStart(2, "0") + ":" + String(secs).padStart(2, "0");
+    curTime.textContent = formatAudioTime(audiobookCurrentTime);
+  }
+  if (totalTime) {
+    totalTime.textContent = formatAudioTime(total);
   }
 }
 
 function rewindAudiobook(seconds) {
   audiobookCurrentTime = Math.max(0, audiobookCurrentTime - seconds);
+  if (globalRealAudio && activeAudiobook && activeAudiobook.audioUrl) {
+    globalRealAudio.currentTime = audiobookCurrentTime;
+  }
   updateAudioProgressUI();
 }
 
 function forwardAudiobook(seconds) {
   if (!activeAudiobook) return;
   audiobookCurrentTime = Math.min(activeAudiobook.totalSeconds || 3600, audiobookCurrentTime + seconds);
+  if (globalRealAudio && activeAudiobook && activeAudiobook.audioUrl) {
+    globalRealAudio.currentTime = audiobookCurrentTime;
+  }
   updateAudioProgressUI();
 }
 
 function setAudioSpeed(speed) {
   currentAudioSpeed = speed;
+  if (globalRealAudio) {
+    globalRealAudio.playbackRate = currentAudioSpeed;
+  }
   [1.0, 1.25, 1.5].forEach(s => {
     const btn = document.getElementById("abSpeed" + String(s).replace(".", ""));
     if (btn) {
@@ -4655,5 +4726,8 @@ function handleAudioScrub(event) {
   const clickX = event.clientX - rect.left;
   const pct = Math.max(0, Math.min(1, clickX / rect.width));
   audiobookCurrentTime = Math.round(pct * (activeAudiobook.totalSeconds || 3600));
+  if (globalRealAudio && activeAudiobook && activeAudiobook.audioUrl) {
+    globalRealAudio.currentTime = audiobookCurrentTime;
+  }
   updateAudioProgressUI();
 }
