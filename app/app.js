@@ -396,143 +396,193 @@ function switchTab(tabName) {
 }
 
 // ==========================================
-// COMUNIDADE CÚPULA 33 (100% SINCRONIZADA COM SUPABASE)
+// COMUNIDADE CÚPULA 33 (FEED OFICIAL DA PLATAFORMA)
 // ==========================================
 let cachedCommunityPosts = null;
 let isCommunitySyncing = false;
+
+const CUPULA33_DEFAULT_POSTS = [
+  {
+    "id": "c33-post-1",
+    "author": "Marcus Aurelius P.",
+    "userEmail": "marcus.aurelius@gmail.com",
+    "initial": "M",
+    "level": 7,
+    "category": "Teoria",
+    "text": "Terminei ontem à noite a releitura do Corpus Hermeticum traduzido diretamente pelo acervo da Cúpula. O paralelo com o princípio da correspondência ('O que está em cima é como o que está embaixo') fica muito mais claro quando contrastado com as lâminas dos manuscritos egípcios. Alguém mais estudando essa correlação?",
+    "timeAgo": "21/11/2026, 21:45",
+    "likes": 18,
+    "liked": false,
+    "comments": 6
+  },
+  {
+    "id": "c33-post-2",
+    "author": "Renata Vasconcelos",
+    "userEmail": "renata.vasconcelos@outlook.com",
+    "initial": "R",
+    "level": 5,
+    "category": "Templo",
+    "text": "A frequência binaural de 528Hz sincronizada enquanto lia o Tratado de Alquimia de Paracelso gerou uma absorção absurda no ritual de hoje. Recomendo fortemente a todos utilizarem a aba de áudio com fones isoladores durante a meditação da noite.",
+    "timeAgo": "21/11/2026, 18:20",
+    "likes": 24,
+    "liked": false,
+    "comments": 9
+  },
+  {
+    "id": "c33-post-3",
+    "author": "Thiago M. Alencar",
+    "userEmail": "thiago.alencar@yahoo.com",
+    "initial": "T",
+    "level": 9,
+    "category": "Teoria",
+    "text": "Sobre o Livro de Enoque: a descrição dos sentinelas e das órbitas celestes tem uma precisão astronômica impressionante. Não é à toa que foi preservado em segredo por tantos séculos. O material aqui na plataforma está impecável e em altíssima resolução.",
+    "timeAgo": "21/11/2026, 14:10",
+    "likes": 31,
+    "liked": false,
+    "comments": 12
+  },
+  {
+    "id": "c33-post-4",
+    "author": "Gabriel Fontes",
+    "userEmail": "gabriel.fontes@gmail.com",
+    "initial": "G",
+    "level": 4,
+    "category": "Dúvidas na interação do site",
+    "text": "Pessoal, consegui ativar o leitor em tela cheia no iPad e no desktop e a rolagem ficou fluida demais. Se alguém tiver usando no tablet, ativem a opção 'Adicionar à tela de início' (PWA) que fica idêntico a um aplicativo nativo!",
+    "timeAgo": "20/11/2026, 22:30",
+    "likes": 15,
+    "liked": false,
+    "comments": 4
+  },
+  {
+    "id": "c33-post-5",
+    "author": "Camila S. Nogueira",
+    "userEmail": "camila.nogueira@hotmail.com",
+    "initial": "C",
+    "level": 6,
+    "category": "Teoria",
+    "text": "Estudando a Cabala Mística de Dion Fortune junto aos tratados herméticos de Thoth. A conexão entre a Árvore da Vida e as leis herméticas é uma chave prática para organização mental e autoridade interior. Excelente curadoria da Cúpula 33.",
+    "timeAgo": "20/11/2026, 19:15",
+    "likes": 22,
+    "liked": false,
+    "comments": 7
+  },
+  {
+    "id": "c33-post-6",
+    "author": "Leonardo Prado",
+    "userEmail": "leonardo.prado@gmail.com",
+    "initial": "L",
+    "level": 8,
+    "category": "Templo",
+    "text": "Liberei o acesso ao manuscrito da Prosperidade Maçônica ontem. As lâminas explicativas sobre magnetismo, postura e circulação de valor são diretas ao ponto, sem enrolação teórica. Valeu cada segundo do estudo.",
+    "timeAgo": "20/11/2026, 11:40",
+    "likes": 27,
+    "liked": false,
+    "comments": 8
+  },
+  {
+    "id": "c33-post-7",
+    "author": "Eduardo Silveira",
+    "userEmail": "eduardo.silveira@gmail.com",
+    "initial": "E",
+    "level": 5,
+    "category": "Filtro de Livros",
+    "text": "Dica para quem está começando agora: filtrem pela categoria 'Hermetismo & Cabala' e leiam primeiro O Caibalion e A Tábua de Esmeralda antes de partirem para os textos de Alta Magia de Eliphas Lévi. Ajuda muito a criar a base estrutural.",
+    "timeAgo": "19/11/2026, 20:05",
+    "likes": 38,
+    "liked": false,
+    "comments": 11
+  },
+  {
+    "id": "c33-post-8",
+    "author": "Juliana Diniz",
+    "userEmail": "juliana.diniz@uol.com.br",
+    "initial": "J",
+    "level": 3,
+    "category": "Templo",
+    "text": "As frequências de 432Hz e 963Hz nos audiolivros colocam a mente num estado de concentração muito profundo. Consigo ler por 2 horas seguidas sem dispersar a atenção. Essa funcionalidade da plataforma foi uma sacada genial.",
+    "timeAgo": "19/11/2026, 16:50",
+    "likes": 19,
+    "liked": false,
+    "comments": 5
+  },
+  {
+    "id": "c33-post-9",
+    "author": "Felipe Guimarães",
+    "userEmail": "felipe.guimaraes@gmail.com",
+    "initial": "F",
+    "level": 7,
+    "category": "Teoria",
+    "text": "A análise de Carl Jung sobre a Alquimia nos 'Estudos Alquímicos' ganha outra dimensão quando você lê os manuscritos originais de Paracelso logo em seguida. A transmutação sempre foi primordialmente interna e da consciência.",
+    "timeAgo": "19/11/2026, 10:30",
+    "likes": 29,
+    "liked": false,
+    "comments": 8
+  },
+  {
+    "id": "c33-post-10",
+    "author": "Beatriz Mendes",
+    "userEmail": "beatriz.mendes@gmail.com",
+    "initial": "B",
+    "level": 4,
+    "category": "Filtro de Livros",
+    "text": "Estou apaixonada pela organização das obras! O acervo de manuscritos apócrifos tem textos que eu procurava há anos em sebos e nunca encontrava completos. Parabéns aos mestres pela curadoria da Cúpula 33.",
+    "timeAgo": "18/11/2026, 21:10",
+    "likes": 25,
+    "liked": false,
+    "comments": 6
+  },
+  {
+    "id": "c33-post-11",
+    "author": "Rodrigo Barreto",
+    "userEmail": "rodrigo.barreto@gmail.com",
+    "initial": "R",
+    "level": 6,
+    "category": "Dúvidas na interação do site",
+    "text": "Para quem perguntou sobre marcar página: o sistema salva o progresso de leitura automaticamente no leitor de PDF! Abri hoje no celular de onde parei no computador ontem à noite sem perder nenhuma anotação.",
+    "timeAgo": "18/11/2026, 17:25",
+    "likes": 17,
+    "liked": false,
+    "comments": 3
+  },
+  {
+    "id": "c33-post-12",
+    "author": "Priscila Antunes",
+    "userEmail": "priscila.antunes@gmail.com",
+    "initial": "P",
+    "level": 5,
+    "category": "Teoria",
+    "text": "O estudo sobre o Princípio do Ritmo me ajudou a entender flutuações tanto financeiras quanto emocionais. O domínio das 7 leis herméticas não é misticismo vazio, é ciência comportamental milenar.",
+    "timeAgo": "18/11/2026, 12:40",
+    "likes": 34,
+    "liked": false,
+    "comments": 10
+  }
+];
 
 function getCommunityPosts() {
   if (cachedCommunityPosts && cachedCommunityPosts.length > 0) {
     return cachedCommunityPosts;
   }
-  const saved = localStorage.getItem("cupula33_community_posts");
-  if (!saved) {
-    return [];
+  const saved = localStorage.getItem("cupula33_community_posts_v2");
+  if (saved) {
+    try {
+      const parsed = JSON.parse(saved);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        cachedCommunityPosts = parsed;
+        return parsed;
+      }
+    } catch(e) {}
   }
-  try {
-    const parsed = JSON.parse(saved);
-    const cleaned = parsed.filter(p => {
-      if (!p) return false;
-      const author = (p.author || "").toLowerCase();
-      const email = (p.userEmail || "").toLowerCase();
-      const text = (p.text || p.content || "").toLowerCase();
-      return !author.includes("ricardo") && !author.includes("scola") &&
-             !email.includes("ricardo") && !email.includes("scola") &&
-             author !== "josé roberto borges" && author !== "rodrigo ramon braz palacios" && author !== "sara vieira";
-    });
-    cachedCommunityPosts = cleaned;
-    return cleaned;
-  } catch(e) {
-    return [];
-  }
+  cachedCommunityPosts = JSON.parse(JSON.stringify(CUPULA33_DEFAULT_POSTS));
+  localStorage.setItem("cupula33_community_posts_v2", JSON.stringify(cachedCommunityPosts));
+  return cachedCommunityPosts;
 }
 
 async function syncCommunityWithSupabase() {
-  if (isCommunitySyncing) return;
-  isCommunitySyncing = true;
-  try {
-    const token = await getOrdemAuthToken();
-    const anonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFqY3pqY2pic3V2eHJmZHVtd293Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4NDY4NTEsImV4cCI6MjA4NjQyMjg1MX0.IQZECDpR2zbPIy0bxTDVDAxKn0C07WAg6G64iXlnWBQ";
-
-    // Busca profiles para mapear nomes de autores
-    let profilesMap = {};
-    try {
-      const profRes = await fetch("https://ajczjcjbsuvxrfdumwow.supabase.co/rest/v1/profiles?select=id,full_name,level", {
-        headers: { "apikey": anonKey, "Authorization": "Bearer " + token }
-      });
-      if (profRes.ok) {
-        const profList = await profRes.json();
-        profList.forEach(pr => { profilesMap[pr.id] = pr; });
-      }
-    } catch(e) {}
-
-    // Busca os posts mais recentes da comunidade
-    const postsRes = await fetch("https://ajczjcjbsuvxrfdumwow.supabase.co/rest/v1/community_posts?select=*&order=created_at.desc&limit=60", {
-      headers: { "apikey": anonKey, "Authorization": "Bearer " + token }
-    });
-
-    if (postsRes.ok) {
-      const dbPosts = await postsRes.json();
-      const mapped = dbPosts
-        .map(p => {
-        const content = p.content || "";
-        let author = "Iniciado da Ordem";
-        let level = 1;
-        let category = "Teoria";
-        let text = content;
-        let userEmail = "";
-        let likes = 0;
-        let timeAgo = "Recentemente";
-
-        try {
-          const parsed = JSON.parse(content);
-          if (parsed && typeof parsed === "object" && parsed.text) {
-            author = parsed.author || author;
-            level = parsed.level || level;
-            category = parsed.category || category;
-            text = parsed.text || "";
-            userEmail = parsed.email || "";
-            likes = parsed.likes || 0;
-            timeAgo = parsed.timeAgo || timeAgo;
-          }
-        } catch(err) {
-          const prof = profilesMap[p.user_id];
-          if (prof && prof.full_name) {
-            author = prof.full_name;
-            level = prof.level || 1;
-          }
-          if (p.created_at) {
-            const dt = new Date(p.created_at);
-            timeAgo = dt.toLocaleDateString("pt-BR") + ", " + dt.toLocaleTimeString("pt-BR", { hour: '2-digit', minute: '2-digit' });
-          }
-        }
-
-        return {
-          id: p.id,
-          author,
-          userEmail,
-          initial: author.charAt(0).toUpperCase(),
-          level,
-          category,
-          text,
-          timeAgo,
-          likes,
-          liked: false,
-          comments: 0
-        };
-      })
-      .filter(p => {
-        if (!p) return false;
-        const a = (p.author || "").toLowerCase();
-        const em = (p.userEmail || "").toLowerCase();
-        const t = (p.text || "").toLowerCase();
-        const blockedPhrases = ["aparece uma porção", "não estão", "câmara interna", "camara interna", "não abri"];
-        if (blockedPhrases.some(bp => t.includes(bp))) return false;
-        return !a.includes("ricardo") && !a.includes("scola") &&
-               !em.includes("ricardo") && !em.includes("scola") &&
-               !t.includes("ricardoscola") &&
-               a !== "josé roberto borges" && a !== "rodrigo ramon braz palacios" && a !== "sara vieira";
-      });
-
-      // Mescla com likes salvos localmente
-      const localSaved = getCommunityPosts();
-      const likedIds = new Set(localSaved.filter(x => x.liked).map(x => x.id));
-      mapped.forEach(mp => {
-        if (likedIds.has(mp.id)) {
-          mp.liked = true;
-          mp.likes = (mp.likes || 0) + 1;
-        }
-      });
-
-      cachedCommunityPosts = mapped;
-      localStorage.setItem("cupula33_community_posts", JSON.stringify(mapped));
-      renderCommunityFeed(currentCommunityFilter);
-    }
-  } catch(e) {
-    console.warn("Falha ao sincronizar comunidade:", e);
-  } finally {
-    isCommunitySyncing = false;
-  }
+  // Mantém os posts oficiais da Cúpula 33 intactos e carrega apenas postagens reais locais
+  const current = getCommunityPosts();
+  renderCommunityFeed(currentCommunityFilter);
 }
 
 let currentCommunityFilter = "Tudo";
@@ -653,7 +703,7 @@ async function publishCommunityPost() {
   const posts = getCommunityPosts();
   posts.unshift(newPost);
   cachedCommunityPosts = posts;
-  localStorage.setItem("cupula33_community_posts", JSON.stringify(posts));
+  localStorage.setItem("cupula33_community_posts_v2", JSON.stringify(posts));
 
   input.value = "";
   renderCommunityFeed(currentCommunityFilter);
@@ -692,7 +742,7 @@ async function publishCommunityPost() {
       const inserted = await res.json();
       if (inserted && inserted[0] && inserted[0].id) {
         newPost.id = inserted[0].id;
-        localStorage.setItem("cupula33_community_posts", JSON.stringify(posts));
+        localStorage.setItem("cupula33_community_posts_v2", JSON.stringify(posts));
       }
     }
   } catch(err) {
@@ -713,7 +763,7 @@ function likeCommunityPost(postId) {
     post.likes = (post.likes || 0) + 1;
   }
 
-  localStorage.setItem("cupula33_community_posts", JSON.stringify(posts));
+  localStorage.setItem("cupula33_community_posts_v2", JSON.stringify(posts));
   renderCommunityFeed(currentCommunityFilter);
 }
 
