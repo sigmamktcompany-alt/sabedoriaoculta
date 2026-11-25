@@ -159,6 +159,19 @@
       "sale_code": "MANUAL_APPROVAL_MASTER",
       "date_added": "2026-11-25",
       "updated_at": 1795599498.573164
+    },
+    "severino_lucena@hotmail.com": {
+      "name": "Severino Lucena",
+      "password": "cupula@33",
+      "tier": "master",
+      "level": 1,
+      "has_prosperidade": false,
+      "has_orderbump": false,
+      "active": true,
+      "status": "approved",
+      "sale_code": "MANUAL_APPROVAL_MASTER",
+      "date_added": "2026-11-25",
+      "updated_at": 1795607717.653832
     }
   }
 }
