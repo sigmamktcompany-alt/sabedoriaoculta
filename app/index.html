@@ -134,23 +134,24 @@
   <aside id="desktopSidebar"
     class="hidden md:flex flex-col h-screen fixed left-0 top-0 bg-[#0a0a0a] border-r border-white/10 z-50 w-60 text-left select-none transition-all duration-300">
 
-    <!-- Top Brand: Logo e Título -->
+    <!-- Top Brand: Logo e Título (Padrão Ordem 137 com Logo Cúpula 33) -->
     <div class="p-4 flex items-center justify-between border-b border-white/10 relative">
       <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('home')">
         <div
-          class="w-11 h-11 rounded-lg bg-black border border-white/15 p-1 flex items-center justify-center shadow-lg shrink-0">
-          <img src="assets/logo.jpg" alt="Cúpula 33" class="w-full h-full object-cover rounded">
+          class="w-12 h-12 rounded-xl bg-black border border-yellow-500/30 p-1 flex items-center justify-center shadow-lg shrink-0 overflow-hidden">
+          <img src="assets/cupula33_badge_logo.jpg" alt="Cúpula 33" class="w-full h-full object-cover rounded-lg" onerror="this.onerror=null; this.src='assets/logo.jpg'">
         </div>
         <div class="flex flex-col">
           <span class="font-cinzel font-black text-sm tracking-wider text-white">CÚPULA <span
               class="text-yellow-400">33</span></span>
-          <span class="text-[9px] tracking-widest text-gray-500 uppercase font-mono">BIBLIOTECA OCULTA</span>
+          <span class="text-[9px] tracking-widest text-yellow-500/70 uppercase font-mono">BIBLIOTECA OCULTA</span>
         </div>
       </div>
 
-      <!-- Botão Chevron Toggle na borda -->
+      <!-- Botão Chevron Toggle na borda (Exato Ordem 137 em Amarelo) -->
       <button onclick="toggleSidebarCollapse()"
-        class="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-yellow-500 hover:bg-yellow-400 rounded-full flex items-center justify-center border-2 border-black text-black hover:scale-110 transition shadow-lg z-10 cursor-pointer">
+        class="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-yellow-500 hover:bg-yellow-400 rounded-full flex items-center justify-center border-2 border-black text-black hover:scale-110 transition shadow-lg z-10 cursor-pointer"
+        title="Recolher / Expandir Menu">
         <i id="sidebarChevronIcon" data-lucide="chevron-left" class="w-3.5 h-3.5 stroke-[3]"></i>
       </button>
     </div>
@@ -440,9 +441,10 @@
     <section id="tab-library" class="app-tab-section hidden animate-fade-in">
       <div class="px-4 sm:px-8 py-6 max-w-7xl mx-auto">
 
-        <!-- Header da Biblioteca com Barra Vermelha / Red Accent -->
-        <div class="flex items-center justify-between mb-5">
-          <div class="flex items-center space-x-3">
+        <!-- Header da Biblioteca + Barra de Busca (Padrão Ordem 137 Desktop/Mobile com Amarelo) -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+          <!-- Título com Acento Amarelo -->
+          <div class="flex items-center space-x-3 shrink-0">
             <button id="libraryBackBtn" onclick="returnToDefaultLibrary()"
               class="hidden p-2 bg-white/5 rounded-full hover:bg-yellow-500 hover:text-black transition-colors text-gray-400 cursor-pointer">
               <i data-lucide="arrow-left" class="w-5 h-5"></i>
@@ -452,31 +454,31 @@
               Biblioteca
             </h1>
           </div>
-        </div>
 
-        <!-- Barra de Busca e Ações Rápidas (Padrão Screenshot Ordem 137) -->
-        <div class="flex items-center gap-3 mb-6">
-          <div class="relative flex-1">
-            <i data-lucide="search" class="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
-            <input type="text" id="searchInput" oninput="handleSearchInput(this.value)" placeholder="Buscar livros..."
-              class="w-full bg-[#161616] border border-white/10 rounded-full py-2.5 pl-10 pr-10 text-white placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-all text-xs sm:text-sm">
-            <button id="clearSearchBtn" onclick="clearSearch()"
-              class="hidden absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white cursor-pointer">
-              <i data-lucide="x" class="w-4 h-4"></i>
+          <!-- Barra de Busca e Ações Rápidas -->
+          <div class="flex items-center gap-3 w-full md:max-w-md">
+            <div class="relative flex-1">
+              <i data-lucide="search" class="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+              <input type="text" id="searchInput" oninput="handleSearchInput(this.value)" placeholder="Buscar livros..."
+                class="w-full bg-[#161616] border border-white/10 rounded-full py-2.5 pl-10 pr-10 text-white placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-all text-xs sm:text-sm">
+              <button id="clearSearchBtn" onclick="clearSearch()"
+                class="hidden absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white cursor-pointer">
+                <i data-lucide="x" class="w-4 h-4"></i>
+              </button>
+            </div>
+
+            <button onclick="toggleCategoriesView()" id="btnToggleCategories"
+              class="p-2.5 bg-[#161616] border border-white/10 rounded-full text-gray-300 hover:text-white hover:border-yellow-500 transition-all cursor-pointer shrink-0"
+              title="Navegar por Categorias">
+              <i data-lucide="layout-grid" class="w-5 h-5"></i>
+            </button>
+
+            <button onclick="openMyList()" id="btnToggleMyList"
+              class="p-2.5 bg-[#161616] border border-white/10 rounded-full text-gray-300 hover:text-yellow-400 hover:border-yellow-500 transition-all cursor-pointer shrink-0"
+              title="Minha Lista">
+              <i data-lucide="bookmark" class="w-5 h-5"></i>
             </button>
           </div>
-
-          <button onclick="toggleCategoriesView()" id="btnToggleCategories"
-            class="p-2.5 bg-[#161616] border border-white/10 rounded-full text-gray-300 hover:text-white hover:border-yellow-500 transition-all cursor-pointer shrink-0"
-            title="Navegar por Categorias">
-            <i data-lucide="layout-grid" class="w-5 h-5"></i>
-          </button>
-
-          <button onclick="openMyList()" id="btnToggleMyList"
-            class="p-2.5 bg-[#161616] border border-white/10 rounded-full text-gray-300 hover:text-yellow-400 hover:border-yellow-500 transition-all cursor-pointer shrink-0"
-            title="Minha Lista">
-            <i data-lucide="bookmark" class="w-5 h-5"></i>
-          </button>
         </div>
 
         <!-- 1. STREAMING ROWS VIEW (CARROSSEIS ORDEM 137) -->
@@ -1476,7 +1478,7 @@
 
   <!-- SCRIPTS -->
   <script src="books_data.js?v=1795566000"></script>
-  <script src="app.js?v=1795565700"></script>
+  <script src="app.js?v=1795568000"></script>
 </body>
 
 </html>
