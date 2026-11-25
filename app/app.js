@@ -3444,6 +3444,21 @@ function updateProsperidadeCardUI() {
   if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
+function closeVipGateIfAuth() {
+  const savedEmail = (localStorage.getItem("cupula33_user_email") || "").trim().toLowerCase();
+  if (savedEmail) {
+    const gate = document.getElementById("vipLoginGate");
+    if (gate) {
+      gate.style.opacity = "0";
+      gate.style.pointerEvents = "none";
+      setTimeout(() => {
+        gate.classList.add("hidden");
+        gate.style.display = "none";
+      }, 200);
+    }
+  }
+}
+
 function checkVipGateAuth() {
   const gate = document.getElementById("vipLoginGate");
   const savedEmail = (localStorage.getItem("cupula33_user_email") || "").trim().toLowerCase();
@@ -3451,7 +3466,16 @@ function checkVipGateAuth() {
 
   if (!gate) return;
 
-  if (savedEmail) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const forceLogin = urlParams.get("login") === "1" || urlParams.get("login") === "true" || window.location.hash === "#login";
+
+  const closeBtn = document.getElementById("gateCloseBtn");
+  if (closeBtn) {
+    if (savedEmail) closeBtn.classList.remove("hidden");
+    else closeBtn.classList.add("hidden");
+  }
+
+  if (savedEmail && !forceLogin) {
     if (savedTier === "master") {
       currentTier = "master";
     }
@@ -3484,7 +3508,10 @@ function checkVipGateAuth() {
     gate.style.opacity = "1";
     setTimeout(() => {
       const inp = document.getElementById("gateEmailInput");
-      if (inp) inp.focus();
+      if (inp) {
+        if (savedEmail) inp.value = savedEmail;
+        inp.focus();
+      }
     }, 150);
   }
 }

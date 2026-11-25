@@ -242,9 +242,11 @@
           <span class="text-[9px] text-gold-400/90 tracking-widest uppercase block -mt-1 font-semibold">Câmara de Triagem Iniciática</span>
         </div>
       </div>
-      <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-crimson-900/50 border border-crimson-500/50 text-red-200 text-[11px] font-semibold">
-        <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-        <span>ACESSO RESTRITO</span>
+      <div class="flex items-center gap-2">
+        <a href="/app/?login=1" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-crimson-900/70 to-gold-500/20 hover:from-crimson-800/80 hover:to-gold-500/30 border border-gold-500/40 text-gold-300 text-xs font-semibold uppercase tracking-wider transition-all shadow-md">
+          <i data-lucide="key" class="w-3.5 h-3.5"></i>
+          <span>Acessar Acervo</span>
+        </a>
       </div>
     </div>
 
@@ -423,12 +425,12 @@
         </div>
       </div>
 
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2 sm:gap-3">
         <span id="header-badge-key" class="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-[11px] font-bold">
           <i data-lucide="check-circle" class="w-3.5 h-3.5"></i>
           <span>CHAVE ATIVA</span>
         </span>
-        <a href="#planos" class="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-crimson-900/70 to-gold-500/20 hover:from-crimson-800/80 hover:to-gold-500/30 border border-gold-500/40 text-gold-300 text-xs font-semibold uppercase tracking-wider transition-all">
+        <a href="/app/?login=1" class="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-gradient-to-r from-crimson-900/70 to-gold-500/20 hover:from-crimson-800/80 hover:to-gold-500/30 border border-gold-500/40 text-gold-300 text-xs font-semibold uppercase tracking-wider transition-all shadow-md">
           <i data-lucide="key" class="w-3.5 h-3.5"></i>
           <span>Acessar Acervo</span>
         </a>
@@ -1119,6 +1121,8 @@
         </p>
 
         <div class="flex flex-wrap items-center justify-center gap-4 text-gray-400 text-xs font-medium">
+          <a href="/app/?login=1" class="text-gold-400 font-bold hover:underline flex items-center gap-1.5"><i data-lucide="key" class="w-3.5 h-3.5"></i> Acessar Acervo (Login)</a>
+          <span>•</span>
           <a href="#planos" class="hover:text-gold-400 transition-colors">Termos de Uso</a>
           <span>•</span>
           <a href="#planos" class="hover:text-gold-400 transition-colors">Política de Privacidade</a>
