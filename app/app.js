@@ -3367,6 +3367,31 @@ function updateFrequencyUI(currentActiveHz) {
   if (window.lucide) try { lucide.createIcons(); } catch (e) { }
 }
 
+let isIOSAudioUnlocked = false;
+function unlockIOSAudio() {
+  if (isIOSAudioUnlocked) return;
+  try {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (AudioContextClass) {
+      if (!audioCtx || audioCtx.state === 'closed') {
+        audioCtx = new AudioContextClass();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+    // Silent buffer unlock for iOS Safari silent switch
+    const unlockAudio = new Audio("data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA");
+    unlockAudio.volume = 0.01;
+    unlockAudio.play().then(() => {
+      isIOSAudioUnlocked = true;
+    }).catch(() => {});
+  } catch (e) {}
+}
+
+document.addEventListener("touchstart", unlockIOSAudio, { once: true, passive: true });
+document.addEventListener("click", unlockIOSAudio, { once: true, passive: true });
+
 let lastFrequencyToggleTime = 0;
 
 function handleFrequencyClick(hz, event) {
@@ -3374,9 +3399,11 @@ function handleFrequencyClick(hz, event) {
     event.stopPropagation();
   }
 
+  unlockIOSAudio();
+
   const now = Date.now();
-  // Debounce robusto de 500ms para aniquilar qualquer duplo clique de touch screen
-  if (now - lastFrequencyToggleTime < 500) {
+  // Debounce ajustado de 250ms para resposta ágil no touch mobile
+  if (now - lastFrequencyToggleTime < 250) {
     return;
   }
   lastFrequencyToggleTime = now;
@@ -3391,7 +3418,9 @@ function handleFrequencyClick(hz, event) {
 
 let stopFrequencyTimeout = null;
 
-async function playFrequency(hz, name) {
+function playFrequency(hz, name) {
+  unlockIOSAudio();
+
   const targetHz = parseInt(hz);
   if (activeFrequencyHz === targetHz) {
     stopFrequency(true);
@@ -3428,20 +3457,22 @@ async function playFrequency(hz, name) {
     if (!audioCtx || audioCtx.state === 'closed') {
       audioCtx = new AudioContextClass();
     }
+    // Acionamento síncrono para preservar o token de ativação do usuário no Safari/WebKit
     if (audioCtx.state === 'suspended') {
-      await audioCtx.resume();
+      audioCtx.resume();
     }
 
     const now = audioCtx.currentTime;
     const gainNode = audioCtx.createGain();
-    gainNode.gain.setValueAtTime(0.001, now);
-    gainNode.gain.linearRampToValueAtTime(0.35, now + 0.15);
+    
+    // Atribuição direta e sólida: elimina travamentos no WebKit e garante som audível imediato
+    gainNode.gain.setValueAtTime(0.40, now);
     gainNode.connect(audioCtx.destination);
     masterGainNode = gainNode;
 
     const newOscs = [];
 
-    // Oscilador 1: Tom Principal (Solfeggio Puro)
+    // Oscilador 1: Tom Fundamental Puro (Solfeggio Puro)
     const osc1 = audioCtx.createOscillator();
     osc1.type = "sine";
     osc1.frequency.setValueAtTime(targetHz, now);
@@ -3449,7 +3480,7 @@ async function playFrequency(hz, name) {
     osc1.start();
     newOscs.push(osc1);
 
-    // Oscilador 2: Batimento Harmônico Binaural (+4 Hz de modulação Theta)
+    // Oscilador 2: Batimento Harmônico Binaural (+4 Hz modulação Theta para meditação e relaxamento)
     const osc2 = audioCtx.createOscillator();
     osc2.type = "sine";
     osc2.frequency.setValueAtTime(targetHz + 4, now);
@@ -3459,6 +3490,18 @@ async function playFrequency(hz, name) {
     osc2Gain.connect(gainNode);
     osc2.start();
     newOscs.push(osc2);
+
+    // Oscilador 3: Ressonância Harmônica (2º Harmônico / Oitava)
+    // Permite que alto-falantes de celular (que cortam sub-graves < 300Hz) reproduzam a nota com clareza
+    const osc3 = audioCtx.createOscillator();
+    osc3.type = "sine";
+    osc3.frequency.setValueAtTime(targetHz * 2, now);
+    const osc3Gain = audioCtx.createGain();
+    osc3Gain.gain.setValueAtTime(0.08, now);
+    osc3.connect(osc3Gain);
+    osc3Gain.connect(gainNode);
+    osc3.start();
+    newOscs.push(osc3);
 
     currentOscillators = newOscs;
     activeFrequencyHz = targetHz;
