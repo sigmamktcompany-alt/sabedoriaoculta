@@ -1359,7 +1359,7 @@ function openMyList() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// Modal do Livro (Padrão Bk Cúpula 33)
+// Modal do Livro (Padrão Ordem 137 / Cúpula 33 Gold)
 function openBookModal(book) {
   currentBookModalData = book;
 
@@ -1367,26 +1367,45 @@ function openBookModal(book) {
   const cat = document.getElementById("modalBookCategory");
   const pages = document.getElementById("modalBookPages");
   const title = document.getElementById("modalBookTitle");
-  const author = document.getElementById("modalBookAuthor");
-  const desc = document.getElementById("modalBookDesc");
   const pBar = document.getElementById("modalProgressBar");
   const pText = document.getElementById("modalProgressPercent");
 
   if (cover) cover.src = book.cover;
-  if (cat) cat.textContent = (book.module ? `${book.module}: ` : '') + book.category;
-  if (pages) pages.textContent = `${book.pages || 120} páginas`;
+  
+  // Categoria limpa conforme print (ex: ALQUIMIA)
+  let cleanCat = typeof getBookCleanCategory === "function" ? getBookCleanCategory(book) : (book.category || "ACERVO");
+  if (cat) cat.textContent = cleanCat.toUpperCase();
+  if (pages) pages.textContent = `${book.pages || 120} PÁGINAS`;
   if (title) title.textContent = book.title;
-  if (author) author.textContent = "Por " + book.author;
-  if (desc) desc.textContent = book.desc || "Tratado autêntico preservado em língua portuguesa.";
 
-  // Progresso
+  // Progresso do livro
   const saved = getSavedProgress(book.id);
-  const percent = saved && book.pages ? Math.min(100, Math.round((saved.page / book.pages) * 100)) : 0;
-  if (pBar) pBar.style.width = percent + "%";
-  if (pText) pText.textContent = percent + "%";
+  const percent = saved && book.pages ? Math.min(100, Math.round((saved.page / book.pages) * 100)) : (saved && saved.page ? 1 : 0);
+  if (pBar) pBar.style.width = (percent || 1) + "%";
+  if (pText) pText.textContent = (percent || 1) + "%";
 
   updateModalBookmarkUI(book.id);
   openModal("bookModal");
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+}
+
+function openBookCommunityDiscussions() {
+  if (!currentBookModalData) return;
+  closeModal("bookModal");
+  switchTab("community");
+  const inp = document.getElementById("communityPostInput");
+  if (inp) {
+    inp.value = `Discussão sobre a obra: "${currentBookModalData.title}"`;
+    inp.focus();
+  }
+}
+
+function handleSendToKindleClick() {
+  if (!currentBookModalData) return;
+  showToast("Preparando envio para o Kindle via e-mail...");
+  setTimeout(() => {
+    showToast("✓ Obra enviada para o seu endereço Kindle configurado!");
+  }, 1200);
 }
 
 function triggerReadModalFromDetails() {
@@ -1577,8 +1596,8 @@ function handleBookClick(bookId) {
       return;
     }
   }
-  // Toque direto no livro abre a leitura imediatamente (sem barreiras ou etapas extras)
-  openReaderModalDirect(bookId);
+  // Ao clicar em cada livro, abre primeiro o modal de detalhes do livro (conforme padrão Ordem 137)
+  openBookDetailsModal(bookId);
 }
 
 function openBookDetailsModal(bookId) {

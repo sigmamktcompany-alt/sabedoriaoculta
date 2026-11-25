@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR" class="dark">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>CÚPULA 33 | Biblioteca Oculta</title>
-  <meta name="description" content="Acesso exclusivo à Biblioteca Oculta — mais de 2.500 livros, grimórios e manuscritos esotéricos raros.">
+  <meta name="description"
+    content="Acesso exclusivo à Biblioteca Oculta — mais de 2.500 livros, grimórios e manuscritos esotéricos raros.">
   <meta name="theme-color" content="#000000">
 
   <!-- PWA Manifest & Icons -->
@@ -18,7 +20,9 @@
   <!-- Fonts: Cinzel + Inter + Playfair -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap"
+    rel="stylesheet">
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -53,7 +57,7 @@
       }
     }
   </script>
-    <!-- PDF.js Engine Core (Standard Stable Build) -->
+  <!-- PDF.js Engine Core (Standard Stable Build) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
   <script>
     if (typeof window["pdfjs-dist/build/pdf"] !== "undefined") {
@@ -66,19 +70,26 @@
   <link rel="stylesheet" href="app.css?v=1795540999">
 </head>
 
-<body class="bg-black text-gray-200 font-sans antialiased overflow-x-hidden selection:bg-yellow-500/30 selection:text-yellow-300">
+<body
+  class="bg-black text-gray-200 font-sans antialiased overflow-x-hidden selection:bg-yellow-500/30 selection:text-yellow-300">
 
   <!-- ==================== TELA INICIAL DE LOGIN VIP ==================== -->
-  <div id="vipLoginGate" class="fixed inset-0 z-[20000] bg-black/98 backdrop-blur-2xl flex items-center justify-center p-4 transition-opacity duration-300">
-    <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-yellow-500/10 via-black/80 to-black"></div>
+  <div id="vipLoginGate"
+    class="fixed inset-0 z-[20000] bg-black/98 backdrop-blur-2xl flex items-center justify-center p-4 transition-opacity duration-300">
+    <div
+      class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-yellow-500/10 via-black/80 to-black">
+    </div>
 
-    <div class="relative w-full max-w-md rounded-3xl p-7 sm:p-9 border border-white/10 bg-[#121212] shadow-[0_0_60px_rgba(234,179,8,0.15)] text-center">
+    <div
+      class="relative w-full max-w-md rounded-3xl p-7 sm:p-9 border border-white/10 bg-[#121212] shadow-[0_0_60px_rgba(234,179,8,0.15)] text-center">
       <div class="relative w-20 h-20 mx-auto mb-5">
         <div class="absolute inset-0 rounded-2xl bg-yellow-500/20 blur-xl animate-pulse"></div>
-        <img src="assets/logo.jpg" alt="Cúpula 33" class="relative w-20 h-20 rounded-2xl object-cover border border-white/10 shadow-2xl mx-auto">
+        <img src="assets/logo.jpg" alt="Cúpula 33"
+          class="relative w-20 h-20 rounded-2xl object-cover border border-white/10 shadow-2xl mx-auto">
       </div>
 
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-[10px] font-bold uppercase tracking-widest mb-3">
+      <div
+        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-[10px] font-bold uppercase tracking-widest mb-3">
         <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Biblioteca Oculta
       </div>
 
@@ -91,15 +102,18 @@
 
       <form onsubmit="event.preventDefault(); authenticateGateLogin();" class="space-y-3">
         <div>
-          <input type="email" id="gateEmailInput" placeholder="Seu e-mail de compra" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-all text-center">
+          <input type="email" id="gateEmailInput" placeholder="Seu e-mail de compra" required
+            class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-all text-center">
         </div>
         <div>
-          <input type="password" id="gatePasswordInput" placeholder="Sua senha (ex: cupula@33)" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-all text-center">
+          <input type="password" id="gatePasswordInput" placeholder="Sua senha (ex: cupula@33)"
+            class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-all text-center">
         </div>
 
         <div id="gateStatusMsg" class="text-xs text-center min-h-[20px]"></div>
 
-        <button type="submit" id="gateSubmitBtn" class="w-full py-3 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-black font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-yellow-500/20 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer">
+        <button type="submit" id="gateSubmitBtn"
+          class="w-full py-3 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-black font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-yellow-500/20 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer">
           <i data-lucide="key" class="w-4 h-4"></i>
           <span>Acessar o Acervo</span>
         </button>
@@ -109,68 +123,79 @@
 
   <!-- TOAST FLUTUANTE -->
   <div id="appToast" class="fixed top-5 left-1/2 -translate-x-1/2 z-[9999] hidden transition-all">
-    <div class="bg-[#141414] px-4 py-2.5 rounded-full border border-yellow-500/40 text-yellow-400 text-xs font-medium shadow-2xl flex items-center gap-2">
+    <div
+      class="bg-[#141414] px-4 py-2.5 rounded-full border border-yellow-500/40 text-yellow-400 text-xs font-medium shadow-2xl flex items-center gap-2">
       <i data-lucide="check-circle" class="w-4 h-4 text-yellow-400"></i>
       <span id="appToastText">Operação realizada</span>
     </div>
   </div>
 
   <!-- ==================== SIDEBAR DESKTOP (PADRÃO ORDEM 137 COM AMARELO) ==================== -->
-  <aside id="desktopSidebar" class="hidden md:flex flex-col h-screen fixed left-0 top-0 bg-[#0a0a0a] border-r border-white/10 z-50 w-60 text-left select-none transition-all duration-300">
-    
+  <aside id="desktopSidebar"
+    class="hidden md:flex flex-col h-screen fixed left-0 top-0 bg-[#0a0a0a] border-r border-white/10 z-50 w-60 text-left select-none transition-all duration-300">
+
     <!-- Top Brand: Logo e Título -->
     <div class="p-4 flex items-center justify-between border-b border-white/10 relative">
       <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('home')">
-        <div class="w-11 h-11 rounded-lg bg-black border border-white/15 p-1 flex items-center justify-center shadow-lg shrink-0">
+        <div
+          class="w-11 h-11 rounded-lg bg-black border border-white/15 p-1 flex items-center justify-center shadow-lg shrink-0">
           <img src="assets/logo.jpg" alt="Cúpula 33" class="w-full h-full object-cover rounded">
         </div>
         <div class="flex flex-col">
-          <span class="font-cinzel font-black text-sm tracking-wider text-white">CÚPULA <span class="text-yellow-400">33</span></span>
+          <span class="font-cinzel font-black text-sm tracking-wider text-white">CÚPULA <span
+              class="text-yellow-400">33</span></span>
           <span class="text-[9px] tracking-widest text-gray-500 uppercase font-mono">BIBLIOTECA OCULTA</span>
         </div>
       </div>
 
       <!-- Botão Chevron Toggle na borda -->
-      <button onclick="toggleSidebarCollapse()" class="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-yellow-500 hover:bg-yellow-400 rounded-full flex items-center justify-center border-2 border-black text-black hover:scale-110 transition shadow-lg z-10 cursor-pointer">
+      <button onclick="toggleSidebarCollapse()"
+        class="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-yellow-500 hover:bg-yellow-400 rounded-full flex items-center justify-center border-2 border-black text-black hover:scale-110 transition shadow-lg z-10 cursor-pointer">
         <i id="sidebarChevronIcon" data-lucide="chevron-left" class="w-3.5 h-3.5 stroke-[3]"></i>
       </button>
     </div>
 
     <!-- Navegação Vertical (Os 6 Menus Oficiais) -->
     <nav class="flex-1 px-3 py-5 space-y-1.5 overflow-y-auto hide-scrollbar">
-      
+
       <!-- 1. Início (Ativo por padrão) -->
-      <button onclick="switchTab('home')" id="sideNav-home" class="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-bold text-yellow-400 bg-white/5 border border-yellow-500/40 transition-all text-left cursor-pointer">
+      <button onclick="switchTab('home')" id="sideNav-home"
+        class="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-bold text-yellow-400 bg-white/5 border border-yellow-500/40 transition-all text-left cursor-pointer">
         <i data-lucide="home" class="w-4 h-4 text-yellow-400"></i>
         <span>Início</span>
       </button>
 
       <!-- 2. Biblioteca -->
-      <button onclick="switchTab('library')" id="sideNav-library" class="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left cursor-pointer">
+      <button onclick="switchTab('library')" id="sideNav-library"
+        class="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left cursor-pointer">
         <i data-lucide="library" class="w-4 h-4"></i>
         <span>Biblioteca</span>
       </button>
 
       <!-- 3. Audiolivros -->
-      <button onclick="switchTab('audiobooks')" id="sideNav-audiobooks" class="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left cursor-pointer">
+      <button onclick="switchTab('audiobooks')" id="sideNav-audiobooks"
+        class="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left cursor-pointer">
         <i data-lucide="headphones" class="w-4 h-4"></i>
         <span>Audiolivros</span>
       </button>
 
       <!-- 4. Cursos -->
-      <button onclick="switchTab('courses')" id="sideNav-courses" class="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left cursor-pointer">
+      <button onclick="switchTab('courses')" id="sideNav-courses"
+        class="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left cursor-pointer">
         <i data-lucide="play-circle" class="w-4 h-4"></i>
         <span>Cursos</span>
       </button>
 
       <!-- 5. Comunidade -->
-      <button onclick="switchTab('community')" id="sideNav-community" class="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left cursor-pointer">
+      <button onclick="switchTab('community')" id="sideNav-community"
+        class="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left cursor-pointer">
         <i data-lucide="users" class="w-4 h-4"></i>
         <span>Comunidade</span>
       </button>
 
       <!-- 6. Perfil -->
-      <button onclick="switchTab('profile')" id="sideNav-profile" class="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left cursor-pointer">
+      <button onclick="switchTab('profile')" id="sideNav-profile"
+        class="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-all text-left cursor-pointer">
         <i data-lucide="user" class="w-4 h-4"></i>
         <span>Perfil</span>
       </button>
@@ -179,7 +204,9 @@
 
     <!-- Card de Membro Inferior Dinâmico (Carregado por e-mail) -->
     <div class="p-3.5 border-t border-white/10 bg-[#0d0d0d] flex items-center justify-between gap-2">
-      <div onclick="switchTab('profile')" class="flex items-center gap-3 p-1.5 rounded-xl hover:bg-white/5 cursor-pointer transition flex-1 min-w-0" title="Ver Perfil">
+      <div onclick="switchTab('profile')"
+        class="flex items-center gap-3 p-1.5 rounded-xl hover:bg-white/5 cursor-pointer transition flex-1 min-w-0"
+        title="Ver Perfil">
         <div class="w-9 h-9 rounded-full overflow-hidden bg-white/5 border border-white/10 shrink-0">
           <img id="sidebarAvatarImg" src="assets/logo.jpg" alt="Avatar" class="w-full h-full object-cover">
         </div>
@@ -191,54 +218,66 @@
           </div>
         </div>
       </div>
-      <button onclick="logoutVipGate()" title="Sair / Trocar Usuário" class="p-2 rounded-lg text-gray-500 hover:text-rose-400 hover:bg-white/5 transition cursor-pointer shrink-0">
+      <button onclick="logoutVipGate()" title="Sair / Trocar Usuário"
+        class="p-2 rounded-lg text-gray-500 hover:text-rose-400 hover:bg-white/5 transition cursor-pointer shrink-0">
         <i data-lucide="log-out" class="w-4 h-4"></i>
       </button>
     </div>
   </aside>
 
   <!-- ==================== HEADER MOBILE (EXATO ORDEM 137 / CÚPULA 33) ==================== -->
-  <header class="md:hidden sticky top-0 z-40 bg-black/95 backdrop-blur-md border-b border-white/10 px-4 py-2.5 flex items-center justify-between">
+  <header
+    class="md:hidden sticky top-0 z-40 bg-black/95 backdrop-blur-md border-b border-white/10 px-4 py-2.5 flex items-center justify-between">
     <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('home')">
-      <div class="w-9 h-9 rounded-lg bg-[#0e0e0e] border border-white/15 flex items-center justify-center overflow-hidden shadow-sm">
+      <div
+        class="w-9 h-9 rounded-lg bg-[#0e0e0e] border border-white/15 flex items-center justify-center overflow-hidden shadow-sm">
         <img src="assets/logo.jpg" alt="Cúpula 33" class="w-full h-full object-cover">
       </div>
       <span class="font-serif font-bold text-base text-white tracking-wide">Início</span>
     </div>
     <div class="flex items-center gap-2.5">
-      <button onclick="triggerPWAInstall()" class="px-2.5 py-1 rounded-lg bg-yellow-500/15 text-yellow-400 border border-yellow-500/30 text-[10px] font-bold flex items-center gap-1 active:scale-95 transition">
+      <button onclick="triggerPWAInstall()"
+        class="px-2.5 py-1 rounded-lg bg-yellow-500/15 text-yellow-400 border border-yellow-500/30 text-[10px] font-bold flex items-center gap-1 active:scale-95 transition">
         <i data-lucide="download" class="w-3 h-3"></i> App
       </button>
-      <button onclick="switchTab('profile')" class="w-8 h-8 rounded-full overflow-hidden border border-white/15 bg-white/5">
+      <button onclick="switchTab('profile')"
+        class="w-8 h-8 rounded-full overflow-hidden border border-white/15 bg-white/5">
         <img id="mobileAvatarImg" src="assets/logo.jpg" alt="Avatar" class="w-full h-full object-cover">
       </button>
     </div>
   </header>
 
   <!-- ==================== MOBILE BOTTOM NAVIGATION (COM AS 6 ABAS) ==================== -->
-  <nav class="md:hidden fixed bottom-0 left-0 w-full bg-[#0a0a0a]/95 backdrop-blur-md border-t border-white/10 z-50 pb-safe shadow-[0_-4px_20px_rgba(0,0,0,0.5)]">
+  <nav
+    class="md:hidden fixed bottom-0 left-0 w-full bg-[#0a0a0a]/95 backdrop-blur-md border-t border-white/10 z-50 pb-safe shadow-[0_-4px_20px_rgba(0,0,0,0.5)]">
     <div class="flex justify-around items-center p-1.5">
-      <button id="navBtn-home" onclick="switchTab('home')" class="flex flex-col items-center gap-0.5 text-yellow-400 text-[10px] font-bold py-1">
+      <button id="navBtn-home" onclick="switchTab('home')"
+        class="flex flex-col items-center gap-0.5 text-yellow-400 text-[10px] font-bold py-1">
         <i data-lucide="home" class="w-4 h-4"></i>
         <span>Início</span>
       </button>
-      <button id="navBtn-library" onclick="switchTab('library')" class="flex flex-col items-center gap-0.5 text-gray-400 text-[10px] font-medium py-1">
+      <button id="navBtn-library" onclick="switchTab('library')"
+        class="flex flex-col items-center gap-0.5 text-gray-400 text-[10px] font-medium py-1">
         <i data-lucide="library" class="w-4 h-4"></i>
         <span>Biblioteca</span>
       </button>
-      <button id="navBtn-audiobooks" onclick="switchTab('audiobooks')" class="flex flex-col items-center gap-0.5 text-gray-400 text-[10px] font-medium py-1">
+      <button id="navBtn-audiobooks" onclick="switchTab('audiobooks')"
+        class="flex flex-col items-center gap-0.5 text-gray-400 text-[10px] font-medium py-1">
         <i data-lucide="headphones" class="w-4 h-4"></i>
         <span>Áudio</span>
       </button>
-      <button id="navBtn-courses" onclick="switchTab('courses')" class="flex flex-col items-center gap-0.5 text-gray-400 text-[10px] font-medium py-1">
+      <button id="navBtn-courses" onclick="switchTab('courses')"
+        class="flex flex-col items-center gap-0.5 text-gray-400 text-[10px] font-medium py-1">
         <i data-lucide="play-circle" class="w-4 h-4"></i>
         <span>Cursos</span>
       </button>
-      <button id="navBtn-community" onclick="switchTab('community')" class="flex flex-col items-center gap-0.5 text-gray-400 text-[10px] font-medium py-1">
+      <button id="navBtn-community" onclick="switchTab('community')"
+        class="flex flex-col items-center gap-0.5 text-gray-400 text-[10px] font-medium py-1">
         <i data-lucide="users" class="w-4 h-4"></i>
         <span>Comunidade</span>
       </button>
-      <button id="navBtn-profile" onclick="switchTab('profile')" class="flex flex-col items-center gap-0.5 text-gray-400 text-[10px] font-medium py-1">
+      <button id="navBtn-profile" onclick="switchTab('profile')"
+        class="flex flex-col items-center gap-0.5 text-gray-400 text-[10px] font-medium py-1">
         <i data-lucide="user" class="w-4 h-4"></i>
         <span>Perfil</span>
       </button>
@@ -249,18 +288,25 @@
   <main id="mainContainer" class="min-h-screen pb-24 md:pl-60 bg-black text-gray-200 transition-all duration-300">
 
     <!-- BANNER DE AVISO DE ATUALIZAÇÃO / INSTABILIDADES -->
-    <div id="systemUpdateBanner" class="w-full bg-gradient-to-r from-amber-950/90 via-black to-amber-950/90 border-b border-yellow-500/35 px-4 py-2.5 sm:py-3 text-xs text-yellow-200/90 shadow-xl relative z-30 transition-all duration-300">
+    <div id="systemUpdateBanner"
+      class="w-full bg-gradient-to-r from-amber-950/90 via-black to-amber-950/90 border-b border-yellow-500/35 px-4 py-2.5 sm:py-3 text-xs text-yellow-200/90 shadow-xl relative z-30 transition-all duration-300">
       <div class="max-w-6xl mx-auto flex items-center justify-between gap-3">
         <div class="flex items-center gap-2.5 min-w-0">
-          <div class="w-7 h-7 rounded-full bg-yellow-500/20 border border-yellow-500/50 flex items-center justify-center shrink-0 animate-pulse text-yellow-400 shadow-[0_0_12px_rgba(234,179,8,0.25)]">
+          <div
+            class="w-7 h-7 rounded-full bg-yellow-500/20 border border-yellow-500/50 flex items-center justify-center shrink-0 animate-pulse text-yellow-400 shadow-[0_0_12px_rgba(234,179,8,0.25)]">
             <i data-lucide="refresh-cw" class="w-3.5 h-3.5 animate-spin" style="animation-duration: 4s;"></i>
           </div>
           <p class="leading-snug text-[11px] sm:text-xs">
-            <span class="font-extrabold text-yellow-400 uppercase tracking-wider text-[10px] sm:text-[11px] mr-1 px-1.5 py-0.5 rounded bg-yellow-500/10 border border-yellow-500/20">ATUALIZAÇÃO EM ANDAMENTO</span>
-            O acervo da Cúpula 33 está sendo atualizado e expandido neste momento. Pequenas instabilidades temporárias podem ocorrer na plataforma, mas nossa equipe já está finalizando as otimizações.
+            <span
+              class="font-extrabold text-yellow-400 uppercase tracking-wider text-[10px] sm:text-[11px] mr-1 px-1.5 py-0.5 rounded bg-yellow-500/10 border border-yellow-500/20">ATUALIZAÇÃO
+              EM ANDAMENTO</span>
+            O acervo da Cúpula 33 está sendo atualizado e expandido neste momento. Pequenas instabilidades temporárias
+            podem ocorrer na plataforma, mas nossa equipe já está finalizando as otimizações.
           </p>
         </div>
-        <button onclick="dismissUpdateBanner()" class="text-gray-400 hover:text-white p-1 rounded-lg hover:bg-white/10 transition shrink-0 cursor-pointer" title="Dispensar aviso">
+        <button onclick="dismissUpdateBanner()"
+          class="text-gray-400 hover:text-white p-1 rounded-lg hover:bg-white/10 transition shrink-0 cursor-pointer"
+          title="Dispensar aviso">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
@@ -268,30 +314,35 @@
 
     <!-- ==================== ABA 1: INÍCIO (EXATAMENTE COMO NAS SCREENSHOTS 6 E 7) ==================== -->
     <section id="tab-home" class="app-tab-section animate-fade-in">
-      
+
       <!-- HERO BANNER (REPRODUÇÃO EXATA DA IMAGEM 2 COM CAPA DE ENOQUE NÍTIDA E CORES CÚPULA 33) -->
       <div class="relative w-full h-[400px] sm:h-[480px] overflow-hidden bg-black border-b border-white/10">
         <!-- Capa de Enoque de Fundo Nítida e Amarelada/Pergaminho -->
-        <div class="absolute inset-0 bg-cover bg-top scale-100 opacity-90 transition-transform duration-700" style="background-image: url('assets/books/enoque.png'); background-position: center 15%;"></div>
+        <div class="absolute inset-0 bg-cover bg-top scale-100 opacity-90 transition-transform duration-700"
+          style="background-image: url('assets/books/enoque.png'); background-position: center 15%;"></div>
         <!-- Gradientes sutis para legibilidade impecável dos textos -->
         <div class="absolute inset-0 bg-gradient-to-t from-black via-black/65 to-transparent"></div>
         <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
 
         <div class="relative max-w-5xl h-full flex flex-col justify-end px-5 sm:px-12 pb-8 z-10 text-left">
-          <div class="inline-flex items-center px-2.5 py-0.5 rounded-md bg-yellow-500 text-black text-[10px] font-black uppercase tracking-wider mb-2.5 w-fit shadow-md">
+          <div
+            class="inline-flex items-center px-2.5 py-0.5 rounded-md bg-yellow-500 text-black text-[10px] font-black uppercase tracking-wider mb-2.5 w-fit shadow-md">
             DESTAQUE
           </div>
 
-          <h1 class="text-3xl sm:text-5xl font-serif font-black text-white mb-2.5 tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+          <h1
+            class="text-3xl sm:text-5xl font-serif font-black text-white mb-2.5 tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
             O Livro de Enoque
           </h1>
 
-          <p class="text-xs sm:text-sm text-gray-200 max-w-xl leading-relaxed mb-5 line-clamp-3 drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
+          <p
+            class="text-xs sm:text-sm text-gray-200 max-w-xl leading-relaxed mb-5 line-clamp-3 drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
             O Livro de Enoque é um dos textos apócrifos mais influentes e misteriosos da tradição judaico-cristã.
           </p>
 
           <div class="flex items-center gap-3">
-            <button onclick="openReaderModalDirect(36)" class="px-6 py-2.5 rounded-xl bg-white hover:bg-gray-100 text-black font-extrabold text-xs uppercase tracking-wider flex items-center gap-2 shadow-2xl hover:scale-105 active:scale-95 transition-all cursor-pointer">
+            <button onclick="openReaderModalDirect(36)"
+              class="px-6 py-2.5 rounded-xl bg-white hover:bg-gray-100 text-black font-extrabold text-xs uppercase tracking-wider flex items-center gap-2 shadow-2xl hover:scale-105 active:scale-95 transition-all cursor-pointer">
               <i data-lucide="book-open" class="w-4 h-4 fill-black"></i>
               <span>Ler</span>
             </button>
@@ -308,7 +359,7 @@
 
       <!-- CARDS EM DESTAQUE (SCREENSHOT 6) -->
       <div class="px-6 sm:px-12 py-10">
-        
+
         <!-- CONTINUAR LENDO NA HOME (SE HOUVER LEITURA ATIVA) -->
         <div id="homeContinueSection" class="hidden mb-10 max-w-5xl mx-auto">
           <div class="flex items-center gap-2 mb-4">
@@ -323,15 +374,19 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          
+
           <!-- Card 1: O Núcleo (Screenshot 6) -->
-          <div onclick="switchTab('courses')" class="esoteric-card esoteric-card-hover rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between cursor-pointer group">
+          <div onclick="switchTab('courses')"
+            class="esoteric-card esoteric-card-hover rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between cursor-pointer group">
             <div class="flex items-start gap-4">
-              <div class="w-24 sm:w-28 aspect-[3/4] rounded-xl overflow-hidden bg-black shrink-0 border border-white/10">
-                <img src="assets/o_nucleo_cover.jpg" alt="O Núcleo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div
+                class="w-24 sm:w-28 aspect-[3/4] rounded-xl overflow-hidden bg-black shrink-0 border border-white/10">
+                <img src="assets/o_nucleo_cover.jpg" alt="O Núcleo"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
               </div>
               <div class="flex-1 text-left">
-                <div class="inline-flex items-center gap-1.5 text-yellow-400 text-[10px] font-bold uppercase tracking-wider mb-1.5">
+                <div
+                  class="inline-flex items-center gap-1.5 text-yellow-400 text-[10px] font-bold uppercase tracking-wider mb-1.5">
                   <i data-lucide="lock" class="w-3.5 h-3.5"></i> ACESSO RESTRITO
                 </div>
                 <h3 class="text-xl font-serif font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors">
@@ -345,7 +400,8 @@
           </div>
 
           <!-- Card 2: Os Segredos da Prosperidade Maçônica (Screenshot 6) -->
-          <div onclick="handleBookClick(999)" class="esoteric-card esoteric-card-hover rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between cursor-pointer group">
+          <div onclick="handleBookClick(999)"
+            class="esoteric-card esoteric-card-hover rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between cursor-pointer group">
             <div class="flex items-start gap-4">
               <div class="w-24 sm:w-28 aspect-[3/4] rounded-xl overflow-hidden bg-black shrink-0 border border-white/10 relative">
                 <img src="assets/cover_prosperidade_maconica_real.jpg" alt="Os Segredos da Prosperidade Maçônica" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -354,7 +410,8 @@
                 </div>
               </div>
               <div class="flex-1 text-left">
-                <div id="homeProsperidadeBadge" class="inline-flex items-center gap-1.5 text-yellow-400 text-[10px] font-bold uppercase tracking-wider mb-1.5">
+                <div id="homeProsperidadeBadge"
+                  class="inline-flex items-center gap-1.5 text-yellow-400 text-[10px] font-bold uppercase tracking-wider mb-1.5">
                   <i data-lucide="book-open" class="w-3.5 h-3.5"></i> ACESSO PERMITIDO
                 </div>
                 <h3 class="text-xl font-serif font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors">
@@ -382,14 +439,16 @@
     <!-- ==================== ABA 2: BIBLIOTECA (PADRÃO ORDEM 137 / CÚPULA 33) ==================== -->
     <section id="tab-library" class="app-tab-section hidden animate-fade-in">
       <div class="px-4 sm:px-8 py-6 max-w-7xl mx-auto">
-        
+
         <!-- Header da Biblioteca com Barra Vermelha / Red Accent -->
         <div class="flex items-center justify-between mb-5">
           <div class="flex items-center space-x-3">
-            <button id="libraryBackBtn" onclick="returnToDefaultLibrary()" class="hidden p-2 bg-white/5 rounded-full hover:bg-red-600 hover:text-white transition-colors text-gray-400 cursor-pointer">
+            <button id="libraryBackBtn" onclick="returnToDefaultLibrary()"
+              class="hidden p-2 bg-white/5 rounded-full hover:bg-red-600 hover:text-white transition-colors text-gray-400 cursor-pointer">
               <i data-lucide="arrow-left" class="w-5 h-5"></i>
             </button>
-            <h1 id="libraryMainTitle" class="text-2xl sm:text-3xl font-serif text-white border-l-4 border-red-600 pl-3 font-bold tracking-tight">
+            <h1 id="libraryMainTitle"
+              class="text-2xl sm:text-3xl font-serif text-white border-l-4 border-red-600 pl-3 font-bold tracking-tight">
               Biblioteca
             </h1>
           </div>
@@ -399,24 +458,30 @@
         <div class="flex items-center gap-3 mb-6">
           <div class="relative flex-1">
             <i data-lucide="search" class="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
-            <input type="text" id="searchInput" oninput="handleSearchInput(this.value)" placeholder="Buscar livros..." class="w-full bg-[#161616] border border-white/10 rounded-full py-2.5 pl-10 pr-10 text-white placeholder-gray-500 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all text-xs sm:text-sm">
-            <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white cursor-pointer">
+            <input type="text" id="searchInput" oninput="handleSearchInput(this.value)" placeholder="Buscar livros..."
+              class="w-full bg-[#161616] border border-white/10 rounded-full py-2.5 pl-10 pr-10 text-white placeholder-gray-500 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all text-xs sm:text-sm">
+            <button id="clearSearchBtn" onclick="clearSearch()"
+              class="hidden absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white cursor-pointer">
               <i data-lucide="x" class="w-4 h-4"></i>
             </button>
           </div>
 
-          <button onclick="toggleCategoriesView()" id="btnToggleCategories" class="p-2.5 bg-[#161616] border border-white/10 rounded-full text-gray-300 hover:text-white hover:border-red-600 transition-all cursor-pointer shrink-0" title="Navegar por Categorias">
+          <button onclick="toggleCategoriesView()" id="btnToggleCategories"
+            class="p-2.5 bg-[#161616] border border-white/10 rounded-full text-gray-300 hover:text-white hover:border-red-600 transition-all cursor-pointer shrink-0"
+            title="Navegar por Categorias">
             <i data-lucide="layout-grid" class="w-5 h-5"></i>
           </button>
 
-          <button onclick="openMyList()" id="btnToggleMyList" class="p-2.5 bg-[#161616] border border-white/10 rounded-full text-gray-300 hover:text-red-500 hover:border-red-600 transition-all cursor-pointer shrink-0" title="Minha Lista">
+          <button onclick="openMyList()" id="btnToggleMyList"
+            class="p-2.5 bg-[#161616] border border-white/10 rounded-full text-gray-300 hover:text-red-500 hover:border-red-600 transition-all cursor-pointer shrink-0"
+            title="Minha Lista">
             <i data-lucide="bookmark" class="w-5 h-5"></i>
           </button>
         </div>
 
         <!-- 1. STREAMING ROWS VIEW (CARROSSEIS ORDEM 137) -->
         <div id="libraryStreamingView" class="space-y-8">
-          
+
           <!-- CONTINUAR LENDO -->
           <div id="sectionContinueReading" class="hidden">
             <div class="flex items-center gap-2 mb-3">
@@ -425,7 +490,8 @@
                 CONTINUAR LENDO
               </h2>
             </div>
-            <div id="continueReadingCarousel" class="flex overflow-x-auto gap-3.5 pb-2 hide-scrollbar scroll-smooth snap-x">
+            <div id="continueReadingCarousel"
+              class="flex overflow-x-auto gap-3.5 pb-2 hide-scrollbar scroll-smooth snap-x">
               <!-- Injetado dinamicamente -->
             </div>
           </div>
@@ -447,22 +513,26 @@
 
         <!-- 3. CATEGORY DETAIL GRID VIEW -->
         <div id="libraryCategoryDetailView" class="hidden animate-fade-in">
-          <div id="categoryDetailBooksGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5 sm:gap-6">
+          <div id="categoryDetailBooksGrid"
+            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5 sm:gap-6">
             <!-- Injetado dinamicamente -->
           </div>
         </div>
 
         <!-- 4. SEARCH RESULTS VIEW -->
         <div id="librarySearchResultsView" class="hidden animate-fade-in">
-          <p class="text-gray-400 text-sm mb-6">Resultados para: <span id="searchResultTerm" class="text-yellow-400 font-bold"></span></p>
-          <div id="searchResultsGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5 sm:gap-6">
+          <p class="text-gray-400 text-sm mb-6">Resultados para: <span id="searchResultTerm"
+              class="text-yellow-400 font-bold"></span></p>
+          <div id="searchResultsGrid"
+            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5 sm:gap-6">
             <!-- Injetado dinamicamente -->
           </div>
         </div>
 
         <!-- 5. MINHA LISTA VIEW -->
         <div id="libraryMyListView" class="hidden animate-fade-in">
-          <div id="myListBooksGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5 sm:gap-6">
+          <div id="myListBooksGrid"
+            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5 sm:gap-6">
             <!-- Injetado dinamicamente -->
           </div>
         </div>
@@ -473,13 +543,14 @@
     <!-- ==================== ABA 3: ÁUDIOS & FREQUÊNCIAS ==================== -->
     <section id="tab-audiobooks" class="app-tab-section hidden animate-fade-in">
       <div class="px-6 sm:px-12 py-8">
-        
+
         <!-- Header com Título e Seletor dos 2 Grupos -->
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 text-left">
           <div>
             <div class="flex items-center gap-3">
               <i data-lucide="headphones" class="w-6 h-6 text-yellow-400"></i>
-              <h1 id="audioMainHeaderTitle" class="text-2xl sm:text-3xl font-serif text-white font-bold border-l-4 border-yellow-500 pl-4 tracking-tight">
+              <h1 id="audioMainHeaderTitle"
+                class="text-2xl sm:text-3xl font-serif text-white font-bold border-l-4 border-yellow-500 pl-4 tracking-tight">
                 Áudios & Frequências
               </h1>
             </div>
@@ -489,12 +560,15 @@
           </div>
 
           <!-- SELETOR DOS DOIS GRUPOS: FREQUÊNCIAS SONORAS vs AUDIOLIVROS -->
-          <div class="inline-flex items-center p-1.5 rounded-2xl bg-white/5 border border-white/10 shadow-lg backdrop-blur-md">
-            <button id="groupBtnFrequencies" onclick="switchAudioGroup('frequencies')" class="px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer bg-yellow-500 text-black shadow-lg shadow-yellow-500/20">
+          <div
+            class="inline-flex items-center p-1.5 rounded-2xl bg-white/5 border border-white/10 shadow-lg backdrop-blur-md">
+            <button id="groupBtnFrequencies" onclick="switchAudioGroup('frequencies')"
+              class="px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer bg-yellow-500 text-black shadow-lg shadow-yellow-500/20">
               <i data-lucide="radio" class="w-4 h-4"></i>
               <span>Frequências Sonoras</span>
             </button>
-            <button id="groupBtnAudiobooks" onclick="switchAudioGroup('audiobooks')" class="px-5 py-2.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
+            <button id="groupBtnAudiobooks" onclick="switchAudioGroup('audiobooks')"
+              class="px-5 py-2.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
               <i data-lucide="book-open" class="w-4 h-4"></i>
               <span>Audiolivros</span>
             </button>
@@ -504,28 +578,36 @@
         <!-- GRUPO 1: FREQUÊNCIAS SONORAS -->
         <div id="groupViewFrequencies" class="space-y-8 animate-fade-in">
           <!-- Player de Frequências Sagradas 100% Funcional e Audível -->
-          <div class="esoteric-card rounded-3xl p-6 sm:p-8 mb-10 border border-white/10 max-w-5xl text-left relative overflow-hidden">
-            <div class="absolute -right-16 -top-16 w-56 h-56 rounded-full bg-[#D4AF37]/5 blur-3xl pointer-events-none"></div>
+          <div
+            class="esoteric-card rounded-3xl p-6 sm:p-8 mb-10 border border-white/10 max-w-5xl text-left relative overflow-hidden">
+            <div class="absolute -right-16 -top-16 w-56 h-56 rounded-full bg-[#D4AF37]/5 blur-3xl pointer-events-none">
+            </div>
 
             <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 relative z-10">
               <div>
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D4AF37]/10 text-[#D4AF37] text-[10px] font-bold uppercase tracking-wider mb-2 border border-[#D4AF37]/30 shadow-sm">
+                <span
+                  class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D4AF37]/10 text-[#D4AF37] text-[10px] font-bold uppercase tracking-wider mb-2 border border-[#D4AF37]/30 shadow-sm">
                   <i data-lucide="radio" class="w-3.5 h-3.5"></i> Ressonância de Solfeggio Ativa
                 </span>
-                <h2 class="text-xl sm:text-2xl font-serif font-bold text-white">Frequências Sonoras & Ondas Sagradas</h2>
-                <p class="text-xs text-gray-400 mt-1.5 max-w-lg leading-relaxed">Batimentos binaurais de ondas senoidais puras calibrados para concentração profunda, desbloqueio de chakras e expansão da consciência.</p>
+                <h2 class="text-xl sm:text-2xl font-serif font-bold text-white">Frequências Sonoras & Ondas Sagradas
+                </h2>
+                <p class="text-xs text-gray-400 mt-1.5 max-w-lg leading-relaxed">Batimentos binaurais de ondas senoidais
+                  puras calibrados para concentração profunda, desbloqueio de chakras e expansão da consciência.</p>
               </div>
 
               <div class="flex flex-col items-center sm:items-end gap-2.5 shrink-0">
-                <div id="soundWaveBox" class="px-4 py-2.5 rounded-2xl bg-black/90 border border-white/15 flex items-center gap-2.5 shadow-lg wave-paused">
+                <div id="soundWaveBox"
+                  class="px-4 py-2.5 rounded-2xl bg-black/90 border border-white/15 flex items-center gap-2.5 shadow-lg wave-paused">
                   <span class="wave-bar"></span>
                   <span class="wave-bar"></span>
                   <span class="wave-bar"></span>
                   <span class="wave-bar"></span>
                   <span class="wave-bar"></span>
-                  <span id="playerCurrentHz" class="font-mono font-bold text-xs text-[#D4AF37] tracking-wide">Santuário em Silêncio</span>
+                  <span id="playerCurrentHz" class="font-mono font-bold text-xs text-[#D4AF37] tracking-wide">Santuário
+                    em Silêncio</span>
                 </div>
-                <button onclick="stopFrequency(true)" class="text-xs text-gray-400 hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer py-1 px-2.5 rounded-lg hover:bg-white/5">
+                <button onclick="stopFrequency(true)"
+                  class="text-xs text-gray-400 hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer py-1 px-2.5 rounded-lg hover:bg-white/5">
                   <i data-lucide="square" class="w-3.5 h-3.5"></i> Parar Frequência
                 </button>
               </div>
@@ -534,7 +616,8 @@
             <!-- Grade Dinâmica Completa com as 8 Frequências Sagradas de Solfeggio -->
             <div class="mt-8 pt-6 border-t border-white/10 relative z-10">
               <div class="flex items-center justify-between mb-4">
-                <span class="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Sintonizar Matriz Sonora</span>
+                <span class="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Sintonizar Matriz
+                  Sonora</span>
                 <span class="text-[10px] font-mono text-[#D4AF37]">Ondas Senoidais 432Hz - 963Hz</span>
               </div>
               <div id="frequenciesList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
@@ -548,11 +631,13 @@
         <div id="groupViewAudiobooks" class="hidden space-y-8 animate-fade-in text-left">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
             <div>
-              <span class="text-[10px] font-bold text-yellow-400 uppercase tracking-widest block mb-1">ACERVO NARRADO EM ALTA DEFINIÇÃO</span>
+              <span class="text-[10px] font-bold text-yellow-400 uppercase tracking-widest block mb-1">ACERVO NARRADO EM
+                ALTA DEFINIÇÃO</span>
               <h2 class="text-xl sm:text-2xl font-serif font-bold text-white flex items-center gap-2">
                 <i data-lucide="sparkles" class="w-5 h-5 text-yellow-400"></i> Manuscritos Sagrados Narrados
               </h2>
-              <p class="text-xs text-gray-400 mt-1">Tratados clássicos transmitidos oralmente com ambiência de fundo em frequência áurea 432Hz.</p>
+              <p class="text-xs text-gray-400 mt-1">Tratados clássicos transmitidos oralmente com ambiência de fundo em
+                frequência áurea 432Hz.</p>
             </div>
           </div>
 
@@ -568,7 +653,7 @@
     <!-- ==================== ABA 4: AULAS & CURSOS (A CÂMARA INTERNA) ==================== -->
     <section id="tab-courses" class="app-tab-section hidden animate-fade-in">
       <div class="px-4 sm:px-12 py-8 text-left max-w-4xl mx-auto">
-        
+
         <!-- Header da Seção -->
         <div class="mb-6">
           <div class="flex items-center gap-2 mb-1">
@@ -583,14 +668,17 @@
         </div>
 
         <!-- Card de Destaque de O Núcleo (Cúpula 33 Gold) -->
-        <div class="esoteric-card rounded-3xl p-6 sm:p-8 mb-10 border border-white/10 relative overflow-hidden bg-[#111111] text-center shadow-2xl">
+        <div
+          class="esoteric-card rounded-3xl p-6 sm:p-8 mb-10 border border-white/10 relative overflow-hidden bg-[#111111] text-center shadow-2xl">
           <!-- Capa Grande Centralizada -->
-          <div class="w-48 sm:w-60 aspect-[3/4] mx-auto rounded-2xl overflow-hidden bg-black shadow-2xl border border-white/10 mb-6">
+          <div
+            class="w-48 sm:w-60 aspect-[3/4] mx-auto rounded-2xl overflow-hidden bg-black shadow-2xl border border-white/10 mb-6">
             <img src="assets/o_nucleo_cover.jpg" alt="O Núcleo" class="w-full h-full object-cover">
           </div>
 
           <!-- Tag Destaque Amarela Cúpula 33 -->
-          <div class="inline-block px-3 py-1 rounded bg-yellow-500 text-black text-[11px] font-extrabold uppercase tracking-wider mb-3 shadow-lg shadow-yellow-500/20">
+          <div
+            class="inline-block px-3 py-1 rounded bg-yellow-500 text-black text-[11px] font-extrabold uppercase tracking-wider mb-3 shadow-lg shadow-yellow-500/20">
             DESTAQUE
           </div>
 
@@ -602,19 +690,23 @@
           <!-- Descrição com Ver Mais -->
           <div class="max-w-xl mx-auto mb-6">
             <p id="courseDescShort" class="text-xs text-gray-300 leading-relaxed">
-              Quebre as correntes da ignorância. Esta coletânea de vídeos revela os mecanismos ocultos da realidade e os mistérios do...
+              Quebre as correntes da ignorância. Esta coletânea de vídeos revela os mecanismos ocultos da realidade e os
+              mistérios do...
             </p>
             <p id="courseDescFull" class="hidden text-xs text-gray-300 leading-relaxed">
-              Quebre as correntes da ignorância. Esta coletânea de vídeos revela os mecanismos ocultos da realidade e os mistérios do universo que foram escondidos de você por séculos. A verdade nua e crua.
+              Quebre as correntes da ignorância. Esta coletânea de vídeos revela os mecanismos ocultos da realidade e os
+              mistérios do universo que foram escondidos de você por séculos. A verdade nua e crua.
             </p>
-            <button onclick="toggleCourseDesc()" id="btnToggleCourseDesc" class="mt-2 text-[11px] font-bold text-gray-400 hover:text-white uppercase tracking-wider transition cursor-pointer flex items-center justify-center gap-1 mx-auto">
+            <button onclick="toggleCourseDesc()" id="btnToggleCourseDesc"
+              class="mt-2 text-[11px] font-bold text-gray-400 hover:text-white uppercase tracking-wider transition cursor-pointer flex items-center justify-center gap-1 mx-auto">
               <span>LER MAIS</span>
               <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
             </button>
           </div>
 
           <!-- Botão Acessar Estrutura (Branco com Cadeado, idêntico aos Prints 2 e 3) -->
-          <button onclick="openCourseStructureModal()" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white hover:bg-gray-100 text-black font-extrabold text-xs uppercase tracking-wider inline-flex items-center justify-center gap-2 shadow-xl active:scale-95 transition cursor-pointer">
+          <button onclick="openCourseStructureModal()"
+            class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white hover:bg-gray-100 text-black font-extrabold text-xs uppercase tracking-wider inline-flex items-center justify-center gap-2 shadow-xl active:scale-95 transition cursor-pointer">
             <i data-lucide="lock" class="w-4 h-4 text-black"></i>
             <span>Acessar Estrutura</span>
           </button>
@@ -629,11 +721,14 @@
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6">
             <!-- Card Catálogo de O Núcleo -->
             <div onclick="openCourseStructureModal()" class="group cursor-pointer text-left">
-              <div class="w-full aspect-[3/4] rounded-2xl overflow-hidden bg-black relative border border-white/10 shadow-lg mb-2.5">
-                <img src="assets/o_nucleo_cover.jpg" alt="O Núcleo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                
+              <div
+                class="w-full aspect-[3/4] rounded-2xl overflow-hidden bg-black relative border border-white/10 shadow-lg mb-2.5">
+                <img src="assets/o_nucleo_cover.jpg" alt="O Núcleo"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+
                 <!-- Ícone Cadeado Translúcido no Canto Superior Direito -->
-                <div class="absolute top-2.5 right-2.5 w-7 h-7 rounded-lg bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white/90">
+                <div
+                  class="absolute top-2.5 right-2.5 w-7 h-7 rounded-lg bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white/90">
                   <i data-lucide="lock" class="w-3.5 h-3.5"></i>
                 </div>
               </div>
@@ -653,7 +748,7 @@
     <!-- ==================== ABA 5: COMUNIDADE 100% FUNCIONAL (SCREENSHOT 2) ==================== -->
     <section id="tab-community" class="app-tab-section hidden animate-fade-in">
       <div class="px-6 sm:px-12 py-8 max-w-4xl text-left">
-        
+
         <div class="flex items-center justify-between mb-6">
           <div>
             <h1 class="text-2xl sm:text-3xl font-serif text-white font-bold tracking-tight">
@@ -664,7 +759,8 @@
             </p>
           </div>
 
-          <button onclick="filterCommunityPosts('Meus Posts')" class="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-medium text-gray-300 flex items-center gap-2 transition cursor-pointer">
+          <button onclick="filterCommunityPosts('Meus Posts')"
+            class="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-medium text-gray-300 flex items-center gap-2 transition cursor-pointer">
             <i data-lucide="bookmark" class="w-3.5 h-3.5 text-yellow-400"></i>
             <span>Minhas Discussões</span>
           </button>
@@ -672,31 +768,45 @@
 
         <!-- Filtros em Pílulas (Screenshot 2) -->
         <div class="flex items-center gap-2 overflow-x-auto pb-2 hide-scrollbar mb-6" id="communityFilterBar">
-          <button onclick="filterCommunityPosts('Tudo')" data-filter="Tudo" class="community-pill px-4 py-1.5 rounded-full bg-yellow-500 text-black text-xs font-bold whitespace-nowrap transition cursor-pointer">Tudo</button>
-          <button onclick="filterCommunityPosts('Meus Posts')" data-filter="Meus Posts" class="community-pill px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 text-xs font-medium whitespace-nowrap transition cursor-pointer">Meus Posts</button>
-          <button onclick="filterCommunityPosts('Dúvidas na interação do site')" data-filter="Dúvidas na interação do site" class="community-pill px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 text-xs font-medium whitespace-nowrap transition cursor-pointer">Dúvidas na interação do site</button>
-          <button onclick="filterCommunityPosts('Teoria')" data-filter="Teoria" class="community-pill px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 text-xs font-medium whitespace-nowrap transition cursor-pointer">Teoria</button>
-          <button onclick="filterCommunityPosts('Templo')" data-filter="Templo" class="community-pill px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 text-xs font-medium whitespace-nowrap transition cursor-pointer">Templo</button>
-          <button onclick="filterCommunityPosts('Filtro de Livros')" data-filter="Filtro de Livros" class="community-pill px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 text-xs font-medium whitespace-nowrap transition cursor-pointer">Filtro de Livros</button>
+          <button onclick="filterCommunityPosts('Tudo')" data-filter="Tudo"
+            class="community-pill px-4 py-1.5 rounded-full bg-yellow-500 text-black text-xs font-bold whitespace-nowrap transition cursor-pointer">Tudo</button>
+          <button onclick="filterCommunityPosts('Meus Posts')" data-filter="Meus Posts"
+            class="community-pill px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 text-xs font-medium whitespace-nowrap transition cursor-pointer">Meus
+            Posts</button>
+          <button onclick="filterCommunityPosts('Dúvidas na interação do site')"
+            data-filter="Dúvidas na interação do site"
+            class="community-pill px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 text-xs font-medium whitespace-nowrap transition cursor-pointer">Dúvidas
+            na interação do site</button>
+          <button onclick="filterCommunityPosts('Teoria')" data-filter="Teoria"
+            class="community-pill px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 text-xs font-medium whitespace-nowrap transition cursor-pointer">Teoria</button>
+          <button onclick="filterCommunityPosts('Templo')" data-filter="Templo"
+            class="community-pill px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 text-xs font-medium whitespace-nowrap transition cursor-pointer">Templo</button>
+          <button onclick="filterCommunityPosts('Filtro de Livros')" data-filter="Filtro de Livros"
+            class="community-pill px-4 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white border border-white/10 text-xs font-medium whitespace-nowrap transition cursor-pointer">Filtro
+            de Livros</button>
         </div>
 
         <!-- Post Composer (Screenshot 2) -->
         <div class="esoteric-card rounded-2xl p-5 mb-6 border border-white/10">
           <div class="flex items-start gap-3">
-            <div id="composerAvatarLetter" class="w-9 h-9 rounded-full bg-yellow-500 text-black flex items-center justify-center font-bold text-xs shrink-0">
+            <div id="composerAvatarLetter"
+              class="w-9 h-9 rounded-full bg-yellow-500 text-black flex items-center justify-center font-bold text-xs shrink-0">
               ?
             </div>
-            <textarea id="communityPostInput" rows="2" placeholder="Compartilhe seus pensamentos no Feed Geral..." class="w-full bg-transparent text-sm text-white placeholder-gray-500 focus:outline-none resize-none"></textarea>
+            <textarea id="communityPostInput" rows="2" placeholder="Compartilhe seus pensamentos no Feed Geral..."
+              class="w-full bg-transparent text-sm text-white placeholder-gray-500 focus:outline-none resize-none"></textarea>
           </div>
 
           <div class="flex items-center justify-between pt-3 mt-3 border-t border-white/5">
-            <select id="communityPostCategory" class="bg-white/5 border border-white/10 text-gray-400 text-xs rounded-lg px-2.5 py-1.5 focus:outline-none">
+            <select id="communityPostCategory"
+              class="bg-white/5 border border-white/10 text-gray-400 text-xs rounded-lg px-2.5 py-1.5 focus:outline-none">
               <option value="Teoria">Teoria</option>
               <option value="Dúvidas na interação do site">Dúvidas na interação</option>
               <option value="Templo">Templo</option>
               <option value="Filtro de Livros">Filtro de Livros</option>
             </select>
-            <button onclick="publishCommunityPost()" class="px-5 py-2 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold flex items-center gap-1.5 transition cursor-pointer">
+            <button onclick="publishCommunityPost()"
+              class="px-5 py-2 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-black text-xs font-bold flex items-center gap-1.5 transition cursor-pointer">
               <span>Publicar</span>
               <i data-lucide="send" class="w-3.5 h-3.5"></i>
             </button>
@@ -714,16 +824,20 @@
     <!-- ==================== ABA 6: PERFIL DINÂMICO (SCREENSHOT 1) ==================== -->
     <section id="tab-profile" class="app-tab-section hidden animate-fade-in">
       <div class="px-6 sm:px-12 py-10 max-w-3xl text-left">
-        
+
         <div class="flex flex-col items-center text-center mb-8">
           <div class="relative mb-4 group cursor-pointer" onclick="promptEditUserName()">
-            <div class="w-28 h-28 rounded-full overflow-hidden bg-[#121212] border-2 border-[#D4AF37]/50 flex items-center justify-center shadow-[0_0_25px_rgba(212,175,55,0.25)] relative">
-              <img id="profileAvatarImg" src="assets/logo.jpg" alt="Avatar" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-              <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <div
+              class="w-28 h-28 rounded-full overflow-hidden bg-[#121212] border-2 border-[#D4AF37]/50 flex items-center justify-center shadow-[0_0_25px_rgba(212,175,55,0.25)] relative">
+              <img id="profileAvatarImg" src="assets/logo.jpg" alt="Avatar"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+              <div
+                class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                 <i data-lucide="camera" class="w-5 h-5 text-[#D4AF37]"></i>
               </div>
             </div>
-            <span id="profileLevelBadge" class="absolute -bottom-1 -right-1 px-3 py-0.5 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#E5C158] text-black text-[10px] font-black uppercase tracking-wider shadow-lg border border-black/50">
+            <span id="profileLevelBadge"
+              class="absolute -bottom-1 -right-1 px-3 py-0.5 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#E5C158] text-black text-[10px] font-black uppercase tracking-wider shadow-lg border border-black/50">
               LVL 1
             </span>
           </div>
@@ -732,11 +846,14 @@
             <h1 id="profileDisplayName" class="text-2xl sm:text-3xl font-serif font-black text-white tracking-tight">
               Carregando...
             </h1>
-            <button onclick="promptEditUserName()" class="p-1.5 rounded-lg text-gray-400 hover:text-[#D4AF37] hover:bg-white/5 transition cursor-pointer" title="Editar Nome">
+            <button onclick="promptEditUserName()"
+              class="p-1.5 rounded-lg text-gray-400 hover:text-[#D4AF37] hover:bg-white/5 transition cursor-pointer"
+              title="Editar Nome">
               <i data-lucide="edit-3" class="w-4 h-4"></i>
             </button>
           </div>
-          <div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/25 text-[#D4AF37] text-[10px] font-mono font-bold tracking-widest uppercase mt-2">
+          <div
+            class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/25 text-[#D4AF37] text-[10px] font-mono font-bold tracking-widest uppercase mt-2">
             <span class="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-pulse"></span>
             <span>MEMBRO DA CÚPULA 33</span>
           </div>
@@ -748,7 +865,9 @@
               <span id="profileNextLvlText" class="text-[#D4AF37] tracking-wider">RUMO AO NÍVEL 2</span>
             </div>
             <div class="w-full h-2 bg-black/80 rounded-full overflow-hidden border border-white/5">
-              <div id="profileXpBar" class="h-full bg-gradient-to-r from-[#AA7C11] via-[#D4AF37] to-[#F3E5AB] shadow-[0_0_10px_rgba(212,175,55,0.7)] transition-all duration-300" style="width: 15%"></div>
+              <div id="profileXpBar"
+                class="h-full bg-gradient-to-r from-[#AA7C11] via-[#D4AF37] to-[#F3E5AB] shadow-[0_0_10px_rgba(212,175,55,0.7)] transition-all duration-300"
+                style="width: 15%"></div>
             </div>
           </div>
         </div>
@@ -799,7 +918,8 @@
               <i data-lucide="mail" class="w-4 h-4 text-gray-600"></i>
             </div>
 
-            <div class="p-4 flex items-center justify-between cursor-pointer hover:bg-white/5 transition" onclick="showToast('Configure seu Kindle no app da Amazon')">
+            <div class="p-4 flex items-center justify-between cursor-pointer hover:bg-white/5 transition"
+              onclick="showToast('Configure seu Kindle no app da Amazon')">
               <div>
                 <div class="text-xs text-gray-400">E-mail do Kindle</div>
                 <div class="text-xs text-gray-500 mt-0.5">Não configurado</div>
@@ -807,7 +927,8 @@
               <span class="text-xs text-gray-400 flex items-center gap-1">Como Configurar &gt;</span>
             </div>
 
-            <div class="p-4 flex items-center justify-between cursor-pointer hover:bg-white/5 transition" onclick="logoutVipGate()">
+            <div class="p-4 flex items-center justify-between cursor-pointer hover:bg-white/5 transition"
+              onclick="logoutVipGate()">
               <div>
                 <div class="text-xs text-gray-400">Sair da Conta</div>
                 <div class="text-xs text-rose-400 mt-0.5">Encerrar sessão neste dispositivo</div>
@@ -823,25 +944,33 @@
   </main>
 
   <!-- ==================== MODAL DE REPRODUÇÃO DE AUDIOLIVRO ==================== -->
-  <div id="audiobookPlayerModal" class="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md hidden animate-fade-in">
+  <div id="audiobookPlayerModal"
+    class="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md hidden animate-fade-in">
     <div class="absolute inset-0" onclick="closeAudiobookPlayerModal()"></div>
-    
-    <div class="relative bg-[#101010] w-full max-w-lg rounded-3xl shadow-[0_25px_70px_rgba(0,0,0,0.9)] border border-white/15 overflow-hidden p-6 sm:p-8 z-10 text-left animate-slide-up">
-      <button onclick="closeAudiobookPlayerModal()" class="absolute top-4 right-4 z-30 p-2.5 bg-black/70 backdrop-blur-md rounded-full text-white/80 hover:text-black hover:bg-[#D4AF37] border border-white/10 transition-all cursor-pointer">
+
+    <div
+      class="relative bg-[#101010] w-full max-w-lg rounded-3xl shadow-[0_25px_70px_rgba(0,0,0,0.9)] border border-white/15 overflow-hidden p-6 sm:p-8 z-10 text-left animate-slide-up">
+      <button onclick="closeAudiobookPlayerModal()"
+        class="absolute top-4 right-4 z-30 p-2.5 bg-black/70 backdrop-blur-md rounded-full text-white/80 hover:text-black hover:bg-[#D4AF37] border border-white/10 transition-all cursor-pointer">
         <i data-lucide="x" class="w-4 h-4"></i>
       </button>
 
       <!-- Capa & Informações do Audiolivro -->
       <div class="flex flex-col items-center text-center mb-6">
-        <div class="relative w-36 h-48 sm:w-44 sm:h-60 rounded-2xl overflow-hidden shadow-2xl border border-white/15 mb-4 group">
+        <div
+          class="relative w-36 h-48 sm:w-44 sm:h-60 rounded-2xl overflow-hidden shadow-2xl border border-white/15 mb-4 group">
           <img id="abPlayerCover" src="" alt="Capa" class="w-full h-full object-cover">
-          <div class="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/80 backdrop-blur-md text-[9px] font-bold text-[#D4AF37] border border-[#D4AF37]/30">
+          <div
+            class="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/80 backdrop-blur-md text-[9px] font-bold text-[#D4AF37] border border-[#D4AF37]/30">
             432Hz HD
           </div>
         </div>
 
-        <span id="abPlayerCategory" class="text-[10px] font-mono uppercase tracking-widest text-[#D4AF37] font-bold mb-1">Hermetismo & Cabala</span>
-        <h3 id="abPlayerTitle" class="text-lg sm:text-xl font-serif font-bold text-white max-w-sm leading-snug">O Caibalion</h3>
+        <span id="abPlayerCategory"
+          class="text-[10px] font-mono uppercase tracking-widest text-[#D4AF37] font-bold mb-1">Hermetismo &
+          Cabala</span>
+        <h3 id="abPlayerTitle" class="text-lg sm:text-xl font-serif font-bold text-white max-w-sm leading-snug">O
+          Caibalion</h3>
         <p id="abPlayerAuthor" class="text-xs text-gray-400 mt-1">Por Três Iniciados • Narrado pela Cúpula 33</p>
       </div>
 
@@ -863,8 +992,11 @@
 
       <!-- Barra de Progresso do Áudio -->
       <div class="space-y-1.5 mb-6">
-        <div class="w-full h-2 rounded-full bg-white/10 overflow-hidden relative cursor-pointer" onclick="handleAudioScrub(event)">
-          <div id="abProgressBar" class="h-full bg-gradient-to-r from-[#AA7C11] via-[#D4AF37] to-[#F3E5AB] transition-all duration-200" style="width: 0%"></div>
+        <div class="w-full h-2 rounded-full bg-white/10 overflow-hidden relative cursor-pointer"
+          onclick="handleAudioScrub(event)">
+          <div id="abProgressBar"
+            class="h-full bg-gradient-to-r from-[#AA7C11] via-[#D4AF37] to-[#F3E5AB] transition-all duration-200"
+            style="width: 0%"></div>
         </div>
         <div class="flex items-center justify-between text-[10px] font-mono text-gray-400">
           <span id="abCurrentTime">00:00</span>
@@ -874,15 +1006,18 @@
 
       <!-- Controles Principais -->
       <div class="flex items-center justify-center gap-6 mb-6">
-        <button onclick="rewindAudiobook(15)" class="p-3 text-gray-400 hover:text-white transition-colors cursor-pointer" title="Voltar 15s">
+        <button onclick="rewindAudiobook(15)"
+          class="p-3 text-gray-400 hover:text-white transition-colors cursor-pointer" title="Voltar 15s">
           <i data-lucide="rotate-ccw" class="w-5 h-5"></i>
         </button>
 
-        <button id="abPlayBtn" onclick="toggleAudiobookPlay()" class="w-14 h-14 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#E5C158] to-[#D4AF37] text-black flex items-center justify-center shadow-[0_0_25px_rgba(212,175,55,0.4)] hover:scale-105 active:scale-95 transition-all cursor-pointer">
+        <button id="abPlayBtn" onclick="toggleAudiobookPlay()"
+          class="w-14 h-14 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#E5C158] to-[#D4AF37] text-black flex items-center justify-center shadow-[0_0_25px_rgba(212,175,55,0.4)] hover:scale-105 active:scale-95 transition-all cursor-pointer">
           <i id="abPlayIcon" data-lucide="play" class="w-6 h-6 fill-black translate-x-0.5"></i>
         </button>
 
-        <button onclick="forwardAudiobook(15)" class="p-3 text-gray-400 hover:text-white transition-colors cursor-pointer" title="Avançar 15s">
+        <button onclick="forwardAudiobook(15)"
+          class="p-3 text-gray-400 hover:text-white transition-colors cursor-pointer" title="Avançar 15s">
           <i data-lucide="rotate-cw" class="w-5 h-5"></i>
         </button>
       </div>
@@ -891,83 +1026,110 @@
       <div class="flex items-center justify-between pt-4 border-t border-white/10 text-xs">
         <div class="flex items-center gap-1.5">
           <span class="text-gray-400 text-[11px]">Velocidade:</span>
-          <button onclick="setAudioSpeed(1.0)" id="abSpeed10" class="px-2 py-0.5 rounded bg-yellow-500 text-black font-bold text-[10px]">1.0x</button>
-          <button onclick="setAudioSpeed(1.25)" id="abSpeed125" class="px-2 py-0.5 rounded bg-white/5 hover:bg-white/10 text-gray-300 font-bold text-[10px]">1.25x</button>
-          <button onclick="setAudioSpeed(1.5)" id="abSpeed15" class="px-2 py-0.5 rounded bg-white/5 hover:bg-white/10 text-gray-300 font-bold text-[10px]">1.5x</button>
+          <button onclick="setAudioSpeed(1.0)" id="abSpeed10"
+            class="px-2 py-0.5 rounded bg-yellow-500 text-black font-bold text-[10px]">1.0x</button>
+          <button onclick="setAudioSpeed(1.25)" id="abSpeed125"
+            class="px-2 py-0.5 rounded bg-white/5 hover:bg-white/10 text-gray-300 font-bold text-[10px]">1.25x</button>
+          <button onclick="setAudioSpeed(1.5)" id="abSpeed15"
+            class="px-2 py-0.5 rounded bg-white/5 hover:bg-white/10 text-gray-300 font-bold text-[10px]">1.5x</button>
         </div>
 
-        <button onclick="toggleAmbientDrone()" id="abDroneToggleBtn" class="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 text-[11px] font-bold cursor-pointer">
+        <button onclick="toggleAmbientDrone()" id="abDroneToggleBtn"
+          class="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 text-[11px] font-bold cursor-pointer">
           <i data-lucide="volume-2" class="w-3.5 h-3.5"></i> Drone 432Hz: ON
         </button>
       </div>
     </div>
   </div>
 
-  <!-- ==================== MODAL DE DETALHES DO LIVRO ==================== -->
-  <div id="bookModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md hidden animate-fade-in">
+  <!-- ==================== MODAL DE DETALHES DO LIVRO (EXATO ORDEM 137 / CÚPULA 33 GOLD) ==================== -->
+  <div id="bookModal"
+    class="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-black/90 backdrop-blur-md hidden animate-fade-in">
     <div class="absolute inset-0" onclick="closeModal('bookModal')"></div>
-    
-    <div class="relative bg-[#101010] w-full max-w-4xl rounded-3xl shadow-[0_25px_70px_rgba(0,0,0,0.9)] border border-white/15 overflow-hidden flex flex-col md:flex-row max-h-[92vh] z-10 text-left animate-slide-up">
-      
-      <button onclick="closeModal('bookModal')" class="absolute top-4 right-4 z-30 p-2.5 bg-black/70 backdrop-blur-md rounded-full text-white/80 hover:text-black hover:bg-[#D4AF37] border border-white/10 transition-all duration-200 cursor-pointer shadow-lg active:scale-90">
-        <i data-lucide="x" class="w-4 h-4 stroke-[2.5]"></i>
+
+    <div
+      class="relative bg-[#111111] w-full max-w-md sm:max-w-lg rounded-3xl shadow-[0_25px_80px_rgba(0,0,0,0.95)] border border-white/10 overflow-hidden flex flex-col max-h-[92vh] z-10 text-left animate-slide-up">
+
+      <!-- Botão Fechar X com fundo circular no topo direito -->
+      <button onclick="closeModal('bookModal')"
+        class="absolute top-3.5 right-3.5 z-30 w-8 h-8 bg-black/75 hover:bg-white/15 backdrop-blur-md rounded-full text-white/80 hover:text-white flex items-center justify-center border border-white/10 transition-all cursor-pointer shadow-lg active:scale-90">
+        <i data-lucide="x" class="w-4 h-4"></i>
       </button>
 
-      <div class="w-full md:w-5/12 h-64 md:h-auto relative bg-[#060606] shrink-0 overflow-hidden group">
-        <img id="modalBookCover" src="" alt="Capa" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-        <div class="absolute inset-0 bg-gradient-to-t from-[#101010] via-black/30 to-transparent md:bg-gradient-to-r md:from-transparent md:via-black/30 md:to-[#101010]"></div>
-        <div class="absolute top-4 left-4 z-20 flex flex-col gap-1.5">
-          <span class="px-2.5 py-1 rounded-md bg-black/80 backdrop-blur-md text-[#D4AF37] text-[10px] font-mono font-bold tracking-wider uppercase border border-[#D4AF37]/30 shadow-md">
-            TRATADO OFICIAL
-          </span>
-        </div>
-      </div>
-
-      <div class="flex-1 p-6 md:p-8 flex flex-col justify-between overflow-y-auto bg-[#101010]">
-        <div>
-          <div class="flex items-center space-x-2 text-[#D4AF37] text-xs font-bold uppercase tracking-widest mb-2.5">
-            <span id="modalBookCategory">Módulo I: Hermetismo & Cabala</span>
-            <span class="text-white/20">•</span>
-            <span id="modalBookPages" class="font-mono">127 páginas</span>
-          </div>
-
-          <h2 id="modalBookTitle" class="text-2xl md:text-3xl font-serif text-white font-bold mb-1.5 leading-snug tracking-tight">
-            Título da Obra
-          </h2>
-
-          <p id="modalBookAuthor" class="text-gray-400 text-xs mb-5 font-medium">Por Acervo Cúpula 33</p>
-
-          <div id="modalProgressContainer" class="mb-6 bg-white/[0.03] border border-white/10 p-3.5 rounded-2xl">
-            <div class="flex justify-between items-center mb-2 text-xs">
-              <span class="text-gray-400 font-bold uppercase tracking-wider text-[10px] flex items-center gap-1.5">
-                <i data-lucide="sparkles" class="w-3 h-3 text-[#D4AF37]"></i> Progresso Iniciático
-              </span>
-              <span id="modalProgressPercent" class="text-[#D4AF37] font-mono font-bold text-xs">0%</span>
-            </div>
-            <div class="w-full h-2 bg-black/80 rounded-full overflow-hidden border border-white/5">
-              <div id="modalProgressBar" class="h-full bg-gradient-to-r from-[#AA7C11] via-[#D4AF37] to-[#F3E5AB] shadow-[0_0_12px_rgba(212,175,55,0.8)] transition-all duration-300" style="width: 0%"></div>
-            </div>
-          </div>
-
-          <div class="text-xs sm:text-sm text-gray-300 leading-relaxed space-y-2.5 mb-6">
-            <p id="modalBookDesc">Tratado autêntico preservado em língua portuguesa com anotações e comentários herméticos da tradição.</p>
-          </div>
+      <!-- Conteúdo com Scroll -->
+      <div class="overflow-y-auto px-5 sm:px-6 py-5 hide-scrollbar flex-1 space-y-4">
+        
+        <!-- Capa do Livro Grande (Banner Topo com Degradê Suave) -->
+        <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-[#0d0d0d] border border-white/10 shadow-2xl flex items-center justify-center">
+          <img id="modalBookCover" src="" alt="Capa" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent"></div>
         </div>
 
-        <div class="pt-5 border-t border-white/10 flex flex-col sm:flex-row items-center gap-3">
-          <button id="modalBtnRead" onclick="triggerReadModalFromDetails()" class="w-full sm:flex-1 py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#D4AF37] via-[#E5C158] to-[#D4AF37] hover:brightness-110 text-black font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(212,175,55,0.35)] active:scale-95 transition-all cursor-pointer">
-            <i data-lucide="book-open" class="w-4 h-4 fill-black"></i>
-            <span>Ler Manuscrito</span>
+        <!-- Categoria e Total de Páginas em Dourado/Amarelo -->
+        <div class="flex items-center gap-2 text-yellow-500 font-mono text-[10px] sm:text-xs font-bold uppercase tracking-widest pt-1">
+          <span id="modalBookCategory">ALQUIMIA</span>
+          <span class="text-gray-600">•</span>
+          <span id="modalBookPages">679 PÁGINAS</span>
+        </div>
+
+        <!-- Título do Livro em Serif Bold Branco -->
+        <h2 id="modalBookTitle" class="text-xl sm:text-2xl font-serif text-white font-bold leading-snug tracking-tight">
+          Estudos Alquimicos
+        </h2>
+
+        <!-- Barra de Progresso do Livro (Seu Progresso) -->
+        <div id="modalProgressContainer" class="pt-1">
+          <div class="flex justify-between items-center mb-1.5 text-xs">
+            <span class="text-gray-400 font-mono font-bold uppercase tracking-wider text-[10px]">
+              SEU PROGRESSO
+            </span>
+            <span id="modalProgressPercent" class="text-yellow-500 font-mono font-bold text-xs">1%</span>
+          </div>
+          <div class="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+            <div id="modalProgressBar"
+              class="h-full bg-yellow-500 shadow-[0_0_10px_rgba(234,179,8,0.8)] transition-all duration-300"
+              style="width: 1%"></div>
+          </div>
+          <p class="text-[11px] text-gray-500 mt-1.5">Continue de onde parou.</p>
+        </div>
+
+        <!-- Grupo de Botões de Ação (Padrão Ordem 137 na Cor Amarela da Cúpula 33) -->
+        <div class="space-y-2.5 pt-2">
+          <!-- 1. Botão Ler Agora (Amarelo Principal Cúpula 33) -->
+          <button id="modalBtnRead" onclick="triggerReadModalFromDetails()"
+            class="w-full py-3.5 px-6 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-black font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(234,179,8,0.35)] active:scale-95 transition-all cursor-pointer">
+            <i data-lucide="book-open" class="w-4 h-4"></i>
+            <span>Ler Agora</span>
           </button>
 
-          <button id="modalBtnDownload" onclick="triggerDownloadFromDetails()" class="w-full sm:w-auto py-3.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-gray-200 hover:text-white text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer" title="Baixar PDF">
-            <i data-lucide="download" class="w-4 h-4"></i>
-            <span>Baixar PDF</span>
+          <!-- 2. Botão Ver Discussões (Borda sutil) -->
+          <button onclick="openBookCommunityDiscussions()"
+            class="w-full py-3 px-4 rounded-xl bg-[#161616] hover:bg-[#1f1f1f] border border-white/10 text-white text-xs font-serif font-bold flex items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer">
+            <i data-lucide="message-circle" class="w-4 h-4 text-gray-400"></i>
+            <span>Ver Discussões</span>
           </button>
 
-          <button id="modalBtnBookmark" onclick="toggleCurrentBookMyList()" class="w-full sm:w-auto py-3.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-gray-300 hover:text-[#D4AF37] hover:border-[#D4AF37]/50 text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer" title="Minha Lista">
-            <i id="modalBookmarkIcon" data-lucide="bookmark" class="w-4 h-4"></i>
-            <span id="modalBookmarkText">Salvar</span>
+          <!-- 3. Linha com Minha Lista + Baixar PDF -->
+          <div class="flex items-center gap-2.5">
+            <button id="modalBtnBookmark" onclick="toggleCurrentBookMyList()"
+              class="flex-1 py-3 px-4 rounded-xl bg-[#161616] hover:bg-[#1f1f1f] border border-white/10 text-white text-xs font-serif font-bold flex items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer"
+              title="Minha Lista">
+              <span class="text-gray-400 font-bold">+</span>
+              <span id="modalBookmarkText">Minha Lista</span>
+            </button>
+
+            <button id="modalBtnDownload" onclick="triggerDownloadFromDetails()"
+              class="w-16 py-3 rounded-xl bg-[#161616] hover:bg-[#1f1f1f] border border-white/10 text-gray-300 hover:text-white flex items-center justify-center active:scale-95 transition-all cursor-pointer"
+              title="Baixar PDF">
+              <i data-lucide="download" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <!-- 4. Botão Enviar para Kindle -->
+          <button onclick="handleSendToKindleClick()"
+            class="w-full py-3 px-4 rounded-xl bg-[#161616] hover:bg-[#1f1f1f] border border-white/10 text-white text-xs font-serif font-bold flex items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer">
+            <i data-lucide="send" class="w-4 h-4 text-gray-400"></i>
+            <span>Enviar para Kindle</span>
           </button>
         </div>
 
@@ -980,23 +1142,30 @@
   <div id="readerModal" class="fixed inset-0 z-[1000] bg-black hidden flex flex-col">
     <div class="h-14 bg-[#0a0a0a] border-b border-white/10 px-4 flex items-center justify-between shrink-0">
       <div class="flex items-center gap-3">
-        <button onclick="closeReaderModal()" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition cursor-pointer">
+        <button onclick="closeReaderModal()"
+          class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition cursor-pointer">
           <i data-lucide="arrow-left" class="w-5 h-5"></i>
         </button>
         <div class="flex flex-col text-left">
-          <span id="readerTitle" class="text-xs sm:text-sm font-bold text-white truncate max-w-xs sm:max-w-md">Leitor</span>
+          <span id="readerTitle"
+            class="text-xs sm:text-sm font-bold text-white truncate max-w-xs sm:max-w-md">Leitor</span>
           <span id="readerProgressLabel" class="text-[10px] text-yellow-400 font-mono">Página 1 • 0% Concluído</span>
         </div>
       </div>
 
       <div class="flex items-center gap-2">
-        <button onclick="changeReaderPage(-1)" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white text-xs font-bold transition cursor-pointer" title="Página Anterior">
+        <button onclick="changeReaderPage(-1)"
+          class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white text-xs font-bold transition cursor-pointer"
+          title="Página Anterior">
           <i data-lucide="chevron-left" class="w-4 h-4"></i>
         </button>
-        <button onclick="changeReaderPage(1)" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white text-xs font-bold transition cursor-pointer" title="Próxima Página">
+        <button onclick="changeReaderPage(1)"
+          class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white text-xs font-bold transition cursor-pointer"
+          title="Próxima Página">
           <i data-lucide="chevron-right" class="w-4 h-4"></i>
         </button>
-        <button onclick="markCurrentBookCompleted()" class="px-3 py-1.5 rounded-lg bg-yellow-500 text-black text-xs font-bold flex items-center gap-1.5 hover:bg-yellow-400 transition cursor-pointer">
+        <button onclick="markCurrentBookCompleted()"
+          class="px-3 py-1.5 rounded-lg bg-yellow-500 text-black text-xs font-bold flex items-center gap-1.5 hover:bg-yellow-400 transition cursor-pointer">
           <i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>
           <span>Concluir</span>
         </button>
@@ -1005,19 +1174,24 @@
 
     <!-- Barra de Progresso no Topo do Leitor -->
     <div class="w-full h-1 bg-gray-900 shrink-0">
-      <div id="readerProgressBar" class="h-full bg-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.8)] transition-all duration-300" style="width: 0%"></div>
+      <div id="readerProgressBar"
+        class="h-full bg-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.8)] transition-all duration-300" style="width: 0%">
+      </div>
     </div>
 
     <!-- Container dos Visualizadores (Nativo PDF.js com Scroll Contínuo vs Fallback Drive) -->
     <div class="flex-1 w-full h-full relative bg-[#0d0d0d] overflow-hidden flex flex-col items-center">
       <!-- Spinner de Carregamento -->
-      <div id="readerLoadingSpinner" class="hidden absolute inset-0 bg-black/85 z-20 flex flex-col items-center justify-center gap-3">
+      <div id="readerLoadingSpinner"
+        class="hidden absolute inset-0 bg-black/85 z-20 flex flex-col items-center justify-center gap-3">
         <div class="w-10 h-10 border-4 border-yellow-500/20 border-t-yellow-500 rounded-full animate-spin"></div>
-        <span class="text-xs text-yellow-400 font-mono font-bold" id="readerLoadingText">Renderizando manuscrito sagrado...</span>
+        <span class="text-xs text-yellow-400 font-mono font-bold" id="readerLoadingText">Renderizando manuscrito
+          sagrado...</span>
       </div>
 
       <!-- Leitor Nativo PDF.js com Scroll Contínuo e IntersectionObserver -->
-      <div id="readerNativeContainer" class="w-full h-full overflow-y-auto px-2 sm:px-4 py-8 space-y-6 block hide-scrollbar scroll-smooth">
+      <div id="readerNativeContainer"
+        class="w-full h-full overflow-y-auto px-2 sm:px-4 py-8 space-y-6 block hide-scrollbar scroll-smooth">
         <!-- Páginas renderizadas dinamicamente aqui -->
       </div>
 
@@ -1027,20 +1201,24 @@
   </div>
 
   <!-- ==================== MODAL ESTRUTURA DO CURSO: A CÂMARA INTERNA (EXATAMENTE COMO PRINTS 4 E 5) ==================== -->
-  <div id="courseStructureModal" class="fixed inset-0 z-[120] flex items-center justify-center p-3 sm:p-4 bg-black/95 backdrop-blur-xl hidden animate-fade-in">
-    <div class="relative bg-[#121212] w-full max-w-lg rounded-3xl shadow-[0_25px_80px_rgba(0,0,0,0.95)] border border-white/10 overflow-hidden max-h-[92vh] flex flex-col z-10 text-left animate-slide-up">
-      
+  <div id="courseStructureModal"
+    class="fixed inset-0 z-[120] flex items-center justify-center p-3 sm:p-4 bg-black/95 backdrop-blur-xl hidden animate-fade-in">
+    <div
+      class="relative bg-[#121212] w-full max-w-lg rounded-3xl shadow-[0_25px_80px_rgba(0,0,0,0.95)] border border-white/10 overflow-hidden max-h-[92vh] flex flex-col z-10 text-left animate-slide-up">
+
       <!-- Botão Fechar X no Topo Direito (Idêntico ao Print 4) -->
-      <button onclick="closeCourseStructureModal()" class="absolute top-4 right-4 z-30 w-9 h-9 bg-black/70 hover:bg-white/10 border border-white/15 rounded-full flex items-center justify-center text-white/80 hover:text-white transition-all cursor-pointer">
+      <button onclick="closeCourseStructureModal()"
+        class="absolute top-4 right-4 z-30 w-9 h-9 bg-black/70 hover:bg-white/10 border border-white/15 rounded-full flex items-center justify-center text-white/80 hover:text-white transition-all cursor-pointer">
         <i data-lucide="x" class="w-4 h-4"></i>
       </button>
 
       <!-- Conteúdo com Scroll -->
       <div class="overflow-y-auto px-6 py-6 hide-scrollbar flex-1">
-        
+
         <!-- Topo do Curso: Capa à esquerda + Tags & Título à direita -->
         <div class="flex items-start gap-4 mb-4 pr-8">
-          <div class="w-20 sm:w-24 aspect-[3/4] rounded-xl overflow-hidden bg-black shrink-0 border border-white/10 shadow-lg">
+          <div
+            class="w-20 sm:w-24 aspect-[3/4] rounded-xl overflow-hidden bg-black shrink-0 border border-white/10 shadow-lg">
             <img src="assets/o_nucleo_cover.jpg" alt="O Núcleo" class="w-full h-full object-cover">
           </div>
           <div>
@@ -1061,12 +1239,15 @@
         <!-- Sinopse com Expansão LER MAIS -->
         <div class="mb-6">
           <p id="modalDescShort" class="text-xs text-gray-300 leading-relaxed">
-            Quebre as correntes da ignorância. Esta coletânea de vídeos revela os mecanismos ocultos da realidade e os mistérios do...
+            Quebre as correntes da ignorância. Esta coletânea de vídeos revela os mecanismos ocultos da realidade e os
+            mistérios do...
           </p>
           <p id="modalDescFull" class="hidden text-xs text-gray-300 leading-relaxed">
-            Quebre as correntes da ignorância. Esta coletânea de vídeos revela os mecanismos ocultos da realidade e os mistérios do universo que foram escondidos de você por séculos. A verdade nua e crua.
+            Quebre as correntes da ignorância. Esta coletânea de vídeos revela os mecanismos ocultos da realidade e os
+            mistérios do universo que foram escondidos de você por séculos. A verdade nua e crua.
           </p>
-          <button onclick="toggleModalDesc()" id="btnToggleModalDesc" class="mt-1 text-[10px] font-bold text-gray-400 hover:text-white uppercase tracking-wider transition cursor-pointer flex items-center gap-1">
+          <button onclick="toggleModalDesc()" id="btnToggleModalDesc"
+            class="mt-1 text-[10px] font-bold text-gray-400 hover:text-white uppercase tracking-wider transition cursor-pointer flex items-center gap-1">
             <span>LER MAIS</span>
             <i data-lucide="chevron-down" class="w-3 h-3"></i>
           </button>
@@ -1080,7 +1261,8 @@
         <!-- Acordeão Módulo: Nível 1 (Idêntico ao Print 4 e 5) -->
         <div class="border border-white/10 rounded-2xl overflow-hidden bg-[#161616]">
           <!-- Header do Módulo Nível 1 -->
-          <div class="p-4 flex items-center justify-between border-b border-white/5 cursor-pointer" onclick="toggleModuleAccordion()">
+          <div class="p-4 flex items-center justify-between border-b border-white/5 cursor-pointer"
+            onclick="toggleModuleAccordion()">
             <span class="text-sm font-bold text-white">Nível 1</span>
             <i id="moduleChevronIcon" data-lucide="chevron-up" class="w-4 h-4 text-gray-400"></i>
           </div>
@@ -1088,7 +1270,8 @@
           <!-- Lista de Aulas Bloqueadas (Exatamente como nos Prints 4 e 5) -->
           <div id="moduleLessonsList" class="divide-y divide-white/5">
             <!-- Aula 1 -->
-            <div onclick="openCourseLockedNotice('Por que Jesus não rezava como nos ensinaram?')" class="p-3.5 sm:p-4 flex items-center justify-between hover:bg-white/[0.03] transition cursor-pointer group">
+            <div onclick="openCourseLockedNotice('Por que Jesus não rezava como nos ensinaram?')"
+              class="p-3.5 sm:p-4 flex items-center justify-between hover:bg-white/[0.03] transition cursor-pointer group">
               <div class="flex items-center gap-3.5 pr-2 overflow-hidden">
                 <span class="text-xs font-mono font-bold text-gray-500 w-4 text-center shrink-0">1</span>
                 <div class="overflow-hidden">
@@ -1105,7 +1288,8 @@
             </div>
 
             <!-- Aula 2 -->
-            <div onclick="openCourseLockedNotice('AS 7 LEIS HERMÉTICAS EXPLICADAS EM DETALHES')" class="p-3.5 sm:p-4 flex items-center justify-between hover:bg-white/[0.03] transition cursor-pointer group">
+            <div onclick="openCourseLockedNotice('AS 7 LEIS HERMÉTICAS EXPLICADAS EM DETALHES')"
+              class="p-3.5 sm:p-4 flex items-center justify-between hover:bg-white/[0.03] transition cursor-pointer group">
               <div class="flex items-center gap-3.5 pr-2 overflow-hidden">
                 <span class="text-xs font-mono font-bold text-gray-500 w-4 text-center shrink-0">2</span>
                 <div class="overflow-hidden">
@@ -1122,7 +1306,8 @@
             </div>
 
             <!-- Aula 3 -->
-            <div onclick="openCourseLockedNotice('O EMPATA CURADO')" class="p-3.5 sm:p-4 flex items-center justify-between hover:bg-white/[0.03] transition cursor-pointer group">
+            <div onclick="openCourseLockedNotice('O EMPATA CURADO')"
+              class="p-3.5 sm:p-4 flex items-center justify-between hover:bg-white/[0.03] transition cursor-pointer group">
               <div class="flex items-center gap-3.5 pr-2 overflow-hidden">
                 <span class="text-xs font-mono font-bold text-gray-500 w-4 text-center shrink-0">3</span>
                 <div class="overflow-hidden">
@@ -1139,7 +1324,8 @@
             </div>
 
             <!-- Aula 4 -->
-            <div onclick="openCourseLockedNotice('A REALIDADE É UMA ILUSÃO: O CÉREBRO')" class="p-3.5 sm:p-4 flex items-center justify-between hover:bg-white/[0.03] transition cursor-pointer group">
+            <div onclick="openCourseLockedNotice('A REALIDADE É UMA ILUSÃO: O CÉREBRO')"
+              class="p-3.5 sm:p-4 flex items-center justify-between hover:bg-white/[0.03] transition cursor-pointer group">
               <div class="flex items-center gap-3.5 pr-2 overflow-hidden">
                 <span class="text-xs font-mono font-bold text-gray-500 w-4 text-center shrink-0">4</span>
                 <div class="overflow-hidden">
@@ -1156,7 +1342,8 @@
             </div>
 
             <!-- Aula 5 -->
-            <div onclick="openCourseLockedNotice('MANIFESTAÇÃO QUÂNTICA: O QUE O 1% SABE')" class="p-3.5 sm:p-4 flex items-center justify-between hover:bg-white/[0.03] transition cursor-pointer group">
+            <div onclick="openCourseLockedNotice('MANIFESTAÇÃO QUÂNTICA: O QUE O 1% SABE')"
+              class="p-3.5 sm:p-4 flex items-center justify-between hover:bg-white/[0.03] transition cursor-pointer group">
               <div class="flex items-center gap-3.5 pr-2 overflow-hidden">
                 <span class="text-xs font-mono font-bold text-gray-500 w-4 text-center shrink-0">5</span>
                 <div class="overflow-hidden">
@@ -1176,7 +1363,8 @@
 
         <!-- Botão para Desbloqueio no rodapé do Modal -->
         <div class="mt-6">
-          <a href="https://pay.kirvano.com/85412bf1-7719-4b62-8703-94aa0d95f07d" target="_blank" class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-yellow-500 to-amber-400 hover:from-yellow-400 text-black font-extrabold text-xs uppercase tracking-wider text-center shadow-lg transition-all flex items-center justify-center gap-2">
+          <a href="https://pay.kirvano.com/85412bf1-7719-4b62-8703-94aa0d95f07d" target="_blank"
+            class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-yellow-500 to-amber-400 hover:from-yellow-400 text-black font-extrabold text-xs uppercase tracking-wider text-center shadow-lg transition-all flex items-center justify-center gap-2">
             <i data-lucide="sparkles" class="w-4 h-4"></i>
             <span>Desbloquear Acesso a O Núcleo</span>
           </a>
@@ -1187,9 +1375,12 @@
   </div>
 
   <!-- MODAL DE BLOQUEIO DE CURSOS (A CÂMARA INTERNA) -->
-  <div id="courseLockedModal" class="fixed inset-0 z-[115] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md hidden animate-fade-in">
-    <div class="relative bg-[#101010] w-full max-w-lg rounded-3xl shadow-[0_25px_70px_rgba(0,0,0,0.9)] border border-yellow-500/30 overflow-hidden p-6 sm:p-8 z-10 text-left animate-slide-up">
-      <button onclick="closeCourseLockedModal()" class="absolute top-4 right-4 z-30 p-2.5 bg-black/70 backdrop-blur-md rounded-full text-white/80 hover:text-black hover:bg-[#D4AF37] border border-white/10 transition-all cursor-pointer">
+  <div id="courseLockedModal"
+    class="fixed inset-0 z-[115] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md hidden animate-fade-in">
+    <div
+      class="relative bg-[#101010] w-full max-w-lg rounded-3xl shadow-[0_25px_70px_rgba(0,0,0,0.9)] border border-yellow-500/30 overflow-hidden p-6 sm:p-8 z-10 text-left animate-slide-up">
+      <button onclick="closeCourseLockedModal()"
+        class="absolute top-4 right-4 z-30 p-2.5 bg-black/70 backdrop-blur-md rounded-full text-white/80 hover:text-black hover:bg-[#D4AF37] border border-white/10 transition-all cursor-pointer">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
 
@@ -1198,7 +1389,8 @@
           <img src="assets/o_nucleo_cover.jpg" alt="O Núcleo" class="w-full h-full object-cover">
         </div>
         <div>
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-[10px] font-bold tracking-wider uppercase mb-1">
+          <div
+            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-[10px] font-bold tracking-wider uppercase mb-1">
             <i data-lucide="lock" class="w-3 h-3"></i> MÓDULO FECHADO
           </div>
           <h3 id="courseLockedModalTitle" class="text-lg font-serif font-bold text-white">O Núcleo</h3>
@@ -1206,21 +1398,26 @@
         </div>
       </div>
 
-      <div class="space-y-3.5 text-xs text-gray-300 leading-relaxed bg-white/[0.03] p-4 rounded-2xl border border-white/5 mb-6">
+      <div
+        class="space-y-3.5 text-xs text-gray-300 leading-relaxed bg-white/[0.03] p-4 rounded-2xl border border-white/5 mb-6">
         <p>
-          Este treinamento exclusivo em vídeo aborda as operações internas da realidade, cosmogonia oculta, hermetismo avançado e os princípios de autoridade gnóstica.
+          Este treinamento exclusivo em vídeo aborda as operações internas da realidade, cosmogonia oculta, hermetismo
+          avançado e os princípios de autoridade gnóstica.
         </p>
         <p class="text-yellow-400/90 font-medium">
-          O acesso aos vídeos é reservado para os membros iniciados com acesso ao módulo de <strong class="text-white">O Núcleo</strong>.
+          O acesso aos vídeos é reservado para os membros iniciados com acesso ao módulo de <strong class="text-white">O
+            Núcleo</strong>.
         </p>
       </div>
 
       <div class="flex flex-col gap-3">
-        <a href="https://pay.kirvano.com/85412bf1-7719-4b62-8703-94aa0d95f07d" target="_blank" class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-yellow-500 to-amber-400 hover:from-yellow-400 hover:to-amber-300 text-black font-bold text-xs uppercase tracking-wider text-center shadow-lg transition-all flex items-center justify-center gap-2">
+        <a href="https://pay.kirvano.com/85412bf1-7719-4b62-8703-94aa0d95f07d" target="_blank"
+          class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-yellow-500 to-amber-400 hover:from-yellow-400 hover:to-amber-300 text-black font-bold text-xs uppercase tracking-wider text-center shadow-lg transition-all flex items-center justify-center gap-2">
           <i data-lucide="sparkles" class="w-4 h-4"></i>
           <span>Desbloquear Acesso às Aulas</span>
         </a>
-        <button onclick="closeCourseLockedModal()" class="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white font-medium text-xs text-center border border-white/10 transition-all flex items-center justify-center gap-2 cursor-pointer">
+        <button onclick="closeCourseLockedModal()"
+          class="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white font-medium text-xs text-center border border-white/10 transition-all flex items-center justify-center gap-2 cursor-pointer">
           <span>Continuar Navegando</span>
         </button>
       </div>
@@ -1228,9 +1425,12 @@
   </div>
 
   <!-- MODAL DE ORDER BUMP / COMPLEMENTO EXCLUSIVO (PROSPERIDADE MAÇÔNICA) -->
-  <div id="orderBumpModal" class="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md hidden animate-fade-in">
-    <div class="relative bg-[#101010] w-full max-w-lg rounded-3xl shadow-[0_25px_70px_rgba(0,0,0,0.9)] border border-yellow-500/30 overflow-hidden p-6 sm:p-8 z-10 text-left animate-slide-up">
-      <button onclick="closeModal('orderBumpModal')" class="absolute top-4 right-4 z-30 p-2.5 bg-black/70 backdrop-blur-md rounded-full text-white/80 hover:text-black hover:bg-[#D4AF37] border border-white/10 transition-all cursor-pointer">
+  <div id="orderBumpModal"
+    class="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md hidden animate-fade-in">
+    <div
+      class="relative bg-[#101010] w-full max-w-lg rounded-3xl shadow-[0_25px_70px_rgba(0,0,0,0.9)] border border-yellow-500/30 overflow-hidden p-6 sm:p-8 z-10 text-left animate-slide-up">
+      <button onclick="closeModal('orderBumpModal')"
+        class="absolute top-4 right-4 z-30 p-2.5 bg-black/70 backdrop-blur-md rounded-full text-white/80 hover:text-black hover:bg-[#D4AF37] border border-white/10 transition-all cursor-pointer">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
 
@@ -1239,7 +1439,8 @@
           <img src="assets/cover_prosperidade_maconica_real.jpg" alt="Prosperidade Maçônica" class="w-full h-full object-cover">
         </div>
         <div>
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-[10px] font-bold tracking-wider uppercase mb-1">
+          <div
+            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-[10px] font-bold tracking-wider uppercase mb-1">
             <i data-lucide="lock" class="w-3 h-3"></i> ACESSO EXCLUSIVO
           </div>
           <h3 class="text-lg font-serif font-bold text-white">Os Segredos da Prosperidade Maçônica</h3>
@@ -1247,9 +1448,11 @@
         </div>
       </div>
 
-      <div class="space-y-3.5 text-xs text-gray-300 leading-relaxed bg-white/[0.03] p-4 rounded-2xl border border-white/5 mb-6">
+      <div
+        class="space-y-3.5 text-xs text-gray-300 leading-relaxed bg-white/[0.03] p-4 rounded-2xl border border-white/5 mb-6">
         <p>
-          Este manuscrito iniciático contém as chaves herméticas de atração magnética, códigos de prosperidade secular e arquétipos de influência preservados sob sigilo.
+          Este manuscrito iniciático contém as chaves herméticas de atração magnética, códigos de prosperidade secular e
+          arquétipos de influência preservados sob sigilo.
         </p>
         <p class="text-yellow-400/90 font-medium">
           O acesso a esta obra é liberado exclusivamente para iniciados que adicionaram o <strong class="text-white">Acesso Exclusivo da Prosperidade</strong> no momento da inscrição na Kirvano.
@@ -1257,11 +1460,13 @@
       </div>
 
       <div class="flex flex-col gap-3">
-        <a href="https://pay.kirvano.com/85412bf1-7719-4b62-8703-94aa0d95f07d" target="_blank" class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-yellow-500 to-amber-400 hover:from-yellow-400 hover:to-amber-300 text-black font-bold text-xs uppercase tracking-wider text-center shadow-lg transition-all flex items-center justify-center gap-2">
+        <a href="https://pay.kirvano.com/85412bf1-7719-4b62-8703-94aa0d95f07d" target="_blank"
+          class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-yellow-500 to-amber-400 hover:from-yellow-400 hover:to-amber-300 text-black font-bold text-xs uppercase tracking-wider text-center shadow-lg transition-all flex items-center justify-center gap-2">
           <i data-lucide="sparkles" class="w-4 h-4"></i>
           <span>Desbloquear Prosperidade Maçônica</span>
         </a>
-        <a href="mailto:suportesabedoriaoculta@gmail.com?subject=Liberacao%20Order%20Bump%20Prosperidade%20Maconica" class="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white font-medium text-xs text-center border border-white/10 transition-all flex items-center justify-center gap-2">
+        <a href="mailto:suportesabedoriaoculta@gmail.com?subject=Liberacao%20Order%20Bump%20Prosperidade%20Maconica"
+          class="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white font-medium text-xs text-center border border-white/10 transition-all flex items-center justify-center gap-2">
           <i data-lucide="help-circle" class="w-3.5 h-3.5"></i>
           <span>Já adquiriu na Kirvano? Fale com o suporte</span>
         </a>
@@ -1271,6 +1476,7 @@
 
   <!-- SCRIPTS -->
   <script src="books_data.js?v=1795566000"></script>
-  <script src="app.js?v=1795564500"></script>
+  <script src="app.js?v=1795565100"></script>
 </body>
+
 </html>
