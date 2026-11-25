@@ -27,7 +27,8 @@
     "cover": "assets/covers_extracted/cover_A_T_bua_Das_Esmeraldas_De_Thoth.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Hermetismo & Cabala com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1ZDRLz0h7k5mI9IbmPJxKldYHVN7GlKNm/preview"
+    "pdfUrl": "livros_pdf/10_A_Tabua_de_Esmeralda_Hermes_Trismegisto.pdf",
+    "directDownloadUrl": "livros_pdf/10_A_Tabua_de_Esmeralda_Hermes_Trismegisto.pdf"
   },
   {
     "id": 2,
@@ -53,7 +54,8 @@
     "cover": "assets/covers_extracted/cover_Cabala_Coment_rios_de_um_Pedreiro_Sobre_a_Tor__Shemot__xodo.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Hermetismo & Cabala com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1LJ_gIVwhLX5RJ8m7p3tQVFYNFa9lXGpE/preview"
+    "pdfUrl": "livros_pdf/Cabala_Comentários_de_um_Pedreiro_Sobre_a_Torá_Shemot_Ê.pdf",
+    "directDownloadUrl": "livros_pdf/Cabala_Comentários_de_um_Pedreiro_Sobre_a_Torá_Shemot_Ê.pdf"
   },
   {
     "id": 4,
@@ -66,7 +68,8 @@
     "cover": "assets/covers_extracted/cover_Cabala_Gen_tica.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Hermetismo & Cabala com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1E4RxiG1VQIXR3yXs2k4DXx4UObsWCQvb/preview"
+    "pdfUrl": "livros_pdf/Cabala_Genética.pdf",
+    "directDownloadUrl": "livros_pdf/Cabala_Genética.pdf"
   },
   {
     "id": 5,
@@ -92,7 +95,9 @@
     "cover": "assets/covers_extracted/cover_Caibalion_PDF.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Hermetismo & Cabala com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1PYJfwEzIJNo5tE6j9di1Q7t94Q48aYOS/preview"
+    "pdfUrl": "https://ajczjcjbsuvxrfdumwow.supabase.co/storage/v1/object/sign/library-files/uploads/1778767744525_tqe266.pdf?token=eyJraWQiOiJiY2Y3Y2U5Yi1jZWMyLTRkZGMtOTJlNi03NzA2N2FkMDE0MGEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsaWJyYXJ5LWZpbGVzL3VwbG9hZHMvMTc3ODc2Nzc0NDUyNV90cWUyNjYucGRmIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc5NTU1MDM1NCwiZXhwIjoxODI3MDg2MzU0fQ.aIozb1Vw-jejjJKiQ7lYqchOsemC7Fym9ZRTvRqLuls",
+    "directDownloadUrl": "https://ajczjcjbsuvxrfdumwow.supabase.co/storage/v1/object/sign/library-files/uploads/1778767744525_tqe266.pdf?token=eyJraWQiOiJiY2Y3Y2U5Yi1jZWMyLTRkZGMtOTJlNi03NzA2N2FkMDE0MGEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsaWJyYXJ5LWZpbGVzL3VwbG9hZHMvMTc3ODc2Nzc0NDUyNV90cWUyNjYucGRmIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc5NTU1MDM1NCwiZXhwIjoxODI3MDg2MzU0fQ.aIozb1Vw-jejjJKiQ7lYqchOsemC7Fym9ZRTvRqLuls",
+    "file_path": "uploads/1778767744525_tqe266.pdf"
   },
   {
     "id": 7,
@@ -118,7 +123,8 @@
     "cover": "assets/covers_extracted/cover_Fundamentos_da_Cabala_S_fer_Yetsir____edi__o_revisada_e_ampl.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Hermetismo & Cabala com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1Td17N7whDneowMR-W_NB-mrG5IjX2qPq/preview"
+    "pdfUrl": "livros_pdf/Fundamentos_da_Cabala_Sêfer_Yetsirá__edição_revisada_e_ampli.pdf",
+    "directDownloadUrl": "livros_pdf/Fundamentos_da_Cabala_Sêfer_Yetsirá__edição_revisada_e_ampli.pdf"
   },
   {
     "id": 9,
@@ -131,7 +137,8 @@
     "cover": "assets/covers_extracted/cover_Hermes_Trismegistos__o_Tr_s_Vezes_Grande_e_Muitas_Vezes_Forj.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Hermetismo & Cabala com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1fJ-uVawwIUwCaCIAs5_aBkS8R6OPa1nZ/preview"
+    "pdfUrl": "livros_pdf/Hermes_Trismegistos_o_Três_Vezes_Grande_e_Muitas_Vezes_.pdf",
+    "directDownloadUrl": "livros_pdf/Hermes_Trismegistos_o_Três_Vezes_Grande_e_Muitas_Vezes_.pdf"
   },
   {
     "id": 10,
@@ -144,7 +151,9 @@
     "cover": "assets/covers_extracted/cover_Inicia__o_ao_Hermetismo.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Hermetismo & Cabala com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/16T3ovH6B_j5CpNvgbDKvg_F_kwvk6K1X/preview"
+    "pdfUrl": "https://ajczjcjbsuvxrfdumwow.supabase.co/storage/v1/object/sign/library-files/uploads/1778767717344_dduom.pdf?token=eyJraWQiOiJiY2Y3Y2U5Yi1jZWMyLTRkZGMtOTJlNi03NzA2N2FkMDE0MGEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsaWJyYXJ5LWZpbGVzL3VwbG9hZHMvMTc3ODc2NzcxNzM0NF9kZHVvbS5wZGYiLCJzY29wZSI6ImRvd25sb2FkIiwiaWF0IjoxNzk1NTUwMzU0LCJleHAiOjE4MjcwODYzNTR9.RcubW5qmfbi-M7ksxMP0jokCnPWn4FSWuUo_eyTcCl8",
+    "directDownloadUrl": "https://ajczjcjbsuvxrfdumwow.supabase.co/storage/v1/object/sign/library-files/uploads/1778767717344_dduom.pdf?token=eyJraWQiOiJiY2Y3Y2U5Yi1jZWMyLTRkZGMtOTJlNi03NzA2N2FkMDE0MGEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsaWJyYXJ5LWZpbGVzL3VwbG9hZHMvMTc3ODc2NzcxNzM0NF9kZHVvbS5wZGYiLCJzY29wZSI6ImRvd25sb2FkIiwiaWF0IjoxNzk1NTUwMzU0LCJleHAiOjE4MjcwODYzNTR9.RcubW5qmfbi-M7ksxMP0jokCnPWn4FSWuUo_eyTcCl8",
+    "file_path": "uploads/1778767717344_dduom.pdf"
   },
   {
     "id": 11,
@@ -157,7 +166,9 @@
     "cover": "assets/covers_extracted/cover_O_Caibalion_-_Edi__o_Definitiva.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Hermetismo & Cabala com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1fJ-uVawwIUwCaCIAs5_aBkS8R6OPa1nZ/preview"
+    "pdfUrl": "https://ajczjcjbsuvxrfdumwow.supabase.co/storage/v1/object/sign/library-files/uploads/1778767744525_tqe266.pdf?token=eyJraWQiOiJiY2Y3Y2U5Yi1jZWMyLTRkZGMtOTJlNi03NzA2N2FkMDE0MGEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsaWJyYXJ5LWZpbGVzL3VwbG9hZHMvMTc3ODc2Nzc0NDUyNV90cWUyNjYucGRmIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc5NTU1MDM1NCwiZXhwIjoxODI3MDg2MzU0fQ.aIozb1Vw-jejjJKiQ7lYqchOsemC7Fym9ZRTvRqLuls",
+    "directDownloadUrl": "https://ajczjcjbsuvxrfdumwow.supabase.co/storage/v1/object/sign/library-files/uploads/1778767744525_tqe266.pdf?token=eyJraWQiOiJiY2Y3Y2U5Yi1jZWMyLTRkZGMtOTJlNi03NzA2N2FkMDE0MGEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsaWJyYXJ5LWZpbGVzL3VwbG9hZHMvMTc3ODc2Nzc0NDUyNV90cWUyNjYucGRmIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc5NTU1MDM1NCwiZXhwIjoxODI3MDg2MzU0fQ.aIozb1Vw-jejjJKiQ7lYqchOsemC7Fym9ZRTvRqLuls",
+    "file_path": "uploads/1778767744525_tqe266.pdf"
   },
   {
     "id": 12,
@@ -183,7 +194,8 @@
     "cover": "assets/covers_extracted/cover_Tratado_da_sciencia_cabala__ou_noticia_de_arte_cabalistica_..jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Hermetismo & Cabala com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1eiIWTc4MGNy-k0Faz5WzeR9zpFhy-LvN/preview"
+    "pdfUrl": "livros_pdf/Tratado_da_sciencia_cabala_ou_noticia_de_arte_cabalistica.pdf",
+    "directDownloadUrl": "livros_pdf/Tratado_da_sciencia_cabala_ou_noticia_de_arte_cabalistica.pdf"
   },
   {
     "id": 14,
@@ -196,7 +208,8 @@
     "cover": "assets/covers_extracted/cover_Tratado_da_sciencia_cabala__ou__Noticia_da_arte_cabalistica.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Hermetismo & Cabala com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1831wuYX5sfciSh17U_gT9ewFH0prMEzY/preview"
+    "pdfUrl": "livros_pdf/Tratado_da_sciencia_cabala_ou_Noticia_da_arte_cabalistica.pdf",
+    "directDownloadUrl": "livros_pdf/Tratado_da_sciencia_cabala_ou_Noticia_da_arte_cabalistica.pdf"
   },
   {
     "id": 15,
@@ -222,7 +235,9 @@
     "cover": "assets/covers_extracted/cover_07_Dogma_Ritual_Alta_Magia.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Grimórios & Alta Magia com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1yuTp1klB0nrO6X7B1nTyoArpYm2lxwnu/preview"
+    "pdfUrl": "https://ajczjcjbsuvxrfdumwow.supabase.co/storage/v1/object/sign/library-files/uploads/1773848977217_hn2lb3.pdf?token=eyJraWQiOiJiY2Y3Y2U5Yi1jZWMyLTRkZGMtOTJlNi03NzA2N2FkMDE0MGEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsaWJyYXJ5LWZpbGVzL3VwbG9hZHMvMTc3Mzg0ODk3NzIxN19objJsYjMucGRmIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc5NTU1MDM2NSwiZXhwIjoxODI3MDg2MzY1fQ.YCiK302cfOrqqerKeLINjIhg0T4CT8HgyQTtY322cv8",
+    "directDownloadUrl": "https://ajczjcjbsuvxrfdumwow.supabase.co/storage/v1/object/sign/library-files/uploads/1773848977217_hn2lb3.pdf?token=eyJraWQiOiJiY2Y3Y2U5Yi1jZWMyLTRkZGMtOTJlNi03NzA2N2FkMDE0MGEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsaWJyYXJ5LWZpbGVzL3VwbG9hZHMvMTc3Mzg0ODk3NzIxN19objJsYjMucGRmIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc5NTU1MDM2NSwiZXhwIjoxODI3MDg2MzY1fQ.YCiK302cfOrqqerKeLINjIhg0T4CT8HgyQTtY322cv8",
+    "file_path": "uploads/1773848977217_hn2lb3.pdf"
   },
   {
     "id": 17,
@@ -235,7 +250,9 @@
     "cover": "assets/covers_extracted/cover_A_Goetia_Ilustrada_de_Aleister_Crowley_Evoca__o_Sexual.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Grimórios & Alta Magia com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1U61DRzO4NvWGqXt71RmDFdvua8XwpaOU/preview"
+    "pdfUrl": "https://ajczjcjbsuvxrfdumwow.supabase.co/storage/v1/object/sign/library-files/uploads/1774044091744_fgvcyq.pdf?token=eyJraWQiOiJiY2Y3Y2U5Yi1jZWMyLTRkZGMtOTJlNi03NzA2N2FkMDE0MGEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsaWJyYXJ5LWZpbGVzL3VwbG9hZHMvMTc3NDA0NDA5MTc0NF9mZ3ZjeXEucGRmIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc5NTU1MDM2NCwiZXhwIjoxODI3MDg2MzY0fQ.P7XUCCmXltpyAi3CKaiw1n4M2qDK3gKLb_SQU-7U0Ck",
+    "directDownloadUrl": "https://ajczjcjbsuvxrfdumwow.supabase.co/storage/v1/object/sign/library-files/uploads/1774044091744_fgvcyq.pdf?token=eyJraWQiOiJiY2Y3Y2U5Yi1jZWMyLTRkZGMtOTJlNi03NzA2N2FkMDE0MGEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsaWJyYXJ5LWZpbGVzL3VwbG9hZHMvMTc3NDA0NDA5MTc0NF9mZ3ZjeXEucGRmIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc5NTU1MDM2NCwiZXhwIjoxODI3MDg2MzY0fQ.P7XUCCmXltpyAi3CKaiw1n4M2qDK3gKLb_SQU-7U0Ck",
+    "file_path": "uploads/1774044091744_fgvcyq.pdf"
   },
   {
     "id": 18,
@@ -287,7 +304,8 @@
     "cover": "assets/covers_extracted/cover_Frabato_O_Mago_-_Franz_Bardon.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Grimórios & Alta Magia com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1BMRAmwRSPg9Em588OmKZp5rNbPPkUrHQ/preview"
+    "pdfUrl": "livros_pdf/Frabato_O_Mago_-_Franz_Bardon.pdf",
+    "directDownloadUrl": "livros_pdf/Frabato_O_Mago_-_Franz_Bardon.pdf"
   },
   {
     "id": 22,
@@ -313,7 +331,9 @@
     "cover": "assets/covers_extracted/cover_Magia_Pr_tica_O_Caminho_Do_Adepto.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Grimórios & Alta Magia com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1O20ZhARTwgAhv0VOZKjlG7w8nra5uwAo/preview"
+    "pdfUrl": "https://ajczjcjbsuvxrfdumwow.supabase.co/storage/v1/object/sign/library-files/uploads/1774299989607_usz34u.pdf?token=eyJraWQiOiJiY2Y3Y2U5Yi1jZWMyLTRkZGMtOTJlNi03NzA2N2FkMDE0MGEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsaWJyYXJ5LWZpbGVzL3VwbG9hZHMvMTc3NDI5OTk4OTYwN191c3ozNHUucGRmIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc5NTU1MDM1OCwiZXhwIjoxODI3MDg2MzU4fQ.BJV37iv7CRM2uzMMXhSVd2w97txAbrSNryf9oP-FcQg",
+    "directDownloadUrl": "https://ajczjcjbsuvxrfdumwow.supabase.co/storage/v1/object/sign/library-files/uploads/1774299989607_usz34u.pdf?token=eyJraWQiOiJiY2Y3Y2U5Yi1jZWMyLTRkZGMtOTJlNi03NzA2N2FkMDE0MGEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsaWJyYXJ5LWZpbGVzL3VwbG9hZHMvMTc3NDI5OTk4OTYwN191c3ozNHUucGRmIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc5NTU1MDM1OCwiZXhwIjoxODI3MDg2MzU4fQ.BJV37iv7CRM2uzMMXhSVd2w97txAbrSNryf9oP-FcQg",
+    "file_path": "uploads/1774299989607_usz34u.pdf"
   },
   {
     "id": 24,
@@ -352,7 +372,8 @@
     "cover": "assets/covers_extracted/cover_Ritual_On_rico_Comunica__o_Espiritual_Durante_o_Sono__Magia_.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Grimórios & Alta Magia com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1JrpVU-v5fIRL-cDwLNtp5Iv_lTr7i9w2/preview"
+    "pdfUrl": "livros_pdf/Ritual_Onírico_Comunicação_Espiritual_Durante_o_Sono_Ma.pdf",
+    "directDownloadUrl": "livros_pdf/Ritual_Onírico_Comunicação_Espiritual_Durante_o_Sono_Ma.pdf"
   },
   {
     "id": 27,
@@ -365,7 +386,8 @@
     "cover": "assets/covers_extracted/cover_Segredos_da_Magia_de_Umbanda_e_Quimbanda.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Grimórios & Alta Magia com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1OXkN9ZiGmOOyqT09uBHr7S-Dx4TsiCRJ/preview"
+    "pdfUrl": "livros_pdf/Segredos_da_Magia_de_Umbanda_e_Quimbanda.pdf",
+    "directDownloadUrl": "livros_pdf/Segredos_da_Magia_de_Umbanda_e_Quimbanda.pdf"
   },
   {
     "id": 28,
@@ -430,7 +452,8 @@
     "cover": "assets/covers_extracted/cover_Livro_De_Enoque_1_E_2.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Gnosticismo & Apócrifos com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/10UOxHr5n22tlTzjY3c9X2Yh29i46ODv0/preview"
+    "pdfUrl": "livros_pdf/Livro_De_Enoque_1_E_2.pdf",
+    "directDownloadUrl": "livros_pdf/Livro_De_Enoque_1_E_2.pdf"
   },
   {
     "id": 33,
@@ -482,7 +505,8 @@
     "cover": "assets/covers_extracted/cover_O_Livro_De_Enoque.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Gnosticismo & Apócrifos com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1QBVf5u0lyV9irR73jqtlTpTqCZyHD3wP/preview"
+    "pdfUrl": "livros_pdf/01_O_Livro_de_Enoque_Completo.pdf",
+    "directDownloadUrl": "livros_pdf/01_O_Livro_de_Enoque_Completo.pdf"
   },
   {
     "id": 37,
@@ -495,7 +519,8 @@
     "cover": "assets/covers_extracted/cover_Pistis_Sophia.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Gnosticismo & Apócrifos com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1K6Qrd65ODGFfBo6fnACkeUhl4t6yuyNh/preview"
+    "pdfUrl": "livros_pdf/Pistis_Sophia.pdf",
+    "directDownloadUrl": "livros_pdf/Pistis_Sophia.pdf"
   },
   {
     "id": 38,
@@ -508,7 +533,8 @@
     "cover": "assets/covers_extracted/cover_Primeiro_Livro_de_Enoque.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Gnosticismo & Apócrifos com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1H7Hli1RPrhhiWvj0sBPR4SXV06fK3N7p/preview"
+    "pdfUrl": "livros_pdf/O_Livro_de_Enoque.pdf",
+    "directDownloadUrl": "livros_pdf/O_Livro_de_Enoque.pdf"
   },
   {
     "id": 39,
@@ -534,7 +560,8 @@
     "cover": "assets/covers_extracted/cover_Alquimia_E_Tar__Uma_Investiga__o_de_suas_Conex_es_Hist_ricas.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Alquimia & Transmutação com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1fWwPR-Og4tJasWH0eeblurljbon23hNV/preview"
+    "pdfUrl": "livros_pdf/Alquimia.pdf",
+    "directDownloadUrl": "livros_pdf/Alquimia.pdf"
   },
   {
     "id": 41,
@@ -547,7 +574,8 @@
     "cover": "assets/covers_extracted/cover_Alquimia.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Alquimia & Transmutação com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1W5tmnKLJUvNieVfRLtfTDzRIKwc0KnPC/preview"
+    "pdfUrl": "livros_pdf/Alquimia.pdf",
+    "directDownloadUrl": "livros_pdf/Alquimia.pdf"
   },
   {
     "id": 42,
@@ -560,7 +588,8 @@
     "cover": "assets/covers_extracted/cover_Curso_de_Alquimia_do_Guru_da_Virg_nia.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Alquimia & Transmutação com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1eOslwoMlji9lN8huJx_FYX1YKL4NNoJq/preview"
+    "pdfUrl": "livros_pdf/Alquimia.pdf",
+    "directDownloadUrl": "livros_pdf/Alquimia.pdf"
   },
   {
     "id": 43,
@@ -586,7 +615,8 @@
     "cover": "assets/covers_extracted/cover_O_FILOSOFO_NATURAL_NUM_MANUAL_DE_ALQUIMIA.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Alquimia & Transmutação com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1ore7318frGyY9torsLAyf-5UbyIVgIAw/preview"
+    "pdfUrl": "livros_pdf/Alquimia.pdf",
+    "directDownloadUrl": "livros_pdf/Alquimia.pdf"
   },
   {
     "id": 45,
@@ -612,7 +642,8 @@
     "cover": "assets/covers_extracted/cover_A_Revelacao_Dos_Templarios_-_Lynn_Picknett_e_Clive_Prince.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Sociedades Secretas com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1fJ-uVawwIUwCaCIAs5_aBkS8R6OPa1nZ/preview"
+    "pdfUrl": "livros_pdf/A_Revelacao_Dos_Templarios_-_Lynn_Picknett_e_Clive_Prin.pdf",
+    "directDownloadUrl": "livros_pdf/A_Revelacao_Dos_Templarios_-_Lynn_Picknett_e_Clive_Prin.pdf"
   },
   {
     "id": 47,
@@ -625,7 +656,8 @@
     "cover": "assets/covers_extracted/cover_A_maconaria.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Sociedades Secretas com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1OSl7gGNT16NpmJMaAtteiOZ14xU4_L44/preview"
+    "pdfUrl": "livros_pdf/A_maçonaria_e_os_jesuitas_instrucção_pastoral_do_Bispo_de_Ol.pdf",
+    "directDownloadUrl": "livros_pdf/A_maçonaria_e_os_jesuitas_instrucção_pastoral_do_Bispo_de_Ol.pdf"
   },
   {
     "id": 48,
@@ -638,7 +670,8 @@
     "cover": "assets/covers_extracted/cover_As_Mansoes_Secretas_Da_Rosacruz.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Sociedades Secretas com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1ZHS9BfgXNjGMs16Nci6KMnCc-3HFO6xw/preview"
+    "pdfUrl": "livros_pdf/As_Mansoes_Secretas_Da_Rosacruz.pdf",
+    "directDownloadUrl": "livros_pdf/As_Mansoes_Secretas_Da_Rosacruz.pdf"
   },
   {
     "id": 49,
@@ -651,7 +684,8 @@
     "cover": "assets/covers_extracted/cover_Cardeal_Rampolla_por_que_o_padre_Ricossa_busca_hoje_reabilit.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Sociedades Secretas com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1qXGaFVEL-qYr_TgmFsUKVhDeMCs50uBN/preview"
+    "pdfUrl": "livros_pdf/Cardeal_Rampolla_por_que_o_padre_Ricossa_busca_hoje_reabilit.pdf",
+    "directDownloadUrl": "livros_pdf/Cardeal_Rampolla_por_que_o_padre_Ricossa_busca_hoje_reabilit.pdf"
   },
   {
     "id": 50,
@@ -677,7 +711,8 @@
     "cover": "assets/covers_extracted/cover_H._P._Blavatsky_e_o_Caso_Coulomb.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Sociedades Secretas com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1ZzwCc181zeYtvkN9R3K_mHbB6efyqyJ1/preview"
+    "pdfUrl": "livros_pdf/H_P_Blavatsky_e_o_Caso_Coulomb.pdf",
+    "directDownloadUrl": "livros_pdf/H_P_Blavatsky_e_o_Caso_Coulomb.pdf"
   },
   {
     "id": 52,
@@ -742,7 +777,9 @@
     "cover": "assets/covers_extracted/cover_O_Sol_Negro_-_o_Retorno_Das_Sociedades_Secretas_do_Vril_-_M..jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Sociedades Secretas com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1fJ-uVawwIUwCaCIAs5_aBkS8R6OPa1nZ/preview"
+    "pdfUrl": "https://ajczjcjbsuvxrfdumwow.supabase.co/storage/v1/object/sign/library-files/uploads/1776442252885_xumqin.pdf?token=eyJraWQiOiJiY2Y3Y2U5Yi1jZWMyLTRkZGMtOTJlNi03NzA2N2FkMDE0MGEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsaWJyYXJ5LWZpbGVzL3VwbG9hZHMvMTc3NjQ0MjI1Mjg4NV94dW1xaW4ucGRmIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc5NTU1MDM1NSwiZXhwIjoxODI3MDg2MzU1fQ.wcO2RJslGr5elLAnyiasl25-2eKWPdVevi2LV4O-7vM",
+    "directDownloadUrl": "https://ajczjcjbsuvxrfdumwow.supabase.co/storage/v1/object/sign/library-files/uploads/1776442252885_xumqin.pdf?token=eyJraWQiOiJiY2Y3Y2U5Yi1jZWMyLTRkZGMtOTJlNi03NzA2N2FkMDE0MGEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsaWJyYXJ5LWZpbGVzL3VwbG9hZHMvMTc3NjQ0MjI1Mjg4NV94dW1xaW4ucGRmIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc5NTU1MDM1NSwiZXhwIjoxODI3MDg2MzU1fQ.wcO2RJslGr5elLAnyiasl25-2eKWPdVevi2LV4O-7vM",
+    "file_path": "uploads/1776442252885_xumqin.pdf"
   },
   {
     "id": 57,
@@ -846,7 +883,8 @@
     "cover": "assets/covers_extracted/cover_222_ANOS_GRANDE_ORIENTE_LUSITANO.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1feOQOiHOsLyMKt17U-uenfuazxEUgQ-W/preview"
+    "pdfUrl": "livros_pdf/222_ANOS_GRANDE_ORIENTE_LUSITANO.pdf",
+    "directDownloadUrl": "livros_pdf/222_ANOS_GRANDE_ORIENTE_LUSITANO.pdf"
   },
   {
     "id": 65,
@@ -859,7 +897,8 @@
     "cover": "assets/covers_extracted/cover_64865430_A_Ciencia_Cabalistica_Lenain.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/13jAmtq5oxOvfaufG1XrylhcCLHiDCcri/preview"
+    "pdfUrl": "livros_pdf/64865430_A_Ciencia_Cabalistica_Lenain.pdf",
+    "directDownloadUrl": "livros_pdf/64865430_A_Ciencia_Cabalistica_Lenain.pdf"
   },
   {
     "id": 66,
@@ -950,7 +989,8 @@
     "cover": "assets/covers_extracted/cover_A_Chave_Dos_Grandes_Misterios_Eliphas_Le.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/12-Olfn0cWWrKh5dhwVD3H5cEc0YHMvKB/preview"
+    "pdfUrl": "livros_pdf/A_Chave_Dos_Grandes_Misterios_Eliphas_Le.pdf",
+    "directDownloadUrl": "livros_pdf/A_Chave_Dos_Grandes_Misterios_Eliphas_Le.pdf"
   },
   {
     "id": 73,
@@ -976,7 +1016,8 @@
     "cover": "assets/covers_extracted/cover_A_Energia_Dos_Raios.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1SUeuIPnuJYqlE_ToLHlHrA1SKSgKeINZ/preview"
+    "pdfUrl": "livros_pdf/A_Energia_Dos_Raios.pdf",
+    "directDownloadUrl": "livros_pdf/A_Energia_Dos_Raios.pdf"
   },
   {
     "id": 75,
@@ -1418,7 +1459,8 @@
     "cover": "assets/covers_extracted/cover_A_Teologia_Mistica_Como_Linguagem_Do_Sagrado.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1sC_FdgsCcqmzP5-6lk_fwZSpUshLEwtu/preview"
+    "pdfUrl": "livros_pdf/A_Teologia_Mistica_Como_Linguagem_Do_Sagrado.pdf",
+    "directDownloadUrl": "livros_pdf/A_Teologia_Mistica_Como_Linguagem_Do_Sagrado.pdf"
   },
   {
     "id": 109,
@@ -1522,7 +1564,8 @@
     "cover": "assets/covers_extracted/cover_A_ma_onaria_e_os_jesuitas__instruc__o_pastoral_do_Bispo_de_O.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1ojF2s0SyWbe3jaCa1iyVKRM5uFSnCP19/preview"
+    "pdfUrl": "livros_pdf/A_maçonaria_e_os_jesuitas_instrucção_pastoral_do_Bispo_de_Ol.pdf",
+    "directDownloadUrl": "livros_pdf/A_maçonaria_e_os_jesuitas_instrucção_pastoral_do_Bispo_de_Ol.pdf"
   },
   {
     "id": 117,
@@ -1769,7 +1812,9 @@
     "cover": "assets/covers_extracted/cover_Antigo_Livro_de_S_o_Cipriano_-_O_Gigante_e_Verdadeiro_Capa_d.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1RDHBZV1sIO2W_DQXNR52nm25hNtU-0PD/preview"
+    "pdfUrl": "https://ajczjcjbsuvxrfdumwow.supabase.co/storage/v1/object/sign/library-files/uploads/1774298761397_9tnm97.pdf?token=eyJraWQiOiJiY2Y3Y2U5Yi1jZWMyLTRkZGMtOTJlNi03NzA2N2FkMDE0MGEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsaWJyYXJ5LWZpbGVzL3VwbG9hZHMvMTc3NDI5ODc2MTM5N185dG5tOTcucGRmIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc5NTU1MDM2MSwiZXhwIjoxODI3MDg2MzYxfQ.a2mW2D23lRGBAQDbGNyB6tHP25O4v9iPjtFdQORngM0",
+    "directDownloadUrl": "https://ajczjcjbsuvxrfdumwow.supabase.co/storage/v1/object/sign/library-files/uploads/1774298761397_9tnm97.pdf?token=eyJraWQiOiJiY2Y3Y2U5Yi1jZWMyLTRkZGMtOTJlNi03NzA2N2FkMDE0MGEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsaWJyYXJ5LWZpbGVzL3VwbG9hZHMvMTc3NDI5ODc2MTM5N185dG5tOTcucGRmIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc5NTU1MDM2MSwiZXhwIjoxODI3MDg2MzYxfQ.a2mW2D23lRGBAQDbGNyB6tHP25O4v9iPjtFdQORngM0",
+    "file_path": "uploads/1774298761397_9tnm97.pdf"
   },
   {
     "id": 136,
@@ -1899,7 +1944,9 @@
     "cover": "assets/covers_extracted/cover_Autobiografia_de_um_iogue.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/177pzchtZf9lF_A4nwF8jqKx5W1Vyu6qk/preview"
+    "pdfUrl": "https://ajczjcjbsuvxrfdumwow.supabase.co/storage/v1/object/sign/library-files/uploads/1778192897749_wvrcqg.pdf?token=eyJraWQiOiJiY2Y3Y2U5Yi1jZWMyLTRkZGMtOTJlNi03NzA2N2FkMDE0MGEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsaWJyYXJ5LWZpbGVzL3VwbG9hZHMvMTc3ODE5Mjg5Nzc0OV93dnJjcWcucGRmIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc5NTU1MDM1NCwiZXhwIjoxODI3MDg2MzU0fQ.-gijwvWU73mUrCzt06yctt2Y0CENU3v141qz4Vly6VE",
+    "directDownloadUrl": "https://ajczjcjbsuvxrfdumwow.supabase.co/storage/v1/object/sign/library-files/uploads/1778192897749_wvrcqg.pdf?token=eyJraWQiOiJiY2Y3Y2U5Yi1jZWMyLTRkZGMtOTJlNi03NzA2N2FkMDE0MGEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsaWJyYXJ5LWZpbGVzL3VwbG9hZHMvMTc3ODE5Mjg5Nzc0OV93dnJjcWcucGRmIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc5NTU1MDM1NCwiZXhwIjoxODI3MDg2MzU0fQ.-gijwvWU73mUrCzt06yctt2Y0CENU3v141qz4Vly6VE",
+    "file_path": "uploads/1778192897749_wvrcqg.pdf"
   },
   {
     "id": 146,
@@ -1990,7 +2037,8 @@
     "cover": "assets/covers_extracted/cover_Boletim_do_DESSEAK_-_n-ro_2__okt-nov_1984_.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1fJ-uVawwIUwCaCIAs5_aBkS8R6OPa1nZ/preview"
+    "pdfUrl": "livros_pdf/Boletim_do_DESSEAK_-_n-ro_2_okt-nov1984.pdf",
+    "directDownloadUrl": "livros_pdf/Boletim_do_DESSEAK_-_n-ro_2_okt-nov1984.pdf"
   },
   {
     "id": 153,
@@ -2198,7 +2246,8 @@
     "cover": "assets/covers_extracted/cover_Carta_do_Passageiro_do_Abismo__Vers_o_Ritual__-_Adriano_Bene.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1fJ-uVawwIUwCaCIAs5_aBkS8R6OPa1nZ/preview"
+    "pdfUrl": "livros_pdf/Carta_do_Passageiro_do_Abismo_Versão_Ritual_-_Adriano_B.pdf",
+    "directDownloadUrl": "livros_pdf/Carta_do_Passageiro_do_Abismo_Versão_Ritual_-_Adriano_B.pdf"
   },
   {
     "id": 169,
@@ -2367,7 +2416,8 @@
     "cover": "assets/covers_extracted/cover_Consagracao_Geral_Oleo_Santo.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1tyUik56ymAzV8up1EQX7WLdpw8g3oqFP/preview"
+    "pdfUrl": "livros_pdf/Consagracao_Geral_Oleo_Santo.pdf",
+    "directDownloadUrl": "livros_pdf/Consagracao_Geral_Oleo_Santo.pdf"
   },
   {
     "id": 182,
@@ -2588,7 +2638,8 @@
     "cover": "assets/covers_extracted/cover_Ensaios_de_teatro_e_filosofia_do_Renascimento_ao_s_culo_XVII.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1Z6CxdaxC1YO1dKqbC8oivg961wsvMQaX/preview"
+    "pdfUrl": "livros_pdf/Ensaios_de_teatro_e_filosofia_do_Renascimento_ao_século_XVII.pdf",
+    "directDownloadUrl": "livros_pdf/Ensaios_de_teatro_e_filosofia_do_Renascimento_ao_século_XVII.pdf"
   },
   {
     "id": 199,
@@ -2822,7 +2873,8 @@
     "cover": "assets/covers_extracted/cover_Frabato_O_Mago_-_Franz_Bardon.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1BMRAmwRSPg9Em588OmKZp5rNbPPkUrHQ/preview"
+    "pdfUrl": "livros_pdf/Frabato_O_Mago_-_Franz_Bardon.pdf",
+    "directDownloadUrl": "livros_pdf/Frabato_O_Mago_-_Franz_Bardon.pdf"
   },
   {
     "id": 217,
@@ -2848,7 +2900,8 @@
     "cover": "assets/covers_extracted/cover_Francisco_de_Assis_Bezerra_de_Meneses.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/171lA-seXqnlch4_XYp3Dknadt6TXk14U/preview"
+    "pdfUrl": "livros_pdf/Francisco_de_Assis_Bezerra_de_Meneses.pdf",
+    "directDownloadUrl": "livros_pdf/Francisco_de_Assis_Bezerra_de_Meneses.pdf"
   },
   {
     "id": 219,
@@ -2874,7 +2927,8 @@
     "cover": "assets/covers_extracted/cover_Fundamentos_Do_Misticismo_Tibetano_Lama_Anagarika_Govinda_Pd.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1fJ-uVawwIUwCaCIAs5_aBkS8R6OPa1nZ/preview"
+    "pdfUrl": "livros_pdf/Fundamentos_Do_Misticismo_Tibetano_Lama_Anagarika_Govin.pdf",
+    "directDownloadUrl": "livros_pdf/Fundamentos_Do_Misticismo_Tibetano_Lama_Anagarika_Govin.pdf"
   },
   {
     "id": 221,
@@ -2900,7 +2954,8 @@
     "cover": "assets/covers_extracted/cover_Gareth_Knight_Praticas_E_Exercicios_Ocultos.jpg",
     "tier": "basico",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1aqhQW6U8hX8ufeiSnemx6vGIEBcUZUVi/preview"
+    "pdfUrl": "livros_pdf/Gareth_Knight_Praticas_E_Exercicios_Ocultos.pdf",
+    "directDownloadUrl": "livros_pdf/Gareth_Knight_Praticas_E_Exercicios_Ocultos.pdf"
   },
   {
     "id": 223,
@@ -3342,7 +3397,8 @@
     "cover": "assets/covers_extracted/cover_Jerusal_m_Um_C_lice_de_Tontear_-_Dave_Hunt.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1fJ-uVawwIUwCaCIAs5_aBkS8R6OPa1nZ/preview"
+    "pdfUrl": "livros_pdf/JERUSALÉM.pdf",
+    "directDownloadUrl": "livros_pdf/JERUSALÉM.pdf"
   },
   {
     "id": 257,
@@ -3446,7 +3502,8 @@
     "cover": "assets/covers_extracted/cover_LMTLT_3_MAG_PORT.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1hAKUoP_fLtjeU1BXt20AWmCcPJYJvqs1/preview"
+    "pdfUrl": "livros_pdf/LMTLT_3_MAG_PORT.pdf",
+    "directDownloadUrl": "livros_pdf/LMTLT_3_MAG_PORT.pdf"
   },
   {
     "id": 265,
@@ -3498,7 +3555,8 @@
     "cover": "assets/covers_extracted/cover_Liber_AL_vel_Legis.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/15_XiLzugNALkSqhXS5p2TvRU9ouie33W/preview"
+    "pdfUrl": "livros_pdf/08_O_Livro_da_Lei_Liber_AL_vel_Legis_Crowley.pdf",
+    "directDownloadUrl": "livros_pdf/08_O_Livro_da_Lei_Liber_AL_vel_Legis_Crowley.pdf"
   },
   {
     "id": 269,
@@ -3563,7 +3621,8 @@
     "cover": "assets/covers_extracted/cover_Livro_Dos_Espiritos_-Ed._2013.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1fJ-uVawwIUwCaCIAs5_aBkS8R6OPa1nZ/preview"
+    "pdfUrl": "livros_pdf/Livro_Dos_Espiritos_-Ed_2013.pdf",
+    "directDownloadUrl": "livros_pdf/Livro_Dos_Espiritos_-Ed_2013.pdf"
   },
   {
     "id": 274,
@@ -3628,7 +3687,8 @@
     "cover": "assets/covers_extracted/cover_Livros_de_Astrologia.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1A6ZmT25LTHKMQemPYA7Y6J03XNcEi5Ih/preview"
+    "pdfUrl": "livros_pdf/Livros_de_Astrologia.pdf",
+    "directDownloadUrl": "livros_pdf/Livros_de_Astrologia.pdf"
   },
   {
     "id": 279,
@@ -3797,7 +3857,9 @@
     "cover": "assets/covers_extracted/cover_Magia_Pr_tica_O_Caminho_Do_Adepto.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1O20ZhARTwgAhv0VOZKjlG7w8nra5uwAo/preview"
+    "pdfUrl": "https://ajczjcjbsuvxrfdumwow.supabase.co/storage/v1/object/sign/library-files/uploads/1774299989607_usz34u.pdf?token=eyJraWQiOiJiY2Y3Y2U5Yi1jZWMyLTRkZGMtOTJlNi03NzA2N2FkMDE0MGEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsaWJyYXJ5LWZpbGVzL3VwbG9hZHMvMTc3NDI5OTk4OTYwN191c3ozNHUucGRmIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc5NTU1MDM1OCwiZXhwIjoxODI3MDg2MzU4fQ.BJV37iv7CRM2uzMMXhSVd2w97txAbrSNryf9oP-FcQg",
+    "directDownloadUrl": "https://ajczjcjbsuvxrfdumwow.supabase.co/storage/v1/object/sign/library-files/uploads/1774299989607_usz34u.pdf?token=eyJraWQiOiJiY2Y3Y2U5Yi1jZWMyLTRkZGMtOTJlNi03NzA2N2FkMDE0MGEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsaWJyYXJ5LWZpbGVzL3VwbG9hZHMvMTc3NDI5OTk4OTYwN191c3ozNHUucGRmIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc5NTU1MDM1OCwiZXhwIjoxODI3MDg2MzU4fQ.BJV37iv7CRM2uzMMXhSVd2w97txAbrSNryf9oP-FcQg",
+    "file_path": "uploads/1774299989607_usz34u.pdf"
   },
   {
     "id": 292,
@@ -3992,7 +4054,8 @@
     "cover": "assets/covers_extracted/cover_Mist_rios_e_Pr_ticas_da_Lei_de_Umbanda.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1COfF-ekDkhe2dFgD_s9vDiT1hRiJm3PH/preview"
+    "pdfUrl": "livros_pdf/Mistérios_e_Práticas_da_Lei_de_Umbanda.pdf",
+    "directDownloadUrl": "livros_pdf/Mistérios_e_Práticas_da_Lei_de_Umbanda.pdf"
   },
   {
     "id": 307,
@@ -4083,7 +4146,8 @@
     "cover": "assets/covers_extracted/cover_No_Reino_Da_Feiticaria.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1i9cTK2N59igQD7bVZ9VjTaPuFLNucjBF/preview"
+    "pdfUrl": "livros_pdf/No_Reino_Da_Feiticaria.pdf",
+    "directDownloadUrl": "livros_pdf/No_Reino_Da_Feiticaria.pdf"
   },
   {
     "id": 314,
@@ -4239,7 +4303,8 @@
     "cover": "assets/covers_extracted/cover_O_Diabo_Desmistifica__o_Completa_de_um_Mito.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1w_ZPhW1Ee890WYbD5uQfQ_bhTgRfmgHm/preview"
+    "pdfUrl": "livros_pdf/O_Diabo_Desmistificação_Completa_de_um_Mito.pdf",
+    "directDownloadUrl": "livros_pdf/O_Diabo_Desmistificação_Completa_de_um_Mito.pdf"
   },
   {
     "id": 326,
@@ -4447,7 +4512,8 @@
     "cover": "assets/covers_extracted/cover_O_Livro_Dos_Esp_ritos__Allan_Kardec.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1fJ-uVawwIUwCaCIAs5_aBkS8R6OPa1nZ/preview"
+    "pdfUrl": "livros_pdf/38_O_Livro_dos_Espiritos_Allan_Kardec.pdf",
+    "directDownloadUrl": "livros_pdf/38_O_Livro_dos_Espiritos_Allan_Kardec.pdf"
   },
   {
     "id": 342,
@@ -4460,7 +4526,8 @@
     "cover": "assets/covers_extracted/cover_O_Livro_Dos_M_diuns.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1fJ-uVawwIUwCaCIAs5_aBkS8R6OPa1nZ/preview"
+    "pdfUrl": "livros_pdf/39_O_Livro_dos_Mediuns_Allan_Kardec.pdf",
+    "directDownloadUrl": "livros_pdf/39_O_Livro_dos_Mediuns_Allan_Kardec.pdf"
   },
   {
     "id": 343,
@@ -4512,7 +4579,8 @@
     "cover": "assets/covers_extracted/cover_O_MAIOR_SEGREDO_-_DAVID_ICKE.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1yu5DpC_O42qEozH7TsI-u_9m0P-rEKPb/preview"
+    "pdfUrl": "livros_pdf/O_MAIOR_SEGREDO_-_DAVID_ICKE.pdf",
+    "directDownloadUrl": "livros_pdf/O_MAIOR_SEGREDO_-_DAVID_ICKE.pdf"
   },
   {
     "id": 347,
@@ -4733,7 +4801,8 @@
     "cover": "assets/covers_extracted/cover_O_Vaticano_Ma__nico_Em_Nome_Do_Fantasioso_Jeov__Jahv_h_Fac_n.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1fJ-uVawwIUwCaCIAs5_aBkS8R6OPa1nZ/preview"
+    "pdfUrl": "livros_pdf/O_Vaticano_Maçônico_Em_Nome_Do_Fantasioso_Jeová_Jahvéh_.pdf",
+    "directDownloadUrl": "livros_pdf/O_Vaticano_Maçônico_Em_Nome_Do_Fantasioso_Jeová_Jahvéh_.pdf"
   },
   {
     "id": 364,
@@ -4746,7 +4815,9 @@
     "cover": "assets/covers_extracted/cover_O_Verdadeiro_Livro_Das_Clav_culas_De_Salom_o.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1fJ-uVawwIUwCaCIAs5_aBkS8R6OPa1nZ/preview"
+    "pdfUrl": "https://ajczjcjbsuvxrfdumwow.supabase.co/storage/v1/object/sign/library-files/uploads/1774298733066_dto0o.pdf?token=eyJraWQiOiJiY2Y3Y2U5Yi1jZWMyLTRkZGMtOTJlNi03NzA2N2FkMDE0MGEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsaWJyYXJ5LWZpbGVzL3VwbG9hZHMvMTc3NDI5ODczMzA2Nl9kdG8wby5wZGYiLCJzY29wZSI6ImRvd25sb2FkIiwiaWF0IjoxNzk1NTUwMzYxLCJleHAiOjE4MjcwODYzNjF9.BVGModZNdX32TPNuslO72VDHEfp0r-MiqQ4jAyLKO2w",
+    "directDownloadUrl": "https://ajczjcjbsuvxrfdumwow.supabase.co/storage/v1/object/sign/library-files/uploads/1774298733066_dto0o.pdf?token=eyJraWQiOiJiY2Y3Y2U5Yi1jZWMyLTRkZGMtOTJlNi03NzA2N2FkMDE0MGEiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsaWJyYXJ5LWZpbGVzL3VwbG9hZHMvMTc3NDI5ODczMzA2Nl9kdG8wby5wZGYiLCJzY29wZSI6ImRvd25sb2FkIiwiaWF0IjoxNzk1NTUwMzYxLCJleHAiOjE4MjcwODYzNjF9.BVGModZNdX32TPNuslO72VDHEfp0r-MiqQ4jAyLKO2w",
+    "file_path": "uploads/1774298733066_dto0o.pdf"
   },
   {
     "id": 365,
@@ -4850,7 +4921,8 @@
     "cover": "assets/covers_extracted/cover_OGrande_Computador_Celeste_Marcelo_Del_Debbio.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1T2fMebieUS-FY0Kgf9X0w84OHp93vXpP/preview"
+    "pdfUrl": "livros_pdf/OGrande_Computador_Celeste_Marcelo_Del_Debbio.pdf",
+    "directDownloadUrl": "livros_pdf/OGrande_Computador_Celeste_Marcelo_Del_Debbio.pdf"
   },
   {
     "id": 373,
@@ -4876,7 +4948,8 @@
     "cover": "assets/covers_extracted/cover_OS_ENSINAMENTOS_SECRETOS_DE_TODO_OS_TEMPOS_-_MANLY_P._HALL.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1fJ-uVawwIUwCaCIAs5_aBkS8R6OPa1nZ/preview"
+    "pdfUrl": "livros_pdf/OS_ENSINAMENTOS_SECRETOS_DE_TODO_OS_TEMPOS_-_MANLY_P_HALL.pdf",
+    "directDownloadUrl": "livros_pdf/OS_ENSINAMENTOS_SECRETOS_DE_TODO_OS_TEMPOS_-_MANLY_P_HALL.pdf"
   },
   {
     "id": 375,
@@ -4941,7 +5014,8 @@
     "cover": "assets/covers_extracted/cover_Os_Arque_tipos_E_O_Inconsciente_Coletivo.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1fJ-uVawwIUwCaCIAs5_aBkS8R6OPa1nZ/preview"
+    "pdfUrl": "livros_pdf/37_Os_Arquetipos_e_o_Inconsciente_Coletivo_Jung.pdf",
+    "directDownloadUrl": "livros_pdf/37_Os_Arquetipos_e_o_Inconsciente_Coletivo_Jung.pdf"
   },
   {
     "id": 380,
@@ -5019,7 +5093,8 @@
     "cover": "assets/covers_extracted/cover_Os_Protocolos_dos_S_bios_de_Si_o_.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1fJ-uVawwIUwCaCIAs5_aBkS8R6OPa1nZ/preview"
+    "pdfUrl": "livros_pdf/Os_Protocolos_dos_Sábios_de_Sião.pdf",
+    "directDownloadUrl": "livros_pdf/Os_Protocolos_dos_Sábios_de_Sião.pdf"
   },
   {
     "id": 386,
@@ -5149,7 +5224,8 @@
     "cover": "assets/covers_extracted/cover_Pir_e_rabi_Eli_ezer_hu_rabi_Eli_ezer_ben_hor_anus_ha-ni_ra_r.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1fJ-uVawwIUwCaCIAs5_aBkS8R6OPa1nZ/preview"
+    "pdfUrl": "livros_pdf/Pirḳe_rabi_Eliʻezer__hu_rabi_Eliʻezer_ben_horḳanus_ha-niḳra_.pdf",
+    "directDownloadUrl": "livros_pdf/Pirḳe_rabi_Eliʻezer__hu_rabi_Eliʻezer_ben_horḳanus_ha-niḳra_.pdf"
   },
   {
     "id": 396,
@@ -5318,7 +5394,8 @@
     "cover": "assets/covers_extracted/cover_Psiquiatria__espiritismo_e_ci_ncia_Um_di_logo_sobre_psicose.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1fJ-uVawwIUwCaCIAs5_aBkS8R6OPa1nZ/preview"
+    "pdfUrl": "livros_pdf/Psiquiatria_espiritismo_e_ciência_Um_diálogo_sobre_psic.pdf",
+    "directDownloadUrl": "livros_pdf/Psiquiatria_espiritismo_e_ciência_Um_diálogo_sobre_psic.pdf"
   },
   {
     "id": 409,
@@ -5435,7 +5512,8 @@
     "cover": "assets/covers_extracted/cover_Resenha_do_livro_e_link_para_download_online._Grim_rio_do_Sa.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1tpYAN727Xp_TSMv2hNxErIh2ccNNird4/preview"
+    "pdfUrl": "livros_pdf/Resenha_do_livro_e_link_para_download_online_Grimório_do_Sat.pdf",
+    "directDownloadUrl": "livros_pdf/Resenha_do_livro_e_link_para_download_online_Grimório_do_Sat.pdf"
   },
   {
     "id": 418,
@@ -5448,7 +5526,8 @@
     "cover": "assets/covers_extracted/cover_Revista_Espirita_-_Ano_I_-_1858.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/18S8M4VU8WloV1I3dJqtD3gt_CFr7kcOM/preview"
+    "pdfUrl": "livros_pdf/Revista_Espirita_-_Ano_I_-_1858.pdf",
+    "directDownloadUrl": "livros_pdf/Revista_Espirita_-_Ano_I_-_1858.pdf"
   },
   {
     "id": 419,
@@ -5552,7 +5631,8 @@
     "cover": "assets/covers_extracted/cover_SHEMYAZA_O_L_der_dos_Vigilantes___A_Queda__o_Ensino_e_o_Pre_.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/12HRqhI087OLKUtUbn7-2Q2gVsTHee1YQ/preview"
+    "pdfUrl": "livros_pdf/SHEMYAZA_O_Líder_dos_Vigilantes__A_Queda_o_Ensino_e_o_P.pdf",
+    "directDownloadUrl": "livros_pdf/SHEMYAZA_O_Líder_dos_Vigilantes__A_Queda_o_Ensino_e_o_P.pdf"
   },
   {
     "id": 427,
@@ -5721,7 +5801,8 @@
     "cover": "assets/covers_extracted/cover_S_o_Cipriano.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1hBTQ3W3uv-Ud_x9Xmtwqte65LNOrANog/preview"
+    "pdfUrl": "livros_pdf/36_O_Livro_Negro_de_Sao_Cipriano_Lopes.pdf",
+    "directDownloadUrl": "livros_pdf/36_O_Livro_Negro_de_Sao_Cipriano_Lopes.pdf"
   },
   {
     "id": 440,
@@ -5760,7 +5841,8 @@
     "cover": "assets/covers_extracted/cover_Tarot_O_Livro_Azul.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1hcDKatgKPHpXb7BkelCD60qqOP5Uyw8h/preview"
+    "pdfUrl": "livros_pdf/Tarot_O_Livro_Azul.pdf",
+    "directDownloadUrl": "livros_pdf/Tarot_O_Livro_Azul.pdf"
   },
   {
     "id": 443,
@@ -5799,7 +5881,8 @@
     "cover": "assets/covers_extracted/cover_Teses_sobre_a_Comunidade_Terrivel.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1E44FxHAoGp-uhU3KiTrmauf-IyhIF4_p/preview"
+    "pdfUrl": "livros_pdf/Teses_sobre_a_Comunidade_Terrivel.pdf",
+    "directDownloadUrl": "livros_pdf/Teses_sobre_a_Comunidade_Terrivel.pdf"
   },
   {
     "id": 446,
@@ -5916,7 +5999,8 @@
     "cover": "assets/covers_extracted/cover_Um_Iniciante_na_Viagem_Astral_-_Saulo_Calderon.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1s8aZmissD9SSzJ2251xfqd3HBkUkJDwH/preview"
+    "pdfUrl": "livros_pdf/Um_Iniciante_na_Viagem_Astral_-_Saulo_Calderon.pdf",
+    "directDownloadUrl": "livros_pdf/Um_Iniciante_na_Viagem_Astral_-_Saulo_Calderon.pdf"
   },
   {
     "id": 455,
@@ -5955,7 +6039,8 @@
     "cover": "assets/covers_extracted/cover_Umbanda_do_Brasil.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1QW0HQd9n5cIK2oqeNIuQx7nz60WppmPZ/preview"
+    "pdfUrl": "livros_pdf/Umbanda_do_Brasil.pdf",
+    "directDownloadUrl": "livros_pdf/Umbanda_do_Brasil.pdf"
   },
   {
     "id": 458,
@@ -5968,7 +6053,8 @@
     "cover": "assets/covers_extracted/cover_Umbanda_e_o_Poder_da_Mediunidade.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1oV8XgLAa9fhRLMrykx2NPnAdUcPkJesC/preview"
+    "pdfUrl": "livros_pdf/Umbanda_e_o_Poder_da_Mediunidade.pdf",
+    "directDownloadUrl": "livros_pdf/Umbanda_e_o_Poder_da_Mediunidade.pdf"
   },
   {
     "id": 459,
@@ -6098,7 +6184,8 @@
     "cover": "assets/covers_extracted/cover_a-aguia--01.01.1911-03.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1fJ-uVawwIUwCaCIAs5_aBkS8R6OPa1nZ/preview"
+    "pdfUrl": "livros_pdf/a-aguia--01011911-03.pdf",
+    "directDownloadUrl": "livros_pdf/a-aguia--01011911-03.pdf"
   },
   {
     "id": 469,
@@ -6163,7 +6250,8 @@
     "cover": "assets/covers_extracted/cover_nro_2_11_ano_Grande_Oriente_do_Brazil_Jornal_Official_da_Ma_.jpg",
     "tier": "master",
     "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa. Obra integral de Mente & Projeção Astral com fac-símiles de alta resolução.",
-    "pdfUrl": "https://drive.google.com/file/d/1fJ-uVawwIUwCaCIAs5_aBkS8R6OPa1nZ/preview"
+    "pdfUrl": "livros_pdf/nro_2_11_ano_Grande_Oriente_do_Brazil_Jornal_Official_da_Maç.pdf",
+    "directDownloadUrl": "livros_pdf/nro_2_11_ano_Grande_Oriente_do_Brazil_Jornal_Official_da_Maç.pdf"
   },
   {
     "id": 474,

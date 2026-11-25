@@ -2070,8 +2070,20 @@ async function openReaderModal(book, startPage) {
   const iframe = document.getElementById("readerIframe");
   const spinner = document.getElementById("readerLoadingSpinner");
 
-  // MODO NATIVO COM SCROLL CONTÍNUO PARA TODOS OS LIVROS
-  if (typeof pdfjsLib !== "undefined") {
+  // MODO DE LEITURA
+  if (targetUrl && targetUrl.includes("drive.google.com")) {
+    if (nativeContainer) {
+      nativeContainer.classList.add("hidden");
+      nativeContainer.style.display = "none";
+      nativeContainer.innerHTML = "";
+    }
+    if (iframe) {
+      iframe.classList.remove("hidden");
+      iframe.style.display = "block";
+      iframe.src = targetUrl;
+    }
+    if (spinner) spinner.classList.add("hidden");
+  } else if (typeof pdfjsLib !== "undefined") {
     if (iframe) {
       iframe.classList.add("hidden");
       iframe.style.display = "none";
@@ -2408,7 +2420,9 @@ async function renderNativePDF(pdfUrl, startPage = 1) {
     const iframe = document.getElementById("readerIframe");
     if (iframe) {
       container.classList.add("hidden");
+      container.style.display = "none";
       iframe.classList.remove("hidden");
+      iframe.style.display = "block";
       iframe.src = pdfUrl;
     }
   }
@@ -2462,9 +2476,17 @@ function closeReaderModal() {
   if (currentRenderObserver) currentRenderObserver.disconnect();
   if (currentScrollObserver) currentScrollObserver.disconnect();
   const iframe = document.getElementById("readerIframe");
-  if (iframe) iframe.src = "";
+  if (iframe) {
+    iframe.src = "";
+    iframe.classList.add("hidden");
+    iframe.style.display = "none";
+  }
   const container = document.getElementById("readerNativeContainer");
-  if (container) container.innerHTML = "";
+  if (container) {
+    container.innerHTML = "";
+    container.classList.remove("hidden");
+    container.style.display = "block";
+  }
   closeModal("readerModal");
 }
 
