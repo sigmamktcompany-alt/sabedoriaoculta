@@ -1,4 +1,5 @@
 const KNOWN_STUDENT_NAMES = {
+  "lord.von.hoelz.88@gmail.com": "Bruno Di Lourenço",
   "josecar2neiro@gmail.com": "José de Jesus Carneiro",
   "sigma.mkt.company@gmail.com": "MKT Teste",
   "joaomayamarcelo@gmail.com": "João Maya Marcelo",
@@ -3639,6 +3640,7 @@ const SUPABASE_CONFIG = {
 };
 
 const MASTER_ALLOWLIST = [
+  "lord.von.hoelz.88@gmail.com",
   "josecar2neiro@gmail.com",
   "sigma.mkt.company@gmail.com",
   "joaomayamarcelo@gmail.com",
