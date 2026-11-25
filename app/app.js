@@ -121,65 +121,81 @@ const collectionsData = [
 const frequenciesData = [
   {
     hz: 432,
-    name: "432 Hz • Ressonância Áurea Cósmica",
-    benefit: "Afinação natural do Universo (proporção áurea Phi), cura celular profunda e alinhamento do DNA.",
+    name: "Ressonância Áurea Cósmica",
+    subtitle: "Afinação Natural Phi & Cura Celular",
+    benefit: "Alinha as ondas cerebrais com a geometria áurea do cosmos, reduzindo estresse e harmonizando o campo biomagnético.",
     chakra: "Cardíaco & Coronário",
+    symbol: "assets/symbols/freq_432hz.png",
     color: "#d4af37",
     tier: "basico"
   },
   {
     hz: 528,
-    name: "528 Hz • Frequência dos Milagres & Reparo do DNA",
-    benefit: "A frequência central de Solfeggio. Transforma a consciência, repara fitas genéticas e atrai milagres.",
+    name: "Frequência dos Milagres",
+    subtitle: "Reparo do DNA & Transmutação",
+    benefit: "A nota central de Solfeggio ('Mi'). Acelera clareza intuitiva, dissolução de amarras e regeneração mental.",
     chakra: "Plexo Solar (Manipura)",
+    symbol: "assets/symbols/freq_528hz.png",
     color: "#10b981",
     tier: "master"
   },
   {
     hz: 396,
-    name: "396 Hz • Liberação de Culpa, Medo & Bloqueios",
-    benefit: "Dissolve nós emocionais antigos no chakra raiz e ancora a mente em estado de absoluta coragem.",
+    name: "Liberação de Medo & Culpa",
+    subtitle: "Ancoramento e Coragem Primordial",
+    benefit: "Dissolve bloqueios inconscientes no chakra básico, dissipando inseguranças e ancorando foco realizador.",
     chakra: "Básico (Muladhara)",
+    symbol: "assets/symbols/freq_396hz.png",
     color: "#ef4444",
     tier: "basico"
   },
   {
     hz: 417,
-    name: "417 Hz • Quebra de Padrões Negativos & Mudança",
-    benefit: "Limpa experiências traumáticas do passado e facilita novas decisões sem resistência inconsciente.",
+    name: "Quebra de Padrões Negativos",
+    subtitle: "Transmutação & Novos Ciclos",
+    benefit: "Facilita a quebra de crenças autolimitantes e limpa resíduos de experiências passadas para expansão espiritual.",
     chakra: "Sacral (Svadhisthana)",
+    symbol: "assets/symbols/freq_417hz.png",
     color: "#f97316",
     tier: "master"
   },
   {
     hz: 639,
-    name: "639 Hz • Conexão & Harmonização dos Relacionamentos",
-    benefit: "Promove empatia, telepatia afetiva e conexão profunda com companheiros de caminho espiritual.",
+    name: "Harmonização & Conexão",
+    subtitle: "Empatia e Telepatia Afetiva",
+    benefit: "Promove compreensão mútua, sintonia interpessoal e alinhamento de intenções no campo magnético sutil.",
     chakra: "Cardíaco (Anahata)",
+    symbol: "assets/symbols/freq_639hz.png",
     color: "#06b6d4",
     tier: "master"
   },
   {
     hz: 741,
-    name: "741 Hz • Despertar da Intuição & Limpeza Toxinas",
-    benefit: "Estimula a expressão autêntica, desintoxica células cerebrais e ativa a voz interior dos mestres.",
+    name: "Despertar da Intuição",
+    subtitle: "Expressão Autêntica & Limpeza",
+    benefit: "Desperta a lucidez mental, ativando a voz interior da verdade e clareza para tomadas de decisão superiores.",
     chakra: "Laríngeo (Vishuddha)",
+    symbol: "assets/symbols/freq_741hz.png",
     color: "#3b82f6",
     tier: "master"
   },
   {
     hz: 852,
-    name: "852 Hz • Despertar do Terceiro Olho (Ajna)",
-    benefit: "Restaura a ordem espiritual, dissolve a névoa mental e desenvolve clarividência e visão astral.",
+    name: "Visão do Terceiro Olho",
+    subtitle: "Ordem Espiritual e Clarividência",
+    benefit: "Estimula o chakra frontal para visão além das aparências materiais, dissolvendo ilusões cognitivas.",
     chakra: "Frontal (Ajna)",
+    symbol: "assets/symbols/freq_852hz.png",
     color: "#8b5cf6",
     tier: "master"
   },
   {
     hz: 963,
-    name: "963 Hz • Conexão com a Centelha Divina Primordial",
-    benefit: "Ativação direta da glândula pineal, estado de Samadhi, reintegração com a Fonte Cósmica Suprema.",
+    name: "Centelha Divina Primordial",
+    subtitle: "Conexão com a Consciência Cósmica",
+    benefit: "Ativação sutil da glândula pineal e reintegração com a Fonte Cósmica através da frequência mais alta de Solfeggio.",
     chakra: "Coronário (Sahasrara)",
+    symbol: "assets/symbols/freq_963hz.png",
     color: "#ec4899",
     tier: "master"
   }
@@ -2869,31 +2885,49 @@ function renderFrequencies() {
   const list = document.getElementById("frequenciesList");
   if (!list) return;
 
-  // Se a grade já foi renderizada uma vez, apenas atualiza classes sem destruir a árvore DOM
-  if (list.children.length === frequenciesData.length) {
-    updateFrequencyUI(activeFrequencyHz);
-    return;
-  }
-
+  // Renderização harmoniosa com símbolos sagrados e proporção perfeita
   list.innerHTML = frequenciesData.map(f => {
     const isPlaying = activeFrequencyHz === f.hz;
     return `
-      <div id="freq-card-${f.hz}" onclick="handleFrequencyClick(${f.hz}, event)" class="esoteric-card rounded-2xl p-4.5 border ${isPlaying ? 'border-[#D4AF37] shadow-[0_0_25px_rgba(212,175,55,0.3)] bg-[#D4AF37]/5' : 'border-white/10 hover:border-[#D4AF37]/40'} flex flex-col justify-between transition-all duration-300 cursor-pointer group">
+      <div id="freq-card-${f.hz}" onclick="handleFrequencyClick(${f.hz}, event)" 
+        class="esoteric-card rounded-2xl p-4 sm:p-5 border ${isPlaying ? 'border-yellow-500 shadow-[0_0_30px_rgba(234,179,8,0.25)] bg-yellow-500/5 ring-1 ring-yellow-500/50' : 'border-white/10 hover:border-yellow-500/40 bg-[#0d0d0d]'} flex flex-col justify-between transition-all duration-300 cursor-pointer group hover:-translate-y-0.5">
+        
         <div>
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-mono font-bold text-[#D4AF37] px-2 py-0.5 rounded bg-[#D4AF37]/10 border border-[#D4AF37]/20">${f.hz} HZ</span>
-            <span class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">${f.chakra || 'Solfeggio'}</span>
+          <!-- Topo do Card: Símbolo Sagrado Autoral + Badges -->
+          <div class="flex items-center gap-3.5 mb-3.5">
+            <div class="w-13 h-13 sm:w-14 sm:h-14 rounded-xl bg-black border ${isPlaying ? 'border-yellow-500' : 'border-white/10 group-hover:border-yellow-500/40'} p-1 flex items-center justify-center shrink-0 shadow-md relative overflow-hidden transition-all duration-300">
+              <img src="${f.symbol}" alt="${f.name}" class="w-full h-full object-contain ${isPlaying ? 'scale-110 drop-shadow-[0_0_8px_rgba(234,179,8,0.8)]' : 'group-hover:scale-105'} transition-transform duration-300">
+              ${isPlaying ? '<div class="absolute inset-0 bg-yellow-500/10 pointer-events-none animate-pulse"></div>' : ''}
+            </div>
+
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-xs font-mono font-black text-yellow-400 px-2 py-0.5 rounded-md bg-yellow-500/15 border border-yellow-500/30 shrink-0">${f.hz} HZ</span>
+                <span class="text-[9px] font-mono text-gray-500 uppercase tracking-widest truncate">${f.chakra}</span>
+              </div>
+              <h4 class="font-serif font-bold text-sm text-white group-hover:text-yellow-400 transition-colors truncate">${f.name}</h4>
+              <p class="text-[10px] text-gray-400 font-medium truncate">${f.subtitle || ''}</p>
+            </div>
           </div>
-          <h4 class="font-serif font-bold text-sm text-white group-hover:text-[#D4AF37] transition-colors mb-1 line-clamp-1">${f.name}</h4>
-          <p class="text-xs text-gray-400 leading-relaxed mb-3 line-clamp-2">${f.benefit}</p>
+
+          <!-- Descrição Concisa e Proporcional -->
+          <p class="text-[11px] sm:text-xs text-gray-300/90 leading-relaxed mb-4 line-clamp-2">${f.benefit}</p>
         </div>
-        <div class="pt-2.5 border-t border-white/5 flex items-center justify-between">
-          <span class="text-[10px] text-gray-500 font-mono">Onda Binaural</span>
-          <button id="freq-btn-${f.hz}" class="px-3 py-1.5 rounded-xl ${isPlaying ? 'bg-[#D4AF37] text-black font-black' : 'bg-white/5 text-gray-300 group-hover:bg-[#D4AF37] group-hover:text-black font-bold'} text-[11px] flex items-center gap-1.5 transition-all duration-200 pointer-events-none">
-            <i data-lucide="${isPlaying ? 'pause' : 'play'}" class="w-3.5 h-3.5"></i>
+
+        <!-- Rodapé do Card com Status e Botão com Feedback Fiel -->
+        <div class="pt-3 border-t border-white/5 flex items-center justify-between gap-2">
+          <div class="flex items-center gap-1.5 text-[10px] text-gray-500 font-mono">
+            <span class="w-1.5 h-1.5 rounded-full ${isPlaying ? 'bg-yellow-400 animate-ping' : 'bg-gray-600'}"></span>
+            <span>${isPlaying ? 'Onda Senoidal Ativa' : 'Onda Binaural'}</span>
+          </div>
+
+          <button id="freq-btn-${f.hz}" 
+            class="px-4 py-1.5 rounded-xl ${isPlaying ? 'bg-yellow-500 text-black font-black shadow-lg shadow-yellow-500/30' : 'bg-white/5 text-gray-300 group-hover:bg-yellow-500 group-hover:text-black font-bold border border-white/10'} text-xs flex items-center gap-1.5 transition-all duration-200 pointer-events-none shrink-0">
+            <i data-lucide="${isPlaying ? 'pause' : 'play'}" class="w-3.5 h-3.5 fill-current"></i>
             <span>${isPlaying ? 'Tocando' : 'Ouvir'}</span>
           </button>
         </div>
+
       </div>
     `;
   }).join("");
@@ -2909,19 +2943,19 @@ function updateFrequencyUI(currentActiveHz) {
 
     if (card) {
       if (isPlaying) {
-        card.className = "esoteric-card rounded-2xl p-4.5 border border-[#D4AF37] shadow-[0_0_25px_rgba(212,175,55,0.3)] bg-[#D4AF37]/5 flex flex-col justify-between transition-all duration-300 cursor-pointer group";
+        card.className = "esoteric-card rounded-2xl p-4 sm:p-5 border border-yellow-500 shadow-[0_0_30px_rgba(234,179,8,0.25)] bg-yellow-500/5 ring-1 ring-yellow-500/50 flex flex-col justify-between transition-all duration-300 cursor-pointer group";
       } else {
-        card.className = "esoteric-card rounded-2xl p-4.5 border border-white/10 hover:border-[#D4AF37]/40 flex flex-col justify-between transition-all duration-300 cursor-pointer group";
+        card.className = "esoteric-card rounded-2xl p-4 sm:p-5 border border-white/10 hover:border-yellow-500/40 bg-[#0d0d0d] flex flex-col justify-between transition-all duration-300 cursor-pointer group hover:-translate-y-0.5";
       }
     }
 
     if (btn) {
       if (isPlaying) {
-        btn.className = "px-3 py-1.5 rounded-xl bg-[#D4AF37] text-black font-black text-[11px] flex items-center gap-1.5 transition-all duration-200 pointer-events-none";
-        btn.innerHTML = `<i data-lucide="pause" class="w-3.5 h-3.5"></i><span>Tocando</span>`;
+        btn.className = "px-4 py-1.5 rounded-xl bg-yellow-500 text-black font-black shadow-lg shadow-yellow-500/30 text-xs flex items-center gap-1.5 transition-all duration-200 pointer-events-none shrink-0";
+        btn.innerHTML = `<i data-lucide="pause" class="w-3.5 h-3.5 fill-current"></i><span>Tocando</span>`;
       } else {
-        btn.className = "px-3 py-1.5 rounded-xl bg-white/5 text-gray-300 group-hover:bg-[#D4AF37] group-hover:text-black font-bold text-[11px] flex items-center gap-1.5 transition-all duration-200 pointer-events-none";
-        btn.innerHTML = `<i data-lucide="play" class="w-3.5 h-3.5"></i><span>Ouvir</span>`;
+        btn.className = "px-4 py-1.5 rounded-xl bg-white/5 text-gray-300 group-hover:bg-yellow-500 group-hover:text-black font-bold border border-white/10 text-xs flex items-center gap-1.5 transition-all duration-200 pointer-events-none shrink-0";
+        btn.innerHTML = `<i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i><span>Ouvir</span>`;
       }
     }
   });
@@ -2931,7 +2965,7 @@ function updateFrequencyUI(currentActiveHz) {
 
   if (currentActiveHz) {
     const fObj = frequenciesData.find(x => x.hz === currentActiveHz);
-    if (badge) badge.textContent = `Sintonizado em ${currentActiveHz} Hz • ${fObj ? fObj.name.split('•')[1] || '' : ''}`;
+    if (badge) badge.textContent = `Sintonizado em ${currentActiveHz} Hz • ${fObj ? fObj.name : ''}`;
     if (waveBox) waveBox.classList.remove("wave-paused");
   } else {
     if (badge) badge.textContent = "Santuário em Silêncio";
@@ -4026,32 +4060,33 @@ function renderAudiobooksList() {
   if (!grid) return;
 
   grid.innerHTML = AUDIOBOOKS_CATALOG.map(ab => `
-    <div class="esoteric-card rounded-2xl p-5 border border-white/10 flex flex-col justify-between group hover:border-[#D4AF37]/50 transition-all duration-300 shadow-lg bg-[#0d0d0d]">
+    <div class="esoteric-card rounded-2xl p-4 sm:p-5 border border-white/10 flex flex-col justify-between group hover:border-yellow-500/50 transition-all duration-300 shadow-xl bg-[#0e0e0e] hover:-translate-y-1">
       <div>
-        <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-4 border border-white/10 group-hover:border-[#D4AF37]/40 shadow-xl bg-black">
-          <img src="${ab.cover}" alt="${ab.title}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+        <!-- Capa do Audiolivro em Proporção Áurea 3:4 -->
+        <div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-3.5 border border-white/10 group-hover:border-yellow-500/40 shadow-2xl bg-black">
+          <img src="${ab.cover}" alt="${ab.title}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='assets/logo.jpg'">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent"></div>
           
-          <div class="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-full bg-black/85 backdrop-blur-md text-[9px] font-bold text-[#D4AF37] border border-[#D4AF37]/30 flex items-center gap-1 shadow-md">
-            <i data-lucide="sparkles" class="w-3 h-3"></i> ${ab.hz}Hz HD
+          <div class="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-black/85 backdrop-blur-md text-[9px] font-mono font-bold text-yellow-400 border border-yellow-500/30 flex items-center gap-1 shadow-md">
+            <i data-lucide="sparkles" class="w-3 h-3 text-yellow-400"></i> ${ab.hz}Hz Binaural
           </div>
 
-          <div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded bg-black/85 backdrop-blur-md text-[10px] font-mono text-gray-300 border border-white/10">
+          <div class="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded-md bg-black/85 backdrop-blur-md text-[10px] font-mono text-gray-200 border border-white/10">
             ${ab.duration}
           </div>
         </div>
 
-        <span class="text-[9px] font-mono uppercase tracking-widest text-[#D4AF37] font-bold block mb-1">${ab.category}</span>
-        <h3 class="text-sm font-serif font-bold text-white group-hover:text-[#D4AF37] transition-colors line-clamp-1">${ab.title}</h3>
-        <p class="text-[11px] text-gray-400 mt-0.5 line-clamp-1">Por ${ab.author}</p>
-        <p class="text-xs text-gray-400 mt-2 line-clamp-2 leading-relaxed">${ab.desc}</p>
+        <span class="text-[9px] font-mono uppercase tracking-widest text-yellow-500/80 font-bold block mb-1">${ab.category}</span>
+        <h3 class="text-sm font-serif font-bold text-white group-hover:text-yellow-400 transition-colors line-clamp-1">${ab.title}</h3>
+        <p class="text-[11px] text-gray-400 mt-0.5 line-clamp-1 font-medium">Por ${ab.author}</p>
+        <p class="text-[11px] sm:text-xs text-gray-400 mt-2 line-clamp-2 leading-relaxed">${ab.desc}</p>
       </div>
 
-      <div class="mt-4 pt-3.5 border-t border-white/10 flex items-center justify-between gap-2">
-        <span class="text-[10px] text-gray-400 flex items-center gap-1">
-          <i data-lucide="mic" class="w-3 h-3 text-[#D4AF37]"></i> ${ab.narrator}
+      <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between gap-2">
+        <span class="text-[10px] text-gray-400 flex items-center gap-1 truncate max-w-[130px]">
+          <i data-lucide="mic" class="w-3 h-3 text-yellow-400 shrink-0"></i> <span class="truncate">${ab.narrator}</span>
         </span>
-        <button onclick="openAudiobookPlayer('${ab.id}')" class="px-3.5 py-1.5 rounded-xl bg-yellow-500/10 hover:bg-yellow-500 text-yellow-400 hover:text-black border border-yellow-500/30 text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-sm active:scale-95">
+        <button onclick="openAudiobookPlayer('${ab.id}')" class="px-4 py-1.5 rounded-xl bg-yellow-500/15 hover:bg-yellow-500 text-yellow-400 hover:text-black border border-yellow-500/30 text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-sm active:scale-95 shrink-0">
           <i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i>
           <span>Ouvir</span>
         </button>
@@ -4060,6 +4095,7 @@ function renderAudiobooksList() {
   `).join("");
 
   if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+}
 }
 
 let activeAudiobook = null;
