@@ -1,22 +1,20 @@
 const KNOWN_STUDENT_NAMES = {
-  "severino_lucena@hotmail.com": "Severino Lucena",
-  "lord.von.hoelz.88@gmail.com": "Bruno Di Lourenço",
-  "josecar2neiro@gmail.com": "José de Jesus Carneiro",
-  "sigma.mkt.company@gmail.com": "MKT Teste",
-  "joaomayamarcelo@gmail.com": "João Maya Marcelo",
-  "dweslley2003@gmail.com": "Weslley Dias",
-  "loisianavida123@gmail.com": "Loisiana Lopes",
-  "tjoaquim627@gmail.com": "Tamara S Joaquim",
-  "paulo-reis51@hotmail.com": "Paulo Reis",
-  "mrobertor057@gmail.com": "Robertto Machado",
   "edurosalopes@vivaldi.net": "Carlos Eduardo Rosa Lopes",
   "crazyled.delavelle9@gmail.com": "Emerson Ferreira",
-  "elevarevenue@gmail.com": "Eleva Revenue",
-  "suportesabedoriaoculta@gmail.com": "Suporte Cúpula 33",
-  "admin@cupula33.com": "Administração Cúpula 33",
-  "sigmamarketing@gmail.com": "Sigma Marketing",
-  "novo_membro_vip@gmail.com": "Membro VIP Cúpula 33",
-  "testealuno@gmail.com": "Aluno Iniciado"
+  "mrobertor057@gmail.com": "Robertto Machado",
+  "paulo-reis51@hotmail.com": "Paulo Reis",
+  "tjoaquim627@gmail.com": "Tamara S Joaquim",
+  "loisianavida123@gmail.com": "Loisiana Lopes",
+  "dweslley2003@gmail.com": "Weslley Dias",
+  "joaomayamarcelo@gmail.com": "João Maya Marcelo",
+  "sigma.mkt.company@gmail.com": "Sigma Marketing",
+  "josecar2neiro@gmail.com": "José de Jesus Carneiro",
+  "lord.von.hoelz.88@gmail.com": "Bruno Di Lourenço",
+  "severino_lucena@hotmail.com": "Severino Lucena",
+  "jersenkayky@gmail.com": "Kayky jersen Santiago Lima",
+  "adv.hjgabriel@gmail.com": "Hugo Jean Gabriel de Paula",
+  "valsolerantoniovalsoler332@gmail.com": "Clovis Antônio valsoler",
+  "samanguero@gmail.com": "Fábio Buainain de Luca"
 };
 /**
  * CÚPULA 33 | PLATAFORMA DE MEMBROS & ACERVO HERMÉTICO PWA
@@ -28,10 +26,10 @@ const KNOWN_STUDENT_NAMES = {
 // 1. BANCO DE DADOS OFICIAL - 55 OBRAS RESTAURADAS COM PDFS E CAPAS EXCLUSIVAS
 // 1. BANCO DE DADOS OFICIAL - 1.335 OBRAS DO ACERVO SAGRADO
 const DEFAULT_LOCAL_BOOKS = [
-  {"id":36,"title":"O Livro de Enoque","author":"Nelson Marins (Edição Revisada)","category":"Gnosticismo & Apócrifos","module":"Módulo III - Gnosticismo & Apócrifos","cover":"assets/books/enoque.png","pdfUrl":"livros_pdf/O_Livro_de_Enoque.pdf","pages":76,"tier":"basico","desc":"Tratado apócrifo milenar sobre os mistérios celestes e a queda dos sentinelas."},
-  {"id":999,"title":"Os Segredos da Prosperidade Maçônica","author":"Acervo Cúpula 33","category":"Sociedades Secretas & Maçonaria","module":"Módulo V - Sociedades Secretas","cover":"assets/covers_extracted/cover_Manuscrito_Maconico_da_Prosperidade_Oculta.jpg","pdfUrl":"livros_pdf/Manuscrito_Maconico_da_Prosperidade_Oculta.pdf","pages":31,"tier":"master","desc":"Segredos usados por maçons para atrair riqueza, prosperidade e influência."},
-  {"id":1,"title":"A Tábua Das Esmeraldas De Thoth","author":"Hermes Trismegisto","category":"Hermetismo & Cabala","module":"Módulo I - Hermetismo & Cabala","cover":"assets/covers_extracted/cover_A_T_bua_Das_Esmeraldas_De_Thoth.jpg","pdfUrl":"livros_pdf/10_A_Tabua_de_Esmeralda_Hermes_Trismegisto.pdf","pages":127,"tier":"basico","desc":"Tratado e manuscrito autêntico preservado em língua portuguesa."},
-  {"id":6,"title":"O Caibalion: As Sete Leis Herméticas","author":"Três Iniciados","category":"Hermetismo & Cabala","module":"Módulo I - Hermetismo & Cabala","cover":"assets/covers_extracted/cover_O_Caibalion_-_Edi__o_Definitiva.jpg","pdfUrl":"livros_pdf/01_O_Caibalion_Tres_Iniciados.pdf","pages":162,"tier":"basico","desc":"Os 7 princípios universais da filosofia hermética."}
+  { "id": 36, "title": "O Livro de Enoque", "author": "Nelson Marins (Edição Revisada)", "category": "Gnosticismo & Apócrifos", "module": "Módulo III - Gnosticismo & Apócrifos", "cover": "assets/books/enoque.png", "pdfUrl": "livros_pdf/O_Livro_de_Enoque.pdf", "pages": 76, "tier": "basico", "desc": "Tratado apócrifo milenar sobre os mistérios celestes e a queda dos sentinelas." },
+  { "id": 999, "title": "Os Segredos da Prosperidade Maçônica", "author": "Acervo Cúpula 33", "category": "Sociedades Secretas & Maçonaria", "module": "Módulo V - Sociedades Secretas", "cover": "assets/covers_extracted/cover_Manuscrito_Maconico_da_Prosperidade_Oculta.jpg", "pdfUrl": "livros_pdf/Manuscrito_Maconico_da_Prosperidade_Oculta.pdf", "pages": 31, "tier": "master", "desc": "Segredos usados por maçons para atrair riqueza, prosperidade e influência." },
+  { "id": 1, "title": "A Tábua Das Esmeraldas De Thoth", "author": "Hermes Trismegisto", "category": "Hermetismo & Cabala", "module": "Módulo I - Hermetismo & Cabala", "cover": "assets/covers_extracted/cover_A_T_bua_Das_Esmeraldas_De_Thoth.jpg", "pdfUrl": "livros_pdf/10_A_Tabua_de_Esmeralda_Hermes_Trismegisto.pdf", "pages": 127, "tier": "basico", "desc": "Tratado e manuscrito autêntico preservado em língua portuguesa." },
+  { "id": 6, "title": "O Caibalion: As Sete Leis Herméticas", "author": "Três Iniciados", "category": "Hermetismo & Cabala", "module": "Módulo I - Hermetismo & Cabala", "cover": "assets/covers_extracted/cover_O_Caibalion_-_Edi__o_Definitiva.jpg", "pdfUrl": "livros_pdf/01_O_Caibalion_Tres_Iniciados.pdf", "pages": 162, "tier": "basico", "desc": "Os 7 princípios universais da filosofia hermética." }
 ];
 
 function getAllBooks() {
@@ -267,7 +265,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 5. Atualizar ícones Lucide
   if (window.lucide) {
-    try { if (window.lucide) lucide.createIcons(); } catch(e) {}
+    try { if (window.lucide) lucide.createIcons(); } catch (e) { }
   }
 });
 
@@ -291,7 +289,7 @@ function updateTierBadgeUI() {
   const accessibleCount = document.getElementById("accessibleCount");
 
   if (typeof updateSidebarUserInfo === "function") {
-    try { updateSidebarUserInfo(); } catch(e) {}
+    try { updateSidebarUserInfo(); } catch (e) { }
   }
 
   if (currentTier === "master") {
@@ -348,13 +346,13 @@ function toggleSidebarCollapse() {
     }
     if (icon) icon.setAttribute("data-lucide", "chevron-left");
   }
-  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
 }
 
 function switchTab(tabName) {
   if (tabName === "books") tabName = "library";
   const allTabs = ["home", "library", "audiobooks", "courses", "community", "profile"];
-  
+
   allTabs.forEach(t => {
     const sec = document.getElementById("tab-" + t);
     const sideBtn = document.getElementById("sideNav-" + t);
@@ -362,7 +360,7 @@ function switchTab(tabName) {
 
     if (t === tabName) {
       if (sec) sec.classList.remove("hidden");
-      
+
       // Sidebar desktop active
       if (sideBtn) {
         sideBtn.className = "w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-xs font-bold text-yellow-400 bg-white/5 border border-yellow-500/40 transition-all text-left cursor-pointer";
@@ -411,7 +409,7 @@ function switchTab(tabName) {
   }
 
   window.scrollTo({ top: 0, behavior: "smooth" });
-  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
 }
 
 // ==========================================
@@ -591,7 +589,7 @@ function getCommunityPosts() {
         cachedCommunityPosts = parsed;
         return parsed;
       }
-    } catch(e) {}
+    } catch (e) { }
   }
   cachedCommunityPosts = JSON.parse(JSON.stringify(CUPULA33_DEFAULT_POSTS));
   localStorage.setItem("cupula33_community_posts_v2", JSON.stringify(cachedCommunityPosts));
@@ -608,7 +606,7 @@ let currentCommunityFilter = "Tudo";
 
 function filterCommunityPosts(category) {
   currentCommunityFilter = category;
-  
+
   document.querySelectorAll(".community-pill").forEach(btn => {
     const f = btn.getAttribute("data-filter");
     if (f === category) {
@@ -642,7 +640,7 @@ function renderCommunityFeed(filter = "Tudo") {
         <p class="text-xs text-gray-500 mt-1">Seja o primeiro a publicar usando o campo acima!</p>
       </div>
     `;
-    if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+    if (window.lucide) try { lucide.createIcons(); } catch (e) { }
     return;
   }
 
@@ -684,7 +682,7 @@ function renderCommunityFeed(filter = "Tudo") {
     </div>
   `).join("");
 
-  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
 }
 
 async function publishCommunityPost() {
@@ -764,7 +762,7 @@ async function publishCommunityPost() {
         localStorage.setItem("cupula33_community_posts_v2", JSON.stringify(posts));
       }
     }
-  } catch(err) {
+  } catch (err) {
     console.warn("Post gravado localmente, sincronizará depois:", err);
   }
 }
@@ -875,7 +873,7 @@ function getMyList() {
     const scoped = localStorage.getItem(`cupula33_my_list_${email}`);
     if (scoped) return JSON.parse(scoped);
     return JSON.parse(localStorage.getItem("cupula33_my_list") || "[]");
-  } catch(e) {
+  } catch (e) {
     return [];
   }
 }
@@ -890,7 +888,7 @@ function toggleCurrentBookMyList() {
   const email = (localStorage.getItem("cupula33_user_email") || "iniciado").trim().toLowerCase();
   const id = Number(currentBookModalData.id);
   let list = getMyList();
-  
+
   if (list.includes(id)) {
     list = list.filter(x => x !== id);
     showToast("Removido da Minha Lista");
@@ -898,11 +896,11 @@ function toggleCurrentBookMyList() {
     list.push(id);
     showToast("Adicionado à Minha Lista");
   }
-  
+
   localStorage.setItem(`cupula33_my_list_${email}`, JSON.stringify(list));
   localStorage.setItem("cupula33_my_list", JSON.stringify(list));
   updateModalBookmarkUI(id);
-  
+
   if (libraryViewMode === "my_list") {
     renderMyListGrid();
   }
@@ -913,7 +911,7 @@ function updateModalBookmarkUI(bookId) {
   const icon = document.getElementById("modalBookmarkIcon");
   const text = document.getElementById("modalBookmarkText");
   if (!btn) return;
-  
+
   const saved = isBookInMyList(bookId);
   if (saved) {
     btn.className = "w-full sm:w-auto py-3 px-4 rounded-xl bg-[#eab308]/20 border border-[#eab308]/60 text-[#eab308] text-xs font-bold flex items-center justify-center gap-2 transition cursor-pointer";
@@ -924,7 +922,7 @@ function updateModalBookmarkUI(bookId) {
     if (text) text.textContent = "Salvar";
     if (icon) icon.className = "w-4 h-4";
   }
-  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
 }
 
 // Criação do Card de Livro Estilo Ordem 137 / Cúpula 33
@@ -932,8 +930,8 @@ function createBookCardHTML(book, isCarousel) {
   const isLocked = currentTier === "basico" && book.tier === "master";
   const savedProg = getSavedProgress(book.id);
   const progPercent = savedProg && book.pages ? Math.min(100, Math.round((savedProg.page / book.pages) * 100)) : 0;
-  
-  const containerClass = isCarousel 
+
+  const containerClass = isCarousel
     ? "flex-none w-[120px] sm:w-[140px] cursor-pointer group snap-start select-none transition-transform duration-200 active:scale-95 text-left"
     : "cursor-pointer group select-none transition-transform duration-200 active:scale-95 text-left";
 
@@ -947,7 +945,7 @@ function createBookCardHTML(book, isCarousel) {
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
 
         <!-- Botão de Detalhes (i) -->
-        <button type="button" onclick="event.stopPropagation(); openBookDetailsModal('${book.id}')" class="absolute top-2 right-2 z-20 w-6 h-6 rounded-full bg-black/85 hover:bg-[#D4AF37] text-yellow-400 hover:text-black border border-yellow-500/50 flex items-center justify-center transition-all shadow-[0_0_10px_rgba(212,175,55,0.3)] active:scale-90 cursor-pointer" title="Ver Detalhes">
+        <button type="button" onclick="event.stopPropagation(); openBookDetailsModal('${book.id}')" class="absolute top-2 right-2 z-20 w-6 h-6 rounded-full bg-black/75 hover:bg-yellow-500 hover:text-black text-gray-300 border border-white/20 flex items-center justify-center transition-all shadow-md active:scale-90 cursor-pointer" title="Ver Detalhes">
           <i data-lucide="info" class="w-3 h-3"></i>
         </button>
 
@@ -1048,7 +1046,7 @@ function renderCollections() {
     </div>
   `).join("");
 
-  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
 }
 
 function renderBooks() {
@@ -1095,7 +1093,7 @@ function renderBooks() {
     renderMyListGrid();
   }
 
-  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
 }
 
 // Ordem canônica exata das categorias (conforme prints do app Ordem 137)
@@ -1309,15 +1307,11 @@ function renderLibraryStreaming() {
 
     rowsContainer.innerHTML = `
       ${grausRowsHTML}
-      <div class="flex items-center gap-3 pt-4 pb-2 border-t border-white/10">
-        <div class="w-1.5 h-5 bg-yellow-500 rounded-full"></div>
-        <h3 class="text-sm font-serif font-bold text-gray-300 uppercase tracking-wider">Acervo por Categorias & Tradições</h3>
-      </div>
       ${categoriesRowsHTML}
     `;
   }
 
-  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
 }
 
 // 2. Renderiza a Grade de Vias de Estudo ("Selecione uma via")
@@ -1350,7 +1344,7 @@ function renderCategoriesGrid() {
     `;
   }).join("");
 
-  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
 }
 
 // 3. Renderiza a Grade Completa da Categoria Selecionada
@@ -1361,8 +1355,8 @@ function renderCategoryDetailGrid(categoryName) {
   const filtered = all.filter(b => {
     const cat = getBookCleanCategory(b);
     return cat.toLowerCase() === categoryName.toLowerCase() ||
-           (b.category && b.category.toLowerCase().includes(categoryName.toLowerCase())) ||
-           (b.module && b.module.toLowerCase().includes(categoryName.toLowerCase()));
+      (b.category && b.category.toLowerCase().includes(categoryName.toLowerCase())) ||
+      (b.module && b.module.toLowerCase().includes(categoryName.toLowerCase()));
   });
 
   if (filtered.length === 0) {
@@ -1371,7 +1365,7 @@ function renderCategoryDetailGrid(categoryName) {
   }
 
   grid.innerHTML = filtered.map(b => createBookCardHTML(b, false)).join("");
-  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
 }
 
 // 4. Renderiza Resultados da Busca
@@ -1395,7 +1389,7 @@ function handleSearchInput(query) {
 
   if (termSpan) termSpan.textContent = `"${q}"`;
 
-  const results = booksData.filter(b => 
+  const results = booksData.filter(b =>
     b.title.toLowerCase().includes(q) ||
     b.author.toLowerCase().includes(q) ||
     b.category.toLowerCase().includes(q) ||
@@ -1417,7 +1411,7 @@ function handleSearchInput(query) {
     }
   }
 
-  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
 }
 
 function clearSearch() {
@@ -1445,12 +1439,12 @@ function renderMyListGrid() {
         </button>
       </div>
     `;
-    if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+    if (window.lucide) try { lucide.createIcons(); } catch (e) { }
     return;
   }
 
   grid.innerHTML = savedBooks.map(b => createBookCardHTML(b, false)).join("");
-  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
 }
 
 // ==========================================
@@ -1461,14 +1455,14 @@ function filterLibraryByGrau(grau) {
 
   // Atualizar visual dos botões de Grau
   document.querySelectorAll(".grau-pill-btn").forEach(btn => {
-    btn.classList.remove("bg-gradient-to-r", "from-[#D4AF37]", "to-[#E5C158]", "text-black", "font-black", "shadow-[0_0_15px_rgba(212,175,55,0.4)]", "bg-yellow-500", "font-bold", "shadow-md");
+    btn.classList.remove("bg-yellow-500", "text-black", "font-bold", "shadow-md");
     btn.classList.add("bg-white/5", "text-gray-300", "border", "border-white/10");
   });
 
   const activeBtn = document.getElementById("btnGrau-" + grau);
   if (activeBtn) {
     activeBtn.classList.remove("bg-white/5", "text-gray-300", "border", "border-white/10");
-    activeBtn.classList.add("bg-gradient-to-r", "from-[#D4AF37]", "to-[#E5C158]", "text-black", "font-black", "shadow-[0_0_15px_rgba(212,175,55,0.4)]");
+    activeBtn.classList.add("bg-yellow-500", "text-black", "font-bold", "shadow-md");
   }
 
   if (grau === "all" || !grau) {
@@ -1536,7 +1530,7 @@ function filterLibraryByGrau(grau) {
     }
   }
 
-  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -1607,7 +1601,7 @@ function openBookModal(book) {
   const pText = document.getElementById("modalProgressPercent");
 
   if (cover) cover.src = book.cover;
-  
+
   // Categoria limpa conforme print (ex: ALQUIMIA)
   let cleanCat = typeof getBookCleanCategory === "function" ? getBookCleanCategory(book) : (book.category || "ACERVO");
   if (cat) cat.textContent = cleanCat.toUpperCase();
@@ -1622,7 +1616,7 @@ function openBookModal(book) {
 
   updateModalBookmarkUI(book.id);
   openModal("bookModal");
-  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
 }
 
 function openBookCommunityDiscussions() {
@@ -1720,7 +1714,7 @@ function setUserLevel(email, newLevel) {
 function resolveUserIdentity() {
   const currentEmail = (localStorage.getItem("cupula33_user_email") || "").trim().toLowerCase();
   const userLevel = getUserLevel(currentEmail);
-  
+
   // 1. Nome customizado salvo pelo aluno
   const customKey = currentEmail ? "cupula33_custom_name_" + currentEmail : "cupula33_custom_name";
   const customName = localStorage.getItem(customKey) || localStorage.getItem("cupula33_custom_name");
@@ -1770,7 +1764,7 @@ function resolveUserIdentity() {
 function updateAllUserDisplays() {
   const user = resolveUserIdentity();
   const grauProg = typeof calculateUserGrauProgress === "function" ? calculateUserGrauProgress(user.email || "") : { grauNum: 1, grauLabel: "Grau I • Neófito" };
-  
+
   // Sidebar Desktop & Mobile
   const sName = document.getElementById("sidebarUserName");
   const sTier = document.getElementById("sidebarTierLabel");
@@ -1822,7 +1816,7 @@ window.addEventListener("DOMContentLoaded", () => {
   try {
     updateSidebarUserInfo();
     updateProsperidadeCardUI();
-  } catch(e) {}
+  } catch (e) { }
 });
 
 function handleBookClick(bookId) {
@@ -1883,7 +1877,7 @@ function switchModalTab(tab) {
       audioBtn.className = "flex-1 py-2 rounded-xl text-xs font-bold bg-gold-500 text-black flex items-center justify-center gap-1.5 transition";
     }
   }
-  if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch (e) { }
 }
 
 // AJUSTE DE PÁGINA NO MODAL
@@ -1926,7 +1920,7 @@ function onReaderPageInputChange(val) {
   if (!currentBookModalData) return;
   const page = Math.max(1, Math.min(currentBookModalData.pages, parseInt(val) || 1));
   saveReadingProgress(currentBookModalData.id, page, currentBookModalData.pages);
-  
+
   // Atualiza também os displays do bookModal
   const modalInput = document.getElementById("modalPageInput");
   if (modalInput) modalInput.value = page;
@@ -2087,7 +2081,7 @@ async function openReaderModal(book, startPage) {
       nativeContainer.classList.remove("hidden");
       nativeContainer.style.display = "block";
     }
-    
+
     await renderNativePDF(targetUrl, startPage);
   } else {
     showToast("Carregando visualizador...");
@@ -2111,7 +2105,7 @@ async function getSignedSupabaseUrl(filePathOrUrl) {
         return parsed.url;
       }
     }
-  } catch(e) {}
+  } catch (e) { }
 
   try {
     const token = await getOrdemAuthToken();
@@ -2134,11 +2128,11 @@ async function getSignedSupabaseUrl(filePathOrUrl) {
             url: fullUrl,
             exp: Date.now() + 2500000 * 1000
           }));
-        } catch(e) {}
+        } catch (e) { }
         return fullUrl;
       }
     }
-  } catch(e) {
+  } catch (e) {
     console.warn("Falha ao assinar URL Supabase:", e);
   }
   return null;
@@ -2169,7 +2163,7 @@ async function getOrdemAuthToken() {
       tokenExpiryTime = now + 3500 * 1000;
       return cachedOrdemToken;
     }
-  } catch(e) {
+  } catch (e) {
     console.warn("Usando anonKey para nuvem:", e);
   }
   return anonKey;
@@ -2208,7 +2202,7 @@ async function renderNativePDF(pdfUrl, startPage = 1) {
       let signedUrl = null;
       try {
         signedUrl = await getSignedSupabaseUrl(pdfUrl);
-      } catch(e) {}
+      } catch (e) { }
 
       if (signedUrl) {
         pdfParam = {
@@ -2247,7 +2241,7 @@ async function renderNativePDF(pdfUrl, startPage = 1) {
     const loadingTask = pdfjsLib.getDocument(pdfParam);
 
     if (loadingTask.onProgress) {
-      loadingTask.onProgress = function(progress) {
+      loadingTask.onProgress = function (progress) {
         if (progress && progress.total > 0 && spinnerText) {
           const pct = Math.min(99, Math.round((progress.loaded / progress.total) * 100));
           const mbLoaded = (progress.loaded / (1024 * 1024)).toFixed(1);
@@ -2275,7 +2269,7 @@ async function renderNativePDF(pdfUrl, startPage = 1) {
       ]);
       const sampleViewport = samplePage.getViewport({ scale: 1 });
       ratio = sampleViewport.height / sampleViewport.width;
-    } catch(e) {
+    } catch (e) {
       console.warn('Usando ratio padrão 1.414:', e);
     }
 
@@ -2439,7 +2433,7 @@ function changeReaderPage(delta) {
   if (!currentBookModalData) return;
   const total = currentBookModalData.pages || 100;
   currentReaderPage = Math.max(1, Math.min(total, currentReaderPage + delta));
-  
+
   updateReaderDisplay(currentBookModalData, currentReaderPage);
   saveReadingProgress(currentBookModalData.id, currentReaderPage, total);
 
@@ -2458,7 +2452,7 @@ function markCurrentBookCompleted() {
   if (!currentBookModalData) return;
   const total = currentBookModalData.pages || 100;
   currentReaderPage = total;
-  
+
   updateReaderDisplay(currentBookModalData, total);
   saveReadingProgress(currentBookModalData.id, total, total);
   showToast("Parabéns! Obra concluída e +50 XP adicionados ao seu grau!");
@@ -2497,11 +2491,11 @@ function getSavedProgress(bookId) {
   }
   try {
     const cleanEmail = (localStorage.getItem("cupula33_user_email") || "").trim().toLowerCase();
-  const allHistory = typeof MemberDatabase !== "undefined"
-    ? MemberDatabase.getAllProgress(cleanEmail)
-    : JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
+    const allHistory = typeof MemberDatabase !== "undefined"
+      ? MemberDatabase.getAllProgress(cleanEmail)
+      : JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
     return allHistory[String(bookId)] || allHistory[Number(bookId)] || null;
-  } catch(e) {
+  } catch (e) {
     return null;
   }
 }
@@ -2529,7 +2523,7 @@ function checkReadingProgress() {
     if (rText) rText.textContent = "Página " + data.page + " de " + data.totalPages + " • " + data.percent + "% Concluído";
     if (rBar) rBar.style.width = data.percent + "%";
     section.classList.remove("hidden");
-    if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+    if (window.lucide) try { lucide.createIcons(); } catch (e) { }
   } catch (err) {
     section.classList.add("hidden");
   }
@@ -2576,7 +2570,7 @@ function renderContinueReading() {
     libCarousel.innerHTML = cardsHTML;
     libSection.classList.remove("hidden");
   }
-  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
 }
 
 function calculateUserGrauProgress(cleanEmail) {
@@ -2586,7 +2580,7 @@ function calculateUserGrauProgress(cleanEmail) {
   } else {
     try {
       allHistory = JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
-    } catch(e) {}
+    } catch (e) { }
   }
 
   const allBooks = getAllBooks();
@@ -2706,7 +2700,7 @@ function renderProfileGrausRoadmap(prog) {
     const isCurrent = prog.grauNum === g.num;
     const isUnlocked = prog.grauNum >= g.num;
     const gStats = prog.byGrau && prog.byGrau[g.num] ? prog.byGrau[g.num] : { completed: 0, pagesRead: 0 };
-    
+
     let statusBadge = '';
     if (prog.grauNum > g.num) {
       statusBadge = `<span class="px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold">✓ Grau Consagrado</span>`;
@@ -2746,12 +2740,12 @@ function renderProfileGrausRoadmap(prog) {
     `;
   }).join("");
 
-  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
 }
 
 function updateProfileXP() {
   const cleanEmail = (localStorage.getItem("cupula33_user_email") || "").trim().toLowerCase();
-  
+
   // Resgata o histórico isolado de leitura do aluno
   let allHistory = {};
   if (typeof MemberDatabase !== "undefined") {
@@ -2759,11 +2753,11 @@ function updateProfileXP() {
   } else {
     try {
       allHistory = JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
-    } catch(e) {}
+    } catch (e) { }
   }
 
   const entries = Object.values(allHistory || {});
-  
+
   let totalPagesRead = 0;
   let completedCount = 0;
 
@@ -2773,7 +2767,7 @@ function updateProfileXP() {
   });
 
   const totalXP = (totalPagesRead * 2) + (completedCount * 50);
-  
+
   // Regra de Ouro: Todo aluno novo começa no Nível 1
   const earnedLevel = Math.max(1, Math.floor(totalXP / 300) + 1);
   const baseLevel = getUserLevel(cleanEmail);
@@ -2830,7 +2824,7 @@ function resumeLastReading() {
     if (book) {
       openReaderModal(book, data.page);
     }
-  } catch(e) {}
+  } catch (e) { }
 }
 
 function clearReadingProgress() {
@@ -2931,7 +2925,7 @@ function updateAudiobookControlsUI(playing) {
   const status = document.getElementById("audiobookStatus");
   if (icon) {
     icon.setAttribute("data-lucide", playing ? "pause" : "play");
-    if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
+    if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch (e) { }
   }
   if (status) {
     status.textContent = playing ? "Reproduzindo narração com frequência de fundo 432Hz..." : "Reprodução pausada.";
@@ -2980,7 +2974,7 @@ function stopAudiobookAmbientDrone() {
         }
       }, 500);
     }
-  } catch (err) {}
+  } catch (err) { }
 }
 
 // BAIXAR ÁUDIO DO AUDIOBOOK PARA SMARTPHONE
@@ -3091,7 +3085,7 @@ const MemberDatabase = {
   getAllClientsIndex() {
     try {
       return JSON.parse(localStorage.getItem("cupula33_all_clients") || "{}");
-    } catch(e) {
+    } catch (e) {
       return {};
     }
   },
@@ -3133,7 +3127,7 @@ const MemberDatabase = {
     try {
       const stored = localStorage.getItem(key);
       if (stored) return JSON.parse(stored);
-    } catch(e) {}
+    } catch (e) { }
 
     const knownName = (typeof KNOWN_STUDENT_NAMES !== "undefined" && KNOWN_STUDENT_NAMES[clean]) || "";
     const savedLevel = localStorage.getItem("cupula33_user_level_" + clean) || 1;
@@ -3198,7 +3192,7 @@ const MemberDatabase = {
     try {
       const scoped = localStorage.getItem(scopedKey);
       if (scoped) return JSON.parse(scoped);
-    } catch(e) {}
+    } catch (e) { }
     // Novo cliente sempre inicia com progresso limpo e isolado
     return {};
   },
@@ -3228,44 +3222,44 @@ function renderFrequencies() {
   const list = document.getElementById("frequenciesList");
   if (!list) return;
 
-  // Renderização harmoniosa com símbolos sagrados rigorosamente enquadrados
+  // Renderização harmoniosa com símbolos sagrados e proporção perfeita
   list.innerHTML = frequenciesData.map(f => {
     const isPlaying = activeFrequencyHz === f.hz;
     return `
       <div id="freq-card-${f.hz}" onclick="handleFrequencyClick(${f.hz}, event)" 
-        class="esoteric-card rounded-2xl p-4 sm:p-5 border ${isPlaying ? 'border-yellow-500 shadow-[0_0_25px_rgba(234,179,8,0.25)] bg-yellow-500/5 ring-1 ring-yellow-500/50' : 'border-white/10 hover:border-yellow-500/40 bg-[#0d0d0d]'} flex flex-col justify-between transition-all duration-300 cursor-pointer group hover:-translate-y-0.5">
+        class="esoteric-card rounded-2xl p-4 sm:p-5 border ${isPlaying ? 'border-yellow-500 shadow-[0_0_30px_rgba(234,179,8,0.25)] bg-yellow-500/5 ring-1 ring-yellow-500/50' : 'border-white/10 hover:border-yellow-500/40 bg-[#0d0d0d]'} flex flex-col justify-between transition-all duration-300 cursor-pointer group hover:-translate-y-0.5">
         
         <div>
-          <!-- Topo do Card: Símbolo Sagrado Autoral (Enquadrado 48x48) + Badges -->
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-12 h-12 min-w-[48px] max-w-[48px] h-[48px] max-h-[48px] rounded-xl bg-black border ${isPlaying ? 'border-yellow-500 shadow-[0_0_10px_rgba(234,179,8,0.4)]' : 'border-white/10 group-hover:border-yellow-500/40'} p-1.5 flex items-center justify-center shrink-0 relative overflow-hidden transition-all duration-300">
-              <img src="${f.symbol}" alt="${f.name}" class="w-full h-full object-contain ${isPlaying ? 'scale-110 drop-shadow-[0_0_6px_rgba(234,179,8,0.8)]' : 'group-hover:scale-105'} transition-transform duration-300">
+          <!-- Topo do Card: Símbolo Sagrado Autoral + Badges -->
+          <div class="flex items-center gap-3.5 mb-3.5">
+            <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-black border ${isPlaying ? 'border-yellow-500 shadow-[0_0_15px_rgba(234,179,8,0.3)]' : 'border-white/10 group-hover:border-yellow-500/40'} p-1.5 flex items-center justify-center shrink-0 shadow-md relative overflow-hidden transition-all duration-300" style="width: 44px; height: 44px; min-width: 44px; min-height: 44px; max-width: 44px; max-height: 44px;">
+              <img src="${f.symbol}" alt="${f.name}" class="w-full h-full object-contain pointer-events-none ${isPlaying ? 'scale-110 drop-shadow-[0_0_8px_rgba(234,179,8,0.8)]' : 'group-hover:scale-105'} transition-transform duration-300" style="max-width: 100%; max-height: 100%; display: block;">
               ${isPlaying ? '<div class="absolute inset-0 bg-yellow-500/10 pointer-events-none animate-pulse"></div>' : ''}
             </div>
 
             <div class="flex-1 min-w-0">
-              <div class="flex items-center justify-between gap-1 mb-1">
+              <div class="flex items-center gap-2 mb-1">
                 <span class="text-xs font-mono font-black text-yellow-400 px-2 py-0.5 rounded-md bg-yellow-500/15 border border-yellow-500/30 shrink-0">${f.hz} HZ</span>
                 <span class="text-[9px] font-mono text-gray-500 uppercase tracking-widest truncate">${f.chakra}</span>
               </div>
               <h4 class="font-serif font-bold text-sm text-white group-hover:text-yellow-400 transition-colors truncate">${f.name}</h4>
+              <p class="text-[10px] text-gray-400 font-medium truncate">${f.subtitle || ''}</p>
             </div>
           </div>
 
-          <!-- Subtítulo e Benefício -->
-          <p class="text-[11px] text-yellow-500/80 font-medium truncate mb-1.5">${f.subtitle || ''}</p>
-          <p class="text-[11px] sm:text-xs text-gray-400 leading-relaxed mb-4 line-clamp-2">${f.benefit}</p>
+          <!-- Descrição Concisa e Proporcional -->
+          <p class="text-[11px] sm:text-xs text-gray-300/90 leading-relaxed mb-4 line-clamp-2">${f.benefit}</p>
         </div>
 
         <!-- Rodapé do Card com Status e Botão com Feedback Fiel -->
         <div class="pt-3 border-t border-white/5 flex items-center justify-between gap-2">
           <div class="flex items-center gap-1.5 text-[10px] text-gray-500 font-mono">
             <span class="w-1.5 h-1.5 rounded-full ${isPlaying ? 'bg-yellow-400 animate-ping' : 'bg-gray-600'}"></span>
-            <span>${isPlaying ? 'Onda Ativa' : 'Onda Binaural'}</span>
+            <span>${isPlaying ? 'Onda Senoidal Ativa' : 'Onda Binaural'}</span>
           </div>
 
           <button id="freq-btn-${f.hz}" 
-            class="px-4 py-1.5 rounded-xl ${isPlaying ? 'bg-gradient-to-r from-[#D4AF37] to-[#E5C158] text-black font-black shadow-lg shadow-yellow-500/30' : 'bg-white/5 text-gray-300 group-hover:bg-gradient-to-r group-hover:from-[#D4AF37] group-hover:to-[#E5C158] group-hover:text-black font-bold border border-white/10'} text-xs flex items-center gap-1.5 transition-all duration-200 pointer-events-none shrink-0">
+            class="px-4 py-1.5 rounded-xl ${isPlaying ? 'bg-yellow-500 text-black font-black shadow-lg shadow-yellow-500/30' : 'bg-white/5 text-gray-300 group-hover:bg-yellow-500 group-hover:text-black font-bold border border-white/10'} text-xs flex items-center gap-1.5 transition-all duration-200 pointer-events-none shrink-0">
             <i data-lucide="${isPlaying ? 'pause' : 'play'}" class="w-3.5 h-3.5 fill-current"></i>
             <span>${isPlaying ? 'Tocando' : 'Ouvir'}</span>
           </button>
@@ -3275,7 +3269,7 @@ function renderFrequencies() {
     `;
   }).join("");
 
-  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
 }
 
 function updateFrequencyUI(currentActiveHz) {
@@ -3286,7 +3280,7 @@ function updateFrequencyUI(currentActiveHz) {
 
     if (card) {
       if (isPlaying) {
-        card.className = "esoteric-card rounded-2xl p-4 sm:p-5 border border-yellow-500 shadow-[0_0_25px_rgba(234,179,8,0.25)] bg-yellow-500/5 ring-1 ring-yellow-500/50 flex flex-col justify-between transition-all duration-300 cursor-pointer group";
+        card.className = "esoteric-card rounded-2xl p-4 sm:p-5 border border-yellow-500 shadow-[0_0_30px_rgba(234,179,8,0.25)] bg-yellow-500/5 ring-1 ring-yellow-500/50 flex flex-col justify-between transition-all duration-300 cursor-pointer group";
       } else {
         card.className = "esoteric-card rounded-2xl p-4 sm:p-5 border border-white/10 hover:border-yellow-500/40 bg-[#0d0d0d] flex flex-col justify-between transition-all duration-300 cursor-pointer group hover:-translate-y-0.5";
       }
@@ -3294,10 +3288,10 @@ function updateFrequencyUI(currentActiveHz) {
 
     if (btn) {
       if (isPlaying) {
-        btn.className = "px-4 py-1.5 rounded-xl bg-gradient-to-r from-[#D4AF37] to-[#E5C158] text-black font-black shadow-lg shadow-yellow-500/30 text-xs flex items-center gap-1.5 transition-all duration-200 pointer-events-none shrink-0";
+        btn.className = "px-4 py-1.5 rounded-xl bg-yellow-500 text-black font-black shadow-lg shadow-yellow-500/30 text-xs flex items-center gap-1.5 transition-all duration-200 pointer-events-none shrink-0";
         btn.innerHTML = `<i data-lucide="pause" class="w-3.5 h-3.5 fill-current"></i><span>Tocando</span>`;
       } else {
-        btn.className = "px-4 py-1.5 rounded-xl bg-white/5 text-gray-300 group-hover:bg-gradient-to-r group-hover:from-[#D4AF37] group-hover:to-[#E5C158] group-hover:text-black font-bold border border-white/10 text-xs flex items-center gap-1.5 transition-all duration-200 pointer-events-none shrink-0";
+        btn.className = "px-4 py-1.5 rounded-xl bg-white/5 text-gray-300 group-hover:bg-yellow-500 group-hover:text-black font-bold border border-white/10 text-xs flex items-center gap-1.5 transition-all duration-200 pointer-events-none shrink-0";
         btn.innerHTML = `<i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i><span>Ouvir</span>`;
       }
     }
@@ -3315,7 +3309,7 @@ function updateFrequencyUI(currentActiveHz) {
     if (waveBox) waveBox.classList.add("wave-paused");
   }
 
-  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
 }
 
 let lastFrequencyToggleTime = 0;
@@ -3362,11 +3356,11 @@ async function playFrequency(hz, name) {
       try {
         osc.stop();
         osc.disconnect();
-      } catch(e) {}
+      } catch (e) { }
     });
   }
   if (masterGainNode) {
-    try { masterGainNode.disconnect(); } catch(e) {}
+    try { masterGainNode.disconnect(); } catch (e) { }
     masterGainNode = null;
   }
 
@@ -3439,7 +3433,7 @@ function stopFrequency(showFeedback = true) {
       const now = audioCtx.currentTime;
       gainToRamp.gain.setValueAtTime(gainToRamp.gain.value, now);
       gainToRamp.gain.linearRampToValueAtTime(0.0001, now + 0.08);
-    } catch(e) {}
+    } catch (e) { }
   }
 
   stopFrequencyTimeout = setTimeout(() => {
@@ -3447,10 +3441,10 @@ function stopFrequency(showFeedback = true) {
       try {
         osc.stop();
         osc.disconnect();
-      } catch(e) {}
+      } catch (e) { }
     });
     if (gainToRamp) {
-      try { gainToRamp.disconnect(); } catch(e) {}
+      try { gainToRamp.disconnect(); } catch (e) { }
     }
     stopFrequencyTimeout = null;
   }, 90);
@@ -3468,7 +3462,7 @@ function getRoadmapCompleted() {
     const scoped = localStorage.getItem(`cupula33_roadmap_completed_${cleanEmail}`);
     if (scoped) return JSON.parse(scoped);
     return JSON.parse(localStorage.getItem("cupula33_roadmap_completed") || "[]");
-  } catch(e) {
+  } catch (e) {
     return [];
   }
 }
@@ -3508,7 +3502,7 @@ function renderRoadmap() {
     `;
   }).join("");
 
-  if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch (e) { }
 }
 
 function toggleRoadmapGrade(grade) {
@@ -3640,29 +3634,38 @@ const SUPABASE_CONFIG = {
   localVerifyApi: "http://127.0.0.1:8033/api/verify"
 };
 
+const BASIC_ALLOWLIST = [
+  "valsolerantoniovalsoler332@gmail.com"
+];
+
 const MASTER_ALLOWLIST = [
-  "severino_lucena@hotmail.com",
-  "lord.von.hoelz.88@gmail.com",
-  "josecar2neiro@gmail.com",
-  "sigma.mkt.company@gmail.com",
-  "joaomayamarcelo@gmail.com",
-  "dweslley2003@gmail.com",
-  "loisianavida123@gmail.com",
-  "tjoaquim627@gmail.com",
-  "paulo-reis51@hotmail.com",
-  "mrobertor057@gmail.com",
-  "crazyled.delavelle9@gmail.com",
-  "edurosalopes@vivaldi.net",
-  "testealuno@gmail.com",
-  "cliente@example.com",
   "suportesabedoriaoculta@gmail.com",
   "admin@cupula33.com",
   "sigmamarketing@gmail.com",
-  "teste@cupula33.com"
+  "teste@cupula33.com",
+  "novo_membro_vip@gmail.com",
+  "testealuno@gmail.com",
+  "cliente@example.com",
+  "edurosalopes@vivaldi.net",
+  "crazyled.delavelle9@gmail.com",
+  "mrobertor057@gmail.com",
+  "paulo-reis51@hotmail.com",
+  "tjoaquim627@gmail.com",
+  "loisianavida123@gmail.com",
+  "dweslley2003@gmail.com",
+  "joaomayamarcelo@gmail.com",
+  "sigma.mkt.company@gmail.com",
+  "josecar2neiro@gmail.com",
+  "lord.von.hoelz.88@gmail.com",
+  "severino_lucena@hotmail.com",
+  "jersenkayky@gmail.com",
+  "adv.hjgabriel@gmail.com",
+  "samanguero@gmail.com"
 ];
 
 // LISTA DE INICIADOS QUE ADQUIRIRAM O ORDER BUMP DA PROSPERIDADE MAÇÔNICA
 const ORDERBUMP_PROSPERIDADE_ALLOWLIST = [
+  "jersenkayky@gmail.com",
   "josecar2neiro@gmail.com",
   "sigma.mkt.company@gmail.com",
   "tjoaquim627@gmail.com",
@@ -3684,7 +3687,7 @@ function openCourseStructureModal() {
   const modal = document.getElementById("courseStructureModal");
   if (modal) {
     modal.classList.remove("hidden");
-    if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+    if (window.lucide) try { lucide.createIcons(); } catch (e) { }
   }
 }
 
@@ -3708,7 +3711,7 @@ function toggleCourseDesc() {
     f.classList.remove("hidden");
     if (btn) btn.innerHTML = `<span>LER MENOS</span><i data-lucide="chevron-up" class="w-3.5 h-3.5"></i>`;
   }
-  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
 }
 
 function toggleModalDesc() {
@@ -3726,7 +3729,7 @@ function toggleModalDesc() {
     f.classList.remove("hidden");
     if (btn) btn.innerHTML = `<span>LER MENOS</span><i data-lucide="chevron-up" class="w-3 h-3"></i>`;
   }
-  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
 }
 
 function toggleModuleAccordion() {
@@ -3740,7 +3743,7 @@ function toggleModuleAccordion() {
     } else {
       icon.setAttribute("data-lucide", "chevron-up");
     }
-    if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+    if (window.lucide) try { lucide.createIcons(); } catch (e) { }
   }
 }
 
@@ -3751,7 +3754,7 @@ function openCourseLockedNotice(courseTitle = "O Núcleo") {
     const titleEl = document.getElementById("courseLockedModalTitle");
     if (titleEl) titleEl.textContent = courseTitle;
     modal.classList.remove("hidden");
-    if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+    if (window.lucide) try { lucide.createIcons(); } catch (e) { }
   } else {
     showToast("Conteúdo reservado aos alunos de O Núcleo.");
   }
@@ -3764,14 +3767,14 @@ function closeCourseLockedModal() {
 
 function openOrderBumpModal() {
   openModal("orderBumpModal");
-  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
 }
 
 function updateProsperidadeCardUI() {
   const badge = document.getElementById("homeProsperidadeBadge");
   const lock = document.getElementById("homeProsperidadeCoverLock");
   const hasBump = userHasOrderBumpProsperidade();
-  
+
   if (badge) {
     if (hasBump) {
       badge.className = "inline-flex items-center gap-1.5 text-yellow-400 text-[10px] font-bold uppercase tracking-wider mb-1.5";
@@ -3788,7 +3791,7 @@ function updateProsperidadeCardUI() {
       lock.classList.remove("hidden");
     }
   }
-  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
 }
 
 function closeVipGateIfAuth() {
@@ -3823,7 +3826,9 @@ function checkVipGateAuth() {
   }
 
   if (savedEmail && !forceLogin) {
-    if (savedTier === "master") {
+    if (BASIC_ALLOWLIST.includes(savedEmail) || savedTier === "basico") {
+      currentTier = "basico";
+    } else if (savedTier === "master") {
       currentTier = "master";
     }
     // Sincroniza permissão do order bump
@@ -3838,10 +3843,10 @@ function checkVipGateAuth() {
     localStorage.setItem("cupula33_user_level_" + savedEmail, String(studentLevel));
     localStorage.setItem("cupula33_user_level", String(studentLevel));
 
-    try { updateTierBadgeUI(); } catch(e) {}
-    try { updateProsperidadeCardUI(); } catch(e) {}
-    try { updateAllUserDisplays(); } catch(e) {}
-    try { updateProfileXP(); } catch(e) {}
+    try { updateTierBadgeUI(); } catch (e) { }
+    try { updateProsperidadeCardUI(); } catch (e) { }
+    try { updateAllUserDisplays(); } catch (e) { }
+    try { updateProfileXP(); } catch (e) { }
     gate.style.opacity = "0";
     gate.style.pointerEvents = "none";
     setTimeout(() => {
@@ -3865,7 +3870,12 @@ function checkVipGateAuth() {
 
 async function verifyMemberInSupabase(email) {
   const cleanEmail = String(email || "").trim().toLowerCase();
-  
+
+  // 0. Checagem se for aluno no plano Básico
+  if (typeof BASIC_ALLOWLIST !== "undefined" && BASIC_ALLOWLIST.includes(cleanEmail)) {
+    return { authorized: true, tier: "basico", level: 1, has_prosperidade: false };
+  }
+
   // 1. Checagem imediata na whitelist embutida
   if (MASTER_ALLOWLIST.includes(cleanEmail) || cleanEmail.endsWith("@cupula33.com")) {
     const hasBump = ORDERBUMP_PROSPERIDADE_ALLOWLIST.includes(cleanEmail);
@@ -3898,7 +3908,7 @@ async function verifyMemberInSupabase(email) {
         return { authorized: true, tier: data.tier || "master", level: data.level || 1, has_prosperidade: false };
       }
     }
-  } catch (e) {}
+  } catch (e) { }
 
   return { authorized: false };
 }
@@ -3922,7 +3932,7 @@ async function authenticateGateLogin() {
   if (btn) {
     btn.disabled = true;
     btn.innerHTML = `<i data-lucide="loader" class="w-4 h-4 animate-spin"></i><span>Consultando no Supabase...</span>`;
-    if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
+    if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch (e) { }
   }
 
   if (statusMsg) {
@@ -3939,8 +3949,13 @@ async function authenticateGateLogin() {
   const passInput = document.getElementById("gatePasswordInput");
   const passValue = passInput ? passInput.value.trim() : "";
 
-  // 1. Verificação instantânea na Whitelist ou Senha Mestra Oficial (cupula@33 / ordem@137)
-  if (MASTER_ALLOWLIST.includes(cleanEmail) || cleanEmail.endsWith("@cupula33.com") || passValue === "cupula@33" || passValue === "ordem@137") {
+  // 1. Verificação instantânea na Whitelist (Básico ou Master)
+  if (typeof BASIC_ALLOWLIST !== "undefined" && BASIC_ALLOWLIST.includes(cleanEmail)) {
+    authorized = true;
+    userTier = "basico";
+    userHasBump = false;
+    userLevel = 1;
+  } else if (MASTER_ALLOWLIST.includes(cleanEmail) || cleanEmail.endsWith("@cupula33.com") || passValue === "cupula@33" || passValue === "ordem@137") {
     authorized = true;
     userTier = "master";
     userHasBump = ORDERBUMP_PROSPERIDADE_ALLOWLIST.includes(cleanEmail);
@@ -3956,7 +3971,7 @@ async function authenticateGateLogin() {
     }
   }
 
-    if (authorized) {
+  if (authorized) {
     localStorage.setItem("cupula33_user_email", cleanEmail);
     localStorage.setItem("cupula33_user_tier", userTier);
     localStorage.setItem("cupula33_has_prosperidade", userHasBump ? "true" : "false");
@@ -3994,9 +4009,9 @@ async function authenticateGateLogin() {
       statusMsg.textContent = "✓ Acesso Autorizado! Carregando Acervo Sagrado...";
     }
 
-    try { updateTierBadgeUI(); } catch(e) {}
-    try { updateProsperidadeCardUI(); } catch(e) {}
-    try { renderBooks(); } catch(e) {}
+    try { updateTierBadgeUI(); } catch (e) { }
+    try { updateProsperidadeCardUI(); } catch (e) { }
+    try { renderBooks(); } catch (e) { }
 
     // Fecha o portal de login imediatamente
     const gate = document.getElementById("vipLoginGate");
@@ -4017,7 +4032,7 @@ async function authenticateGateLogin() {
   if (btn) {
     btn.disabled = false;
     btn.innerHTML = `<i data-lucide="lock-open" class="w-4 h-4"></i><span>Entrar no Acervo Sagrado</span>`;
-    if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
+    if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch (e) { }
   }
 }
 
@@ -4077,11 +4092,11 @@ let currentActiveModule = null;
 
 function openModuleDetail(moduleCategory) {
   currentActiveModule = moduleCategory;
-  
+
   // Ocultar view geral da biblioteca e exibir view de detalhe do módulo
   const mainLibraryView = document.getElementById("mainLibraryView");
   const moduleDetailView = document.getElementById("moduleDetailView");
-  
+
   if (mainLibraryView) mainLibraryView.classList.add("hidden");
   if (moduleDetailView) {
     moduleDetailView.classList.remove("hidden");
@@ -4094,7 +4109,7 @@ function closeModuleDetail() {
   currentActiveModule = null;
   const mainLibraryView = document.getElementById("mainLibraryView");
   const moduleDetailView = document.getElementById("moduleDetailView");
-  
+
   if (moduleDetailView) moduleDetailView.classList.add("hidden");
   if (mainLibraryView) {
     mainLibraryView.classList.remove("hidden");
@@ -4107,24 +4122,24 @@ function renderModuleDetailContent(moduleCategory) {
   const descEl = document.getElementById("moduleDetailDesc");
   const gridEl = document.getElementById("moduleDetailBooksGrid");
   const countEl = document.getElementById("moduleDetailCount");
-  
+
   const moduleBooks = booksData.filter(b => b.category.toLowerCase() === moduleCategory.toLowerCase() || (b.module && b.module.toLowerCase() === moduleCategory.toLowerCase()));
-  
+
   if (titleEl) titleEl.textContent = moduleCategory;
   if (countEl) countEl.textContent = moduleBooks.length + " Manuscritos & Tratados";
-  
+
   const cleanEmail = (localStorage.getItem("cupula33_user_email") || "").trim().toLowerCase();
   const allHistory = typeof MemberDatabase !== "undefined"
     ? MemberDatabase.getAllProgress(cleanEmail)
     : JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
-  
+
   if (gridEl) {
     gridEl.innerHTML = moduleBooks.map(book => {
       const isLocked = currentTier === "basico" && book.tier === "master";
       const progress = allHistory[book.id];
       const percent = progress ? progress.percent : 0;
       const curPage = progress ? progress.page : 1;
-      
+
       return `
         <div onclick="handleBookClick('${book.id}')" class="glass-panel glass-panel-hover rounded-2xl overflow-hidden border border-gold-500/20 flex flex-col justify-between cursor-pointer group relative transition-all">
           <div class="relative aspect-[3/4] bg-dark-900 overflow-hidden">
@@ -4175,8 +4190,8 @@ function renderModuleDetailContent(moduleCategory) {
         </div>
       `;
     }).join("");
-    
-    if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch(e) {}
+
+    if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch (e) { }
   }
 }
 
@@ -4226,7 +4241,7 @@ function loadUserProfile() {
   if (inpFreq) inpFreq.value = defaultFreq;
   if (inpModule) inpModule.value = defaultModule;
 
-  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
 }
 
 function saveUserProfile() {
@@ -4271,7 +4286,7 @@ function handleProfileAvatarChange(event) {
   }
 
   const reader = new FileReader();
-  reader.onload = function(e) {
+  reader.onload = function (e) {
     const base64Img = e.target.result;
     const avatarImg = document.getElementById('profileAvatarImg');
     if (avatarImg) avatarImg.src = base64Img;
@@ -4303,26 +4318,31 @@ function switchAudioGroup(group) {
   const viewAud = document.getElementById("groupViewAudiobooks");
   const subTitle = document.getElementById("audioMainHeaderSubtitle");
 
-  const activeClass = "px-4 py-1.5 rounded-full text-xs font-black transition-all flex items-center justify-center gap-1.5 cursor-pointer bg-gradient-to-r from-[#D4AF37] to-[#E5C158] text-black shadow-md whitespace-nowrap";
-  const inactiveClass = "px-4 py-1.5 rounded-full text-xs font-medium text-gray-400 hover:text-white transition-all flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap";
-
   if (group === "frequencies") {
     if (viewFreq) viewFreq.classList.remove("hidden");
     if (viewAud) viewAud.classList.add("hidden");
-    if (btnFreq) btnFreq.className = activeClass;
-    if (btnAud) btnAud.className = inactiveClass;
+    if (btnFreq) {
+      btnFreq.className = "px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer bg-yellow-500 text-black shadow-lg shadow-yellow-500/20";
+    }
+    if (btnAud) {
+      btnAud.className = "px-5 py-2.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white transition-all flex items-center gap-2 cursor-pointer";
+    }
     if (subTitle) subTitle.textContent = "Batimentos binaurais de ondas senoidais puras calibrados para concentração profunda, desbloqueio de chakras e expansão da consciência.";
     renderFrequencies();
   } else {
     if (viewFreq) viewFreq.classList.add("hidden");
     if (viewAud) viewAud.classList.remove("hidden");
-    if (btnAud) btnAud.className = activeClass;
-    if (btnFreq) btnFreq.className = inactiveClass;
+    if (btnAud) {
+      btnAud.className = "px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer bg-yellow-500 text-black shadow-lg shadow-yellow-500/20";
+    }
+    if (btnFreq) {
+      btnFreq.className = "px-5 py-2.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white transition-all flex items-center gap-2 cursor-pointer";
+    }
     if (subTitle) subTitle.textContent = "Obras sagradas e tratados herméticos narrados com frequência de fundo em 432Hz.";
     renderAudiobooksList();
   }
 
-  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
 }
 
 const AUDIOBOOKS_CATALOG = [
@@ -4463,7 +4483,7 @@ function renderAudiobooksList() {
     </div>
   `).join("");
 
-  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
 }
 
 let activeAudiobook = null;
@@ -4588,7 +4608,7 @@ function updateAudioPlayerUI(playing) {
 
   if (icon) {
     icon.setAttribute("data-lucide", playing ? "pause" : "play");
-    if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+    if (window.lucide) try { lucide.createIcons(); } catch (e) { }
   }
 
   if (waveBox) {
@@ -4662,7 +4682,7 @@ function toggleAmbientDrone() {
       btn.innerHTML = `<i data-lucide="volume-x" class="w-3.5 h-3.5"></i> Drone 432Hz: OFF`;
     }
   }
-  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+  if (window.lucide) try { lucide.createIcons(); } catch (e) { }
 }
 
 function handleAudioScrub(event) {
