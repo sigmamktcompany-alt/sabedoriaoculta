@@ -2,6 +2,21 @@
 <html lang="pt-BR" class="dark">
 
 <head>
+  <!-- EXPURGO TOTAL DE SERVICE WORKER E CACHE OBSOLETO -->
+  <script>
+    try {
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(regs) {
+          for (var i = 0; i < regs.length; i++) { regs[i].unregister(); }
+        });
+      }
+      if ("caches" in window) {
+        caches.keys().then(function(names) {
+          for (var i = 0; i < names.length; i++) { caches.delete(names[i]); }
+        });
+      }
+    } catch(e) {}
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>CÚPULA 33 | Biblioteca Oculta</title>
@@ -67,7 +82,7 @@
       pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
     }
   </script>
-  <link rel="stylesheet" href="app.css?v=1795620000">
+  <link rel="stylesheet" href="app.css?v=1795540999">
   <!-- CSS DEFINITIVO PARA O DECK LATERAL / SIDEBAR DESKTOP -->
   <style>
     @media (min-width: 768px) {
@@ -1387,8 +1402,17 @@
         <!-- Páginas renderizadas dinamicamente aqui -->
       </div>
 
-      <!-- Fallback de Iframe (Google Drive) -->
-      <iframe id="readerIframe" src="" class="hidden w-full h-full border-0" allow="fullscreen"></iframe>
+      <!-- Fallback Seguro sem Iframe para prevencao total de app-aninhado -->
+      <div id="readerFallback" class="hidden w-full h-full flex flex-col items-center justify-center p-6 text-center">
+        <i data-lucide="book-open" class="w-12 h-12 text-yellow-500/70 mb-4 animate-pulse"></i>
+        <p class="text-white font-cinzel font-bold text-base mb-2">Manuscrito em Alta Resolução</p>
+        <p class="text-xs text-gray-400 max-w-sm mb-6">Para máxima nitidez e fluidez no leitor mobile, acesse a versão canônica:</p>
+        <a id="readerFallbackLink" href="#" target="_blank" rel="noopener noreferrer"
+          class="px-6 py-3 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-black font-extrabold text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg transition">
+          <i data-lucide="external-link" class="w-4 h-4"></i>
+          <span>Abrir Manuscrito no Navegador</span>
+        </a>
+      </div>
     </div>
   </div>
 
@@ -1665,8 +1689,8 @@
   </div>
 
   <!-- SCRIPTS -->
-  <script src="books_data.js?v=1795620000"></script>
-  <script src="app.js?v=1795620000"></script>
+  <script src="books_data.js?v=1795594000"></script>
+  <script src="app.js?v=1795594000"></script>
 </body>
 
 </html>

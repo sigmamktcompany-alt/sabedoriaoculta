@@ -202,21 +202,7 @@ const frequenciesData = [
   }
 ];
 
-// 4. ROADMAP INICIÁTICO - OS 12 GRAUS DA CÚPULA 33
-const roadmapData = [
-  { grade: 1, title: "Grau I: O Despertar do Buscador", desc: "Leitura integral de O Caibalion. Assimilação prática dos 7 Princípios Herméticos na rotina diária.", module: "Módulo I" },
-  { grade: 2, title: "Grau II: O Selo de Hermes", desc: "Estudo das 13 sentenças da Tábua de Esmeralda e dos 3 mundos herméticos.", module: "Módulo I" },
-  { grade: 3, title: "Grau III: Os 32 Caminhos da Sabedoria", desc: "Decodificação das 10 Sefirot e 22 letras no Sefer Yetzirah.", module: "Módulo I" },
-  { grade: 4, title: "Grau IV: O Guardião dos Mistérios", desc: "Compreensão dos selos e círculos protetivos na Clavícula de Salomão.", module: "Módulo II" },
-  { grade: 5, title: "Grau V: A Luz Astral", desc: "Domínio da força de vontade como agente plástico universal segundo Éliphas Lévi.", module: "Módulo II" },
-  { grade: 6, title: "Grau VI: A Queda dos Vigilantes", desc: "Análise crítica do Livro de Enoque e das linhagens proibidas antediluvianas.", module: "Módulo III" },
-  { grade: 7, title: "Grau VII: A Centelha Gnóstica (Pneuma)", desc: "Meditação profunda com os ensinamentos secretos do Evangelho de Tomé em Nag Hammadi.", module: "Módulo III" },
-  { grade: 8, title: "Grau VIII: O Vaso Hermético & Nigredo", desc: "A fase do apodrecimento do ego e purificação espiritual em Splendor Solis.", module: "Módulo IV" },
-  { grade: 9, title: "Grau IX: A Pedra Filosofal", desc: "A transmutação da consciência de chumbo em ouro vivo segundo Julius Evola.", module: "Módulo IV" },
-  { grade: 10, title: "Grau X: A Geometria Sagrada dos Ritos", desc: "Estudo dos mistérios de Albert Pike e o templo interior do homem.", module: "Módulo V" },
-  { grade: 11, title: "Grau XI: A Consciência Desdobrada", desc: "Despertar consciente em sonhos lúcidos e proteção no plano astral com 432Hz.", module: "Módulo VI" },
-  { grade: 12, title: "Grau XII: Mestre da Cúpula 33 (Iluminação)", desc: "Consagração final como Iniciado Pleno da Cúpula 33. Acesso total ao Sanctum Sanctorum.", module: "Módulo VI" }
-];
+// Roadmap legado expurgado
 
 // ESTADO GLOBAL DO APLICATIVO
 let currentTier = "master"; localStorage.setItem("cupula33_user_tier", "master");
@@ -248,7 +234,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderBooks();
   renderCollections();
   renderFrequencies();
-  renderRoadmap();
   updateAllUserDisplays();
   updateProfileXP();
   renderContinueReading();
@@ -2067,27 +2052,29 @@ async function openReaderModal(book, startPage) {
   }
 
   const nativeContainer = document.getElementById("readerNativeContainer");
-  const iframe = document.getElementById("readerIframe");
   const spinner = document.getElementById("readerLoadingSpinner");
 
-  // MODO DE LEITURA
+  // MODO DE LEITURA 100% NATIVO SEM IFRAME (Zero risco de carregar app aninhado)
+  const fallback = document.getElementById("readerFallback");
+  const fallbackLink = document.getElementById("readerFallbackLink");
+
   if (targetUrl && targetUrl.includes("drive.google.com")) {
     if (nativeContainer) {
       nativeContainer.classList.add("hidden");
       nativeContainer.style.display = "none";
       nativeContainer.innerHTML = "";
     }
-    if (iframe) {
-      iframe.classList.remove("hidden");
-      iframe.style.display = "block";
-      iframe.src = targetUrl;
+    if (fallback && fallbackLink) {
+      fallbackLink.href = targetUrl;
+      fallback.classList.remove("hidden");
+      fallback.style.display = "flex";
+      if (window.lucide) try { lucide.createIcons(); } catch(e) {}
     }
     if (spinner) spinner.classList.add("hidden");
   } else if (typeof pdfjsLib !== "undefined") {
-    if (iframe) {
-      iframe.classList.add("hidden");
-      iframe.style.display = "none";
-      iframe.src = "";
+    if (fallback) {
+      fallback.classList.add("hidden");
+      fallback.style.display = "none";
     }
     if (nativeContainer) {
       nativeContainer.classList.remove("hidden");
@@ -2318,7 +2305,9 @@ async function renderNativePDF(pdfUrl, startPage = 1) {
         const pixelRatio = window.devicePixelRatio || 1;
         const displayScale = containerWidth / unscaledViewport.width;
         // Limita o fator de escala de render para evitar estouro de memória da GPU
-        const renderScale = displayScale * Math.min(pixelRatio, 2.5);
+        const isMobile = window.innerWidth <= 768;
+        const maxScaleFactor = isMobile ? 1.5 : 2.2;
+        const renderScale = displayScale * Math.min(pixelRatio, maxScaleFactor);
         const viewport = page.getViewport({ scale: Math.max(1, renderScale) });
 
         const canvas = document.createElement("canvas");
@@ -2416,14 +2405,17 @@ async function renderNativePDF(pdfUrl, startPage = 1) {
   } catch (err) {
     console.error("Erro ao carregar PDF via PDF.js:", err);
     if (spinner) spinner.classList.add("hidden");
-    showToast("Abrindo modo de leitura alternativo...");
-    const iframe = document.getElementById("readerIframe");
-    if (iframe) {
+    const fallback = document.getElementById("readerFallback");
+    const fallbackLink = document.getElementById("readerFallbackLink");
+    if (fallback && fallbackLink) {
       container.classList.add("hidden");
       container.style.display = "none";
-      iframe.classList.remove("hidden");
-      iframe.style.display = "block";
-      iframe.src = pdfUrl;
+      fallbackLink.href = pdfUrl;
+      fallback.classList.remove("hidden");
+      fallback.style.display = "flex";
+      if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+    } else {
+      showToast("Não foi possível renderizar este manuscrito no leitor.");
     }
   }
 }
@@ -2475,12 +2467,13 @@ function markCurrentBookCompleted() {
 function closeReaderModal() {
   if (currentRenderObserver) currentRenderObserver.disconnect();
   if (currentScrollObserver) currentScrollObserver.disconnect();
-  const iframe = document.getElementById("readerIframe");
-  if (iframe) {
-    iframe.src = "";
-    iframe.classList.add("hidden");
-    iframe.style.display = "none";
+  const fallback = document.getElementById("readerFallback");
+  const fallbackLink = document.getElementById("readerFallbackLink");
+  if (fallback) {
+    fallback.classList.add("hidden");
+    fallback.style.display = "none";
   }
+  if (fallbackLink) fallbackLink.href = "#";
   const container = document.getElementById("readerNativeContainer");
   if (container) {
     container.innerHTML = "";
@@ -3489,59 +3482,6 @@ function getRoadmapCompleted() {
   }
 }
 
-function renderRoadmap() {
-  const list = document.getElementById("roadmapList");
-  if (!list) return;
-
-  const completed = getRoadmapCompleted();
-  const pct = Math.round((completed.length / roadmapData.length) * 100);
-
-  const progText = document.getElementById("roadmapProgressText");
-  const progBar = document.getElementById("roadmapProgressBar");
-  if (progText) progText.textContent = completed.length + " de 12 Graus (" + pct + "%)";
-  if (progBar) progBar.style.width = pct + "%";
-
-  list.innerHTML = roadmapData.map(r => {
-    const isDone = completed.includes(r.grade);
-
-    return `
-      <div onclick="toggleRoadmapGrade(${r.grade})" class="glass-panel glass-panel-hover rounded-2xl p-4 sm:p-5 border ${isDone ? 'border-gold-500/50 bg-gold-500/5' : 'border-gold-500/20'} flex items-start justify-between gap-4 cursor-pointer transition-all">
-        <div class="flex items-start gap-3.5">
-          <div class="w-8 h-8 rounded-xl ${isDone ? 'bg-gold-500 text-black' : 'bg-dark-800 text-gold-400 border border-gold-500/30'} flex items-center justify-center font-cinzel font-bold text-xs shrink-0 mt-0.5">
-            ${isDone ? '<i data-lucide="check" class="w-4 h-4 stroke-[3]"></i>' : r.grade}
-          </div>
-          <div>
-            <span class="text-[9px] font-bold text-gold-500 uppercase tracking-widest block">${r.module}</span>
-            <h4 class="font-cinzel font-bold text-sm text-gray-100 ${isDone ? 'line-through text-gray-400' : ''}">${r.title}</h4>
-            <p class="text-xs text-gray-400 mt-0.5">${r.desc}</p>
-          </div>
-        </div>
-
-        <span class="text-xs text-gray-500 font-bold shrink-0 mt-1">
-          ${isDone ? '<span class="text-gold-400">Concluído</span>' : 'Pendente'}
-        </span>
-      </div>
-    `;
-  }).join("");
-
-  if (window.lucide) try { if (window.lucide) lucide.createIcons(); } catch (e) { }
-}
-
-function toggleRoadmapGrade(grade) {
-  const cleanEmail = (localStorage.getItem("cupula33_user_email") || "iniciado").trim().toLowerCase();
-  let completed = getRoadmapCompleted();
-  if (completed.includes(grade)) {
-    completed = completed.filter(g => g !== grade);
-  } else {
-    completed.push(grade);
-    showToast("Grau " + grade + " concluído com sucesso!");
-  }
-  localStorage.setItem(`cupula33_roadmap_completed_${cleanEmail}`, JSON.stringify(completed));
-  localStorage.setItem("cupula33_roadmap_completed", JSON.stringify(completed));
-  renderRoadmap();
-}
-
-// SISTEMA DE DOWNLOADS
 function triggerDownload(book) {
   showToast("Iniciando download seguro de: " + book.title + "...");
   const a = document.createElement('a');
