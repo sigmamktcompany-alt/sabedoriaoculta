@@ -1214,9 +1214,75 @@ function renderLibraryStreaming() {
     }
   }
 
-  // B. Fileiras por Categoria (Estilo Ordem 137)
+  // B. Fileiras por Categoria (Estilo Ordem 137 com Trilhas por Graus da Cúpula 33)
   const rowsContainer = document.getElementById("moduleRowsContainer");
   if (rowsContainer) {
+    const allBooksList = getAllBooks();
+
+    // 1. CARROSSEIS DAS TRILHAS POR GRAUS (GRAU I AO GRAU IV)
+    const GRAUS_DEF = [
+      {
+        num: 1,
+        title: "Trilha Grau I • Neófito",
+        tagline: "Fundamentos, Mentalismo & Hermetismo Sagrado",
+        module: "Módulo I",
+        filterFn: b => b.module === "Módulo I" || (b.category && b.category.toLowerCase().includes("hermetismo"))
+      },
+      {
+        num: 2,
+        title: "Trilha Grau II • Adepto",
+        tagline: "Alquimia, Ocultismo & Magia Prática",
+        module: "Módulo II",
+        filterFn: b => b.module === "Módulo II" || b.module === "Módulo IV" || (b.category && (b.category.toLowerCase().includes("alquimia") || b.category.toLowerCase().includes("magia")))
+      },
+      {
+        num: 3,
+        title: "Trilha Grau III • Filósofo",
+        tagline: "Gnosticismo & Manuscritos Apócrifos",
+        module: "Módulo III",
+        filterFn: b => b.module === "Módulo III" || (b.category && (b.category.toLowerCase().includes("gnosticismo") || b.category.toLowerCase().includes("apócrifos")))
+      },
+      {
+        num: 4,
+        title: "Trilha Grau IV • Mestre",
+        tagline: "Sociedades Secretas & Alta Prosperidade",
+        module: "Módulo V",
+        filterFn: b => b.module === "Módulo V" || b.module === "Módulo VI" || (b.category && b.category.toLowerCase().includes("sociedades secretas")) || Number(b.id) === 999
+      }
+    ];
+
+    const grausRowsHTML = GRAUS_DEF.map(grau => {
+      const grauBooks = allBooksList.filter(grau.filterFn);
+      if (grauBooks.length === 0) return '';
+      const displayBooks = grauBooks.slice(0, 20);
+
+      return `
+        <div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-yellow-500/5 via-black/40 to-black/80 border border-yellow-500/20 shadow-xl mb-8">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 cursor-pointer" onclick="filterLibraryByGrau(${grau.num})">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded-full bg-yellow-500/15 border border-yellow-500/40 text-yellow-400 text-[10px] font-mono font-bold tracking-wider">
+                  GRAU ${["I", "II", "III", "IV"][grau.num - 1]}
+                </span>
+                <h2 class="text-lg sm:text-xl font-serif text-white hover:text-yellow-400 transition-colors font-bold">
+                  ${grau.title}
+                </h2>
+              </div>
+              <p class="text-xs text-gray-400 mt-0.5">${grau.tagline} • <strong class="text-yellow-500/90 font-mono">${grauBooks.length} Obras Catalogadas</strong></p>
+            </div>
+            <button onclick="event.stopPropagation(); filterLibraryByGrau(${grau.num})" class="self-start sm:self-auto text-xs text-yellow-400 font-bold uppercase tracking-wider hover:underline flex items-center gap-1 cursor-pointer">
+              <span>Explorar Trilha</span>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+
+          <div class="flex overflow-x-auto gap-3.5 pb-2 hide-scrollbar scroll-smooth snap-x">
+            ${displayBooks.map(b => createBookCardHTML(b, true)).join("")}
+          </div>
+        </div>
+      `;
+    }).join("");
+
     const groups = {};
     booksData.forEach(b => {
       const catName = getBookCleanCategory(b);
@@ -1229,7 +1295,7 @@ function renderLibraryStreaming() {
     const remaining = Object.keys(groups).filter(c => !ORDEM_137_CATEGORIES.includes(c)).sort();
     const categoriesToRender = [...presentTarget, ...remaining];
 
-    rowsContainer.innerHTML = categoriesToRender.map(catName => {
+    const categoriesRowsHTML = categoriesToRender.map(catName => {
       const catBooks = groups[catName] || [];
       if (catBooks.length === 0) return '';
 
@@ -1250,6 +1316,15 @@ function renderLibraryStreaming() {
         </div>
       `;
     }).join("");
+
+    rowsContainer.innerHTML = `
+      ${grausRowsHTML}
+      <div class="flex items-center gap-3 pt-4 pb-2 border-t border-white/10">
+        <div class="w-1.5 h-5 bg-yellow-500 rounded-full"></div>
+        <h3 class="text-sm font-serif font-bold text-gray-300 uppercase tracking-wider">Acervo por Categorias & Tradições</h3>
+      </div>
+      ${categoriesRowsHTML}
+    `;
   }
 
   if (window.lucide) try { lucide.createIcons(); } catch(e) {}
@@ -1704,12 +1779,13 @@ function resolveUserIdentity() {
 
 function updateAllUserDisplays() {
   const user = resolveUserIdentity();
+  const grauProg = typeof calculateUserGrauProgress === "function" ? calculateUserGrauProgress(user.email || "") : { grauNum: 1, grauLabel: "Grau I • Neófito" };
   
   // Sidebar Desktop & Mobile
   const sName = document.getElementById("sidebarUserName");
   const sTier = document.getElementById("sidebarTierLabel");
   if (sName) sName.textContent = user.name;
-  if (sTier) sTier.textContent = user.tier === "master" ? "Membro Master" : "Membro Básico";
+  if (sTier) sTier.textContent = (user.tier === "master" ? "Membro Master" : "Membro Básico") + " • " + grauProg.grauLabel;
 
   // Perfil
   const pName = document.getElementById("profileDisplayName");
@@ -2513,6 +2589,176 @@ function renderContinueReading() {
   if (window.lucide) try { lucide.createIcons(); } catch(e) {}
 }
 
+function calculateUserGrauProgress(cleanEmail) {
+  let allHistory = {};
+  if (typeof MemberDatabase !== "undefined") {
+    allHistory = MemberDatabase.getAllProgress(cleanEmail);
+  } else {
+    try {
+      allHistory = JSON.parse(localStorage.getItem("cupula33_books_progress") || "{}");
+    } catch(e) {}
+  }
+
+  const allBooks = getAllBooks();
+  const bookMap = {};
+  allBooks.forEach(b => { bookMap[String(b.id)] = b; });
+
+  const progressByGrau = {
+    1: { name: "Grau I • Neófito", completed: 0, pagesRead: 0, totalBooks: 0 },
+    2: { name: "Grau II • Adepto", completed: 0, pagesRead: 0, totalBooks: 0 },
+    3: { name: "Grau III • Filósofo", completed: 0, pagesRead: 0, totalBooks: 0 },
+    4: { name: "Grau IV • Mestre", completed: 0, pagesRead: 0, totalBooks: 0 }
+  };
+
+  allBooks.forEach(b => {
+    let g = 1;
+    if (b.module === "Módulo II" || b.module === "Módulo IV" || (b.category && b.category.toLowerCase().includes("alquimia"))) g = 2;
+    else if (b.module === "Módulo III" || (b.category && (b.category.toLowerCase().includes("gnosticismo") || b.category.toLowerCase().includes("apócrifos")))) g = 3;
+    else if (b.module === "Módulo V" || b.module === "Módulo VI" || Number(b.id) === 999 || (b.category && b.category.toLowerCase().includes("sociedades secretas"))) g = 4;
+    else g = 1;
+    if (progressByGrau[g]) progressByGrau[g].totalBooks++;
+  });
+
+  let totalCompletedAll = 0;
+  let totalPagesAll = 0;
+
+  Object.values(allHistory || {}).forEach(item => {
+    const book = bookMap[String(item.bookId)];
+    let g = 1;
+    if (book) {
+      if (book.module === "Módulo II" || book.module === "Módulo IV" || (book.category && book.category.toLowerCase().includes("alquimia"))) g = 2;
+      else if (book.module === "Módulo III" || (book.category && (book.category.toLowerCase().includes("gnosticismo") || book.category.toLowerCase().includes("apócrifos")))) g = 3;
+      else if (book.module === "Módulo V" || book.module === "Módulo VI" || Number(book.id) === 999 || (book.category && book.category.toLowerCase().includes("sociedades secretas"))) g = 4;
+      else g = 1;
+    }
+    const isCompleted = (item.percent || 0) >= 90 || (item.page && book && item.page >= (book.pages || 50));
+    if (isCompleted) {
+      progressByGrau[g].completed++;
+      totalCompletedAll++;
+    }
+    progressByGrau[g].pagesRead += (item.page || 0);
+    totalPagesAll += (item.page || 0);
+  });
+
+  // Conforme o aluno lê e finaliza as obras, sobe de Grau no perfil:
+  let currentGrauNum = 1;
+  if (totalCompletedAll >= 4 || totalPagesAll >= 400) {
+    currentGrauNum = 4;
+  } else if (totalCompletedAll >= 2 || totalPagesAll >= 200) {
+    currentGrauNum = 3;
+  } else if (totalCompletedAll >= 1 || totalPagesAll >= 80) {
+    currentGrauNum = 2;
+  } else {
+    currentGrauNum = 1;
+  }
+
+  // Whitelist admin
+  if (cleanEmail === "admin@cupula33.com" || cleanEmail === "sigma.mkt.company@gmail.com" || cleanEmail === "sigmamarketing@gmail.com") {
+    currentGrauNum = 4;
+  }
+
+  const GRAUS_LABELS = {
+    1: "Grau I • Neófito",
+    2: "Grau II • Adepto",
+    3: "Grau III • Filósofo",
+    4: "Grau IV • Mestre 33"
+  };
+
+  return {
+    grauNum: currentGrauNum,
+    grauLabel: GRAUS_LABELS[currentGrauNum],
+    totalCompleted: totalCompletedAll,
+    totalPages: totalPagesAll,
+    byGrau: progressByGrau
+  };
+}
+
+function renderProfileGrausRoadmap(prog) {
+  const container = document.getElementById("profileGrausList");
+  if (!container) return;
+
+  const grausConfig = [
+    {
+      num: 1,
+      name: "Grau I • Neófito",
+      subtitle: "Fundamentos & Hermetismo Sagrado",
+      minCompleted: 1,
+      minPages: 80,
+      icon: "compass"
+    },
+    {
+      num: 2,
+      name: "Grau II • Adepto",
+      subtitle: "Alquimia & Magia Prática",
+      minCompleted: 2,
+      minPages: 200,
+      icon: "flame"
+    },
+    {
+      num: 3,
+      name: "Grau III • Filósofo",
+      subtitle: "Gnosticismo & Apócrifos",
+      minCompleted: 4,
+      minPages: 380,
+      icon: "eye"
+    },
+    {
+      num: 4,
+      name: "Grau IV • Mestre 33",
+      subtitle: "Sociedades Secretas & Prosperidade",
+      minCompleted: 6,
+      minPages: 600,
+      icon: "crown"
+    }
+  ];
+
+  container.innerHTML = grausConfig.map(g => {
+    const isCurrent = prog.grauNum === g.num;
+    const isUnlocked = prog.grauNum >= g.num;
+    const gStats = prog.byGrau && prog.byGrau[g.num] ? prog.byGrau[g.num] : { completed: 0, pagesRead: 0 };
+    
+    let statusBadge = '';
+    if (prog.grauNum > g.num) {
+      statusBadge = `<span class="px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold">✓ Grau Consagrado</span>`;
+    } else if (isCurrent) {
+      statusBadge = `<span class="px-2 py-0.5 rounded-full bg-yellow-500/20 border border-yellow-500/40 text-yellow-400 text-[10px] font-bold animate-pulse">● Grau em Curso</span>`;
+    } else {
+      statusBadge = `<span class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-gray-500 text-[10px] font-medium"><i data-lucide="lock" class="w-3 h-3 inline"></i> Bloqueado</span>`;
+    }
+
+    const pct = isUnlocked ? (prog.grauNum > g.num ? 100 : Math.min(95, Math.max(15, Math.round((gStats.pagesRead / g.minPages) * 100)))) : 0;
+
+    return `
+      <div class="p-3.5 rounded-xl ${isCurrent ? 'bg-yellow-500/5 border border-yellow-500/30' : 'bg-black/40 border border-white/5'} transition-all text-left">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-lg ${isUnlocked ? 'bg-yellow-500/15 text-yellow-400 border border-yellow-500/30' : 'bg-white/5 text-gray-600'} flex items-center justify-center shrink-0">
+              <i data-lucide="${g.icon}" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <h4 class="text-xs sm:text-sm font-serif font-bold ${isUnlocked ? 'text-white' : 'text-gray-500'}">${g.name}</h4>
+              <p class="text-[10px] text-gray-400">${g.subtitle}</p>
+            </div>
+          </div>
+          ${statusBadge}
+        </div>
+        
+        <div class="mt-2.5">
+          <div class="flex items-center justify-between text-[10px] text-gray-400 font-mono mb-1">
+            <span>Progresso no Módulo: ${gStats.completed} livros lidos (${gStats.pagesRead} páginas)</span>
+            <span>${pct}%</span>
+          </div>
+          <div class="w-full h-1.5 bg-black/80 rounded-full overflow-hidden border border-white/5">
+            <div class="h-full ${isUnlocked ? 'bg-gradient-to-r from-yellow-600 to-yellow-400' : 'bg-gray-800'}" style="width: ${pct}%"></div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+}
+
 function updateProfileXP() {
   const cleanEmail = (localStorage.getItem("cupula33_user_email") || "").trim().toLowerCase();
   
@@ -2568,12 +2814,20 @@ function updateProfileXP() {
   const statLvl = document.getElementById("statCurrentLevel");
   const lvlBadge = document.getElementById("profileLevelBadge");
 
+  // Cálculo e exibição da progressão dos Graus
+  const grauProg = calculateUserGrauProgress(cleanEmail);
+
   if (xpText) xpText.textContent = `XP: ${currentLevelXP} / 300`;
   if (nextLvlText) nextLvlText.textContent = `RUMO AO NÍVEL ${currentLevel + 1}`;
   if (xpBar) xpBar.style.width = `${Math.max(5, pctToNext)}%`;
   if (statBooks) statBooks.textContent = completedCount;
-  if (statLvl) statLvl.textContent = `Nível ${currentLevel}`;
-  if (lvlBadge) lvlBadge.textContent = `LVL ${currentLevel}`;
+  if (statLvl) statLvl.textContent = grauProg.grauLabel;
+  if (lvlBadge) lvlBadge.textContent = "GRAU " + ["I", "II", "III", "IV"][grauProg.grauNum - 1];
+
+  const pGrauStatus = document.getElementById("profileGrauBadgeStatus");
+  if (pGrauStatus) pGrauStatus.textContent = grauProg.grauLabel;
+
+  renderProfileGrausRoadmap(grauProg);
 }
 
 function resumeLastReading() {
