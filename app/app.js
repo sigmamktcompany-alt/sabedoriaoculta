@@ -10,7 +10,7 @@ const KNOWN_STUDENT_NAMES = {
   "sigma.mkt.company@gmail.com": "Sigma Marketing",
   "josecar2neiro@gmail.com": "José de Jesus Carneiro",
   "lord.von.hoelz.88@gmail.com": "Bruno Di Lourenço",
-  "severino_lucena@hotmail.com": "Severino Lucena",
+  "severino_lucena@hotmail.com": "Severino Lucena da Silva",
   "jersenkayky@gmail.com": "Kayky jersen Santiago Lima",
   "adv.hjgabriel@gmail.com": "Hugo Jean Gabriel de Paula",
   "valsolerantoniovalsoler332@gmail.com": "Clovis Antônio valsoler",
@@ -3627,6 +3627,7 @@ const MASTER_ALLOWLIST = [
 
 // LISTA DE INICIADOS QUE ADQUIRIRAM O ORDER BUMP DA PROSPERIDADE MAÇÔNICA
 const ORDERBUMP_PROSPERIDADE_ALLOWLIST = [
+  "severino_lucena@hotmail.com",
   "jersenkayky@gmail.com",
   "josecar2neiro@gmail.com",
   "sigma.mkt.company@gmail.com",

@@ -161,17 +161,18 @@
       "updated_at": 1795599498.573164
     },
     "severino_lucena@hotmail.com": {
-      "name": "Severino Lucena",
+      "name": "Severino Lucena da Silva",
       "password": "cupula@33",
       "tier": "master",
       "level": 1,
-      "has_prosperidade": false,
-      "has_orderbump": false,
+      "has_prosperidade": true,
+      "has_orderbump": true,
       "active": true,
       "status": "approved",
-      "sale_code": "MANUAL_APPROVAL_MASTER",
+      "sale_code": "MANUAL_APPROVAL_MASTER_BUMP",
       "date_added": "2026-11-25",
-      "updated_at": 1795607717.653832
+      "updated_at": 1795626899.2466319,
+      "has_prosperidade_oculta": true
     },
     "jersenkayky@gmail.com": {
       "name": "Kayky jersen Santiago Lima",
