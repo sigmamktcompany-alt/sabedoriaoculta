@@ -2052,29 +2052,36 @@ async function openReaderModal(book, startPage) {
   }
 
   const nativeContainer = document.getElementById("readerNativeContainer");
+  const iframe = document.getElementById("readerIframe");
   const spinner = document.getElementById("readerLoadingSpinner");
 
-  // MODO DE LEITURA 100% NATIVO SEM IFRAME (Zero risco de carregar app aninhado)
-  const fallback = document.getElementById("readerFallback");
-  const fallbackLink = document.getElementById("readerFallbackLink");
+  // Travar o scroll de fundo no mobile para leitura fluida
+  document.body.style.overflow = "hidden";
 
-  if (targetUrl && targetUrl.includes("drive.google.com")) {
+  // MODO DE LEITURA 100% INTEGRADO DENTRO DO APP
+  if (targetUrl && (targetUrl.includes("drive.google.com") || targetUrl.includes("/preview"))) {
+    let embedUrl = targetUrl;
+    if (embedUrl.includes("/view")) {
+      embedUrl = embedUrl.replace("/view", "/preview");
+    } else if (!embedUrl.includes("/preview")) {
+      embedUrl = embedUrl.split("?")[0].replace(/\/+$/, "") + "/preview";
+    }
     if (nativeContainer) {
       nativeContainer.classList.add("hidden");
       nativeContainer.style.display = "none";
       nativeContainer.innerHTML = "";
     }
-    if (fallback && fallbackLink) {
-      fallbackLink.href = targetUrl;
-      fallback.classList.remove("hidden");
-      fallback.style.display = "flex";
-      if (window.lucide) try { lucide.createIcons(); } catch(e) {}
+    if (iframe) {
+      iframe.src = embedUrl;
+      iframe.classList.remove("hidden");
+      iframe.style.display = "block";
     }
     if (spinner) spinner.classList.add("hidden");
   } else if (typeof pdfjsLib !== "undefined") {
-    if (fallback) {
-      fallback.classList.add("hidden");
-      fallback.style.display = "none";
+    if (iframe) {
+      iframe.src = "about:blank";
+      iframe.classList.add("hidden");
+      iframe.style.display = "none";
     }
     if (nativeContainer) {
       nativeContainer.classList.remove("hidden");
@@ -2392,6 +2399,37 @@ async function renderNativePDF(pdfUrl, startPage = 1) {
 
     pageContainers.forEach(div => currentScrollObserver.observe(div));
 
+    // Monitoramento contínuo de rolagem para contabilizar páginas em tempo real
+    let nativeScrollTimer = null;
+    const handleContainerScroll = () => {
+      clearTimeout(nativeScrollTimer);
+      nativeScrollTimer = setTimeout(() => {
+        const wrappers = container.querySelectorAll(".pdf-page-wrapper");
+        if (!wrappers.length) return;
+        const cRect = container.getBoundingClientRect();
+        const probeY = cRect.top + (cRect.height * 0.35);
+        let activePage = currentReaderPage;
+        let minDiff = Infinity;
+
+        wrappers.forEach(w => {
+          const wRect = w.getBoundingClientRect();
+          const diff = Math.abs(wRect.top - probeY);
+          if (diff < minDiff) {
+            minDiff = diff;
+            const p = parseInt(w.dataset.pageNumber);
+            if (!isNaN(p)) activePage = p;
+          }
+        });
+
+        if (activePage && activePage !== currentReaderPage) {
+          currentReaderPage = activePage;
+          updateReaderDisplay(currentBookModalData, activePage);
+          saveReadingProgress(currentBookModalData.id, activePage, numPages);
+        }
+      }, 70);
+    };
+    container.addEventListener("scroll", handleContainerScroll, { passive: true });
+
     // Se começou numa página mais adiantada, rola até ela
     if (startPage > 1 && startPage <= numPages) {
       setTimeout(() => {
@@ -2405,18 +2443,17 @@ async function renderNativePDF(pdfUrl, startPage = 1) {
   } catch (err) {
     console.error("Erro ao carregar PDF via PDF.js:", err);
     if (spinner) spinner.classList.add("hidden");
-    const fallback = document.getElementById("readerFallback");
-    const fallbackLink = document.getElementById("readerFallbackLink");
-    if (fallback && fallbackLink) {
-      container.classList.add("hidden");
-      container.style.display = "none";
-      fallbackLink.href = pdfUrl;
-      fallback.classList.remove("hidden");
-      fallback.style.display = "flex";
-      if (window.lucide) try { lucide.createIcons(); } catch(e) {}
-    } else {
-      showToast("Não foi possível renderizar este manuscrito no leitor.");
-    }
+    container.innerHTML = `
+      <div class="flex flex-col items-center justify-center py-20 text-center px-4 text-gray-300">
+        <i data-lucide="alert-circle" class="w-10 h-10 text-yellow-500 mb-3 animate-bounce"></i>
+        <p class="font-cinzel text-base font-bold text-white mb-1">Não foi possível carregar as páginas deste manuscrito</p>
+        <p class="text-xs text-gray-400 mb-5">Verifique sua conexão ou tente recarregar a obra.</p>
+        <button onclick="renderNativePDF('${pdfUrl}', ${startPage})" class="px-5 py-2.5 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-black font-bold text-xs uppercase tracking-wider">
+          Tentar Novamente
+        </button>
+      </div>
+    `;
+    if (window.lucide) try { lucide.createIcons(); } catch(e) {}
   }
 }
 
@@ -2465,15 +2502,15 @@ function markCurrentBookCompleted() {
 }
 
 function closeReaderModal() {
+  document.body.style.overflow = "";
   if (currentRenderObserver) currentRenderObserver.disconnect();
   if (currentScrollObserver) currentScrollObserver.disconnect();
-  const fallback = document.getElementById("readerFallback");
-  const fallbackLink = document.getElementById("readerFallbackLink");
-  if (fallback) {
-    fallback.classList.add("hidden");
-    fallback.style.display = "none";
+  const iframe = document.getElementById("readerIframe");
+  if (iframe) {
+    iframe.src = "about:blank";
+    iframe.classList.add("hidden");
+    iframe.style.display = "none";
   }
-  if (fallbackLink) fallbackLink.href = "#";
   const container = document.getElementById("readerNativeContainer");
   if (container) {
     container.innerHTML = "";
