@@ -1,0 +1,21 @@
+  <!-- FORÇAR DESREGISTRO TOTAL DE SERVICE WORKER ANTIGO E LIMPEZA DE CACHE -->
+  <script>
+    (function() {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for (var i = 0; i < registrations.length; i++) {
+            registrations[i].unregister().then(function(boolean) {
+              console.log('Service Worker antigo desregistrado com sucesso!');
+            });
+          }
+        });
+      }
+      if ('caches' in window) {
+        caches.keys().then(function(names) {
+          for (var i = 0; i < names.length; i++) {
+            caches.delete(names[i]);
+          }
+        });
+      }
+    })();
+  </script>

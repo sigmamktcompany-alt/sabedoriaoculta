@@ -127,8 +127,8 @@
       <img src="assets/banner_cupula.jpg" alt="Cúpula 33 • Biblioteca Proibida" class="w-full h-auto object-cover">
     </div>
 
-    <!-- TICKET CHECKOUT CARD -->
-    <div class="ticket-card shadow-2xl overflow-hidden p-5 sm:p-6 space-y-5">
+    <!-- TICKET CHECKOUT CARD (STEP 1: FORMULÁRIO DE COMPRA) -->
+    <div id="checkout-form-container" class="ticket-card shadow-2xl overflow-hidden p-5 sm:p-6 space-y-5 transition-all">
       
       <!-- COUNTRY PICKER PILL (BRASIL) -->
       <div class="flex justify-center">
@@ -194,20 +194,20 @@
       <!-- DASHED SEPARATOR COM NOTCHES LATERAIS (CUPOM) -->
       <div class="ticket-notch-row my-2 border-b border-dashed border-zinc-800"></div>
 
-      <!-- 4. FORMAS DE PAGAMENTO (TABS CARTÃO / PIX / APPLE PAY) -->
+      <!-- 4. FORMAS DE PAGAMENTO (TABS CARTÃO / PIX / APPLE PAY / GOOGLE PAY) -->
       <div class="space-y-4">
         
         <!-- Pílulas Horizontais -->
         <div class="flex items-center gap-2.5 overflow-x-auto no-scrollbar py-1">
           
           <!-- TAB CARTÃO -->
-          <button type="button" id="tab-card" onclick="selectPaymentMethod('card')" class="pay-tab-active flex-1 min-w-[125px] flex flex-col items-start p-3 rounded-2xl bg-[#17171b] border border-zinc-800 text-left transition">
+          <button type="button" id="tab-card" onclick="selectPaymentMethod('card')" class="pay-tab-active flex-1 min-w-[120px] flex flex-col items-start p-3 rounded-2xl bg-[#17171b] border border-zinc-800 text-left transition">
             <i data-lucide="credit-card" class="w-5 h-5 text-zinc-300 mb-1.5"></i>
             <span class="text-xs font-bold text-white block">Cartão de crédito</span>
           </button>
 
-          <!-- TAB PIX -->
-          <button type="button" id="tab-pix" onclick="selectPaymentMethod('pix')" class="flex-1 min-w-[125px] flex flex-col items-start p-3 rounded-2xl bg-[#17171b] border border-zinc-800 text-left transition hover:border-zinc-700">
+          <!-- TAB PIX (IMAGE 1 EXACT) -->
+          <button type="button" id="tab-pix" onclick="selectPaymentMethod('pix')" class="flex-1 min-w-[120px] flex flex-col items-start p-3 rounded-2xl bg-[#17171b] border border-zinc-800 text-left transition hover:border-zinc-700">
             <div class="w-5 h-5 mb-1.5 flex items-center justify-center text-emerald-400">
               <svg class="w-4 h-4" viewBox="0 0 512 512" fill="currentColor">
                 <path d="M112.5 120.5l82.1-82.1c34.7-34.7 91-34.7 125.7 0l82.1 82.1c34.7 34.7 34.7 91 0 125.7l-82.1 82.1c-34.7 34.7-91 34.7-125.7 0l-82.1-82.1c-34.7-34.7-34.7-91 0-125.7z"/>
@@ -218,9 +218,15 @@
           </button>
 
           <!-- TAB APPLE PAY -->
-          <button type="button" id="tab-apple" onclick="selectPaymentMethod('card')" class="flex-1 min-w-[125px] flex flex-col items-start p-3 rounded-2xl bg-[#17171b] border border-zinc-800 text-left transition hover:border-zinc-700">
+          <button type="button" id="tab-apple" onclick="selectPaymentMethod('card')" class="flex-1 min-w-[120px] flex flex-col items-start p-3 rounded-2xl bg-[#17171b] border border-zinc-800 text-left transition hover:border-zinc-700">
             <i data-lucide="apple" class="w-5 h-5 text-zinc-300 mb-1.5"></i>
             <span class="text-xs font-bold text-white block">Apple Pay</span>
+          </button>
+
+          <!-- TAB GOOGLE PAY -->
+          <button type="button" id="tab-google" onclick="selectPaymentMethod('card')" class="flex-1 min-w-[120px] flex flex-col items-start p-3 rounded-2xl bg-[#17171b] border border-zinc-800 text-left transition hover:border-zinc-700">
+            <span class="text-base font-black text-zinc-300 mb-1 block">G</span>
+            <span class="text-xs font-bold text-white block">Google Pay</span>
           </button>
 
         </div>
@@ -273,14 +279,15 @@
           </div>
         </div>
 
-        <!-- CONTAINER PIX INFO (QUANDO ABA PIX ESTIVER SELECIONADA) -->
+        <!-- CONTAINER PIX INFO (IMAGE 1 EXACT: PAGAMENTO RÁPIDO E DIRETO) -->
         <div id="payment-pix-info" class="space-y-3 pt-1 hidden">
-          <div class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300 space-y-1.5">
-            <p class="font-bold flex items-center gap-1.5 text-emerald-400">
-              <i data-lucide="zap" class="w-4 h-4"></i> Liberação Instantânea no Banco Central
-            </p>
-            <p class="text-[11px] text-zinc-300 leading-relaxed">
-              O QR Code e o código Pix Copia e Cola serão gerados imediatamente na próxima etapa com confirmação automática em menos de 1 segundo.
+          <div class="p-4 rounded-2xl bg-[#1c1c20] border border-zinc-800 text-left space-y-1">
+            <div class="flex items-center gap-2.5 text-white font-bold text-xs">
+              <i data-lucide="smartphone" class="w-4 h-4 text-zinc-400"></i>
+              <span>Pagamento rápido e direto</span>
+            </div>
+            <p class="text-[11px] text-zinc-400 leading-relaxed pl-6.5">
+              Finalize sua compra em segundos com total segurança e confirmação imediata.
             </p>
           </div>
         </div>
@@ -346,8 +353,8 @@
         <!-- Linhas Ocultáveis do Resumo -->
         <div id="summary-details" class="hidden text-xs space-y-1.5 p-3 rounded-xl bg-zinc-900/60 border border-zinc-800">
           <div class="flex justify-between text-zinc-300">
-            <span>Cúpula 33 Master</span>
-            <span>R$ 37,00</span>
+            <span id="summary-base-title">Cúpula 33 Master</span>
+            <span id="summary-base-val">R$ 37,00</span>
           </div>
           <div id="summary-bump-line" class="hidden flex justify-between text-amber-300">
             <span>Manuscrito Maçônico da Prosperidade</span>
@@ -355,9 +362,9 @@
           </div>
         </div>
 
-        <!-- BOTÃO ACESSAR AGORA -->
+        <!-- BOTÃO COMPRAR AGORA / ACESSAR AGORA -->
         <button type="button" id="btn-submit" onclick="handleSubmitCheckout()" class="w-full py-4 rounded-xl bg-black hover:bg-zinc-900 active:scale-[0.99] text-white font-black text-xs sm:text-sm uppercase tracking-wider border border-zinc-800 shadow-2xl transition flex items-center justify-center gap-2">
-          <span id="btn-submit-label">ACESSAR AGORA</span>
+          <span id="btn-submit-label">Comprar agora</span>
         </button>
 
         <!-- Selo de Ambiente Seguro -->
@@ -381,6 +388,161 @@
           </p>
         </div>
 
+      </div>
+
+    </div>
+
+    <!-- TELA OFICIAL DO PIX GERADO (EXATAMENTE COMO NAS IMAGENS 2, 3 E 4) -->
+    <div id="pix-result-container" class="hidden bg-white text-zinc-900 rounded-3xl shadow-2xl p-6 sm:p-7 space-y-5 relative animate-fade-in">
+      
+      <!-- Top floating pill badge com ícone de QR Code -->
+      <div class="flex justify-center -mt-11">
+        <div class="w-14 h-14 rounded-2xl bg-white border border-zinc-200 shadow-lg flex items-center justify-center text-black">
+          <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Título e Instruções Principais em Português -->
+      <div class="text-center space-y-1.5 pt-1">
+        <h3 id="pix-page-title" class="text-xl sm:text-2xl font-black text-zinc-950 tracking-tight">
+          Pague R$ 37,00 por Pix
+        </h3>
+        <p class="text-xs text-zinc-500 max-w-sm mx-auto leading-relaxed">
+          Copie o código ou use a câmera para escanear o código QR e realize o pagamento no app do seu banco.
+        </p>
+      </div>
+
+      <!-- Imagem do QR Code Oficial do Banco Central -->
+      <div class="flex justify-center">
+        <div class="p-3 bg-white rounded-2xl border border-zinc-200 shadow-sm max-w-[210px] w-full flex items-center justify-center">
+          <img id="pix-qr-img" src="" alt="QR Code Pix Oficial" class="w-48 h-48 object-contain">
+        </div>
+      </div>
+
+      <!-- Campo de Input com o Código Copia e Cola -->
+      <div>
+        <input type="text" id="pix-copia-cola-input" readonly class="w-full bg-[#f4f4f5] border border-zinc-200 rounded-xl px-4 py-3 text-xs text-zinc-700 font-mono select-all outline-none truncate">
+      </div>
+
+      <!-- Os 3 Botões de Ação Idênticos -->
+      <div class="space-y-2.5">
+        
+        <!-- Botão 1: Copiar (Preto) -->
+        <button type="button" onclick="copyPixCode()" id="btn-copy-action" class="w-full py-3.5 rounded-xl bg-black hover:bg-zinc-800 active:scale-[0.99] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md transition">
+          <i data-lucide="copy" class="w-4 h-4"></i>
+          <span id="btn-copy-label">Copiar</span>
+        </button>
+
+        <!-- Botão 2: Confirmar pagamento (Branco com Check Verde) -->
+        <button type="button" onclick="manualCheckPayment()" id="btn-check-action" class="w-full py-3.5 rounded-xl bg-white hover:bg-zinc-50 active:scale-[0.99] text-zinc-900 border border-zinc-200 font-bold text-xs tracking-wider flex items-center justify-center gap-2 shadow-sm transition">
+          <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i>
+          <span>Confirmar pagamento</span>
+        </button>
+
+        <!-- Botão 3: Enviar por WhatsApp (Branco com WhatsApp) -->
+        <a id="btn-whatsapp-share" href="#" target="_blank" class="w-full py-3.5 rounded-xl bg-white hover:bg-zinc-50 active:scale-[0.99] text-zinc-900 border border-zinc-200 font-bold text-xs tracking-wider flex items-center justify-center gap-2 shadow-sm transition">
+          <svg class="w-4 h-4 fill-emerald-600" viewBox="0 0 24 24">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+          </svg>
+          <span>Enviar por WhatsApp</span>
+        </a>
+
+      </div>
+
+      <!-- Caixa Tracejada de Expiração do Código com Dígitos Digitais -->
+      <div class="border border-dashed border-zinc-300 rounded-xl py-3 px-4 flex items-center justify-center gap-2 text-xs font-semibold text-zinc-700 select-none">
+        <i data-lucide="clock" class="w-4 h-4 text-zinc-500"></i>
+        <span>Código expira em</span>
+        <div class="flex items-center gap-1 font-mono font-bold text-white ml-1">
+          <span id="exp-m1" class="px-1.5 py-0.5 rounded bg-black text-xs">1</span>
+          <span id="exp-m2" class="px-1.5 py-0.5 rounded bg-black text-xs">4</span>
+          <span class="text-black font-sans font-bold">:</span>
+          <span id="exp-s1" class="px-1.5 py-0.5 rounded bg-black text-xs">5</span>
+          <span id="exp-s2" class="px-1.5 py-0.5 rounded bg-black text-xs">8</span>
+        </div>
+      </div>
+
+      <!-- Caixa de Instruções Passo a Passo em Português -->
+      <div class="bg-zinc-50 rounded-2xl p-4 sm:p-5 space-y-4 text-left border border-zinc-100">
+        
+        <!-- Passo 1 -->
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-lg bg-zinc-200/70 flex items-center justify-center text-zinc-800 shrink-0">
+            <i data-lucide="landmark" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h5 class="font-bold text-xs text-zinc-900">Acesse o seu banco</h5>
+            <p class="text-[11px] text-zinc-500 mt-0.5">Abra o app do seu banco, é rápido.</p>
+          </div>
+        </div>
+
+        <!-- Passo 2 -->
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-lg bg-zinc-200/70 flex items-center justify-center text-zinc-800 shrink-0">
+            <svg class="w-4 h-4" viewBox="0 0 512 512" fill="currentColor">
+              <path d="M112.5 120.5l82.1-82.1c34.7-34.7 91-34.7 125.7 0l82.1 82.1c34.7 34.7 34.7 91 0 125.7l-82.1 82.1c-34.7 34.7-91 34.7-125.7 0l-82.1-82.1c-34.7-34.7-34.7-91 0-125.7z"/>
+            </svg>
+          </div>
+          <div>
+            <h5 class="font-bold text-xs text-zinc-900">Escolha a opção Pix</h5>
+            <p class="text-[11px] text-zinc-500 mt-0.5">Selecione "Pix Copia e Cola" ou "Ler código QR".</p>
+          </div>
+        </div>
+
+        <!-- Passo 3 -->
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-lg bg-zinc-200/70 flex items-center justify-center text-zinc-800 shrink-0">
+            <i data-lucide="dollar-sign" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h5 class="font-bold text-xs text-zinc-900">Conclua o pagamento</h5>
+            <p class="text-[11px] text-zinc-500 mt-0.5">Cole o código ou escaneie o código QR, confirme os dados e pronto!</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Resumo da Compra no Rodapé do Ticket -->
+      <div class="pt-2 border-t border-dashed border-zinc-200 space-y-2 text-xs">
+        <h5 class="font-bold text-zinc-900">Resumo da compra</h5>
+        
+        <div class="flex justify-between text-zinc-600">
+          <span id="pix-summary-name">CÚPULA 33</span>
+          <span id="pix-summary-base">R$ 37,00</span>
+        </div>
+
+        <div id="pix-summary-bump-row" class="hidden flex justify-between text-zinc-600">
+          <span>Manuscrito Maçônico da Prosperidade</span>
+          <span>R$ 14,90</span>
+        </div>
+
+        <div class="flex justify-between font-black text-sm text-zinc-950 pt-2 border-t border-zinc-100">
+          <span>Total</span>
+          <span id="pix-summary-total">R$ 37,00</span>
+        </div>
+      </div>
+
+      <!-- Linha de Status (Pix ... Pendente / Aprovado) -->
+      <div class="pt-3 border-t border-dashed border-zinc-200 flex items-center justify-between text-xs font-semibold">
+        <div class="flex items-center gap-1.5 text-zinc-700">
+          <div class="w-3.5 h-3.5 flex items-center justify-center text-emerald-600">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 512 512" fill="currentColor">
+              <path d="M112.5 120.5l82.1-82.1c34.7-34.7 91-34.7 125.7 0l82.1 82.1c34.7 34.7 34.7 91 0 125.7l-82.1 82.1c-34.7 34.7-91 34.7-125.7 0l-82.1-82.1c-34.7-34.7-34.7-91 0-125.7z"/>
+            </svg>
+          </div>
+          <span>Pix</span>
+        </div>
+
+        <!-- Pill de Status Dinâmica -->
+        <div id="pix-status-badge" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-xs font-bold">
+          <i data-lucide="clock" class="w-3.5 h-3.5 text-amber-600"></i>
+          <span id="pix-status-text">Pendente</span>
+        </div>
       </div>
 
     </div>
@@ -448,59 +610,20 @@
     <span>Suporte Cúpula 33</span>
   </a>
 
-  <!-- 9. MODAL / OVERLAY DO PIX GERADO -->
-  <div id="pix-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 hidden">
-    <div class="relative w-full max-w-md bg-[#121214] border border-amber-500/40 rounded-2xl shadow-2xl p-6 text-center space-y-4">
-      
-      <button onclick="closePixModal()" class="absolute top-4 right-4 p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 transition">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
-
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        Cobrança Oficial Pix Gerada
-      </div>
-
-      <div>
-        <p class="text-xs text-zinc-400">Total a pagar:</p>
-        <p id="pix-modal-total" class="text-2xl font-black text-amber-400 font-sans">R$ 37,00</p>
-      </div>
-
-      <!-- Container do QR Code -->
-      <div class="p-3 bg-white rounded-2xl max-w-[210px] mx-auto border-2 border-amber-400 shadow-xl flex items-center justify-center">
-        <img id="pix-modal-qr" src="" alt="QR Code Pix" class="w-48 h-48 object-contain">
-      </div>
-
-      <!-- Copia e Cola -->
-      <div class="space-y-2">
-        <p class="text-xs text-zinc-300 font-medium">Copie o código abaixo no app do seu banco:</p>
-        <div class="flex items-center gap-2">
-          <input type="text" id="pix-modal-code" readonly class="form-input-dark text-xs font-mono select-all">
-          <button type="button" onclick="copyPixCode()" id="btn-copy-pix" class="px-4 py-3 bg-[#facc15] hover:bg-[#eab308] text-black font-bold text-xs rounded-xl whitespace-nowrap transition">
-            Copiar
-          </button>
-        </div>
-      </div>
-
-      <!-- Polling Status -->
-      <div class="p-3 bg-zinc-900/80 rounded-xl border border-zinc-800 flex items-center justify-center gap-2.5 text-xs text-zinc-400">
-        <div class="w-3.5 h-3.5 border-2 border-amber-400 border-t-transparent rounded-full animate-spin"></div>
-        <span>Aguardando confirmação do Banco Central...</span>
-      </div>
-
-    </div>
-  </div>
-
   <!-- SCRIPT DE INTERATIVIDADE E INTEGRAÇÃO DO CHECKOUT -->
   <script>
     // Inicialização de Lucide Icons
     if (window.lucide) lucide.createIcons();
 
-    
     // Leitura de parâmetros de URL para planos (Master vs Básico)
     const urlParams = new URLSearchParams(window.location.search);
     const planParam = (urlParams.get('plan') || '').toLowerCase();
     let currentPlanTitle = 'Cúpula 33 Master';
+    let basePrice = 37.00;
+    let bumpPrice = 14.90;
+    let selectedPayment = 'card';
+    let pollingInterval = null;
+    let currentOrderId = null;
 
     if (planParam.includes('basic') || planParam === '19' || planParam === '24') {
       basePrice = 24.90;
@@ -509,15 +632,13 @@
       document.getElementById('display-prod-installments').textContent = 'R$ 24,90 à vista';
       document.getElementById('display-prod-cash').textContent = 'Sem mensalidades';
       document.getElementById('summary-price-display').textContent = 'R$ 24,90 à vista';
+      document.getElementById('summary-base-title').textContent = 'Cúpula 33 Básico';
+      document.getElementById('summary-base-val').textContent = 'R$ 24,90';
+      document.getElementById('pix-summary-name').textContent = 'Cúpula 33 Básico';
+      document.getElementById('pix-summary-base').textContent = 'R$ 24,90';
     }
 
-    // Estado da Compra
-    let basePrice = 37.00;
-    let bumpPrice = 14.90;
-    let selectedPayment = 'card';
-    let pollingInterval = null;
-
-    // Countdown regressivo de 10 minutos
+    // Countdown regressivo de 10 minutos no topo
     let totalSeconds = 600;
     const minEl = document.getElementById('timer-min');
     const secEl = document.getElementById('timer-sec');
@@ -537,6 +658,7 @@
       const tabCard = document.getElementById('tab-card');
       const tabPix = document.getElementById('tab-pix');
       const tabApple = document.getElementById('tab-apple');
+      const tabGoogle = document.getElementById('tab-google');
       const cardFields = document.getElementById('payment-card-fields');
       const pixInfo = document.getElementById('payment-pix-info');
       const btnLabel = document.getElementById('btn-submit-label');
@@ -544,17 +666,18 @@
       tabCard.classList.remove('pay-tab-active');
       tabPix.classList.remove('pay-tab-active');
       tabApple.classList.remove('pay-tab-active');
+      if (tabGoogle) tabGoogle.classList.remove('pay-tab-active');
 
       if (method === 'pix') {
         tabPix.classList.add('pay-tab-active');
         cardFields.classList.add('hidden');
         pixInfo.classList.remove('hidden');
-        btnLabel.textContent = "GERAR PIX IMEDIATO";
+        btnLabel.textContent = "Comprar agora";
       } else {
         tabCard.classList.add('pay-tab-active');
         cardFields.classList.remove('hidden');
         pixInfo.classList.add('hidden');
-        btnLabel.textContent = "ACESSAR AGORA";
+        btnLabel.textContent = "Comprar agora";
       }
     }
 
@@ -569,12 +692,11 @@
       if (isBump) {
         bumpLine.classList.remove('hidden');
         countEl.textContent = "2 itens";
-        // Atualiza parcelas com acréscimo
         priceDisplay.textContent = "8x R$ 7,72*";
       } else {
         bumpLine.classList.add('hidden');
         countEl.textContent = "1 item";
-        priceDisplay.textContent = "8x R$ 5,50*";
+        priceDisplay.textContent = (basePrice === 37.00) ? "8x R$ 5,50*" : "R$ 24,90 à vista";
       }
     }
 
@@ -636,16 +758,18 @@
 
       if (selectedPayment === 'pix') {
         const btn = document.getElementById('btn-submit');
+        const originalContent = btn.innerHTML;
         btn.disabled = true;
-        btn.innerHTML = `<div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div><span>GERANDO COBRANÇA NO BANCO CENTRAL...</span>`;
+        btn.classList.add('pointer-events-none');
+        btn.innerHTML = '<div class="w-5 h-5 border-2 border-zinc-700 border-t-zinc-200 rounded-full animate-spin"></div>';
 
         try {
           const endpoint = (window.location.protocol === 'file:') ? 'http://localhost:3001/api/checkout/charge' : '/api/checkout/charge';
-        const res = await fetch(endpoint, {
+          const res = await fetch(endpoint, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              product_name: "Cúpula 33 Master",
+              product_name: currentPlanTitle,
               price: basePrice,
               customer_name: name,
               customer_email: email,
@@ -660,19 +784,50 @@
             throw new Error(data.error || "Erro ao conectar com o gateway.");
           }
 
-          // Abre modal do Pix
-          document.getElementById('pix-modal-total').textContent = "R$ " + data.amount.toFixed(2).replace('.', ',');
-          document.getElementById('pix-modal-qr').src = data.pix_qr_base64;
-          document.getElementById('pix-modal-code').value = data.pix_code;
-          document.getElementById('pix-modal').classList.remove('hidden');
+          currentOrderId = data.order_id;
+          const totalVal = data.amount.toFixed(2).replace('.', ',');
 
+          // 1. Preenche a tela oficial do Pix gerado (Imagens 2, 3 e 4)
+          document.getElementById('pix-page-title').textContent = "Pague R$ " + totalVal + " por Pix";
+          document.getElementById('pix-qr-img').src = data.pix_qr_base64;
+          document.getElementById('pix-copia-cola-input').value = data.pix_code;
+          document.getElementById('pix-summary-total').textContent = "R$ " + totalVal;
+
+          if (isBump) {
+            document.getElementById('pix-summary-bump-row').classList.remove('hidden');
+          } else {
+            document.getElementById('pix-summary-bump-row').classList.add('hidden');
+          }
+
+          // Link para envio no WhatsApp
+          const waText = encodeURIComponent("Olá! Segue meu código Pix da Cúpula 33 no valor de R$ " + totalVal + ":\n\n" + data.pix_code);
+          document.getElementById('btn-whatsapp-share').href = "https://wa.me/5514981380380?text=" + waText;
+
+          // 2. Transição visual: oculta formulário e exibe o Ticket Branco do Pix
+          document.getElementById('checkout-form-container').classList.add('hidden');
+          const resultCont = document.getElementById('pix-result-container');
+          resultCont.classList.remove('hidden');
+          resultCont.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+          if (window.lucide) lucide.createIcons();
+
+          // 3. Inicia contador regressivo de expiração do Pix (15 minutos)
+          startPixTimer(900);
+
+          // 4. Inicia Polling de confirmação no Banco Central
           startPixPolling(data.order_id);
 
         } catch(err) {
           alert("Erro: " + err.message);
-        } finally {
           btn.disabled = false;
-          btn.innerHTML = `<span>GERAR PIX IMEDIATO</span>`;
+          btn.classList.remove('pointer-events-none');
+          btn.innerHTML = originalContent;
+        } finally {
+          if (!document.getElementById('checkout-form-container').classList.contains('hidden')) {
+            btn.disabled = false;
+            btn.classList.remove('pointer-events-none');
+            btn.innerHTML = originalContent;
+          }
         }
       } else {
         alert("Pagamento via Cartão de Crédito aprovado em modo sandbox com sucesso!");
@@ -680,20 +835,70 @@
       }
     }
 
-    function closePixModal() {
-      document.getElementById('pix-modal').classList.add('hidden');
-      if (pollingInterval) clearInterval(pollingInterval);
+    // Timer de expiração do Pix (15 minutos)
+    let pixExpInterval = null;
+    function startPixTimer(seconds) {
+      if (pixExpInterval) clearInterval(pixExpInterval);
+      let remaining = seconds;
+      
+      const updateDigits = () => {
+        const m = Math.floor(remaining / 60);
+        const s = remaining % 60;
+        const mStr = m < 10 ? '0' + m : '' + m;
+        const sStr = s < 10 ? '0' + s : '' + s;
+
+        document.getElementById('exp-m1').textContent = mStr[0];
+        document.getElementById('exp-m2').textContent = mStr[1];
+        document.getElementById('exp-s1').textContent = sStr[0];
+        document.getElementById('exp-s2').textContent = sStr[1];
+
+        if (remaining > 0) {
+          remaining--;
+        } else {
+          clearInterval(pixExpInterval);
+        }
+      };
+
+      updateDigits();
+      pixExpInterval = setInterval(updateDigits, 1000);
     }
 
+    // Copiar código Pix
     function copyPixCode() {
-      const codeInput = document.getElementById('pix-modal-code');
+      const codeInput = document.getElementById('pix-copia-cola-input');
       codeInput.select();
       navigator.clipboard.writeText(codeInput.value);
-      const btn = document.getElementById('btn-copy-pix');
-      btn.textContent = "Copiado!";
-      setTimeout(() => { btn.textContent = "Copiar"; }, 2000);
+      const label = document.getElementById('btn-copy-label');
+      label.textContent = "Copiado com sucesso!";
+      setTimeout(() => { label.textContent = "Copiar"; }, 2500);
     }
 
+    // Checagem manual de status ao clicar em Confirmar Pagamento
+    async function manualCheckPayment() {
+      if (!currentOrderId) return;
+      const btn = document.getElementById('btn-check-action');
+      const originalHTML = btn.innerHTML;
+      btn.innerHTML = `<div class="w-4 h-4 border-2 border-zinc-700 border-t-zinc-300 rounded-full animate-spin"></div><span>Verificando...</span>`;
+
+      try {
+        const statusEndpoint = (window.location.protocol === 'file:') ? 'http://localhost:3001/api/orders/' + currentOrderId + '/status' : '/api/orders/' + currentOrderId + '/status';
+        const res = await fetch(statusEndpoint);
+        const data = await res.json();
+        
+        if (data && data.status === 'paid') {
+          onPaymentApproved();
+        } else {
+          alert("O Banco Central ainda não acusou o recebimento. Realize o pagamento no seu banco e tente novamente em instantes.");
+        }
+      } catch(e) {
+        alert("Aguardando confirmação do pagamento no Banco Central...");
+      } finally {
+        btn.innerHTML = originalHTML;
+        if (window.lucide) lucide.createIcons();
+      }
+    }
+
+    // Polling contínuo a cada 2.5s
     function startPixPolling(orderId) {
       if (pollingInterval) clearInterval(pollingInterval);
       pollingInterval = setInterval(async () => {
@@ -703,11 +908,21 @@
           const data = await res.json();
           if (data && data.status === 'paid') {
             clearInterval(pollingInterval);
-            alert("Pagamento Aprovado com Sucesso pelo Banco Central! Liberando acesso...");
-            window.location.href = '/app/';
+            onPaymentApproved();
           }
         } catch(e) {}
       }, 2500);
+    }
+
+    // Quando o pagamento for aprovado
+    function onPaymentApproved() {
+      const badge = document.getElementById('pix-status-badge');
+      badge.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold";
+      badge.innerHTML = `<i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-600"></i><span>Aprovado</span>`;
+      if (window.lucide) lucide.createIcons();
+
+      alert("🎉 Pagamento Aprovado com Sucesso pelo Banco Central!\nLiberando seu acesso à Biblioteca Proibida...");
+      window.location.href = '/app/';
     }
   </script>
 </body>
