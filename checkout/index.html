@@ -700,31 +700,54 @@
         tabPix.classList.add('pay-tab-active');
         cardFields.classList.add('hidden');
         pixInfo.classList.remove('hidden');
-        btnLabel.textContent = "Comprar agora";
+        if (btnLabel) btnLabel.textContent = "Comprar agora";
       } else {
         tabCard.classList.add('pay-tab-active');
         cardFields.classList.remove('hidden');
         pixInfo.classList.add('hidden');
-        btnLabel.textContent = "Comprar agora";
+        if (btnLabel) btnLabel.textContent = "ACESSAR AGORA";
       }
+
+      // Atualiza os valores na hora (Pix mostra valor total à vista, Cartão mostra parcelado)
+      recalculateTotal();
     }
 
-    // Recálculo do Total com Order Bump
+    // Recálculo do Total com Order Bump e Forma de Pagamento
     function recalculateTotal() {
       const isBump = document.getElementById('order-bump-check').checked;
       const total = isBump ? (basePrice + bumpPrice) : basePrice;
+      const totalStr = "R$ " + total.toFixed(2).replace('.', ',');
       const bumpLine = document.getElementById('summary-bump-line');
       const countEl = document.getElementById('summary-items-count');
       const priceDisplay = document.getElementById('summary-price-display');
+      const topInstallments = document.getElementById('display-prod-installments');
+      const topCash = document.getElementById('display-prod-cash');
 
       if (isBump) {
         bumpLine.classList.remove('hidden');
         countEl.textContent = "2 itens";
-        priceDisplay.textContent = "8x R$ 7,72*";
+        if (selectedPayment === 'pix') {
+          priceDisplay.textContent = totalStr;
+        } else {
+          priceDisplay.textContent = "8x R$ 7,72*";
+        }
       } else {
         bumpLine.classList.add('hidden');
         countEl.textContent = "1 item";
-        priceDisplay.textContent = (basePrice === 37.00) ? "8x R$ 5,50*" : "R$ 24,90 à vista";
+        if (selectedPayment === 'pix') {
+          priceDisplay.textContent = totalStr;
+        } else {
+          priceDisplay.textContent = (basePrice === 37.00) ? "8x R$ 5,50*" : "R$ 24,90 à vista";
+        }
+      }
+
+      // No topo: quando for Pix, exibe o valor total à vista sem parcelamento
+      if (selectedPayment === 'pix') {
+        topInstallments.textContent = totalStr;
+        if (topCash) topCash.parentElement.classList.add('hidden');
+      } else {
+        topInstallments.textContent = (basePrice === 37.00) ? "8x de R$ 5,50*" : "R$ 24,90 à vista";
+        if (topCash) topCash.parentElement.classList.remove('hidden');
       }
     }
 
