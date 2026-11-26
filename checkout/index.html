@@ -496,6 +496,21 @@
     // Inicialização de Lucide Icons
     if (window.lucide) lucide.createIcons();
 
+    
+    // Leitura de parâmetros de URL para planos (Master vs Básico)
+    const urlParams = new URLSearchParams(window.location.search);
+    const planParam = (urlParams.get('plan') || '').toLowerCase();
+    let currentPlanTitle = 'Cúpula 33 Master';
+
+    if (planParam.includes('basic') || planParam === '19' || planParam === '24') {
+      basePrice = 24.90;
+      currentPlanTitle = 'Cúpula 33 Básico';
+      document.getElementById('display-prod-title').textContent = 'CÚPULA 33 • BÁSICO';
+      document.getElementById('display-prod-installments').textContent = 'R$ 24,90 à vista';
+      document.getElementById('display-prod-cash').textContent = 'Sem mensalidades';
+      document.getElementById('summary-price-display').textContent = 'R$ 24,90 à vista';
+    }
+
     // Estado da Compra
     let basePrice = 37.00;
     let bumpPrice = 14.90;
