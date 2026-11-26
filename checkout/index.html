@@ -527,8 +527,11 @@
         </div>
       </div>
 
-      <!-- Linha de Status (Pix ... Pendente / Aprovado) -->
-      <div class="pt-3 border-t border-dashed border-zinc-200 flex items-center justify-between text-xs font-semibold">
+      <!-- Linha com Picote / Notches -->
+      <div class="relative py-3.5 border-t border-dashed border-zinc-200 flex items-center justify-between text-xs font-semibold -mx-6 sm:-mx-7 px-6 sm:px-7">
+        <div class="absolute -left-2.5 top-1/2 -translate-y-1/2 w-5 h-5 bg-black rounded-full z-10"></div>
+        <div class="absolute -right-2.5 top-1/2 -translate-y-1/2 w-5 h-5 bg-black rounded-full z-10"></div>
+
         <div class="flex items-center gap-1.5 text-zinc-700">
           <div class="w-3.5 h-3.5 flex items-center justify-center text-emerald-600">
             <svg class="w-3.5 h-3.5" viewBox="0 0 512 512" fill="currentColor">
@@ -542,6 +545,31 @@
         <div id="pix-status-badge" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-xs font-bold">
           <i data-lucide="clock" class="w-3.5 h-3.5 text-amber-600"></i>
           <span id="pix-status-text">Pendente</span>
+        </div>
+      </div>
+
+      <!-- Seção Informações do Cliente (Abaixo de Pendente como na imagem) -->
+      <div class="relative pt-4 border-t border-dashed border-zinc-200 -mx-6 sm:-mx-7 px-6 sm:px-7 space-y-3 text-left">
+        <div class="absolute -left-2.5 top-0 -translate-y-1/2 w-5 h-5 bg-black rounded-full z-10"></div>
+        <div class="absolute -right-2.5 top-0 -translate-y-1/2 w-5 h-5 bg-black rounded-full z-10"></div>
+
+        <h5 class="font-bold text-xs text-zinc-900 tracking-tight">Informações</h5>
+        
+        <div class="space-y-2.5 text-xs">
+          <div class="flex justify-between items-center text-zinc-500">
+            <span>Cliente</span>
+            <span id="pix-customer-name" class="text-zinc-800 font-medium text-right truncate max-w-[210px]">-</span>
+          </div>
+
+          <div class="flex justify-between items-center text-zinc-500">
+            <span>E-mail</span>
+            <span id="pix-customer-email" class="text-zinc-800 font-medium text-right truncate max-w-[210px]">-</span>
+          </div>
+
+          <div class="flex justify-between items-center text-zinc-500">
+            <span>Telefone</span>
+            <span id="pix-customer-phone" class="text-zinc-800 font-medium text-right">-</span>
+          </div>
         </div>
       </div>
 
@@ -799,9 +827,18 @@
             document.getElementById('pix-summary-bump-row').classList.add('hidden');
           }
 
-          // Link para envio no WhatsApp
-          const waText = encodeURIComponent("Olá! Segue meu código Pix da Cúpula 33 no valor de R$ " + totalVal + ":\n\n" + data.pix_code);
-          document.getElementById('btn-whatsapp-share').href = "https://wa.me/5514981380380?text=" + waText;
+          // Preenche informações do cliente no ticket
+          let formattedPhone = phone;
+          if (formattedPhone && !formattedPhone.startsWith('+')) {
+            formattedPhone = '+55 ' + formattedPhone;
+          }
+          document.getElementById('pix-customer-name').textContent = name || '-';
+          document.getElementById('pix-customer-email').textContent = email || '-';
+          document.getElementById('pix-customer-phone').textContent = formattedPhone || '-';
+
+          // Link para envio no WhatsApp (Sem número de telefone associado)
+          const waMsg = `Olá! Aqui está o código PIX para o pagamento:\n\n*Valor:* R$ ${totalVal}\n*Código PIX:* ${data.pix_code}\n\nPor favor, realize o pagamento utilizando o código acima.`;
+          document.getElementById('btn-whatsapp-share').href = "https://api.whatsapp.com/send?text=" + encodeURIComponent(waMsg);
 
           // 2. Transição visual: oculta formulário e exibe o Ticket Branco do Pix
           document.getElementById('checkout-form-container').classList.add('hidden');
