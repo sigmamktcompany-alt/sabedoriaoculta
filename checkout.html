@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CÚPULA 33 • Checkout Oficial</title>
+  
+  <!-- Fonts: Inter + Plus Jakarta Sans + Cinzel -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    body {
+      background-color: #000000;
+      color: #e4e4e7;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    /* Ticket Container Styles */
+    .ticket-card {
+      background-color: #121214;
+      border: 1px solid #222226;
+      border-radius: 1.5rem;
+      position: relative;
+    }
+
+    /* Ticket cutouts on the sides */
+    .ticket-notch-row {
+      position: relative;
+    }
+    .ticket-notch-row::before, .ticket-notch-row::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 20px;
+      height: 20px;
+      background-color: #000000;
+      border-radius: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+    }
+    .ticket-notch-row::before {
+      left: -11px;
+      box-shadow: inset -1px 0 0 #222226;
+    }
+    .ticket-notch-row::after {
+      right: -11px;
+      box-shadow: inset 1px 0 0 #222226;
+    }
+
+    .form-input-dark {
+      width: 100%;
+      background-color: #1c1c20;
+      border: 1px solid #2e2e34;
+      border-radius: 0.85rem;
+      padding: 0.85rem 1rem;
+      font-size: 0.875rem;
+      color: #ffffff;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .form-input-dark:focus {
+      border-color: #d4af37;
+      box-shadow: 0 0 0 1px #d4af37;
+    }
+
+    /* Tab Payment active style */
+    .pay-tab-active {
+      border: 2px solid #ffffff !important;
+      background-color: #1e1e24 !important;
+    }
+
+    /* Custom Scrollbar for horizontal tabs */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-black text-white antialiased flex flex-col items-center pb-24 selection:bg-amber-400 selection:text-black">
+
+  <!-- 1. STICKY TOP URGENCY COUNTDOWN BAR -->
+  <header class="w-full bg-black border-b border-zinc-900 py-2.5 px-4 sticky top-0 z-40 backdrop-blur-md flex items-center justify-center">
+    <div class="max-w-md w-full flex items-center justify-between gap-3 text-xs">
+      
+      <!-- Live Clock Display -->
+      <div class="flex items-center gap-1.5 font-mono">
+        <div class="flex flex-col items-center">
+          <span id="timer-min" class="text-base font-black text-white leading-none">10</span>
+          <span class="text-[9px] text-zinc-400 uppercase tracking-widest font-sans font-bold">MIN</span>
+        </div>
+        <span class="text-sm font-bold text-zinc-500 mb-2">:</span>
+        <div class="flex flex-col items-center">
+          <span id="timer-sec" class="text-base font-black text-white leading-none">00</span>
+          <span class="text-[9px] text-zinc-400 uppercase tracking-widest font-sans font-bold">SEG</span>
+        </div>
+      </div>
+
+      <!-- Center Clock Icon -->
+      <div class="w-7 h-7 rounded-full bg-zinc-900 border border-zinc-700 flex items-center justify-center text-white shrink-0">
+        <i data-lucide="alarm-clock" class="w-4 h-4"></i>
+      </div>
+
+      <!-- Right Urgency Text -->
+      <div class="text-right">
+        <span class="font-extrabold text-[10px] sm:text-[11px] tracking-wider uppercase text-white">
+          Essa página não aparecerá novamente.
+        </span>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- 2. MAIN WRAPPER (MAX-W-MD MOBILE FIRST EXACT) -->
+  <main class="w-full max-w-[460px] px-3 sm:px-4 mt-3 space-y-4">
+
+    <!-- HERO BANNER CÚPULA 33 -->
+    <div class="w-full rounded-2xl overflow-hidden border border-zinc-800 bg-[#070709] shadow-xl relative">
+      <img src="assets/banner_cupula.jpg" alt="Cúpula 33 • Biblioteca Proibida" class="w-full h-auto object-cover">
+    </div>
+
+    <!-- TICKET CHECKOUT CARD -->
+    <div class="ticket-card shadow-2xl overflow-hidden p-5 sm:p-6 space-y-5">
+      
+      <!-- COUNTRY PICKER PILL (BRASIL) -->
+      <div class="flex justify-center">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-800/80 border border-zinc-700 text-xs font-semibold text-white shadow-sm cursor-pointer hover:bg-zinc-700 transition">
+          <span class="text-sm">🇧🇷</span>
+          <span>Brasil</span>
+          <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5 text-zinc-400"></i>
+        </div>
+      </div>
+
+      <!-- PRODUCT HEADER ROW -->
+      <div class="flex items-start gap-3.5 pt-1">
+        <div class="w-14 h-14 rounded-xl overflow-hidden border border-amber-500/30 bg-black shrink-0 shadow-md">
+          <img src="assets/cupula_thumb.jpg" alt="Cúpula 33" class="w-full h-full object-cover">
+        </div>
+        <div class="flex-1 min-w-0">
+          <h2 id="display-prod-title" class="font-bold text-base text-white tracking-tight">CÚPULA 33</h2>
+          <div class="mt-0.5">
+            <span id="display-prod-installments" class="font-extrabold text-sm text-white">8x de R$ 5,50*</span>
+          </div>
+          <div class="text-xs text-zinc-400">
+            Ou <span id="display-prod-cash" class="text-zinc-300 font-medium">R$ 37,00 à vista</span>
+          </div>
+          <p class="text-[11px] text-zinc-500 mt-0.5 truncate">
+            Cúpula 33 é um acervo e uma trilha... <a href="javascript:void(0)" onclick="alert('Acesso completo a 2.500 obras raras em PDF + Frequências Solfeggio + Áudio-manuscritos com liberação vitalícia imediata.')" class="text-zinc-400 underline font-medium">Ver mais</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- DASHED SEPARATOR -->
+      <div class="border-b border-dashed border-zinc-800"></div>
+
+      <!-- 3. FORMULÁRIO DE DADOS DO CLIENTE -->
+      <div class="space-y-3.5">
+        <div>
+          <label class="block text-xs font-semibold text-zinc-300 mb-1">Seu e-mail</label>
+          <input type="email" id="cust-email" placeholder="Insira seu e-mail" class="form-input-dark">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-zinc-300 mb-1">Nome completo</label>
+          <input type="text" id="cust-name" placeholder="Insira seu nome completo" class="form-input-dark">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-zinc-300 mb-1">CPF/CNPJ</label>
+          <input type="text" id="cust-doc" maxlength="18" placeholder="Insira seu CPF ou CNPJ" oninput="maskDoc(this)" class="form-input-dark">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-zinc-300 mb-1">Seu celular</label>
+          <div class="flex gap-2">
+            <div class="flex items-center gap-1.5 px-3 rounded-xl bg-[#1c1c20] border border-zinc-700/80 text-xs font-semibold text-white shrink-0">
+              <span>🇧🇷</span>
+              <i data-lucide="chevron-down" class="w-3 h-3 text-zinc-400"></i>
+              <span class="text-zinc-300 ml-0.5">+55</span>
+            </div>
+            <input type="tel" id="cust-phone" maxlength="15" placeholder="(11) 99999-9999" oninput="maskPhone(this)" class="form-input-dark flex-1">
+          </div>
+        </div>
+      </div>
+
+      <!-- DASHED SEPARATOR COM NOTCHES LATERAIS (CUPOM) -->
+      <div class="ticket-notch-row my-2 border-b border-dashed border-zinc-800"></div>
+
+      <!-- 4. FORMAS DE PAGAMENTO (TABS CARTÃO / PIX / APPLE PAY) -->
+      <div class="space-y-4">
+        
+        <!-- Pílulas Horizontais -->
+        <div class="flex items-center gap-2.5 overflow-x-auto no-scrollbar py-1">
+          
+          <!-- TAB CARTÃO -->
+          <button type="button" id="tab-card" onclick="selectPaymentMethod('card')" class="pay-tab-active flex-1 min-w-[125px] flex flex-col items-start p-3 rounded-2xl bg-[#17171b] border border-zinc-800 text-left transition">
+            <i data-lucide="credit-card" class="w-5 h-5 text-zinc-300 mb-1.5"></i>
+            <span class="text-xs font-bold text-white block">Cartão de crédito</span>
+          </button>
+
+          <!-- TAB PIX -->
+          <button type="button" id="tab-pix" onclick="selectPaymentMethod('pix')" class="flex-1 min-w-[125px] flex flex-col items-start p-3 rounded-2xl bg-[#17171b] border border-zinc-800 text-left transition hover:border-zinc-700">
+            <div class="w-5 h-5 mb-1.5 flex items-center justify-center text-emerald-400">
+              <svg class="w-4 h-4" viewBox="0 0 512 512" fill="currentColor">
+                <path d="M112.5 120.5l82.1-82.1c34.7-34.7 91-34.7 125.7 0l82.1 82.1c34.7 34.7 34.7 91 0 125.7l-82.1 82.1c-34.7 34.7-91 34.7-125.7 0l-82.1-82.1c-34.7-34.7-34.7-91 0-125.7z"/>
+                <path d="M307.7 298.1l82.1-82.1c11.5-11.5 30.2-11.5 41.7 0l67.9 67.9c11.5 11.5 11.5 30.2 0 41.7l-82.1 82.1c-34.7 34.7-91 34.7-125.7 0l-41.6-41.6 57.7-68z" opacity="0.8"/>
+              </svg>
+            </div>
+            <span class="text-xs font-bold text-white block">Pix</span>
+          </button>
+
+          <!-- TAB APPLE PAY -->
+          <button type="button" id="tab-apple" onclick="selectPaymentMethod('card')" class="flex-1 min-w-[125px] flex flex-col items-start p-3 rounded-2xl bg-[#17171b] border border-zinc-800 text-left transition hover:border-zinc-700">
+            <i data-lucide="apple" class="w-5 h-5 text-zinc-300 mb-1.5"></i>
+            <span class="text-xs font-bold text-white block">Apple Pay</span>
+          </button>
+
+        </div>
+
+        <p class="text-[11px] text-zinc-500 text-center tracking-wide">
+          &larr; Deslize para ver mais &rarr;
+        </p>
+
+        <!-- CONTAINER CARTÃO DE CRÉDITO -->
+        <div id="payment-card-fields" class="space-y-3 pt-1">
+          <div>
+            <label class="block text-xs font-semibold text-zinc-300 mb-1">Número do cartão</label>
+            <div class="relative">
+              <input type="text" id="card-number" maxlength="19" placeholder="0000 0000 0000 0000" oninput="maskCard(this)" class="form-input-dark">
+              <i data-lucide="credit-card" class="w-4 h-4 text-zinc-500 absolute right-3.5 top-3.5 pointer-events-none"></i>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-zinc-300 mb-1">Validade</label>
+              <input type="text" id="card-expiry" maxlength="5" placeholder="MM/AA" oninput="maskExpiry(this)" class="form-input-dark">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-zinc-300 mb-1 flex items-center justify-between">
+                <span>CVV</span>
+                <i data-lucide="info" class="w-3.5 h-3.5 text-zinc-500"></i>
+              </label>
+              <input type="text" id="card-cvv" maxlength="4" placeholder="3 ou 4 dígitos" class="form-input-dark">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-zinc-300 mb-1">Nome do titular</label>
+            <input type="text" id="card-holder" placeholder="Insira o nome impresso no cartão" class="form-input-dark">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-zinc-300 mb-1">Parcelas</label>
+            <select id="card-installments" class="form-input-dark text-white cursor-pointer">
+              <option value="8">8x de R$ 5,50*</option>
+              <option value="7">7x de R$ 6,19*</option>
+              <option value="6">6x de R$ 7,11*</option>
+              <option value="5">5x de R$ 8,39*</option>
+              <option value="4">4x de R$ 10,32*</option>
+              <option value="3">3x de R$ 13,54*</option>
+              <option value="2">2x de R$ 19,98*</option>
+              <option value="1">1x de R$ 37,00 à vista</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- CONTAINER PIX INFO (QUANDO ABA PIX ESTIVER SELECIONADA) -->
+        <div id="payment-pix-info" class="space-y-3 pt-1 hidden">
+          <div class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-300 space-y-1.5">
+            <p class="font-bold flex items-center gap-1.5 text-emerald-400">
+              <i data-lucide="zap" class="w-4 h-4"></i> Liberação Instantânea no Banco Central
+            </p>
+            <p class="text-[11px] text-zinc-300 leading-relaxed">
+              O QR Code e o código Pix Copia e Cola serão gerados imediatamente na próxima etapa com confirmação automática em menos de 1 segundo.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- DASHED SEPARATOR COM NOTCHES LATERAIS (CUPOM) -->
+      <div class="ticket-notch-row my-2 border-b border-dashed border-zinc-800"></div>
+
+      <!-- 5. ORDER BUMP: "VOCÊ PODE GOSTAR" (CAIXA AMARELO CLARO EXACT) -->
+      <div class="space-y-2">
+        <h3 class="font-bold text-sm text-white tracking-tight">Você pode gostar</h3>
+
+        <div class="rounded-2xl p-4 sm:p-5 border border-[#F5E5BE] bg-[#FEF9EE] text-[#18181b] shadow-md transition">
+          
+          <!-- Checkbox Header -->
+          <label class="flex items-center gap-2.5 cursor-pointer select-none mb-3">
+            <input type="checkbox" id="order-bump-check" onchange="recalculateTotal()" class="w-4 h-4 rounded text-black border-zinc-400 focus:ring-0 accent-black cursor-pointer">
+            <span class="font-black text-xs uppercase tracking-wider text-black">GARANTIR ACESSO</span>
+          </label>
+
+          <!-- Row: Thumb + Title + Price -->
+          <div class="flex items-start gap-3">
+            <div class="w-16 h-16 rounded-xl overflow-hidden border border-amber-300/80 bg-zinc-900 shrink-0 shadow-sm">
+              <img src="assets/cover_prosperidade_maconica_real.jpg" alt="Prosperidade Maçônica" class="w-full h-full object-cover">
+            </div>
+            <div class="flex-1 min-w-0">
+              <h4 class="font-bold text-xs sm:text-sm text-zinc-900 leading-snug">
+                Manuscrito Maçônico da Prosperidade Oculta
+              </h4>
+              <p class="font-black text-sm text-zinc-900 mt-1">
+                R$ 14,90
+              </p>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <p class="text-[11px] text-zinc-700 leading-relaxed mt-2.5">
+            Aqui estão os maiores segredos que foram usados por séculos pelos maçons para atrair riqueza, poder e influência. Rituais secretos, códigos ocultos e princípios proibidos revelados.
+          </p>
+
+        </div>
+      </div>
+
+      <!-- DASHED SEPARATOR COM NOTCHES LATERAIS (CUPOM) -->
+      <div class="ticket-notch-row my-2 border-b border-dashed border-zinc-800"></div>
+
+      <!-- 6. RESUMO E BOTÃO DE CTA -->
+      <div class="space-y-4 pt-1">
+        
+        <!-- Dropdown Resumo do Pedido -->
+        <div class="flex items-center justify-between text-xs">
+          <div class="flex items-center gap-1.5 text-zinc-400 cursor-pointer" onclick="toggleSummaryDropdown()">
+            <span class="font-semibold text-zinc-300">Resumo</span>
+            <span id="summary-items-count" class="text-zinc-500 font-medium">1 item</span>
+            <i data-lucide="chevron-down" id="summary-chevron" class="w-3.5 h-3.5 text-zinc-500 transition-transform"></i>
+          </div>
+          <div class="text-right">
+            <span id="summary-price-display" class="font-black text-sm sm:text-base text-white tracking-tight">8x R$ 5,50*</span>
+          </div>
+        </div>
+
+        <!-- Linhas Ocultáveis do Resumo -->
+        <div id="summary-details" class="hidden text-xs space-y-1.5 p-3 rounded-xl bg-zinc-900/60 border border-zinc-800">
+          <div class="flex justify-between text-zinc-300">
+            <span>Cúpula 33 Master</span>
+            <span>R$ 37,00</span>
+          </div>
+          <div id="summary-bump-line" class="hidden flex justify-between text-amber-300">
+            <span>Manuscrito Maçônico da Prosperidade</span>
+            <span>+ R$ 14,90</span>
+          </div>
+        </div>
+
+        <!-- BOTÃO ACESSAR AGORA -->
+        <button type="button" id="btn-submit" onclick="handleSubmitCheckout()" class="w-full py-4 rounded-xl bg-black hover:bg-zinc-900 active:scale-[0.99] text-white font-black text-xs sm:text-sm uppercase tracking-wider border border-zinc-800 shadow-2xl transition flex items-center justify-center gap-2">
+          <span id="btn-submit-label">ACESSAR AGORA</span>
+        </button>
+
+        <!-- Selo de Ambiente Seguro -->
+        <div class="flex items-center justify-center gap-2 pt-1 text-xs text-zinc-400">
+          <div class="w-6 h-6 rounded-full bg-zinc-900 border border-zinc-700 flex items-center justify-center text-zinc-300">
+            <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+          </div>
+          <div>
+            <p class="font-bold text-white text-[11px] leading-tight">Ambiente seguro</p>
+            <p class="text-[10px] text-zinc-500">Seus dados confidenciais</p>
+          </div>
+        </div>
+
+        <!-- Termos Legais -->
+        <div class="text-center text-[10px] text-zinc-500 leading-relaxed px-2 space-y-2">
+          <p>
+            Ao clicar em "Comprar agora", declaro que a Sigma Pay apenas intermedia o pagamento, não sendo responsável pelo conteúdo ou oferta do infoproduto. *O valor parcelado possui acréscimo. Concordo com os <a href="javascript:void(0)" class="underline text-zinc-400">Termos de Compra</a> e <a href="javascript:void(0)" class="underline text-zinc-400">Política de Privacidade</a>. Este site está protegido pelo reCAPTCHA e aplicam-se a <a href="javascript:void(0)" class="underline text-zinc-400">Política de Privacidade</a> e os <a href="javascript:void(0)" class="underline text-zinc-400">Termos de Serviço</a> do Google.
+          </p>
+          <p class="font-medium text-zinc-600">
+            Sigma Pay &copy; 2026<br>Todos os direitos reservados
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- 7. SEÇÃO DE DEPOIMENTOS (3 CARDS ESCUROS EXACT) -->
+    <section class="space-y-3 pt-2">
+      
+      <!-- Depoimento 1: Paulo Ferreira -->
+      <div class="p-5 rounded-2xl bg-[#121214] border border-[#222226] shadow-lg space-y-2.5">
+        <div class="flex items-center gap-3">
+          <img src="assets/avatar_paulo.jpg" alt="Paulo Ferreira" class="w-10 h-10 rounded-full object-cover border border-zinc-700">
+          <div>
+            <h5 class="font-bold text-xs text-white">Paulo Ferreira</h5>
+            <div class="flex text-amber-400 text-xs">
+              ★★★★★
+            </div>
+          </div>
+        </div>
+        <p class="text-xs text-zinc-300 leading-relaxed">
+          "Depois que conheci esses ensinamentos, minha visão mudou. Novos caminhos começaram a se abrir na minha vida!"
+        </p>
+      </div>
+
+      <!-- Depoimento 2: Pedro Andrade -->
+      <div class="p-5 rounded-2xl bg-[#121214] border border-[#222226] shadow-lg space-y-2.5">
+        <div class="flex items-center gap-3">
+          <img src="assets/avatar_pedro.jpg" alt="Pedro Andrade" class="w-10 h-10 rounded-full object-cover border border-zinc-700">
+          <div>
+            <h5 class="font-bold text-xs text-white">Pedro Andrade</h5>
+            <div class="flex text-amber-400 text-xs">
+              ★★★★★
+            </div>
+          </div>
+        </div>
+        <p class="text-xs text-zinc-300 leading-relaxed">
+          "Sempre tive curiosidade sobre esses assuntos, mas nunca encontrei tanto conhecimento reunido em um só lugar. Esse acervo superou minhas expectativas!"
+        </p>
+      </div>
+
+      <!-- Depoimento 3: Amanda Ferraz -->
+      <div class="p-5 rounded-2xl bg-[#121214] border border-[#222226] shadow-lg space-y-2.5">
+        <div class="flex items-center gap-3">
+          <img src="assets/avatar_amanda.jpg" alt="Amanda Ferraz" class="w-10 h-10 rounded-full object-cover border border-zinc-700">
+          <div>
+            <h5 class="font-bold text-xs text-white">Amanda Ferraz</h5>
+            <div class="flex text-amber-400 text-xs">
+              ★★★★★
+            </div>
+          </div>
+        </div>
+        <p class="text-xs text-zinc-300 leading-relaxed">
+          "É impressionante como esses conhecimentos mudaram minha percepção da realidade. Hoje questiono coisas que antes simplesmente aceitava."
+        </p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- 8. BOTÃO FLUTUANTE DO WHATSAPP (CANTO INFERIOR DIREITO EXACT) -->
+  <a href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20preciso%20de%20ajuda%20com%20o%20acesso%20da%20C%C3%BApula%2033" target="_blank" class="fixed bottom-5 right-5 z-50 flex items-center gap-2 bg-[#facc15] hover:bg-[#eab308] text-black font-black text-xs px-4 py-2.5 rounded-full shadow-2xl transition active:scale-95">
+    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+    </svg>
+    <span>Suporte Cúpula 33</span>
+  </a>
+
+  <!-- 9. MODAL / OVERLAY DO PIX GERADO -->
+  <div id="pix-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="relative w-full max-w-md bg-[#121214] border border-amber-500/40 rounded-2xl shadow-2xl p-6 text-center space-y-4">
+      
+      <button onclick="closePixModal()" class="absolute top-4 right-4 p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 transition">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Cobrança Oficial Pix Gerada
+      </div>
+
+      <div>
+        <p class="text-xs text-zinc-400">Total a pagar:</p>
+        <p id="pix-modal-total" class="text-2xl font-black text-amber-400 font-sans">R$ 37,00</p>
+      </div>
+
+      <!-- Container do QR Code -->
+      <div class="p-3 bg-white rounded-2xl max-w-[210px] mx-auto border-2 border-amber-400 shadow-xl flex items-center justify-center">
+        <img id="pix-modal-qr" src="" alt="QR Code Pix" class="w-48 h-48 object-contain">
+      </div>
+
+      <!-- Copia e Cola -->
+      <div class="space-y-2">
+        <p class="text-xs text-zinc-300 font-medium">Copie o código abaixo no app do seu banco:</p>
+        <div class="flex items-center gap-2">
+          <input type="text" id="pix-modal-code" readonly class="form-input-dark text-xs font-mono select-all">
+          <button type="button" onclick="copyPixCode()" id="btn-copy-pix" class="px-4 py-3 bg-[#facc15] hover:bg-[#eab308] text-black font-bold text-xs rounded-xl whitespace-nowrap transition">
+            Copiar
+          </button>
+        </div>
+      </div>
+
+      <!-- Polling Status -->
+      <div class="p-3 bg-zinc-900/80 rounded-xl border border-zinc-800 flex items-center justify-center gap-2.5 text-xs text-zinc-400">
+        <div class="w-3.5 h-3.5 border-2 border-amber-400 border-t-transparent rounded-full animate-spin"></div>
+        <span>Aguardando confirmação do Banco Central...</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SCRIPT DE INTERATIVIDADE E INTEGRAÇÃO DO CHECKOUT -->
+  <script>
+    // Inicialização de Lucide Icons
+    if (window.lucide) lucide.createIcons();
+
+    // Estado da Compra
+    let basePrice = 37.00;
+    let bumpPrice = 14.90;
+    let selectedPayment = 'card';
+    let pollingInterval = null;
+
+    // Countdown regressivo de 10 minutos
+    let totalSeconds = 600;
+    const minEl = document.getElementById('timer-min');
+    const secEl = document.getElementById('timer-sec');
+    setInterval(() => {
+      if (totalSeconds > 0) {
+        totalSeconds--;
+        const m = Math.floor(totalSeconds / 60);
+        const s = totalSeconds % 60;
+        minEl.textContent = m < 10 ? '0' + m : m;
+        secEl.textContent = s < 10 ? '0' + s : s;
+      }
+    }, 1000);
+
+    // Seleção de Método de Pagamento
+    function selectPaymentMethod(method) {
+      selectedPayment = method;
+      const tabCard = document.getElementById('tab-card');
+      const tabPix = document.getElementById('tab-pix');
+      const tabApple = document.getElementById('tab-apple');
+      const cardFields = document.getElementById('payment-card-fields');
+      const pixInfo = document.getElementById('payment-pix-info');
+      const btnLabel = document.getElementById('btn-submit-label');
+
+      tabCard.classList.remove('pay-tab-active');
+      tabPix.classList.remove('pay-tab-active');
+      tabApple.classList.remove('pay-tab-active');
+
+      if (method === 'pix') {
+        tabPix.classList.add('pay-tab-active');
+        cardFields.classList.add('hidden');
+        pixInfo.classList.remove('hidden');
+        btnLabel.textContent = "GERAR PIX IMEDIATO";
+      } else {
+        tabCard.classList.add('pay-tab-active');
+        cardFields.classList.remove('hidden');
+        pixInfo.classList.add('hidden');
+        btnLabel.textContent = "ACESSAR AGORA";
+      }
+    }
+
+    // Recálculo do Total com Order Bump
+    function recalculateTotal() {
+      const isBump = document.getElementById('order-bump-check').checked;
+      const total = isBump ? (basePrice + bumpPrice) : basePrice;
+      const bumpLine = document.getElementById('summary-bump-line');
+      const countEl = document.getElementById('summary-items-count');
+      const priceDisplay = document.getElementById('summary-price-display');
+
+      if (isBump) {
+        bumpLine.classList.remove('hidden');
+        countEl.textContent = "2 itens";
+        // Atualiza parcelas com acréscimo
+        priceDisplay.textContent = "8x R$ 7,72*";
+      } else {
+        bumpLine.classList.add('hidden');
+        countEl.textContent = "1 item";
+        priceDisplay.textContent = "8x R$ 5,50*";
+      }
+    }
+
+    // Toggle dropdown do resumo
+    function toggleSummaryDropdown() {
+      const details = document.getElementById('summary-details');
+      const chevron = document.getElementById('summary-chevron');
+      details.classList.toggle('hidden');
+      chevron.classList.toggle('rotate-180');
+    }
+
+    // Mascaras de Inputs
+    function maskDoc(i) {
+      let v = i.value.replace(/\D/g, "");
+      if (v.length <= 11) {
+        v = v.replace(/(\d{3})(\d)/, "$1.$2");
+        v = v.replace(/(\d{3})(\d)/, "$1.$2");
+        v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+      } else {
+        v = v.replace(/^(\d{2})(\d)/, "$1.$2");
+        v = v.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
+        v = v.replace(/\.(\d{3})(\d)/, ".$1/$2");
+        v = v.replace(/(\d{4})(\d)/, "$1-$2");
+      }
+      i.value = v;
+    }
+
+    function maskPhone(i) {
+      let v = i.value.replace(/\D/g, "");
+      v = v.replace(/^(\d{2})(\d)/g, "($1) $2");
+      v = v.replace(/(\d)(\d{4})$/, "$1-$2");
+      i.value = v;
+    }
+
+    function maskCard(i) {
+      let v = i.value.replace(/\D/g, "");
+      v = v.replace(/(\d{4})(?=\d)/g, "$1 ");
+      i.value = v;
+    }
+
+    function maskExpiry(i) {
+      let v = i.value.replace(/\D/g, "");
+      if (v.length >= 2) v = v.substring(0,2) + '/' + v.substring(2,4);
+      i.value = v;
+    }
+
+    // Envio do Checkout
+    async function handleSubmitCheckout() {
+      const email = document.getElementById('cust-email').value.trim();
+      const name = document.getElementById('cust-name').value.trim();
+      const doc = document.getElementById('cust-doc').value.trim();
+      const phone = document.getElementById('cust-phone').value.trim();
+      const isBump = document.getElementById('order-bump-check').checked;
+
+      if (!email || !name || !doc) {
+        alert("Por favor, preencha E-mail, Nome e CPF para prosseguir.");
+        return;
+      }
+
+      if (selectedPayment === 'pix') {
+        const btn = document.getElementById('btn-submit');
+        btn.disabled = true;
+        btn.innerHTML = `<div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div><span>GERANDO COBRANÇA NO BANCO CENTRAL...</span>`;
+
+        try {
+          const res = await fetch('/api/checkout/charge', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              product_name: "Cúpula 33 Master",
+              price: basePrice,
+              customer_name: name,
+              customer_email: email,
+              customer_document: doc,
+              customer_phone: phone,
+              order_bumps: isBump ? [bumpPrice] : []
+            })
+          });
+
+          const data = await res.json();
+          if (!data.success || !data.pix_code) {
+            throw new Error(data.error || "Erro ao conectar com o gateway.");
+          }
+
+          // Abre modal do Pix
+          document.getElementById('pix-modal-total').textContent = "R$ " + data.amount.toFixed(2).replace('.', ',');
+          document.getElementById('pix-modal-qr').src = data.pix_qr_base64;
+          document.getElementById('pix-modal-code').value = data.pix_code;
+          document.getElementById('pix-modal').classList.remove('hidden');
+
+          startPixPolling(data.order_id);
+
+        } catch(err) {
+          alert("Erro: " + err.message);
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = `<span>GERAR PIX IMEDIATO</span>`;
+        }
+      } else {
+        alert("Pagamento via Cartão de Crédito aprovado em modo sandbox com sucesso!");
+        window.location.href = '/app/';
+      }
+    }
+
+    function closePixModal() {
+      document.getElementById('pix-modal').classList.add('hidden');
+      if (pollingInterval) clearInterval(pollingInterval);
+    }
+
+    function copyPixCode() {
+      const codeInput = document.getElementById('pix-modal-code');
+      codeInput.select();
+      navigator.clipboard.writeText(codeInput.value);
+      const btn = document.getElementById('btn-copy-pix');
+      btn.textContent = "Copiado!";
+      setTimeout(() => { btn.textContent = "Copiar"; }, 2000);
+    }
+
+    function startPixPolling(orderId) {
+      if (pollingInterval) clearInterval(pollingInterval);
+      pollingInterval = setInterval(async () => {
+        try {
+          const res = await fetch('/api/orders/' + orderId + '/status');
+          const data = await res.json();
+          if (data && data.status === 'paid') {
+            clearInterval(pollingInterval);
+            alert("Pagamento Aprovado com Sucesso pelo Banco Central! Liberando acesso...");
+            window.location.href = '/app/';
+          }
+        } catch(e) {}
+      }, 2500);
+    }
+  </script>
+</body>
+</html>
