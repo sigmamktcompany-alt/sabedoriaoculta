@@ -653,18 +653,73 @@
     let pollingInterval = null;
     let currentOrderId = null;
 
-    if (planParam.includes('basic') || planParam === '19' || planParam === '24') {
-      basePrice = 24.90;
-      currentPlanTitle = 'Cúpula 33 Básico';
-      document.getElementById('display-prod-title').textContent = 'CÚPULA 33 • BÁSICO';
-      document.getElementById('display-prod-installments').textContent = 'R$ 24,90 à vista';
-      document.getElementById('display-prod-cash').textContent = 'Sem mensalidades';
-      document.getElementById('summary-price-display').textContent = 'R$ 24,90 à vista';
-      document.getElementById('summary-base-title').textContent = 'Cúpula 33 Básico';
-      document.getElementById('summary-base-val').textContent = 'R$ 24,90';
-      document.getElementById('pix-summary-name').textContent = 'Cúpula 33 Básico';
-      document.getElementById('pix-summary-base').textContent = 'R$ 24,90';
+    const offerParam = urlParams.get('offer') || urlParams.get('o');
+    const priceParam = urlParams.get('price') || urlParams.get('p');
+    const titleParam = urlParams.get('title') || urlParams.get('t');
+
+    async function initOfferData() {
+      if (offerParam) {
+        try {
+          const endpoint = (window.location.protocol === 'file:') ? 'http://localhost:3001/api/offers/' + offerParam : '/api/offers/' + offerParam;
+          const res = await fetch(endpoint);
+          const data = await res.json();
+          if (data && data.success && data.offer) {
+            basePrice = Number(data.offer.price);
+            currentPlanTitle = data.offer.name || data.product.name;
+            
+            document.getElementById('display-prod-title').textContent = data.product.name || currentPlanTitle;
+            document.getElementById('display-prod-installments').textContent = data.offer.installments_text;
+            document.getElementById('display-prod-cash').textContent = 'Ou R$ ' + basePrice.toFixed(2).replace('.', ',') + ' à vista';
+            
+            if (data.product.cover) {
+              const thumb = document.querySelector('img[alt="Cúpula 33"]');
+              if (thumb) thumb.src = data.product.cover;
+            }
+
+            document.getElementById('summary-base-title').textContent = currentPlanTitle;
+            document.getElementById('summary-base-val').textContent = 'R$ ' + basePrice.toFixed(2).replace('.', ',');
+            document.getElementById('pix-summary-name').textContent = currentPlanTitle;
+            document.getElementById('pix-summary-base').textContent = 'R$ ' + basePrice.toFixed(2).replace('.', ',');
+            
+            recalculateTotal();
+            return;
+          }
+        } catch(e) {
+          console.warn("API de oferta indisponível, usando fallback:", e);
+        }
+      }
+
+      if (priceParam) {
+        const p = parseFloat(priceParam.replace(',', '.'));
+        if (!isNaN(p) && p > 0) {
+          basePrice = p;
+          if (titleParam) currentPlanTitle = titleParam;
+          document.getElementById('display-prod-title').textContent = currentPlanTitle;
+          document.getElementById('display-prod-installments').textContent = (basePrice > 30) ? '8x de R$ ' + ((basePrice * 1.18)/8).toFixed(2).replace('.',',') + '*' : 'R$ ' + basePrice.toFixed(2).replace('.',',') + ' à vista';
+          document.getElementById('display-prod-cash').textContent = 'Ou R$ ' + basePrice.toFixed(2).replace('.', ',') + ' à vista';
+          document.getElementById('summary-base-title').textContent = currentPlanTitle;
+          document.getElementById('summary-base-val').textContent = 'R$ ' + basePrice.toFixed(2).replace('.', ',');
+          document.getElementById('pix-summary-name').textContent = currentPlanTitle;
+          document.getElementById('pix-summary-base').textContent = 'R$ ' + basePrice.toFixed(2).replace('.', ',');
+          recalculateTotal();
+          return;
+        }
+      }
+
+      if (planParam.includes('basic') || planParam === '19' || planParam === '24') {
+        basePrice = 24.90;
+        currentPlanTitle = 'Cúpula 33 Básico';
+        document.getElementById('display-prod-title').textContent = 'CÚPULA 33 • BÁSICO';
+        document.getElementById('display-prod-installments').textContent = 'R$ 24,90 à vista';
+        document.getElementById('display-prod-cash').textContent = 'Sem mensalidades';
+        document.getElementById('summary-price-display').textContent = 'R$ 24,90 à vista';
+        document.getElementById('summary-base-title').textContent = 'Cúpula 33 Básico';
+        document.getElementById('summary-base-val').textContent = 'R$ 24,90';
+        document.getElementById('pix-summary-name').textContent = 'Cúpula 33 Básico';
+        document.getElementById('pix-summary-base').textContent = 'R$ 24,90';
+      }
     }
+    initOfferData();
 
     // Countdown regressivo de 10 minutos no topo
     let totalSeconds = 600;
