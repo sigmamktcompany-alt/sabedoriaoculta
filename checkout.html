@@ -640,7 +640,8 @@
         btn.innerHTML = `<div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div><span>GERANDO COBRANÇA NO BANCO CENTRAL...</span>`;
 
         try {
-          const res = await fetch('/api/checkout/charge', {
+          const endpoint = (window.location.protocol === 'file:') ? 'https://sabedoriaoculta.com/api/checkout/charge' : '/api/checkout/charge';
+        const res = await fetch(endpoint, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -697,7 +698,8 @@
       if (pollingInterval) clearInterval(pollingInterval);
       pollingInterval = setInterval(async () => {
         try {
-          const res = await fetch('/api/orders/' + orderId + '/status');
+          const statusEndpoint = (window.location.protocol === 'file:') ? 'https://sabedoriaoculta.com/api/orders/' + orderId + '/status' : '/api/orders/' + orderId + '/status';
+          const res = await fetch(statusEndpoint);
           const data = await res.json();
           if (data && data.status === 'paid') {
             clearInterval(pollingInterval);
